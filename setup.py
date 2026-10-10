@@ -72,6 +72,8 @@ setup(
     install_requires=[
         "nvidia-cutlass-dsl==4.4.2",
     ],
+    package_data={"moonep": ["csrc/affinity_planner.cu"]},
+    extras_require={"affinity": ["ninja"]},
     ext_modules=ext_modules,
     cmdclass={"build_ext": BuildExtension},
 )

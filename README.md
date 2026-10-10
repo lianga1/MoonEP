@@ -1,5 +1,11 @@
 # MoonEP
 
+> **Fork extension:** opt-in GPU affinity planning via
+> `Buffer(..., planning_backend="affinity_gpu", planning_sweeps=2)`.
+> See [algorithm, integration and benchmark instructions](docs/affinity_gpu.md).
+> The default planner remains upstream MoonEP.
+
+
 MoonEP is an Expert Parallelism communication library that keeps token loads perfectly balanced across ranks via dynamic redundant experts.
 
 **Notation**: `S` = input tokens per rank, `K` = routed top-k per token.

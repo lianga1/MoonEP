@@ -1309,6 +1309,15 @@ def launch_planning(
     _check_planning_outputs(ctx, cu_seqlens, plan)
     _check_dedup_encoding_bounds(ctx)
 
+    planner = ctx.get('affinity_gpu_planner')
+    if planner is not None:
+        planner(topk_experts_flat, tokens_per_expert, cu_seqlens, plan)
+        return
+    launch_moon_planning(ctx, topk_experts_flat, tokens_per_expert, cu_seqlens, plan)
+
+
+def launch_moon_planning(ctx, topk_experts_flat, tokens_per_expert, cu_seqlens, plan):
+    """Original planner, also used as the affinity backend's balanced seed."""
     _launch_planning_kernel(
         ctx, topk_experts_flat, tokens_per_expert,
         plan.dst, cu_seqlens, plan.experts_to_copy,

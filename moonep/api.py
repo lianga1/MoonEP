@@ -232,9 +232,8 @@ def _create_context(
 ) -> dict:
     """Pre-allocate all NVLink shared buffers and local temp buffers.
 
-    The extra logical NvS slots from token_padding are allocated as
-    (token_padding - 1) * 2 * E / num_ep_ranks; the physical allocation is
-    still aligned to VMM granularity.
+    Extra logical NvS slots cover max(2*E/num_ep_ranks, E/num_ep_ranks+B)
+    padded expert segments; the physical allocation is aligned to VMM granularity.
     NVLink shared buffer layout:
       - hidden_buf: [NvS_padded, H] bf16 — separate allocation, padded for VMM alignment
       - meta_buf:   [meta_chunk_padded] int32 — merged allocation containing:
@@ -284,7 +283,9 @@ def _create_context(
     # extra logical NvS slot bound is (token_padding - 1) * 2 * E/R. The
     # physical allocation below is still aligned to VMM granularity via
     # pad_dim0_for_alignment() / pad_to_granularity().
-    token_padding_extra = (token_padding - 1) * 2 * epn
+    # Affinity residency may use more than epn remote expert segments when
+    # B > epn. Keep the original bound and cover all epn+B active segments.
+    token_padding_extra = (token_padding - 1) * max(2 * epn, epn + B)
     NvS = NvS_capacity + token_padding_extra
 
     # ================================================================
@@ -459,6 +460,8 @@ class Buffer:
         comm_stream_priority: int = -1,
         enable_pdl: bool = True,
         explicitly_destroy: bool = False,
+        planning_backend: str = "moon",
+        planning_sweeps: int = 2,
     ):
         """Allocate and hold all communication buffers.
 
@@ -482,6 +485,13 @@ class Buffer:
                 False falls back to plain same-stream serial launches.
             explicitly_destroy: if True, warn (instead of auto-destroying)
                 when the Buffer is garbage-collected without ``destroy()``.
+            planning_backend: "moon" (default) or "affinity_gpu". The latter
+                refines the original planner with GPU expert residency and
+                equal-count swaps. All EP ranks must use the same setting.
+                Requires a CUDA toolkit and ninja for one-time JIT compilation.
+            planning_sweeps: non-negative number of rank-pair exchange sweeps
+                for affinity_gpu (default 2). Initialize and warm up the Buffer
+                before CUDA Graph capture. See docs/affinity_gpu.md.
         """
         assert isinstance(comm_stream_priority, int), (
             f"comm_stream_priority must be an int, got "
@@ -490,6 +500,19 @@ class Buffer:
         assert isinstance(enable_pdl, bool), (
             f"enable_pdl must be a bool, got {type(enable_pdl).__name__}"
         )
+        if planning_backend not in ("moon", "affinity_gpu"):
+            raise ValueError(f"unknown planning_backend: {planning_backend}")
+        if not isinstance(planning_sweeps, int) or planning_sweeps < 0:
+            raise ValueError("planning_sweeps must be a non-negative integer")
+        if planning_backend == "affinity_gpu":
+            if S * K > (2**31 - 1024) // 1024:
+                raise ValueError("affinity_gpu requires S*K <= 2097151")
+            slots = E // num_ep_ranks if B is None else B
+            if not (2 <= num_ep_ranks <= 16 and S > 0 and
+                    num_ep_ranks <= E <= 1024 and E % num_ep_ranks == 0 and
+                    1 <= K <= min(32, E) and 0 < slots <= E - E // num_ep_ranks):
+                raise ValueError("affinity_gpu requires 2<=R<=16, K<=32, E<=1024, "
+                                 "E%R=0, 0<B<=E-E/R")
         self.explicitly_destroy = explicitly_destroy
         self.comm_stream_priority = comm_stream_priority
         self.enable_pdl = enable_pdl
@@ -502,6 +525,12 @@ class Buffer:
             B=B,
             group=group,
         )
+        if planning_backend == "affinity_gpu":
+            from .affinity_gpu import AffinityGpuPlanner
+            # Compile and allocate before graph capture; dispatch reuses buffers.
+            self._ctx['affinity_gpu_planner'] = AffinityGpuPlanner(
+                self._ctx, sweeps=planning_sweeps,
+            )
         self._comm_stream = torch.cuda.Stream(
             device=int(self._ctx['device']),
             priority=self.comm_stream_priority,

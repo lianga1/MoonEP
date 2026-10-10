@@ -1,0 +1,85 @@
+{
+  "device": "NVIDIA H200",
+  "torch": "2.7.0a0+ecf3bae40a.nv25.02",
+  "cuda": "12.8",
+  "source": "synthetic_gaussian_7to1",
+  "replay_sha256": null,
+  "synthetic_seed": 20261010,
+  "physical_ranks": 8,
+  "global_tokens": 100000,
+  "experts": 256,
+  "topk": 8,
+  "slots": 32,
+  "sweeps": 2,
+  "baseline": {
+    "remote_token_destinations": 463605,
+    "all_token_destinations": 530331,
+    "N": 1.5084918664004179,
+    "loads": [
+      100000,
+      100000,
+      100000,
+      100000,
+      100000,
+      100000,
+      100000,
+      100000
+    ],
+    "load_spread_fraction": 0.0,
+    "active_replicas_per_rank": [
+      13,
+      5,
+      1,
+      1,
+      1,
+      0,
+      5,
+      12
+    ]
+  },
+  "affinity": {
+    "remote_token_destinations": 377625,
+    "all_token_destinations": 450048,
+    "N": 1.7775881683731514,
+    "loads": [
+      100000,
+      100000,
+      100000,
+      100000,
+      100000,
+      100000,
+      100000,
+      100000
+    ],
+    "load_spread_fraction": 0.0,
+    "active_replicas_per_rank": [
+      32,
+      24,
+      8,
+      32,
+      32,
+      20,
+      32,
+      32
+    ]
+  },
+  "optimizer_status": 0,
+  "fallback_to_moon": false,
+  "official_us": [
+    82.59680047631264,
+    82.16359987854958,
+    82.07560032606125
+  ],
+  "affinity_us": [
+    748.7019956111908,
+    701.5103995800018,
+    707.5456023216248
+  ],
+  "official_median_us": 82.16359987854958,
+  "affinity_median_us": 707.5456023216248,
+  "communication_reduction": 0.18545960462031252,
+  "timer": "upstream bench_comm.time_gpu_op; CUDA Graph; cross-rank mean",
+  "includes_metadata_collectives": true,
+  "public_dispatch_combine_reuse_passed": true,
+  "planning_invariants_passed": true
+}
