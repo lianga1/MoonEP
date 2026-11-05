@@ -1,0 +1,100 @@
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+USDT:2026-11-05 14:05:39 2530750:2530750 SyncActivityProfilerHandler.cpp:52] profiler_start
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+USDT:2026-11-05 14:05:39 2530744:2530744 SyncActivityProfilerHandler.cpp:52] profiler_start
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+USDT:2026-11-05 14:05:39 2530751:2530751 SyncActivityProfilerHandler.cpp:52] profiler_startUSDT:2026-11-05 14:05:39 2530755:2530755 SyncActivityProfilerHandler.cpp:52] profiler_start
+
+USDT:2026-11-05 14:05:39 2530754:2530754 SyncActivityProfilerHandler.cpp:52] profiler_start
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+USDT:2026-11-05 14:05:39 2530746:2530746 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-05 14:05:39 2530748:2530748 SyncActivityProfilerHandler.cpp:52] profiler_start
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+USDT:2026-11-05 14:05:39 2530757:2530757 SyncActivityProfilerHandler.cpp:52] profiler_start
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+USDT:2026-11-05 14:05:39 2530757:2530757 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-05 14:05:39 2530751:2530751 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-05 14:05:39 2530746:2530746 SyncActivityProfilerHandler.cpp:59] profiler_stop
+USDT:2026-11-05 14:05:39 2530744:2530744 SyncActivityProfilerHandler.cpp:59] profiler_stop
+USDT:2026-11-05 14:05:39 2530748:2530748 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-05 14:05:39 2530755:2530755 SyncActivityProfilerHandler.cpp:59] profiler_stop
+USDT:2026-11-05 14:05:39 2530750:2530750 SyncActivityProfilerHandler.cpp:59] profiler_stop
+
+
+
+USDT:2026-11-05 14:05:39 2530754:2530754 SyncActivityProfilerHandler.cpp:59] profiler_stop
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+USDT:2026-11-05 14:05:39 2530746:2530746 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-05 14:05:39 2530750:2530750 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-05 14:05:39 2530755:2530755 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-05 14:05:39 2530751:2530751 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-05 14:05:39 2530757:2530757 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-05 14:05:39 2530744:2530744 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-05 14:05:39 2530748:2530748 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-05 14:05:39 2530754:2530754 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-05 14:05:39 2530750:2530750 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-05 14:05:39 2530751:2530751 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-05 14:05:39 2530757:2530757 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-05 14:05:39 2530746:2530746 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-05 14:05:39 2530748:2530748 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-05 14:05:39 2530755:2530755 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-05 14:05:39 2530744:2530744 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-05 14:05:39 2530754:2530754 SyncActivityProfilerHandler.cpp:59] profiler_stop
+
+
+
+
+
+
+
+USDT:2026-11-05 14:05:40 2530746:2530746 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-05 14:05:40 2530748:2530748 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-05 14:05:40 2530751:2530751 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-05 14:05:40 2530755:2530755 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-05 14:05:40 2530744:2530744 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-05 14:05:40 2530757:2530757 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-05 14:05:40 2530754:2530754 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-05 14:05:40 2530750:2530750 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-05 14:05:40 2530746:2530746 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-05 14:05:40 2530754:2530754 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-05 14:05:40 2530751:2530751 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-05 14:05:40 2530748:2530748 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-05 14:05:40 2530744:2530744 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-05 14:05:40 2530755:2530755 SyncActivityProfilerHandler.cpp:59] profiler_stop
+USDT:2026-11-05 14:05:40 2530750:2530750 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-05 14:05:40 2530757:2530757 SyncActivityProfilerHandler.cpp:59] profiler_stop
+
+
+
+
+
+
+USDT:2026-11-05 14:05:40 2530746:2530746 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-05 14:05:40 2530755:2530755 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-05 14:05:40 2530754:2530754 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-05 14:05:40 2530744:2530744 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-05 14:05:40 2530750:2530750 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-05 14:05:40 2530748:2530748 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-05 14:05:40 2530751:2530751 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-05 14:05:40 2530757:2530757 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-05 14:05:40 2530744:2530744 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-05 14:05:40 2530755:2530755 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-05 14:05:40 2530748:2530748 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-05 14:05:40 2530754:2530754 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-05 14:05:40 2530746:2530746 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-05 14:05:40 2530750:2530750 SyncActivityProfilerHandler.cpp:59] profiler_stop
+
+USDT:2026-11-05 14:05:40 2530757:2530757 SyncActivityProfilerHandler.cpp:59] profiler_stop
+
+
+
+
+USDT:2026-11-05 14:05:40 2530751:2530751 SyncActivityProfilerHandler.cpp:59] profiler_stop

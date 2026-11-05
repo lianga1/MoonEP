@@ -1,0 +1,17 @@
+{"name": "layer_00", "packages": 1026, "accepted": 32, "cpu_oracle_seconds": 0.3781082849018276, "passed": true}
+{"name": "layer_01", "packages": 958, "accepted": 35, "cpu_oracle_seconds": 0.39574037538841367, "passed": true}
+{"name": "layer_02", "packages": 963, "accepted": 36, "cpu_oracle_seconds": 0.3843926629051566, "passed": true}
+{"name": "layer_03", "packages": 922, "accepted": 33, "cpu_oracle_seconds": 0.35219471994787455, "passed": true}
+{"name": "layer_04", "packages": 941, "accepted": 36, "cpu_oracle_seconds": 0.39733857987448573, "passed": true}
+{"name": "layer_05", "packages": 960, "accepted": 39, "cpu_oracle_seconds": 0.49900552071630955, "passed": true}
+{"name": "layer_06", "packages": 996, "accepted": 35, "cpu_oracle_seconds": 0.3823120999149978, "passed": true}
+{"name": "layer_07", "packages": 960, "accepted": 35, "cpu_oracle_seconds": 0.3668981366790831, "passed": true}
+{"name": "layer_00_B44", "packages": 1027, "accepted": 165, "cpu_oracle_seconds": 1.7265402069315314, "passed": true}
+{"name": "fallback_seed932071", "packages": 477, "accepted": 15, "cpu_oracle_seconds": 0.288181128911674, "passed": true}
+{"name": "fallback_seed932072", "packages": 470, "accepted": 16, "cpu_oracle_seconds": 0.29719030810520053, "passed": true}
+{"name": "small_seed932071", "packages": 130, "accepted": 34, "cpu_oracle_seconds": 0.06725062429904938, "passed": true}
+{"name": "small_seed932072", "packages": 60, "accepted": 25, "cpu_oracle_seconds": 0.03776529710739851, "passed": true}
+{"name": "highg_seed932071", "packages": 401, "accepted": 33, "cpu_oracle_seconds": 0.14416002202779055, "passed": true}
+{"name": "highg_seed932072", "packages": 389, "accepted": 31, "cpu_oracle_seconds": 0.14738483494147658, "passed": true}
+{"name": "k16_seed932071", "packages": 60, "accepted": 14, "cpu_oracle_seconds": 0.09599228296428919, "passed": true}
+{"name": "k16_seed932072", "packages": 58, "accepted": 15, "cpu_oracle_seconds": 0.09658475825563073, "passed": true}

@@ -1,0 +1,740 @@
+{
+  "status": "complete",
+  "scope": "single GPU, all eight logical source packets; selector correctness only",
+  "cases": [
+    {
+      "name": "layer_00",
+      "cohort": "trace",
+      "passes": [
+        {
+          "mode": "eager",
+          "packages": 1026,
+          "accepted": 32,
+          "raw_history_sha256": "1e657dfbf4d9d3b619802ff74ca3ad0c01272e351493fc702ccd7e967d37a99d",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "graph_poisoned_0",
+          "packages": 1026,
+          "accepted": 32,
+          "raw_history_sha256": "1e657dfbf4d9d3b619802ff74ca3ad0c01272e351493fc702ccd7e967d37a99d",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "graph_poisoned_1",
+          "packages": 1026,
+          "accepted": 32,
+          "raw_history_sha256": "1e657dfbf4d9d3b619802ff74ca3ad0c01272e351493fc702ccd7e967d37a99d",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "recovered_after_invalid_copy",
+          "packages": 1026,
+          "accepted": 32,
+          "raw_history_sha256": "1e657dfbf4d9d3b619802ff74ca3ad0c01272e351493fc702ccd7e967d37a99d",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        }
+      ],
+      "cpu_oracle_seconds": 0.3781082849018276,
+      "E": 352,
+      "K": 8,
+      "D": 256,
+      "G": 2,
+      "B": 8,
+      "fixture_sha256": "b705b5e45be5dfa57d9b29fcb6b26e938de49cdf2d9fd153787cc2bd43e9d6f9",
+      "shared_array_bytes_excluding_CUB_alignment": 32688,
+      "expected_path": "table (compile must confirm CUB fits)",
+      "forced_hash_collision_exact": true,
+      "invalid_copy_status": 1
+    },
+    {
+      "name": "layer_01",
+      "cohort": "trace",
+      "passes": [
+        {
+          "mode": "eager",
+          "packages": 958,
+          "accepted": 35,
+          "raw_history_sha256": "1be7c70243847a7bb826f2c0daeeba8cc33ba55d1a83064f59875f0922d5baaa",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "graph_poisoned_0",
+          "packages": 958,
+          "accepted": 35,
+          "raw_history_sha256": "1be7c70243847a7bb826f2c0daeeba8cc33ba55d1a83064f59875f0922d5baaa",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "graph_poisoned_1",
+          "packages": 958,
+          "accepted": 35,
+          "raw_history_sha256": "1be7c70243847a7bb826f2c0daeeba8cc33ba55d1a83064f59875f0922d5baaa",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        }
+      ],
+      "cpu_oracle_seconds": 0.39574037538841367,
+      "E": 352,
+      "K": 8,
+      "D": 256,
+      "G": 2,
+      "B": 8,
+      "fixture_sha256": "dbc6cfdfe10ac87984da3f429f4a5b4d5d6dd32e5d1e64e983e3e39ac807867b",
+      "shared_array_bytes_excluding_CUB_alignment": 32688,
+      "expected_path": "table (compile must confirm CUB fits)"
+    },
+    {
+      "name": "layer_02",
+      "cohort": "trace",
+      "passes": [
+        {
+          "mode": "eager",
+          "packages": 963,
+          "accepted": 36,
+          "raw_history_sha256": "ec9d84684d3646ca0befebd97323b65b373aa90b558add245fe05baf2a1fc6c4",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "graph_poisoned_0",
+          "packages": 963,
+          "accepted": 36,
+          "raw_history_sha256": "ec9d84684d3646ca0befebd97323b65b373aa90b558add245fe05baf2a1fc6c4",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "graph_poisoned_1",
+          "packages": 963,
+          "accepted": 36,
+          "raw_history_sha256": "ec9d84684d3646ca0befebd97323b65b373aa90b558add245fe05baf2a1fc6c4",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        }
+      ],
+      "cpu_oracle_seconds": 0.3843926629051566,
+      "E": 352,
+      "K": 8,
+      "D": 256,
+      "G": 2,
+      "B": 8,
+      "fixture_sha256": "3b4c7c54c395e278a9880ac5e8a5bf737dd72ed53db0f376060b2b059b02134b",
+      "shared_array_bytes_excluding_CUB_alignment": 32688,
+      "expected_path": "table (compile must confirm CUB fits)"
+    },
+    {
+      "name": "layer_03",
+      "cohort": "trace",
+      "passes": [
+        {
+          "mode": "eager",
+          "packages": 922,
+          "accepted": 33,
+          "raw_history_sha256": "79c99f8a044b363764eff71b885b67005d8557ac2289ddd8b20d09856dc41274",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "graph_poisoned_0",
+          "packages": 922,
+          "accepted": 33,
+          "raw_history_sha256": "79c99f8a044b363764eff71b885b67005d8557ac2289ddd8b20d09856dc41274",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "graph_poisoned_1",
+          "packages": 922,
+          "accepted": 33,
+          "raw_history_sha256": "79c99f8a044b363764eff71b885b67005d8557ac2289ddd8b20d09856dc41274",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        }
+      ],
+      "cpu_oracle_seconds": 0.35219471994787455,
+      "E": 352,
+      "K": 8,
+      "D": 256,
+      "G": 2,
+      "B": 8,
+      "fixture_sha256": "0cf78029316533bd3a76053d065263994a78e644c869738043c5feb4d2aff3e2",
+      "shared_array_bytes_excluding_CUB_alignment": 32688,
+      "expected_path": "table (compile must confirm CUB fits)"
+    },
+    {
+      "name": "layer_04",
+      "cohort": "trace",
+      "passes": [
+        {
+          "mode": "eager",
+          "packages": 941,
+          "accepted": 36,
+          "raw_history_sha256": "0fc9e190a925d9c50081b4fa44491ea534e93f64e711b1a4dce841204fb4ea81",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "graph_poisoned_0",
+          "packages": 941,
+          "accepted": 36,
+          "raw_history_sha256": "0fc9e190a925d9c50081b4fa44491ea534e93f64e711b1a4dce841204fb4ea81",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "graph_poisoned_1",
+          "packages": 941,
+          "accepted": 36,
+          "raw_history_sha256": "0fc9e190a925d9c50081b4fa44491ea534e93f64e711b1a4dce841204fb4ea81",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        }
+      ],
+      "cpu_oracle_seconds": 0.39733857987448573,
+      "E": 352,
+      "K": 8,
+      "D": 256,
+      "G": 2,
+      "B": 8,
+      "fixture_sha256": "53c72a6823090add179e5a03fc6c8b795bf632a08330e142dfbef8af1018b6ea",
+      "shared_array_bytes_excluding_CUB_alignment": 32688,
+      "expected_path": "table (compile must confirm CUB fits)"
+    },
+    {
+      "name": "layer_05",
+      "cohort": "trace",
+      "passes": [
+        {
+          "mode": "eager",
+          "packages": 960,
+          "accepted": 39,
+          "raw_history_sha256": "056c1ae96d6648f7ea7da33736c1db3b0928b398199669c211e96c0df71dfc68",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "graph_poisoned_0",
+          "packages": 960,
+          "accepted": 39,
+          "raw_history_sha256": "056c1ae96d6648f7ea7da33736c1db3b0928b398199669c211e96c0df71dfc68",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "graph_poisoned_1",
+          "packages": 960,
+          "accepted": 39,
+          "raw_history_sha256": "056c1ae96d6648f7ea7da33736c1db3b0928b398199669c211e96c0df71dfc68",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        }
+      ],
+      "cpu_oracle_seconds": 0.49900552071630955,
+      "E": 352,
+      "K": 8,
+      "D": 256,
+      "G": 2,
+      "B": 8,
+      "fixture_sha256": "5b6106eaeca3a03c060aa7733b50ce1c409435cb3cd47a510b669047a8143a7b",
+      "shared_array_bytes_excluding_CUB_alignment": 32688,
+      "expected_path": "table (compile must confirm CUB fits)"
+    },
+    {
+      "name": "layer_06",
+      "cohort": "trace",
+      "passes": [
+        {
+          "mode": "eager",
+          "packages": 996,
+          "accepted": 35,
+          "raw_history_sha256": "e94b702f74f88a075daf4a7bda131140d182802b7e94ca3892543d78bbb557cd",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "graph_poisoned_0",
+          "packages": 996,
+          "accepted": 35,
+          "raw_history_sha256": "e94b702f74f88a075daf4a7bda131140d182802b7e94ca3892543d78bbb557cd",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "graph_poisoned_1",
+          "packages": 996,
+          "accepted": 35,
+          "raw_history_sha256": "e94b702f74f88a075daf4a7bda131140d182802b7e94ca3892543d78bbb557cd",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        }
+      ],
+      "cpu_oracle_seconds": 0.3823120999149978,
+      "E": 352,
+      "K": 8,
+      "D": 256,
+      "G": 2,
+      "B": 8,
+      "fixture_sha256": "d4dc1c7b911e3024de4b2cab206ba68ce2df5f520c1701aae6685256de7e389a",
+      "shared_array_bytes_excluding_CUB_alignment": 32688,
+      "expected_path": "table (compile must confirm CUB fits)"
+    },
+    {
+      "name": "layer_07",
+      "cohort": "trace",
+      "passes": [
+        {
+          "mode": "eager",
+          "packages": 960,
+          "accepted": 35,
+          "raw_history_sha256": "35dc8ad0d7158c4799ef51fad1f264e08d752788a1a918d1495a83af9909a13f",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "graph_poisoned_0",
+          "packages": 960,
+          "accepted": 35,
+          "raw_history_sha256": "35dc8ad0d7158c4799ef51fad1f264e08d752788a1a918d1495a83af9909a13f",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "graph_poisoned_1",
+          "packages": 960,
+          "accepted": 35,
+          "raw_history_sha256": "35dc8ad0d7158c4799ef51fad1f264e08d752788a1a918d1495a83af9909a13f",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        }
+      ],
+      "cpu_oracle_seconds": 0.3668981366790831,
+      "E": 352,
+      "K": 8,
+      "D": 256,
+      "G": 2,
+      "B": 8,
+      "fixture_sha256": "1e0f64493ee09ec3711746459c930135c155134c6b1e60fd7b6966f8689bf613",
+      "shared_array_bytes_excluding_CUB_alignment": 32688,
+      "expected_path": "table (compile must confirm CUB fits)"
+    },
+    {
+      "name": "layer_00_B44",
+      "cohort": "b44",
+      "passes": [
+        {
+          "mode": "eager",
+          "packages": 1027,
+          "accepted": 165,
+          "raw_history_sha256": "98f2088564daf95138d4e01c17bf43943bfe9f76f8310989ac798db0c2c5c0e4",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "graph_poisoned_0",
+          "packages": 1027,
+          "accepted": 165,
+          "raw_history_sha256": "98f2088564daf95138d4e01c17bf43943bfe9f76f8310989ac798db0c2c5c0e4",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "graph_poisoned_1",
+          "packages": 1027,
+          "accepted": 165,
+          "raw_history_sha256": "98f2088564daf95138d4e01c17bf43943bfe9f76f8310989ac798db0c2c5c0e4",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "recovered_after_invalid_copy",
+          "packages": 1027,
+          "accepted": 165,
+          "raw_history_sha256": "98f2088564daf95138d4e01c17bf43943bfe9f76f8310989ac798db0c2c5c0e4",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        }
+      ],
+      "cpu_oracle_seconds": 1.7265402069315314,
+      "E": 352,
+      "K": 8,
+      "D": 256,
+      "G": 2,
+      "B": 44,
+      "fixture_sha256": "b705b5e45be5dfa57d9b29fcb6b26e938de49cdf2d9fd153787cc2bd43e9d6f9",
+      "shared_array_bytes_excluding_CUB_alignment": 32688,
+      "expected_path": "table (compile must confirm CUB fits)",
+      "forced_hash_collision_exact": true,
+      "invalid_copy_status": 1
+    },
+    {
+      "name": "fallback_seed932071",
+      "cohort": "fallback",
+      "passes": [
+        {
+          "mode": "eager",
+          "packages": 477,
+          "accepted": 15,
+          "raw_history_sha256": "7f4cb669750cb1720392db64cdd3416b944b1bdea9e39eee5a8e3a1ae01ad298",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "graph_poisoned_0",
+          "packages": 477,
+          "accepted": 15,
+          "raw_history_sha256": "7f4cb669750cb1720392db64cdd3416b944b1bdea9e39eee5a8e3a1ae01ad298",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "graph_poisoned_1",
+          "packages": 477,
+          "accepted": 15,
+          "raw_history_sha256": "7f4cb669750cb1720392db64cdd3416b944b1bdea9e39eee5a8e3a1ae01ad298",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "recovered_after_invalid_copy",
+          "packages": 477,
+          "accepted": 15,
+          "raw_history_sha256": "7f4cb669750cb1720392db64cdd3416b944b1bdea9e39eee5a8e3a1ae01ad298",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        }
+      ],
+      "cpu_oracle_seconds": 0.288181128911674,
+      "E": 520,
+      "K": 16,
+      "D": 512,
+      "G": 3,
+      "B": 8,
+      "fixture_sha256": null,
+      "shared_array_bytes_excluding_CUB_alignment": 87664,
+      "expected_path": "generic (>48KiB arrays alone)",
+      "forced_hash_collision_exact": true,
+      "invalid_copy_status": 1
+    },
+    {
+      "name": "fallback_seed932072",
+      "cohort": "fallback",
+      "passes": [
+        {
+          "mode": "eager",
+          "packages": 470,
+          "accepted": 16,
+          "raw_history_sha256": "ba5c98bd17f8bc5b9cdf38b71f956ab834eedae9bd1833c83ed61b4cb0c39bc1",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "graph_poisoned_0",
+          "packages": 470,
+          "accepted": 16,
+          "raw_history_sha256": "ba5c98bd17f8bc5b9cdf38b71f956ab834eedae9bd1833c83ed61b4cb0c39bc1",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "graph_poisoned_1",
+          "packages": 470,
+          "accepted": 16,
+          "raw_history_sha256": "ba5c98bd17f8bc5b9cdf38b71f956ab834eedae9bd1833c83ed61b4cb0c39bc1",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        }
+      ],
+      "cpu_oracle_seconds": 0.29719030810520053,
+      "E": 520,
+      "K": 16,
+      "D": 512,
+      "G": 3,
+      "B": 8,
+      "fixture_sha256": null,
+      "shared_array_bytes_excluding_CUB_alignment": 87664,
+      "expected_path": "generic (>48KiB arrays alone)"
+    },
+    {
+      "name": "small_seed932071",
+      "cohort": "small",
+      "passes": [
+        {
+          "mode": "eager",
+          "packages": 130,
+          "accepted": 34,
+          "raw_history_sha256": "d5f8e865a3cacc6672fe94731ce9560cbd7249dd746c742670fa3e8b4f4431b0",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "graph_poisoned_0",
+          "packages": 130,
+          "accepted": 34,
+          "raw_history_sha256": "d5f8e865a3cacc6672fe94731ce9560cbd7249dd746c742670fa3e8b4f4431b0",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "graph_poisoned_1",
+          "packages": 130,
+          "accepted": 34,
+          "raw_history_sha256": "d5f8e865a3cacc6672fe94731ce9560cbd7249dd746c742670fa3e8b4f4431b0",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "recovered_after_invalid_copy",
+          "packages": 130,
+          "accepted": 34,
+          "raw_history_sha256": "d5f8e865a3cacc6672fe94731ce9560cbd7249dd746c742670fa3e8b4f4431b0",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        }
+      ],
+      "cpu_oracle_seconds": 0.06725062429904938,
+      "E": 520,
+      "K": 3,
+      "D": 37,
+      "G": 3,
+      "B": 8,
+      "fixture_sha256": null,
+      "shared_array_bytes_excluding_CUB_alignment": 21104,
+      "expected_path": "table (compile must confirm CUB fits)",
+      "forced_hash_collision_exact": true,
+      "invalid_copy_status": 1
+    },
+    {
+      "name": "small_seed932072",
+      "cohort": "small",
+      "passes": [
+        {
+          "mode": "eager",
+          "packages": 60,
+          "accepted": 25,
+          "raw_history_sha256": "49706cc939837b2a747cca8cf00e7b5e62e650623a71d3d934cdc8647e4432e3",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "graph_poisoned_0",
+          "packages": 60,
+          "accepted": 25,
+          "raw_history_sha256": "49706cc939837b2a747cca8cf00e7b5e62e650623a71d3d934cdc8647e4432e3",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "graph_poisoned_1",
+          "packages": 60,
+          "accepted": 25,
+          "raw_history_sha256": "49706cc939837b2a747cca8cf00e7b5e62e650623a71d3d934cdc8647e4432e3",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        }
+      ],
+      "cpu_oracle_seconds": 0.03776529710739851,
+      "E": 520,
+      "K": 3,
+      "D": 37,
+      "G": 3,
+      "B": 8,
+      "fixture_sha256": null,
+      "shared_array_bytes_excluding_CUB_alignment": 21104,
+      "expected_path": "table (compile must confirm CUB fits)"
+    },
+    {
+      "name": "highg_seed932071",
+      "cohort": "highg",
+      "passes": [
+        {
+          "mode": "eager",
+          "packages": 401,
+          "accepted": 33,
+          "raw_history_sha256": "4b6b90c2f456273aea6edd10ba94b9fd4e67e845023e737a42150f08566be12f",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "graph_poisoned_0",
+          "packages": 401,
+          "accepted": 33,
+          "raw_history_sha256": "4b6b90c2f456273aea6edd10ba94b9fd4e67e845023e737a42150f08566be12f",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "graph_poisoned_1",
+          "packages": 401,
+          "accepted": 33,
+          "raw_history_sha256": "4b6b90c2f456273aea6edd10ba94b9fd4e67e845023e737a42150f08566be12f",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "recovered_after_invalid_copy",
+          "packages": 401,
+          "accepted": 33,
+          "raw_history_sha256": "4b6b90c2f456273aea6edd10ba94b9fd4e67e845023e737a42150f08566be12f",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        }
+      ],
+      "cpu_oracle_seconds": 0.14416002202779055,
+      "E": 128,
+      "K": 1,
+      "D": 128,
+      "G": 8,
+      "B": 8,
+      "fixture_sha256": null,
+      "shared_array_bytes_excluding_CUB_alignment": 25776,
+      "expected_path": "table (compile must confirm CUB fits)",
+      "forced_hash_collision_exact": true,
+      "invalid_copy_status": 1
+    },
+    {
+      "name": "highg_seed932072",
+      "cohort": "highg",
+      "passes": [
+        {
+          "mode": "eager",
+          "packages": 389,
+          "accepted": 31,
+          "raw_history_sha256": "cba0a548b2c9cdbc6ba07fe72835186ebcc0ca6fd120fa0aef336914c9efeec2",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "graph_poisoned_0",
+          "packages": 389,
+          "accepted": 31,
+          "raw_history_sha256": "cba0a548b2c9cdbc6ba07fe72835186ebcc0ca6fd120fa0aef336914c9efeec2",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "graph_poisoned_1",
+          "packages": 389,
+          "accepted": 31,
+          "raw_history_sha256": "cba0a548b2c9cdbc6ba07fe72835186ebcc0ca6fd120fa0aef336914c9efeec2",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        }
+      ],
+      "cpu_oracle_seconds": 0.14738483494147658,
+      "E": 128,
+      "K": 1,
+      "D": 128,
+      "G": 8,
+      "B": 8,
+      "fixture_sha256": null,
+      "shared_array_bytes_excluding_CUB_alignment": 25776,
+      "expected_path": "table (compile must confirm CUB fits)"
+    },
+    {
+      "name": "k16_seed932071",
+      "cohort": "k16",
+      "passes": [
+        {
+          "mode": "eager",
+          "packages": 60,
+          "accepted": 14,
+          "raw_history_sha256": "17dd56dbcad065e4b00d8cb3c676cb60d2527cdbc824a20657f7c684f4779069",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "graph_poisoned_0",
+          "packages": 60,
+          "accepted": 14,
+          "raw_history_sha256": "17dd56dbcad065e4b00d8cb3c676cb60d2527cdbc824a20657f7c684f4779069",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "graph_poisoned_1",
+          "packages": 60,
+          "accepted": 14,
+          "raw_history_sha256": "17dd56dbcad065e4b00d8cb3c676cb60d2527cdbc824a20657f7c684f4779069",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "recovered_after_invalid_copy",
+          "packages": 60,
+          "accepted": 14,
+          "raw_history_sha256": "17dd56dbcad065e4b00d8cb3c676cb60d2527cdbc824a20657f7c684f4779069",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        }
+      ],
+      "cpu_oracle_seconds": 0.09599228296428919,
+      "E": 520,
+      "K": 16,
+      "D": 128,
+      "G": 1,
+      "B": 8,
+      "fixture_sha256": null,
+      "shared_array_bytes_excluding_CUB_alignment": 35440,
+      "expected_path": "table (compile must confirm CUB fits)",
+      "forced_hash_collision_exact": true,
+      "invalid_copy_status": 1
+    },
+    {
+      "name": "k16_seed932072",
+      "cohort": "k16",
+      "passes": [
+        {
+          "mode": "eager",
+          "packages": 58,
+          "accepted": 15,
+          "raw_history_sha256": "30930bf13f7732072f4bbc3d305725f28c6fada843239017775d3b4647168757",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "graph_poisoned_0",
+          "packages": 58,
+          "accepted": 15,
+          "raw_history_sha256": "30930bf13f7732072f4bbc3d305725f28c6fada843239017775d3b4647168757",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        },
+        {
+          "mode": "graph_poisoned_1",
+          "packages": 58,
+          "accepted": 15,
+          "raw_history_sha256": "30930bf13f7732072f4bbc3d305725f28c6fada843239017775d3b4647168757",
+          "complete_raw_history_exact": true,
+          "all_intermediates_exact": true
+        }
+      ],
+      "cpu_oracle_seconds": 0.09658475825563073,
+      "E": 520,
+      "K": 16,
+      "D": 128,
+      "G": 1,
+      "B": 8,
+      "fixture_sha256": null,
+      "shared_array_bytes_excluding_CUB_alignment": 35440,
+      "expected_path": "table (compile must confirm CUB fits)"
+    }
+  ],
+  "failures": [],
+  "timings_are_benchmarks": false,
+  "gpu": "NVIDIA H200",
+  "torch": "2.13.0+cu130",
+  "cuda": "13.0",
+  "test_sha256": "a1f348ac9b8bbac178a6e4aacef2f679ea338b691ca2a5fbaa9a433ae84d203e",
+  "oracle_sha256": "b42d6e49dc0ce55dae95eea6830496817d909ce4dee909e8fc539372366df0da",
+  "production_sources": {
+    "sampled_residency.py": "9c31d5ba2c5ab027ec9768e28457515006efe6c92b16f4b462c28ec8a6642b11",
+    "sampled_residency.cu": "c778fcfd411cb2a82d7238c6075f1cf59ba7e0f017184a9270747158c9471c47"
+  }
+}

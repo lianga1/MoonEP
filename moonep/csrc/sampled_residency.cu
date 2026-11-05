@@ -275,6 +275,121 @@ __global__ void global_greedy(const Word* masks,const int* freq,const int* class
   if(t==0)*history_count=accepted;
 }
 
+// Reuse the work for one retained direction group across all reciprocal
+// packages containing it. The generic kernel above remains the fallback.
+// sizeof includes the actual CUB scratch storage and structure alignment.
+using GreedyReduce=cub::BlockReduce<Score,THREADS>;
+constexpr int GREEDY_ROWS=BUCKETS*RETAINED;
+constexpr int PACKAGES_PER_THREAD=(MAXP+THREADS-1)/THREADS;
+struct GreedyTableStorage {
+  typename GreedyReduce::TempStorage reduction;
+  Word resident[R][WORDS];
+  int current_extra[R],e0[BUCKETS],e1[BUCKETS];
+  int missing[GREEDY_ROWS],after0[GREEDY_ROWS],after1[GREEDY_ROWS];
+  Score winner;
+  int accepted;
+  unsigned changed_targets;
+};
+constexpr bool USE_GREEDY_TABLE=sizeof(GreedyTableStorage)<=48*1024;
+
+// A template is intentional: configurations exceeding the static shared-memory
+// limit must not instantiate this kernel (or its large local package arrays).
+template<int Specialization=0>
+__global__ void global_greedy_table(const Word* masks,const int* freq,const int* classes,const int* records,
+ const int* sizes,const int* packages,const int* package_count,bool* support,int* extra,
+ int* output_etc,int64_t* history,int* history_count,const int* status,int B){
+  __shared__ GreedyTableStorage s;
+  const int t=threadIdx.x,n_packages=*package_count;
+  for(int i=t;i<R*WORDS;i+=THREADS){int r=i/WORDS,w=i%WORDS;Word m=0;
+    for(int bit=0;bit<64;++bit){int e=w*64+bit;if(e<E&&support[r*E+e])m|=Word(1)<<bit;}s.resident[r][w]=m;}
+  if(t<R)s.current_extra[t]=extra[t];
+  if(t==0){s.accepted=0;s.changed_targets=(1u<<R)-1;}
+
+  // Only two constant-index arrays are kept per thread. For E352/K8/G2 this
+  // is 2*11 int values; unrolling allows register scalarization, subject to
+  // compiler register pressure. Package order and package contents are intact.
+  int forward_slot[PACKAGES_PER_THREAD],backward_slot[PACKAGES_PER_THREAD];
+  #pragma unroll
+  for(int i=0;i<PACKAGES_PER_THREAD;++i){
+    forward_slot[i]=backward_slot[i]=-1;
+    int p=t+i*THREADS;
+    // The generic path skips all package reads when status is nonzero. Keep
+    // that property even though metadata is now loaded before the iterations.
+    if(p<n_packages&&*status==0){
+      const int* q=packages+p*5;
+      int ka=bucket(q[0],q[1],q[2]),kb=bucket(q[1],q[0],q[2]);
+      for(int j=0;j<sizes[ka];++j)if(records[ka*RETAINED+j]==q[3])forward_slot[i]=ka*RETAINED+j;
+      for(int j=0;j<sizes[kb];++j)if(records[kb*RETAINED+j]==q[4])backward_slot[i]=kb*RETAINED+j;
+    }
+  }
+  __syncthreads();
+
+  for(int iteration=0;iteration<R*B&&*status==0;++iteration){
+    // All cached values for old->new depend only on resident[new]. Every
+    // target is initialized once; after accepting a package, only targets
+    // receiving at least one genuinely new expert need their tables rebuilt.
+    // Keep full package rescoring below: both endpoints' global budgets still
+    // participate in feasibility, and the original deterministic tie remains.
+    const unsigned changed=s.changed_targets;
+    // The baseline counts include every retained group that is already
+    // executable, including groups with zero standalone communication gain.
+    for(int key=t;key<BUCKETS;key+=THREADS){int x0=0,x1=0,b=(key/STRIDE)%R;
+      if(!(changed&(1u<<b)))continue;
+      for(int j=0;j<sizes[key];++j){int rec=records[key*RETAINED+j];if(enabled(masks+rec*WORDS,s.resident[b])){
+        if(classes[rec]&1)x1+=freq[rec];else x0+=freq[rec];}}
+      s.e0[key]=x0;s.e1[key]=x1;
+    }
+    for(int row=t;row<GREEDY_ROWS;row+=THREADS){
+      int key=row/RETAINED,j=row%RETAINED,target=(key/STRIDE)%R;
+      if(!(changed&(1u<<target)))continue;
+      if(j>=sizes[key]){s.missing[row]=s.after0[row]=s.after1[row]=0;continue;}
+      int rec=records[row],missing=0,x0=0,x1=0;
+      for(int w=0;w<WORDS;++w)missing+=__popcll(masks[rec*WORDS+w]&~s.resident[target][w]);
+      // A zero-cost direction still participates: its reverse direction can
+      // produce positive gain. Count the complete bucket after adding this
+      // group's experts, not only the newly enabled records.
+      for(int k=0;k<sizes[key];++k){int other=records[key*RETAINED+k];bool ok=true;
+        for(int w=0;w<WORDS;++w)if(masks[other*WORDS+w]&~(s.resident[target][w]|masks[rec*WORDS+w])){ok=false;break;}
+        if(ok){if(classes[other]&1)x1+=freq[other];else x0+=freq[other];}
+      }
+      s.missing[row]=missing;s.after0[row]=x0;s.after1[row]=x1;
+    }
+    __syncthreads();
+    Score best{0,0,MAXP};
+    #pragma unroll
+    for(int i=0;i<PACKAGES_PER_THREAD;++i){int p=t+i*THREADS;
+      if(p<n_packages){
+        int sa=forward_slot[i],sb=backward_slot[i],ka=sa/RETAINED,kb=sb/RETAINED;
+        int a=ka/(R*STRIDE),b=(ka/STRIDE)%R;
+        // a->b adds the forward group to b, while b->a adds the reverse
+        // group to a. Budgets remain global across all 28 card pairs.
+        int ca=s.missing[sb],cb=s.missing[sa],cost=ca+cb;
+        if(cost==0||s.current_extra[a]+ca>B||s.current_extra[b]+cb>B)continue;
+        int gain=match_gain(s.after0[sa],s.after1[sa],s.after0[sb],s.after1[sb])
+          -match_gain(s.e0[ka],s.e1[ka],s.e0[kb],s.e1[kb]);
+        best=BestScore()(best,Score{gain,cost,p});
+      }
+    }
+    Score found=GreedyReduce(s.reduction).Reduce(best,BestScore());
+    if(t==0)s.winner=found;__syncthreads();
+    if(s.winner.gain<=0)break;
+    if(t==0){const int* q=packages+s.winner.idx*5;int a=q[0],b=q[1];int64_t* h=history+s.accepted*HISTORY_WIDTH;
+      h[0]=s.winner.idx;h[1]=s.winner.gain;h[2]=a;h[3]=b;h[4]=q[2];h[5]=s.winner.cost;
+      s.changed_targets=0;
+      for(int w=0;w<WORDS;++w){Word aa=masks[q[4]*WORDS+w]&~s.resident[a][w],ab=masks[q[3]*WORDS+w]&~s.resident[b][w];
+        h[6+w]=int64_t(aa);h[6+WORDS+w]=int64_t(ab);s.current_extra[a]+=__popcll(aa);s.current_extra[b]+=__popcll(ab);
+        if(aa)s.changed_targets|=1u<<a;if(ab)s.changed_targets|=1u<<b;
+        s.resident[a][w]|=aa;s.resident[b][w]|=ab;}++s.accepted;
+    }
+    __syncthreads();
+  }
+  for(int i=t;i<R*E;i+=THREADS){int r=i/E,e=i%E;support[i]=(s.resident[r][e/64]>>(e%64))&1;}
+  if(t<R){extra[t]=s.current_extra[t];int n=0;
+    for(int e=0;e<E;++e)if(e/HOME!=t&&((s.resident[t][e/64]>>(e%64))&1)){if(n<B)output_etc[t*B+n]=e;++n;}
+    while(n<B)output_etc[t*B+n++]=-1;}
+  if(t==0)*history_count=s.accepted;
+}
+
 void check(const at::Tensor& tensor,const at::Tensor& reference,at::ScalarType dtype,int64_t count,const char* name){
   TORCH_CHECK(tensor.is_cuda()&&tensor.device()==reference.device()&&tensor.scalar_type()==dtype&&tensor.is_contiguous()&&tensor.numel()==count,"invalid ",name);
 }
@@ -319,7 +434,11 @@ void select_residency(const at::Tensor& packet,const at::Tensor& ids,const at::T
   assemble_groups<<<(PAIR_SIZES+THREADS-1)/THREADS,THREADS,0,stream>>>(tops.data_ptr<int>(),first.data_ptr<int>(),classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),offsets.data_ptr<int>());
   prefix_packages<<<1,THREADS,0,stream>>>(records.data_ptr<int>(),sizes.data_ptr<int>(),offsets.data_ptr<int>(),package_count.data_ptr<int>(),status.data_ptr<int>());
   fill_packages<<<(PAIR_SIZES+THREADS-1)/THREADS,THREADS,0,stream>>>(classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),offsets.data_ptr<int>(),packages.data_ptr<int>());
-  global_greedy<<<1,THREADS,0,stream>>>(w(masks),freq.data_ptr<int>(),classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),packages.data_ptr<int>(),package_count.data_ptr<int>(),support.data_ptr<bool>(),extra.data_ptr<int>(),output_etc.data_ptr<int>(),history.data_ptr<int64_t>(),history_count.data_ptr<int>(),status.data_ptr<int>(),B);
+  if constexpr(USE_GREEDY_TABLE){
+    global_greedy_table<><<<1,THREADS,0,stream>>>(w(masks),freq.data_ptr<int>(),classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),packages.data_ptr<int>(),package_count.data_ptr<int>(),support.data_ptr<bool>(),extra.data_ptr<int>(),output_etc.data_ptr<int>(),history.data_ptr<int64_t>(),history_count.data_ptr<int>(),status.data_ptr<int>(),B);
+  }else{
+    global_greedy<<<1,THREADS,0,stream>>>(w(masks),freq.data_ptr<int>(),classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),packages.data_ptr<int>(),package_count.data_ptr<int>(),support.data_ptr<bool>(),extra.data_ptr<int>(),output_etc.data_ptr<int>(),history.data_ptr<int64_t>(),history_count.data_ptr<int>(),status.data_ptr<int>(),B);
+  }
   C10_CUDA_KERNEL_LAUNCH_CHECK();
 }
 // Diagnostic split used to force hash collisions in correctness tests. The

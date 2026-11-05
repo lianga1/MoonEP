@@ -1,0 +1,32 @@
+
+Fatbin elf code:
+================
+arch = sm_90
+code version = [1,8]
+host = linux
+compile_size = 64bit
+identifier = /inspire/hdd/project/embodied-multimodality/liangzuning-253108090053/moonep_stage_profile_20261105/moonep/csrc/sampled_residency.cu
+
+Resource usage:
+ Common:
+  GLOBAL:28 CONSTANT[4]:224
+ Function _ZN53_GLOBAL__N__f9803272_20_sampled_residency_cu_86f7cd3a19global_greedy_tableILi0EEEvPKyPKiS4_S4_S4_S4_S4_PbPiS6_PlS6_S4_i:
+  REG:137 STACK:0 SHARED:33832 LOCAL:0 CONSTANT[0]:636 TEXTURE:0 SURFACE:0 SAMPLER:0
+ Function _ZN53_GLOBAL__N__f9803272_20_sampled_residency_cu_86f7cd3a13global_greedyEPKyPKiS3_S3_S3_S3_S3_PbPiS5_PlS5_S3_i:
+  REG:71 STACK:0 SHARED:6184 LOCAL:0 CONSTANT[0]:636 TEXTURE:0 SURFACE:0 SAMPLER:0
+ Function _ZN53_GLOBAL__N__f9803272_20_sampled_residency_cu_86f7cd3a13fill_packagesEPKiS1_S1_S1_Pi:
+  REG:32 STACK:0 SHARED:0 LOCAL:0 CONSTANT[0]:568 TEXTURE:0 SURFACE:0 SAMPLER:0
+ Function _ZN53_GLOBAL__N__f9803272_20_sampled_residency_cu_86f7cd3a15prefix_packagesEPiS0_S0_S0_S0_:
+  REG:32 STACK:0 SHARED:0 LOCAL:0 CONSTANT[0]:568 TEXTURE:0 SURFACE:0 SAMPLER:0
+ Function _ZN53_GLOBAL__N__f9803272_20_sampled_residency_cu_86f7cd3a15assemble_groupsEPKiS1_S1_PiS2_S2_:
+  REG:32 STACK:0 SHARED:0 LOCAL:0 CONSTANT[0]:576 TEXTURE:0 SURFACE:0 SAMPLER:0
+ Function _ZN53_GLOBAL__N__f9803272_20_sampled_residency_cu_86f7cd3a10class_topgEPKiS1_S1_PiS2_:
+  REG:28 STACK:0 SHARED:1112 LOCAL:0 CONSTANT[0]:568 TEXTURE:0 SURFACE:0 SAMPLER:0
+ Function _ZN53_GLOBAL__N__f9803272_20_sampled_residency_cu_86f7cd3a18record_frequenciesEPKiS1_PKyS3_Pi:
+  REG:24 STACK:0 SHARED:6144 LOCAL:0 CONSTANT[0]:568 TEXTURE:0 SURFACE:0 SAMPLER:0
+ Function _ZN53_GLOBAL__N__f9803272_20_sampled_residency_cu_86f7cd3a14sample_recordsEPKiPKlPKbS1_PiS6_PyS7_S7_S1_ii:
+  REG:32 STACK:96 SHARED:0 LOCAL:0 CONSTANT[0]:616 TEXTURE:0 SURFACE:0 SAMPLER:0
+ Function _ZN53_GLOBAL__N__f9803272_20_sampled_residency_cu_86f7cd3a18mandatory_validateEPKiS1_PiPbS2_S2_S2_i:
+  REG:32 STACK:0 SHARED:0 LOCAL:0 CONSTANT[0]:588 TEXTURE:0 SURFACE:0 SAMPLER:0
+ Function _ZN53_GLOBAL__N__f9803272_20_sampled_residency_cu_86f7cd3a12gather_localEPKiS1_PKlS1_PiS4_S4_iii:
+  REG:32 STACK:0 SHARED:0 LOCAL:0 CONSTANT[0]:596 TEXTURE:0 SURFACE:0 SAMPLER:0
