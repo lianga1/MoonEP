@@ -1,0 +1,44 @@
+{
+  "native_rt0": {
+    "remote": 5054165,
+    "reduction_pct": 0.0,
+    "audit_pass": true,
+    "max_active_extra": 4,
+    "unsupported_pairs": 0
+  },
+  "native_rt2": {
+    "remote": 4771576,
+    "reduction_pct": 5.591210417546721,
+    "audit_pass": true,
+    "max_active_extra": 7,
+    "unsupported_pairs": 0
+  },
+  "sample256_g2_bundle": {
+    "remote": 3791665,
+    "reduction_pct": 24.97939817952125,
+    "audit_pass": true,
+    "max_active_extra": 8,
+    "unsupported_pairs": 0
+  },
+  "sample256_g2_single": {
+    "remote": 3825459,
+    "reduction_pct": 24.310761520448978,
+    "audit_pass": true,
+    "max_active_extra": 8,
+    "unsupported_pairs": 0
+  },
+  "sample4096_g4_bundle": {
+    "remote": 3810002,
+    "reduction_pct": 24.616588496814018,
+    "audit_pass": true,
+    "max_active_extra": 8,
+    "unsupported_pairs": 0
+  },
+  "sample4096_g4_single": {
+    "remote": 3855509,
+    "reduction_pct": 23.716202379621564,
+    "audit_pass": true,
+    "max_active_extra": 8,
+    "unsupported_pairs": 0
+  }
+}

@@ -217,3 +217,7 @@ This library is inspired by the following works:
       howpublished = {\url{https://github.com/MoonshotAI/MoonEP}},
 }
 ```
+
+## Router planner experiments (2026-11-05)
+
+See [eight-rank sampled residency, prefix exchange, and H200 evidence](experiments/router_planner_20261105/README.md) for the experimental CUDA kernels, reproducible router fixtures, raw measurements and failures, and training communication cost estimates. Two physical GPUs calibrate original eight-rank components and bandwidth; the eight-GPU communication totals are modeled, not end-to-end training measurements.

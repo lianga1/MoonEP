@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "estimate_sha256": "d4a2930ea15042e611a82f27b484a7117eaa58aa5c51b93556d040117cc2077a",
+  "checks": {
+    "source_input_hashes_match": true,
+    "once_refresh_results_unchanged": true,
+    "F1_native_rt0_serial": true,
+    "F1_native_rt0_shared_two_distinct_windows": true,
+    "F1_native_rt2_serial": true,
+    "F1_native_rt2_shared_two_distinct_windows": true,
+    "F1_sample256_g2_bundle_serial": true,
+    "F1_sample256_g2_bundle_shared_two_distinct_windows": true,
+    "F2_native_rt0_serial": true,
+    "F2_native_rt0_shared_two_distinct_windows": true,
+    "F2_native_rt2_serial": true,
+    "F2_native_rt2_shared_two_distinct_windows": true,
+    "F2_sample256_g2_bundle_serial": true,
+    "F2_sample256_g2_bundle_shared_two_distinct_windows": true,
+    "F2_extra_weight_exactly_double": true,
+    "F2_grad_unchanged": true
+  },
+  "scope": "Independent raw-matrix recomputation, two separate refresh windows, no hardware claims"
+}

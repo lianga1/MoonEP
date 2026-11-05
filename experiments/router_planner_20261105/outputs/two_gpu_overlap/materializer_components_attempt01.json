@@ -1,0 +1,2632 @@
+{
+  "status": "complete",
+  "metadata": {
+    "world": 2,
+    "gpu": "NVIDIA H200",
+    "torch": "2.11.0+cu130",
+    "cuda": "13.0",
+    "nccl": [
+      2,
+      28,
+      9
+    ],
+    "hidden": 7168,
+    "intermediate": 2048,
+    "weight_dtype": "BF16",
+    "expert_bytes": 88080384,
+    "rounds": 4,
+    "source_mapping": "original 0..3 to rank0; 4..7 to rank1; all router rows retained",
+    "scope": "planning + actual expert copies + actual dispatch/combine; identity experts, no GEMM",
+    "precomputed_inputs": "local expert histogram and fixed random sample IDs; routes remain runtime GPU input",
+    "hot_scope": "same trace/support and immutable version reused; no measured cross-step stability",
+    "samples": 10,
+    "warmup": 3,
+    "num_sms": 32,
+    "prefetch_sms": 32,
+    "timing_mode": "graph",
+    "hot_exact_map_prefill_per_sample": true,
+    "materializer": "reuse",
+    "sources": {
+      "moonep_materialize_reuse.py": "5b15d1b889bd003e4a49e4fb25114c5e577fd93285d024449c3f2d0d1e560bae",
+      "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+      "moonep_materialize.cu": "94a46ff9ba6cc46ebbfec4502847d7138670bda9fe5a9ab92bac0ddac6a92d1a",
+      "deepep_v1_smoke.py": "0b876b8ffc973b98248650f8f68a382fbb18b964f996638e38010bcfb646db46",
+      "moonep_common.py": "e6987ae8e34d938575808421ff003d6ec2180cc7dc1370d9df9c8b8f8d332b6c",
+      "deepep_adapter.py": "90ce02cbd9ecae7723d6b407c7db21f394af88af1e37821125fb1d55234bb0e4",
+      "residency_reference_check.py": "0d43d46493dee5cdbd454702fd2ff987215e479e332c1bf2e10e94202b8a0da5",
+      "._deepep_v1_smoke.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+      "prepare_inputs.py": "1acc76d6b0f49eea8a607fd9ec9e1be1ab01d4b727810ef56738501b019050a6",
+      "moonep_materialize.py": "86b3b4b22cbb27260533ba51a6da40c22922ade93880ad7269a9842d720bfa94",
+      "two_gpu_smoke.py": "0decb839b2d48980b396dc37ea5d493f47492223071565dadf1f224320ef94b4",
+      "benchmark.py": "a18f357568fd2e7ab8aacd63ae35d89d042df706989529474d7ad93251b4d46d",
+      "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956",
+      "moonep_materialize_reference.py": "cb2edff4d47e8bc08bb2af415086f0d3945e20f5c3aa1d2f91de4dd2b0263568",
+      "deepep_v1_adapter.py": "4f2dba9c74a6ccef8a52ce696be6c219e41ad6401185549b920d195f6331c8a8",
+      "analyze_results.py": "19befe9f8725169b699791e3ea1fbec4c1f66a8c35f335141d2b51e5e61a2e4f",
+      "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d",
+      "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+      "._deepep_trace_smoke.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+      "profile_residency.py": "b43987e8a056e917ee5dd094e0ce9cc9f686ff0a0c355bee41bb58771d96b9d7",
+      "._deepep_v1_adapter.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+      "residency_smoke.py": "f86f9ef028dd0b30a2c8f2b321840e8cbfdfb7e0c82292c958f024546999a808",
+      "deepep_smoke.py": "e437ce9267fa0a05b93feb0986762df3594f4ad189fc88a81aa41f32e52a17d8",
+      "moonep_materialize_reuse.cu": "269cb85f0312818cd46a26a6b94fccc5897e9fa9e278b038a13a30f5e2e9d1a8",
+      "moonep_split.py": "171935a9f72dc1cc16fdcb37030fa4e1208e7329e656b81efb3fc38de719deff",
+      "deepep_trace_smoke.py": "f25f4325ac926a4219df56ba6b6e41707557898e1d03654e21c4498b9e704370",
+      "exchange_reference_check.py": "10d4f08410a93b9ed1f4a2a38a1173325d78207d371da1226920936d72383dfb",
+      "moonep_reuse_reference_check.py": "aadcd1099ac40b1319cf7936df463248c899987be1f83ae89491f15159eb98d4",
+      "timeline_overlap.py": "cb35008555881ee672a20f5f7f555c0f59919f6bfc248e257efa1eb6c1caee0d"
+    }
+  },
+  "layers": [
+    {
+      "layer": 0,
+      "input_sha256": "9070d5d269147c08f991f023f2e424c031d3649b3f3517e2e7c896f344e9de8b",
+      "shape": [
+        2,
+        67072,
+        8
+      ],
+      "correctness": {
+        "native_cpu_owner": true,
+        "native_cpu_copies": true,
+        "sampled_residency_cpu": true,
+        "sort_prefix_owner": true,
+        "sort_prefix_stats": true,
+        "balanced": true,
+        "residency_legal": true,
+        "materializers_exact": true
+      },
+      "communication": {
+        "remote_before_by_rank": [
+          66842,
+          66844
+        ],
+        "remote_after_by_rank": [
+          66615,
+          66642
+        ],
+        "native_copies": [
+          0,
+          1
+        ],
+        "optimized_copies": [
+          7,
+          8
+        ],
+        "dispatch_combine_bytes_saved": 12300288
+      },
+      "rounds": [
+        [
+          225,
+          576,
+          450,
+          427
+        ],
+        [
+          2,
+          12,
+          4,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "measurements": {
+        "native_planner": [
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.2189439982175827,
+                "host_ms": 0.23148697800934315
+              },
+              {
+                "cuda_ms": 0.21801599860191345,
+                "host_ms": 0.23038196377456188
+              }
+            ],
+            "max_cuda_ms": 0.2189439982175827,
+            "max_host_ms": 0.23148697800934315,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.21875199675559998,
+                "host_ms": 0.2290720585733652
+              },
+              {
+                "cuda_ms": 0.21507200598716736,
+                "host_ms": 0.2253619022667408
+              }
+            ],
+            "max_cuda_ms": 0.21875199675559998,
+            "max_host_ms": 0.2290720585733652,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.21526400744915009,
+                "host_ms": 0.22557203192263842
+              },
+              {
+                "cuda_ms": 0.21740800142288208,
+                "host_ms": 0.22735795937478542
+              }
+            ],
+            "max_cuda_ms": 0.21740800142288208,
+            "max_host_ms": 0.22735795937478542,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.21395200490951538,
+                "host_ms": 0.2248859964311123
+              },
+              {
+                "cuda_ms": 0.2229440063238144,
+                "host_ms": 0.23305206559598446
+              }
+            ],
+            "max_cuda_ms": 0.2229440063238144,
+            "max_host_ms": 0.23305206559598446,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.21475200355052948,
+                "host_ms": 0.22561801597476006
+              },
+              {
+                "cuda_ms": 0.22067199647426605,
+                "host_ms": 0.2307010581716895
+              }
+            ],
+            "max_cuda_ms": 0.22067199647426605,
+            "max_host_ms": 0.2307010581716895,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.21491199731826782,
+                "host_ms": 0.2255779691040516
+              },
+              {
+                "cuda_ms": 0.21913599967956543,
+                "host_ms": 0.22940593771636486
+              }
+            ],
+            "max_cuda_ms": 0.21913599967956543,
+            "max_host_ms": 0.22940593771636486,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.21571199595928192,
+                "host_ms": 0.22625795099884272
+              },
+              {
+                "cuda_ms": 0.2210559993982315,
+                "host_ms": 0.2312209689989686
+              }
+            ],
+            "max_cuda_ms": 0.2210559993982315,
+            "max_host_ms": 0.2312209689989686,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.21568000316619873,
+                "host_ms": 0.2263840287923813
+              },
+              {
+                "cuda_ms": 0.22646400332450867,
+                "host_ms": 0.23655302356928587
+              }
+            ],
+            "max_cuda_ms": 0.22646400332450867,
+            "max_host_ms": 0.23655302356928587,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.21942399442195892,
+                "host_ms": 0.23036706261336803
+              },
+              {
+                "cuda_ms": 0.25174400210380554,
+                "host_ms": 0.26172795332968235
+              }
+            ],
+            "max_cuda_ms": 0.25174400210380554,
+            "max_host_ms": 0.26172795332968235,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.21507200598716736,
+                "host_ms": 0.22523198276758194
+              },
+              {
+                "cuda_ms": 0.22313599288463593,
+                "host_ms": 0.23322401102632284
+              }
+            ],
+            "max_cuda_ms": 0.22313599288463593,
+            "max_host_ms": 0.23322401102632284,
+            "hot_prepared_map_sha256": null
+          }
+        ],
+        "sampled_residency": [
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.1759680062532425,
+                "host_ms": 0.18712400924414396
+              },
+              {
+                "cuda_ms": 0.17004799842834473,
+                "host_ms": 0.18130196258425713
+              }
+            ],
+            "max_cuda_ms": 0.1759680062532425,
+            "max_host_ms": 0.18712400924414396,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.16707199811935425,
+                "host_ms": 0.17765897791832685
+              },
+              {
+                "cuda_ms": 0.1969279944896698,
+                "host_ms": 0.20730309188365936
+              }
+            ],
+            "max_cuda_ms": 0.1969279944896698,
+            "max_host_ms": 0.20730309188365936,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.1712000072002411,
+                "host_ms": 0.18149195238947868
+              },
+              {
+                "cuda_ms": 0.16470399498939514,
+                "host_ms": 0.17484102863818407
+              }
+            ],
+            "max_cuda_ms": 0.1712000072002411,
+            "max_host_ms": 0.18149195238947868,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.16380800306797028,
+                "host_ms": 0.1746410271152854
+              },
+              {
+                "cuda_ms": 0.16966399550437927,
+                "host_ms": 0.18004991579800844
+              }
+            ],
+            "max_cuda_ms": 0.16966399550437927,
+            "max_host_ms": 0.18004991579800844,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.16380800306797028,
+                "host_ms": 0.1744719920679927
+              },
+              {
+                "cuda_ms": 0.1711360067129135,
+                "host_ms": 0.18136599101126194
+              }
+            ],
+            "max_cuda_ms": 0.1711360067129135,
+            "max_host_ms": 0.18136599101126194,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.16473600268363953,
+                "host_ms": 0.17493893392384052
+              },
+              {
+                "cuda_ms": 0.17097599804401398,
+                "host_ms": 0.18164492212235928
+              }
+            ],
+            "max_cuda_ms": 0.17097599804401398,
+            "max_host_ms": 0.18164492212235928,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.163455992937088,
+                "host_ms": 0.17393205780535936
+              },
+              {
+                "cuda_ms": 0.1700800061225891,
+                "host_ms": 0.18053606618195772
+              }
+            ],
+            "max_cuda_ms": 0.1700800061225891,
+            "max_host_ms": 0.18053606618195772,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.164000004529953,
+                "host_ms": 0.17457990907132626
+              },
+              {
+                "cuda_ms": 0.1701119989156723,
+                "host_ms": 0.1801979960873723
+              }
+            ],
+            "max_cuda_ms": 0.1701119989156723,
+            "max_host_ms": 0.1801979960873723,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.1690240055322647,
+                "host_ms": 0.17993501387536526
+              },
+              {
+                "cuda_ms": 0.1764799952507019,
+                "host_ms": 0.18661003559827805
+              }
+            ],
+            "max_cuda_ms": 0.1764799952507019,
+            "max_host_ms": 0.18661003559827805,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.16687999665737152,
+                "host_ms": 0.17751893028616905
+              },
+              {
+                "cuda_ms": 0.19254399836063385,
+                "host_ms": 0.2031730255112052
+              }
+            ],
+            "max_cuda_ms": 0.19254399836063385,
+            "max_host_ms": 0.2031730255112052,
+            "hot_prepared_map_sha256": null
+          }
+        ],
+        "exchange_sort": [
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.17612800002098083,
+                "host_ms": 0.1867481041699648
+              },
+              {
+                "cuda_ms": 0.1719679981470108,
+                "host_ms": 0.1826719380915165
+              }
+            ],
+            "max_cuda_ms": 0.17612800002098083,
+            "max_host_ms": 0.1867481041699648,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.1708800047636032,
+                "host_ms": 0.18171791452914476
+              },
+              {
+                "cuda_ms": 0.18201600015163422,
+                "host_ms": 0.19216793589293957
+              }
+            ],
+            "max_cuda_ms": 0.18201600015163422,
+            "max_host_ms": 0.19216793589293957,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.17283199727535248,
+                "host_ms": 0.1838069874793291
+              },
+              {
+                "cuda_ms": 0.2043199986219406,
+                "host_ms": 0.21455297246575356
+              }
+            ],
+            "max_cuda_ms": 0.2043199986219406,
+            "max_host_ms": 0.21455297246575356,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.17164799571037292,
+                "host_ms": 0.18207309767603874
+              },
+              {
+                "cuda_ms": 0.17052799463272095,
+                "host_ms": 0.18032698426395655
+              }
+            ],
+            "max_cuda_ms": 0.17164799571037292,
+            "max_host_ms": 0.18207309767603874,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.16963200271129608,
+                "host_ms": 0.18016796093434095
+              },
+              {
+                "cuda_ms": 0.17183999717235565,
+                "host_ms": 0.18254504539072514
+              }
+            ],
+            "max_cuda_ms": 0.17183999717235565,
+            "max_host_ms": 0.18254504539072514,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.17017599940299988,
+                "host_ms": 0.1808960223570466
+              },
+              {
+                "cuda_ms": 0.1730560064315796,
+                "host_ms": 0.18362293485552073
+              }
+            ],
+            "max_cuda_ms": 0.1730560064315796,
+            "max_host_ms": 0.18362293485552073,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.16812799870967865,
+                "host_ms": 0.1788650406524539
+              },
+              {
+                "cuda_ms": 0.17257599532604218,
+                "host_ms": 0.18299103248864412
+              }
+            ],
+            "max_cuda_ms": 0.17257599532604218,
+            "max_host_ms": 0.18299103248864412,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.16944000124931335,
+                "host_ms": 0.18006598111242056
+              },
+              {
+                "cuda_ms": 0.17155200242996216,
+                "host_ms": 0.18176494631916285
+              }
+            ],
+            "max_cuda_ms": 0.17155200242996216,
+            "max_host_ms": 0.18176494631916285,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.17052799463272095,
+                "host_ms": 0.1813719281926751
+              },
+              {
+                "cuda_ms": 0.17475199699401855,
+                "host_ms": 0.18486508633941412
+              }
+            ],
+            "max_cuda_ms": 0.17475199699401855,
+            "max_host_ms": 0.18486508633941412,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.1711360067129135,
+                "host_ms": 0.18218997865915298
+              },
+              {
+                "cuda_ms": 0.17897599935531616,
+                "host_ms": 0.18919596914201975
+              }
+            ],
+            "max_cuda_ms": 0.17897599935531616,
+            "max_host_ms": 0.18919596914201975,
+            "hot_prepared_map_sha256": null
+          }
+        ],
+        "exchange_prefix": [
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.08102399855852127,
+                "host_ms": 0.0914490083232522
+              },
+              {
+                "cuda_ms": 0.08822400122880936,
+                "host_ms": 0.09842007420957088
+              }
+            ],
+            "max_cuda_ms": 0.08822400122880936,
+            "max_host_ms": 0.09842007420957088,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.10198400169610977,
+                "host_ms": 0.11231598909944296
+              },
+              {
+                "cuda_ms": 0.08156800270080566,
+                "host_ms": 0.09225297253578901
+              }
+            ],
+            "max_cuda_ms": 0.10198400169610977,
+            "max_host_ms": 0.11231598909944296,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.07980799674987793,
+                "host_ms": 0.09059091098606586
+              },
+              {
+                "cuda_ms": 0.09126400202512741,
+                "host_ms": 0.10152801405638456
+              }
+            ],
+            "max_cuda_ms": 0.09126400202512741,
+            "max_host_ms": 0.10152801405638456,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.08204799890518188,
+                "host_ms": 0.09298196528106928
+              },
+              {
+                "cuda_ms": 0.11327999830245972,
+                "host_ms": 0.12349092867225409
+              }
+            ],
+            "max_cuda_ms": 0.11327999830245972,
+            "max_host_ms": 0.12349092867225409,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.07807999849319458,
+                "host_ms": 0.08842907845973969
+              },
+              {
+                "cuda_ms": 0.0809599980711937,
+                "host_ms": 0.09127496741712093
+              }
+            ],
+            "max_cuda_ms": 0.0809599980711937,
+            "max_host_ms": 0.09127496741712093,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.07807999849319458,
+                "host_ms": 0.08876202628016472
+              },
+              {
+                "cuda_ms": 0.08179199695587158,
+                "host_ms": 0.09226799011230469
+              }
+            ],
+            "max_cuda_ms": 0.08179199695587158,
+            "max_host_ms": 0.09226799011230469,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.08048000186681747,
+                "host_ms": 0.09120500180870295
+              },
+              {
+                "cuda_ms": 0.07923199981451035,
+                "host_ms": 0.08943595457822084
+              }
+            ],
+            "max_cuda_ms": 0.08048000186681747,
+            "max_host_ms": 0.09120500180870295,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.07737600058317184,
+                "host_ms": 0.08806097321212292
+              },
+              {
+                "cuda_ms": 0.08534400165081024,
+                "host_ms": 0.09550596587359905
+              }
+            ],
+            "max_cuda_ms": 0.08534400165081024,
+            "max_host_ms": 0.09550596587359905,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.07878399640321732,
+                "host_ms": 0.08945597801357508
+              },
+              {
+                "cuda_ms": 0.08329600095748901,
+                "host_ms": 0.09372597560286522
+              }
+            ],
+            "max_cuda_ms": 0.08329600095748901,
+            "max_host_ms": 0.09372597560286522,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.0783040001988411,
+                "host_ms": 0.08899800013750792
+              },
+              {
+                "cuda_ms": 0.08329600095748901,
+                "host_ms": 0.09354599751532078
+              }
+            ],
+            "max_cuda_ms": 0.08329600095748901,
+            "max_host_ms": 0.09354599751532078,
+            "hot_prepared_map_sha256": null
+          }
+        ],
+        "materialize": [
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.08793599903583527,
+                "host_ms": 0.09856303222477436
+              },
+              {
+                "cuda_ms": 0.09564799815416336,
+                "host_ms": 0.10601803660392761
+              }
+            ],
+            "max_cuda_ms": 0.09564799815416336,
+            "max_host_ms": 0.10601803660392761,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.09459199756383896,
+                "host_ms": 0.10548497084528208
+              },
+              {
+                "cuda_ms": 0.0880960002541542,
+                "host_ms": 0.09925989434123039
+              }
+            ],
+            "max_cuda_ms": 0.09459199756383896,
+            "max_host_ms": 0.10548497084528208,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.08531200140714645,
+                "host_ms": 0.09634601883590221
+              },
+              {
+                "cuda_ms": 0.09385599941015244,
+                "host_ms": 0.10399101302027702
+              }
+            ],
+            "max_cuda_ms": 0.09385599941015244,
+            "max_host_ms": 0.10399101302027702,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.0859839990735054,
+                "host_ms": 0.09680900257080793
+              },
+              {
+                "cuda_ms": 0.0952640026807785,
+                "host_ms": 0.10573607869446278
+              }
+            ],
+            "max_cuda_ms": 0.0952640026807785,
+            "max_host_ms": 0.10573607869446278,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.08966399729251862,
+                "host_ms": 0.1005630474537611
+              },
+              {
+                "cuda_ms": 0.12396799772977829,
+                "host_ms": 0.1342089381068945
+              }
+            ],
+            "max_cuda_ms": 0.12396799772977829,
+            "max_host_ms": 0.1342089381068945,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.08595199882984161,
+                "host_ms": 0.09639095515012741
+              },
+              {
+                "cuda_ms": 0.09062399715185165,
+                "host_ms": 0.100840930826962
+              }
+            ],
+            "max_cuda_ms": 0.09062399715185165,
+            "max_host_ms": 0.100840930826962,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.0883840024471283,
+                "host_ms": 0.09917397983372211
+              },
+              {
+                "cuda_ms": 0.08643200248479843,
+                "host_ms": 0.09671691805124283
+              }
+            ],
+            "max_cuda_ms": 0.0883840024471283,
+            "max_host_ms": 0.09917397983372211,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.08691199868917465,
+                "host_ms": 0.09765592403709888
+              },
+              {
+                "cuda_ms": 0.09187199920415878,
+                "host_ms": 0.10268494952470064
+              }
+            ],
+            "max_cuda_ms": 0.09187199920415878,
+            "max_host_ms": 0.10268494952470064,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.08528000116348267,
+                "host_ms": 0.09553402196615934
+              },
+              {
+                "cuda_ms": 0.08883199840784073,
+                "host_ms": 0.09882089216262102
+              }
+            ],
+            "max_cuda_ms": 0.08883199840784073,
+            "max_host_ms": 0.09882089216262102,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.08764799684286118,
+                "host_ms": 0.09842007420957088
+              },
+              {
+                "cuda_ms": 0.0926079973578453,
+                "host_ms": 0.10332395322620869
+              }
+            ],
+            "max_cuda_ms": 0.0926079973578453,
+            "max_host_ms": 0.10332395322620869,
+            "hot_prepared_map_sha256": null
+          }
+        ],
+        "materialize_sort": [
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.1042879968881607,
+                "host_ms": 0.11510599870234728
+              },
+              {
+                "cuda_ms": 0.10940799862146378,
+                "host_ms": 0.11964899022132158
+              }
+            ],
+            "max_cuda_ms": 0.10940799862146378,
+            "max_host_ms": 0.11964899022132158,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.10867200046777725,
+                "host_ms": 0.11899496894329786
+              },
+              {
+                "cuda_ms": 0.10412800312042236,
+                "host_ms": 0.11507002636790276
+              }
+            ],
+            "max_cuda_ms": 0.10867200046777725,
+            "max_host_ms": 0.11899496894329786,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.10636799782514572,
+                "host_ms": 0.11740601621568203
+              },
+              {
+                "cuda_ms": 0.10454399883747101,
+                "host_ms": 0.114638009108603
+              }
+            ],
+            "max_cuda_ms": 0.10636799782514572,
+            "max_host_ms": 0.11740601621568203,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.10470400005578995,
+                "host_ms": 0.11611601803451777
+              },
+              {
+                "cuda_ms": 0.1101439967751503,
+                "host_ms": 0.1206340966746211
+              }
+            ],
+            "max_cuda_ms": 0.1101439967751503,
+            "max_host_ms": 0.1206340966746211,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.10524799674749374,
+                "host_ms": 0.11604395695030689
+              },
+              {
+                "cuda_ms": 0.11760000139474869,
+                "host_ms": 0.12747792061418295
+              }
+            ],
+            "max_cuda_ms": 0.11760000139474869,
+            "max_host_ms": 0.12747792061418295,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.10876800119876862,
+                "host_ms": 0.11964200530201197
+              },
+              {
+                "cuda_ms": 0.14239999651908875,
+                "host_ms": 0.15262304805219173
+              }
+            ],
+            "max_cuda_ms": 0.14239999651908875,
+            "max_host_ms": 0.15262304805219173,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.10444799810647964,
+                "host_ms": 0.11533696670085192
+              },
+              {
+                "cuda_ms": 0.11900799721479416,
+                "host_ms": 0.12899294961243868
+              }
+            ],
+            "max_cuda_ms": 0.11900799721479416,
+            "max_host_ms": 0.12899294961243868,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.11036799848079681,
+                "host_ms": 0.12069998774677515
+              },
+              {
+                "cuda_ms": 0.10387200117111206,
+                "host_ms": 0.11428107973188162
+              }
+            ],
+            "max_cuda_ms": 0.11036799848079681,
+            "max_host_ms": 0.12069998774677515,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.1034879982471466,
+                "host_ms": 0.11380098294466734
+              },
+              {
+                "cuda_ms": 0.10329599678516388,
+                "host_ms": 0.11379399802535772
+              }
+            ],
+            "max_cuda_ms": 0.1034879982471466,
+            "max_host_ms": 0.11380098294466734,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.10374400019645691,
+                "host_ms": 0.1139629166573286
+              },
+              {
+                "cuda_ms": 0.10793600231409073,
+                "host_ms": 0.11821207590401173
+              }
+            ],
+            "max_cuda_ms": 0.10793600231409073,
+            "max_host_ms": 0.11821207590401173,
+            "hot_prepared_map_sha256": null
+          }
+        ],
+        "materialize_reuse": [
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.08611200004816055,
+                "host_ms": 0.0965240178629756
+              },
+              {
+                "cuda_ms": 0.09071999788284302,
+                "host_ms": 0.10109902359545231
+              }
+            ],
+            "max_cuda_ms": 0.09071999788284302,
+            "max_host_ms": 0.10109902359545231,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.08707199990749359,
+                "host_ms": 0.09770295582711697
+              },
+              {
+                "cuda_ms": 0.09283199906349182,
+                "host_ms": 0.10316702537238598
+              }
+            ],
+            "max_cuda_ms": 0.09283199906349182,
+            "max_host_ms": 0.10316702537238598,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.08502399921417236,
+                "host_ms": 0.09563099592924118
+              },
+              {
+                "cuda_ms": 0.09027200192213058,
+                "host_ms": 0.10062602814286947
+              }
+            ],
+            "max_cuda_ms": 0.09027200192213058,
+            "max_host_ms": 0.10062602814286947,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.08636800199747086,
+                "host_ms": 0.09678793139755726
+              },
+              {
+                "cuda_ms": 0.08921600133180618,
+                "host_ms": 0.09963300544768572
+              }
+            ],
+            "max_cuda_ms": 0.08921600133180618,
+            "max_host_ms": 0.09963300544768572,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.08611200004816055,
+                "host_ms": 0.09688304271548986
+              },
+              {
+                "cuda_ms": 0.09356799721717834,
+                "host_ms": 0.1039688941091299
+              }
+            ],
+            "max_cuda_ms": 0.09356799721717834,
+            "max_host_ms": 0.1039688941091299,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.08787199854850769,
+                "host_ms": 0.09871693328022957
+              },
+              {
+                "cuda_ms": 0.09993600100278854,
+                "host_ms": 0.11046906001865864
+              }
+            ],
+            "max_cuda_ms": 0.09993600100278854,
+            "max_host_ms": 0.11046906001865864,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.08579199761152267,
+                "host_ms": 0.09679992217570543
+              },
+              {
+                "cuda_ms": 0.11852800101041794,
+                "host_ms": 0.1287030754610896
+              }
+            ],
+            "max_cuda_ms": 0.11852800101041794,
+            "max_host_ms": 0.1287030754610896,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.08752000331878662,
+                "host_ms": 0.0979460310190916
+              },
+              {
+                "cuda_ms": 0.08588799834251404,
+                "host_ms": 0.09653600864112377
+              }
+            ],
+            "max_cuda_ms": 0.08752000331878662,
+            "max_host_ms": 0.0979460310190916,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.08828800171613693,
+                "host_ms": 0.09878294076770544
+              },
+              {
+                "cuda_ms": 0.08643200248479843,
+                "host_ms": 0.0967150554060936
+              }
+            ],
+            "max_cuda_ms": 0.08828800171613693,
+            "max_host_ms": 0.09878294076770544,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.08540800213813782,
+                "host_ms": 0.09575602598488331
+              },
+              {
+                "cuda_ms": 0.08649600297212601,
+                "host_ms": 0.09650795254856348
+              }
+            ],
+            "max_cuda_ms": 0.08649600297212601,
+            "max_host_ms": 0.09650795254856348,
+            "hot_prepared_map_sha256": null
+          }
+        ],
+        "optimized_full_planner": [
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.5280320048332214,
+                "host_ms": 0.5384489195421338
+              },
+              {
+                "cuda_ms": 0.5229439735412598,
+                "host_ms": 0.5333140725269914
+              }
+            ],
+            "max_cuda_ms": 0.5280320048332214,
+            "max_host_ms": 0.5384489195421338,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.521344006061554,
+                "host_ms": 0.5316360620781779
+              },
+              {
+                "cuda_ms": 0.5247039794921875,
+                "host_ms": 0.5351530853658915
+              }
+            ],
+            "max_cuda_ms": 0.5247039794921875,
+            "max_host_ms": 0.5351530853658915,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.520799994468689,
+                "host_ms": 0.5311149870976806
+              },
+              {
+                "cuda_ms": 0.5235840082168579,
+                "host_ms": 0.5337049951776862
+              }
+            ],
+            "max_cuda_ms": 0.5235840082168579,
+            "max_host_ms": 0.5337049951776862,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.5191680192947388,
+                "host_ms": 0.5296840099617839
+              },
+              {
+                "cuda_ms": 0.5213119983673096,
+                "host_ms": 0.5315348971635103
+              }
+            ],
+            "max_cuda_ms": 0.5213119983673096,
+            "max_host_ms": 0.5315348971635103,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.5221760272979736,
+                "host_ms": 0.5332890432327986
+              },
+              {
+                "cuda_ms": 0.5284799933433533,
+                "host_ms": 0.5386610282585025
+              }
+            ],
+            "max_cuda_ms": 0.5284799933433533,
+            "max_host_ms": 0.5386610282585025,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.5222079753875732,
+                "host_ms": 0.5334260640665889
+              },
+              {
+                "cuda_ms": 0.5261440277099609,
+                "host_ms": 0.536280102096498
+              }
+            ],
+            "max_cuda_ms": 0.5261440277099609,
+            "max_host_ms": 0.536280102096498,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.5204160213470459,
+                "host_ms": 0.5311060231178999
+              },
+              {
+                "cuda_ms": 0.5338559746742249,
+                "host_ms": 0.5438498919829726
+              }
+            ],
+            "max_cuda_ms": 0.5338559746742249,
+            "max_host_ms": 0.5438498919829726,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.5302720069885254,
+                "host_ms": 0.5409809527918696
+              },
+              {
+                "cuda_ms": 0.5618240237236023,
+                "host_ms": 0.572099001146853
+              }
+            ],
+            "max_cuda_ms": 0.5618240237236023,
+            "max_host_ms": 0.572099001146853,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.5217919945716858,
+                "host_ms": 0.5321310600265861
+              },
+              {
+                "cuda_ms": 0.5258560180664062,
+                "host_ms": 0.5359540227800608
+              }
+            ],
+            "max_cuda_ms": 0.5258560180664062,
+            "max_host_ms": 0.5359540227800608,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.5249919891357422,
+                "host_ms": 0.5356590263545513
+              },
+              {
+                "cuda_ms": 0.527679979801178,
+                "host_ms": 0.5379469366744161
+              }
+            ],
+            "max_cuda_ms": 0.527679979801178,
+            "max_host_ms": 0.5379469366744161,
+            "hot_prepared_map_sha256": null
+          }
+        ]
+      },
+      "graph_capture_passed": true,
+      "post_timing_checked": true
+    },
+    {
+      "layer": 7,
+      "input_sha256": "b005244357fa30dea03327859a928359ec3971ea0d5718053a9f1351b5d36b6e",
+      "shape": [
+        2,
+        67072,
+        8
+      ],
+      "correctness": {
+        "native_cpu_owner": true,
+        "native_cpu_copies": true,
+        "sampled_residency_cpu": true,
+        "sort_prefix_owner": true,
+        "sort_prefix_stats": true,
+        "balanced": true,
+        "residency_legal": true,
+        "materializers_exact": true
+      },
+      "communication": {
+        "remote_before_by_rank": [
+          66594,
+          66374
+        ],
+        "remote_after_by_rank": [
+          63476,
+          62588
+        ],
+        "native_copies": [
+          0,
+          1
+        ],
+        "optimized_copies": [
+          7,
+          8
+        ],
+        "dispatch_combine_bytes_saved": 197951488
+      },
+      "rounds": [
+        [
+          3898,
+          14134,
+          7796,
+          6799
+        ],
+        [
+          78,
+          584,
+          156,
+          78
+        ],
+        [
+          27,
+          162,
+          54,
+          27
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "measurements": {
+        "native_planner": [
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.15775999426841736,
+                "host_ms": 0.16876403242349625
+              },
+              {
+                "cuda_ms": 0.16358399391174316,
+                "host_ms": 0.17503497656434774
+              }
+            ],
+            "max_cuda_ms": 0.16358399391174316,
+            "max_host_ms": 0.17503497656434774,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.15756799280643463,
+                "host_ms": 0.16791094094514847
+              },
+              {
+                "cuda_ms": 0.15798400342464447,
+                "host_ms": 0.16832700930535793
+              }
+            ],
+            "max_cuda_ms": 0.15798400342464447,
+            "max_host_ms": 0.16832700930535793,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.15622399747371674,
+                "host_ms": 0.16651698388159275
+              },
+              {
+                "cuda_ms": 0.16012799739837646,
+                "host_ms": 0.17012201715260744
+              }
+            ],
+            "max_cuda_ms": 0.16012799739837646,
+            "max_host_ms": 0.17012201715260744,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.1600639969110489,
+                "host_ms": 0.17022097017616034
+              },
+              {
+                "cuda_ms": 0.15744000673294067,
+                "host_ms": 0.16773899551481009
+              }
+            ],
+            "max_cuda_ms": 0.1600639969110489,
+            "max_host_ms": 0.17022097017616034,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.15775999426841736,
+                "host_ms": 0.16852503176778555
+              },
+              {
+                "cuda_ms": 0.16732800006866455,
+                "host_ms": 0.17765897791832685
+              }
+            ],
+            "max_cuda_ms": 0.16732800006866455,
+            "max_host_ms": 0.17765897791832685,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.15775999426841736,
+                "host_ms": 0.16827601939439774
+              },
+              {
+                "cuda_ms": 0.16227200627326965,
+                "host_ms": 0.1725469483062625
+              }
+            ],
+            "max_cuda_ms": 0.16227200627326965,
+            "max_host_ms": 0.1725469483062625,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.15782399475574493,
+                "host_ms": 0.168450060300529
+              },
+              {
+                "cuda_ms": 0.1634880006313324,
+                "host_ms": 0.17360993660986423
+              }
+            ],
+            "max_cuda_ms": 0.1634880006313324,
+            "max_host_ms": 0.17360993660986423,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.1592320054769516,
+                "host_ms": 0.1702549634501338
+              },
+              {
+                "cuda_ms": 0.17472000420093536,
+                "host_ms": 0.18514797557145357
+              }
+            ],
+            "max_cuda_ms": 0.17472000420093536,
+            "max_host_ms": 0.18514797557145357,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.16460800170898438,
+                "host_ms": 0.17519504763185978
+              },
+              {
+                "cuda_ms": 0.18592000007629395,
+                "host_ms": 0.1983559923246503
+              }
+            ],
+            "max_cuda_ms": 0.18592000007629395,
+            "max_host_ms": 0.1983559923246503,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.15609599649906158,
+                "host_ms": 0.16631302423775196
+              },
+              {
+                "cuda_ms": 0.15916800498962402,
+                "host_ms": 0.1689600758254528
+              }
+            ],
+            "max_cuda_ms": 0.15916800498962402,
+            "max_host_ms": 0.1689600758254528,
+            "hot_prepared_map_sha256": null
+          }
+        ],
+        "sampled_residency": [
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.15001599490642548,
+                "host_ms": 0.16068702097982168
+              },
+              {
+                "cuda_ms": 0.1536639928817749,
+                "host_ms": 0.16424001660197973
+              }
+            ],
+            "max_cuda_ms": 0.1536639928817749,
+            "max_host_ms": 0.16424001660197973,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.15334400534629822,
+                "host_ms": 0.16460299957543612
+              },
+              {
+                "cuda_ms": 0.1871359944343567,
+                "host_ms": 0.1975590130314231
+              }
+            ],
+            "max_cuda_ms": 0.1871359944343567,
+            "max_host_ms": 0.1975590130314231,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.1493760049343109,
+                "host_ms": 0.15977199655026197
+              },
+              {
+                "cuda_ms": 0.15091200172901154,
+                "host_ms": 0.16085593961179256
+              }
+            ],
+            "max_cuda_ms": 0.15091200172901154,
+            "max_host_ms": 0.16085593961179256,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.15593600273132324,
+                "host_ms": 0.1662540016695857
+              },
+              {
+                "cuda_ms": 0.14902399480342865,
+                "host_ms": 0.15946500934660435
+              }
+            ],
+            "max_cuda_ms": 0.15593600273132324,
+            "max_host_ms": 0.1662540016695857,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.14934399724006653,
+                "host_ms": 0.15956908464431763
+              },
+              {
+                "cuda_ms": 0.1518400013446808,
+                "host_ms": 0.16182393301278353
+              }
+            ],
+            "max_cuda_ms": 0.1518400013446808,
+            "max_host_ms": 0.16182393301278353,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.14985600113868713,
+                "host_ms": 0.16013404820114374
+              },
+              {
+                "cuda_ms": 0.15510399639606476,
+                "host_ms": 0.1652309438213706
+              }
+            ],
+            "max_cuda_ms": 0.15510399639606476,
+            "max_host_ms": 0.1652309438213706,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.14847999811172485,
+                "host_ms": 0.1595119247213006
+              },
+              {
+                "cuda_ms": 0.1486400067806244,
+                "host_ms": 0.15911110676825047
+              }
+            ],
+            "max_cuda_ms": 0.1486400067806244,
+            "max_host_ms": 0.1595119247213006,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.14998400211334229,
+                "host_ms": 0.1610739855095744
+              },
+              {
+                "cuda_ms": 0.1547199934720993,
+                "host_ms": 0.16513001173734665
+              }
+            ],
+            "max_cuda_ms": 0.1547199934720993,
+            "max_host_ms": 0.16513001173734665,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.15673600137233734,
+                "host_ms": 0.1672579674050212
+              },
+              {
+                "cuda_ms": 0.1544640064239502,
+                "host_ms": 0.1646790187805891
+              }
+            ],
+            "max_cuda_ms": 0.15673600137233734,
+            "max_host_ms": 0.1672579674050212,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.15507200360298157,
+                "host_ms": 0.16638298984616995
+              },
+              {
+                "cuda_ms": 0.19462400674819946,
+                "host_ms": 0.20468200091272593
+              }
+            ],
+            "max_cuda_ms": 0.19462400674819946,
+            "max_host_ms": 0.20468200091272593,
+            "hot_prepared_map_sha256": null
+          }
+        ],
+        "exchange_sort": [
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.1679999977350235,
+                "host_ms": 0.17834396567195654
+              },
+              {
+                "cuda_ms": 0.17123199999332428,
+                "host_ms": 0.1820119796320796
+              }
+            ],
+            "max_cuda_ms": 0.17123199999332428,
+            "max_host_ms": 0.1820119796320796,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.17056000232696533,
+                "host_ms": 0.18138508312404156
+              },
+              {
+                "cuda_ms": 0.18316799402236938,
+                "host_ms": 0.19331509247422218
+              }
+            ],
+            "max_cuda_ms": 0.18316799402236938,
+            "max_host_ms": 0.19331509247422218,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.17020800709724426,
+                "host_ms": 0.1806409563869238
+              },
+              {
+                "cuda_ms": 0.20748800039291382,
+                "host_ms": 0.21762005053460598
+              }
+            ],
+            "max_cuda_ms": 0.20748800039291382,
+            "max_host_ms": 0.21762005053460598,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.1687999963760376,
+                "host_ms": 0.17920800019055605
+              },
+              {
+                "cuda_ms": 0.16809600591659546,
+                "host_ms": 0.17861102242022753
+              }
+            ],
+            "max_cuda_ms": 0.1687999963760376,
+            "max_host_ms": 0.17920800019055605,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.1666879951953888,
+                "host_ms": 0.1768789952620864
+              },
+              {
+                "cuda_ms": 0.1722559928894043,
+                "host_ms": 0.18245703540742397
+              }
+            ],
+            "max_cuda_ms": 0.1722559928894043,
+            "max_host_ms": 0.18245703540742397,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.16787199676036835,
+                "host_ms": 0.17802906222641468
+              },
+              {
+                "cuda_ms": 0.17103999853134155,
+                "host_ms": 0.18134794663637877
+              }
+            ],
+            "max_cuda_ms": 0.17103999853134155,
+            "max_host_ms": 0.18134794663637877,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.16179199516773224,
+                "host_ms": 0.17288397066295147
+              },
+              {
+                "cuda_ms": 0.16713599860668182,
+                "host_ms": 0.17750600818544626
+              }
+            ],
+            "max_cuda_ms": 0.16713599860668182,
+            "max_host_ms": 0.17750600818544626,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.16752000153064728,
+                "host_ms": 0.17813092563301325
+              },
+              {
+                "cuda_ms": 0.17283199727535248,
+                "host_ms": 0.1831980189308524
+              }
+            ],
+            "max_cuda_ms": 0.17283199727535248,
+            "max_host_ms": 0.1831980189308524,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.16972799599170685,
+                "host_ms": 0.18039310816675425
+              },
+              {
+                "cuda_ms": 0.1756799966096878,
+                "host_ms": 0.18593191634863615
+              }
+            ],
+            "max_cuda_ms": 0.1756799966096878,
+            "max_host_ms": 0.18593191634863615,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.1698240041732788,
+                "host_ms": 0.18104200717061758
+              },
+              {
+                "cuda_ms": 0.18243199586868286,
+                "host_ms": 0.19258400425314903
+              }
+            ],
+            "max_cuda_ms": 0.18243199586868286,
+            "max_host_ms": 0.19258400425314903,
+            "hot_prepared_map_sha256": null
+          }
+        ],
+        "exchange_prefix": [
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.07840000092983246,
+                "host_ms": 0.08964096195995808
+              },
+              {
+                "cuda_ms": 0.08083199709653854,
+                "host_ms": 0.09215495083481073
+              }
+            ],
+            "max_cuda_ms": 0.08083199709653854,
+            "max_host_ms": 0.09215495083481073,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.07865600287914276,
+                "host_ms": 0.08963095024228096
+              },
+              {
+                "cuda_ms": 0.08355200290679932,
+                "host_ms": 0.09342702105641365
+              }
+            ],
+            "max_cuda_ms": 0.08355200290679932,
+            "max_host_ms": 0.09342702105641365,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.07737600058317184,
+                "host_ms": 0.08802697993814945
+              },
+              {
+                "cuda_ms": 0.08928000181913376,
+                "host_ms": 0.09996502194553614
+              }
+            ],
+            "max_cuda_ms": 0.08928000181913376,
+            "max_host_ms": 0.09996502194553614,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.0820159986615181,
+                "host_ms": 0.09273493196815252
+              },
+              {
+                "cuda_ms": 0.1210239976644516,
+                "host_ms": 0.13112393207848072
+              }
+            ],
+            "max_cuda_ms": 0.1210239976644516,
+            "max_host_ms": 0.13112393207848072,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.0764480009675026,
+                "host_ms": 0.08670799434185028
+              },
+              {
+                "cuda_ms": 0.07878399640321732,
+                "host_ms": 0.08933502249419689
+              }
+            ],
+            "max_cuda_ms": 0.07878399640321732,
+            "max_host_ms": 0.08933502249419689,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.09622400254011154,
+                "host_ms": 0.10643398854881525
+              },
+              {
+                "cuda_ms": 0.07782399654388428,
+                "host_ms": 0.08830404840409756
+              }
+            ],
+            "max_cuda_ms": 0.09622400254011154,
+            "max_host_ms": 0.10643398854881525,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.07248000055551529,
+                "host_ms": 0.08342403452843428
+              },
+              {
+                "cuda_ms": 0.07500799745321274,
+                "host_ms": 0.08557701949030161
+              }
+            ],
+            "max_cuda_ms": 0.07500799745321274,
+            "max_host_ms": 0.08557701949030161,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.0761599987745285,
+                "host_ms": 0.08773303125053644
+              },
+              {
+                "cuda_ms": 0.07833600044250488,
+                "host_ms": 0.08884700946509838
+              }
+            ],
+            "max_cuda_ms": 0.07833600044250488,
+            "max_host_ms": 0.08884700946509838,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.07820799946784973,
+                "host_ms": 0.08884293492883444
+              },
+              {
+                "cuda_ms": 0.08825600147247314,
+                "host_ms": 0.09841297287493944
+              }
+            ],
+            "max_cuda_ms": 0.08825600147247314,
+            "max_host_ms": 0.09841297287493944,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.0783040001988411,
+                "host_ms": 0.08908403106033802
+              },
+              {
+                "cuda_ms": 0.08579199761152267,
+                "host_ms": 0.09576999582350254
+              }
+            ],
+            "max_cuda_ms": 0.08579199761152267,
+            "max_host_ms": 0.09576999582350254,
+            "hot_prepared_map_sha256": null
+          }
+        ],
+        "materialize": [
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.07791999727487564,
+                "host_ms": 0.0890649389475584
+              },
+              {
+                "cuda_ms": 0.08025600016117096,
+                "host_ms": 0.09069708175957203
+              }
+            ],
+            "max_cuda_ms": 0.08025600016117096,
+            "max_host_ms": 0.09069708175957203,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.07718399912118912,
+                "host_ms": 0.08827401325106621
+              },
+              {
+                "cuda_ms": 0.0838719978928566,
+                "host_ms": 0.0943279592320323
+              }
+            ],
+            "max_cuda_ms": 0.0838719978928566,
+            "max_host_ms": 0.0943279592320323,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.07974400371313095,
+                "host_ms": 0.09072909597307444
+              },
+              {
+                "cuda_ms": 0.08441600203514099,
+                "host_ms": 0.09456300176680088
+              }
+            ],
+            "max_cuda_ms": 0.08441600203514099,
+            "max_host_ms": 0.09456300176680088,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.07868800312280655,
+                "host_ms": 0.0897430581972003
+              },
+              {
+                "cuda_ms": 0.08956799656152725,
+                "host_ms": 0.10009703692048788
+              }
+            ],
+            "max_cuda_ms": 0.08956799656152725,
+            "max_host_ms": 0.10009703692048788,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.08054400235414505,
+                "host_ms": 0.09140605106949806
+              },
+              {
+                "cuda_ms": 0.11337599903345108,
+                "host_ms": 0.12390199117362499
+              }
+            ],
+            "max_cuda_ms": 0.11337599903345108,
+            "max_host_ms": 0.12390199117362499,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.0817599967122078,
+                "host_ms": 0.09201397188007832
+              },
+              {
+                "cuda_ms": 0.07791999727487564,
+                "host_ms": 0.08842302486300468
+              }
+            ],
+            "max_cuda_ms": 0.0817599967122078,
+            "max_host_ms": 0.09201397188007832,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.07676800340414047,
+                "host_ms": 0.0876520061865449
+              },
+              {
+                "cuda_ms": 0.07852800190448761,
+                "host_ms": 0.08939311373978853
+              }
+            ],
+            "max_cuda_ms": 0.07852800190448761,
+            "max_host_ms": 0.08939311373978853,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.07711999863386154,
+                "host_ms": 0.08864200208336115
+              },
+              {
+                "cuda_ms": 0.08207999914884567,
+                "host_ms": 0.09261199738830328
+              }
+            ],
+            "max_cuda_ms": 0.08207999914884567,
+            "max_host_ms": 0.09261199738830328,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.08630400151014328,
+                "host_ms": 0.09710597805678844
+              },
+              {
+                "cuda_ms": 0.07980799674987793,
+                "host_ms": 0.09014003444463015
+              }
+            ],
+            "max_cuda_ms": 0.08630400151014328,
+            "max_host_ms": 0.09710597805678844,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.07852800190448761,
+                "host_ms": 0.08925993461161852
+              },
+              {
+                "cuda_ms": 0.08694399893283844,
+                "host_ms": 0.09721308015286922
+              }
+            ],
+            "max_cuda_ms": 0.08694399893283844,
+            "max_host_ms": 0.09721308015286922,
+            "hot_prepared_map_sha256": null
+          }
+        ],
+        "materialize_sort": [
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.10188800096511841,
+                "host_ms": 0.1119859516620636
+              },
+              {
+                "cuda_ms": 0.10022400319576263,
+                "host_ms": 0.1105929259210825
+              }
+            ],
+            "max_cuda_ms": 0.10188800096511841,
+            "max_host_ms": 0.1119859516620636,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.09862399846315384,
+                "host_ms": 0.10910199489444494
+              },
+              {
+                "cuda_ms": 0.10326399654150009,
+                "host_ms": 0.11369097046554089
+              }
+            ],
+            "max_cuda_ms": 0.10326399654150009,
+            "max_host_ms": 0.11369097046554089,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.0984639972448349,
+                "host_ms": 0.10869803372770548
+              },
+              {
+                "cuda_ms": 0.10201600193977356,
+                "host_ms": 0.11225300841033459
+              }
+            ],
+            "max_cuda_ms": 0.10201600193977356,
+            "max_host_ms": 0.11225300841033459,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.09907200187444687,
+                "host_ms": 0.11009292211383581
+              },
+              {
+                "cuda_ms": 0.10719999670982361,
+                "host_ms": 0.1176120713353157
+              }
+            ],
+            "max_cuda_ms": 0.10719999670982361,
+            "max_host_ms": 0.1176120713353157,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.10102400183677673,
+                "host_ms": 0.11193007230758667
+              },
+              {
+                "cuda_ms": 0.10918399691581726,
+                "host_ms": 0.11916493531316519
+              }
+            ],
+            "max_cuda_ms": 0.10918399691581726,
+            "max_host_ms": 0.11916493531316519,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.10275200009346008,
+                "host_ms": 0.11367397382855415
+              },
+              {
+                "cuda_ms": 0.1379839926958084,
+                "host_ms": 0.14858203940093517
+              }
+            ],
+            "max_cuda_ms": 0.1379839926958084,
+            "max_host_ms": 0.14858203940093517,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.10364799946546555,
+                "host_ms": 0.11452799662947655
+              },
+              {
+                "cuda_ms": 0.09984000027179718,
+                "host_ms": 0.11012505274266005
+              }
+            ],
+            "max_cuda_ms": 0.10364799946546555,
+            "max_host_ms": 0.11452799662947655,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.0987199991941452,
+                "host_ms": 0.10922201909124851
+              },
+              {
+                "cuda_ms": 0.1066880002617836,
+                "host_ms": 0.11675094719976187
+              }
+            ],
+            "max_cuda_ms": 0.1066880002617836,
+            "max_host_ms": 0.11675094719976187,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.09868799895048141,
+                "host_ms": 0.10932993609458208
+              },
+              {
+                "cuda_ms": 0.09955199807882309,
+                "host_ms": 0.1097419299185276
+              }
+            ],
+            "max_cuda_ms": 0.09955199807882309,
+            "max_host_ms": 0.1097419299185276,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.09920000284910202,
+                "host_ms": 0.10951107833534479
+              },
+              {
+                "cuda_ms": 0.09939199686050415,
+                "host_ms": 0.11009897571057081
+              }
+            ],
+            "max_cuda_ms": 0.09939199686050415,
+            "max_host_ms": 0.11009897571057081,
+            "hot_prepared_map_sha256": null
+          }
+        ],
+        "materialize_reuse": [
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.07833600044250488,
+                "host_ms": 0.08953397627919912
+              },
+              {
+                "cuda_ms": 0.08588799834251404,
+                "host_ms": 0.09610701818019152
+              }
+            ],
+            "max_cuda_ms": 0.08588799834251404,
+            "max_host_ms": 0.09610701818019152,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.07811199873685837,
+                "host_ms": 0.08852093014866114
+              },
+              {
+                "cuda_ms": 0.07993599772453308,
+                "host_ms": 0.09014003444463015
+              }
+            ],
+            "max_cuda_ms": 0.07993599772453308,
+            "max_host_ms": 0.09014003444463015,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.0809599980711937,
+                "host_ms": 0.0922270119190216
+              },
+              {
+                "cuda_ms": 0.08684799820184708,
+                "host_ms": 0.09788805618882179
+              }
+            ],
+            "max_cuda_ms": 0.08684799820184708,
+            "max_host_ms": 0.09788805618882179,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.08003199845552444,
+                "host_ms": 0.09048695210367441
+              },
+              {
+                "cuda_ms": 0.08646400272846222,
+                "host_ms": 0.09615800809115171
+              }
+            ],
+            "max_cuda_ms": 0.08646400272846222,
+            "max_host_ms": 0.09615800809115171,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.08006399869918823,
+                "host_ms": 0.09049894288182259
+              },
+              {
+                "cuda_ms": 0.08687999844551086,
+                "host_ms": 0.09686301928013563
+              }
+            ],
+            "max_cuda_ms": 0.08687999844551086,
+            "max_host_ms": 0.09686301928013563,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.08220800012350082,
+                "host_ms": 0.09275996126234531
+              },
+              {
+                "cuda_ms": 0.09254399687051773,
+                "host_ms": 0.10260601993650198
+              }
+            ],
+            "max_cuda_ms": 0.09254399687051773,
+            "max_host_ms": 0.10260601993650198,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.07798399776220322,
+                "host_ms": 0.08881592657417059
+              },
+              {
+                "cuda_ms": 0.11007999628782272,
+                "host_ms": 0.12038194108754396
+              }
+            ],
+            "max_cuda_ms": 0.11007999628782272,
+            "max_host_ms": 0.12038194108754396,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.0783040001988411,
+                "host_ms": 0.0884390901774168
+              },
+              {
+                "cuda_ms": 0.08348800241947174,
+                "host_ms": 0.09379303082823753
+              }
+            ],
+            "max_cuda_ms": 0.08348800241947174,
+            "max_host_ms": 0.09379303082823753,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.07916799932718277,
+                "host_ms": 0.09009498171508312
+              },
+              {
+                "cuda_ms": 0.07814399898052216,
+                "host_ms": 0.08833198808133602
+              }
+            ],
+            "max_cuda_ms": 0.07916799932718277,
+            "max_host_ms": 0.09009498171508312,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.07849600166082382,
+                "host_ms": 0.08877296932041645
+              },
+              {
+                "cuda_ms": 0.07929600030183792,
+                "host_ms": 0.08972198702394962
+              }
+            ],
+            "max_cuda_ms": 0.07929600030183792,
+            "max_host_ms": 0.08972198702394962,
+            "hot_prepared_map_sha256": null
+          }
+        ],
+        "optimized_full_planner": [
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.44275200366973877,
+                "host_ms": 0.45319495256990194
+              },
+              {
+                "cuda_ms": 0.4386560022830963,
+                "host_ms": 0.44900202192366123
+              }
+            ],
+            "max_cuda_ms": 0.44275200366973877,
+            "max_host_ms": 0.45319495256990194,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.44115200638771057,
+                "host_ms": 0.4513850435614586
+              },
+              {
+                "cuda_ms": 0.4410560131072998,
+                "host_ms": 0.4512480227276683
+              }
+            ],
+            "max_cuda_ms": 0.44115200638771057,
+            "max_host_ms": 0.4513850435614586,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.4384639859199524,
+                "host_ms": 0.4492719890549779
+              },
+              {
+                "cuda_ms": 0.4435200095176697,
+                "host_ms": 0.45369297731667757
+              }
+            ],
+            "max_cuda_ms": 0.4435200095176697,
+            "max_host_ms": 0.45369297731667757,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.4406079947948456,
+                "host_ms": 0.4517079796642065
+              },
+              {
+                "cuda_ms": 0.4468800127506256,
+                "host_ms": 0.4573980113491416
+              }
+            ],
+            "max_cuda_ms": 0.4468800127506256,
+            "max_host_ms": 0.4573980113491416,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.440095990896225,
+                "host_ms": 0.4506590776145458
+              },
+              {
+                "cuda_ms": 0.44764798879623413,
+                "host_ms": 0.45796402264386415
+              }
+            ],
+            "max_cuda_ms": 0.44764798879623413,
+            "max_host_ms": 0.45796402264386415,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.4413760006427765,
+                "host_ms": 0.4520739894360304
+              },
+              {
+                "cuda_ms": 0.4519360065460205,
+                "host_ms": 0.46207697596400976
+              }
+            ],
+            "max_cuda_ms": 0.4519360065460205,
+            "max_host_ms": 0.46207697596400976,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.4301440119743347,
+                "host_ms": 0.4410959081724286
+              },
+              {
+                "cuda_ms": 0.43913599848747253,
+                "host_ms": 0.44933194294571877
+              }
+            ],
+            "max_cuda_ms": 0.43913599848747253,
+            "max_host_ms": 0.44933194294571877,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.44543999433517456,
+                "host_ms": 0.4563780967146158
+              },
+              {
+                "cuda_ms": 0.48550400137901306,
+                "host_ms": 0.4956689663231373
+              }
+            ],
+            "max_cuda_ms": 0.48550400137901306,
+            "max_host_ms": 0.4956689663231373,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.4416320025920868,
+                "host_ms": 0.45208097435534
+              },
+              {
+                "cuda_ms": 0.4408000111579895,
+                "host_ms": 0.45099807903170586
+              }
+            ],
+            "max_cuda_ms": 0.4416320025920868,
+            "max_host_ms": 0.45208097435534,
+            "hot_prepared_map_sha256": null
+          },
+          {
+            "per_rank": [
+              {
+                "cuda_ms": 0.4399679899215698,
+                "host_ms": 0.4502090159803629
+              },
+              {
+                "cuda_ms": 0.4419519901275635,
+                "host_ms": 0.4518880741670728
+              }
+            ],
+            "max_cuda_ms": 0.4419519901275635,
+            "max_host_ms": 0.4518880741670728,
+            "hot_prepared_map_sha256": null
+          }
+        ]
+      },
+      "graph_capture_passed": true,
+      "post_timing_checked": true
+    }
+  ],
+  "failures": []
+}

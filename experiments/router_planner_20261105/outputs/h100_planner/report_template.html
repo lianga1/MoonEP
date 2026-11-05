@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MoonEP 通信优化：单卡 H100 kernel 对比与动画</title><style>
+:root{--ink:#192c3a;--muted:#526875;--blue:#176b90;--mint:#19755a;--orange:#a9531c;--line:#d8e3e7;--bg:#f1f5f6;--paper:#fff}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.85 system-ui,-apple-system,"PingFang SC",sans-serif}header{background:#123c50;color:white;padding:60px max(24px,calc((100vw - 1080px)/2)) 42px}header p{color:#cfe4ed;max-width:900px}h1{font-size:clamp(30px,4vw,46px);line-height:1.35;margin:14px 0}h2{font-size:27px;line-height:1.45;margin:0 0 20px}h3{font-size:20px;margin:28px 0 10px}p{margin:12px 0 18px}main{max-width:1140px;margin:auto;padding:20px 24px 70px}section{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:34px;margin:24px 0;scroll-margin-top:20px}a{color:var(--blue);text-underline-offset:4px}nav{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}nav a{background:white;border:1px solid var(--line);padding:5px 14px;border-radius:30px;text-decoration:none}small,.sub{font-size:14px;color:var(--muted)}header small{color:#b8d9e6}.tag{letter-spacing:2px;font-size:13px;color:#94c6d9}.lead,.note{padding:17px 21px;border-left:4px solid var(--blue);background:#eef7fb;border-radius:0 10px 10px 0}.note{background:#fff6eb;border-color:var(--orange)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}.card{padding:18px;background:#f4f8f9;border:1px solid var(--line);border-radius:12px}.card b{display:block;color:var(--blue);font-size:19px}.table{overflow:auto}table{border-collapse:collapse;width:100%;font-size:15px;margin:18px 0}th,td{padding:11px 13px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}th{background:#eaf2f5}td:first-child{font-weight:550}code{background:#eff3f5;border-radius:4px;padding:2px 5px;font-size:14px}.formula{font-family:ui-monospace,monospace;font-size:15px;background:#f1f6f8;border-left:4px solid var(--mint);border-radius:8px;padding:17px;overflow:auto;white-space:pre-wrap}.pill{display:inline-block;font-size:14px;background:#e4f1ec;color:var(--mint);border-radius:7px;padding:3px 10px}.controls{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:17px 0}button{font:inherit;border:1px solid #99b5c2;border-radius:8px;padding:7px 13px;background:white;color:var(--ink);cursor:pointer}button:hover{background:#e9f4f8}button:disabled{opacity:.4;cursor:default}button.primary{background:var(--blue);color:white}.flow{display:flex;gap:7px;flex-wrap:wrap;margin:16px 0}.flow span{padding:7px 11px;background:#edf3f5;border-radius:7px;font-size:15px}.flow .active{background:var(--blue);color:white}.scene{border:1px solid var(--line);border-radius:13px;padding:18px;background:#f8fbfc}.scene h3{margin:0 0 12px;font-size:18px}.scenegrid{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:13px}.pane{border:1px solid var(--line);border-radius:10px;background:white;padding:15px;min-height:360px}.tokenbox{border:2px solid #acc6d1;border-radius:10px;padding:14px;transition:background .35s,border-color .35s}.tokenbox.active{background:#e5f3f9;border-color:var(--blue)}.expert{display:inline-block;background:#e4eff8;border:1px solid #b9d1dd;border-radius:6px;padding:2px 7px;margin:3px;font-size:14px}.expert.other{background:#e6f1e9;border-color:#b9d2c3}.rows{display:grid;gap:7px}.candidate{padding:8px 10px;font-size:14px;border:1px solid var(--line);border-radius:7px;background:#f8fafb;transition:background .25s,transform .25s,border-color .25s}.candidate.active{border-color:var(--blue);background:#dff0f8;transform:translateX(3px)}.candidate.hit{border-color:#9fc6b7;background:#e5f3ec}.candidate.skip{color:#788890;background:#f5f6f7;text-decoration:line-through}.stamp{font-size:12px;padding:1px 5px;border-radius:4px;background:white;float:right}.tokenchip{color:var(--blue);font-weight:700}.metric{padding:13px;background:#edf5f7;border-radius:9px;margin:10px 0;font-size:14px}.metric strong{font-size:27px;color:var(--blue);display:block;line-height:1.35}.chosen{border:2px solid var(--mint);background:#e4f2ec;border-radius:10px;padding:13px;min-height:90px}.caption{min-height:130px;margin:15px 0 0;padding:14px 17px;background:#eef5f8;border-radius:9px}.caption strong{display:block;color:var(--blue)}.balance{display:grid;grid-template-columns:1fr 70px 1fr;align-items:center;gap:10px;margin-top:14px}.balance .dir{background:#e8f1f5;padding:10px;border-radius:8px;font-size:14px}.arrow{text-align:center;color:var(--mint);font-size:27px}.mini{font-size:13px}.passed{color:var(--mint);font-weight:650}li{margin:8px 0}details{border-top:1px solid var(--line);padding:14px 0}summary{font-weight:600;cursor:pointer}footer{text-align:center;font-size:14px;color:var(--muted)}.placeholder:empty{display:none}@media(max-width:850px){.scenegrid{grid-template-columns:1fr 1fr}.scenegrid .pane:last-child{grid-column:1/-1;min-height:auto}.grid{grid-template-columns:1fr}.pane{min-height:320px}}@media(max-width:620px){body{font-size:16px}main{padding:12px}section{padding:23px 17px}h2{font-size:24px}.two,.scenegrid{grid-template-columns:1fr}.scenegrid .pane:last-child{grid-column:auto}.pane{min-height:auto}.balance{grid-template-columns:1fr}.arrow{transform:rotate(90deg)}header{padding:38px 23px 30px}.caption{min-height:170px}}@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}@media print{body{background:white}header{background:white;color:black;padding:20px}header p,header small,.tag{color:#333}main{padding:0}nav,.controls{display:none}section{border:0;border-bottom:1px solid #ddd;border-radius:0;padding:24px 0;break-inside:auto}.scenegrid{grid-template-columns:1fr 1fr 1fr}.pane{min-height:auto}a{color:black}.caption{min-height:0}}
+</style></head><body>
+<header><div class="tag">EPMoE / H100 实验与算法解释</div><h1>同一个 token，能不能少查几遍？<br>从共享名单，到直接查自己的子集</h1><p>把成组交换、完整状态聚合、共享子集三条路线放到同一张 H100 上。区分“少读数据”“少做比较”和“改变交换顺序”，再看它们各自的通信收益与执行时间。</p><small>2026-11-02 主实验 · 2026-11-03 轮数补测 · 真实 router trace 八层回放 · 一张物理 H100、八个逻辑 rank · 离线文档，动画为教学构造</small></header>
+<main><nav aria-label="目录"><a href="#result">测量结果</a><a href="#animation">动画：重复扫描</a><a href="#parameters">参数怎么读</a><a href="#balance">怎样等量交换</a><a href="#replica-tables">副本统计与扫描范围</a><a href="#complexity">复杂度</a><a href="#user-steps-complexity">按步骤看复杂度</a><a href="#bundle-round-sweep">成组交换与轮数补测</a><a href="#memory">GPU 实现优化</a><a href="#scope">计时范围</a><a href="#validation">正确性与证据</a></nav>
+<section id="result"><h2>01 / 先看实际结果，再看原因</h2>
+<div class="placeholder">__CONCLUSION__</div>
+<div class="placeholder table">__GPU_TABLE__</div>
+<p class="lead"><strong>直接查子集，是这次真正减少候选比较的一步。</strong>先把一个 token 的专家和执行卡读进 GPU 的小型临时存储，能减少重复访存；如果随后仍遍历所有模板，比较次数还在。索引版由 token 生成自己确实拥有的单专家、双专家组合，再查它是否在候选表里，因此跳过了与它无关的模板。</p>
+<div class="grid"><div class="card"><b>完整状态聚合</b>相同来源、专家集合、执行位置的 token 合成一类。每类按数量参与交换，最后展开成具体任务。保留大小 1～8 的混合匹配。</div><div class="card"><b>共享子集 · 顺序版</b>例如所有含 {e1,e2} 的 token 共用一个模板。仍按 28 对卡依次决定交换，保留上一版仿真的输出。</div><div class="card"><b>共享子集 · 同时版</b>一轮先为每个 token 选一个提议，再同时匹配所有卡对。平铺扫描和索引查找实现同一套规则，二者输出逐项相同。</div></div>
+<p>“通信减少”统计的是：一个 token 发给一张远端卡算一份；同一 token 在该卡执行多个专家仍算一份。这里没有真正传输 token 或专家权重，因而这个比例不能直接解释成整层耗时下降比例。</p></section>
+<section id="animation"><h2>02 / 动画：名单重叠，和计算重复，是两回事</h2>
+<p>教学例子只画 token <strong>u</strong> 的四个任务：e1、e2、e3 在 A 执行，e7 在 B 执行；u 来自 C。B 已有 e1、e2、e7，A 已有 e1、e2、e3。其余任务省略。u 同时出现在三个 A→B 候选名单中。</p>
+<div class="controls"><button id="prev">上一步</button><button id="play" class="primary">播放</button><button id="next">下一步</button><button id="reset">重置</button><span id="position" class="pill"></span></div>
+<div class="flow" id="phasebar"><span>① 重叠名单</span><span>② 缓存后平铺扫描</span><span>③ 自有子集查表</span><span>④ 一个提议，再配额</span></div>
+<div class="scene"><div class="scenegrid"><div class="pane"><h3>同一个 token u</h3><div class="tokenbox" id="tokenbox"><div><span class="expert">A · e1</span><span class="expert">A · e2</span><span class="expert">A · e3</span><span class="expert other">B · e7</span></div><div class="sub" id="cachetext">来源 C；专家编号与执行卡共同构成当前状态。</div></div><div class="metric">本阶段示例中，读入 u 的整份状态<strong id="reads">0 次</strong></div><p class="mini" id="ownsets">完整状态相同，才属于同一个“完整聚合类”；只共享 e1、e2，则可以属于同一个“共享子集名单”。</p></div>
+<div class="pane"><h3 id="listtitle">三个重叠名单</h3><div id="candidates" class="rows"></div><p class="mini" id="scantext"></p></div>
+<div class="pane"><h3>最终会发生什么</h3><div class="chosen" id="chosen">进入多个候选名单，不等于可以把同一个任务发送多次。</div><div class="metric">u 在这一轮可提交的提议数<strong id="proposalcount">最多 1 个</strong></div><p class="mini" id="actiontext">比较完后，只保留一项合法提议。它还要等待反方向凑齐计算对数量，才会写入新的执行位置。</p></div></div>
+<div class="caption" aria-live="polite"><strong id="steptitle"></strong><div id="stepcaption"></div></div>
+<div class="balance"><div class="dir" id="leftbalance">A → B：u 的 {e1,e2}<br>2 个计算对，收益 0</div><div class="arrow">⇄</div><div class="dir" id="rightbalance">B → A：v 的 {f1} + w 的 {f2}<br>1 + 1 个计算对，收益 1 + 1</div></div></div>
+<p class="sub">动画中的读取次数是示意结构，不是显存性能计数器。这个小例子有 6 个平铺模板，索引版先枚举 7 个自有子集，再经过驻留剪枝只查 3 个键；不能凭这个例子声称总运算一定少于 6 次。真实的 K=8 情形最多有 36 个自有子集，候选表则最多有 1,792 个有向模板。</p>
+<p><strong>“每个 token 读一次”限定在同时版的一轮提议阶段。</strong>总共运行四轮，上一轮修改执行位置后，下一轮需要重新读。模板统计准备、排序、提交、输出地址生成也会读写各自的数据。它不表示整次 planner 只访问 token 一次，更不表示所有访问都只落到显存一次。</p></section>
+<section id="parameters"><h2>03 / h、g、B：三个完全不同的限制</h2><div class="table"><table><thead><tr><th>符号</th><th>具体限制什么</th><th>这次设置</th></tr></thead><tbody>
+<tr><td>h：共享子集大小上限</td><td>一次模板允许包含多少个专家。例如 h=2 时考虑 {e1} 和 {e1,e2}，不考虑 {e1,e2,e3}。</td><td>2</td></tr>
+<tr><td>g：每类保留多少个模板</td><td>按“移动方向、收益 0/1、子集大小 1/2”分开计数，每类取出现频率最高的 g 个，再去重。g 限制候选名单数量，不限制一张卡能放多少专家。</td><td>8</td></tr>
+<tr><td>B：每卡额外专家预算</td><td>44 个原属专家之外，最多允许额外驻留 B 个不同专家。原生均衡需要的额外专家也算在预算内。</td><td>8；总驻留容量 C=44+B=52</td></tr>
+<tr><td>以前“256 样本 / 每方向 2 组”</td><td>用来选择专家放在哪些卡上的另一个阶段。这次复用其保存的驻留结果。它的“2”不是当前共享子集的 h，也不是当前 g=8。</td><td>固定使用同一份驻留输入</td></tr></tbody></table></div>
+<p>从 8 张卡中任选两张，共有 28 对。每对有两个方向、两种收益、h 种子集大小，每类最多留 g 项：</p><div class="formula">每对最多 2 × 2 × h × g = 64 个有向模板
+全部卡对最多 M = 28 × 64 = 1,792 个有向模板（去重后通常更少）</div>
+<p>“模板”是一条规则，例如“把目前在 A 的 {e1,e2} 移到 B”。统计表中它出现得多，只说明很多 token 可能用得到它。每轮仍要检查当前执行位置、B 是否拥有所需专家、是否会增加远端数据份数，并重新决定接受哪些 token。</p></section>
+<section id="balance"><h2>04 / 先生成均衡计划，再做保持负载的交换</h2>
+<div id="planning-order" class="placeholder">
+<p><strong>计划执行位置改变，不等于 token 已经传输。</strong>原始来源卡是本层输入 token 所在的卡；计划执行卡是准备让某个专家任务在哪里计算。规划阶段一直保留原始来源，修改的是任务的执行计划。当前成组交换测试没有先发一轮 token，再把收到的 token 重新交换。</p>
+<div class="flow"><span>原始路由与来源卡</span><span>MoonEP rt0 均衡草案</span><span>按来源＋草案选择专家副本</span><span>成组等量交换修改草案</span><span>最终执行地址与通信清单</span></div>
+<p>每张卡在草案中已经有同样多的专家计算任务。成组交换要求 A→B 和 B→A 搬动同样多的任务，所以它<strong>保持已有均衡</strong>，并不负责把任意不均衡输入变成均衡输入。只有最终计划确定之后，实际系统才按它发送 token、准备专家权重；两类通信的调度可以分开，专家计算前需要准备好。本次单卡实验只测规划，没有执行这些实际通信。</p>
+<h3>“本卡热门专家复制”在两条流程里不是同一步</h3>
+<div class="table"><table><thead><tr><th>流程</th><th>副本依据</th><th>顺序与实际含义</th></tr></thead><tbody>
+<tr><td>原包 MoonEP，replica_target&gt;0</td><td>先统计原始本卡 token 选择各专家的次数。</td><td>先选择本卡热门的外来专家作为保留意向，再算负载配额、分配具体任务。最后还会根据计划执行量确定副本槽。这些阶段只生成计划，尚未搬权重。</td></tr>
+<tr><td>当前 H100 成组实验</td><td>原始来源卡＋rt0 均衡草案中的计划执行卡，估计补哪些专家能促成有收益的等量交换。</td><td>没有启用原包的本卡热门保留。先保留草案必需的专家，再用 256 个样本、每类别前 2 个专家组选择额外副本，保存驻留表；GPU 测试复用这张表。</td></tr>
+</tbody></table></div>
+<p>原包“均衡后按计划执行量选副本槽”主要是在落实计算所需的专家，并不是对已经收到的 token 重新统计。它的热门保留也只先预留任务数量；后续按专家出现顺序分配具体任务，不能保证所有原本来自该卡的相关 token 都留在本卡。当前实验用的是 rt0：不启用热门保留，但均衡草案本身仍可能需要非原属专家副本，这些副本同样占每卡额外 8 个专家的预算。</p>
+<h3>来源不是目标卡，也能减少传输</h3>
+<p>下面只列出相关 token 的任务，其他任务保持不变。</p>
+<div class="table"><table><thead><tr><th>token 的原始来源</th><th>均衡草案</th><th>补副本并交换后的计划</th><th>最终远端发送</th></tr></thead><tbody>
+<tr><td>x 来自 C</td><td>e1、e2 在 A 算；e3、e4 在 B 算。</td><td>若 B 有 e1、e2，把 x 的这两个任务改到 B。</td><td>从 C→A、C→B 两份，变成仅 C→B 一份。</td></tr>
+<tr><td>y 来自 A</td><td>e5、e6 在 B 算；e7、e8 在 A 算。</td><td>若 A 有 e5、e6，把 y 的这两个任务改到 A。</td><td>原本需要 A→B 一份，现在全部本地。</td></tr>
+</tbody></table></div>
+<p>双方各交换两个计算任务，负载不变，合计少发两份远端 token。这里“x 的任务从 A 改到 B”不是将已经到 A 的 x 再转发给 B：x 在规划时仍是 C 上的输入。副本选择与实际交换的收益，始终以原始来源计算“少去一张远端卡，是否又增加一张远端卡”。</p>
+<p><strong>当前实现边界：</strong>副本选择是此前 CPU 回放生成的固定输入，既没有集成到这次 GPU 交换 kernel，也没有算进表中的交换或起点＋交换＋输出延迟。实际权重拉取也未计时。原包的计划接口本身不发送 token；集成优化时应在真实 dispatch 之前修改计划，不能先完整 dispatch 再把这份规划收益当成节省。</p>
+<p><a href="../../analysis/replay_small_sample.py">当前实验的实际调用顺序</a> · <a href="../../analysis/vendor/residency.py">使用原始来源与计划位置选择副本</a> · <a href="../../inputs/MoonEP/moonep/planning.py">原包统计与规划</a> · <a href="../../inputs/MoonEP/moonep/api.py">原包计划、发送与权重预取接口</a></p>
+</div>
+<!-- BEGIN replica-tables -->
+<div id="replica-tables" class="placeholder">
+<h3>副本怎么选，之后每张卡到底扫描什么？</h3>
+<p><strong>采样用于选择专家放在哪些卡；真正决定交换时仍检查全量 token。</strong>当前实验先在 CPU 上离线选好驻留表，再交给 GPU 成组交换。因此 H100 表中的交换延迟不包含这段副本选择。</p>
+<div class="table"><table><thead><tr><th>阶段</th><th>扫描哪些数据</th><th>形成什么表</th><th>在哪里执行</th></tr></thead><tbody>
+<tr><td>保留必须存在的专家</td><td>全量 134,144 个 token 的 8 个专家任务，按初始计划执行卡统计</td><td><code>counts[执行卡, 专家]</code>，8×352；保留原属专家，以及起始分配已经需要的副本</td><td>当前为 CPU 离线准备</td></tr>
+<tr><td>选择可增加的副本</td><td>从全层抽 256 个完整 token，不放回；不是每卡 256 个</td><td>“方向、组大小、收益、具体专家组合”的样本频数；最后输出 <code>support[卡,专家]</code>，8×352 个布尔值</td><td>当前为 CPU 离线准备</td></tr>
+<tr><td>生成交换提议</td><td>单张 H100 扫全部 134,144 个 token；八卡分片接口中，每张卡扫原本来自自己的 16,768 个 token</td><td>每 token 最多一条提议；再汇成 1,152 项本地计数表</td><td>GPU，每轮重做</td></tr>
+<tr><td>匹配与提交</td><td>先看各方向、大小、收益的计数，再检查本地哪些提议在接收名额内</td><td>全局计数、各来源卡之前的计数、接受数量；最后改写被接受的执行位置</td><td>GPU；八卡接口需要先汇集各卡计数</td></tr>
+</tbody></table></div>
+<p><strong>“这张卡的 token”指原始来源卡，不是计划执行卡。</strong>一个 token 的 8 个任务即使分散到几张卡，原始来源卡保留的完整路由行仍能看到全部专家及其执行位置，由它统一提出本轮的一条交换建议。扫描的是专家编号与执行位置等元数据，不是 token 的隐藏向量。当前单卡 H100 测试把 8 份来源数据展平成一个数组；8 线程版本的八卡协调接口尚未完成八卡实测。这个分片说明仅针对当前成组交换实现，不概括原生 MoonEP 所有子 kernel。</p>
+
+<details><summary>展开：256 个样本怎样变成副本清单</summary>
+<p>先全量统计起始分配已经要求哪些专家在哪张卡执行。每卡保留自己的原属专家和这些必需副本；必需副本也占“最多 8 个额外专家”的预算。剩余槽位才参与下面的选择，不能先把已有合法执行位置删除。</p>
+<p>从全层 134,144 行均匀、不放回地抽 256 行，每行保留全部 8 个专家及当前执行位置。对抽到的 token，把当前计划在同一张执行卡的任务合成一组。例如某行在 A 卡上的全部任务是 {e1,e2}，便考察把这一整组移到 B 是否能减少远端份数；如果所需新增副本已超过 B 的剩余预算，先剔除。每个样本、每对卡最多选择一个方向，避免把同一个样本同时当作自己的反向伙伴。</p>
+<div class="table"><table><thead><tr><th>样本统计键（示意）</th><th>具体专家组合</th><th>样本中出现次数</th></tr></thead><tbody>
+<tr><td>A→B，大小 2，收益 1</td><td>{e1,e2}</td><td>12</td></tr>
+<tr><td>A→B，大小 2，收益 1</td><td>{e3,e4}</td><td>8</td></tr>
+<tr><td>B→A，大小 2，收益 0</td><td>{e5,e6}</td><td>10</td></tr>
+</tbody></table></div>
+<p class="sub">此表是解释流程的手写示例，不是真实 trace 的统计值。收益 1 表示若该提议可执行，少一份远端 token 传输；收益 0 表示份数不变，但可以为另一方向提供等量交换。</p>
+<p>源码的“保留 2 组”是<strong>每个完整类别：方向×大小×收益，分别保留出现最多的两种专家组合</strong>。同方向、同大小如果收益 0 和收益 1 都有候选，合起来最多有 4 组。之后把反方向、相同大小的候选组合成一个方案：B 需要补齐 A→B 组的专家，A 需要补齐 B→A 组的专家。</p>
+<p>每次选择“新增可匹配的样本通信收益 ÷ 新增专家槽位数”最好的方案，更新两张卡的驻留表和剩余预算，再重算候选。已经存在的专家不重复收费；一个新增专家也可能同时让其他保留组合变得可用。八张卡联合选择，每卡始终不超过 8 个额外专家；没有正收益可选时结束，允许剩余槽位空着。</p>
+<p>这里直接使用样本频数，<strong>没有乘 134,144/256 外推成全量次数</strong>。不同卡对仍可能用到重叠的样本，因此这是候选价值的估计，不是可立即提交的交换清单，也不保证全局最优。最后真正执行哪些交换，要由全量阶段重新判定。</p>
+<p>已有三种抽样种子 20261026、20261027、20261028 的八层最终远端份数下降分别为 <strong>24.9794%、24.5005%、24.5397%</strong>。总体相差约 0.48 个百分点，但单层波动更大：第 7 层分别为 26.4472%、32.3976%、28.8764%，最大相差约 5.95 个百分点。因此不能只凭八层总数相近就断言采样稳定，也不能把三次结果当成一般精度保证或置信区间。全量交换会阻止非法执行，但不能补回采样时没有选中的专家副本。</p>
+</details>
+
+<details id="candidate-selection"><summary>展开：两组各含几个专家？哪些双向方案参与比较？</summary>
+<p><strong>“保留两组”限制组合种类数，不限制每组只有两个专家。</strong>每个样本在某张计划执行卡上的完整组，可以含 1～8 个专家。大小 1、2、3……8 分别统计，收益 0、1 也分别统计，各类别保留两个组合。因此大小 3 的类别可以同时保留 {e1,e2,e3} 和 {e4,e5,e6}。</p>
+<p>对同一卡对、同一大小，将两个方向保留的组合逐一配对，排除双方收益都是 0 的方案。不是只把第一名和第一名配对，也不是把前两名全部复制。每方向两种收益各最多两组，因此最多 4×4 个组合，排除 0+0 后每卡对、每大小最多 12 个方案。</p>
+<p><strong>以下为教学构造，暂只考虑表内四组。</strong>全部组大小为 2；B 已有 e1、缺 e2/e3/e4，A 已有 e7、缺 e8/e9/e10，且两边预算足够。</p>
+<div class="table"><table><thead><tr><th>方向</th><th>专家组</th><th>样本次数</th><th>每条收益</th></tr></thead><tbody>
+<tr><td>A→B</td><td>{e1,e2}</td><td>40</td><td>1</td></tr>
+<tr><td>A→B</td><td>{e3,e4}</td><td>12</td><td>1</td></tr>
+<tr><td>B→A</td><td>{e7,e8}</td><td>30</td><td>1</td></tr>
+<tr><td>B→A</td><td>{e9,e10}</td><td>8</td><td>0</td></tr>
+</tbody></table></div>
+<div class="table"><table><thead><tr><th>备选方案</th><th>新增副本数</th><th>当前预计新增收益</th><th>每新增副本的收益</th></tr></thead><tbody>
+<tr><td>{e1,e2} 配 {e7,e8}</td><td>2：B 加 e2，A 加 e8</td><td>min(40,30)×2＝60</td><td>30</td></tr>
+<tr><td>{e1,e2} 配 {e9,e10}</td><td>3</td><td>min(40,8)×1＝8</td><td>约 2.67</td></tr>
+<tr><td>{e3,e4} 配 {e7,e8}</td><td>3</td><td>min(12,30)×2＝24</td><td>8</td></tr>
+<tr><td>{e3,e4} 配 {e9,e10}</td><td>4</td><td>min(12,8)×1＝8</td><td>2</td></tr>
+</tbody></table></div>
+<p>先选第一项。本次不需要给 B 补 e3、e4；它们是另一条 A→B 备选，不是必须反向搬回的专家组。反向任务来自另一批 token 的 {e7,e8}。下一步必须重算增量：此时正向已有 40 条、反向有 30 条，再补 e3、e4 虽把正向增加到 52 条，反向仍只有 30 条，新增收益为 0，因此不选。给 A 补 e9、e10 则可再提供 8 条反向零收益提议，匹配剩余的正向正收益提议，新增收益为 8。</p>
+<p>代码计算“假设新增副本后的可匹配收益 − 当前可匹配收益”，再除以真正缺少的副本数；比值相同优先增量更大，再优先副本更少，最后按固定方案顺序。它重算当前卡对、当前大小下的所有保留组，因为一个新专家可能补齐其他组；这仍是样本上的估计，不是全体 token 的联合最优解。</p>
+</details>
+
+<h3>全量扫描之后的两张表</h3>
+<p class="note"><strong>非负收益只是候选资格，不是所有候选都进入计数表。</strong>每个 token 比较全部方向和候选大小后，只提交一个最佳提议；汇总的是这些唯一提议。若该提议没有获得反向配额，本轮不再提交第二名。下一轮才重新计算。这样避免一个 token 的多条重叠提议被同时接受，但也可能漏掉原本可匹配的次优机会。</p>
+<p>“1、2、4”各取原路由顺序下前几个可搬任务，不枚举所有同大小组合；“全部”指这个 token 当前计划在搬出卡上的全部任务，未必是全部 8 个。收益 1 优先于收益 0；同收益再按随 token 与轮次变化的大小优先级、目标卡已有任务数和方向规则选择，因而不是始终优先最大组。</p>
+<p>每个 token 先读自己的 8 个任务，检查 56 个有效移动方向，每方向考虑前 1、2、4 个可搬任务和原卡上的全部任务，只留下一个最佳合法提议。具体专家组合的可执行性已经在这一步检查；匹配阶段只需要知道方向、任务数量和通信收益。</p>
+<div class="table"><table><thead><tr><th>表</th><th>一行记什么</th><th>为什么需要它</th></tr></thead><tbody>
+<tr><td>token 提议表</td><td>token 编号、旧卡→新卡、大小、收益，以及 <code>move_mask</code>：8 个二进制位标记移动哪些任务</td><td>最终知道改写哪个 token 的哪几个执行位置。代码把类别和 token 编号打包存储，移动位图单独保存。</td></tr>
+<tr><td>本地计数表</td><td><code>counts[旧卡,新卡,收益,大小]</code></td><td>只统计该类别有多少条提议，不再保存专家编号。当前分配 8×8×2×9=1,152 项；大小范围预留 0…8，部分项不使用。</td></tr>
+</tbody></table></div>
+<p>八卡接口每轮汇集各卡的 1,152 个 32 位整数：一张卡的输入计数是 <strong>4,608 字节</strong>，汇集后每卡得到的计数数组是 <strong>36 KiB</strong>。这是数组大小；实际网络传输字节数和延迟取决于通信实现，不能直接等同于这两个数。</p>
+<p>全局总数决定每类接受多少条；各来源卡之前的累计数决定这张卡的提议排在全局第几位。例如这一类全局收前 100 条，前面的来源卡已有 70 条，本卡只有前 30 条可进入。各卡内部按 token 顺序排列，所以不必把全部 token 提议表传到一张卡集中选择。</p>
+
+<details><summary>展开：等量配额的手算例子，以及“副本选择也全量做”目前实现到哪</summary>
+<p><strong>以下是手写示例。</strong>固定 A、B 两张卡，所有提议大小均为 2；“条数”指 token 提议数量。</p>
+<div class="table"><table><thead><tr><th>方向</th><th>收益 1 的条数</th><th>收益 0 的条数</th><th>本次接受</th></tr></thead><tbody>
+<tr><td>A→B</td><td>100</td><td>20</td><td>100 条收益 1</td></tr>
+<tr><td>B→A</td><td>60</td><td>80</td><td>60 条收益 1＋40 条收益 0</td></tr>
+</tbody></table></div>
+<p>双方各接受 100 条、每条搬 2 个任务，因此每个方向都搬 200 个任务，两张卡的任务总量保持不变。远端份数减少 100＋60=160。剩余可配的都是收益 0 的组合，本版不会为了零总收益继续交换。</p>
+<p>如果希望<strong>副本选择阶段也查看全部 token</strong>，当前 CPU 函数可以把 <code>sample_tokens</code> 设成 N=134,144，按相同规则扫描全部数据。这会消除抽样遗漏，但仍保留每类别前 2 组和贪心选择，并不因此成为全局最优算法。这个全量副本选择的 GPU 版本、以及八卡分布式统计完整专家组合频数后再选副本的流程，目前尚未实现。</p>
+<p>分布式实现必须先按同一专家组合正确合并全局频数，再找全局前 2 组。不能每卡只保留本地前 2 组再合并，就称为精确的全局前 2 组：某种组合可能在每卡都排第三，合计后却应当第一。现有八卡计数汇集接口解决的是<strong>固定驻留后的交换配额</strong>，不等于已经实现分布式副本选择。</p>
+</details>
+<p><a href="../../analysis/vendor/residency.py">副本选择源码</a> · <a href="../../experiments/h100_planner/bundle_lane8.py">单卡／分片协调接口</a> · <a href="../../experiments/h100_planner/bundle_lane8.cu">提议、计数、配额与提交 kernel</a> · <a href="../replay/small_sample.json">三种子的逐层原始回放结果</a> · <a href="round_sweep_20261103_attempt01.json">H100 单卡全量交换原始结果</a></p>
+</div>
+<!-- END replica-tables -->
+
+<h3>共享子集与完整聚合：一组两个任务，也能换两组各一个任务</h3>
+<p class="note">下面的混合大小匹配属于共享子集与完整状态聚合。报告中的“8 线程成组交换”采用相同大小的反向提议配对，不把一个大小 2 的提议与两个大小 1 的提议匹配。</p>
+<p>等量条件是<strong>计算对数量相等</strong>，不要求 token 数或专家组数相等。在动画最后，A 交出 u 的两项任务；B 交回 v、w 各一项任务。A、B 都净增零项计算，所以负载不会变化。</p>
+<div class="two"><div class="card"><b>为什么 u 的收益可以是 0？</b>u 的 e3 仍留在 A，e7 原本就在 B。把 e1、e2 移到 B 后，u 还是访问 A、B 两张远端卡，份数不变。不过它提供两个反向交换名额，可以让另外两个 token 各省一份通信。</div><div class="card"><b>为什么不能接收三条重叠提议？</b>{e1} 与 {e1,e2} 共用 e1。若同时接收，e1 会被安排两次。当前同时版在一轮里只为 u 产生一条提议，接受时整条提交，自然避免这个冲突。</div></div>
+<h3>匹配程序实际算什么</h3><p>先把每一对卡的提议按“方向 × 收益 × 大小”计数。例如 A→B 有 5 个大小 1、收益 1 的提议，还有 3 个大小 2、收益 0 的提议。先求双方都可能移动的最大计算对数 W，再逐一考虑移动 0、1、…、W 个任务时，能获得多少收益。</p>
+<p>共享子集当前只有大小 1、2。代码用一个固定次数的整数计算，求<strong>给定移动量 w</strong>下最好的接收数量，然后把不同 w 并行比较。它仍会比较多个 w；“固定次数”只针对一个 w，不代表整张配额表是常数复杂度。收益相同时选择较小移动量，并保留旧版动态规划的数量选择规则。</p>
+<p>完整状态聚合允许大小 1～8，不能直接套用这个双大小公式。它保留“动态规划”：逐类加入可选组，在每个确切移动量上保存目前最好的收益。当前 GPU 实现有明显的顺序依赖，是需要结合实测分析的成本。</p>
+<div class="note">同时版改变了处理顺序：旧版先完成一对卡，再处理下一对；新版先让所有 token 各选一条，再同时匹配。因此，“旧顺序版”和“同时版”的通信收益可能不同。平铺同时版与索引同时版保持同一规则，GPU 校验确认二者输出一致。</div></section>
+<section id="complexity"><h2>05 / 复杂度：先说清楚每个字母</h2><p>下面是代码执行工作量的上界，用来解释规模增大时做多少事情；它不是 GPU 延迟公式。并行线程数、依赖链、缓存命中、kernel 启动和 CPU 发起开销都会影响实际时间。</p>
+<div class="table"><table><thead><tr><th>符号</th><th>解释与本次值</th></tr></thead><tbody>
+<tr><td>N</td><td>一层的总 token 数，8 × 16,768 = 134,144。计算对总数是 NK=1,073,152。</td></tr><tr><td>K、R、P</td><td>每 token 的专家数 K=8；逻辑卡数 R=8；无序卡对数 P=R(R−1)/2=28。</td></tr><tr><td>L</td><td>交换轮数，L=4。</td></tr><tr><td>G<sub>l</sub></td><td>第 l 轮的完整状态类数。只有来源、全部专家、全部执行位置均相同才能合并，所以 G<sub>l</sub>≤N，但可能很接近 N。</td></tr><tr><td>M、h、g、C</td><td>有向模板总数 M≤4hgP；h=2；g=8；每卡驻留容量 C=52。C 包括原属专家，B=8 仅算额外专家。</td></tr><tr><td>W<sub>l,ab</sub></td><td>第 l 轮卡对 a、b 的两边候选可移动计算对数的较小值。决定匹配程序需要考虑的最大移动量，单位是计算对，不是 token 或专家种类。</td></tr><tr><td>p</td><td>整数基数排序扫描数据的趟数。按整数若干二进制位分类排序，当前键宽固定，p 是较小常数。它不同于逐项比较的排序。</td></tr></tbody></table></div>
+<!-- BEGIN user-steps-complexity -->
+<div id="user-steps-complexity" class="placeholder">
+<h3>按 0—6 步核对：哪一步做什么，花多少工作量和空间</h3>
+<p>下面沿用 <strong>N＝全层总 token 数、R＝卡数、d＝全局抽样 token 数、L＝交换轮数</strong>。本节把整数排序的扫描趟数写作 <strong>p</strong>，避免与样本数 d 混淆。主表固定每 token 专家数 K=8、专家总数 E=352、每卡额外槽位 B=8、每类别保留组数 g=2。</p>
+<p><strong>“时间复杂度”这里指计算工作量，不是实测延迟。</strong>步骤 1—4 当前在 CPU 上全局执行，不能直接除以 R；步骤 5 才区分八卡分片和单张 H100。空间列默认列算法工作区，不重复计入已经持有的路由输入、执行位置输出及真实 token 向量；步骤 0 的原包 Buffer 另列，避免混淆。</p>
+<div class="table"><table><thead><tr><th>步骤</th><th>准确含义与需要纠正的地方</th><th>计算工作量</th><th>工作区／必要空间</th></tr></thead><tbody>
+<tr><td>0. 获得起始分配</td><td>调用 rt0 planner 生成均衡的初始执行位置；此时没有做真实 token 分发。原包多卡实现与当前单 H100 语义移植版需要分别计算。</td><td>原包所有卡合计：<code>O(N(1+log R)+R²)</code>。<br>单 H100 移植版：<code>O(NR+R²)</code>。</td><td>原包每卡 planner 必要空间：<code>O(N/R+R²)</code>；其完整 Buffer 还按容量预分配了每卡 <code>O(NK)</code> 的部分数组，不能用必要工作区替代实际内存占用。<br>单 H100 移植版：<code>O(N+R²)</code>。</td></tr>
+<tr><td>1. 保留必需专家</td><td>全量统计 <code>counts[执行卡,专家]</code>。保留原属专家和起始分配要求的副本。这是一张“必须能够执行”的计划表，不代表专家权重已物理复制到位。</td><td>CPU 全局：<code>O(N+R)</code></td><td>表本体 <code>O(R)</code>；当前 NumPy 表达式还产生长度 NK 的索引等临时数组，因此峰值工作区为 <code>O(N+R)</code>。</td></tr>
+<tr><td>2. 抽样</td><td>全层均匀、不放回抽 d 个完整 token，再按原行号排序。不是每卡各抽 d 个。</td><td>稀疏抽样路径加排序：<code>O(d log(d+1))</code></td><td>保存 d 个样本索引为 <code>O(d)</code>；NumPy 在 d 较大时可能选择建立长度 N 临时数组的路径，不能对所有 d 保证只有 <code>O(d)</code> 峰值空间。</td></tr>
+<tr><td>3. 统计组、筛选候选、构造反向组合</td><td>对样本按当前执行卡组成完整任务组；方向指“执行位置旧卡→新卡”，不一定是原始来源卡向外发送。每个“方向×大小×收益”保留前 2 种专家组，再与反方向同大小组联合配对。这里还不复制专家。</td><td>当前 CPU 总上界：<code>O(dR² log(d+1))</code>。代码先将每个类别的完整频数表排序，再取前 2，不能把它写成只看 2 项。</td><td><code>O(dR²)</code>，保留样本组合频数、筛选结果和候选组合。</td></tr>
+<tr><td>4. 选择驻留方案</td><td>全局反复比较“新增可匹配收益／新增槽位成本”，每选中一个方案都更新驻留并重新计算候选增益。不是每对卡各选一次，也不是把频数最高的专家直接复制。</td><td>实际选择 I 次时：<code>O((I+1)R²)</code>；I≤RB，固定 B 后最坏为 <code>O(R³)</code>。</td><td>当前函数还保留步骤 3 的表，合计 <code>O(dR²+R)</code>。不能只计算最后那张布尔驻留表。</td></tr>
+<tr><td>5. 执行一轮全量成组交换</td><td>每 token 最多一个提议；收益 0 的提议可以参与，但最后只接受正收益组合，如 1+0、1+1，不接受 0+0。如果最佳提议未匹配，不自动退回第二名。</td><td>八卡接口每卡：<code>O((N/R)(R+R²+p)+R³)</code>。<br>单 H100、全量 N：<code>O(N(R+R²+p)+R²)</code>。</td><td>八卡接口每卡额外工作区：<code>O(N/R+R³+L)</code>；单 H100：<code>O(N+R²+L)</code>。L 仅来自逐轮统计，主要数组重复使用。</td></tr>
+<tr><td>6. 汇总全部卡的工作</td><td>这是步骤 5 的计数，不是额外扫描。单卡枚举方向为 (N/R)R²；全部卡合计 NR²。若做 L 轮，每轮更新执行位置后重新提议、匹配。</td><td>全部卡一轮的工作量为步骤 5 单卡工作量乘 R；做 L 轮再乘 L。步骤 0—4 不因此重复 L 次。</td><td>主要临时数组不乘 L；只有保留每轮统计的少量数组为 <code>O(L)</code>。</td></tr>
+</tbody></table></div>
+<p><strong>用一个小例子区分“组大小”和“新增副本数”：</strong>卡 0 已有 e1、e7、e8，卡 1 已有 e1、e2、e7。样本中，100 个来自卡 0 的 token 各有 {e1,e2} 两项任务安排在卡 1；30 个来自卡 1 的 token 各有 {e7,e8} 两项任务安排在卡 0。给卡 0 补 e2、给卡 1 补 e8 后，两个方向都能把完整两任务组移回来源卡。组大小是 2，新增副本却是每边各 1 个。</p>
+<p>两个方向能匹配的样本数为 min(100,30)=30；每对减少 1+1=2 份远端发送，所以估计收益是 60，除以 2 个新增副本，得 30 份／副本。不能将两边 100+30=130 都算成收益。实际代码会比较新增专家前后的可匹配收益之差，并把同方向、同大小中其他被顺便启用的保留组也算进去。样本之间跨卡对的重叠仍可能存在，因此此分数是选副本的估计，最终全量扫描才决定真实交换。</p>
+<p>步骤 4 的 I 是实际接受的副本方案数量；每次至少占用一个此前未用的额外槽位，因此 I≤RB。这里的 <code>O(R³)</code> 是预算限制给出的最坏上界，不表示每次都把所有槽位填满。</p>
+<p>当前 8 线程成组交换使用原始来源卡分片：每卡处理 N/R=16,768 行，每行能看到该 token 的全部 8 个专家及其执行位置。每行有 56 个有效方向，因此一轮每卡有 <strong>939,008</strong> 个方向检查位置，八卡合计 <strong>7,512,064</strong> 个；不可搬的方向会提前跳过。每个方向最多考虑前 1、2、4 个可搬任务和原卡上的全部任务。</p>
+<p>八卡接口中的 <strong>R³</strong> 来自当前实现把 R 张来源卡的 <code>O(R²K)</code> 计数表全部收集到每张卡，再逐来源卡累加；不是 token 两两匹配产生的。当前 H100 数据是在一张物理卡上处理全部 N 行，只有一份计数表，因此这一项是 R²。跨卡汇集还会产生通信，其延迟不能由上述计算工作量直接推算；本次单 H100 延迟也没有测到八卡汇集成本。</p>
+
+<details><summary>展开：保留 K、E、B、g 后，各项具体从哪里来</summary>
+<p><strong>步骤 1：</strong>全量计数与表初始化为 <code>O(NK+RE)</code>；表本身 <code>O(RE)</code>，但当前 NumPy 先生成所有计算对的索引等临时数组，峰值工作区为 <code>O(NK+RE)</code>。固定 K、E 才得到主表中的 <code>O(N+R)</code>。</p>
+<p><strong>步骤 3：</strong>为一个样本检查卡对需要 R² 个循环位置；同一旧卡的完整专家组会对不同目标卡重新排序、判断，合计建表上界为 <code>O(d[R²+RK log(K+1)])</code>。这是当前 CPU 源码对“完整旧卡组”的处理，不是枚举 2<sup>K</sup> 个任意子集。</p>
+<p>令 H 为频数表中不同记录的数量。每个样本、每对无序卡最多记录一个方向，所以 <code>H≤dR(R−1)/2</code>。每个完整类别内至多有 d 种组合，代码完整排序的比较工作上界为 <code>O(KH log(d+1))</code>；K 来自最坏情况下对专家元组的比较。固定 K、g 后，步骤 3 总上界就是 <code>O(dR² log(d+1))</code>。</p>
+<p>令 J 为筛选后保留的组数、P 为反向候选方案数，则 <code>J≤2gR(R−1)K</code>；排除收益 0+0 后，<code>P≤3g²K·R(R−1)/2</code>。本次 R=8、K=8、g=2，P 的上界是 <strong>2,688</strong>，不是每次一定达到这个数。</p>
+<p><strong>步骤 4：</strong>每次选择前，先检查已保留的组是否被当前驻留启用，工作量 <code>O(KJ)</code>；再重算所有候选方案。当前实现对元组执行 <code>e in add_a</code> 一类成员判断，最坏需 O(K)，因此每轮候选评估为 <code>O(PgK²)</code>。总体为 <code>O((I+1)[KJ+PgK²])</code>；固定 K、g 后为 <code>O((I+1)R²)</code>。函数尚未释放前面的频数表，空间为 <code>O(dR²+RE+RB)</code>，其中 K、g 已按固定常数处理。</p>
+<p><strong>步骤 5：</strong>令每张卡的本地 token 数为 n=N/R。提议阶段为 <code>O(n(KR+R²))</code>；整数基数排序为 <code>O(pn)</code>；本地类别计数和配额为 <code>O(R²K)</code>；R 份计数表的汇总工作与存储均为 <code>O(R³K)</code>；写回上界为 <code>O(nK)</code>。因此当前八卡接口每卡每轮合计：</p>
+<div class="formula">O(n(KR+R²+p) + R³K)，其中 n=N/R。
+额外工作区：O(n + R³K + E + L)。
+把本地 routes、owner 和 support 也计入：O(nK + RE + R³K + L)。
+单 H100：将 n 换成 N，将 R³K 换成 R²K。</div>
+<p>“位掩码”是用整数的不同二进制位表示任务集合；当前集合装得进一个整数，所以提议阶段后续的交集与计数无需再逐专家扫描。排序只处理类别编号的 11 个二进制位，p 是本实现固定的小常数；不能另乘一次 K，也不能把它自动写成比较排序的 N log N。当前 kernel 硬编码 R=K=8，改变 R、K 后需要重新设计相应表示和代码；这些展开式用于解释当前成本来源。</p>
+<p><strong>步骤 0 的两种实现：</strong>原包 rt0 planner 利用有序配额边界定位执行卡，工作量中的 log R 与这类查找相关；本次单 H100 语义移植代码按目的卡顺序扫描，因此该项为 R。两者并非同一个 kernel，不能用移植版的计时替代原包多卡 planner 延迟。这里不包含真正的 token 分发、专家计算或权重复制。</p>
+</details>
+<p><strong>最终输出还需一步：</strong>交换修改了任务执行位置后，需要重新生成物理专家槽、执行地址及去重发送元数据，不能继续使用第 0 步的旧地址。当前固定参数的单卡输出构建随 NK 线性增长；这一步不重新做负载均衡。之后才进入真实的专家权重复制与 token 分发。</p>
+<p>固定实际 R=8、K=8 和排序位宽后，步骤 5 的工作量随本地 token 数近似线性；固定轮数 L 后仍是线性。减少轮数会减少重复工作，但 GPU 延迟还受并行调度、访存、启动和通信影响，不能将工作量简单除以 8 个线程，或据此断言一定缩短多少毫秒。</p>
+<p><a href="../../analysis/vendor/residency.py">步骤 1—4：CPU 副本选择源码</a> · <a href="../../experiments/h100_planner/baseline_virtual.cu">单 H100 起始分配移植版</a> · <a href="../../experiments/h100_planner/bundle_lane8.py">步骤 5—6：分片与计数汇集接口</a> · <a href="../../experiments/h100_planner/bundle_lane8.cu">GPU 提议、配额和写回</a></p>
+</div>
+<!-- END user-steps-complexity -->
+<!-- BEGIN bundle-round-sweep: generated from round_sweep_20261103_attempt01.json -->
+<div id="bundle-round-sweep" class="placeholder">
+<h3>成组交换：R、K 分别花在哪一步？</h3>
+<p>这里讨论“每个 token 由 8 个线程协作”的成组交换。它的组是<strong>同一个 token 的若干专家计算任务</strong>。先固定专家驻留位置，每轮为每个 token 最多选一条搬运提议，再按相反方向、相同任务数量匹配；16 线程版与 8 线程版遵循同一规则。</p>
+<p><strong>N</strong> 是一层全部 token 数，本次为 134,144；<strong>K</strong> 是每 token 选中的专家数，本次为 8；<strong>R</strong> 是逻辑卡数，本次为 8；<strong>L</strong> 是交换轮数；<strong>p</strong> 是整数排序扫描数据的趟数。下面另用 <strong>U<sub>l</sub></strong> 表示第 l 轮真正改写执行位置的计算对数量，一个计算对就是“一个 token 交给一个专家算一次”，所以 0≤U<sub>l</sub>≤NK。</p>
+<div class="table"><table><thead><tr><th>步骤</th><th>一轮工作量</th><th>这个乘数从哪里来</th></tr></thead><tbody>
+<tr><td>1. 建立当前位置和可执行位置的小表</td><td><code>O(NKR)</code></td><td>每个 token 的 K 个专家任务，都要判断它对应 R 张卡中的哪些卡。一个 token 有 8 个专家、8 张卡时，共有 8×8 个“专家任务／卡”检查位置。</td></tr>
+<tr><td>2. 选择搬运提议</td><td><code>O(4NR²)</code></td><td>每 token 检查 R² 个方向位置；自身到自身跳过，本次有 56 个有效有向卡对。每方向最多考虑前 1、2、4 个可搬任务和原卡上的全部任务。每个候选复用小表做整数位运算。</td></tr>
+<tr><td>3. 按类别整理提议、决定接受数量</td><td><code>O(pN + R²K)</code></td><td>N 条记录按类别排序；计数和接受数量按“方向 × 收益 × 搬几个任务”保存。最后一项的大小范围是 1…K，因此有 K，不是每个 token 再与 K 个 token 比较。</td></tr>
+<tr><td>4. 写回被接受的执行位置</td><td><code>O(N + U<sub>l</sub>)</code><br>上界 <code>O(NK)</code></td><td>扫描 N 条提议，跳过未接受的；接受的提议搬几个任务，就改写几个位置。一个 token 最多有 K 个位置，因而最坏上界有 K。</td></tr>
+</tbody></table></div>
+<p><strong>第一步乘 R，表示检查工作量，不表示把 token 从显存重复读取 R 遍。</strong>当前 kernel 的 8 个线程先各读一个专家和执行位置，再循环检查 8 张卡。每张卡的“哪些任务现在归我”和“哪些任务我能执行”压成一个整数：每一位表示一个专家任务是否在集合中。后续方向比较复用这些整数，使用线程间交换与位运算。这样减少重复读取，但检查逻辑本身仍存在；这也不是缓存命中率或显存事务的实测结论。</p>
+<p><strong>第三步为什么不是只有 1、2、4 三种大小？</strong>因为还有“把原卡上的任务全部搬走”这个候选。例如某个 token 有 3 个任务在 A，且 B 都能执行，那么大小 3 的全组可以参加；5、6、7、8 也同理。因此配额表按 1…K 预留类别。本次只需给 28 对卡×8 种大小分别算数量，共 224 项；每项是固定次数的整数计算。它不做全体 token 两两比较，也不搜索“2 个任务与 1+1 个任务”的混合配对。</p>
+<p>例如 A→B 有 100 条大小 2、收益 1 的提议，B→A 有 120 条大小 2、收益 1 的提议，直接接受双方各 100 条即可，不需要做 100×120 次比较。排序保证同一类别里按原 token 顺序选取。这里的排序只处理类别编号的 <strong>11 个二进制位</strong>，不对 token 编号逐项比较；当前 p 是固定的小常数，所以是 <code>O(pN)</code>，不写成比较排序的 <code>O(N log N)</code>。</p>
+<div class="formula">每轮：O(NKR + 4NR² + pN + R²K + N + U_l)
+L 轮最坏上界：O(L · [N(KR + R² + p) + R²K])
+若把一次驻留位图准备也计入，再加 O(RE)，E=352 是专家总数。
+当前 R=K=8、p 固定：O(LN)；L 也固定时：O(N)。</div>
+<p>上述是总工作量，不是把每一步串行执行所需的时间。GPU 可以让许多 token 同时处理，但不能据此把整个式子直接除以 8。当前实现把 R、K 写死为 8，且集合装在单个整数中；不能不改实现就将此式外推到任意大的 R、K。16→8 线程改变执行效率和常数，不改变复杂度阶数。第四步实际只改 U<sub>l</sub> 项，比直接写 NK 更能解释后几轮搬得少时的成本。</p>
+
+<h3>2026-11-03 补测：只做 1、2 轮，会损失多少收益、节约多少时间？</h3>
+<p>在指定 h100-omni 重新启动后，使用单张 H100 80GB、同一八层真实 trace、同一驻留表和同一起始分配，重新比较 L=1、2、4。<strong>这是本次同一张卡上互相比较的一组新测量。</strong>本次物理 GPU UUID 与旧主表不同，所以 L=4 也重测；旧主表和旧原始样本保留，不混用两次测量来计算加速比例。</p>
+<div class="table"><table><thead><tr><th>轮数 L</th><th>八层远端份数</th><th>相对起点下降</th><th>保留 L=4 的收益</th><th>Graph：交换 / ms</th><th>Graph：起点＋交换＋输出 / ms</th></tr></thead><tbody><tr><td>1</td><td>4,443,634</td><td>12.08%</td><td>48.4%</td><td>0.075</td><td>0.279</td></tr><tr><td>2</td><td>4,076,988</td><td>19.33%</td><td>77.4%</td><td>0.141</td><td>0.344</td></tr><tr><td>4</td><td>3,791,665</td><td>24.98%</td><td>100.0%</td><td>0.268</td><td>0.471</td></tr></tbody></table></div>
+<p>起点 L=0 的八层远端份数是 <strong>5,054,165</strong>；这里只作为通信参考，没有把 L=0 记成一次实测 planner 延迟。“份数”按每个 token 需要发送到几张不同的远端卡计数，同一 token 在同一卡交给多个专家只算一份；它不是网络时间或模型加速百分比。</p>
+<p><strong>L=2 保留 L=4 约 77.4% 的通信收益，同时少花 47.4% 的交换时间、27.0% 的起点＋交换＋输出时间。</strong>L=1 保留约 48.4% 的收益，交换时间减少 72.2%，起点＋交换＋输出时间减少 40.8%。这些比例都来自本次 Graph 实测，按未四舍五入的数据计算。</p>
+<p>轮数增加后，前一轮改过的执行位置会产生新的可交换机会，同分时优先考虑的组大小和卡对也随轮次轮换。每次实际接受的交换都要求组合收益为正，所以沿同一执行前缀增加轮数不会增加远端份数；但后面的增益不保证在所有数据上递减。本次 trace 确实逐轮减少：</p>
+<div class="table"><table><thead><tr><th>新增一轮</th><th>这一轮新减少的远端份数（八层合计）</th><th>相对同一起点的新增下降</th></tr></thead><tbody><tr><td>第 1 轮</td><td>610,531</td><td>12.08 个百分点</td></tr><tr><td>第 2 轮</td><td>366,646</td><td>7.25 个百分点</td></tr><tr><td>第 3 轮</td><td>190,449</td><td>3.77 个百分点</td></tr><tr><td>第 4 轮</td><td>94,874</td><td>1.88 个百分点</td></tr></tbody></table></div>
+<p>时间也不会随 L 严格等比例缩放。每轮都要重新检查 token、整理提议、计算配额；轮数减少会减少这部分工作。起始分配与最终输出只做一次，减少轮数也省不掉它们，因此整条路径的时间下降比例小于交换阶段。Graph 的 L=1、2、4 交换实测为 0.075、0.141、0.268 ms，而非直接将 L=4 除以 4 或除以 2。</p>
+<details><summary>普通调用延迟与逐层结果</summary>
+<div class="table"><table><thead><tr><th>轮数 L</th><th>普通调用：交换 / ms</th><th>普通调用：起点＋交换＋输出 / ms</th></tr></thead><tbody><tr><td>1</td><td>0.100</td><td>0.312</td></tr><tr><td>2</td><td>0.173</td><td>0.387</td></tr><tr><td>4</td><td>0.320</td><td>0.534</td></tr></tbody></table></div>
+<div class="table"><table><thead><tr><th>层</th><th>L1 下降</th><th>L2 下降</th><th>L4 下降</th><th>L1 Graph 交换 / ms</th><th>L2 Graph 交换 / ms</th><th>L4 Graph 交换 / ms</th></tr></thead><tbody><tr><td>0</td><td>10.15%</td><td>13.27%</td><td>14.61%</td><td>0.077</td><td>0.145</td><td>0.275</td></tr><tr><td>1</td><td>13.25%</td><td>21.91%</td><td>28.01%</td><td>0.077</td><td>0.146</td><td>0.278</td></tr><tr><td>2</td><td>14.38%</td><td>23.34%</td><td>29.52%</td><td>0.076</td><td>0.142</td><td>0.270</td></tr><tr><td>3</td><td>11.65%</td><td>19.61%</td><td>25.72%</td><td>0.074</td><td>0.139</td><td>0.265</td></tr><tr><td>4</td><td>12.51%</td><td>19.94%</td><td>26.00%</td><td>0.074</td><td>0.140</td><td>0.266</td></tr><tr><td>5</td><td>11.20%</td><td>18.28%</td><td>24.19%</td><td>0.073</td><td>0.137</td><td>0.263</td></tr><tr><td>6</td><td>11.68%</td><td>19.00%</td><td>25.09%</td><td>0.073</td><td>0.137</td><td>0.260</td></tr><tr><td>7</td><td>11.72%</td><td>19.13%</td><td>26.45%</td><td>0.074</td><td>0.140</td><td>0.266</td></tr></tbody></table></div>
+</details>
+<p>CUDA Graph 是把固定的一串 GPU 操作预先组织起来，随后整串重放，减少逐次发起的开销；普通调用则逐次发起这些操作。</p>
+<p><strong>计时口径：</strong>每层每个方法保留 10 次普通调用与 20 次 CUDA Graph 样本，每轮改变方法执行顺序，执行预热后计时；先取各层中位数，再对八层等权平均。通信下降按八层份数相加后计算。“交换”包含恢复起始执行位置和 L 轮交换；“起点＋交换＋输出”包含 MoonEP 语义移植版生成起点、恢复起点、L 轮交换和最终执行地址等输出，整条路径直接计时。它不是原包原生 MoonEP 的完整延迟。</p>
+<p><strong>排除项：</strong>两列时间均不含专家驻留选择、驻留位图打包、输入统计、编译、内存分配、正确性检查、Graph 捕获，也不含真实 token／专家权重通信或专家计算。因此目前只能据此选择规划时间与通信份数之间的取舍，不能直接宣布 L=1、2 或 4 哪个端到端更快。</p>
+<p><strong>核验：</strong>8 层×L=1、2、4 共 24 组结果与 CPU 对应前缀逐元素一致，L=4 与原保存结果一致；逐轮搬动数与预测收益一致，负载守恒、专家驻留合法、输出地址唯一且来源可恢复，Graph 计时前后结果均通过核验。另逐轮检查了 GPU 四轮过程的所有前缀。失败记录为空，源码与输入文件哈希保留在原始 JSON。</p>
+<details><summary>设备身份与证据</summary><p>本次设备：<code>GPU-dc88af35-8632-8695-efff-d817dbb524af</code>；旧主表设备：<code>GPU-916f69b6-b969-dae3-1bc3-c4368f606576</code>。型号均为 H100 80GB HBM3，本次 PyTorch 2.13.0+cu130，CUDA 13.0。设备空闲状态、频率和功耗读数见原始 JSON；不把未锁频环境下的细小差别解释成算法变化。</p></details>
+<p><a href="round_sweep_20261103_attempt01.json">本次八层原始样本、逐轮收益与审计</a> · <a href="../../experiments/h100_planner/round_sweep.py">复现实验脚本</a> · <a href="../../experiments/h100_planner/bundle_lane8.cu">成组交换 kernel</a></p>
+</div>
+<!-- END bundle-round-sweep -->
+
+<h3>完整状态聚合：合并有成本，混合匹配也有成本</h3>
+<div class="formula">总工作量 = O( Σ[l=1…L] {
+  NK² + KN log N                  // 排好每 token 专家、按完整状态比较排序
+  + P(N + K·G_l)                 // 启动全长数组处理、每卡对扫描状态类与计数
+  + K·Σ[a&lt;b] W_l,ab              // 大小 1…K 的混合数量匹配
+  + NR² + NK                     // 按方向展开接收数量，写回计算对
+})</div>
+<p>保存的真实回放中，八层 × 四轮共 32 个 G 值的平均为 <strong>50,885.41 类</strong>，约为 N 的 37.93%；最少 15,226 类，最多 126,986 类。此前的 126,984 是第 0 层首轮的具体值，不是所有层固定的类数。见<a href="../aggregate_exchange_multipair/results.json">逐层完整状态统计</a>。</p><p>这里确实有 N log N：使用 Thrust 按完整状态进行比较排序，一次状态比较最多查看 K 个专家及其执行位置。即使相同 token 很多，程序也要先整理全量输入，才知道哪些可以合并。实际代码为安全分配长度 N 的工作区，部分 kernel 也按 N 启动，因此不能把所有 N 都换成 G。</p>
+<p>聚合 AoS 版读取某一类的代表 token；SoA 版先把代表信息转成按字段连续排列的表，随后 28 对卡复用。两者算法和输出相同，复杂度相同；区别是数据如何排放、读取是否容易合并。</p>
+<h3>共享子集：三种执行方式的差别</h3><div class="table"><table><thead><tr><th>实现</th><th>四轮交换工作量上界</th><th>消除了什么，还留下什么</th></tr></thead><tbody>
+<tr><td>保持旧顺序 exact</td><td><code>O(Σ_l [NK(P+M) + PpN + PN + Σ_ab W_l,ab])</code></td><td>同一对卡内一次读 token、复用模板；换卡对仍重新检查。四轮有 4×28=112 次排序/配额/提交。</td></tr>
+<tr><td>平铺同时版 flat</td><td><code>O(Σ_l [NMK + pN + NK + Σ_ab W_l,ab + R²])</code></td><td>一轮加载 token 一次，遍历全部模板；四轮只做 4 次排序/配额/提交。最坏情况下 NMK 比较仍存在。</td></tr>
+<tr><td>索引同时版 indexed</td><td><code>O(L [NK²R + pN + NK + R²])</code></td><td>枚举 token 自己的子集并查表，去掉 M 因子。与 flat 同规则、同输出。每轮每 token 最多提出一项，因此所有卡对的 ΣW≤N。</td></tr></tbody></table></div>
+<p>对子集同时版，最多 K + K(K−1)/2 = 36 个单/双专家子集。双专家必须当前在同一执行卡；目标卡还必须同时有这些专家，筛掉后才查索引。上界是 36×7 个实际目的卡查表候选，通常更少。它仍然会做“生成自己子集”的工作，不能说每 token 的算法变成零比较。</p>
+<p>共享子集的排序采用 CUB 整数基数排序，写成 pN；完整聚合的完整状态比较排序写成 KN log N。两种排序不要合并成同一个 O(N log N)，也不要把它们都当作无成本。</p>
+<h3>准备模板也必须计入完整范围</h3><div class="formula">共享准备：O(NK²R + R²C²g + P(hg)² + RE + NK)
+索引版额外建表：O(R²C² + M)</div>
+<p>第一项来自遍历 token 的单/双专家组合并统计可移动方向；第二项来自扫描计数表、维护每类前 g 个候选；第三项来自候选去重和小表排序；E=352 是专家总数。索引额外成本包括清空查找表、写入选中的模板。<strong>这里不包括选择新的专家驻留位置</strong>，各版本都使用相同的保存结果。</p></section>
+<section id="memory"><h2>06 / GPU 层面具体改了什么</h2><div class="table"><table><thead><tr><th>修改</th><th>人话解释</th><th>收益边界</th></tr></thead><tbody>
+<tr><td>按字段连续存放，合并访存</td><td>把“token0 的 8 个专家、token1 的 8 个专家”转成“所有 token 的第 1 个专家、所有 token 的第 2 个专家”。相邻线程读同一字段时，地址也相邻，GPU 容易一次取回一整段。</td><td>减少访存浪费；转换本身要读写 NK 项。完整聚合 SoA 和共享子集都计入各自需要的转换。</td></tr>
+<tr><td>模板放进共享内存</td><td>一小队线程先把模板表放到芯片上的公共临时区域，再各自处理 token。每个 token 的专家和执行位置尽量留在线程的小型临时存储中复用。</td><td>平铺版仍遍历模板；缓存位置改变不等于算法候选数减少。编译器是否溢出到其他存储还会影响速度。</td></tr>
+<tr><td>计数只用目标卡的驻留编号</td><td>全局有 352 个专家，但目标卡最多只有 52 个可执行专家。用这 52 个本地编号做单/双专家计数，然后恢复全局编号比较频率相同的候选。</td><td>计数工作区从 127,238,144 字节缩到 2,822,144 字节，保持原本的同分顺序。不是删除合法候选。</td></tr>
+<tr><td>合并相同计数更新</td><td>同一批 32 个线程若同时给同一个计数格加一，由其中一个线程一次加总，减少多人争抢同一个格子。</td><td>仅对同时遇到相同格子的线程有效；不同格子仍分别更新。</td></tr>
+<tr><td>子集直接查表</td><td>索引由 GPU 已选出的模板建立，总计 705,536 字节。表里记的是模板原来在名单中的顺序，同分时按原顺序决定。</td><td>不再扫描无关模板。查表地址可能不连续，所以不能只凭运算次数推断延迟。</td></tr>
+<tr><td>大小 1/2 的配额公式</td><td>把一般动态规划换成给定移动量下的固定次数整数计算，很多不同移动量可以并行计算。</td><td>仅适用于当前大小 1、2；不能直接用于完整聚合的大小 1～8。</td></tr>
+<tr><td>768 类起始位置并行计算</td><td>原先一个线程逐项累加，现在 256 个线程分三段一起算每类之前共有多少提议；每段再加上前段总量。</td><td>整数前缀与原版完全相同。独立第 0 层诊断由约 29.23 降至 2.44 μs／次，不把诊断数替代无 profiler 的正式计时。</td></tr><tr><td>成组交换 16→8 线程协作</td><td>旧版用 16 个协作线程处理一行，只有 8 个线程加载专家，但 16 个线程都会枚举交换方向。新版用 8 个线程，一次 warp 处理 4 行，保持原算法规则。</td><td>加载阶段少了空载线程，但每线程的方向枚举从 4 次增加到 8 次；不能说旧版一半线程全程空闲。速度以实测为准。</td></tr></tbody></table></div>
+<p>“一批 32 个线程”在 CUDA 中叫 warp；“共享内存”是同一线程块能共同使用的芯片内存；“合并访存”指把相邻线程对相邻地址的请求合成较少的内存事务。它们解决的是硬件执行成本，不改变专家副本预算或负载守恒条件。</p></section>
+<section id="scope"><h2>07 / 每一个延迟，测的是哪一段</h2><div class="placeholder table">__SCOPE_TABLE__</div>
+<div class="flow"><span>输入 trace 与固定驻留</span><span>起始均衡分配</span><span>GPU 统计并准备模板</span><span>四轮交换</span><span>生成物理地址和去重输出</span></div>
+<p><strong>交换段</strong>从已有分配开始；共享子集在这个范围里可以使用已准备的模板。<strong>准备＋交换</strong>把 GPU 统计、筛选、排布转换，以及索引版建表算进去。<strong>起始分配＋准备／交换＋输出</strong>再加上起始 owner 和最终可执行输出的构造。</p>
+<p>输出构造包括：专家在目标卡的物理槽、按专家连续排列的行号、对齐补空位置、来源信息、以及“同一 token 发到同一目的卡只记一次”的目的地址标记。这些是本次紧凑物理槽格式的元数据；已与独立 PyTorch 实现逐项核对。它尚不是可直接替换 MoonEP dispatch 接口的成品，也没有集成到实际数据发送路径。</p>
+<div class="note">所有这些范围都排除了：选择专家驻留方案、真正复制专家权重、发送 token、合并结果、专家矩阵计算，以及真实八卡之间的同步。因此，它们是 planner 部件的测量，不是完整 MoE 层或训练端到端测量。</div>
+<div class="placeholder">__TIMING_NOTES__</div>
+<h3>单卡八逻辑 rank，与原生 MoonEP 怎么比较</h3><p>主表里的 MoonEP R8 port，是把原 rt0 的分配语义移植到单卡：它处理同一份八来源输入，产生同样的起始 owner；使用单卡排序和多个 kernel。它没有真实 NVLink 数据收集、跨卡远端写入和八卡屏障。所以它是<strong>相同硬件上的语义基线</strong>，不能叫“原生 MoonEP 八卡耗时”，也不能当作原生八卡的严格上界或下界。</p>
+<p>计划中的原生 R1 对照只使用一个 rank，将八个来源拼成单来源，所有专家本地可用。此次实际运行在 NVLink multicast 初始化时失败，尚未执行到 planner kernel，因此没有原生 kernel 延迟。即使 R1 能运行，其工作任务也与 R8 不同，不能相除得出加速倍数。真正的原生 R8 延迟需要八张物理 GPU。</p>
+<div class="placeholder">__NATIVE__</div>
+<p>普通执行（eager）由 CPU 逐次发起 GPU 操作；CUDA Graph 先记录固定执行流程，再整体重放。GPU 事件计时测相应设备时间线区间；同步墙钟还覆盖 CPU 发起与等待。当前完整聚合使用 Thrust 排序中的分配及同步，未纳入 Graph 版本，应该用各方案都存在的普通执行行比较。</p></section>
+<section id="validation"><h2>08 / 先验证结果，才接纳计时</h2>
+<p class="passed">已知 GPU 正确性证据：完整聚合 8 层 × 两种布局，全部与 CPU mixed-size 参考逐项相同；共享子集顺序、平铺同时、索引同时共 24 个层／版本组合，全部与各自 CPU 参考逐项相同，Graph 重放结果也一致。</p>
+<p>完整聚合汇总远端份数为 3,708,225，相对 rt0 的 5,054,165 降低 26.6303%。共享子集顺序版降幅为 26.81848%；平铺与索引同时版均为 25.28718%。这些是同一保存驻留下的真实 trace 回放计数，GPU 与 CPU 核对通过；不是网络传输耗时。</p>
+<p>每层有 134,144 个 token，每个 8 个专家，总共 1,073,152 个计算对。校验要求每项任务只有一个执行位置、执行卡拥有对应专家，并且每卡仍恰好执行 134,144 个计算对。通信份数从最终执行位置重新计算，不只信算法内部预估收益。</p>
+<div class="two"><div class="card"><b>保留失败与修复过程</b>第一次聚合扩展编译因间接引用缺失的 cusparse.h 失败；改用仅需的 CUDAStream 头文件后成功。首次失败日志与成功日志同时保留，失败运行未记为有效计时。</div><div class="card"><b>结果可回查</b>输入、编译、正确性、计时范围分别留证据。性能汇总应保留逐层原始重复样本，并按固定规则汇总，不能只挑最好的一次。</div></div>
+<h3>本地代码与原始记录</h3><p class="sub">以下链接使用相对路径，保持本项目目录结构即可离线打开；JSON 是可核对的原始结构化记录。</p>
+<ul>
+<li><a href="PROTOCOL.txt">固定测试协议</a>；<a href="input_manifest.json">输入清单</a>；<a href="bootstrap_source_trace_manifest.json">上传源码与 trace 清单</a>。</li>
+<li><a href="aggregate_correctness.json">聚合八层 GPU 正确性 JSON</a>；<a href="aggregate_tiny.log">tiny 结果</a>；<a href="aggregate_compile_failure1.log">首次编译失败</a>；<a href="aggregate_compile2.log">修复后编译成功</a>。</li>
+<li><a href="../h100_subset_validation/subset_smoke_results_02.json">共享子集三版本 GPU 正确性 JSON</a>；<a href="../h100_subset_validation/subset_smoke_02.log">对应运行日志</a>。</li>
+<li><a href="../../experiments/h100_planner/benchmark.py">统一计时与输出审计</a>；<a href="../../experiments/h100_planner/aggregate_cuda.cu">完整聚合 CUDA</a>；<a href="../../experiments/h100_planner/subset_cuda.cu">共享子集 CUDA</a>。</li>
+<li><a href="../../experiments/h100_planner/subset_reference.py">同时版独立 CPU 参考</a>；<a href="../../experiments/h100_planner/subset_formula_check.py">大小 1/2 配额公式核对</a>；<a href="../../analysis/vendor/aggregate_exchange.py">完整聚合 CPU 参考</a>。</li>
+<li><a href="../../experiments/h100_planner/materialize_cuda.cu">物理输出构造 CUDA</a>；<a href="../../experiments/h100_planner/materialize.py">独立 PyTorch 输出参考</a>；<a href="../../experiments/h100_planner/baseline_virtual.cu">单卡 R8 语义基线</a>。</li>
+<li><a href="../planner_explainer/MoonEP_动画讲解.html">前一份动画文档：原生 planner、采样、专家驻留、完整组与共享子集</a>。</li>
+</ul></section>
+<footer>页面不访问网络、不调用模型、不改变输入。支持播放、暂停、单步、重置和打印。动画的教学数值与实际实验结果已分开标注。</footer></main>
+<script>
+'use strict';
+const byId=id=>document.getElementById(id);
+const templates=['A → B · {e1}','A → B · {e2}','A → B · {e1,e2}','A → B · {e5}','D → A · {e8,e9}','C → D · {e6}'];
+const steps=[
+ {phase:0,read:0,title:'同一 token 同时属于三个名单',text:'u 含 e1，也含 e2，当然也含 {e1,e2}。如果以候选名单为外层循环，三个名单都会碰到 u。名单重叠本身没有错，重复读、重复判断才是要优化的工作。'},
+ {phase:0,read:1,active:0,title:'第一个名单读 u',text:'处理 {e1} 名单时，读 u 的专家与执行位置，再判断 A→B 是否可执行、会不会增加通信。'},
+ {phase:0,read:2,active:1,title:'第二个名单又碰到 u',text:'处理 {e2} 名单时，同一个 u 再次被访问。这并不意味着 u 的任务已经移动。'},
+ {phase:0,read:3,active:2,title:'第三个名单仍要检查 u',text:'处理 {e1,e2} 名单时，还要检查两个专家都在 A、B 都能执行。即使实现有缓存，算法的名单访问结构仍存在重复。'},
+ {phase:1,read:1,title:'把循环反过来：先取一个 token',text:'平铺同时版先把 u 的状态读进线程的临时存储。候选模板由线程块共同缓存，随后对这个 u 比较模板，不再按每个模板重读它的整份状态。'},
+ {phase:1,read:1,active:0,title:'比较 {e1} 模板',text:'在刚读入的 u 状态里找 e1，检查执行卡和收益。状态读取次数仍是 1，但模板比较次数加 1。'},
+ {phase:1,read:1,active:1,title:'比较 {e2} 模板',text:'继续使用同一份缓存状态。少读数据，不等于不用比较第二个模板。'},
+ {phase:1,read:1,active:2,title:'比较 {e1,e2} 模板',text:'检查两个专家能否一起移动。它与前两项重叠，所以最后不能全部提交，只能根据本轮规则挑一项。'},
+ {phase:1,read:1,active:3,title:'无关的模板仍然会遇到',text:'u 没有 e5，但平铺循环仍先走到这个模板，再用条件判断把它淘汰。这里省的是重复读取，候选循环没有消失。'},
+ {phase:1,read:1,active:5,title:'扫到名单末尾，才完成提议',text:'另外两个模板也与 u 无关。有些模板可早早跳过，但最坏仍要遍历完整名单。这个例子共 6 项，真实表最多 1,792 项。'},
+ {phase:2,read:1,title:'索引版从 u 自己拥有的组合出发',text:'先枚举 A 上的单项 e1、e2、e3，双项 {e1,e2}、{e1,e3}、{e2,e3}，以及 B 上的 e7，共 7 项。不生成 u 根本没有的 e5 或 {e8,e9}。'},
+ {phase:2,read:1,title:'先用驻留条件剪枝',text:'B 只有 e1、e2、e7，没有 e3；其余卡在这个教学场景没有相应副本。因此含 e3 的移动，以及 B→A 的 e7，都在查模板表前被排除。剩下 A→B 的三项。'},
+ {phase:2,read:1,title:'直接查三个键，跳过无关名单',text:'以“方向＋子集”为键查表：A→B:{e1}、A→B:{e2}、A→B:{e1,e2}。表里保存原模板顺序，同分时仍能作出与平铺版相同的选择。'},
+ {phase:3,read:1,title:'u 只产生一条提议',text:'假设本轮规则选中 {e1,e2}。u 的 e3 仍在 A、e7 已在 B，所以这一条收益为 0。其余候选不再提交，避免 e1 或 e2 被重复安排。'},
+ {phase:3,read:1,title:'两个任务，换回两组各一个任务',text:'反向有 v 的一个任务、w 的一个任务，每项收益 1。双方移动量都是 2，合计收益 2。配额匹配可以接受“一个双专家组 ↔ 两个单专家组”。'},
+ {phase:3,read:1,title:'写入新位置，下一轮重新读',text:'实际 planner 在这里只改执行位置和输出计划；真正传输由后续阶段执行。u 的 e1、e2 改为 B，e3 留 A。下一轮必须用新状态重新选择，四轮并不是共享一份不变缓存。'}
+];
+let step=0,timer=null;
+function stop(){if(timer!==null)clearInterval(timer);timer=null;byId('play').textContent='播放';}
+function render(){
+ const s=steps[step];byId('position').textContent=`${step+1} / ${steps.length}`;byId('prev').disabled=step===0;byId('next').disabled=step===steps.length-1;
+ document.querySelectorAll('#phasebar span').forEach((el,i)=>el.classList.toggle('active',i===s.phase));
+ byId('steptitle').textContent=s.title;byId('stepcaption').textContent=s.text;byId('reads').textContent=s.read+' 次';
+ byId('tokenbox').classList.toggle('active',s.phase>0||s.read>0);
+ byId('cachetext').textContent=step===15?'更新后：e1、e2、e7 在 B；e3 在 A。':s.phase>0?'本轮读入一次；候选比较复用线程内状态。':'来源 C；三个名单都引用同一个 u。';
+ byId('listtitle').textContent=s.phase===0?'三个重叠名单':s.phase===1?'平铺模板：仍逐项比较':s.phase===2?'自己的子集 → 目标查表':'只保留一条合法提议';
+ const n=s.phase===0?3:6;byId('candidates').innerHTML=templates.slice(0,n).map((t,i)=>{
+  let cls='candidate',suffix='';if(s.phase===0){suffix='<span class="tokenchip"> u</span>、…';}
+  if(i===s.active)cls+=' active';
+  if(s.phase===2&&step>=11){if(i<3){cls+=' hit';suffix='<span class="stamp">查表命中</span>';}else{cls+=' skip';suffix='<span class="stamp">不枚举</span>';}}
+  if(s.phase===3){if(i===2){cls+=' hit';suffix='<span class="stamp">本轮唯一提议</span>';}else cls+=' skip';}
+  return `<div class="${cls}">${t}${suffix}</div>`;
+ }).join('');
+ byId('scantext').textContent=s.phase===0?'三个列表里出现 u，不代表三个不同 token。':s.phase===1?'读 u 的整份状态 1 次；仍检查候选表中的模板。':s.phase===2?'不相关模板不触发 token 专家扫描；表仍由 GPU 准备。':'其他候选不会再对 u 写入。';
+ byId('ownsets').textContent=s.phase===2?'自有子集：{e1}、{e2}、{e3}、{e1,e2}、{e1,e3}、{e2,e3}、{e7}。':s.phase===1?'状态缓存在小型临时存储里；模板循环中的条件与比较仍要执行。':'同一 token 的专家任务可能横跨多张卡；只把同卡任务组成可移动子集。';
+ byId('chosen').textContent=s.phase===3?(step===15?'u：e1、e2 → B；e3 仍在 A。':'u 的唯一提议：A→B，{e1,e2}，大小 2，收益 0。'):'进入多个候选名单，不等于可以把同一个任务发送多次。';
+ byId('proposalcount').textContent=s.phase===3?'1 个':'最多 1 个';
+ byId('actiontext').textContent=step>=14?'配额接受后，u、v、w 的选择共同提交。两边各移动 2 个计算对，负载不变。':'必须等反方向有相同计算对数量，配额允许后才提交。';
+ byId('leftbalance').style.opacity=step>=13?'1':'.5';byId('rightbalance').style.opacity=step>=14?'1':'.5';
+}
+byId('prev').addEventListener('click',()=>{stop();step=Math.max(0,step-1);render();});
+byId('next').addEventListener('click',()=>{stop();step=Math.min(steps.length-1,step+1);render();});
+byId('reset').addEventListener('click',()=>{stop();step=0;render();});
+byId('play').addEventListener('click',()=>{if(timer!==null){stop();return;}if(step===steps.length-1)step=0;render();byId('play').textContent='暂停';timer=setInterval(()=>{step++;render();if(step===steps.length-1)stop();},2800);});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});render();
+</script></body></html>

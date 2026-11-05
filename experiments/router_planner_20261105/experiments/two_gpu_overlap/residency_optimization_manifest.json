@@ -1,0 +1,19 @@
+{
+  "base_is_unchanged": true,
+  "files": {
+    "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956",
+    "residency_cuda_optimized.cu": "eb0d30bd8e7b3ff3e8950c1eaadf6757009b91b80946628270ae8ca9b10a4242",
+    "residency_cuda_fused.cu": "a69fe9c215e8fe5623ffb69d40d2921c9cd969182e8313916137690e2dd17bad",
+    "benchmark_residency_variants.py": "fa301046d51c67e09a658fe40baf8bf38e61448abb61461a6dd2594191905be2",
+    "prepare_residency_corners.py": "68a306a7e53e97c7536abc81e8631b095c849e3164cd536845c55a264a7b1398",
+    "residency_cuda_fused.py": "da23ccabc52115a972757d4ea3dbdb5745771ee62a4a332145ca8b8f3220cada",
+    "kernel_design.txt": "64937371a43d0894ded305f70e6954b23104103565572cf39f4eed5512202754"
+  },
+  "candidate_status": {
+    "optimized": "root measured exact 8 real plus 14 synthetic checks; timing in outputs/two_gpu_overlap/residency_variants_attempt01.json",
+    "fused": "verified: 8 real layers plus 14 synthetic exact checks; paired component timing in outputs/two_gpu_overlap/residency_fused_attempt01.json; no full-pipeline claim"
+  },
+  "class_top2": "Same tuple order; parallel reduction retains earliest category sample independently",
+  "fusion_fallback": "d>256 uses separate frequency plus parallel top2",
+  "synthetic_scope": "correctness only; P80 cases exercise strided warp candidates, d290 exercises larger sample fallback"
+}

@@ -1,0 +1,197 @@
+{
+  "rows": [
+    {
+      "layer": 0,
+      "variant": "sequential",
+      "bitwise": true,
+      "graph_bitwise": true,
+      "graph_us": [],
+      "median_us": null
+    },
+    {
+      "layer": 0,
+      "variant": "parallel",
+      "bitwise": true,
+      "graph_bitwise": true,
+      "graph_us": [],
+      "median_us": null
+    },
+    {
+      "layer": 0,
+      "variant": "indexed",
+      "bitwise": true,
+      "graph_bitwise": true,
+      "graph_us": [],
+      "median_us": null
+    },
+    {
+      "layer": 1,
+      "variant": "sequential",
+      "bitwise": true,
+      "graph_bitwise": true,
+      "graph_us": [],
+      "median_us": null
+    },
+    {
+      "layer": 1,
+      "variant": "parallel",
+      "bitwise": true,
+      "graph_bitwise": true,
+      "graph_us": [],
+      "median_us": null
+    },
+    {
+      "layer": 1,
+      "variant": "indexed",
+      "bitwise": true,
+      "graph_bitwise": true,
+      "graph_us": [],
+      "median_us": null
+    },
+    {
+      "layer": 2,
+      "variant": "sequential",
+      "bitwise": true,
+      "graph_bitwise": true,
+      "graph_us": [],
+      "median_us": null
+    },
+    {
+      "layer": 2,
+      "variant": "parallel",
+      "bitwise": true,
+      "graph_bitwise": true,
+      "graph_us": [],
+      "median_us": null
+    },
+    {
+      "layer": 2,
+      "variant": "indexed",
+      "bitwise": true,
+      "graph_bitwise": true,
+      "graph_us": [],
+      "median_us": null
+    },
+    {
+      "layer": 3,
+      "variant": "sequential",
+      "bitwise": true,
+      "graph_bitwise": true,
+      "graph_us": [],
+      "median_us": null
+    },
+    {
+      "layer": 3,
+      "variant": "parallel",
+      "bitwise": true,
+      "graph_bitwise": true,
+      "graph_us": [],
+      "median_us": null
+    },
+    {
+      "layer": 3,
+      "variant": "indexed",
+      "bitwise": true,
+      "graph_bitwise": true,
+      "graph_us": [],
+      "median_us": null
+    },
+    {
+      "layer": 4,
+      "variant": "sequential",
+      "bitwise": true,
+      "graph_bitwise": true,
+      "graph_us": [],
+      "median_us": null
+    },
+    {
+      "layer": 4,
+      "variant": "parallel",
+      "bitwise": true,
+      "graph_bitwise": true,
+      "graph_us": [],
+      "median_us": null
+    },
+    {
+      "layer": 4,
+      "variant": "indexed",
+      "bitwise": true,
+      "graph_bitwise": true,
+      "graph_us": [],
+      "median_us": null
+    },
+    {
+      "layer": 5,
+      "variant": "sequential",
+      "bitwise": true,
+      "graph_bitwise": true,
+      "graph_us": [],
+      "median_us": null
+    },
+    {
+      "layer": 5,
+      "variant": "parallel",
+      "bitwise": true,
+      "graph_bitwise": true,
+      "graph_us": [],
+      "median_us": null
+    },
+    {
+      "layer": 5,
+      "variant": "indexed",
+      "bitwise": true,
+      "graph_bitwise": true,
+      "graph_us": [],
+      "median_us": null
+    },
+    {
+      "layer": 6,
+      "variant": "sequential",
+      "bitwise": true,
+      "graph_bitwise": true,
+      "graph_us": [],
+      "median_us": null
+    },
+    {
+      "layer": 6,
+      "variant": "parallel",
+      "bitwise": true,
+      "graph_bitwise": true,
+      "graph_us": [],
+      "median_us": null
+    },
+    {
+      "layer": 6,
+      "variant": "indexed",
+      "bitwise": true,
+      "graph_bitwise": true,
+      "graph_us": [],
+      "median_us": null
+    },
+    {
+      "layer": 7,
+      "variant": "sequential",
+      "bitwise": true,
+      "graph_bitwise": true,
+      "graph_us": [],
+      "median_us": null
+    },
+    {
+      "layer": 7,
+      "variant": "parallel",
+      "bitwise": true,
+      "graph_bitwise": true,
+      "graph_us": [],
+      "median_us": null
+    },
+    {
+      "layer": 7,
+      "variant": "indexed",
+      "bitwise": true,
+      "graph_bitwise": true,
+      "graph_us": [],
+      "median_us": null
+    }
+  ],
+  "scope": "full GPU subset component including shortlist mining, excludes seed/support generation and physical plan materialization"
+}

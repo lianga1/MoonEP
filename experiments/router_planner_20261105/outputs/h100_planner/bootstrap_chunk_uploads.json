@@ -1,0 +1,242 @@
+[
+  {
+    "part": "part003",
+    "ok": true,
+    "seconds": 4.049092374974862
+  },
+  {
+    "part": "part001",
+    "ok": true,
+    "seconds": 5.342947791097686
+  },
+  {
+    "part": "part002",
+    "ok": true,
+    "seconds": 6.171501792035997
+  },
+  {
+    "part": "part000",
+    "ok": true,
+    "seconds": 6.535274541005492
+  },
+  {
+    "part": "part004",
+    "ok": true,
+    "seconds": 5.7324575840029866
+  },
+  {
+    "part": "part005",
+    "ok": true,
+    "seconds": 4.519520167028531
+  },
+  {
+    "part": "part006",
+    "ok": true,
+    "seconds": 4.073347915895283
+  },
+  {
+    "part": "part007",
+    "ok": true,
+    "seconds": 4.678750124992803
+  },
+  {
+    "part": "part008",
+    "ok": true,
+    "seconds": 3.4287573751062155
+  },
+  {
+    "part": "part009",
+    "ok": true,
+    "seconds": 3.8849884159862995
+  },
+  {
+    "part": "part010",
+    "ok": true,
+    "seconds": 4.372758957790211
+  },
+  {
+    "part": "part011",
+    "ok": true,
+    "seconds": 4.316466000163928
+  },
+  {
+    "part": "part012",
+    "ok": true,
+    "seconds": 3.019562666071579
+  },
+  {
+    "part": "part013",
+    "ok": true,
+    "seconds": 2.9869448749814183
+  },
+  {
+    "part": "part014",
+    "ok": true,
+    "seconds": 3.1155425829347223
+  },
+  {
+    "part": "part016",
+    "ok": true,
+    "seconds": 3.0196970829274505
+  },
+  {
+    "part": "part015",
+    "ok": true,
+    "seconds": 4.095775208901614
+  },
+  {
+    "part": "part018",
+    "ok": true,
+    "seconds": 3.2275538339745253
+  },
+  {
+    "part": "part017",
+    "ok": true,
+    "seconds": 4.918714166153222
+  },
+  {
+    "part": "part019",
+    "ok": true,
+    "seconds": 5.2376546249724925
+  },
+  {
+    "part": "part022",
+    "ok": true,
+    "seconds": 3.7157433331012726
+  },
+  {
+    "part": "part020",
+    "ok": true,
+    "seconds": 7.753003416117281
+  },
+  {
+    "part": "part021",
+    "ok": true,
+    "seconds": 6.831301792059094
+  },
+  {
+    "part": "part023",
+    "ok": true,
+    "seconds": 4.844323625089601
+  },
+  {
+    "part": "part024",
+    "ok": true,
+    "seconds": 4.373978542163968
+  },
+  {
+    "part": "part026",
+    "ok": true,
+    "seconds": 3.781446374952793
+  },
+  {
+    "part": "part025",
+    "ok": true,
+    "seconds": 5.555439333198592
+  },
+  {
+    "part": "part028",
+    "ok": true,
+    "seconds": 4.36144212516956
+  },
+  {
+    "part": "part029",
+    "ok": true,
+    "seconds": 4.491692665964365
+  },
+  {
+    "part": "part030",
+    "ok": true,
+    "seconds": 5.058353333035484
+  },
+  {
+    "part": "part032",
+    "ok": true,
+    "seconds": 2.3407515841536224
+  },
+  {
+    "part": "part027",
+    "ok": true,
+    "seconds": 9.287583082914352
+  },
+  {
+    "part": "part031",
+    "ok": true,
+    "seconds": 8.613001457881182
+  },
+  {
+    "part": "part035",
+    "ok": true,
+    "seconds": 4.746168249985203
+  },
+  {
+    "part": "part034",
+    "ok": true,
+    "seconds": 5.509932334069163
+  },
+  {
+    "part": "part033",
+    "ok": true,
+    "seconds": 6.172706124838442
+  },
+  {
+    "part": "part037",
+    "ok": true,
+    "seconds": 3.17354516685009
+  },
+  {
+    "part": "part036",
+    "ok": true,
+    "seconds": 4.163065291009843
+  },
+  {
+    "part": "part038",
+    "ok": true,
+    "seconds": 3.5729616249445826
+  },
+  {
+    "part": "part042",
+    "ok": true,
+    "seconds": 2.6125855420250446
+  },
+  {
+    "part": "part040",
+    "ok": true,
+    "seconds": 4.330040707951412
+  },
+  {
+    "part": "part041",
+    "ok": true,
+    "seconds": 4.608994249952957
+  },
+  {
+    "part": "part043",
+    "ok": true,
+    "seconds": 1.919800667092204
+  },
+  {
+    "part": "part039",
+    "ok": true,
+    "seconds": 7.935318042058498
+  },
+  {
+    "part": "part045",
+    "ok": true,
+    "seconds": 2.693337708013132
+  },
+  {
+    "part": "part044",
+    "ok": true,
+    "seconds": 3.4015794589649886
+  },
+  {
+    "part": "part047",
+    "ok": true,
+    "seconds": 2.756991249974817
+  },
+  {
+    "part": "part046",
+    "ok": true,
+    "seconds": 4.171752791851759
+  }
+]

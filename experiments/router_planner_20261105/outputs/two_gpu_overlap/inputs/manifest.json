@@ -1,0 +1,894 @@
+{
+  "topology": "derived: original source ranks 0..3 -> physical 0; 4..7 -> physical 1",
+  "experts": 352,
+  "topk": 8,
+  "extra_slots": 8,
+  "sample_tokens": 256,
+  "groups_per_class": 2,
+  "sample_seed": 20261015,
+  "weights_in_trace": false,
+  "layer_records": [
+    {
+      "layer": 0,
+      "original_sha256": "22bd2a9496dbc0e377d72b7a71c44e94adaa1e0ff86bc3e590264c31abd2393b",
+      "replay_sha256": "9070d5d269147c08f991f023f2e424c031d3649b3f3517e2e7c896f344e9de8b",
+      "shape": [
+        2,
+        67072,
+        8
+      ],
+      "cpu_seed_seconds": 0.101121042,
+      "cpu_select_seconds": 0.02477725,
+      "native": {
+        "remote_token_destinations": 133686,
+        "all_token_destinations": 267500,
+        "remote_pairs": 528048,
+        "source_remote_payloads": [
+          66842,
+          66844
+        ],
+        "destination_remote_payloads": [
+          66844,
+          66842
+        ],
+        "pair_loads": [
+          536576,
+          536576
+        ],
+        "max_min_pair_load": 0,
+        "max_mean_pair_load": 1.0,
+        "active_extra_experts": [
+          0,
+          1
+        ]
+      },
+      "residency": {
+        "method": "reciprocal",
+        "mandatory_extra": [
+          0,
+          1
+        ],
+        "candidate_extra": [
+          7,
+          8
+        ],
+        "sampled_tokens": 256,
+        "distinct_group_buckets": 14,
+        "infeasible_directions_filtered": 1,
+        "candidate_packages": 28,
+        "accepted_packages": [
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              183
+            ],
+            "add_b": [
+              55
+            ],
+            "size": 1,
+            "estimated_sample_gain": 2
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              215
+            ],
+            "add_b": [
+              75
+            ],
+            "size": 1,
+            "estimated_sample_gain": 2
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              177,
+              283
+            ],
+            "add_b": [
+              3
+            ],
+            "size": 2,
+            "estimated_sample_gain": 2
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              304
+            ],
+            "add_b": [
+              2,
+              30
+            ],
+            "size": 2,
+            "estimated_sample_gain": 2
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              289,
+              351
+            ],
+            "add_b": [
+              68,
+              119
+            ],
+            "size": 3,
+            "estimated_sample_gain": 2
+          }
+        ],
+        "warning": "one direction per sample token/rank-pair; cross-pair overlaps remain estimates; final exchanges audited independently"
+      }
+    },
+    {
+      "layer": 1,
+      "original_sha256": "4a85f36543028ee06888370cc6d2d9f5569839d080ed472525aa60d377088829",
+      "replay_sha256": "dbbcdacc2a46d3ba2d581a00ba81139f20bc1413cff88edf57750370083671f6",
+      "shape": [
+        2,
+        67072,
+        8
+      ],
+      "cpu_seed_seconds": 0.07636325,
+      "cpu_select_seconds": 0.003639000000000059,
+      "native": {
+        "remote_token_destinations": 133701,
+        "all_token_destinations": 267656,
+        "remote_pairs": 530294,
+        "source_remote_payloads": [
+          66972,
+          66729
+        ],
+        "destination_remote_payloads": [
+          66729,
+          66972
+        ],
+        "pair_loads": [
+          536576,
+          536576
+        ],
+        "max_min_pair_load": 0,
+        "max_mean_pair_load": 1.0,
+        "active_extra_experts": [
+          0,
+          1
+        ]
+      },
+      "residency": {
+        "method": "reciprocal",
+        "mandatory_extra": [
+          0,
+          1
+        ],
+        "candidate_extra": [
+          7,
+          5
+        ],
+        "sampled_tokens": 256,
+        "distinct_group_buckets": 14,
+        "infeasible_directions_filtered": 0,
+        "candidate_packages": 24,
+        "accepted_packages": [
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              208
+            ],
+            "add_b": [
+              81
+            ],
+            "size": 1,
+            "estimated_sample_gain": 2
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              224,
+              247,
+              291
+            ],
+            "add_b": [
+              21,
+              169
+            ],
+            "size": 3,
+            "estimated_sample_gain": 4
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              235,
+              266,
+              290
+            ],
+            "add_b": [
+              156
+            ],
+            "size": 4,
+            "estimated_sample_gain": 4
+          }
+        ],
+        "warning": "one direction per sample token/rank-pair; cross-pair overlaps remain estimates; final exchanges audited independently"
+      }
+    },
+    {
+      "layer": 2,
+      "original_sha256": "d947eacd11a5707b45b59eda85cbbf6f13fe16ec2beb671980274aed7907cd06",
+      "replay_sha256": "844f64ee50dcec66a87a2163fa158e012bd9d74e1cfaa9d4423a9198aa52f0ff",
+      "shape": [
+        2,
+        67072,
+        8
+      ],
+      "cpu_seed_seconds": 0.06916254199999994,
+      "cpu_select_seconds": 0.0037080000000000446,
+      "native": {
+        "remote_token_destinations": 133679,
+        "all_token_destinations": 267715,
+        "remote_pairs": 530154,
+        "source_remote_payloads": [
+          66933,
+          66746
+        ],
+        "destination_remote_payloads": [
+          66746,
+          66933
+        ],
+        "pair_loads": [
+          536576,
+          536576
+        ],
+        "max_min_pair_load": 0,
+        "max_mean_pair_load": 1.0,
+        "active_extra_experts": [
+          1,
+          0
+        ]
+      },
+      "residency": {
+        "method": "reciprocal",
+        "mandatory_extra": [
+          1,
+          0
+        ],
+        "candidate_extra": [
+          6,
+          8
+        ],
+        "sampled_tokens": 256,
+        "distinct_group_buckets": 14,
+        "infeasible_directions_filtered": 0,
+        "candidate_packages": 24,
+        "accepted_packages": [
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              231
+            ],
+            "add_b": [
+              148
+            ],
+            "size": 1,
+            "estimated_sample_gain": 4
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [],
+            "add_b": [
+              20
+            ],
+            "size": 1,
+            "estimated_sample_gain": 2
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              191,
+              217
+            ],
+            "add_b": [
+              116,
+              125
+            ],
+            "size": 2,
+            "estimated_sample_gain": 4
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              201,
+              293
+            ],
+            "add_b": [
+              45,
+              102
+            ],
+            "size": 4,
+            "estimated_sample_gain": 4
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [],
+            "add_b": [
+              13,
+              135
+            ],
+            "size": 2,
+            "estimated_sample_gain": 2
+          }
+        ],
+        "warning": "one direction per sample token/rank-pair; cross-pair overlaps remain estimates; final exchanges audited independently"
+      }
+    },
+    {
+      "layer": 3,
+      "original_sha256": "39b1dfad9d146fbe5b177fa401f8471b4f4035127b70feae9dee661a92f6688a",
+      "replay_sha256": "3238bd6b0ae54810c99040153d41007130eb80807e0d0de88a1dfeb2e13a117d",
+      "shape": [
+        2,
+        67072,
+        8
+      ],
+      "cpu_seed_seconds": 0.068923917,
+      "cpu_select_seconds": 0.004061958000000088,
+      "native": {
+        "remote_token_destinations": 133952,
+        "all_token_destinations": 267890,
+        "remote_pairs": 530478,
+        "source_remote_payloads": [
+          66991,
+          66961
+        ],
+        "destination_remote_payloads": [
+          66961,
+          66991
+        ],
+        "pair_loads": [
+          536576,
+          536576
+        ],
+        "max_min_pair_load": 0,
+        "max_mean_pair_load": 1.0,
+        "active_extra_experts": [
+          0,
+          1
+        ]
+      },
+      "residency": {
+        "method": "reciprocal",
+        "mandatory_extra": [
+          0,
+          1
+        ],
+        "candidate_extra": [
+          6,
+          7
+        ],
+        "sampled_tokens": 256,
+        "distinct_group_buckets": 14,
+        "infeasible_directions_filtered": 0,
+        "candidate_packages": 26,
+        "accepted_packages": [
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              184
+            ],
+            "add_b": [
+              90
+            ],
+            "size": 1,
+            "estimated_sample_gain": 2
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              207
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 2
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              188,
+              233,
+              286
+            ],
+            "add_b": [
+              46,
+              137
+            ],
+            "size": 3,
+            "estimated_sample_gain": 4
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              342
+            ],
+            "add_b": [
+              49
+            ],
+            "size": 2,
+            "estimated_sample_gain": 2
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [],
+            "add_b": [
+              48,
+              125
+            ],
+            "size": 2,
+            "estimated_sample_gain": 2
+          }
+        ],
+        "warning": "one direction per sample token/rank-pair; cross-pair overlaps remain estimates; final exchanges audited independently"
+      }
+    },
+    {
+      "layer": 4,
+      "original_sha256": "826c138dd62a7af4d50693906c397cf5d947eba84d7a6fd091178e7a7e64fb59",
+      "replay_sha256": "502bbef9e34edbb784659fd842cc12fb01e30a1bb0b6ded4c7cf0063fc9b9e4c",
+      "shape": [
+        2,
+        67072,
+        8
+      ],
+      "cpu_seed_seconds": 0.06462954200000004,
+      "cpu_select_seconds": 0.003726915999999969,
+      "native": {
+        "remote_token_destinations": 133886,
+        "all_token_destinations": 267873,
+        "remote_pairs": 505366,
+        "source_remote_payloads": [
+          66878,
+          67008
+        ],
+        "destination_remote_payloads": [
+          67008,
+          66878
+        ],
+        "pair_loads": [
+          536576,
+          536576
+        ],
+        "max_min_pair_load": 0,
+        "max_mean_pair_load": 1.0,
+        "active_extra_experts": [
+          0,
+          1
+        ]
+      },
+      "residency": {
+        "method": "reciprocal",
+        "mandatory_extra": [
+          0,
+          1
+        ],
+        "candidate_extra": [
+          7,
+          8
+        ],
+        "sampled_tokens": 256,
+        "distinct_group_buckets": 14,
+        "infeasible_directions_filtered": 0,
+        "candidate_packages": 24,
+        "accepted_packages": [
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              210
+            ],
+            "add_b": [
+              100
+            ],
+            "size": 1,
+            "estimated_sample_gain": 4
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [],
+            "add_b": [
+              60
+            ],
+            "size": 1,
+            "estimated_sample_gain": 2
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              198,
+              293
+            ],
+            "add_b": [
+              81
+            ],
+            "size": 2,
+            "estimated_sample_gain": 4
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              220,
+              235
+            ],
+            "add_b": [
+              5,
+              29
+            ],
+            "size": 2,
+            "estimated_sample_gain": 4
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              286,
+              327
+            ],
+            "add_b": [
+              21,
+              150
+            ],
+            "size": 3,
+            "estimated_sample_gain": 4
+          }
+        ],
+        "warning": "one direction per sample token/rank-pair; cross-pair overlaps remain estimates; final exchanges audited independently"
+      }
+    },
+    {
+      "layer": 5,
+      "original_sha256": "b1bba721c45b72c90b983c54f20cc5c0b6d520c285e26d9131ca8e8eee08cc6a",
+      "replay_sha256": "cf72b7f79316d6ef7515c48ab829a3f54e5c45b58263eb4cf06ac734c65e2a56",
+      "shape": [
+        2,
+        67072,
+        8
+      ],
+      "cpu_seed_seconds": 0.06563641700000011,
+      "cpu_select_seconds": 0.0038295419999998526,
+      "native": {
+        "remote_token_destinations": 133903,
+        "all_token_destinations": 267954,
+        "remote_pairs": 533044,
+        "source_remote_payloads": [
+          66853,
+          67050
+        ],
+        "destination_remote_payloads": [
+          67050,
+          66853
+        ],
+        "pair_loads": [
+          536576,
+          536576
+        ],
+        "max_min_pair_load": 0,
+        "max_mean_pair_load": 1.0,
+        "active_extra_experts": [
+          2,
+          1
+        ]
+      },
+      "residency": {
+        "method": "reciprocal",
+        "mandatory_extra": [
+          1,
+          0
+        ],
+        "candidate_extra": [
+          8,
+          7
+        ],
+        "sampled_tokens": 256,
+        "distinct_group_buckets": 14,
+        "infeasible_directions_filtered": 0,
+        "candidate_packages": 26,
+        "accepted_packages": [
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              258,
+              297
+            ],
+            "add_b": [
+              53,
+              113
+            ],
+            "size": 2,
+            "estimated_sample_gain": 4
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              349
+            ],
+            "add_b": [
+              24
+            ],
+            "size": 1,
+            "estimated_sample_gain": 2
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [],
+            "add_b": [
+              141
+            ],
+            "size": 1,
+            "estimated_sample_gain": 2
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              185,
+              213,
+              337
+            ],
+            "add_b": [
+              19,
+              70
+            ],
+            "size": 3,
+            "estimated_sample_gain": 4
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              192
+            ],
+            "add_b": [
+              173
+            ],
+            "size": 2,
+            "estimated_sample_gain": 2
+          }
+        ],
+        "warning": "one direction per sample token/rank-pair; cross-pair overlaps remain estimates; final exchanges audited independently"
+      }
+    },
+    {
+      "layer": 6,
+      "original_sha256": "9c98bd5c50fb8a7462c2a67f55a113c46e7811f8b7db51c064ce89ec11962cd4",
+      "replay_sha256": "07b245a0267b26a726c60f263c661ade189262bf4e62c8e6bfe671a5a6b21d33",
+      "shape": [
+        2,
+        67072,
+        8
+      ],
+      "cpu_seed_seconds": 0.06373829099999995,
+      "cpu_select_seconds": 0.0036619580000003538,
+      "native": {
+        "remote_token_destinations": 134003,
+        "all_token_destinations": 267361,
+        "remote_pairs": 557820,
+        "source_remote_payloads": [
+          67009,
+          66994
+        ],
+        "destination_remote_payloads": [
+          66994,
+          67009
+        ],
+        "pair_loads": [
+          536576,
+          536576
+        ],
+        "max_min_pair_load": 0,
+        "max_mean_pair_load": 1.0,
+        "active_extra_experts": [
+          0,
+          1
+        ]
+      },
+      "residency": {
+        "method": "reciprocal",
+        "mandatory_extra": [
+          0,
+          1
+        ],
+        "candidate_extra": [
+          7,
+          7
+        ],
+        "sampled_tokens": 256,
+        "distinct_group_buckets": 14,
+        "infeasible_directions_filtered": 1,
+        "candidate_packages": 26,
+        "accepted_packages": [
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              268
+            ],
+            "add_b": [
+              102
+            ],
+            "size": 1,
+            "estimated_sample_gain": 2
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              200,
+              234,
+              348
+            ],
+            "add_b": [
+              30,
+              138
+            ],
+            "size": 3,
+            "estimated_sample_gain": 4
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              232,
+              306,
+              310
+            ],
+            "add_b": [
+              114,
+              145,
+              149
+            ],
+            "size": 3,
+            "estimated_sample_gain": 4
+          }
+        ],
+        "warning": "one direction per sample token/rank-pair; cross-pair overlaps remain estimates; final exchanges audited independently"
+      }
+    },
+    {
+      "layer": 7,
+      "original_sha256": "6611d17243bdf35730027eb6b3b9277649ca5cc1d84625af680baa0b0d8fac0e",
+      "replay_sha256": "b005244357fa30dea03327859a928359ec3971ea0d5718053a9f1351b5d36b6e",
+      "shape": [
+        2,
+        67072,
+        8
+      ],
+      "cpu_seed_seconds": 0.0651797919999999,
+      "cpu_select_seconds": 0.004289666999999664,
+      "native": {
+        "remote_token_destinations": 132968,
+        "all_token_destinations": 267052,
+        "remote_pairs": 490194,
+        "source_remote_payloads": [
+          66594,
+          66374
+        ],
+        "destination_remote_payloads": [
+          66374,
+          66594
+        ],
+        "pair_loads": [
+          536576,
+          536576
+        ],
+        "max_min_pair_load": 0,
+        "max_mean_pair_load": 1.0,
+        "active_extra_experts": [
+          0,
+          1
+        ]
+      },
+      "residency": {
+        "method": "reciprocal",
+        "mandatory_extra": [
+          0,
+          1
+        ],
+        "candidate_extra": [
+          7,
+          8
+        ],
+        "sampled_tokens": 256,
+        "distinct_group_buckets": 13,
+        "infeasible_directions_filtered": 0,
+        "candidate_packages": 24,
+        "accepted_packages": [
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              289
+            ],
+            "add_b": [
+              123
+            ],
+            "size": 1,
+            "estimated_sample_gain": 4
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [],
+            "add_b": [
+              63
+            ],
+            "size": 1,
+            "estimated_sample_gain": 2
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              216,
+              282,
+              320
+            ],
+            "add_b": [
+              82,
+              132
+            ],
+            "size": 3,
+            "estimated_sample_gain": 6
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              273
+            ],
+            "add_b": [
+              36,
+              172
+            ],
+            "size": 2,
+            "estimated_sample_gain": 4
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              283,
+              334
+            ],
+            "add_b": [
+              99
+            ],
+            "size": 3,
+            "estimated_sample_gain": 4
+          }
+        ],
+        "warning": "one direction per sample token/rank-pair; cross-pair overlaps remain estimates; final exchanges audited independently"
+      }
+    }
+  ]
+}

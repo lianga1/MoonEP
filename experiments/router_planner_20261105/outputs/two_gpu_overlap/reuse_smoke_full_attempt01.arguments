@@ -1,0 +1,13 @@
+experiments/two_gpu_overlap/two_gpu_smoke.py
+--tokens
+0
+--hidden
+7168
+--intermediate
+2048
+--materializer
+reuse
+--prefetch-sms
+32
+--output
+outputs/two_gpu_overlap/reuse_smoke_full_attempt01.json

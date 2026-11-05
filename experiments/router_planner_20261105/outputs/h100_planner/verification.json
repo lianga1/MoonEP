@@ -1,0 +1,45 @@
+{
+  "report_sha256": "8a32855c1316ccec96b19c30575be98b1913c42897500518aebfbede03990b08",
+  "links": 40,
+  "missing_links": [],
+  "js_syntax": true,
+  "validated_engine_files": [
+    "experiments/h100_planner/materialize.py",
+    "experiments/h100_planner/subset_formula_check.py",
+    "experiments/h100_planner/baseline_native_r1.py",
+    "experiments/h100_planner/materialize_cuda.cu",
+    "experiments/h100_planner/bundle_lane8.cu",
+    "experiments/h100_planner/baseline_virtual.py",
+    "experiments/h100_planner/aggregate.py",
+    "experiments/h100_planner/aggregate_cuda.cu",
+    "experiments/h100_planner/baseline_smoke.py",
+    "experiments/h100_planner/subset_cuda.py",
+    "experiments/h100_planner/benchmark.py",
+    "experiments/h100_planner/subset_cuda.cu",
+    "experiments/h100_planner/bundle_lane8.py",
+    "experiments/h100_planner/bundle_wrapper.py",
+    "experiments/h100_planner/subset_reference.py",
+    "experiments/h100_planner/subset_smoke.py",
+    "experiments/h100_planner/materialize_cuda.py",
+    "experiments/h100_planner/baseline_virtual.cu",
+    "experiments/h100_planner/profile_components.py",
+    "experiments/h100_planner/aggregate_check.py"
+  ],
+  "excluded_archiver_sidecars": [
+    "experiments/h100_planner/._aggregate_tiny.npz",
+    "experiments/h100_planner/._aggregate_cuda.cu",
+    "experiments/h100_planner/._aggregate.py",
+    "experiments/h100_planner/._subset_README.md",
+    "experiments/h100_planner/._subset_cuda.cu",
+    "experiments/h100_planner/._aggregate_check.py",
+    "experiments/h100_planner/._subset_smoke.py",
+    "experiments/h100_planner/._subset_cuda.py"
+  ],
+  "benchmark_failures": [],
+  "animation_ui": {
+    "first_overlap_step": "4/16 reads3",
+    "end": "16/16 reads1 proposals1 next_disabled",
+    "reset": "1/16"
+  },
+  "gpu_released": true
+}

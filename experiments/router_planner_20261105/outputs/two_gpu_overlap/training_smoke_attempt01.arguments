@@ -1,0 +1,15 @@
+experiments/two_gpu_overlap/benchmark_training.py
+--layers
+0
+--hidden
+128
+--intermediate
+1024
+--samples
+2
+--warmup
+1
+--mode
+eager
+--output
+outputs/two_gpu_training/smoke_attempt01.json

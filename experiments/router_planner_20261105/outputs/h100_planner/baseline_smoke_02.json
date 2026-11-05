@@ -1,0 +1,84 @@
+{
+  "checks": [
+    {
+      "layer": 0,
+      "seed_port_owner_physical_alloc_copies_exact": true,
+      "seed_only_owner_exact": true,
+      "seed_port_dst_unique": true,
+      "seed_port_provenance_exact": true,
+      "bundle_cpu_owner_exact": true,
+      "bundle_lane8_cpu_owner_exact": true,
+      "cuda_graph": true
+    },
+    {
+      "layer": 1,
+      "seed_port_owner_physical_alloc_copies_exact": true,
+      "seed_only_owner_exact": true,
+      "seed_port_dst_unique": true,
+      "seed_port_provenance_exact": true,
+      "bundle_cpu_owner_exact": true,
+      "bundle_lane8_cpu_owner_exact": true,
+      "cuda_graph": true
+    },
+    {
+      "layer": 2,
+      "seed_port_owner_physical_alloc_copies_exact": true,
+      "seed_only_owner_exact": true,
+      "seed_port_dst_unique": true,
+      "seed_port_provenance_exact": true,
+      "bundle_cpu_owner_exact": true,
+      "bundle_lane8_cpu_owner_exact": true,
+      "cuda_graph": true
+    },
+    {
+      "layer": 3,
+      "seed_port_owner_physical_alloc_copies_exact": true,
+      "seed_only_owner_exact": true,
+      "seed_port_dst_unique": true,
+      "seed_port_provenance_exact": true,
+      "bundle_cpu_owner_exact": true,
+      "bundle_lane8_cpu_owner_exact": true,
+      "cuda_graph": true
+    },
+    {
+      "layer": 4,
+      "seed_port_owner_physical_alloc_copies_exact": true,
+      "seed_only_owner_exact": true,
+      "seed_port_dst_unique": true,
+      "seed_port_provenance_exact": true,
+      "bundle_cpu_owner_exact": true,
+      "bundle_lane8_cpu_owner_exact": true,
+      "cuda_graph": true
+    },
+    {
+      "layer": 5,
+      "seed_port_owner_physical_alloc_copies_exact": true,
+      "seed_only_owner_exact": true,
+      "seed_port_dst_unique": true,
+      "seed_port_provenance_exact": true,
+      "bundle_cpu_owner_exact": true,
+      "bundle_lane8_cpu_owner_exact": true,
+      "cuda_graph": true
+    },
+    {
+      "layer": 6,
+      "seed_port_owner_physical_alloc_copies_exact": true,
+      "seed_only_owner_exact": true,
+      "seed_port_dst_unique": true,
+      "seed_port_provenance_exact": true,
+      "bundle_cpu_owner_exact": true,
+      "bundle_lane8_cpu_owner_exact": true,
+      "cuda_graph": true
+    },
+    {
+      "layer": 7,
+      "seed_port_owner_physical_alloc_copies_exact": true,
+      "seed_only_owner_exact": true,
+      "seed_port_dst_unique": true,
+      "seed_port_provenance_exact": true,
+      "bundle_cpu_owner_exact": true,
+      "bundle_lane8_cpu_owner_exact": true,
+      "cuda_graph": true
+    }
+  ]
+}

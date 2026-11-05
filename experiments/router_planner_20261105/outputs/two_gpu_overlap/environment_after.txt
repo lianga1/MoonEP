@@ -1,0 +1,3 @@
+name, uuid, memory.used [MiB], utilization.gpu [%]
+NVIDIA H200, GPU-b0dbb5c8-c2e2-f770-1cb6-cc1e680c7958, 0 MiB, 0 %
+NVIDIA H200, GPU-e6f50625-4c8c-5404-19d3-af75854f63fd, 0 MiB, 0 %

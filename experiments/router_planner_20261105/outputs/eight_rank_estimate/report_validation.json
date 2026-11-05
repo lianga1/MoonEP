@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "formula_comparisons": 72,
+  "max_absolute_error_ms": 5.684341886080802e-14,
+  "planner_250us_per_layer_adds_2ms_over_eight_layers": true,
+  "interactive_result": "\u516b\u5c42\uff1a\u57fa\u7ebf 259.851 ms\uff0c\u4f18\u5316 297.504 ms\uff1b\u4f30\u7b97\u589e\u52a0 37.652 ms\uff08\u6bcf\u5c42\u5e73\u5747 4.707 ms\uff09\u3002",
+  "missing_links": [],
+  "checked_links": 20,
+  "independent_bandwidth_scenarios_visible": true,
+  "forward_backward_weight_lifetime_explicit": true,
+  "scope": "source-level JS execution and static links; no browser visual render",
+  "report_sha256": "4bb5a672dfa889f3e46330dc100f10f4547add8372fbe4918749c55232365992"
+}

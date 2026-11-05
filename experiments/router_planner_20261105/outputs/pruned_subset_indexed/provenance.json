@@ -1,0 +1,11 @@
+{
+  "sources": {
+    "analysis/vendor/pruned_subset_exchange.py": "875ce07db8fffd414694f55aa555b6c9152de5bba9493a0d74f5943b90e9ec23",
+    "analysis/replay_pruned_subsets_indexed.py": "9e0614aeea2ccd235c7ad120e2731dd6aad1f2aefecd184029b3d8d6d5dcad34",
+    "analysis/benchmark_pruned_cpu.py": "15c8536a8a71668b1d9af0f17f8ab8310aaef65333477043bd18e1bc8ec45b38",
+    "analysis/audit_pruned_subsets.py": "6df03de169b0f72a25b7ee6783f576e1fd1799c81f657f816905cde47082f016"
+  },
+  "gpu_benchmark": false,
+  "support": "same saved 256/g2 seed20261026",
+  "scope": "static initial subset shortlist; h<=2; four rounds; no model execution"
+}

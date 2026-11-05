@@ -1,0 +1,34 @@
+[1/2] /usr/local/cuda/bin/nvcc -MD -MF aggregate_cuda.cuda.o.d -DTORCH_EXTENSION_NAME=epmoe_aggregate_exact_cuda -DTORCH_API_INCLUDE_EXTENSION_H -isystem /usr/local/lib/python3.12/dist-packages/torch/include -isystem /usr/local/lib/python3.12/dist-packages/torch/include/torch/csrc/api/include -isystem /usr/local/cuda/include -isystem /usr/include/python3.12 -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr -gencode=arch=compute_90,code=sm_90 --compiler-options '-fPIC' -O3 -lineinfo --expt-relaxed-constexpr -std=c++20 -c /inspire/hdd/project/video-generation/liangzuning-253108090053/epmoe_h100_aggregate_stage/experiments/h100_planner/aggregate_cuda.cu -o aggregate_cuda.cuda.o 
+FAILED: [code=1] aggregate_cuda.cuda.o 
+/usr/local/cuda/bin/nvcc -MD -MF aggregate_cuda.cuda.o.d -DTORCH_EXTENSION_NAME=epmoe_aggregate_exact_cuda -DTORCH_API_INCLUDE_EXTENSION_H -isystem /usr/local/lib/python3.12/dist-packages/torch/include -isystem /usr/local/lib/python3.12/dist-packages/torch/include/torch/csrc/api/include -isystem /usr/local/cuda/include -isystem /usr/include/python3.12 -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr -gencode=arch=compute_90,code=sm_90 --compiler-options '-fPIC' -O3 -lineinfo --expt-relaxed-constexpr -std=c++20 -c /inspire/hdd/project/video-generation/liangzuning-253108090053/epmoe_h100_aggregate_stage/experiments/h100_planner/aggregate_cuda.cu -o aggregate_cuda.cuda.o 
+In file included from /usr/local/lib/python3.12/dist-packages/torch/include/ATen/cuda/CUDAContext.h:4,
+                 from /inspire/hdd/project/video-generation/liangzuning-253108090053/epmoe_h100_aggregate_stage/experiments/h100_planner/aggregate_cuda.cu:2:
+/usr/local/lib/python3.12/dist-packages/torch/include/ATen/cuda/CUDAContextLight.h:10:10: fatal error: cusparse.h: No such file or directory
+   10 | #include <cusparse.h>
+      |          ^~~~~~~~~~~~
+compilation terminated.
+ninja: build stopped: subcommand failed.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/torch/utils/cpp_extension.py", line 2893, in _run_ninja_build
+    subprocess.run(
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['ninja', '-v', '-j', '4']' returned non-zero exit status 1.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/inspire/hdd/project/video-generation/liangzuning-253108090053/epmoe_h100_aggregate_stage/experiments/h100_planner/aggregate.py", line 13, in extension
+    _mod=load(name='epmoe_aggregate_exact_cuda',sources=[str(Path(__file__).with_name('aggregate_cuda.cu'))],extra_cuda_cflags=['-O3','-lineinfo','--expt-relaxed-constexpr'],verbose=True)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/utils/cpp_extension.py", line 1927, in load
+    return _jit_compile(
+           ^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/utils/cpp_extension.py", line 2382, in _jit_compile
+    _write_ninja_file_and_build_library(
+  File "/usr/local/lib/python3.12/dist-packages/torch/utils/cpp_extension.py", line 2543, in _write_ninja_file_and_build_library
+    _run_ninja_build(
+  File "/usr/local/lib/python3.12/dist-packages/torch/utils/cpp_extension.py", line 2910, in _run_ninja_build
+    raise RuntimeError(message) from e
+RuntimeError: Error building extension 'epmoe_aggregate_exact_cuda'

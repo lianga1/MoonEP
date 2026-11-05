@@ -1,0 +1,17 @@
+[
+  {
+    "name": "benchmark_graph_attempt01",
+    "8_layers_10_samples_2_ranks_checked": true,
+    "benchmark_source_archive_match": true
+  },
+  {
+    "name": "benchmark_graph_attempt02",
+    "8_layers_10_samples_2_ranks_checked": true,
+    "benchmark_source_archive_match": true
+  },
+  {
+    "name": "benchmark_graph_attempt03",
+    "8_layers_10_samples_2_ranks_checked": true,
+    "benchmark_source_archive_match": true
+  }
+]

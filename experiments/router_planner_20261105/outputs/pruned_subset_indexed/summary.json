@@ -1,0 +1,315 @@
+{
+  "quality": {
+    "h1_g8": {
+      "remote": 3763992,
+      "reduction_pct": 25.52692680195443,
+      "pattern_range": [
+        78,
+        92
+      ],
+      "mean_prepare_ms": 75.31231262499985,
+      "mean_exchange_median_ms": 66.41461975000045,
+      "mean_posting_entries": 487219.875,
+      "mean_four_round_posting_visits": 10034293.0
+    },
+    "h2_g2": {
+      "remote": 3747878,
+      "reduction_pct": 25.845752958203782,
+      "pattern_range": [
+        103,
+        119
+      ],
+      "mean_prepare_ms": 63.49727074999978,
+      "mean_exchange_median_ms": 63.4553643750001,
+      "mean_posting_entries": 562422.25,
+      "mean_four_round_posting_visits": 9525668.0
+    },
+    "h2_g8": {
+      "remote": 3698715,
+      "reduction_pct": 26.818475455391745,
+      "pattern_range": [
+        118,
+        142
+      ],
+      "mean_prepare_ms": 63.654343624999996,
+      "mean_exchange_median_ms": 69.43418237500005,
+      "mean_posting_entries": 602243.375,
+      "mean_four_round_posting_visits": 10781234.5
+    },
+    "h2_g32": {
+      "remote": 3698715,
+      "reduction_pct": 26.818475455391745,
+      "pattern_range": [
+        118,
+        142
+      ],
+      "mean_prepare_ms": 63.303479375000194,
+      "mean_exchange_median_ms": 68.8665259999996,
+      "mean_posting_entries": 602243.375,
+      "mean_four_round_posting_visits": 10781234.5
+    },
+    "h2_g0": {
+      "remote": 3698715,
+      "reduction_pct": 26.818475455391745,
+      "pattern_range": [
+        118,
+        142
+      ],
+      "mean_prepare_ms": 63.28135912499949,
+      "mean_exchange_median_ms": 69.1003383749998,
+      "mean_posting_entries": 602243.375,
+      "mean_four_round_posting_visits": 10781234.5
+    }
+  },
+  "paired_cpu_layer_median_mean_ms": {
+    "token_bundle": 110.86729174999942,
+    "aggregate_mixed": 672.0303647500008,
+    "subset_h1_g8": 116.2019221249997,
+    "subset_h2_g2": 128.61958324999924,
+    "subset_h2_g8": 134.82116649999963,
+    "subset_h2_all": 135.42980175000002
+  },
+  "checks": [
+    {
+      "layer": 0,
+      "variant": "h1_g8",
+      "all_pass": true,
+      "remote": 530138
+    },
+    {
+      "layer": 0,
+      "variant": "h2_g2",
+      "all_pass": true,
+      "remote": 531110
+    },
+    {
+      "layer": 0,
+      "variant": "h2_g8",
+      "all_pass": true,
+      "remote": 527854
+    },
+    {
+      "layer": 0,
+      "variant": "h2_g32",
+      "all_pass": true,
+      "remote": 527854
+    },
+    {
+      "layer": 0,
+      "variant": "h2_g0",
+      "all_pass": true,
+      "remote": 527854
+    },
+    {
+      "layer": 1,
+      "variant": "h1_g8",
+      "all_pass": true,
+      "remote": 468370
+    },
+    {
+      "layer": 1,
+      "variant": "h2_g2",
+      "all_pass": true,
+      "remote": 475339
+    },
+    {
+      "layer": 1,
+      "variant": "h2_g8",
+      "all_pass": true,
+      "remote": 461828
+    },
+    {
+      "layer": 1,
+      "variant": "h2_g32",
+      "all_pass": true,
+      "remote": 461828
+    },
+    {
+      "layer": 1,
+      "variant": "h2_g0",
+      "all_pass": true,
+      "remote": 461828
+    },
+    {
+      "layer": 2,
+      "variant": "h1_g8",
+      "all_pass": true,
+      "remote": 464130
+    },
+    {
+      "layer": 2,
+      "variant": "h2_g2",
+      "all_pass": true,
+      "remote": 460030
+    },
+    {
+      "layer": 2,
+      "variant": "h2_g8",
+      "all_pass": true,
+      "remote": 455333
+    },
+    {
+      "layer": 2,
+      "variant": "h2_g32",
+      "all_pass": true,
+      "remote": 455333
+    },
+    {
+      "layer": 2,
+      "variant": "h2_g0",
+      "all_pass": true,
+      "remote": 455333
+    },
+    {
+      "layer": 3,
+      "variant": "h1_g8",
+      "all_pass": true,
+      "remote": 461716
+    },
+    {
+      "layer": 3,
+      "variant": "h2_g2",
+      "all_pass": true,
+      "remote": 459044
+    },
+    {
+      "layer": 3,
+      "variant": "h2_g8",
+      "all_pass": true,
+      "remote": 455098
+    },
+    {
+      "layer": 3,
+      "variant": "h2_g32",
+      "all_pass": true,
+      "remote": 455098
+    },
+    {
+      "layer": 3,
+      "variant": "h2_g0",
+      "all_pass": true,
+      "remote": 455098
+    },
+    {
+      "layer": 4,
+      "variant": "h1_g8",
+      "all_pass": true,
+      "remote": 469574
+    },
+    {
+      "layer": 4,
+      "variant": "h2_g2",
+      "all_pass": true,
+      "remote": 463312
+    },
+    {
+      "layer": 4,
+      "variant": "h2_g8",
+      "all_pass": true,
+      "remote": 460825
+    },
+    {
+      "layer": 4,
+      "variant": "h2_g32",
+      "all_pass": true,
+      "remote": 460825
+    },
+    {
+      "layer": 4,
+      "variant": "h2_g0",
+      "all_pass": true,
+      "remote": 460825
+    },
+    {
+      "layer": 5,
+      "variant": "h1_g8",
+      "all_pass": true,
+      "remote": 465151
+    },
+    {
+      "layer": 5,
+      "variant": "h2_g2",
+      "all_pass": true,
+      "remote": 458153
+    },
+    {
+      "layer": 5,
+      "variant": "h2_g8",
+      "all_pass": true,
+      "remote": 451361
+    },
+    {
+      "layer": 5,
+      "variant": "h2_g32",
+      "all_pass": true,
+      "remote": 451361
+    },
+    {
+      "layer": 5,
+      "variant": "h2_g0",
+      "all_pass": true,
+      "remote": 451361
+    },
+    {
+      "layer": 6,
+      "variant": "h1_g8",
+      "all_pass": true,
+      "remote": 463006
+    },
+    {
+      "layer": 6,
+      "variant": "h2_g2",
+      "all_pass": true,
+      "remote": 458067
+    },
+    {
+      "layer": 6,
+      "variant": "h2_g8",
+      "all_pass": true,
+      "remote": 454631
+    },
+    {
+      "layer": 6,
+      "variant": "h2_g32",
+      "all_pass": true,
+      "remote": 454631
+    },
+    {
+      "layer": 6,
+      "variant": "h2_g0",
+      "all_pass": true,
+      "remote": 454631
+    },
+    {
+      "layer": 7,
+      "variant": "h1_g8",
+      "all_pass": true,
+      "remote": 441907
+    },
+    {
+      "layer": 7,
+      "variant": "h2_g2",
+      "all_pass": true,
+      "remote": 442823
+    },
+    {
+      "layer": 7,
+      "variant": "h2_g8",
+      "all_pass": true,
+      "remote": 431785
+    },
+    {
+      "layer": 7,
+      "variant": "h2_g32",
+      "all_pass": true,
+      "remote": 431785
+    },
+    {
+      "layer": 7,
+      "variant": "h2_g0",
+      "all_pass": true,
+      "remote": 431785
+    }
+  ],
+  "context_sensitive_subset_test": true
+}

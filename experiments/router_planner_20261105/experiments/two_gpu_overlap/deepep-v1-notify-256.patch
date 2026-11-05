@@ -1,0 +1,14 @@
+--- a/csrc/kernels/intranode.cu
++++ b/csrc/kernels/intranode.cu
+@@ -118,8 +118,10 @@
+         buffer_ptrs, barrier_signal_ptrs, rank); \
+     break
+ 
+-    constexpr int kNumThreads = 128;
+     EP_HOST_ASSERT(num_experts % num_ranks == 0);
++    // One thread reduces one local expert's count. Keep the upstream launch for
++    // small placements; two-rank E=352 plus 8 replica slots needs 184 threads.
++    const int kNumThreads = num_experts / num_ranks <= 128 ? 128 : 256;
+     EP_HOST_ASSERT(num_experts / num_ranks <= kNumThreads and num_ranks <= kNumThreads);
+ 
+     SETUP_LAUNCH_CONFIG(1 + num_ranks, kNumThreads, stream);

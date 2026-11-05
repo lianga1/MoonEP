@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "current_json_formula_comparisons": 54,
+  "max_absolute_error_ms": 5.684341886080802e-14,
+  "planner_250us_per_layer_adds_2ms_over_eight_layers": true,
+  "missing_links": [],
+  "unrendered_independent_token_scenarios": [
+    "hypothetical_token_200_GBs",
+    "hypothetical_token_300_GBs",
+    "hypothetical_token_450_GBs"
+  ],
+  "scope": "Source-level JavaScript execution using a document stub, not a browser layout audit",
+  "report_sha256": "656aa33e9b2160dbe1f2136c2e6ac4ddace89e3776fe712cf967942debce1b00"
+}

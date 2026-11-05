@@ -1,0 +1,101 @@
+{
+  "cpu_synthetic_edge_controls_only": true,
+  "cases": [
+    {
+      "mandatory_extras": 3,
+      "seed": 19,
+      "gain_zero_samples": 15,
+      "packages": 28,
+      "accepted": 3,
+      "exact": true
+    },
+    {
+      "mandatory_extras": 3,
+      "seed": 23,
+      "gain_zero_samples": 20,
+      "packages": 24,
+      "accepted": 3,
+      "exact": true
+    },
+    {
+      "mandatory_extras": 3,
+      "seed": 41,
+      "gain_zero_samples": 13,
+      "packages": 26,
+      "accepted": 3,
+      "exact": true
+    },
+    {
+      "mandatory_extras": 5,
+      "seed": 19,
+      "gain_zero_samples": 74,
+      "packages": 28,
+      "accepted": 2,
+      "exact": true
+    },
+    {
+      "mandatory_extras": 5,
+      "seed": 23,
+      "gain_zero_samples": 82,
+      "packages": 28,
+      "accepted": 2,
+      "exact": true
+    },
+    {
+      "mandatory_extras": 5,
+      "seed": 41,
+      "gain_zero_samples": 79,
+      "packages": 22,
+      "accepted": 2,
+      "exact": true
+    },
+    {
+      "mandatory_extras": 7,
+      "seed": 19,
+      "gain_zero_samples": 114,
+      "packages": 12,
+      "accepted": 1,
+      "exact": true
+    },
+    {
+      "mandatory_extras": 7,
+      "seed": 23,
+      "gain_zero_samples": 128,
+      "packages": 8,
+      "accepted": 1,
+      "exact": true
+    },
+    {
+      "mandatory_extras": 7,
+      "seed": 41,
+      "gain_zero_samples": 127,
+      "packages": 10,
+      "accepted": 1,
+      "exact": true
+    },
+    {
+      "mandatory_extras": 8,
+      "seed": 19,
+      "gain_zero_samples": 122,
+      "packages": 0,
+      "accepted": 0,
+      "exact": true
+    },
+    {
+      "mandatory_extras": 8,
+      "seed": 23,
+      "gain_zero_samples": 130,
+      "packages": 0,
+      "accepted": 0,
+      "exact": true
+    },
+    {
+      "mandatory_extras": 8,
+      "seed": 41,
+      "gain_zero_samples": 133,
+      "packages": 0,
+      "accepted": 0,
+      "exact": true
+    }
+  ]
+}

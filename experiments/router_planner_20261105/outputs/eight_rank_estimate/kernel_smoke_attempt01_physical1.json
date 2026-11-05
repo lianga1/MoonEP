@@ -1,0 +1,486 @@
+{
+  "status": "complete",
+  "metadata": {
+    "logical_ranks": 8,
+    "global_tokens": 134144,
+    "tokens_per_source": 16768,
+    "K": 8,
+    "E": 352,
+    "B": 8,
+    "d": 256,
+    "g": 2,
+    "L": 4,
+    "sample_seed": 20261026,
+    "physical_process_rank": 1,
+    "physical_process_count": 2,
+    "device": 1,
+    "gpu": "NVIDIA H200",
+    "uuid": "e6f50625-4c8c-5404-19d3-af75854f63fd",
+    "torch": "2.11.0+cu130",
+    "cuda": "13.0",
+    "execution_mode": "graph",
+    "source_mapping": "original source IDs preserved exactly; physical processes independently replay logical inputs",
+    "scope": "source-shard GPU component timings plus optional single-device global selector; no eight-rank distributed timing",
+    "exclusions": [
+      "real eight-rank sample gather",
+      "real eight-rank count collective",
+      "expert-plan broadcast",
+      "native MoonEP eight-device planner",
+      "physical address publication",
+      "weights/tokens/gradients/GEMM"
+    ],
+    "no_divide_by_eight": true,
+    "source_scans_are_actual_16768_token_work": true,
+    "native_residency": "rt0 balanced seed from original eight-rank saved reference",
+    "source_files": {
+      "experiments/eight_rank_estimate/._benchmark_kernels.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+      "experiments/eight_rank_estimate/exchange_prefix.cu": "b5ad1d3e9d24c5b6a33102080fcd9ca70d2cca6fb2da6d7d8dd6a677503ea81f",
+      "experiments/eight_rank_estimate/._residency8.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+      "experiments/eight_rank_estimate/._prepare_kernel_inputs.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+      "experiments/eight_rank_estimate/benchmark_kernels.py": "6230dc374597ca53693048e23ba5cefeff4643d1612574458fd8ecbb2546dd8c",
+      "experiments/eight_rank_estimate/traffic.py": "520e7f3243fa691a9b97f7b370883b7c4d2c2197a3d5b8e623d213cbd0639d85",
+      "experiments/eight_rank_estimate/exchange_prefix.py": "9459e24047b799ca4da60560d71e63154c68189066e7d3bd34563b2551f03eb6",
+      "experiments/eight_rank_estimate/._traffic.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+      "experiments/eight_rank_estimate/build_estimate.py": "584e076eb00bf08f8634250e96a1af2aafa34f5e99624c5c6847861fd355cc72",
+      "experiments/eight_rank_estimate/residency8.py": "b83969b48259702816921d0641330e568730c16c0a85b438ee6f6e31f57a7261",
+      "experiments/eight_rank_estimate/residency8_validate.py": "46b903778ca68dddd0193cf8c78db8bcd0b8df6fe5987439666da9b04de24e18",
+      "experiments/eight_rank_estimate/calibrate_bandwidth.py": "7398d34f6d2e43075c584c3a255e3d06ec3a465bc2593e41715a3a224e8fcbb0",
+      "experiments/eight_rank_estimate/._build_estimate.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+      "experiments/eight_rank_estimate/prepare_kernel_inputs.py": "479c5489013337b906f5e37153c557679dfee46095b304be2dda379870960c3e",
+      "experiments/eight_rank_estimate/._exchange_prefix.cu": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+      "experiments/eight_rank_estimate/._calibrate_bandwidth.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+      "experiments/eight_rank_estimate/._residency8.cu": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+      "experiments/eight_rank_estimate/._residency8_validate.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+      "experiments/eight_rank_estimate/residency8.cu": "1304122a0ef15928af5eb30d92ae403974ae3ee7e170a7817abff0334b91a857",
+      "experiments/eight_rank_estimate/._exchange_prefix.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+      "experiments/h100_planner/._baseline_virtual.cu": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+      "experiments/h100_planner/bundle_lane8.cu": "efde4104163cf20059734b342c36d0ebebd66df555282863e7d0c347cb390fe7",
+      "experiments/h100_planner/._bundle_lane8.cu": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+      "experiments/h100_planner/baseline_virtual.py": "4b961a2b6a3b6fa24ae7ca2fbf7c304413c182d0b486150007684eaa183de821",
+      "experiments/h100_planner/._baseline_virtual.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+      "experiments/h100_planner/bundle_lane8.py": "835fb74aefd022ed061d1e634fe77a7d8f2a464e4dea0be1b7f5b8288432abb2",
+      "experiments/h100_planner/._bundle_lane8.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+      "experiments/h100_planner/baseline_virtual.cu": "62f140c337979885749f57a7ccf74386c022a5ebbd3553424ae9d00d01fd771c"
+    }
+  },
+  "layers": [
+    {
+      "layer": 0,
+      "input_path": "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/outputs/eight_rank_estimate/kernel_inputs/layer_00.npz",
+      "input_sha256": "b705b5e45be5dfa57d9b29fcb6b26e938de49cdf2d9fd153787cc2bd43e9d6f9",
+      "shape": [
+        8,
+        16768,
+        8
+      ],
+      "correctness": {
+        "global_residency_support_exact": true,
+        "all_32_source_round_owners_cpu_exact": true,
+        "prefix_sort_proposals_masks_counts_exact": true,
+        "global_quotas_use_live_all8_source_counts": true
+      },
+      "global_components": {
+        "residency": {
+          "scope": "complete R8 GPU selection with original all-source routes/owners already resident on this GPU; runtime sample-index gather included",
+          "excluded": "physical eight-rank sample collection and support publication",
+          "timing": {
+            "execution_mode": "graph",
+            "replays_or_calls_per_sample": 2,
+            "samples": [
+              {
+                "sample": 0,
+                "cuda_ms": 0.8634240031242371,
+                "host_ms": 0.8703240309841931
+              },
+              {
+                "sample": 1,
+                "cuda_ms": 0.8616480231285095,
+                "host_ms": 0.8673559641465545
+              }
+            ],
+            "median_cuda_ms": 0.8625360131263733,
+            "median_host_ms": 0.8688399975653738
+          }
+        }
+      },
+      "source_components": [
+        {
+          "source": 0,
+          "tokens_scanned": 16768,
+          "possible_execution_ranks": 8,
+          "rounds": [
+            {
+              "round": 0,
+              "prefix_proposal_and_local_counts": {
+                "execution_mode": "graph",
+                "replays_or_calls_per_sample": 2,
+                "samples": [
+                  {
+                    "sample": 0,
+                    "cuda_ms": 0.016287999227643013,
+                    "host_ms": 0.021432992070913315
+                  },
+                  {
+                    "sample": 1,
+                    "cuda_ms": 0.01532800029963255,
+                    "host_ms": 0.020096544176340103
+                  }
+                ],
+                "median_cuda_ms": 0.01580799976363778,
+                "median_host_ms": 0.02076476812362671
+              },
+              "sort_proposal_and_local_counts": {
+                "execution_mode": "graph",
+                "replays_or_calls_per_sample": 2,
+                "samples": [
+                  {
+                    "sample": 0,
+                    "cuda_ms": 0.04206399992108345,
+                    "host_ms": 0.047107983846217394
+                  },
+                  {
+                    "sample": 1,
+                    "cuda_ms": 0.041359998285770416,
+                    "host_ms": 0.04613649798557162
+                  }
+                ],
+                "median_cuda_ms": 0.04171199910342693,
+                "median_host_ms": 0.04662224091589451
+              },
+              "fold_all8_counts_and_quota": {
+                "execution_mode": "graph",
+                "replays_or_calls_per_sample": 2,
+                "samples": [
+                  {
+                    "sample": 0,
+                    "cuda_ms": 0.011935999616980553,
+                    "host_ms": 0.01679197885096073
+                  },
+                  {
+                    "sample": 1,
+                    "cuda_ms": 0.010367999784648418,
+                    "host_ms": 0.015116995200514793
+                  }
+                ],
+                "median_cuda_ms": 0.011151999700814486,
+                "median_host_ms": 0.015954487025737762
+              },
+              "prefix_commit_only": {
+                "execution_mode": "graph",
+                "replays_or_calls_per_sample": 2,
+                "samples": [
+                  {
+                    "sample": 0,
+                    "cuda_ms": 0.010639999993145466,
+                    "host_ms": 0.015383993741124868
+                  },
+                  {
+                    "sample": 1,
+                    "cuda_ms": 0.009344000369310379,
+                    "host_ms": 0.013945507816970348
+                  }
+                ],
+                "median_cuda_ms": 0.009992000181227922,
+                "median_host_ms": 0.014664750779047608
+              },
+              "commit_only_scope": "fixed proposal/ordinal/quota; repeated writes are idempotent (clear old-owner bits, set destination bits, assign identical destination); does not run another planning round"
+            },
+            {
+              "round": 1,
+              "prefix_proposal_and_local_counts": {
+                "execution_mode": "graph",
+                "replays_or_calls_per_sample": 2,
+                "samples": [
+                  {
+                    "sample": 0,
+                    "cuda_ms": 0.01611199975013733,
+                    "host_ms": 0.021327519789338112
+                  },
+                  {
+                    "sample": 1,
+                    "cuda_ms": 0.014879999682307243,
+                    "host_ms": 0.019605504348874092
+                  }
+                ],
+                "median_cuda_ms": 0.015495999716222286,
+                "median_host_ms": 0.020466512069106102
+              },
+              "sort_proposal_and_local_counts": {
+                "execution_mode": "graph",
+                "replays_or_calls_per_sample": 2,
+                "samples": [
+                  {
+                    "sample": 0,
+                    "cuda_ms": 0.04267200082540512,
+                    "host_ms": 0.047712528612464666
+                  },
+                  {
+                    "sample": 1,
+                    "cuda_ms": 0.04131200164556503,
+                    "host_ms": 0.04602398257702589
+                  }
+                ],
+                "median_cuda_ms": 0.04199200123548508,
+                "median_host_ms": 0.04686825559474528
+              },
+              "fold_all8_counts_and_quota": {
+                "execution_mode": "graph",
+                "replays_or_calls_per_sample": 2,
+                "samples": [
+                  {
+                    "sample": 0,
+                    "cuda_ms": 0.011888000182807446,
+                    "host_ms": 0.01670047640800476
+                  },
+                  {
+                    "sample": 1,
+                    "cuda_ms": 0.013295999728143215,
+                    "host_ms": 0.017976504750549793
+                  }
+                ],
+                "median_cuda_ms": 0.01259199995547533,
+                "median_host_ms": 0.017338490579277277
+              },
+              "prefix_commit_only": {
+                "execution_mode": "graph",
+                "replays_or_calls_per_sample": 2,
+                "samples": [
+                  {
+                    "sample": 0,
+                    "cuda_ms": 0.010607999749481678,
+                    "host_ms": 0.015460012946277857
+                  },
+                  {
+                    "sample": 1,
+                    "cuda_ms": 0.009375999681651592,
+                    "host_ms": 0.014010991435498
+                  }
+                ],
+                "median_cuda_ms": 0.009991999715566635,
+                "median_host_ms": 0.014735502190887928
+              },
+              "commit_only_scope": "fixed proposal/ordinal/quota; repeated writes are idempotent (clear old-owner bits, set destination bits, assign identical destination); does not run another planning round"
+            },
+            {
+              "round": 2,
+              "prefix_proposal_and_local_counts": {
+                "execution_mode": "graph",
+                "replays_or_calls_per_sample": 2,
+                "samples": [
+                  {
+                    "sample": 0,
+                    "cuda_ms": 0.01624000072479248,
+                    "host_ms": 0.02157845301553607
+                  },
+                  {
+                    "sample": 1,
+                    "cuda_ms": 0.014944000169634819,
+                    "host_ms": 0.01970701850950718
+                  }
+                ],
+                "median_cuda_ms": 0.01559200044721365,
+                "median_host_ms": 0.020642735762521625
+              },
+              "sort_proposal_and_local_counts": {
+                "execution_mode": "graph",
+                "replays_or_calls_per_sample": 2,
+                "samples": [
+                  {
+                    "sample": 0,
+                    "cuda_ms": 0.04163200035691261,
+                    "host_ms": 0.04677096148952842
+                  },
+                  {
+                    "sample": 1,
+                    "cuda_ms": 0.04123200103640556,
+                    "host_ms": 0.04596100188791752
+                  }
+                ],
+                "median_cuda_ms": 0.04143200069665909,
+                "median_host_ms": 0.04636598168872297
+              },
+              "fold_all8_counts_and_quota": {
+                "execution_mode": "graph",
+                "replays_or_calls_per_sample": 2,
+                "samples": [
+                  {
+                    "sample": 0,
+                    "cuda_ms": 0.012223999947309494,
+                    "host_ms": 0.017142505384981632
+                  },
+                  {
+                    "sample": 1,
+                    "cuda_ms": 0.010576000437140465,
+                    "host_ms": 0.015138532035052776
+                  }
+                ],
+                "median_cuda_ms": 0.01140000019222498,
+                "median_host_ms": 0.016140518710017204
+              },
+              "prefix_commit_only": {
+                "execution_mode": "graph",
+                "replays_or_calls_per_sample": 2,
+                "samples": [
+                  {
+                    "sample": 0,
+                    "cuda_ms": 0.010288000106811523,
+                    "host_ms": 0.01505750697106123
+                  },
+                  {
+                    "sample": 1,
+                    "cuda_ms": 0.009328000247478485,
+                    "host_ms": 0.013965473044663668
+                  }
+                ],
+                "median_cuda_ms": 0.009808000177145004,
+                "median_host_ms": 0.014511490007862449
+              },
+              "commit_only_scope": "fixed proposal/ordinal/quota; repeated writes are idempotent (clear old-owner bits, set destination bits, assign identical destination); does not run another planning round"
+            },
+            {
+              "round": 3,
+              "prefix_proposal_and_local_counts": {
+                "execution_mode": "graph",
+                "replays_or_calls_per_sample": 2,
+                "samples": [
+                  {
+                    "sample": 0,
+                    "cuda_ms": 0.016047999262809753,
+                    "host_ms": 0.021459476556628942
+                  },
+                  {
+                    "sample": 1,
+                    "cuda_ms": 0.015104000456631184,
+                    "host_ms": 0.019922503270208836
+                  }
+                ],
+                "median_cuda_ms": 0.015575999859720469,
+                "median_host_ms": 0.02069098991341889
+              },
+              "sort_proposal_and_local_counts": {
+                "execution_mode": "graph",
+                "replays_or_calls_per_sample": 2,
+                "samples": [
+                  {
+                    "sample": 0,
+                    "cuda_ms": 0.04068800061941147,
+                    "host_ms": 0.045643013436347246
+                  },
+                  {
+                    "sample": 1,
+                    "cuda_ms": 0.04150399938225746,
+                    "host_ms": 0.04619150422513485
+                  }
+                ],
+                "median_cuda_ms": 0.041096000000834465,
+                "median_host_ms": 0.04591725883074105
+              },
+              "fold_all8_counts_and_quota": {
+                "execution_mode": "graph",
+                "replays_or_calls_per_sample": 2,
+                "samples": [
+                  {
+                    "sample": 0,
+                    "cuda_ms": 0.01196799986064434,
+                    "host_ms": 0.016834470443427563
+                  },
+                  {
+                    "sample": 1,
+                    "cuda_ms": 0.010703999549150467,
+                    "host_ms": 0.015419034752994776
+                  }
+                ],
+                "median_cuda_ms": 0.011335999704897404,
+                "median_host_ms": 0.01612675259821117
+              },
+              "prefix_commit_only": {
+                "execution_mode": "graph",
+                "replays_or_calls_per_sample": 2,
+                "samples": [
+                  {
+                    "sample": 0,
+                    "cuda_ms": 0.010320000350475311,
+                    "host_ms": 0.015173980500549078
+                  },
+                  {
+                    "sample": 1,
+                    "cuda_ms": 0.00979200005531311,
+                    "host_ms": 0.014416000340133905
+                  }
+                ],
+                "median_cuda_ms": 0.01005600020289421,
+                "median_host_ms": 0.014794990420341492
+              },
+              "commit_only_scope": "fixed proposal/ordinal/quota; repeated writes are idempotent (clear old-owner bits, set destination bits, assign identical destination); does not run another planning round"
+            }
+          ],
+          "prepare_residency_cache": {
+            "execution_mode": "graph",
+            "replays_or_calls_per_sample": 2,
+            "samples": [
+              {
+                "sample": 0,
+                "cuda_ms": 0.012959999963641167,
+                "host_ms": 0.019918486941605806
+              },
+              {
+                "sample": 1,
+                "cuda_ms": 0.009631999768316746,
+                "host_ms": 0.014488992746919394
+              }
+            ],
+            "median_cuda_ms": 0.011295999865978956,
+            "median_host_ms": 0.0172037398442626
+          },
+          "prefix_L4_conditional": {
+            "execution_mode": "graph",
+            "replays_or_calls_per_sample": 2,
+            "samples": [
+              {
+                "sample": 0,
+                "cuda_ms": 0.08267199993133545,
+                "host_ms": 0.08809647988528013
+              },
+              {
+                "sample": 1,
+                "cuda_ms": 0.08235199749469757,
+                "host_ms": 0.08711096597835422
+              }
+            ],
+            "median_cuda_ms": 0.08251199871301651,
+            "median_host_ms": 0.08760372293181717
+          },
+          "sort_L4_conditional": {
+            "execution_mode": "graph",
+            "replays_or_calls_per_sample": 2,
+            "samples": [
+              {
+                "sample": 0,
+                "cuda_ms": 0.18478399515151978,
+                "host_ms": 0.19035296281799674
+              },
+              {
+                "sample": 1,
+                "cuda_ms": 0.18326400220394135,
+                "host_ms": 0.1880754716694355
+              }
+            ],
+            "median_cuda_ms": 0.18402399867773056,
+            "median_host_ms": 0.18921421724371612
+          },
+          "L4_scope": "includes support/cache preparation, seed restore, four local scans, GPU fold/quota, commit; fixed round counts available; excludes physical collective and waiting"
+        }
+      ],
+      "count_dependency": {
+        "buckets_per_source": 1152,
+        "bytes_per_source": 4608,
+        "bytes_global_table": 36864,
+        "rounds": 4,
+        "measured_full_eight_rank_collective": false,
+        "note": "The saved tables below were generated by live coupled validation; timed source replays condition on their availability."
+      },
+      "post_timing_correctness": true
+    }
+  ],
+  "failures": []
+}

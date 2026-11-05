@@ -1,0 +1,29 @@
+{
+  "upstream_commit": "9af0e0d0e74f3577af1979c9b9e1ac2cad0104ee",
+  "scope": "intranode notify kernel launch capacity only; 128 threads retained for <=128 local slots, 256 for 129..256; not a build-only patch",
+  "source_file": "vendor/DeepEP_v1/csrc/kernels/intranode.cu",
+  "upstream_sha256": "3ed695b9ad2ac7dcf893631d94c84d635ead384ee47ed1d7f05b1cb4f9fcbb2b",
+  "patched_sha256": "794946b5241fbb20cbdc899108b43d041244691aa58d53e52f19bc85354831e5",
+  "patch_sha256": "45efbdb02ffae2d7c98b91862baa6a9b947c0a5a1d4dc9e0dc9c38aaea4ae907",
+  "target_shape": {
+    "physical_ranks": 2,
+    "logical_experts": 352,
+    "extra_slots_per_rank": 8,
+    "total_physical_experts": 368,
+    "local_physical_slots": 184,
+    "notify_threads": 256
+  },
+  "buffers": {
+    "max_local_experts": 1024,
+    "source": "csrc/kernels/configs.cuh and csrc/deep_ep.cpp"
+  },
+  "unmodified": [
+    "physical expert numbering",
+    "per-expert sum logic",
+    "dispatch payload kernel",
+    "combine payload kernel",
+    "weight transport"
+  ],
+  "runtime_validation": "pending; previous smoke02 assertion failure must be retained",
+  "static_reasoning": "notify kernel uses blockDim.x for loops/warps; barrier supports all full-warp block sizes; block size 256 gives each local slot its own reduction thread"
+}

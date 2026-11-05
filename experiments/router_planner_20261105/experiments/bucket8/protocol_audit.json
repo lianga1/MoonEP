@@ -1,0 +1,55 @@
+{
+  "scope": "CPU-only independent proposal and count-prefix protocol check",
+  "cases": [
+    {
+      "case": "real_tail19",
+      "coordinated": false,
+      "four_rounds_exact": true
+    },
+    {
+      "case": "real_tail19",
+      "coordinated": true,
+      "four_rounds_exact": true
+    },
+    {
+      "case": "random_tail1",
+      "coordinated": false,
+      "four_rounds_exact": true
+    },
+    {
+      "case": "random_tail1",
+      "coordinated": true,
+      "four_rounds_exact": true
+    },
+    {
+      "case": "random_tail2",
+      "coordinated": false,
+      "four_rounds_exact": true
+    },
+    {
+      "case": "random_tail2",
+      "coordinated": true,
+      "four_rounds_exact": true
+    },
+    {
+      "case": "random_tail19",
+      "coordinated": false,
+      "four_rounds_exact": true
+    },
+    {
+      "case": "random_tail19",
+      "coordinated": true,
+      "four_rounds_exact": true
+    },
+    {
+      "case": "random_tail23",
+      "coordinated": false,
+      "four_rounds_exact": true
+    },
+    {
+      "case": "random_tail23",
+      "coordinated": true,
+      "four_rounds_exact": true
+    }
+  ]
+}

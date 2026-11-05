@@ -1,0 +1,11 @@
+{
+  "native_saved_plans_checked": 16,
+  "all_pass": true,
+  "checks": [
+    "required nonhome experts covered by selected slots",
+    "slots <= 8",
+    "physical_topk nonnegative",
+    "each rank has 134144 pairs",
+    "independent deduplicated remote destination recount"
+  ]
+}

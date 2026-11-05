@@ -1,0 +1,3483 @@
+{
+  "N": 134144,
+  "R": 8,
+  "S": 16768,
+  "K": 8,
+  "E": 352,
+  "B": 8,
+  "d": 256,
+  "g": 2,
+  "L": 4,
+  "seed": 20261026,
+  "layers": [
+    {
+      "layer": 0,
+      "path": "/Users/liangzuning/Documents/ChatGPT/EPMoE/outputs/eight_rank_estimate/kernel_inputs/layer_00.npz",
+      "sha256": "b705b5e45be5dfa57d9b29fcb6b26e938de49cdf2d9fd153787cc2bd43e9d6f9",
+      "original_sources": {
+        "/Users/liangzuning/Documents/ChatGPT/EPMoE/outputs/trace_audit/layer_00.npz": "22bd2a9496dbc0e377d72b7a71c44e94adaa1e0ff86bc3e590264c31abd2393b",
+        "/Users/liangzuning/Documents/ChatGPT/EPMoE/outputs/rt2_b8_comparison/layer00_native_rt0.npz": "0b405b1dfd2fdcd4568614a108e0b52f8b84ba18652d8d40e201e32282d7c8fb",
+        "/Users/liangzuning/Documents/ChatGPT/EPMoE/outputs/replay/layer00_b8_small256_global_4.npz": "18220b683b637102fd69505e237fbb3d3d2e3da6ee898fa10469298798bf1a74"
+      },
+      "cpu_residency_preparation_seconds": 0.10259679199999999,
+      "cpu_exchange_oracle_seconds": 0.678520667,
+      "cpu_times_are_not_gpu_estimates": true,
+      "archived_support_and_final_owner_exact": true,
+      "residency_diagnostics": {
+        "method": "reciprocal",
+        "mandatory_extra": [
+          0,
+          1,
+          2,
+          1,
+          1,
+          1,
+          1,
+          4
+        ],
+        "candidate_extra": [
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8
+        ],
+        "sampled_tokens": 256,
+        "distinct_group_buckets": 406,
+        "infeasible_directions_filtered": 2,
+        "candidate_packages": 1026,
+        "accepted_packages": [
+          {
+            "a": 2,
+            "b": 5,
+            "add_a": [
+              33
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 11
+          },
+          {
+            "a": 6,
+            "b": 7,
+            "add_a": [],
+            "add_b": [
+              289
+            ],
+            "size": 1,
+            "estimated_sample_gain": 10
+          },
+          {
+            "a": 2,
+            "b": 5,
+            "add_a": [
+              254
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 8
+          },
+          {
+            "a": 6,
+            "b": 7,
+            "add_a": [],
+            "add_b": [
+              300
+            ],
+            "size": 1,
+            "estimated_sample_gain": 8
+          },
+          {
+            "a": 0,
+            "b": 3,
+            "add_a": [
+              148
+            ],
+            "add_b": [
+              7
+            ],
+            "size": 1,
+            "estimated_sample_gain": 12
+          },
+          {
+            "a": 1,
+            "b": 4,
+            "add_a": [
+              203
+            ],
+            "add_b": [
+              47
+            ],
+            "size": 1,
+            "estimated_sample_gain": 12
+          },
+          {
+            "a": 2,
+            "b": 7,
+            "add_a": [
+              294
+            ],
+            "add_b": [
+              88
+            ],
+            "size": 1,
+            "estimated_sample_gain": 12
+          },
+          {
+            "a": 0,
+            "b": 5,
+            "add_a": [],
+            "add_b": [
+              24
+            ],
+            "size": 1,
+            "estimated_sample_gain": 6
+          },
+          {
+            "a": 0,
+            "b": 5,
+            "add_a": [],
+            "add_b": [
+              31
+            ],
+            "size": 1,
+            "estimated_sample_gain": 6
+          },
+          {
+            "a": 1,
+            "b": 5,
+            "add_a": [
+              33
+            ],
+            "add_b": [
+              47
+            ],
+            "size": 1,
+            "estimated_sample_gain": 11
+          },
+          {
+            "a": 2,
+            "b": 4,
+            "add_a": [
+              203
+            ],
+            "add_b": [
+              88
+            ],
+            "size": 1,
+            "estimated_sample_gain": 11
+          },
+          {
+            "a": 3,
+            "b": 4,
+            "add_a": [
+              203
+            ],
+            "add_b": [
+              148
+            ],
+            "size": 1,
+            "estimated_sample_gain": 11
+          },
+          {
+            "a": 3,
+            "b": 4,
+            "add_a": [
+              215
+            ],
+            "add_b": [
+              170
+            ],
+            "size": 1,
+            "estimated_sample_gain": 11
+          },
+          {
+            "a": 4,
+            "b": 5,
+            "add_a": [
+              33
+            ],
+            "add_b": [
+              203
+            ],
+            "size": 1,
+            "estimated_sample_gain": 11
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              76
+            ],
+            "add_b": [
+              39
+            ],
+            "size": 1,
+            "estimated_sample_gain": 10
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [],
+            "add_b": [
+              35
+            ],
+            "size": 1,
+            "estimated_sample_gain": 6
+          },
+          {
+            "a": 0,
+            "b": 6,
+            "add_a": [
+              264
+            ],
+            "add_b": [
+              39
+            ],
+            "size": 1,
+            "estimated_sample_gain": 10
+          },
+          {
+            "a": 1,
+            "b": 2,
+            "add_a": [
+              248
+            ],
+            "add_b": [
+              47
+            ],
+            "size": 1,
+            "estimated_sample_gain": 10
+          },
+          {
+            "a": 1,
+            "b": 3,
+            "add_a": [
+              145
+            ],
+            "add_b": [
+              47
+            ],
+            "size": 1,
+            "estimated_sample_gain": 10
+          },
+          {
+            "a": 1,
+            "b": 6,
+            "add_a": [
+              265
+            ],
+            "add_b": [
+              62
+            ],
+            "size": 1,
+            "estimated_sample_gain": 10
+          },
+          {
+            "a": 2,
+            "b": 3,
+            "add_a": [
+              148
+            ],
+            "add_b": [
+              248
+            ],
+            "size": 1,
+            "estimated_sample_gain": 10
+          },
+          {
+            "a": 3,
+            "b": 6,
+            "add_a": [
+              301
+            ],
+            "add_b": [
+              170
+            ],
+            "size": 1,
+            "estimated_sample_gain": 10
+          },
+          {
+            "a": 3,
+            "b": 5,
+            "add_a": [
+              33
+            ],
+            "add_b": [
+              145
+            ],
+            "size": 1,
+            "estimated_sample_gain": 9
+          },
+          {
+            "a": 4,
+            "b": 7,
+            "add_a": [
+              294
+            ],
+            "add_b": [
+              215
+            ],
+            "size": 1,
+            "estimated_sample_gain": 9
+          },
+          {
+            "a": 5,
+            "b": 6,
+            "add_a": [
+              301
+            ],
+            "add_b": [
+              232
+            ],
+            "size": 1,
+            "estimated_sample_gain": 9
+          },
+          {
+            "a": 0,
+            "b": 4,
+            "add_a": [
+              183
+            ],
+            "add_b": [
+              26
+            ],
+            "size": 1,
+            "estimated_sample_gain": 8
+          },
+          {
+            "a": 5,
+            "b": 6,
+            "add_a": [
+              289
+            ],
+            "add_b": [
+              221
+            ],
+            "size": 1,
+            "estimated_sample_gain": 8
+          },
+          {
+            "a": 0,
+            "b": 6,
+            "add_a": [
+              283
+            ],
+            "add_b": [
+              6
+            ],
+            "size": 1,
+            "estimated_sample_gain": 6
+          },
+          {
+            "a": 3,
+            "b": 6,
+            "add_a": [],
+            "add_b": [
+              175
+            ],
+            "size": 1,
+            "estimated_sample_gain": 3
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              72
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 2
+          },
+          {
+            "a": 0,
+            "b": 4,
+            "add_a": [
+              185
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 2
+          },
+          {
+            "a": 0,
+            "b": 3,
+            "add_a": [
+              145
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 1
+          }
+        ],
+        "warning": "one direction per sample token/rank-pair; cross-pair overlaps remain estimates; final exchanges audited independently"
+      }
+    },
+    {
+      "layer": 1,
+      "path": "/Users/liangzuning/Documents/ChatGPT/EPMoE/outputs/eight_rank_estimate/kernel_inputs/layer_01.npz",
+      "sha256": "dbc6cfdfe10ac87984da3f429f4a5b4d5d6dd32e5d1e64e983e3e39ac807867b",
+      "original_sources": {
+        "/Users/liangzuning/Documents/ChatGPT/EPMoE/outputs/trace_audit/layer_01.npz": "4a85f36543028ee06888370cc6d2d9f5569839d080ed472525aa60d377088829",
+        "/Users/liangzuning/Documents/ChatGPT/EPMoE/outputs/rt2_b8_comparison/layer01_native_rt0.npz": "bef914587dd6e594d05107578f789a931be2964fc9cfdfd153874f9d116e3310",
+        "/Users/liangzuning/Documents/ChatGPT/EPMoE/outputs/replay/layer01_b8_small256_global_4.npz": "14eb74ebeee106a9bf808a1f6cdae5516c0a48426ee1cc863f60e45f644e39f0"
+      },
+      "cpu_residency_preparation_seconds": 0.110385167,
+      "cpu_exchange_oracle_seconds": 0.10678720800000008,
+      "cpu_times_are_not_gpu_estimates": true,
+      "archived_support_and_final_owner_exact": true,
+      "residency_diagnostics": {
+        "method": "reciprocal",
+        "mandatory_extra": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1
+        ],
+        "candidate_extra": [
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8
+        ],
+        "sampled_tokens": 256,
+        "distinct_group_buckets": 390,
+        "infeasible_directions_filtered": 0,
+        "candidate_packages": 958,
+        "accepted_packages": [
+          {
+            "a": 3,
+            "b": 4,
+            "add_a": [],
+            "add_b": [
+              156
+            ],
+            "size": 1,
+            "estimated_sample_gain": 25
+          },
+          {
+            "a": 4,
+            "b": 7,
+            "add_a": [
+              329
+            ],
+            "add_b": [
+              152
+            ],
+            "size": 1,
+            "estimated_sample_gain": 33
+          },
+          {
+            "a": 2,
+            "b": 7,
+            "add_a": [
+              329
+            ],
+            "add_b": [
+              98
+            ],
+            "size": 1,
+            "estimated_sample_gain": 32
+          },
+          {
+            "a": 0,
+            "b": 7,
+            "add_a": [
+              329
+            ],
+            "add_b": [
+              5
+            ],
+            "size": 1,
+            "estimated_sample_gain": 29
+          },
+          {
+            "a": 6,
+            "b": 7,
+            "add_a": [],
+            "add_b": [
+              266
+            ],
+            "size": 1,
+            "estimated_sample_gain": 14
+          },
+          {
+            "a": 3,
+            "b": 7,
+            "add_a": [
+              329
+            ],
+            "add_b": [
+              156
+            ],
+            "size": 1,
+            "estimated_sample_gain": 27
+          },
+          {
+            "a": 0,
+            "b": 2,
+            "add_a": [
+              98
+            ],
+            "add_b": [
+              5
+            ],
+            "size": 1,
+            "estimated_sample_gain": 25
+          },
+          {
+            "a": 2,
+            "b": 4,
+            "add_a": [
+              152
+            ],
+            "add_b": [
+              98
+            ],
+            "size": 1,
+            "estimated_sample_gain": 25
+          },
+          {
+            "a": 0,
+            "b": 4,
+            "add_a": [
+              152
+            ],
+            "add_b": [
+              5
+            ],
+            "size": 1,
+            "estimated_sample_gain": 22
+          },
+          {
+            "a": 0,
+            "b": 3,
+            "add_a": [],
+            "add_b": [
+              5
+            ],
+            "size": 1,
+            "estimated_sample_gain": 16
+          },
+          {
+            "a": 2,
+            "b": 3,
+            "add_a": [
+              137
+            ],
+            "add_b": [
+              98
+            ],
+            "size": 1,
+            "estimated_sample_gain": 21
+          },
+          {
+            "a": 0,
+            "b": 3,
+            "add_a": [
+              167
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 10
+          },
+          {
+            "a": 2,
+            "b": 6,
+            "add_a": [
+              302
+            ],
+            "add_b": [
+              98
+            ],
+            "size": 1,
+            "estimated_sample_gain": 18
+          },
+          {
+            "a": 3,
+            "b": 5,
+            "add_a": [
+              262
+            ],
+            "add_b": [
+              152
+            ],
+            "size": 1,
+            "estimated_sample_gain": 18
+          },
+          {
+            "a": 4,
+            "b": 5,
+            "add_a": [
+              250
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 14
+          },
+          {
+            "a": 3,
+            "b": 6,
+            "add_a": [
+              266
+            ],
+            "add_b": [
+              156
+            ],
+            "size": 1,
+            "estimated_sample_gain": 18
+          },
+          {
+            "a": 2,
+            "b": 6,
+            "add_a": [
+              265
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 10
+          },
+          {
+            "a": 0,
+            "b": 7,
+            "add_a": [
+              337
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 9
+          },
+          {
+            "a": 0,
+            "b": 4,
+            "add_a": [
+              190
+            ],
+            "add_b": [
+              21
+            ],
+            "size": 1,
+            "estimated_sample_gain": 17
+          },
+          {
+            "a": 1,
+            "b": 4,
+            "add_a": [
+              152
+            ],
+            "add_b": [
+              53
+            ],
+            "size": 1,
+            "estimated_sample_gain": 17
+          },
+          {
+            "a": 1,
+            "b": 3,
+            "add_a": [],
+            "add_b": [
+              53
+            ],
+            "size": 1,
+            "estimated_sample_gain": 14
+          },
+          {
+            "a": 5,
+            "b": 7,
+            "add_a": [
+              329
+            ],
+            "add_b": [
+              250
+            ],
+            "size": 1,
+            "estimated_sample_gain": 17
+          },
+          {
+            "a": 5,
+            "b": 7,
+            "add_a": [],
+            "add_b": [
+              247
+            ],
+            "size": 1,
+            "estimated_sample_gain": 10
+          },
+          {
+            "a": 0,
+            "b": 5,
+            "add_a": [
+              261
+            ],
+            "add_b": [
+              5
+            ],
+            "size": 1,
+            "estimated_sample_gain": 16
+          },
+          {
+            "a": 1,
+            "b": 5,
+            "add_a": [
+              250
+            ],
+            "add_b": [
+              53
+            ],
+            "size": 1,
+            "estimated_sample_gain": 15
+          },
+          {
+            "a": 1,
+            "b": 2,
+            "add_a": [
+              98
+            ],
+            "add_b": [
+              247
+            ],
+            "size": 1,
+            "estimated_sample_gain": 14
+          },
+          {
+            "a": 1,
+            "b": 6,
+            "add_a": [
+              266
+            ],
+            "add_b": [
+              53
+            ],
+            "size": 1,
+            "estimated_sample_gain": 12
+          },
+          {
+            "a": 3,
+            "b": 6,
+            "add_a": [
+              302
+            ],
+            "add_b": [
+              160
+            ],
+            "size": 1,
+            "estimated_sample_gain": 12
+          },
+          {
+            "a": 5,
+            "b": 6,
+            "add_a": [
+              266
+            ],
+            "add_b": [
+              250
+            ],
+            "size": 1,
+            "estimated_sample_gain": 12
+          },
+          {
+            "a": 1,
+            "b": 5,
+            "add_a": [],
+            "add_b": [
+              51
+            ],
+            "size": 1,
+            "estimated_sample_gain": 6
+          },
+          {
+            "a": 5,
+            "b": 6,
+            "add_a": [
+              281
+            ],
+            "add_b": [
+              247
+            ],
+            "size": 1,
+            "estimated_sample_gain": 11
+          },
+          {
+            "a": 1,
+            "b": 6,
+            "add_a": [
+              298
+            ],
+            "add_b": [
+              63
+            ],
+            "size": 1,
+            "estimated_sample_gain": 10
+          },
+          {
+            "a": 1,
+            "b": 6,
+            "add_a": [
+              290
+            ],
+            "add_b": [],
+            "size": 2,
+            "estimated_sample_gain": 4
+          },
+          {
+            "a": 1,
+            "b": 7,
+            "add_a": [
+              329
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 4
+          },
+          {
+            "a": 5,
+            "b": 6,
+            "add_a": [],
+            "add_b": [
+              259
+            ],
+            "size": 2,
+            "estimated_sample_gain": 4
+          }
+        ],
+        "warning": "one direction per sample token/rank-pair; cross-pair overlaps remain estimates; final exchanges audited independently"
+      }
+    },
+    {
+      "layer": 2,
+      "path": "/Users/liangzuning/Documents/ChatGPT/EPMoE/outputs/eight_rank_estimate/kernel_inputs/layer_02.npz",
+      "sha256": "3b4c7c54c395e278a9880ac5e8a5bf737dd72ed53db0f376060b2b059b02134b",
+      "original_sources": {
+        "/Users/liangzuning/Documents/ChatGPT/EPMoE/outputs/trace_audit/layer_02.npz": "d947eacd11a5707b45b59eda85cbbf6f13fe16ec2beb671980274aed7907cd06",
+        "/Users/liangzuning/Documents/ChatGPT/EPMoE/outputs/rt2_b8_comparison/layer02_native_rt0.npz": "1ebabc93dd37c99fc9089de0496e901d4a33ddd7224efbbb2c834dcbfeb37260",
+        "/Users/liangzuning/Documents/ChatGPT/EPMoE/outputs/replay/layer02_b8_small256_global_4.npz": "bc6d12e1d444b6871c5c90aea998b651bd4c7ddcb3618f9fc1b4cfc10255d4dc"
+      },
+      "cpu_residency_preparation_seconds": 0.10000987500000003,
+      "cpu_exchange_oracle_seconds": 0.08871349999999989,
+      "cpu_times_are_not_gpu_estimates": true,
+      "archived_support_and_final_owner_exact": true,
+      "residency_diagnostics": {
+        "method": "reciprocal",
+        "mandatory_extra": [
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1
+        ],
+        "candidate_extra": [
+          8,
+          8,
+          7,
+          8,
+          8,
+          8,
+          8,
+          8
+        ],
+        "sampled_tokens": 256,
+        "distinct_group_buckets": 358,
+        "infeasible_directions_filtered": 0,
+        "candidate_packages": 963,
+        "accepted_packages": [
+          {
+            "a": 1,
+            "b": 7,
+            "add_a": [
+              182
+            ],
+            "add_b": [
+              45
+            ],
+            "size": 1,
+            "estimated_sample_gain": 41
+          },
+          {
+            "a": 1,
+            "b": 2,
+            "add_a": [
+              101
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 20
+          },
+          {
+            "a": 1,
+            "b": 3,
+            "add_a": [
+              148
+            ],
+            "add_b": [
+              45
+            ],
+            "size": 1,
+            "estimated_sample_gain": 37
+          },
+          {
+            "a": 3,
+            "b": 4,
+            "add_a": [
+              201
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 18
+          },
+          {
+            "a": 3,
+            "b": 7,
+            "add_a": [
+              182
+            ],
+            "add_b": [
+              148
+            ],
+            "size": 1,
+            "estimated_sample_gain": 34
+          },
+          {
+            "a": 3,
+            "b": 7,
+            "add_a": [],
+            "add_b": [
+              143
+            ],
+            "size": 1,
+            "estimated_sample_gain": 17
+          },
+          {
+            "a": 5,
+            "b": 7,
+            "add_a": [
+              182
+            ],
+            "add_b": [
+              245
+            ],
+            "size": 1,
+            "estimated_sample_gain": 32
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              45
+            ],
+            "add_b": [
+              13
+            ],
+            "size": 1,
+            "estimated_sample_gain": 31
+          },
+          {
+            "a": 1,
+            "b": 5,
+            "add_a": [
+              245
+            ],
+            "add_b": [
+              45
+            ],
+            "size": 1,
+            "estimated_sample_gain": 30
+          },
+          {
+            "a": 4,
+            "b": 7,
+            "add_a": [],
+            "add_b": [
+              191
+            ],
+            "size": 1,
+            "estimated_sample_gain": 14
+          },
+          {
+            "a": 1,
+            "b": 3,
+            "add_a": [
+              143
+            ],
+            "add_b": [
+              116
+            ],
+            "size": 1,
+            "estimated_sample_gain": 26
+          },
+          {
+            "a": 3,
+            "b": 5,
+            "add_a": [
+              237
+            ],
+            "add_b": [
+              148
+            ],
+            "size": 1,
+            "estimated_sample_gain": 26
+          },
+          {
+            "a": 3,
+            "b": 5,
+            "add_a": [
+              245
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 14
+          },
+          {
+            "a": 0,
+            "b": 7,
+            "add_a": [
+              182
+            ],
+            "add_b": [
+              13
+            ],
+            "size": 1,
+            "estimated_sample_gain": 25
+          },
+          {
+            "a": 4,
+            "b": 6,
+            "add_a": [],
+            "add_b": [
+              191
+            ],
+            "size": 1,
+            "estimated_sample_gain": 12
+          },
+          {
+            "a": 4,
+            "b": 7,
+            "add_a": [],
+            "add_b": [
+              215
+            ],
+            "size": 1,
+            "estimated_sample_gain": 12
+          },
+          {
+            "a": 0,
+            "b": 3,
+            "add_a": [
+              148
+            ],
+            "add_b": [
+              13
+            ],
+            "size": 1,
+            "estimated_sample_gain": 23
+          },
+          {
+            "a": 0,
+            "b": 5,
+            "add_a": [
+              245
+            ],
+            "add_b": [
+              13
+            ],
+            "size": 1,
+            "estimated_sample_gain": 22
+          },
+          {
+            "a": 4,
+            "b": 5,
+            "add_a": [
+              245
+            ],
+            "add_b": [
+              201
+            ],
+            "size": 1,
+            "estimated_sample_gain": 20
+          },
+          {
+            "a": 0,
+            "b": 3,
+            "add_a": [],
+            "add_b": [
+              191
+            ],
+            "size": 1,
+            "estimated_sample_gain": 10
+          },
+          {
+            "a": 3,
+            "b": 5,
+            "add_a": [],
+            "add_b": [
+              143
+            ],
+            "size": 1,
+            "estimated_sample_gain": 10
+          },
+          {
+            "a": 4,
+            "b": 5,
+            "add_a": [],
+            "add_b": [
+              190
+            ],
+            "size": 1,
+            "estimated_sample_gain": 10
+          },
+          {
+            "a": 0,
+            "b": 3,
+            "add_a": [
+              143
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 9
+          },
+          {
+            "a": 0,
+            "b": 5,
+            "add_a": [
+              250
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 9
+          },
+          {
+            "a": 1,
+            "b": 2,
+            "add_a": [
+              105
+            ],
+            "add_b": [
+              45
+            ],
+            "size": 1,
+            "estimated_sample_gain": 16
+          },
+          {
+            "a": 2,
+            "b": 4,
+            "add_a": [
+              190
+            ],
+            "add_b": [
+              101
+            ],
+            "size": 1,
+            "estimated_sample_gain": 15
+          },
+          {
+            "a": 0,
+            "b": 6,
+            "add_a": [
+              299
+            ],
+            "add_b": [
+              13
+            ],
+            "size": 1,
+            "estimated_sample_gain": 14
+          },
+          {
+            "a": 2,
+            "b": 6,
+            "add_a": [
+              299
+            ],
+            "add_b": [
+              101
+            ],
+            "size": 1,
+            "estimated_sample_gain": 10
+          },
+          {
+            "a": 2,
+            "b": 6,
+            "add_a": [
+              180
+            ],
+            "add_b": [
+              109
+            ],
+            "size": 1,
+            "estimated_sample_gain": 10
+          },
+          {
+            "a": 4,
+            "b": 6,
+            "add_a": [
+              279
+            ],
+            "add_b": [
+              215
+            ],
+            "size": 1,
+            "estimated_sample_gain": 10
+          },
+          {
+            "a": 4,
+            "b": 5,
+            "add_a": [
+              237
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 5
+          },
+          {
+            "a": 2,
+            "b": 4,
+            "add_a": [
+              201
+            ],
+            "add_b": [
+              92
+            ],
+            "size": 1,
+            "estimated_sample_gain": 8
+          },
+          {
+            "a": 3,
+            "b": 4,
+            "add_a": [],
+            "add_b": [
+              135
+            ],
+            "size": 2,
+            "estimated_sample_gain": 4
+          },
+          {
+            "a": 4,
+            "b": 5,
+            "add_a": [
+              235
+            ],
+            "add_b": [],
+            "size": 2,
+            "estimated_sample_gain": 4
+          },
+          {
+            "a": 2,
+            "b": 6,
+            "add_a": [],
+            "add_b": [
+              96,
+              120
+            ],
+            "size": 2,
+            "estimated_sample_gain": 5
+          },
+          {
+            "a": 2,
+            "b": 6,
+            "add_a": [
+              270
+            ],
+            "add_b": [],
+            "size": 2,
+            "estimated_sample_gain": 2
+          }
+        ],
+        "warning": "one direction per sample token/rank-pair; cross-pair overlaps remain estimates; final exchanges audited independently"
+      }
+    },
+    {
+      "layer": 3,
+      "path": "/Users/liangzuning/Documents/ChatGPT/EPMoE/outputs/eight_rank_estimate/kernel_inputs/layer_03.npz",
+      "sha256": "0cf78029316533bd3a76053d065263994a78e644c869738043c5feb4d2aff3e2",
+      "original_sources": {
+        "/Users/liangzuning/Documents/ChatGPT/EPMoE/outputs/trace_audit/layer_03.npz": "39b1dfad9d146fbe5b177fa401f8471b4f4035127b70feae9dee661a92f6688a",
+        "/Users/liangzuning/Documents/ChatGPT/EPMoE/outputs/rt2_b8_comparison/layer03_native_rt0.npz": "2a96a263bb697026a2276265aafd9645a7177abcc9ffa7a7ff194710a48c3ba2",
+        "/Users/liangzuning/Documents/ChatGPT/EPMoE/outputs/replay/layer03_b8_small256_global_4.npz": "53eccfe374abfc4ac4728fceb92321a0fc07d0394c73eedff78010afed95d662"
+      },
+      "cpu_residency_preparation_seconds": 0.08686758300000008,
+      "cpu_exchange_oracle_seconds": 0.08447129199999992,
+      "cpu_times_are_not_gpu_estimates": true,
+      "archived_support_and_final_owner_exact": true,
+      "residency_diagnostics": {
+        "method": "reciprocal",
+        "mandatory_extra": [
+          2,
+          0,
+          1,
+          2,
+          1,
+          1,
+          1,
+          2
+        ],
+        "candidate_extra": [
+          8,
+          8,
+          7,
+          8,
+          8,
+          8,
+          8,
+          8
+        ],
+        "sampled_tokens": 256,
+        "distinct_group_buckets": 370,
+        "infeasible_directions_filtered": 0,
+        "candidate_packages": 922,
+        "accepted_packages": [
+          {
+            "a": 5,
+            "b": 7,
+            "add_a": [],
+            "add_b": [
+              245
+            ],
+            "size": 1,
+            "estimated_sample_gain": 23
+          },
+          {
+            "a": 3,
+            "b": 4,
+            "add_a": [
+              125
+            ],
+            "add_b": [
+              102
+            ],
+            "size": 1,
+            "estimated_sample_gain": 42
+          },
+          {
+            "a": 0,
+            "b": 5,
+            "add_a": [
+              245
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 20
+          },
+          {
+            "a": 0,
+            "b": 3,
+            "add_a": [
+              102
+            ],
+            "add_b": [
+              230
+            ],
+            "size": 1,
+            "estimated_sample_gain": 39
+          },
+          {
+            "a": 1,
+            "b": 3,
+            "add_a": [
+              102
+            ],
+            "add_b": [
+              66
+            ],
+            "size": 1,
+            "estimated_sample_gain": 38
+          },
+          {
+            "a": 0,
+            "b": 4,
+            "add_a": [
+              209
+            ],
+            "add_b": [
+              230
+            ],
+            "size": 1,
+            "estimated_sample_gain": 36
+          },
+          {
+            "a": 3,
+            "b": 7,
+            "add_a": [
+              233
+            ],
+            "add_b": [
+              102
+            ],
+            "size": 1,
+            "estimated_sample_gain": 34
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              66
+            ],
+            "add_b": [
+              230
+            ],
+            "size": 1,
+            "estimated_sample_gain": 31
+          },
+          {
+            "a": 4,
+            "b": 7,
+            "add_a": [
+              233
+            ],
+            "add_b": [
+              125
+            ],
+            "size": 1,
+            "estimated_sample_gain": 30
+          },
+          {
+            "a": 0,
+            "b": 4,
+            "add_a": [
+              125
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 14
+          },
+          {
+            "a": 2,
+            "b": 3,
+            "add_a": [],
+            "add_b": [
+              98
+            ],
+            "size": 1,
+            "estimated_sample_gain": 14
+          },
+          {
+            "a": 1,
+            "b": 7,
+            "add_a": [
+              233
+            ],
+            "add_b": [
+              66
+            ],
+            "size": 1,
+            "estimated_sample_gain": 24
+          },
+          {
+            "a": 3,
+            "b": 4,
+            "add_a": [
+              209
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 12
+          },
+          {
+            "a": 4,
+            "b": 7,
+            "add_a": [
+              339
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 12
+          },
+          {
+            "a": 1,
+            "b": 5,
+            "add_a": [
+              245
+            ],
+            "add_b": [
+              66
+            ],
+            "size": 1,
+            "estimated_sample_gain": 22
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              45
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 11
+          },
+          {
+            "a": 5,
+            "b": 6,
+            "add_a": [
+              129
+            ],
+            "add_b": [
+              245
+            ],
+            "size": 1,
+            "estimated_sample_gain": 21
+          },
+          {
+            "a": 1,
+            "b": 4,
+            "add_a": [
+              125
+            ],
+            "add_b": [
+              66
+            ],
+            "size": 1,
+            "estimated_sample_gain": 20
+          },
+          {
+            "a": 1,
+            "b": 4,
+            "add_a": [
+              209
+            ],
+            "add_b": [
+              85
+            ],
+            "size": 1,
+            "estimated_sample_gain": 18
+          },
+          {
+            "a": 1,
+            "b": 6,
+            "add_a": [
+              286
+            ],
+            "add_b": [
+              66
+            ],
+            "size": 1,
+            "estimated_sample_gain": 16
+          },
+          {
+            "a": 6,
+            "b": 7,
+            "add_a": [
+              233
+            ],
+            "add_b": [
+              129
+            ],
+            "size": 1,
+            "estimated_sample_gain": 16
+          },
+          {
+            "a": 0,
+            "b": 4,
+            "add_a": [],
+            "add_b": [
+              3
+            ],
+            "size": 1,
+            "estimated_sample_gain": 8
+          },
+          {
+            "a": 1,
+            "b": 7,
+            "add_a": [],
+            "add_b": [
+              85
+            ],
+            "size": 1,
+            "estimated_sample_gain": 7
+          },
+          {
+            "a": 2,
+            "b": 5,
+            "add_a": [
+              245
+            ],
+            "add_b": [
+              123
+            ],
+            "size": 1,
+            "estimated_sample_gain": 12
+          },
+          {
+            "a": 2,
+            "b": 6,
+            "add_a": [
+              286
+            ],
+            "add_b": [
+              123
+            ],
+            "size": 1,
+            "estimated_sample_gain": 12
+          },
+          {
+            "a": 2,
+            "b": 6,
+            "add_a": [],
+            "add_b": [
+              96
+            ],
+            "size": 1,
+            "estimated_sample_gain": 10
+          },
+          {
+            "a": 1,
+            "b": 5,
+            "add_a": [
+              251
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 6
+          },
+          {
+            "a": 1,
+            "b": 5,
+            "add_a": [],
+            "add_b": [
+              48
+            ],
+            "size": 1,
+            "estimated_sample_gain": 5
+          },
+          {
+            "a": 2,
+            "b": 5,
+            "add_a": [
+              238
+            ],
+            "add_b": [
+              90
+            ],
+            "size": 1,
+            "estimated_sample_gain": 8
+          },
+          {
+            "a": 5,
+            "b": 6,
+            "add_a": [
+              286
+            ],
+            "add_b": [
+              85
+            ],
+            "size": 1,
+            "estimated_sample_gain": 8
+          },
+          {
+            "a": 2,
+            "b": 6,
+            "add_a": [
+              267
+            ],
+            "add_b": [],
+            "size": 2,
+            "estimated_sample_gain": 4
+          },
+          {
+            "a": 2,
+            "b": 5,
+            "add_a": [
+              262
+            ],
+            "add_b": [
+              98
+            ],
+            "size": 2,
+            "estimated_sample_gain": 5
+          },
+          {
+            "a": 2,
+            "b": 6,
+            "add_a": [
+              281
+            ],
+            "add_b": [
+              125
+            ],
+            "size": 1,
+            "estimated_sample_gain": 4
+          }
+        ],
+        "warning": "one direction per sample token/rank-pair; cross-pair overlaps remain estimates; final exchanges audited independently"
+      }
+    },
+    {
+      "layer": 4,
+      "path": "/Users/liangzuning/Documents/ChatGPT/EPMoE/outputs/eight_rank_estimate/kernel_inputs/layer_04.npz",
+      "sha256": "53c72a6823090add179e5a03fc6c8b795bf632a08330e142dfbef8af1018b6ea",
+      "original_sources": {
+        "/Users/liangzuning/Documents/ChatGPT/EPMoE/outputs/trace_audit/layer_04.npz": "826c138dd62a7af4d50693906c397cf5d947eba84d7a6fd091178e7a7e64fb59",
+        "/Users/liangzuning/Documents/ChatGPT/EPMoE/outputs/rt2_b8_comparison/layer04_native_rt0.npz": "b05eef4064b7924d45c280272eb73051c588cdd4e4868462a532936e980c8e3e",
+        "/Users/liangzuning/Documents/ChatGPT/EPMoE/outputs/replay/layer04_b8_small256_global_4.npz": "198e0c461e6da9e94173cb070981eb681c0556055f553316bd173d7efbdf67a9"
+      },
+      "cpu_residency_preparation_seconds": 0.102465166,
+      "cpu_exchange_oracle_seconds": 0.08932845799999978,
+      "cpu_times_are_not_gpu_estimates": true,
+      "archived_support_and_final_owner_exact": true,
+      "residency_diagnostics": {
+        "method": "reciprocal",
+        "mandatory_extra": [
+          1,
+          1,
+          1,
+          1,
+          2,
+          0,
+          1,
+          1
+        ],
+        "candidate_extra": [
+          8,
+          8,
+          8,
+          7,
+          8,
+          8,
+          8,
+          8
+        ],
+        "sampled_tokens": 256,
+        "distinct_group_buckets": 358,
+        "infeasible_directions_filtered": 0,
+        "candidate_packages": 941,
+        "accepted_packages": [
+          {
+            "a": 2,
+            "b": 6,
+            "add_a": [
+              35
+            ],
+            "add_b": [
+              120
+            ],
+            "size": 1,
+            "estimated_sample_gain": 46
+          },
+          {
+            "a": 0,
+            "b": 6,
+            "add_a": [],
+            "add_b": [
+              40
+            ],
+            "size": 1,
+            "estimated_sample_gain": 20
+          },
+          {
+            "a": 1,
+            "b": 5,
+            "add_a": [],
+            "add_b": [
+              81
+            ],
+            "size": 1,
+            "estimated_sample_gain": 20
+          },
+          {
+            "a": 2,
+            "b": 4,
+            "add_a": [
+              212
+            ],
+            "add_b": [
+              120
+            ],
+            "size": 1,
+            "estimated_sample_gain": 35
+          },
+          {
+            "a": 2,
+            "b": 4,
+            "add_a": [
+              195
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 18
+          },
+          {
+            "a": 1,
+            "b": 2,
+            "add_a": [
+              120
+            ],
+            "add_b": [
+              81
+            ],
+            "size": 1,
+            "estimated_sample_gain": 34
+          },
+          {
+            "a": 0,
+            "b": 6,
+            "add_a": [],
+            "add_b": [
+              15
+            ],
+            "size": 1,
+            "estimated_sample_gain": 16
+          },
+          {
+            "a": 1,
+            "b": 7,
+            "add_a": [
+              339
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 16
+          },
+          {
+            "a": 3,
+            "b": 5,
+            "add_a": [
+              232
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 16
+          },
+          {
+            "a": 1,
+            "b": 6,
+            "add_a": [
+              35
+            ],
+            "add_b": [
+              81
+            ],
+            "size": 1,
+            "estimated_sample_gain": 29
+          },
+          {
+            "a": 4,
+            "b": 5,
+            "add_a": [],
+            "add_b": [
+              212
+            ],
+            "size": 1,
+            "estimated_sample_gain": 14
+          },
+          {
+            "a": 4,
+            "b": 6,
+            "add_a": [
+              35
+            ],
+            "add_b": [
+              212
+            ],
+            "size": 1,
+            "estimated_sample_gain": 27
+          },
+          {
+            "a": 2,
+            "b": 7,
+            "add_a": [
+              339
+            ],
+            "add_b": [
+              120
+            ],
+            "size": 1,
+            "estimated_sample_gain": 26
+          },
+          {
+            "a": 2,
+            "b": 7,
+            "add_a": [
+              314
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 16
+          },
+          {
+            "a": 6,
+            "b": 7,
+            "add_a": [
+              339
+            ],
+            "add_b": [
+              35
+            ],
+            "size": 1,
+            "estimated_sample_gain": 26
+          },
+          {
+            "a": 4,
+            "b": 7,
+            "add_a": [
+              339
+            ],
+            "add_b": [
+              212
+            ],
+            "size": 1,
+            "estimated_sample_gain": 25
+          },
+          {
+            "a": 5,
+            "b": 6,
+            "add_a": [
+              35
+            ],
+            "add_b": [
+              220
+            ],
+            "size": 1,
+            "estimated_sample_gain": 22
+          },
+          {
+            "a": 4,
+            "b": 5,
+            "add_a": [
+              232
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 11
+          },
+          {
+            "a": 1,
+            "b": 4,
+            "add_a": [
+              212
+            ],
+            "add_b": [
+              81
+            ],
+            "size": 1,
+            "estimated_sample_gain": 21
+          },
+          {
+            "a": 2,
+            "b": 5,
+            "add_a": [
+              232
+            ],
+            "add_b": [
+              120
+            ],
+            "size": 1,
+            "estimated_sample_gain": 21
+          },
+          {
+            "a": 3,
+            "b": 5,
+            "add_a": [],
+            "add_b": [
+              134
+            ],
+            "size": 1,
+            "estimated_sample_gain": 10
+          },
+          {
+            "a": 0,
+            "b": 7,
+            "add_a": [
+              339
+            ],
+            "add_b": [
+              15
+            ],
+            "size": 1,
+            "estimated_sample_gain": 19
+          },
+          {
+            "a": 0,
+            "b": 4,
+            "add_a": [
+              195
+            ],
+            "add_b": [
+              15
+            ],
+            "size": 1,
+            "estimated_sample_gain": 18
+          },
+          {
+            "a": 1,
+            "b": 3,
+            "add_a": [
+              150
+            ],
+            "add_b": [
+              81
+            ],
+            "size": 1,
+            "estimated_sample_gain": 16
+          },
+          {
+            "a": 1,
+            "b": 3,
+            "add_a": [
+              142
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 10
+          },
+          {
+            "a": 5,
+            "b": 7,
+            "add_a": [
+              339
+            ],
+            "add_b": [
+              222
+            ],
+            "size": 1,
+            "estimated_sample_gain": 16
+          },
+          {
+            "a": 0,
+            "b": 3,
+            "add_a": [
+              150
+            ],
+            "add_b": [
+              15
+            ],
+            "size": 1,
+            "estimated_sample_gain": 15
+          },
+          {
+            "a": 0,
+            "b": 7,
+            "add_a": [
+              325
+            ],
+            "add_b": [
+              21
+            ],
+            "size": 1,
+            "estimated_sample_gain": 15
+          },
+          {
+            "a": 0,
+            "b": 5,
+            "add_a": [
+              232
+            ],
+            "add_b": [
+              15
+            ],
+            "size": 1,
+            "estimated_sample_gain": 14
+          },
+          {
+            "a": 1,
+            "b": 7,
+            "add_a": [
+              344
+            ],
+            "add_b": [
+              60
+            ],
+            "size": 1,
+            "estimated_sample_gain": 14
+          },
+          {
+            "a": 0,
+            "b": 2,
+            "add_a": [
+              120
+            ],
+            "add_b": [],
+            "size": 2,
+            "estimated_sample_gain": 6
+          },
+          {
+            "a": 0,
+            "b": 5,
+            "add_a": [],
+            "add_b": [
+              40
+            ],
+            "size": 1,
+            "estimated_sample_gain": 6
+          },
+          {
+            "a": 0,
+            "b": 5,
+            "add_a": [
+              262
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 5
+          },
+          {
+            "a": 3,
+            "b": 5,
+            "add_a": [
+              248
+            ],
+            "add_b": [],
+            "size": 2,
+            "estimated_sample_gain": 4
+          },
+          {
+            "a": 1,
+            "b": 3,
+            "add_a": [],
+            "add_b": [
+              75
+            ],
+            "size": 1,
+            "estimated_sample_gain": 2
+          },
+          {
+            "a": 0,
+            "b": 3,
+            "add_a": [],
+            "add_b": [
+              21
+            ],
+            "size": 1,
+            "estimated_sample_gain": 1
+          }
+        ],
+        "warning": "one direction per sample token/rank-pair; cross-pair overlaps remain estimates; final exchanges audited independently"
+      }
+    },
+    {
+      "layer": 5,
+      "path": "/Users/liangzuning/Documents/ChatGPT/EPMoE/outputs/eight_rank_estimate/kernel_inputs/layer_05.npz",
+      "sha256": "5b6106eaeca3a03c060aa7733b50ce1c409435cb3cd47a510b669047a8143a7b",
+      "original_sources": {
+        "/Users/liangzuning/Documents/ChatGPT/EPMoE/outputs/trace_audit/layer_05.npz": "b1bba721c45b72c90b983c54f20cc5c0b6d520c285e26d9131ca8e8eee08cc6a",
+        "/Users/liangzuning/Documents/ChatGPT/EPMoE/outputs/rt2_b8_comparison/layer05_native_rt0.npz": "906395ed00fe7bb0ab867b50450a54d8a98ca76033ac05b57d7d663d48e12ed0",
+        "/Users/liangzuning/Documents/ChatGPT/EPMoE/outputs/replay/layer05_b8_small256_global_4.npz": "66b33387e7b929e78fea1525b07946c0d160a7b08a1a5e23c981dcd37a8a8900"
+      },
+      "cpu_residency_preparation_seconds": 0.10869054099999964,
+      "cpu_exchange_oracle_seconds": 0.0795907920000003,
+      "cpu_times_are_not_gpu_estimates": true,
+      "archived_support_and_final_owner_exact": true,
+      "residency_diagnostics": {
+        "method": "reciprocal",
+        "mandatory_extra": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1
+        ],
+        "candidate_extra": [
+          8,
+          7,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8
+        ],
+        "sampled_tokens": 256,
+        "distinct_group_buckets": 384,
+        "infeasible_directions_filtered": 0,
+        "candidate_packages": 960,
+        "accepted_packages": [
+          {
+            "a": 2,
+            "b": 7,
+            "add_a": [
+              340
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 22
+          },
+          {
+            "a": 0,
+            "b": 5,
+            "add_a": [
+              258
+            ],
+            "add_b": [
+              70
+            ],
+            "size": 1,
+            "estimated_sample_gain": 39
+          },
+          {
+            "a": 6,
+            "b": 7,
+            "add_a": [
+              329
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 18
+          },
+          {
+            "a": 5,
+            "b": 6,
+            "add_a": [
+              272
+            ],
+            "add_b": [
+              258
+            ],
+            "size": 1,
+            "estimated_sample_gain": 34
+          },
+          {
+            "a": 2,
+            "b": 5,
+            "add_a": [
+              258
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 20
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              73
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 16
+          },
+          {
+            "a": 2,
+            "b": 5,
+            "add_a": [],
+            "add_b": [
+              127
+            ],
+            "size": 1,
+            "estimated_sample_gain": 16
+          },
+          {
+            "a": 2,
+            "b": 3,
+            "add_a": [
+              173
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 15
+          },
+          {
+            "a": 0,
+            "b": 6,
+            "add_a": [
+              272
+            ],
+            "add_b": [
+              70
+            ],
+            "size": 1,
+            "estimated_sample_gain": 29
+          },
+          {
+            "a": 0,
+            "b": 2,
+            "add_a": [],
+            "add_b": [
+              70
+            ],
+            "size": 1,
+            "estimated_sample_gain": 22
+          },
+          {
+            "a": 1,
+            "b": 6,
+            "add_a": [],
+            "add_b": [
+              77
+            ],
+            "size": 1,
+            "estimated_sample_gain": 14
+          },
+          {
+            "a": 5,
+            "b": 7,
+            "add_a": [],
+            "add_b": [
+              236
+            ],
+            "size": 1,
+            "estimated_sample_gain": 14
+          },
+          {
+            "a": 0,
+            "b": 2,
+            "add_a": [
+              127
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 12
+          },
+          {
+            "a": 2,
+            "b": 3,
+            "add_a": [
+              159
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 12
+          },
+          {
+            "a": 2,
+            "b": 6,
+            "add_a": [],
+            "add_b": [
+              127
+            ],
+            "size": 1,
+            "estimated_sample_gain": 12
+          },
+          {
+            "a": 0,
+            "b": 7,
+            "add_a": [
+              340
+            ],
+            "add_b": [
+              70
+            ],
+            "size": 1,
+            "estimated_sample_gain": 23
+          },
+          {
+            "a": 6,
+            "b": 7,
+            "add_a": [
+              350
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 11
+          },
+          {
+            "a": 2,
+            "b": 7,
+            "add_a": [
+              317
+            ],
+            "add_b": [
+              127
+            ],
+            "size": 1,
+            "estimated_sample_gain": 20
+          },
+          {
+            "a": 3,
+            "b": 4,
+            "add_a": [
+              178
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 10
+          },
+          {
+            "a": 3,
+            "b": 6,
+            "add_a": [],
+            "add_b": [
+              175
+            ],
+            "size": 1,
+            "estimated_sample_gain": 10
+          },
+          {
+            "a": 5,
+            "b": 7,
+            "add_a": [
+              340
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 10
+          },
+          {
+            "a": 4,
+            "b": 5,
+            "add_a": [
+              236
+            ],
+            "add_b": [
+              198
+            ],
+            "size": 1,
+            "estimated_sample_gain": 19
+          },
+          {
+            "a": 3,
+            "b": 7,
+            "add_a": [
+              340
+            ],
+            "add_b": [
+              166
+            ],
+            "size": 1,
+            "estimated_sample_gain": 18
+          },
+          {
+            "a": 2,
+            "b": 5,
+            "add_a": [
+              236
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 9
+          },
+          {
+            "a": 3,
+            "b": 7,
+            "add_a": [],
+            "add_b": [
+              173
+            ],
+            "size": 1,
+            "estimated_sample_gain": 9
+          },
+          {
+            "a": 5,
+            "b": 7,
+            "add_a": [],
+            "add_b": [
+              258
+            ],
+            "size": 1,
+            "estimated_sample_gain": 9
+          },
+          {
+            "a": 3,
+            "b": 5,
+            "add_a": [
+              258
+            ],
+            "add_b": [
+              175
+            ],
+            "size": 1,
+            "estimated_sample_gain": 16
+          },
+          {
+            "a": 3,
+            "b": 5,
+            "add_a": [],
+            "add_b": [
+              159
+            ],
+            "size": 1,
+            "estimated_sample_gain": 12
+          },
+          {
+            "a": 4,
+            "b": 7,
+            "add_a": [
+              340
+            ],
+            "add_b": [
+              198
+            ],
+            "size": 1,
+            "estimated_sample_gain": 16
+          },
+          {
+            "a": 2,
+            "b": 6,
+            "add_a": [],
+            "add_b": [
+              112
+            ],
+            "size": 1,
+            "estimated_sample_gain": 8
+          },
+          {
+            "a": 1,
+            "b": 3,
+            "add_a": [
+              166
+            ],
+            "add_b": [
+              73
+            ],
+            "size": 1,
+            "estimated_sample_gain": 14
+          },
+          {
+            "a": 1,
+            "b": 3,
+            "add_a": [],
+            "add_b": [
+              77
+            ],
+            "size": 1,
+            "estimated_sample_gain": 10
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [],
+            "add_b": [
+              12
+            ],
+            "size": 1,
+            "estimated_sample_gain": 6
+          },
+          {
+            "a": 1,
+            "b": 4,
+            "add_a": [
+              187
+            ],
+            "add_b": [
+              63
+            ],
+            "size": 1,
+            "estimated_sample_gain": 10
+          },
+          {
+            "a": 1,
+            "b": 4,
+            "add_a": [
+              214
+            ],
+            "add_b": [
+              73
+            ],
+            "size": 1,
+            "estimated_sample_gain": 10
+          },
+          {
+            "a": 3,
+            "b": 4,
+            "add_a": [
+              198
+            ],
+            "add_b": [
+              175
+            ],
+            "size": 1,
+            "estimated_sample_gain": 10
+          },
+          {
+            "a": 3,
+            "b": 4,
+            "add_a": [
+              199
+            ],
+            "add_b": [
+              152,
+              174
+            ],
+            "size": 2,
+            "estimated_sample_gain": 12
+          },
+          {
+            "a": 1,
+            "b": 3,
+            "add_a": [
+              175
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 4
+          },
+          {
+            "a": 1,
+            "b": 6,
+            "add_a": [
+              301
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 4
+          }
+        ],
+        "warning": "one direction per sample token/rank-pair; cross-pair overlaps remain estimates; final exchanges audited independently"
+      }
+    },
+    {
+      "layer": 6,
+      "path": "/Users/liangzuning/Documents/ChatGPT/EPMoE/outputs/eight_rank_estimate/kernel_inputs/layer_06.npz",
+      "sha256": "d4dc1c7b911e3024de4b2cab206ba68ce2df5f520c1701aae6685256de7e389a",
+      "original_sources": {
+        "/Users/liangzuning/Documents/ChatGPT/EPMoE/outputs/trace_audit/layer_06.npz": "9c98bd5c50fb8a7462c2a67f55a113c46e7811f8b7db51c064ce89ec11962cd4",
+        "/Users/liangzuning/Documents/ChatGPT/EPMoE/outputs/rt2_b8_comparison/layer06_native_rt0.npz": "613cef7cf1c493796651260ff6d592b8536923c236f6c0ab5be54d1246f0a0f3",
+        "/Users/liangzuning/Documents/ChatGPT/EPMoE/outputs/replay/layer06_b8_small256_global_4.npz": "705ac57852aaf50bd617ae32e436964cfdd75adc12e9ca8cef1d22a36f5d8769"
+      },
+      "cpu_residency_preparation_seconds": 0.10018566599999978,
+      "cpu_exchange_oracle_seconds": 0.07776533300000033,
+      "cpu_times_are_not_gpu_estimates": true,
+      "archived_support_and_final_owner_exact": true,
+      "residency_diagnostics": {
+        "method": "reciprocal",
+        "mandatory_extra": [
+          1,
+          2,
+          1,
+          1,
+          1,
+          2,
+          1,
+          0
+        ],
+        "candidate_extra": [
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          7
+        ],
+        "sampled_tokens": 256,
+        "distinct_group_buckets": 370,
+        "infeasible_directions_filtered": 0,
+        "candidate_packages": 996,
+        "accepted_packages": [
+          {
+            "a": 1,
+            "b": 6,
+            "add_a": [
+              350
+            ],
+            "add_b": [
+              1
+            ],
+            "size": 1,
+            "estimated_sample_gain": 40
+          },
+          {
+            "a": 6,
+            "b": 7,
+            "add_a": [
+              322
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 20
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [],
+            "add_b": [
+              38
+            ],
+            "size": 1,
+            "estimated_sample_gain": 19
+          },
+          {
+            "a": 2,
+            "b": 4,
+            "add_a": [],
+            "add_b": [
+              102
+            ],
+            "size": 1,
+            "estimated_sample_gain": 18
+          },
+          {
+            "a": 5,
+            "b": 7,
+            "add_a": [
+              322
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 16
+          },
+          {
+            "a": 1,
+            "b": 4,
+            "add_a": [
+              105
+            ],
+            "add_b": [
+              1
+            ],
+            "size": 1,
+            "estimated_sample_gain": 29
+          },
+          {
+            "a": 4,
+            "b": 6,
+            "add_a": [
+              350
+            ],
+            "add_b": [
+              105
+            ],
+            "size": 1,
+            "estimated_sample_gain": 29
+          },
+          {
+            "a": 3,
+            "b": 6,
+            "add_a": [
+              350
+            ],
+            "add_b": [
+              145
+            ],
+            "size": 1,
+            "estimated_sample_gain": 28
+          },
+          {
+            "a": 3,
+            "b": 6,
+            "add_a": [],
+            "add_b": [
+              30
+            ],
+            "size": 1,
+            "estimated_sample_gain": 18
+          },
+          {
+            "a": 1,
+            "b": 6,
+            "add_a": [],
+            "add_b": [
+              10
+            ],
+            "size": 1,
+            "estimated_sample_gain": 14
+          },
+          {
+            "a": 4,
+            "b": 6,
+            "add_a": [],
+            "add_b": [
+              192
+            ],
+            "size": 1,
+            "estimated_sample_gain": 14
+          },
+          {
+            "a": 1,
+            "b": 5,
+            "add_a": [
+              255
+            ],
+            "add_b": [
+              1
+            ],
+            "size": 1,
+            "estimated_sample_gain": 25
+          },
+          {
+            "a": 0,
+            "b": 7,
+            "add_a": [
+              343
+            ],
+            "add_b": [
+              38
+            ],
+            "size": 1,
+            "estimated_sample_gain": 24
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [],
+            "add_b": [
+              29
+            ],
+            "size": 1,
+            "estimated_sample_gain": 12
+          },
+          {
+            "a": 0,
+            "b": 2,
+            "add_a": [
+              103
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 12
+          },
+          {
+            "a": 3,
+            "b": 4,
+            "add_a": [
+              105
+            ],
+            "add_b": [
+              133
+            ],
+            "size": 1,
+            "estimated_sample_gain": 23
+          },
+          {
+            "a": 4,
+            "b": 5,
+            "add_a": [
+              255
+            ],
+            "add_b": [
+              105
+            ],
+            "size": 1,
+            "estimated_sample_gain": 23
+          },
+          {
+            "a": 1,
+            "b": 3,
+            "add_a": [
+              145
+            ],
+            "add_b": [
+              1
+            ],
+            "size": 1,
+            "estimated_sample_gain": 22
+          },
+          {
+            "a": 2,
+            "b": 5,
+            "add_a": [
+              255
+            ],
+            "add_b": [
+              102
+            ],
+            "size": 1,
+            "estimated_sample_gain": 22
+          },
+          {
+            "a": 3,
+            "b": 5,
+            "add_a": [
+              255
+            ],
+            "add_b": [
+              133
+            ],
+            "size": 1,
+            "estimated_sample_gain": 22
+          },
+          {
+            "a": 4,
+            "b": 7,
+            "add_a": [
+              322
+            ],
+            "add_b": [
+              105
+            ],
+            "size": 1,
+            "estimated_sample_gain": 20
+          },
+          {
+            "a": 2,
+            "b": 3,
+            "add_a": [
+              133
+            ],
+            "add_b": [
+              102
+            ],
+            "size": 1,
+            "estimated_sample_gain": 19
+          },
+          {
+            "a": 2,
+            "b": 7,
+            "add_a": [
+              322
+            ],
+            "add_b": [
+              102
+            ],
+            "size": 1,
+            "estimated_sample_gain": 18
+          },
+          {
+            "a": 4,
+            "b": 5,
+            "add_a": [
+              332
+            ],
+            "add_b": [
+              192
+            ],
+            "size": 1,
+            "estimated_sample_gain": 18
+          },
+          {
+            "a": 3,
+            "b": 5,
+            "add_a": [
+              227
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 8
+          },
+          {
+            "a": 0,
+            "b": 2,
+            "add_a": [
+              102
+            ],
+            "add_b": [
+              38
+            ],
+            "size": 1,
+            "estimated_sample_gain": 15
+          },
+          {
+            "a": 0,
+            "b": 2,
+            "add_a": [
+              99
+            ],
+            "add_b": [],
+            "size": 2,
+            "estimated_sample_gain": 8
+          },
+          {
+            "a": 0,
+            "b": 3,
+            "add_a": [
+              133
+            ],
+            "add_b": [
+              33
+            ],
+            "size": 1,
+            "estimated_sample_gain": 15
+          },
+          {
+            "a": 2,
+            "b": 3,
+            "add_a": [
+              145
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 7
+          },
+          {
+            "a": 0,
+            "b": 6,
+            "add_a": [
+              306,
+              350
+            ],
+            "add_b": [],
+            "size": 2,
+            "estimated_sample_gain": 10
+          },
+          {
+            "a": 2,
+            "b": 5,
+            "add_a": [
+              227
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 5
+          },
+          {
+            "a": 2,
+            "b": 7,
+            "add_a": [
+              310
+            ],
+            "add_b": [
+              91
+            ],
+            "size": 1,
+            "estimated_sample_gain": 9
+          },
+          {
+            "a": 0,
+            "b": 7,
+            "add_a": [],
+            "add_b": [
+              29
+            ],
+            "size": 1,
+            "estimated_sample_gain": 4
+          },
+          {
+            "a": 5,
+            "b": 7,
+            "add_a": [],
+            "add_b": [
+              255
+            ],
+            "size": 1,
+            "estimated_sample_gain": 3
+          },
+          {
+            "a": 5,
+            "b": 7,
+            "add_a": [],
+            "add_b": [
+              232
+            ],
+            "size": 2,
+            "estimated_sample_gain": 4
+          }
+        ],
+        "warning": "one direction per sample token/rank-pair; cross-pair overlaps remain estimates; final exchanges audited independently"
+      }
+    },
+    {
+      "layer": 7,
+      "path": "/Users/liangzuning/Documents/ChatGPT/EPMoE/outputs/eight_rank_estimate/kernel_inputs/layer_07.npz",
+      "sha256": "1e0f64493ee09ec3711746459c930135c155134c6b1e60fd7b6966f8689bf613",
+      "original_sources": {
+        "/Users/liangzuning/Documents/ChatGPT/EPMoE/outputs/trace_audit/layer_07.npz": "6611d17243bdf35730027eb6b3b9277649ca5cc1d84625af680baa0b0d8fac0e",
+        "/Users/liangzuning/Documents/ChatGPT/EPMoE/outputs/rt2_b8_comparison/layer07_native_rt0.npz": "7ee21b569bef62e874b6bf1dd8dec7cbc85df87b1ee43d2dc2cb9e27129eb6fb",
+        "/Users/liangzuning/Documents/ChatGPT/EPMoE/outputs/replay/layer07_b8_small256_global_4.npz": "4c178df5578d5042feb8856b4214dba69194df95126516426f246816a92b4efb"
+      },
+      "cpu_residency_preparation_seconds": 0.09532087500000053,
+      "cpu_exchange_oracle_seconds": 0.08115858299999967,
+      "cpu_times_are_not_gpu_estimates": true,
+      "archived_support_and_final_owner_exact": true,
+      "residency_diagnostics": {
+        "method": "reciprocal",
+        "mandatory_extra": [
+          1,
+          2,
+          1,
+          0,
+          2,
+          2,
+          1,
+          1
+        ],
+        "candidate_extra": [
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8
+        ],
+        "sampled_tokens": 256,
+        "distinct_group_buckets": 367,
+        "infeasible_directions_filtered": 0,
+        "candidate_packages": 960,
+        "accepted_packages": [
+          {
+            "a": 3,
+            "b": 5,
+            "add_a": [],
+            "add_b": [
+              140
+            ],
+            "size": 1,
+            "estimated_sample_gain": 33
+          },
+          {
+            "a": 1,
+            "b": 5,
+            "add_a": [
+              142
+            ],
+            "add_b": [
+              273
+            ],
+            "size": 1,
+            "estimated_sample_gain": 49
+          },
+          {
+            "a": 3,
+            "b": 5,
+            "add_a": [],
+            "add_b": [
+              145
+            ],
+            "size": 1,
+            "estimated_sample_gain": 22
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "add_a": [
+              273
+            ],
+            "add_b": [
+              128
+            ],
+            "size": 1,
+            "estimated_sample_gain": 39
+          },
+          {
+            "a": 0,
+            "b": 2,
+            "add_a": [
+              89
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 19
+          },
+          {
+            "a": 1,
+            "b": 3,
+            "add_a": [
+              140
+            ],
+            "add_b": [
+              273
+            ],
+            "size": 1,
+            "estimated_sample_gain": 31
+          },
+          {
+            "a": 0,
+            "b": 5,
+            "add_a": [
+              142
+            ],
+            "add_b": [
+              128
+            ],
+            "size": 1,
+            "estimated_sample_gain": 30
+          },
+          {
+            "a": 1,
+            "b": 5,
+            "add_a": [],
+            "add_b": [
+              52
+            ],
+            "size": 1,
+            "estimated_sample_gain": 14
+          },
+          {
+            "a": 1,
+            "b": 6,
+            "add_a": [
+              296
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 14
+          },
+          {
+            "a": 2,
+            "b": 6,
+            "add_a": [],
+            "add_b": [
+              99
+            ],
+            "size": 1,
+            "estimated_sample_gain": 14
+          },
+          {
+            "a": 4,
+            "b": 5,
+            "add_a": [
+              142
+            ],
+            "add_b": [
+              206
+            ],
+            "size": 1,
+            "estimated_sample_gain": 26
+          },
+          {
+            "a": 1,
+            "b": 3,
+            "add_a": [
+              145
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 13
+          },
+          {
+            "a": 0,
+            "b": 3,
+            "add_a": [
+              140
+            ],
+            "add_b": [
+              128
+            ],
+            "size": 1,
+            "estimated_sample_gain": 25
+          },
+          {
+            "a": 0,
+            "b": 4,
+            "add_a": [
+              343
+            ],
+            "add_b": [
+              128
+            ],
+            "size": 1,
+            "estimated_sample_gain": 25
+          },
+          {
+            "a": 1,
+            "b": 2,
+            "add_a": [
+              89
+            ],
+            "add_b": [
+              273
+            ],
+            "size": 1,
+            "estimated_sample_gain": 25
+          },
+          {
+            "a": 3,
+            "b": 4,
+            "add_a": [
+              206
+            ],
+            "add_b": [
+              140
+            ],
+            "size": 1,
+            "estimated_sample_gain": 24
+          },
+          {
+            "a": 0,
+            "b": 2,
+            "add_a": [
+              114
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 12
+          },
+          {
+            "a": 3,
+            "b": 6,
+            "add_a": [
+              284
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 12
+          },
+          {
+            "a": 3,
+            "b": 4,
+            "add_a": [
+              216
+            ],
+            "add_b": [
+              145
+            ],
+            "size": 1,
+            "estimated_sample_gain": 22
+          },
+          {
+            "a": 3,
+            "b": 6,
+            "add_a": [
+              289
+            ],
+            "add_b": [
+              140
+            ],
+            "size": 1,
+            "estimated_sample_gain": 22
+          },
+          {
+            "a": 4,
+            "b": 7,
+            "add_a": [
+              339
+            ],
+            "add_b": [
+              206
+            ],
+            "size": 1,
+            "estimated_sample_gain": 22
+          },
+          {
+            "a": 3,
+            "b": 4,
+            "add_a": [
+              343
+            ],
+            "add_b": [],
+            "size": 2,
+            "estimated_sample_gain": 10
+          },
+          {
+            "a": 2,
+            "b": 4,
+            "add_a": [
+              206
+            ],
+            "add_b": [
+              89
+            ],
+            "size": 1,
+            "estimated_sample_gain": 19
+          },
+          {
+            "a": 0,
+            "b": 6,
+            "add_a": [
+              284
+            ],
+            "add_b": [
+              128
+            ],
+            "size": 1,
+            "estimated_sample_gain": 18
+          },
+          {
+            "a": 2,
+            "b": 7,
+            "add_a": [
+              344
+            ],
+            "add_b": [
+              99
+            ],
+            "size": 1,
+            "estimated_sample_gain": 17
+          },
+          {
+            "a": 2,
+            "b": 6,
+            "add_a": [
+              284
+            ],
+            "add_b": [
+              89
+            ],
+            "size": 1,
+            "estimated_sample_gain": 16
+          },
+          {
+            "a": 3,
+            "b": 7,
+            "add_a": [
+              344
+            ],
+            "add_b": [
+              152
+            ],
+            "size": 1,
+            "estimated_sample_gain": 16
+          },
+          {
+            "a": 2,
+            "b": 7,
+            "add_a": [],
+            "add_b": [
+              98
+            ],
+            "size": 1,
+            "estimated_sample_gain": 7
+          },
+          {
+            "a": 6,
+            "b": 7,
+            "add_a": [
+              339
+            ],
+            "add_b": [
+              284
+            ],
+            "size": 1,
+            "estimated_sample_gain": 13
+          },
+          {
+            "a": 6,
+            "b": 7,
+            "add_a": [
+              320
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 6
+          },
+          {
+            "a": 6,
+            "b": 7,
+            "add_a": [
+              338
+            ],
+            "add_b": [],
+            "size": 2,
+            "estimated_sample_gain": 6
+          },
+          {
+            "a": 6,
+            "b": 7,
+            "add_a": [],
+            "add_b": [
+              296
+            ],
+            "size": 1,
+            "estimated_sample_gain": 5
+          },
+          {
+            "a": 0,
+            "b": 2,
+            "add_a": [],
+            "add_b": [
+              28
+            ],
+            "size": 1,
+            "estimated_sample_gain": 4
+          },
+          {
+            "a": 2,
+            "b": 7,
+            "add_a": [
+              339
+            ],
+            "add_b": [
+              97
+            ],
+            "size": 1,
+            "estimated_sample_gain": 7
+          },
+          {
+            "a": 2,
+            "b": 4,
+            "add_a": [
+              343
+            ],
+            "add_b": [],
+            "size": 1,
+            "estimated_sample_gain": 3
+          }
+        ],
+        "warning": "one direction per sample token/rank-pair; cross-pair overlaps remain estimates; final exchanges audited independently"
+      }
+    }
+  ]
+}

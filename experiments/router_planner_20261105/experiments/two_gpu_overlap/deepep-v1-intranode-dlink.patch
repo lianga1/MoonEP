@@ -1,0 +1,13 @@
+--- a/setup.py
++++ b/setup.py
+@@ -73,6 +73,10 @@
+         # CUDA 12 flags
+         nvcc_flags.extend(['-rdc=true', '--ptxas-options=--register-usage-level=10'])
+ 
++        # RDC intranode objects also require CUDA device linking without NVSHMEM.
++        if disable_nvshmem:
++            nvcc_dlink.append('-dlink')
++
+     # Disable LD/ST tricks, as some CUDA version does not support `.L1::no_allocate`
+     if os.environ['TORCH_CUDA_ARCH_LIST'].strip() != '9.0':
+         assert int(os.getenv('DISABLE_AGGRESSIVE_PTX_INSTRS', 1)) == 1

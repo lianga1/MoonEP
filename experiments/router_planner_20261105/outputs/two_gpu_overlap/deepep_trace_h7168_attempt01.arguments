@@ -1,0 +1,9 @@
+experiments/two_gpu_overlap/deepep_trace_smoke.py
+--layers
+0,7
+--hidden
+7168
+--weights
+moonep
+--output
+outputs/two_gpu_overlap/deepep_trace_h7168_attempt01

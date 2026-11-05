@@ -1,0 +1,133 @@
+{"status": "running", "layers": 0, "failures": 0}
+/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+{"status": "running", "layers": 1, "failures": 0}
+/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+{"status": "running", "layers": 1, "failures": 0}
+{"status": "running", "layers": 1, "failures": 0}
+{"status": "running", "layers": 1, "failures": 0}
+{"status": "running", "layers": 1, "failures": 0}
+{"status": "running", "layers": 1, "failures": 0}
+{"status": "running", "layers": 1, "failures": 0}
+{"status": "running", "layers": 1, "failures": 0}
+{"status": "running", "layers": 1, "failures": 0}
+{"status": "running", "layers": 1, "failures": 0}
+{"status": "running", "layers": 1, "failures": 0}
+{"status": "running", "layers": 1, "failures": 0}
+{"status": "running", "layers": 2, "failures": 0}
+{"status": "running", "layers": 2, "failures": 0}
+{"status": "running", "layers": 2, "failures": 0}
+{"status": "running", "layers": 2, "failures": 0}
+{"status": "running", "layers": 2, "failures": 0}
+{"status": "running", "layers": 2, "failures": 0}
+{"status": "running", "layers": 2, "failures": 0}
+{"status": "running", "layers": 2, "failures": 0}
+{"status": "running", "layers": 2, "failures": 0}
+{"status": "running", "layers": 2, "failures": 0}
+{"status": "running", "layers": 2, "failures": 0}
+{"status": "running", "layers": 2, "failures": 0}
+{"status": "running", "layers": 3, "failures": 0}
+{"status": "running", "layers": 3, "failures": 0}
+{"status": "running", "layers": 3, "failures": 0}
+{"status": "running", "layers": 3, "failures": 0}
+{"status": "running", "layers": 3, "failures": 0}
+{"status": "running", "layers": 3, "failures": 0}
+{"status": "running", "layers": 3, "failures": 0}
+{"status": "running", "layers": 3, "failures": 0}
+{"status": "running", "layers": 3, "failures": 0}
+{"status": "running", "layers": 3, "failures": 0}
+{"status": "running", "layers": 3, "failures": 0}
+{"status": "running", "layers": 3, "failures": 0}
+{"status": "running", "layers": 4, "failures": 0}
+{"status": "running", "layers": 4, "failures": 0}
+{"status": "running", "layers": 4, "failures": 0}
+{"status": "running", "layers": 4, "failures": 0}
+{"status": "running", "layers": 4, "failures": 0}
+{"status": "running", "layers": 4, "failures": 0}
+{"status": "running", "layers": 4, "failures": 0}
+{"status": "running", "layers": 4, "failures": 0}
+{"status": "running", "layers": 4, "failures": 0}
+{"status": "running", "layers": 4, "failures": 0}
+{"status": "running", "layers": 4, "failures": 0}
+{"status": "running", "layers": 4, "failures": 0}
+{"status": "running", "layers": 5, "failures": 0}
+{"status": "running", "layers": 5, "failures": 0}
+{"status": "running", "layers": 5, "failures": 0}
+{"status": "running", "layers": 5, "failures": 0}
+{"status": "running", "layers": 5, "failures": 0}
+{"status": "running", "layers": 5, "failures": 0}
+{"status": "running", "layers": 5, "failures": 0}
+{"status": "running", "layers": 5, "failures": 0}
+{"status": "running", "layers": 5, "failures": 0}
+{"status": "running", "layers": 5, "failures": 0}
+{"status": "running", "layers": 5, "failures": 0}
+{"status": "running", "layers": 5, "failures": 0}
+{"status": "running", "layers": 6, "failures": 0}
+{"status": "running", "layers": 6, "failures": 0}
+{"status": "running", "layers": 6, "failures": 0}
+{"status": "running", "layers": 6, "failures": 0}
+{"status": "running", "layers": 6, "failures": 0}
+{"status": "running", "layers": 6, "failures": 0}
+{"status": "running", "layers": 6, "failures": 0}
+{"status": "running", "layers": 6, "failures": 0}
+{"status": "running", "layers": 6, "failures": 0}
+{"status": "running", "layers": 6, "failures": 0}
+{"status": "running", "layers": 6, "failures": 0}
+{"status": "running", "layers": 6, "failures": 0}
+{"status": "running", "layers": 7, "failures": 0}
+{"status": "running", "layers": 7, "failures": 0}
+{"status": "running", "layers": 7, "failures": 0}
+{"status": "running", "layers": 7, "failures": 0}
+{"status": "running", "layers": 7, "failures": 0}
+{"status": "running", "layers": 7, "failures": 0}
+{"status": "running", "layers": 7, "failures": 0}
+{"status": "running", "layers": 7, "failures": 0}
+{"status": "running", "layers": 7, "failures": 0}
+{"status": "running", "layers": 7, "failures": 0}
+{"status": "running", "layers": 7, "failures": 0}
+{"status": "running", "layers": 7, "failures": 0}
+{"status": "running", "layers": 8, "failures": 0}
+{"status": "running", "layers": 8, "failures": 0}
+{"status": "running", "layers": 8, "failures": 0}
+{"status": "running", "layers": 8, "failures": 0}
+{"status": "running", "layers": 8, "failures": 0}
+{"status": "running", "layers": 8, "failures": 0}
+{"status": "running", "layers": 8, "failures": 0}
+{"status": "running", "layers": 8, "failures": 0}
+{"status": "running", "layers": 8, "failures": 0}
+{"status": "running", "layers": 8, "failures": 0}
+{"status": "running", "layers": 8, "failures": 0}
+{"status": "running", "layers": 8, "failures": 0}
+{"status": "complete", "layers": 8, "failures": 0}
+W1105 04:31:51.742000 162926 site-packages/torch/distributed/elastic/agent/server/api.py:739] Received 1 death signal, shutting down workers
+W1105 04:31:51.744000 162926 site-packages/torch/distributed/elastic/multiprocessing/api.py:1012] Sending process 163170 closing signal SIGHUP
+W1105 04:31:51.744000 162926 site-packages/torch/distributed/elastic/multiprocessing/api.py:1012] Sending process 163171 closing signal SIGHUP
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/sglang/bin/torchrun", line 6, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 362, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/distributed/run.py", line 990, in main
+    run(args)
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/distributed/run.py", line 981, in run
+    elastic_launch(
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 170, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 308, in launch_agent
+    result = agent.run()
+             ^^^^^^^^^^^
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/distributed/elastic/metrics/api.py", line 134, in wrapper
+    result = f(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/distributed/elastic/agent/server/api.py", line 731, in run
+    result = self._invoke_run(role)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/distributed/elastic/agent/server/api.py", line 908, in _invoke_run
+    time.sleep(monitor_interval)
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 86, in _terminate_process_handler
+    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
+torch.distributed.elastic.multiprocessing.api.SignalException: Process 162926 got signal: 1

@@ -1,0 +1,28 @@
+{
+  "native_r1": {
+    "status": "blocked_before_kernel_compile",
+    "source": "supplied MoonEP unchanged",
+    "physical_gpus": 1,
+    "logical_ranks": 1,
+    "attempt": "native_r1_compile_only",
+    "error": "cuMulticastCreate invalid argument at csrc/nvl_shared_buffer.cuh:578",
+    "timings_us": null,
+    "fallback_not_used": "Replacing multicast addresses by ordinary CUDA memory is invalid because native planning.py unconditionally issues multimem.st even at R=1."
+  },
+  "smoke_attempt01": {
+    "status": "intentionally_stopped_before_gpu_validation",
+    "reason": "Inherited TORCH_CUDA_ARCH_LIST selected seven architectures 75,80,86,89,90,100,120; only own smoke subprocess tree stopped, preserving separate attempt log."
+  },
+  "smoke_attempt02": {
+    "status": "all_eight_layers_passed",
+    "env": {
+      "TORCH_CUDA_ARCH_LIST": "9.0",
+      "MAX_JOBS": "4"
+    },
+    "wait_recovery": "Verified no compiler process remained and only baseline process was sleeping on the abandoned epmoe_bucket8_0915cfbb3ac9 cache lock left by stopped attempt01. Removed only this lock, retaining the prior successful binary. Validation then passed all eight layers."
+  },
+  "port_compile": {
+    "status": "success_after_client_wait_timeout",
+    "note": "First client wait ended at 600s with returncode124/completedfalse; remote process continued and log later confirmed baseline ports compiled. No repeated build triggered until initial completion."
+  }
+}

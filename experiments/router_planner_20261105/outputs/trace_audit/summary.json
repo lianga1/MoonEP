@@ -1,0 +1,6237 @@
+{
+  "schema_version": 1,
+  "dataset": "iteration_4/microbatch_2",
+  "layers": [
+    {
+      "label": "layer_00",
+      "shape": [
+        8,
+        16768,
+        8
+      ],
+      "global_tokens": 134144,
+      "pairs": 1073152,
+      "num_experts": 352,
+      "top_k": 8,
+      "id_min": 0,
+      "id_max": 351,
+      "observed_experts": 352,
+      "unique_experts_per_token": true,
+      "expert_max_over_mean": 6.345270753816794,
+      "expert_max_count": 19345,
+      "expert_min_count": 87,
+      "expert_effective_count_entropy": 247.6011643463176,
+      "home_assumption": "home[e]=e//44; verify with production expert map; dump has no placement metadata",
+      "home_loads": [
+        148641,
+        137731,
+        106299,
+        149822,
+        128484,
+        150310,
+        150643,
+        101222
+      ],
+      "home_max_over_mean": 1.1229946922709924,
+      "home_max_minus_min_over_mean": 0.36841752146946566,
+      "source_rank_js_bits": 0.1420511526354375,
+      "source_rank_total_variation_from_global": [
+        0.2561342661617366,
+        0.17788999135257635,
+        0.11304456405057252,
+        0.18664178047471375,
+        0.13763381142652673,
+        0.10621887672948473,
+        0.12431510168177481,
+        0.1345773944417939
+      ],
+      "top_experts": [
+        {
+          "id": 164,
+          "count": 19345,
+          "token_frequency": 0.1442106989503817
+        },
+        {
+          "id": 248,
+          "count": 18066,
+          "token_frequency": 0.13467616889312978
+        },
+        {
+          "id": 170,
+          "count": 17436,
+          "token_frequency": 0.12997972328244276
+        },
+        {
+          "id": 55,
+          "count": 16109,
+          "token_frequency": 0.12008736879770993
+        },
+        {
+          "id": 33,
+          "count": 13949,
+          "token_frequency": 0.1039852695610687
+        },
+        {
+          "id": 226,
+          "count": 11434,
+          "token_frequency": 0.0852367604961832
+        },
+        {
+          "id": 47,
+          "count": 11407,
+          "token_frequency": 0.08503548425572519
+        },
+        {
+          "id": 294,
+          "count": 10476,
+          "token_frequency": 0.07809518129770993
+        },
+        {
+          "id": 218,
+          "count": 10474,
+          "token_frequency": 0.07808027194656489
+        },
+        {
+          "id": 145,
+          "count": 10374,
+          "token_frequency": 0.07733480438931298
+        },
+        {
+          "id": 234,
+          "count": 10308,
+          "token_frequency": 0.07684279580152671
+        },
+        {
+          "id": 72,
+          "count": 9819,
+          "token_frequency": 0.07319745944656489
+        },
+        {
+          "id": 304,
+          "count": 9816,
+          "token_frequency": 0.07317509541984733
+        },
+        {
+          "id": 349,
+          "count": 9741,
+          "token_frequency": 0.0726159947519084
+        },
+        {
+          "id": 279,
+          "count": 9647,
+          "token_frequency": 0.0719152552480916
+        },
+        {
+          "id": 16,
+          "count": 9031,
+          "token_frequency": 0.06732317509541985
+        },
+        {
+          "id": 185,
+          "count": 8897,
+          "token_frequency": 0.0663242485687023
+        },
+        {
+          "id": 301,
+          "count": 8791,
+          "token_frequency": 0.06553405295801527
+        },
+        {
+          "id": 46,
+          "count": 8560,
+          "token_frequency": 0.06381202290076336
+        },
+        {
+          "id": 175,
+          "count": 8337,
+          "token_frequency": 0.0621496302480916
+        },
+        {
+          "id": 173,
+          "count": 8320,
+          "token_frequency": 0.06202290076335878
+        },
+        {
+          "id": 333,
+          "count": 8301,
+          "token_frequency": 0.06188126192748092
+        },
+        {
+          "id": 232,
+          "count": 8278,
+          "token_frequency": 0.06170980438931298
+        },
+        {
+          "id": 85,
+          "count": 8193,
+          "token_frequency": 0.06107615696564885
+        }
+      ],
+      "top_expert_pair_share": {
+        "8": 0.1101633319417939,
+        "12": 0.14834524838979007,
+        "16": 0.18397393845419846,
+        "20": 0.21620143278864504,
+        "24": 0.24703769829437022,
+        "32": 0.30325433862118323,
+        "64": 0.4706705107943702
+      },
+      "top_expert_count_per_token": {
+        "8": [
+          51892,
+          52788,
+          23546,
+          5354,
+          540,
+          24,
+          0,
+          0,
+          0
+        ],
+        "16": [
+          24716,
+          49686,
+          37632,
+          16794,
+          4531,
+          734,
+          51,
+          0,
+          0
+        ],
+        "24": [
+          12927,
+          38157,
+          40845,
+          27446,
+          11396,
+          2923,
+          426,
+          23,
+          1
+        ]
+      },
+      "home_remote_destinations_total": 615615,
+      "home_remote_destinations_per_token": 4.589210102576335,
+      "home_remote_destination_histogram": [
+        0,
+        15,
+        1118,
+        13217,
+        45798,
+        54855,
+        17741,
+        1400,
+        0
+      ],
+      "home_remote_tokens_by_source_destination": [
+        [
+          0,
+          12720,
+          11095,
+          12060,
+          12138,
+          9515,
+          9422,
+          11029
+        ],
+        [
+          12506,
+          0,
+          9574,
+          10270,
+          11273,
+          11972,
+          12004,
+          9425
+        ],
+        [
+          11916,
+          11093,
+          0,
+          12067,
+          10217,
+          11861,
+          12135,
+          8915
+        ],
+        [
+          12061,
+          10815,
+          9722,
+          0,
+          10369,
+          12034,
+          11607,
+          8109
+        ],
+        [
+          11427,
+          11334,
+          9728,
+          12117,
+          0,
+          11573,
+          11911,
+          9194
+        ],
+        [
+          11619,
+          11084,
+          9051,
+          12172,
+          10502,
+          0,
+          12276,
+          8850
+        ],
+        [
+          11558,
+          11574,
+          9549,
+          11936,
+          10601,
+          11954,
+          0,
+          8579
+        ],
+        [
+          11808,
+          11451,
+          9118,
+          11664,
+          10890,
+          12186,
+          11985,
+          0
+        ]
+      ],
+      "distinct_unordered_topk_sets": 123271,
+      "most_repeated_unordered_topk_set_count": 3512,
+      "unordered_topk_set_collision_fraction": 0.0810546875,
+      "cooccurrence_pair_tv_vs_slot_shuffle": 0.2183837890625,
+      "cooccurrence_top20_mass": 0.019001435557524538,
+      "cooccurrence_slot_shuffle_mass_on_real_top20": 0.0046133792257360955,
+      "slot_shuffle_duplicate_token_fraction": 0.1477293058206107,
+      "cooccurrence_top20": [
+        {
+          "a": 148,
+          "b": 349,
+          "count": 3721,
+          "slot_shuffle_count": 1038
+        },
+        {
+          "a": 88,
+          "b": 349,
+          "count": 3615,
+          "slot_shuffle_count": 948
+        },
+        {
+          "a": 2,
+          "b": 349,
+          "count": 3611,
+          "slot_shuffle_count": 1038
+        },
+        {
+          "a": 148,
+          "b": 340,
+          "count": 3590,
+          "slot_shuffle_count": 848
+        },
+        {
+          "a": 76,
+          "b": 349,
+          "count": 3572,
+          "slot_shuffle_count": 895
+        },
+        {
+          "a": 340,
+          "b": 349,
+          "count": 3571,
+          "slot_shuffle_count": 997
+        },
+        {
+          "a": 2,
+          "b": 340,
+          "count": 3570,
+          "slot_shuffle_count": 821
+        },
+        {
+          "a": 88,
+          "b": 148,
+          "count": 3570,
+          "slot_shuffle_count": 857
+        },
+        {
+          "a": 2,
+          "b": 148,
+          "count": 3563,
+          "slot_shuffle_count": 846
+        },
+        {
+          "a": 148,
+          "b": 198,
+          "count": 3562,
+          "slot_shuffle_count": 835
+        },
+        {
+          "a": 2,
+          "b": 88,
+          "count": 3559,
+          "slot_shuffle_count": 816
+        },
+        {
+          "a": 198,
+          "b": 340,
+          "count": 3556,
+          "slot_shuffle_count": 865
+        },
+        {
+          "a": 76,
+          "b": 198,
+          "count": 3549,
+          "slot_shuffle_count": 765
+        },
+        {
+          "a": 76,
+          "b": 148,
+          "count": 3546,
+          "slot_shuffle_count": 806
+        },
+        {
+          "a": 76,
+          "b": 88,
+          "count": 3542,
+          "slot_shuffle_count": 804
+        },
+        {
+          "a": 2,
+          "b": 219,
+          "count": 3539,
+          "slot_shuffle_count": 765
+        },
+        {
+          "a": 198,
+          "b": 349,
+          "count": 3539,
+          "slot_shuffle_count": 908
+        },
+        {
+          "a": 88,
+          "b": 340,
+          "count": 3538,
+          "slot_shuffle_count": 805
+        },
+        {
+          "a": 76,
+          "b": 340,
+          "count": 3530,
+          "slot_shuffle_count": 860
+        },
+        {
+          "a": 2,
+          "b": 198,
+          "count": 3527,
+          "slot_shuffle_count": 811
+        }
+      ],
+      "sha256_topk_int32_c": "8de6b46dbb3840287e1d635ba219286c162c65f1bf76a8d4efb9f8b5a59364e6",
+      "cooccurrence_pair_tv_vs_legal_rewire": 0.21813445678844057,
+      "cooccurrence_legal_rewire_mass_on_real_top20": 0.004659438471237732,
+      "legal_rewire": {
+        "sweeps": 16,
+        "seed": 20261026,
+        "accepted_swaps": 7807715,
+        "attempted_swaps": 8585216,
+        "exact_source_slot_marginals": true,
+        "unique_experts_per_token": true
+      }
+    },
+    {
+      "label": "layer_01",
+      "shape": [
+        8,
+        16768,
+        8
+      ],
+      "global_tokens": 134144,
+      "pairs": 1073152,
+      "num_experts": 352,
+      "top_k": 8,
+      "id_min": 0,
+      "id_max": 351,
+      "observed_experts": 342,
+      "unique_experts_per_token": true,
+      "expert_max_over_mean": 17.3308385019084,
+      "expert_max_count": 52837,
+      "expert_min_count": 0,
+      "expert_effective_count_entropy": 112.75905432556885,
+      "home_assumption": "home[e]=e//44; verify with production expert map; dump has no placement metadata",
+      "home_loads": [
+        120086,
+        115536,
+        107524,
+        198818,
+        102547,
+        157611,
+        151271,
+        119759
+      ],
+      "home_max_over_mean": 1.4821236879770991,
+      "home_max_minus_min_over_mean": 0.7176690720419847,
+      "source_rank_js_bits": 0.4297807277593555,
+      "source_rank_total_variation_from_global": [
+        0.3856462085520038,
+        0.2887242440958969,
+        0.24392537124284353,
+        0.30165344704198477,
+        0.24189863132156486,
+        0.23769698980200382,
+        0.26324229932013354,
+        0.2956747972328244
+      ],
+      "top_experts": [
+        {
+          "id": 152,
+          "count": 52837,
+          "token_frequency": 0.3938826932251908
+        },
+        {
+          "id": 156,
+          "count": 49965,
+          "token_frequency": 0.37247286498091603
+        },
+        {
+          "id": 247,
+          "count": 37309,
+          "token_frequency": 0.2781264909351145
+        },
+        {
+          "id": 5,
+          "count": 37121,
+          "token_frequency": 0.2767250119274809
+        },
+        {
+          "id": 329,
+          "count": 35021,
+          "token_frequency": 0.2610701932251908
+        },
+        {
+          "id": 98,
+          "count": 29109,
+          "token_frequency": 0.21699815124045801
+        },
+        {
+          "id": 290,
+          "count": 28179,
+          "token_frequency": 0.21006530295801526
+        },
+        {
+          "id": 169,
+          "count": 25743,
+          "token_frequency": 0.19190571326335878
+        },
+        {
+          "id": 21,
+          "count": 22910,
+          "token_frequency": 0.1707866173664122
+        },
+        {
+          "id": 302,
+          "count": 18148,
+          "token_frequency": 0.13528745229007633
+        },
+        {
+          "id": 266,
+          "count": 17202,
+          "token_frequency": 0.12823532919847327
+        },
+        {
+          "id": 337,
+          "count": 16201,
+          "token_frequency": 0.12077319895038167
+        },
+        {
+          "id": 298,
+          "count": 15521,
+          "token_frequency": 0.1157040195610687
+        },
+        {
+          "id": 320,
+          "count": 15299,
+          "token_frequency": 0.11404908158396947
+        },
+        {
+          "id": 33,
+          "count": 14862,
+          "token_frequency": 0.11079138835877862
+        },
+        {
+          "id": 65,
+          "count": 13232,
+          "token_frequency": 0.09864026717557252
+        },
+        {
+          "id": 224,
+          "count": 13073,
+          "token_frequency": 0.09745497375954199
+        },
+        {
+          "id": 53,
+          "count": 12526,
+          "token_frequency": 0.09337726622137404
+        },
+        {
+          "id": 281,
+          "count": 12373,
+          "token_frequency": 0.09223670085877862
+        },
+        {
+          "id": 126,
+          "count": 12175,
+          "token_frequency": 0.09076067509541985
+        },
+        {
+          "id": 291,
+          "count": 12039,
+          "token_frequency": 0.08974683921755726
+        },
+        {
+          "id": 235,
+          "count": 11649,
+          "token_frequency": 0.08683951574427481
+        },
+        {
+          "id": 250,
+          "count": 10793,
+          "token_frequency": 0.08045831345419847
+        },
+        {
+          "id": 236,
+          "count": 10443,
+          "token_frequency": 0.0778491770038168
+        }
+      ],
+      "top_expert_pair_share": {
+        "8": 0.27515580271946566,
+        "12": 0.3445411274451336,
+        "16": 0.3994392220300573,
+        "20": 0.44616792402194655,
+        "24": 0.4880296546994275,
+        "32": 0.5628121645395993,
+        "64": 0.7547271961474237
+      },
+      "top_expert_count_per_token": {
+        "8": [
+          18815,
+          28211,
+          32325,
+          27784,
+          17803,
+          7486,
+          1611,
+          109,
+          0
+        ],
+        "16": [
+          9644,
+          16760,
+          23226,
+          25948,
+          24802,
+          18875,
+          10705,
+          3682,
+          502
+        ],
+        "24": [
+          6995,
+          8772,
+          15140,
+          22455,
+          26952,
+          25505,
+          18212,
+          8196,
+          1917
+        ]
+      },
+      "home_remote_destinations_total": 623932,
+      "home_remote_destinations_per_token": 4.6512106393129775,
+      "home_remote_destination_histogram": [
+        0,
+        4,
+        531,
+        10318,
+        47033,
+        55097,
+        19832,
+        1329,
+        0
+      ],
+      "home_remote_tokens_by_source_destination": [
+        [
+          0,
+          12033,
+          8476,
+          11385,
+          10532,
+          14102,
+          9533,
+          10979
+        ],
+        [
+          11159,
+          0,
+          9769,
+          14073,
+          11370,
+          11617,
+          11724,
+          10298
+        ],
+        [
+          10469,
+          10373,
+          0,
+          13528,
+          9633,
+          11143,
+          12918,
+          12562
+        ],
+        [
+          11619,
+          9044,
+          11186,
+          0,
+          6165,
+          11771,
+          12342,
+          10919
+        ],
+        [
+          9473,
+          11222,
+          9796,
+          13103,
+          0,
+          12945,
+          12002,
+          11212
+        ],
+        [
+          10985,
+          11294,
+          10848,
+          12748,
+          8046,
+          0,
+          12948,
+          11697
+        ],
+        [
+          11167,
+          9499,
+          10855,
+          15384,
+          7788,
+          12473,
+          0,
+          8910
+        ],
+        [
+          11779,
+          8933,
+          8320,
+          15375,
+          8787,
+          13102,
+          12519,
+          0
+        ]
+      ],
+      "distinct_unordered_topk_sets": 103676,
+      "most_repeated_unordered_topk_set_count": 3512,
+      "unordered_topk_set_collision_fraction": 0.22712905534351144,
+      "cooccurrence_pair_tv_vs_slot_shuffle": 0.3289515371541031,
+      "cooccurrence_top20_mass": 0.07301268998773174,
+      "cooccurrence_slot_shuffle_mass_on_real_top20": 0.05360763699563795,
+      "slot_shuffle_duplicate_token_fraction": 0.39533635496183206,
+      "cooccurrence_top20": [
+        {
+          "a": 152,
+          "b": 156,
+          "count": 21622,
+          "slot_shuffle_count": 17330
+        },
+        {
+          "a": 152,
+          "b": 247,
+          "count": 19355,
+          "slot_shuffle_count": 12916
+        },
+        {
+          "a": 5,
+          "b": 156,
+          "count": 17425,
+          "slot_shuffle_count": 12733
+        },
+        {
+          "a": 156,
+          "b": 247,
+          "count": 17014,
+          "slot_shuffle_count": 11977
+        },
+        {
+          "a": 152,
+          "b": 169,
+          "count": 16537,
+          "slot_shuffle_count": 9783
+        },
+        {
+          "a": 156,
+          "b": 329,
+          "count": 14847,
+          "slot_shuffle_count": 11961
+        },
+        {
+          "a": 152,
+          "b": 290,
+          "count": 13668,
+          "slot_shuffle_count": 9575
+        },
+        {
+          "a": 152,
+          "b": 329,
+          "count": 13256,
+          "slot_shuffle_count": 12450
+        },
+        {
+          "a": 247,
+          "b": 290,
+          "count": 12864,
+          "slot_shuffle_count": 6963
+        },
+        {
+          "a": 98,
+          "b": 152,
+          "count": 12833,
+          "slot_shuffle_count": 10472
+        },
+        {
+          "a": 98,
+          "b": 156,
+          "count": 12771,
+          "slot_shuffle_count": 9604
+        },
+        {
+          "a": 5,
+          "b": 152,
+          "count": 12611,
+          "slot_shuffle_count": 13058
+        },
+        {
+          "a": 156,
+          "b": 290,
+          "count": 12370,
+          "slot_shuffle_count": 9585
+        },
+        {
+          "a": 98,
+          "b": 247,
+          "count": 12328,
+          "slot_shuffle_count": 6967
+        },
+        {
+          "a": 5,
+          "b": 329,
+          "count": 11209,
+          "slot_shuffle_count": 8863
+        },
+        {
+          "a": 247,
+          "b": 329,
+          "count": 11192,
+          "slot_shuffle_count": 9236
+        },
+        {
+          "a": 156,
+          "b": 266,
+          "count": 10692,
+          "slot_shuffle_count": 6841
+        },
+        {
+          "a": 21,
+          "b": 152,
+          "count": 10646,
+          "slot_shuffle_count": 8549
+        },
+        {
+          "a": 21,
+          "b": 156,
+          "count": 10520,
+          "slot_shuffle_count": 7351
+        },
+        {
+          "a": 169,
+          "b": 290,
+          "count": 10478,
+          "slot_shuffle_count": 5138
+        }
+      ],
+      "sha256_topk_int32_c": "3dcbdacdcea2d7451a31a9ccba36a7760bd90e3b2f649d0e936ff6ee6e023fad",
+      "cooccurrence_pair_tv_vs_legal_rewire": 0.3268297501192748,
+      "cooccurrence_legal_rewire_mass_on_real_top20": 0.057509360942611776,
+      "legal_rewire": {
+        "sweeps": 16,
+        "seed": 20261026,
+        "accepted_swaps": 6300360,
+        "attempted_swaps": 8585216,
+        "exact_source_slot_marginals": true,
+        "unique_experts_per_token": true
+      }
+    },
+    {
+      "label": "layer_02",
+      "shape": [
+        8,
+        16768,
+        8
+      ],
+      "global_tokens": 134144,
+      "pairs": 1073152,
+      "num_experts": 352,
+      "top_k": 8,
+      "id_min": 0,
+      "id_max": 351,
+      "observed_experts": 298,
+      "unique_experts_per_token": true,
+      "expert_max_over_mean": 16.35502146946565,
+      "expert_max_count": 49862,
+      "expert_min_count": 0,
+      "expert_effective_count_entropy": 103.4113258316205,
+      "home_assumption": "home[e]=e//44; verify with production expert map; dump has no placement metadata",
+      "home_loads": [
+        107486,
+        115326,
+        150939,
+        134621,
+        242713,
+        127295,
+        108761,
+        86011
+      ],
+      "home_max_over_mean": 1.8093466722328244,
+      "home_max_minus_min_over_mean": 1.1681625715648856,
+      "source_rank_js_bits": 0.5293467282175808,
+      "source_rank_total_variation_from_global": [
+        0.42059745497375955,
+        0.34623520246898853,
+        0.235531406548187,
+        0.3928474251550573,
+        0.27465447578721375,
+        0.23964545562977096,
+        0.26765080808683206,
+        0.28137020664360685
+      ],
+      "top_experts": [
+        {
+          "id": 182,
+          "count": 49862,
+          "token_frequency": 0.37170503339694655
+        },
+        {
+          "id": 191,
+          "count": 46378,
+          "token_frequency": 0.3457329437022901
+        },
+        {
+          "id": 45,
+          "count": 36794,
+          "token_frequency": 0.2742873330152672
+        },
+        {
+          "id": 148,
+          "count": 30621,
+          "token_frequency": 0.22826962070610687
+        },
+        {
+          "id": 180,
+          "count": 29733,
+          "token_frequency": 0.22164986879770993
+        },
+        {
+          "id": 245,
+          "count": 28737,
+          "token_frequency": 0.21422501192748092
+        },
+        {
+          "id": 135,
+          "count": 25731,
+          "token_frequency": 0.19181625715648856
+        },
+        {
+          "id": 71,
+          "count": 21330,
+          "token_frequency": 0.15900822996183206
+        },
+        {
+          "id": 116,
+          "count": 20235,
+          "token_frequency": 0.15084536020992367
+        },
+        {
+          "id": 92,
+          "count": 18882,
+          "token_frequency": 0.14075918416030533
+        },
+        {
+          "id": 217,
+          "count": 18712,
+          "token_frequency": 0.1394918893129771
+        },
+        {
+          "id": 143,
+          "count": 18318,
+          "token_frequency": 0.1365547471374046
+        },
+        {
+          "id": 101,
+          "count": 18004,
+          "token_frequency": 0.1342139790076336
+        },
+        {
+          "id": 13,
+          "count": 17823,
+          "token_frequency": 0.13286468272900764
+        },
+        {
+          "id": 201,
+          "count": 17149,
+          "token_frequency": 0.12784023139312978
+        },
+        {
+          "id": 138,
+          "count": 16091,
+          "token_frequency": 0.11995318463740458
+        },
+        {
+          "id": 237,
+          "count": 16037,
+          "token_frequency": 0.11955063215648855
+        },
+        {
+          "id": 299,
+          "count": 14896,
+          "token_frequency": 0.11104484732824428
+        },
+        {
+          "id": 315,
+          "count": 14672,
+          "token_frequency": 0.109375
+        },
+        {
+          "id": 105,
+          "count": 14632,
+          "token_frequency": 0.10907681297709923
+        },
+        {
+          "id": 297,
+          "count": 13947,
+          "token_frequency": 0.10397036020992366
+        },
+        {
+          "id": 293,
+          "count": 13513,
+          "token_frequency": 0.10073503101145038
+        },
+        {
+          "id": 190,
+          "count": 13407,
+          "token_frequency": 0.09994483540076336
+        },
+        {
+          "id": 250,
+          "count": 13092,
+          "token_frequency": 0.09759661259541985
+        }
+      ],
+      "top_expert_pair_share": {
+        "8": 0.2508367873330153,
+        "12": 0.3217931849355916,
+        "16": 0.38615219465648853,
+        "20": 0.44228310621421757,
+        "24": 0.4925639611164122,
+        "32": 0.5842704481750954,
+        "64": 0.796594517831584
+      },
+      "top_expert_count_per_token": {
+        "8": [
+          13559,
+          31251,
+          44247,
+          32373,
+          11293,
+          1376,
+          45,
+          0,
+          0
+        ],
+        "16": [
+          3992,
+          16791,
+          27154,
+          33363,
+          28844,
+          17325,
+          5584,
+          1021,
+          70
+        ],
+        "24": [
+          1486,
+          9075,
+          13157,
+          25806,
+          34347,
+          29136,
+          15879,
+          4617,
+          641
+        ]
+      },
+      "home_remote_destinations_total": 615540,
+      "home_remote_destinations_per_token": 4.588651001908397,
+      "home_remote_destination_histogram": [
+        0,
+        6,
+        1492,
+        12401,
+        48483,
+        50827,
+        19265,
+        1670,
+        0
+      ],
+      "home_remote_tokens_by_source_destination": [
+        [
+          0,
+          11871,
+          13739,
+          10977,
+          10774,
+          13204,
+          8303,
+          8159
+        ],
+        [
+          8618,
+          0,
+          11570,
+          11223,
+          15680,
+          12964,
+          11472,
+          10828
+        ],
+        [
+          10621,
+          10553,
+          0,
+          10642,
+          16335,
+          11870,
+          8924,
+          8199
+        ],
+        [
+          8787,
+          11528,
+          7795,
+          0,
+          16449,
+          9772,
+          9007,
+          5870
+        ],
+        [
+          10799,
+          8164,
+          12288,
+          13283,
+          0,
+          10446,
+          8069,
+          6832
+        ],
+        [
+          10390,
+          11814,
+          11500,
+          13666,
+          14850,
+          0,
+          11637,
+          6490
+        ],
+        [
+          9387,
+          9846,
+          13195,
+          8870,
+          16056,
+          10895,
+          0,
+          7647
+        ],
+        [
+          10415,
+          11652,
+          12582,
+          13587,
+          14411,
+          10726,
+          10309,
+          0
+        ]
+      ],
+      "distinct_unordered_topk_sets": 52026,
+      "most_repeated_unordered_topk_set_count": 3512,
+      "unordered_topk_set_collision_fraction": 0.6121630486641222,
+      "cooccurrence_pair_tv_vs_slot_shuffle": 0.35812474441112324,
+      "cooccurrence_top20_mass": 0.06301197646878408,
+      "cooccurrence_slot_shuffle_mass_on_real_top20": 0.041038521503544166,
+      "slot_shuffle_duplicate_token_fraction": 0.39934697041984735,
+      "cooccurrence_top20": [
+        {
+          "a": 182,
+          "b": 191,
+          "count": 25982,
+          "slot_shuffle_count": 15324
+        },
+        {
+          "a": 135,
+          "b": 191,
+          "count": 15110,
+          "slot_shuffle_count": 9842
+        },
+        {
+          "a": 45,
+          "b": 191,
+          "count": 13797,
+          "slot_shuffle_count": 10806
+        },
+        {
+          "a": 138,
+          "b": 191,
+          "count": 13284,
+          "slot_shuffle_count": 8077
+        },
+        {
+          "a": 182,
+          "b": 315,
+          "count": 13001,
+          "slot_shuffle_count": 5117
+        },
+        {
+          "a": 191,
+          "b": 217,
+          "count": 12479,
+          "slot_shuffle_count": 7152
+        },
+        {
+          "a": 71,
+          "b": 182,
+          "count": 12467,
+          "slot_shuffle_count": 6955
+        },
+        {
+          "a": 135,
+          "b": 182,
+          "count": 12158,
+          "slot_shuffle_count": 8559
+        },
+        {
+          "a": 92,
+          "b": 191,
+          "count": 12027,
+          "slot_shuffle_count": 6764
+        },
+        {
+          "a": 148,
+          "b": 191,
+          "count": 11925,
+          "slot_shuffle_count": 7838
+        },
+        {
+          "a": 92,
+          "b": 182,
+          "count": 10853,
+          "slot_shuffle_count": 6392
+        },
+        {
+          "a": 148,
+          "b": 182,
+          "count": 10100,
+          "slot_shuffle_count": 8767
+        },
+        {
+          "a": 45,
+          "b": 135,
+          "count": 9953,
+          "slot_shuffle_count": 6699
+        },
+        {
+          "a": 143,
+          "b": 182,
+          "count": 9650,
+          "slot_shuffle_count": 6552
+        },
+        {
+          "a": 45,
+          "b": 182,
+          "count": 9459,
+          "slot_shuffle_count": 11740
+        },
+        {
+          "a": 116,
+          "b": 182,
+          "count": 9296,
+          "slot_shuffle_count": 7085
+        },
+        {
+          "a": 71,
+          "b": 143,
+          "count": 9126,
+          "slot_shuffle_count": 3364
+        },
+        {
+          "a": 191,
+          "b": 201,
+          "count": 8798,
+          "slot_shuffle_count": 6932
+        },
+        {
+          "a": 191,
+          "b": 305,
+          "count": 8758,
+          "slot_shuffle_count": 4237
+        },
+        {
+          "a": 13,
+          "b": 182,
+          "count": 8452,
+          "slot_shuffle_count": 5940
+        }
+      ],
+      "sha256_topk_int32_c": "74d33c272ee4308594b70ac9b8cb5f71bd36e1c00606c081ce1abe12e549ebbf",
+      "cooccurrence_pair_tv_vs_legal_rewire": 0.3571457857654035,
+      "cooccurrence_legal_rewire_mass_on_real_top20": 0.04383934961150491,
+      "legal_rewire": {
+        "sweeps": 16,
+        "seed": 20261026,
+        "accepted_swaps": 6245899,
+        "attempted_swaps": 8585216,
+        "exact_source_slot_marginals": true,
+        "unique_experts_per_token": true
+      }
+    },
+    {
+      "label": "layer_03",
+      "shape": [
+        8,
+        16768,
+        8
+      ],
+      "global_tokens": 134144,
+      "pairs": 1073152,
+      "num_experts": 352,
+      "top_k": 8,
+      "id_min": 0,
+      "id_max": 351,
+      "observed_experts": 291,
+      "unique_experts_per_token": true,
+      "expert_max_over_mean": 16.091632872137406,
+      "expert_max_count": 49059,
+      "expert_min_count": 0,
+      "expert_effective_count_entropy": 110.10634045706551,
+      "home_assumption": "home[e]=e//44; verify with production expert map; dump has no placement metadata",
+      "home_loads": [
+        75239,
+        140246,
+        266540,
+        60129,
+        96549,
+        218080,
+        110703,
+        105666
+      ],
+      "home_max_over_mean": 1.9869692270992367,
+      "home_max_minus_min_over_mean": 1.5387270395992367,
+      "source_rank_js_bits": 0.6543184640216614,
+      "source_rank_total_variation_from_global": [
+        0.43733879264074427,
+        0.3583611641221374,
+        0.29453143636688933,
+        0.4525481944775763,
+        0.31136129830629766,
+        0.3203665463979008,
+        0.29558534112595425,
+        0.33369271081822516
+      ],
+      "top_experts": [
+        {
+          "id": 102,
+          "count": 49059,
+          "token_frequency": 0.36571892891221375
+        },
+        {
+          "id": 125,
+          "count": 48481,
+          "token_frequency": 0.3614101264312977
+        },
+        {
+          "id": 230,
+          "count": 45819,
+          "token_frequency": 0.3415657800572519
+        },
+        {
+          "id": 90,
+          "count": 39002,
+          "token_frequency": 0.29074725667938933
+        },
+        {
+          "id": 129,
+          "count": 38790,
+          "token_frequency": 0.2891668654580153
+        },
+        {
+          "id": 233,
+          "count": 24543,
+          "token_frequency": 0.18296010257633588
+        },
+        {
+          "id": 221,
+          "count": 20869,
+          "token_frequency": 0.15557162452290077
+        },
+        {
+          "id": 239,
+          "count": 20841,
+          "token_frequency": 0.15536289360687022
+        },
+        {
+          "id": 209,
+          "count": 19928,
+          "token_frequency": 0.1485567748091603
+        },
+        {
+          "id": 85,
+          "count": 19783,
+          "token_frequency": 0.14747584685114504
+        },
+        {
+          "id": 48,
+          "count": 17588,
+          "token_frequency": 0.13111283396946566
+        },
+        {
+          "id": 245,
+          "count": 17375,
+          "token_frequency": 0.12952498807251908
+        },
+        {
+          "id": 286,
+          "count": 16825,
+          "token_frequency": 0.1254249165076336
+        },
+        {
+          "id": 339,
+          "count": 16430,
+          "token_frequency": 0.12248031965648855
+        },
+        {
+          "id": 123,
+          "count": 16212,
+          "token_frequency": 0.12085520038167939
+        },
+        {
+          "id": 66,
+          "count": 16150,
+          "token_frequency": 0.1203930104961832
+        },
+        {
+          "id": 262,
+          "count": 14448,
+          "token_frequency": 0.10770515267175572
+        },
+        {
+          "id": 238,
+          "count": 14427,
+          "token_frequency": 0.10754860448473283
+        },
+        {
+          "id": 319,
+          "count": 13516,
+          "token_frequency": 0.10075739503816794
+        },
+        {
+          "id": 96,
+          "count": 12848,
+          "token_frequency": 0.09577767175572519
+        },
+        {
+          "id": 251,
+          "count": 12819,
+          "token_frequency": 0.09556148616412213
+        },
+        {
+          "id": 203,
+          "count": 12649,
+          "token_frequency": 0.0942941913167939
+        },
+        {
+          "id": 342,
+          "count": 11592,
+          "token_frequency": 0.08641459923664122
+        },
+        {
+          "id": 3,
+          "count": 11328,
+          "token_frequency": 0.08444656488549618
+        }
+      ],
+      "top_expert_pair_share": {
+        "8": 0.26781294728053434,
+        "12": 0.3373967527433206,
+        "16": 0.3985409336235687,
+        "20": 0.4500145366173664,
+        "24": 0.4951041418177481,
+        "32": 0.5658564676765268,
+        "64": 0.7488016609017175
+      },
+      "top_expert_count_per_token": {
+        "8": [
+          15348,
+          27029,
+          41809,
+          29640,
+          14972,
+          4331,
+          811,
+          204,
+          0
+        ],
+        "16": [
+          5270,
+          15895,
+          21804,
+          35085,
+          29988,
+          16529,
+          7067,
+          2110,
+          396
+        ],
+        "24": [
+          3173,
+          7635,
+          19302,
+          22008,
+          29388,
+          25779,
+          16682,
+          8896,
+          1281
+        ]
+      },
+      "home_remote_destinations_total": 581922,
+      "home_remote_destinations_per_token": 4.3380397185114505,
+      "home_remote_destination_histogram": [
+        0,
+        31,
+        3091,
+        20717,
+        50663,
+        47415,
+        11758,
+        469,
+        0
+      ],
+      "home_remote_tokens_by_source_destination": [
+        [
+          0,
+          10612,
+          12080,
+          9175,
+          9205,
+          11156,
+          10899,
+          12866
+        ],
+        [
+          9089,
+          0,
+          15777,
+          8678,
+          10491,
+          13461,
+          11276,
+          6632
+        ],
+        [
+          6904,
+          10700,
+          0,
+          5476,
+          12037,
+          13673,
+          8364,
+          7100
+        ],
+        [
+          6379,
+          11677,
+          15807,
+          0,
+          7382,
+          16185,
+          6037,
+          11378
+        ],
+        [
+          8330,
+          12533,
+          16245,
+          7079,
+          0,
+          15407,
+          8566,
+          9289
+        ],
+        [
+          5166,
+          13332,
+          15068,
+          5707,
+          8371,
+          0,
+          10017,
+          11064
+        ],
+        [
+          4808,
+          12117,
+          15881,
+          6617,
+          7093,
+          13956,
+          0,
+          10509
+        ],
+        [
+          8138,
+          12721,
+          15944,
+          5292,
+          8167,
+          12322,
+          11687,
+          0
+        ]
+      ],
+      "distinct_unordered_topk_sets": 35147,
+      "most_repeated_unordered_topk_set_count": 3512,
+      "unordered_topk_set_collision_fraction": 0.7379905176526718,
+      "cooccurrence_pair_tv_vs_slot_shuffle": 0.38494067675674754,
+      "cooccurrence_top20_mass": 0.0719906007190567,
+      "cooccurrence_slot_shuffle_mass_on_real_top20": 0.052333952426390405,
+      "slot_shuffle_duplicate_token_fraction": 0.42528924141221375,
+      "cooccurrence_top20": [
+        {
+          "a": 102,
+          "b": 125,
+          "count": 21474,
+          "slot_shuffle_count": 16839
+        },
+        {
+          "a": 129,
+          "b": 230,
+          "count": 20608,
+          "slot_shuffle_count": 11207
+        },
+        {
+          "a": 125,
+          "b": 230,
+          "count": 16937,
+          "slot_shuffle_count": 14137
+        },
+        {
+          "a": 90,
+          "b": 102,
+          "count": 16847,
+          "slot_shuffle_count": 12185
+        },
+        {
+          "a": 90,
+          "b": 230,
+          "count": 16184,
+          "slot_shuffle_count": 11632
+        },
+        {
+          "a": 102,
+          "b": 230,
+          "count": 15840,
+          "slot_shuffle_count": 14737
+        },
+        {
+          "a": 102,
+          "b": 129,
+          "count": 15827,
+          "slot_shuffle_count": 12954
+        },
+        {
+          "a": 125,
+          "b": 129,
+          "count": 15536,
+          "slot_shuffle_count": 12809
+        },
+        {
+          "a": 125,
+          "b": 233,
+          "count": 13872,
+          "slot_shuffle_count": 9957
+        },
+        {
+          "a": 125,
+          "b": 239,
+          "count": 12324,
+          "slot_shuffle_count": 7645
+        },
+        {
+          "a": 125,
+          "b": 339,
+          "count": 12309,
+          "slot_shuffle_count": 6396
+        },
+        {
+          "a": 48,
+          "b": 102,
+          "count": 12052,
+          "slot_shuffle_count": 5914
+        },
+        {
+          "a": 90,
+          "b": 125,
+          "count": 12002,
+          "slot_shuffle_count": 11994
+        },
+        {
+          "a": 66,
+          "b": 102,
+          "count": 10716,
+          "slot_shuffle_count": 5883
+        },
+        {
+          "a": 129,
+          "b": 286,
+          "count": 10652,
+          "slot_shuffle_count": 4135
+        },
+        {
+          "a": 102,
+          "b": 233,
+          "count": 10647,
+          "slot_shuffle_count": 8564
+        },
+        {
+          "a": 102,
+          "b": 239,
+          "count": 9364,
+          "slot_shuffle_count": 6999
+        },
+        {
+          "a": 90,
+          "b": 129,
+          "count": 9270,
+          "slot_shuffle_count": 9128
+        },
+        {
+          "a": 221,
+          "b": 230,
+          "count": 8978,
+          "slot_shuffle_count": 6365
+        },
+        {
+          "a": 66,
+          "b": 125,
+          "count": 8960,
+          "slot_shuffle_count": 7088
+        }
+      ],
+      "sha256_topk_int32_c": "9b7e4eda365a70d9851ee4d977333476c25031a2bb51997453c785cc02c52e2e",
+      "cooccurrence_pair_tv_vs_legal_rewire": 0.383651683478735,
+      "cooccurrence_legal_rewire_mass_on_real_top20": 0.05593669063522356,
+      "legal_rewire": {
+        "sweeps": 16,
+        "seed": 20261026,
+        "accepted_swaps": 6092607,
+        "attempted_swaps": 8585216,
+        "exact_source_slot_marginals": true,
+        "unique_experts_per_token": true
+      }
+    },
+    {
+      "label": "layer_04",
+      "shape": [
+        8,
+        16768,
+        8
+      ],
+      "global_tokens": 134144,
+      "pairs": 1073152,
+      "num_experts": 352,
+      "top_k": 8,
+      "id_min": 0,
+      "id_max": 351,
+      "observed_experts": 297,
+      "unique_experts_per_token": true,
+      "expert_max_over_mean": 19.925035782442748,
+      "expert_max_count": 60746,
+      "expert_min_count": 0,
+      "expert_effective_count_entropy": 107.8498905239946,
+      "home_assumption": "home[e]=e//44; verify with production expert map; dump has no placement metadata",
+      "home_loads": [
+        194225,
+        144294,
+        117119,
+        104585,
+        111295,
+        189683,
+        88143,
+        123808
+      ],
+      "home_max_over_mean": 1.447884363072519,
+      "home_max_minus_min_over_mean": 0.7908068940839694,
+      "source_rank_js_bits": 0.6566646697740426,
+      "source_rank_total_variation_from_global": [
+        0.4558152060472328,
+        0.3379670354246183,
+        0.3183929210400763,
+        0.40164766966841603,
+        0.2746936128339695,
+        0.3005268591960878,
+        0.30778864503816794,
+        0.320901419370229
+      ],
+      "top_experts": [
+        {
+          "id": 35,
+          "count": 60746,
+          "token_frequency": 0.45284172232824427
+        },
+        {
+          "id": 120,
+          "count": 58920,
+          "token_frequency": 0.4392294847328244
+        },
+        {
+          "id": 81,
+          "count": 48591,
+          "token_frequency": 0.3622301407442748
+        },
+        {
+          "id": 212,
+          "count": 33568,
+          "token_frequency": 0.2502385496183206
+        },
+        {
+          "id": 263,
+          "count": 31112,
+          "token_frequency": 0.23192986641221375
+        },
+        {
+          "id": 339,
+          "count": 26398,
+          "token_frequency": 0.19678852576335878
+        },
+        {
+          "id": 42,
+          "count": 25905,
+          "token_frequency": 0.19311337070610687
+        },
+        {
+          "id": 15,
+          "count": 22917,
+          "token_frequency": 0.17083880009541985
+        },
+        {
+          "id": 254,
+          "count": 21745,
+          "token_frequency": 0.16210192032442747
+        },
+        {
+          "id": 344,
+          "count": 20945,
+          "token_frequency": 0.1561381798664122
+        },
+        {
+          "id": 150,
+          "count": 20847,
+          "token_frequency": 0.15540762166030533
+        },
+        {
+          "id": 220,
+          "count": 20671,
+          "token_frequency": 0.15409559875954199
+        },
+        {
+          "id": 232,
+          "count": 16999,
+          "token_frequency": 0.1267220300572519
+        },
+        {
+          "id": 21,
+          "count": 16309,
+          "token_frequency": 0.12157830391221373
+        },
+        {
+          "id": 278,
+          "count": 14414,
+          "token_frequency": 0.10745169370229007
+        },
+        {
+          "id": 40,
+          "count": 14368,
+          "token_frequency": 0.10710877862595419
+        },
+        {
+          "id": 60,
+          "count": 14168,
+          "token_frequency": 0.10561784351145038
+        },
+        {
+          "id": 195,
+          "count": 13675,
+          "token_frequency": 0.10194268845419847
+        },
+        {
+          "id": 165,
+          "count": 11777,
+          "token_frequency": 0.08779371421755726
+        },
+        {
+          "id": 71,
+          "count": 11681,
+          "token_frequency": 0.08707806536259542
+        },
+        {
+          "id": 273,
+          "count": 11589,
+          "token_frequency": 0.08639223520992366
+        },
+        {
+          "id": 142,
+          "count": 11293,
+          "token_frequency": 0.08418565124045801
+        },
+        {
+          "id": 68,
+          "count": 11208,
+          "token_frequency": 0.0835520038167939
+        },
+        {
+          "id": 314,
+          "count": 10949,
+          "token_frequency": 0.08162124284351145
+        }
+      ],
+      "top_expert_pair_share": {
+        "8": 0.28715130755009544,
+        "12": 0.3656192226264313,
+        "16": 0.42347682341364506,
+        "20": 0.4712808623568702,
+        "24": 0.5132497539957062,
+        "32": 0.5845229753101145,
+        "64": 0.7500139775166985
+      },
+      "top_expert_count_per_token": {
+        "8": [
+          16275,
+          23193,
+          34830,
+          32480,
+          19836,
+          6675,
+          840,
+          15,
+          0
+        ],
+        "16": [
+          10298,
+          12074,
+          18720,
+          25842,
+          27915,
+          24072,
+          11624,
+          3141,
+          458
+        ],
+        "24": [
+          7639,
+          7314,
+          11118,
+          20078,
+          25497,
+          30316,
+          19910,
+          10193,
+          2079
+        ]
+      },
+      "home_remote_destinations_total": 635323,
+      "home_remote_destinations_per_token": 4.736126848759542,
+      "home_remote_destination_histogram": [
+        0,
+        1,
+        404,
+        7953,
+        43907,
+        57928,
+        22270,
+        1681,
+        0
+      ],
+      "home_remote_tokens_by_source_destination": [
+        [
+          0,
+          14478,
+          13214,
+          7319,
+          6176,
+          10293,
+          11297,
+          12399
+        ],
+        [
+          14820,
+          0,
+          12752,
+          8812,
+          10965,
+          13689,
+          6823,
+          10305
+        ],
+        [
+          14007,
+          10983,
+          0,
+          10223,
+          9874,
+          12600,
+          10434,
+          12164
+        ],
+        [
+          13461,
+          14970,
+          11997,
+          0,
+          11356,
+          15228,
+          4223,
+          8513
+        ],
+        [
+          13837,
+          10497,
+          11314,
+          8627,
+          0,
+          13596,
+          8924,
+          12624
+        ],
+        [
+          14079,
+          11670,
+          10575,
+          8238,
+          12209,
+          0,
+          9245,
+          10920
+        ],
+        [
+          14054,
+          13955,
+          9103,
+          10116,
+          13607,
+          13542,
+          0,
+          10281
+        ],
+        [
+          12690,
+          8953,
+          11692,
+          12839,
+          10733,
+          12477,
+          11551,
+          0
+        ]
+      ],
+      "distinct_unordered_topk_sets": 28807,
+      "most_repeated_unordered_topk_set_count": 3512,
+      "unordered_topk_set_collision_fraction": 0.7852531607824428,
+      "cooccurrence_pair_tv_vs_slot_shuffle": 0.37943579820406215,
+      "cooccurrence_top20_mass": 0.0826827353973555,
+      "cooccurrence_slot_shuffle_mass_on_real_top20": 0.06158786719601963,
+      "slot_shuffle_duplicate_token_fraction": 0.4359867008587786,
+      "cooccurrence_top20": [
+        {
+          "a": 35,
+          "b": 120,
+          "count": 30489,
+          "slot_shuffle_count": 23358
+        },
+        {
+          "a": 35,
+          "b": 81,
+          "count": 25575,
+          "slot_shuffle_count": 19642
+        },
+        {
+          "a": 81,
+          "b": 120,
+          "count": 23368,
+          "slot_shuffle_count": 17790
+        },
+        {
+          "a": 120,
+          "b": 212,
+          "count": 18126,
+          "slot_shuffle_count": 12299
+        },
+        {
+          "a": 35,
+          "b": 212,
+          "count": 17158,
+          "slot_shuffle_count": 13990
+        },
+        {
+          "a": 35,
+          "b": 263,
+          "count": 16793,
+          "slot_shuffle_count": 12848
+        },
+        {
+          "a": 81,
+          "b": 212,
+          "count": 15010,
+          "slot_shuffle_count": 12092
+        },
+        {
+          "a": 120,
+          "b": 263,
+          "count": 14534,
+          "slot_shuffle_count": 11918
+        },
+        {
+          "a": 35,
+          "b": 339,
+          "count": 13949,
+          "slot_shuffle_count": 10550
+        },
+        {
+          "a": 212,
+          "b": 263,
+          "count": 13932,
+          "slot_shuffle_count": 8110
+        },
+        {
+          "a": 81,
+          "b": 263,
+          "count": 13167,
+          "slot_shuffle_count": 10265
+        },
+        {
+          "a": 15,
+          "b": 35,
+          "count": 12980,
+          "slot_shuffle_count": 9432
+        },
+        {
+          "a": 42,
+          "b": 120,
+          "count": 12829,
+          "slot_shuffle_count": 10386
+        },
+        {
+          "a": 35,
+          "b": 254,
+          "count": 12822,
+          "slot_shuffle_count": 8656
+        },
+        {
+          "a": 120,
+          "b": 278,
+          "count": 12189,
+          "slot_shuffle_count": 5627
+        },
+        {
+          "a": 35,
+          "b": 42,
+          "count": 11922,
+          "slot_shuffle_count": 10214
+        },
+        {
+          "a": 81,
+          "b": 254,
+          "count": 11777,
+          "slot_shuffle_count": 7447
+        },
+        {
+          "a": 35,
+          "b": 344,
+          "count": 11643,
+          "slot_shuffle_count": 8453
+        },
+        {
+          "a": 120,
+          "b": 339,
+          "count": 11509,
+          "slot_shuffle_count": 10190
+        },
+        {
+          "a": 42,
+          "b": 81,
+          "count": 10787,
+          "slot_shuffle_count": 8059
+        }
+      ],
+      "sha256_topk_int32_c": "c45455353fbdd60781ec2622f9925abd6f1a974289a1e88d3cb206c37b73c871",
+      "cooccurrence_pair_tv_vs_legal_rewire": 0.37694966390062706,
+      "cooccurrence_legal_rewire_mass_on_real_top20": 0.06651514151104145,
+      "legal_rewire": {
+        "sweeps": 16,
+        "seed": 20261026,
+        "accepted_swaps": 5992284,
+        "attempted_swaps": 8585216,
+        "exact_source_slot_marginals": true,
+        "unique_experts_per_token": true
+      }
+    },
+    {
+      "label": "layer_05",
+      "shape": [
+        8,
+        16768,
+        8
+      ],
+      "global_tokens": 134144,
+      "pairs": 1073152,
+      "num_experts": 352,
+      "top_k": 8,
+      "id_min": 0,
+      "id_max": 350,
+      "observed_experts": 288,
+      "unique_experts_per_token": true,
+      "expert_max_over_mean": 29.549051765267176,
+      "expert_max_count": 90087,
+      "expert_min_count": 0,
+      "expert_effective_count_entropy": 103.62620569947438,
+      "home_assumption": "home[e]=e//44; verify with production expert map; dump has no placement metadata",
+      "home_loads": [
+        75562,
+        181379,
+        103438,
+        139559,
+        126549,
+        118304,
+        178443,
+        149918
+      ],
+      "home_max_over_mean": 1.3521216006679388,
+      "home_max_minus_min_over_mean": 0.7888314050572519,
+      "source_rank_js_bits": 0.6502393740916665,
+      "source_rank_total_variation_from_global": [
+        0.450216744692271,
+        0.3540821803435114,
+        0.26240364831822516,
+        0.3990655564169847,
+        0.2960149168058206,
+        0.3072202260257634,
+        0.32943609106631677,
+        0.335226510317271
+      ],
+      "top_experts": [
+        {
+          "id": 272,
+          "count": 90087,
+          "token_frequency": 0.6715693583015268
+        },
+        {
+          "id": 329,
+          "count": 37164,
+          "token_frequency": 0.27704556297709926
+        },
+        {
+          "id": 258,
+          "count": 34509,
+          "token_frequency": 0.2572533993320611
+        },
+        {
+          "id": 236,
+          "count": 32589,
+          "token_frequency": 0.24294042223282442
+        },
+        {
+          "id": 70,
+          "count": 30449,
+          "token_frequency": 0.2269874165076336
+        },
+        {
+          "id": 127,
+          "count": 26706,
+          "token_frequency": 0.19908456583969467
+        },
+        {
+          "id": 340,
+          "count": 26054,
+          "token_frequency": 0.1942241173664122
+        },
+        {
+          "id": 198,
+          "count": 24371,
+          "token_frequency": 0.1816778983778626
+        },
+        {
+          "id": 178,
+          "count": 23938,
+          "token_frequency": 0.17845002385496184
+        },
+        {
+          "id": 12,
+          "count": 20104,
+          "token_frequency": 0.14986879770992367
+        },
+        {
+          "id": 29,
+          "count": 16913,
+          "token_frequency": 0.12608092795801526
+        },
+        {
+          "id": 173,
+          "count": 16552,
+          "token_frequency": 0.12338979007633588
+        },
+        {
+          "id": 337,
+          "count": 16165,
+          "token_frequency": 0.12050483062977099
+        },
+        {
+          "id": 81,
+          "count": 16086,
+          "token_frequency": 0.11991591125954199
+        },
+        {
+          "id": 57,
+          "count": 15737,
+          "token_frequency": 0.11731422948473283
+        },
+        {
+          "id": 273,
+          "count": 14897,
+          "token_frequency": 0.1110523020038168
+        },
+        {
+          "id": 77,
+          "count": 13940,
+          "token_frequency": 0.10391817748091603
+        },
+        {
+          "id": 166,
+          "count": 13233,
+          "token_frequency": 0.09864772185114504
+        },
+        {
+          "id": 159,
+          "count": 12703,
+          "token_frequency": 0.09469674379770993
+        },
+        {
+          "id": 87,
+          "count": 12143,
+          "token_frequency": 0.09052212547709923
+        },
+        {
+          "id": 185,
+          "count": 12094,
+          "token_frequency": 0.09015684637404581
+        },
+        {
+          "id": 141,
+          "count": 11968,
+          "token_frequency": 0.0892175572519084
+        },
+        {
+          "id": 335,
+          "count": 11673,
+          "token_frequency": 0.08701842795801527
+        },
+        {
+          "id": 214,
+          "count": 10839,
+          "token_frequency": 0.08080122853053436
+        }
+      ],
+      "top_expert_pair_share": {
+        "8": 0.28134784261688933,
+        "12": 0.3535715350667939,
+        "16": 0.4121699442390267,
+        "20": 0.4606430403148855,
+        "24": 0.5040422978291985,
+        "32": 0.5804853366531488,
+        "64": 0.7674094629651718
+      },
+      "top_expert_count_per_token": {
+        "8": [
+          17165,
+          25442,
+          34455,
+          30906,
+          17953,
+          6343,
+          1828,
+          52,
+          0
+        ],
+        "16": [
+          7652,
+          8624,
+          20307,
+          34607,
+          35625,
+          18546,
+          7496,
+          1240,
+          47
+        ],
+        "24": [
+          7574,
+          3955,
+          10163,
+          21269,
+          33521,
+          32485,
+          20140,
+          4819,
+          218
+        ]
+      },
+      "home_remote_destinations_total": 629942,
+      "home_remote_destinations_per_token": 4.6960132395038165,
+      "home_remote_destination_histogram": [
+        0,
+        0,
+        493,
+        9634,
+        43773,
+        58217,
+        20312,
+        1715,
+        0
+      ],
+      "home_remote_tokens_by_source_destination": [
+        [
+          0,
+          10087,
+          13559,
+          10627,
+          7497,
+          8584,
+          13107,
+          15544
+        ],
+        [
+          11059,
+          0,
+          9278,
+          10237,
+          10742,
+          11295,
+          14250,
+          12172
+        ],
+        [
+          7471,
+          11636,
+          0,
+          11478,
+          10445,
+          10029,
+          12442,
+          15293
+        ],
+        [
+          6746,
+          13900,
+          5015,
+          0,
+          13781,
+          13481,
+          15022,
+          12855
+        ],
+        [
+          7710,
+          14549,
+          9995,
+          11448,
+          0,
+          11043,
+          14876,
+          12482
+        ],
+        [
+          6099,
+          15354,
+          10000,
+          10459,
+          8393,
+          0,
+          14397,
+          10299
+        ],
+        [
+          6007,
+          15050,
+          6919,
+          14003,
+          8142,
+          11526,
+          0,
+          11814
+        ],
+        [
+          8436,
+          14265,
+          10907,
+          13460,
+          10666,
+          8192,
+          15819,
+          0
+        ]
+      ],
+      "distinct_unordered_topk_sets": 21438,
+      "most_repeated_unordered_topk_set_count": 3512,
+      "unordered_topk_set_collision_fraction": 0.8401866650763359,
+      "cooccurrence_pair_tv_vs_slot_shuffle": 0.388714739384542,
+      "cooccurrence_top20_mass": 0.08703892831583969,
+      "cooccurrence_slot_shuffle_mass_on_real_top20": 0.0647348052412759,
+      "slot_shuffle_duplicate_token_fraction": 0.44460430582061067,
+      "cooccurrence_top20": [
+        {
+          "a": 70,
+          "b": 272,
+          "count": 27859,
+          "slot_shuffle_count": 18683
+        },
+        {
+          "a": 236,
+          "b": 272,
+          "count": 27378,
+          "slot_shuffle_count": 20640
+        },
+        {
+          "a": 258,
+          "b": 272,
+          "count": 25414,
+          "slot_shuffle_count": 20888
+        },
+        {
+          "a": 272,
+          "b": 329,
+          "count": 24343,
+          "slot_shuffle_count": 20929
+        },
+        {
+          "a": 198,
+          "b": 272,
+          "count": 21198,
+          "slot_shuffle_count": 15941
+        },
+        {
+          "a": 272,
+          "b": 340,
+          "count": 21109,
+          "slot_shuffle_count": 16226
+        },
+        {
+          "a": 127,
+          "b": 272,
+          "count": 18652,
+          "slot_shuffle_count": 14716
+        },
+        {
+          "a": 178,
+          "b": 272,
+          "count": 18547,
+          "slot_shuffle_count": 15756
+        },
+        {
+          "a": 12,
+          "b": 272,
+          "count": 16231,
+          "slot_shuffle_count": 12069
+        },
+        {
+          "a": 173,
+          "b": 272,
+          "count": 15831,
+          "slot_shuffle_count": 10891
+        },
+        {
+          "a": 236,
+          "b": 258,
+          "count": 12977,
+          "slot_shuffle_count": 8758
+        },
+        {
+          "a": 236,
+          "b": 340,
+          "count": 12950,
+          "slot_shuffle_count": 7248
+        },
+        {
+          "a": 70,
+          "b": 236,
+          "count": 12821,
+          "slot_shuffle_count": 7571
+        },
+        {
+          "a": 198,
+          "b": 236,
+          "count": 10784,
+          "slot_shuffle_count": 6373
+        },
+        {
+          "a": 258,
+          "b": 329,
+          "count": 10558,
+          "slot_shuffle_count": 8280
+        },
+        {
+          "a": 141,
+          "b": 272,
+          "count": 10534,
+          "slot_shuffle_count": 7651
+        },
+        {
+          "a": 178,
+          "b": 236,
+          "count": 10356,
+          "slot_shuffle_count": 6248
+        },
+        {
+          "a": 272,
+          "b": 273,
+          "count": 10271,
+          "slot_shuffle_count": 8949
+        },
+        {
+          "a": 77,
+          "b": 272,
+          "count": 9577,
+          "slot_shuffle_count": 7977
+        },
+        {
+          "a": 70,
+          "b": 258,
+          "count": 9531,
+          "slot_shuffle_count": 7352
+        }
+      ],
+      "sha256_topk_int32_c": "fd01bcfebb97db6ab7d4e2849da4115699bec43bf268c64d9aa176155de56802",
+      "cooccurrence_pair_tv_vs_legal_rewire": 0.38571449870501634,
+      "cooccurrence_legal_rewire_mass_on_real_top20": 0.07033539650354416,
+      "legal_rewire": {
+        "sweeps": 16,
+        "seed": 20261026,
+        "accepted_swaps": 5853085,
+        "attempted_swaps": 8585216,
+        "exact_source_slot_marginals": true,
+        "unique_experts_per_token": true
+      }
+    },
+    {
+      "label": "layer_06",
+      "shape": [
+        8,
+        16768,
+        8
+      ],
+      "global_tokens": 134144,
+      "pairs": 1073152,
+      "num_experts": 352,
+      "top_k": 8,
+      "id_min": 0,
+      "id_max": 351,
+      "observed_experts": 277,
+      "unique_experts_per_token": true,
+      "expert_max_over_mean": 17.68278864503817,
+      "expert_max_count": 53910,
+      "expert_min_count": 0,
+      "expert_effective_count_entropy": 108.16390974045554,
+      "home_assumption": "home[e]=e//44; verify with production expert map; dump has no placement metadata",
+      "home_loads": [
+        214343,
+        71719,
+        171527,
+        117734,
+        94625,
+        109264,
+        80652,
+        213288
+      ],
+      "home_max_over_mean": 1.597857526240458,
+      "home_max_minus_min_over_mean": 1.0632156488549618,
+      "source_rank_js_bits": 0.6713044531142578,
+      "source_rank_total_variation_from_global": [
+        0.4781792327647901,
+        0.37069119751908397,
+        0.3065138955152672,
+        0.39535871898854963,
+        0.32389633528148853,
+        0.3042979932013359,
+        0.28901497644322516,
+        0.34102438424379766
+      ],
+      "top_experts": [
+        {
+          "id": 350,
+          "count": 53910,
+          "token_frequency": 0.4018815601145038
+        },
+        {
+          "id": 105,
+          "count": 40563,
+          "token_frequency": 0.3023840052480916
+        },
+        {
+          "id": 1,
+          "count": 39642,
+          "token_frequency": 0.29551824904580154
+        },
+        {
+          "id": 10,
+          "count": 30921,
+          "token_frequency": 0.2305060233778626
+        },
+        {
+          "id": 133,
+          "count": 29623,
+          "token_frequency": 0.22082985448473283
+        },
+        {
+          "id": 255,
+          "count": 27019,
+          "token_frequency": 0.20141787929389313
+        },
+        {
+          "id": 30,
+          "count": 26176,
+          "token_frequency": 0.19513358778625955
+        },
+        {
+          "id": 48,
+          "count": 22871,
+          "token_frequency": 0.17049588501908397
+        },
+        {
+          "id": 29,
+          "count": 22560,
+          "token_frequency": 0.16817748091603055
+        },
+        {
+          "id": 332,
+          "count": 21682,
+          "token_frequency": 0.16163227576335878
+        },
+        {
+          "id": 102,
+          "count": 21126,
+          "token_frequency": 0.15748747614503816
+        },
+        {
+          "id": 145,
+          "count": 21066,
+          "token_frequency": 0.15704019561068702
+        },
+        {
+          "id": 306,
+          "count": 18938,
+          "token_frequency": 0.1411766459923664
+        },
+        {
+          "id": 33,
+          "count": 16616,
+          "token_frequency": 0.1238668893129771
+        },
+        {
+          "id": 196,
+          "count": 16454,
+          "token_frequency": 0.12265923187022901
+        },
+        {
+          "id": 232,
+          "count": 16015,
+          "token_frequency": 0.11938662929389313
+        },
+        {
+          "id": 38,
+          "count": 15434,
+          "token_frequency": 0.11505546278625954
+        },
+        {
+          "id": 222,
+          "count": 15315,
+          "token_frequency": 0.11416835639312978
+        },
+        {
+          "id": 91,
+          "count": 14248,
+          "token_frequency": 0.10621421755725191
+        },
+        {
+          "id": 335,
+          "count": 13786,
+          "token_frequency": 0.10277015744274809
+        },
+        {
+          "id": 310,
+          "count": 13285,
+          "token_frequency": 0.09903536498091603
+        },
+        {
+          "id": 322,
+          "count": 12905,
+          "token_frequency": 0.09620258826335878
+        },
+        {
+          "id": 218,
+          "count": 12884,
+          "token_frequency": 0.09604604007633588
+        },
+        {
+          "id": 15,
+          "count": 12825,
+          "token_frequency": 0.09560621421755726
+        }
+      ],
+      "top_expert_pair_share": {
+        "8": 0.2522708805462786,
+        "12": 0.33281305910066794,
+        "16": 0.39619923365935117,
+        "20": 0.4509752579317748,
+        "24": 0.4993365338740458,
+        "32": 0.5810062321087787,
+        "64": 0.7687298723759542
+      },
+      "top_expert_count_per_token": {
+        "8": [
+          17913,
+          28219,
+          41870,
+          29127,
+          13730,
+          3245,
+          40,
+          0,
+          0
+        ],
+        "16": [
+          7996,
+          15250,
+          19382,
+          31691,
+          31572,
+          20884,
+          6198,
+          1169,
+          2
+        ],
+        "24": [
+          4490,
+          11027,
+          11407,
+          20791,
+          27389,
+          31571,
+          20634,
+          6245,
+          590
+        ]
+      },
+      "home_remote_destinations_total": 606948,
+      "home_remote_destinations_per_token": 4.524600429389313,
+      "home_remote_destination_histogram": [
+        0,
+        0,
+        1039,
+        12507,
+        53169,
+        51591,
+        14148,
+        1690,
+        0
+      ],
+      "home_remote_tokens_by_source_destination": [
+        [
+          0,
+          8795,
+          15157,
+          7578,
+          10513,
+          8153,
+          13056,
+          14321
+        ],
+        [
+          15468,
+          0,
+          8665,
+          13901,
+          5994,
+          10192,
+          9519,
+          13927
+        ],
+        [
+          14066,
+          6363,
+          0,
+          12637,
+          10758,
+          11372,
+          6589,
+          12600
+        ],
+        [
+          12202,
+          8945,
+          12906,
+          0,
+          12434,
+          9654,
+          4998,
+          15684
+        ],
+        [
+          15341,
+          8639,
+          13890,
+          10664,
+          0,
+          9468,
+          8021,
+          14786
+        ],
+        [
+          14756,
+          8520,
+          15239,
+          9412,
+          7811,
+          0,
+          6380,
+          12072
+        ],
+        [
+          12457,
+          6107,
+          11550,
+          11276,
+          10023,
+          8879,
+          0,
+          15639
+        ],
+        [
+          15627,
+          3481,
+          14934,
+          12093,
+          7776,
+          10261,
+          5399,
+          0
+        ]
+      ],
+      "distinct_unordered_topk_sets": 19338,
+      "most_repeated_unordered_topk_set_count": 3512,
+      "unordered_topk_set_collision_fraction": 0.8558414837786259,
+      "cooccurrence_pair_tv_vs_slot_shuffle": 0.3977302376550573,
+      "cooccurrence_top20_mass": 0.06216666950654307,
+      "cooccurrence_slot_shuffle_mass_on_real_top20": 0.04484439962172846,
+      "slot_shuffle_duplicate_token_fraction": 0.41682072996183206,
+      "cooccurrence_top20": [
+        {
+          "a": 105,
+          "b": 350,
+          "count": 19761,
+          "slot_shuffle_count": 15137
+        },
+        {
+          "a": 1,
+          "b": 350,
+          "count": 16286,
+          "slot_shuffle_count": 14271
+        },
+        {
+          "a": 30,
+          "b": 105,
+          "count": 13770,
+          "slot_shuffle_count": 6350
+        },
+        {
+          "a": 105,
+          "b": 255,
+          "count": 13090,
+          "slot_shuffle_count": 8130
+        },
+        {
+          "a": 133,
+          "b": 350,
+          "count": 12916,
+          "slot_shuffle_count": 10695
+        },
+        {
+          "a": 1,
+          "b": 48,
+          "count": 12755,
+          "slot_shuffle_count": 6264
+        },
+        {
+          "a": 1,
+          "b": 133,
+          "count": 12541,
+          "slot_shuffle_count": 8527
+        },
+        {
+          "a": 255,
+          "b": 350,
+          "count": 12351,
+          "slot_shuffle_count": 10297
+        },
+        {
+          "a": 10,
+          "b": 30,
+          "count": 11984,
+          "slot_shuffle_count": 5772
+        },
+        {
+          "a": 145,
+          "b": 350,
+          "count": 11785,
+          "slot_shuffle_count": 7883
+        },
+        {
+          "a": 102,
+          "b": 105,
+          "count": 11090,
+          "slot_shuffle_count": 6487
+        },
+        {
+          "a": 1,
+          "b": 105,
+          "count": 9971,
+          "slot_shuffle_count": 10575
+        },
+        {
+          "a": 10,
+          "b": 105,
+          "count": 9861,
+          "slot_shuffle_count": 8512
+        },
+        {
+          "a": 105,
+          "b": 196,
+          "count": 9592,
+          "slot_shuffle_count": 5436
+        },
+        {
+          "a": 306,
+          "b": 350,
+          "count": 9557,
+          "slot_shuffle_count": 7021
+        },
+        {
+          "a": 48,
+          "b": 350,
+          "count": 9538,
+          "slot_shuffle_count": 8141
+        },
+        {
+          "a": 105,
+          "b": 332,
+          "count": 9329,
+          "slot_shuffle_count": 6251
+        },
+        {
+          "a": 196,
+          "b": 350,
+          "count": 9183,
+          "slot_shuffle_count": 7006
+        },
+        {
+          "a": 332,
+          "b": 350,
+          "count": 9092,
+          "slot_shuffle_count": 7776
+        },
+        {
+          "a": 105,
+          "b": 133,
+          "count": 9048,
+          "slot_shuffle_count": 7906
+        }
+      ],
+      "sha256_topk_int32_c": "c6c0bd5d2305c6dc3c6360092f2100634fdd40c5ea941571b866b8424cf42e0c",
+      "cooccurrence_pair_tv_vs_legal_rewire": 0.39691914232892583,
+      "cooccurrence_legal_rewire_mass_on_real_top20": 0.04777382088331516,
+      "legal_rewire": {
+        "sweeps": 16,
+        "seed": 20261026,
+        "accepted_swaps": 6154291,
+        "attempted_swaps": 8585216,
+        "exact_source_slot_marginals": true,
+        "unique_experts_per_token": true
+      }
+    },
+    {
+      "label": "layer_07",
+      "shape": [
+        8,
+        16768,
+        8
+      ],
+      "global_tokens": 134144,
+      "pairs": 1073152,
+      "num_experts": 352,
+      "top_k": 8,
+      "id_min": 0,
+      "id_max": 351,
+      "observed_experts": 261,
+      "unique_experts_per_token": true,
+      "expert_max_over_mean": 20.853291984732827,
+      "expert_max_count": 63576,
+      "expert_min_count": 0,
+      "expert_effective_count_entropy": 89.45261095404223,
+      "home_assumption": "home[e]=e//44; verify with production expert map; dump has no placement metadata",
+      "home_loads": [
+        104325,
+        80998,
+        152717,
+        226573,
+        99491,
+        43691,
+        205036,
+        160321
+      ],
+      "home_max_over_mean": 1.6890282084923665,
+      "home_max_minus_min_over_mean": 1.363325978053435,
+      "source_rank_js_bits": 0.5954755735181905,
+      "source_rank_total_variation_from_global": [
+        0.448565534052958,
+        0.3341549007037214,
+        0.2760289315958969,
+        0.35550881888120234,
+        0.2675986253578244,
+        0.2909038048664122,
+        0.29901262822041985,
+        0.30793214754293896
+      ],
+      "top_experts": [
+        {
+          "id": 142,
+          "count": 63576,
+          "token_frequency": 0.4739384541984733
+        },
+        {
+          "id": 273,
+          "count": 50076,
+          "token_frequency": 0.37330033396946566
+        },
+        {
+          "id": 172,
+          "count": 41298,
+          "token_frequency": 0.30786319179389315
+        },
+        {
+          "id": 289,
+          "count": 40337,
+          "token_frequency": 0.3006992485687023
+        },
+        {
+          "id": 128,
+          "count": 36020,
+          "token_frequency": 0.2685174141221374
+        },
+        {
+          "id": 343,
+          "count": 28119,
+          "token_frequency": 0.20961802242366412
+        },
+        {
+          "id": 206,
+          "count": 27585,
+          "token_frequency": 0.20563722566793893
+        },
+        {
+          "id": 145,
+          "count": 26760,
+          "token_frequency": 0.1994871183206107
+        },
+        {
+          "id": 140,
+          "count": 22047,
+          "token_frequency": 0.16435323234732824
+        },
+        {
+          "id": 28,
+          "count": 21584,
+          "token_frequency": 0.1609017175572519
+        },
+        {
+          "id": 216,
+          "count": 21546,
+          "token_frequency": 0.16061843988549618
+        },
+        {
+          "id": 99,
+          "count": 21045,
+          "token_frequency": 0.15688364742366412
+        },
+        {
+          "id": 52,
+          "count": 20008,
+          "token_frequency": 0.14915314885496184
+        },
+        {
+          "id": 284,
+          "count": 19530,
+          "token_frequency": 0.14558981393129772
+        },
+        {
+          "id": 40,
+          "count": 19472,
+          "token_frequency": 0.14515744274809161
+        },
+        {
+          "id": 282,
+          "count": 18968,
+          "token_frequency": 0.14140028625954199
+        },
+        {
+          "id": 344,
+          "count": 18334,
+          "token_frequency": 0.1366740219465649
+        },
+        {
+          "id": 132,
+          "count": 17846,
+          "token_frequency": 0.13303614026717558
+        },
+        {
+          "id": 339,
+          "count": 17518,
+          "token_frequency": 0.1305910066793893
+        },
+        {
+          "id": 89,
+          "count": 17090,
+          "token_frequency": 0.12740040553435114
+        },
+        {
+          "id": 275,
+          "count": 16105,
+          "token_frequency": 0.12005755009541985
+        },
+        {
+          "id": 123,
+          "count": 15565,
+          "token_frequency": 0.11603202528625954
+        },
+        {
+          "id": 151,
+          "count": 14968,
+          "token_frequency": 0.11158158396946564
+        },
+        {
+          "id": 296,
+          "count": 12104,
+          "token_frequency": 0.09023139312977099
+        }
+      ],
+      "top_expert_pair_share": {
+        "8": 0.29238262613311067,
+        "12": 0.37272725578482824,
+        "16": 0.44538984225906486,
+        "20": 0.5113525390625,
+        "24": 0.5660903581226145,
+        "32": 0.6380084088740458,
+        "64": 0.8173818806655534
+      },
+      "top_expert_count_per_token": {
+        "8": [
+          13874,
+          24347,
+          29864,
+          38539,
+          23728,
+          3585,
+          207,
+          0,
+          0
+        ],
+        "16": [
+          7107,
+          10124,
+          16856,
+          25367,
+          33321,
+          26592,
+          12140,
+          2146,
+          491
+        ],
+        "24": [
+          864,
+          7484,
+          8681,
+          18506,
+          27451,
+          31806,
+          21442,
+          13629,
+          4281
+        ]
+      },
+      "home_remote_destinations_total": 580821,
+      "home_remote_destinations_per_token": 4.329832120706107,
+      "home_remote_destination_histogram": [
+        0,
+        2,
+        2684,
+        19407,
+        52704,
+        49887,
+        9241,
+        219,
+        0
+      ],
+      "home_remote_tokens_by_source_destination": [
+        [
+          0,
+          7582,
+          10722,
+          12845,
+          6427,
+          8123,
+          15623,
+          14406
+        ],
+        [
+          11495,
+          0,
+          12978,
+          13561,
+          8719,
+          2993,
+          13362,
+          11866
+        ],
+        [
+          9074,
+          8709,
+          0,
+          15937,
+          6612,
+          4794,
+          14436,
+          12400
+        ],
+        [
+          5258,
+          7945,
+          15074,
+          0,
+          10091,
+          800,
+          15480,
+          10984
+        ],
+        [
+          9033,
+          5877,
+          10983,
+          15598,
+          0,
+          5630,
+          14802,
+          11941
+        ],
+        [
+          9131,
+          3991,
+          11208,
+          14494,
+          13133,
+          0,
+          15084,
+          12002
+        ],
+        [
+          4437,
+          10131,
+          10695,
+          16515,
+          8729,
+          3099,
+          0,
+          10461
+        ],
+        [
+          10629,
+          6734,
+          12858,
+          14065,
+          9227,
+          7056,
+          14982,
+          0
+        ]
+      ],
+      "distinct_unordered_topk_sets": 15047,
+      "most_repeated_unordered_topk_set_count": 3512,
+      "unordered_topk_set_collision_fraction": 0.8878294966603053,
+      "cooccurrence_pair_tv_vs_slot_shuffle": 0.3524197876908397,
+      "cooccurrence_top20_mass": 0.07900465171755726,
+      "cooccurrence_slot_shuffle_mass_on_real_top20": 0.06046061375408942,
+      "slot_shuffle_duplicate_token_fraction": 0.4647170205152672,
+      "cooccurrence_top20": [
+        {
+          "a": 142,
+          "b": 273,
+          "count": 26870,
+          "slot_shuffle_count": 21535
+        },
+        {
+          "a": 142,
+          "b": 172,
+          "count": 19578,
+          "slot_shuffle_count": 16947
+        },
+        {
+          "a": 128,
+          "b": 273,
+          "count": 19245,
+          "slot_shuffle_count": 13052
+        },
+        {
+          "a": 142,
+          "b": 289,
+          "count": 18801,
+          "slot_shuffle_count": 16242
+        },
+        {
+          "a": 128,
+          "b": 142,
+          "count": 16950,
+          "slot_shuffle_count": 15639
+        },
+        {
+          "a": 142,
+          "b": 145,
+          "count": 15523,
+          "slot_shuffle_count": 11726
+        },
+        {
+          "a": 273,
+          "b": 289,
+          "count": 15070,
+          "slot_shuffle_count": 12727
+        },
+        {
+          "a": 99,
+          "b": 142,
+          "count": 14890,
+          "slot_shuffle_count": 10870
+        },
+        {
+          "a": 142,
+          "b": 216,
+          "count": 14329,
+          "slot_shuffle_count": 10802
+        },
+        {
+          "a": 206,
+          "b": 289,
+          "count": 13520,
+          "slot_shuffle_count": 7529
+        },
+        {
+          "a": 145,
+          "b": 273,
+          "count": 12844,
+          "slot_shuffle_count": 9805
+        },
+        {
+          "a": 206,
+          "b": 273,
+          "count": 12751,
+          "slot_shuffle_count": 9036
+        },
+        {
+          "a": 172,
+          "b": 273,
+          "count": 12728,
+          "slot_shuffle_count": 13411
+        },
+        {
+          "a": 99,
+          "b": 273,
+          "count": 12569,
+          "slot_shuffle_count": 8289
+        },
+        {
+          "a": 142,
+          "b": 344,
+          "count": 12334,
+          "slot_shuffle_count": 7512
+        },
+        {
+          "a": 142,
+          "b": 282,
+          "count": 12137,
+          "slot_shuffle_count": 8643
+        },
+        {
+          "a": 52,
+          "b": 172,
+          "count": 11924,
+          "slot_shuffle_count": 6570
+        },
+        {
+          "a": 172,
+          "b": 289,
+          "count": 11668,
+          "slot_shuffle_count": 10425
+        },
+        {
+          "a": 128,
+          "b": 343,
+          "count": 11609,
+          "slot_shuffle_count": 7373
+        },
+        {
+          "a": 142,
+          "b": 284,
+          "count": 11404,
+          "slot_shuffle_count": 8959
+        }
+      ],
+      "sha256_topk_int32_c": "756a38f5f3701dee5da3952c8854fd239e01fff5c4d4fca0d04f47e4330789aa",
+      "cooccurrence_pair_tv_vs_legal_rewire": 0.34975101383587787,
+      "cooccurrence_legal_rewire_mass_on_real_top20": 0.065698322059024,
+      "legal_rewire": {
+        "sweeps": 16,
+        "seed": 20261026,
+        "accepted_swaps": 5785121,
+        "attempted_swaps": 8585216,
+        "exact_source_slot_marginals": true,
+        "unique_experts_per_token": true
+      }
+    }
+  ],
+  "files": [
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_00/layer_00.pkl",
+      "bytes": 536988,
+      "sha256": "0685e27d388128ff88917038a49cf0f1eae9d1abd7537a74f2032aa576a68e92"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_01/layer_00.pkl",
+      "bytes": 536988,
+      "sha256": "dce2b05288b7ac192ab069d9e0c275068460e958aeebe6a050b0f99adfd49b15"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_02/layer_00.pkl",
+      "bytes": 536988,
+      "sha256": "97707ca30e6e0517e27fd342cfd5c757b18b0b38c1e1ab99da752ab606d31cb5"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_03/layer_00.pkl",
+      "bytes": 536988,
+      "sha256": "fa56b5177b86b94b80fb6e2a489c84d0c0ca12c2c9e38c78ccdbb539d3ccc671"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_04/layer_00.pkl",
+      "bytes": 536988,
+      "sha256": "8abacc8e76b04f9d7290554e881e2021278679962201ec58dde4b4d2e2467b4d"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_05/layer_00.pkl",
+      "bytes": 536988,
+      "sha256": "8ec2d13c1c4e9df6526911c0638727d6c7bdc46ef914e1ebe8fdb079574a853c"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_06/layer_00.pkl",
+      "bytes": 536988,
+      "sha256": "22453faf244b2fccafdb022a75f6c2835831f6a0aa9737633a4126eec23ad1f9"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_07/layer_00.pkl",
+      "bytes": 536988,
+      "sha256": "3a848d6410497a2e7b4ac986db9be99371d8b66f6a1824510ed96fdca4b71879"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_00/layer_01.pkl",
+      "bytes": 536988,
+      "sha256": "3ebbc2902e0d27f3272db34a068380519af8777972c39bd22076d689adb6d183"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_01/layer_01.pkl",
+      "bytes": 536988,
+      "sha256": "2ff9beb626512a197c2e2773c3e30cb1bd1201f1bcc36971fa56f8a5feafa221"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_02/layer_01.pkl",
+      "bytes": 536988,
+      "sha256": "aa9444e86ab8bd001aa87998741a58a58b86c5fe8ca1c1daeaa9aedcf272ff30"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_03/layer_01.pkl",
+      "bytes": 536988,
+      "sha256": "05f05238e4894a570222e8504d59df01f7ced77100b1de2e6d83e67b4374361c"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_04/layer_01.pkl",
+      "bytes": 536988,
+      "sha256": "60e5f15f13a439ac52415552eebadbc2afcc6587d44f67afdc76b4ac8a69cbdf"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_05/layer_01.pkl",
+      "bytes": 536988,
+      "sha256": "b5a3ca1086c55e041706ddf000a60b9be8b3129fecb1dcad5199300d6f9d4774"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_06/layer_01.pkl",
+      "bytes": 536988,
+      "sha256": "4ca26dbc5a93947f32471fe6df4a7f64b68ff3adb4486be910fd97f3793983e3"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_07/layer_01.pkl",
+      "bytes": 536988,
+      "sha256": "a9008730d4e2f7f4557489415808142c153069254367c2d108908ecfb9423c5c"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_00/layer_02.pkl",
+      "bytes": 536988,
+      "sha256": "b2df0ab9bb94a7756abaf2eb3c35d31c6e6083b7a9e725aa7cf00a3f23da2023"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_01/layer_02.pkl",
+      "bytes": 536988,
+      "sha256": "758c08d35e202e6da5ebd15093d955f487c642a9604d58531650a6ce4b526d8e"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_02/layer_02.pkl",
+      "bytes": 536988,
+      "sha256": "1fb366f2c00c7268101e755953831fbbe51cbc30d2f9d43cea8fc1bf4f4c3878"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_03/layer_02.pkl",
+      "bytes": 536988,
+      "sha256": "791cd260c238cdc9d90744cb0335b8c3bfe9001643f15d85ae0b01a62218ae0b"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_04/layer_02.pkl",
+      "bytes": 536988,
+      "sha256": "ab850713295d8c0e4b383475dc2f8c6cb3cc3846666ac2fe61e797dc4e097973"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_05/layer_02.pkl",
+      "bytes": 536988,
+      "sha256": "31fe80347ff8d1e27f2a1315e9beb37e2a2aa7bc6b11d127d189f036354d2548"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_06/layer_02.pkl",
+      "bytes": 536988,
+      "sha256": "d7abfef50357a2387d41bd583d3e1aab6df830781f672e2ce77e17a34ce4ce83"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_07/layer_02.pkl",
+      "bytes": 536988,
+      "sha256": "70ad3a9247bbe6cdffab389745b606c19f9d436c6c240d40ee38110efa8fef32"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_00/layer_03.pkl",
+      "bytes": 536988,
+      "sha256": "9d6fb12cec99cb7b7e7218013267d5ea1af68229bac42ff2dfc7b3cad5395c39"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_01/layer_03.pkl",
+      "bytes": 536988,
+      "sha256": "5ee032f58a8ead2ca6307a473b29b5da448dc6d081ba5817765b7ef20338a4a1"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_02/layer_03.pkl",
+      "bytes": 536988,
+      "sha256": "a30825ba3dfe33bc9694b9092295c536fcac3346290d147b7d4374ec3c578fe5"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_03/layer_03.pkl",
+      "bytes": 536988,
+      "sha256": "45c4282fc03dad322262121e410a013e35072c322928a57d1d14d8d11a87132a"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_04/layer_03.pkl",
+      "bytes": 536988,
+      "sha256": "e2a2d8f1917e8d8ae39a13523b3401f8d080ec0c32939f77d31ecea435aa7449"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_05/layer_03.pkl",
+      "bytes": 536988,
+      "sha256": "6ea996df8cef708b6ff094ff2cb8f8aac2f66bf31132ce5d00be6e17a1584edb"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_06/layer_03.pkl",
+      "bytes": 536988,
+      "sha256": "c7940f1823002ba89f000a5b7f83a86979651e426633693a4d0f1a5dc181457c"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_07/layer_03.pkl",
+      "bytes": 536988,
+      "sha256": "b583197d75a31f3e69055335268981cc1ffe7bf2276cf0f67a7d1694953adad3"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_00/layer_04.pkl",
+      "bytes": 536988,
+      "sha256": "8117300e8a180b4907a91235144295a08621ac5204515bd100ace850136705a4"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_01/layer_04.pkl",
+      "bytes": 536988,
+      "sha256": "2797fde9b7c825fda9317df2cfc4f8eef69b983e85e4a4bbdb6de828f0e1c8d4"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_02/layer_04.pkl",
+      "bytes": 536988,
+      "sha256": "376e087464032078674e76ef50c35ccd26380bf0e4a44ba7a710f5cdb8adf5c0"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_03/layer_04.pkl",
+      "bytes": 536988,
+      "sha256": "0902ddd42aa9d3c265db8a58ac1f58c775754f6bc45bb5000267c007fb8c9755"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_04/layer_04.pkl",
+      "bytes": 536988,
+      "sha256": "3d66f2f1611e1a5820bb835b3b2c5916fe903949e547d5ec5354e84216375c0b"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_05/layer_04.pkl",
+      "bytes": 536988,
+      "sha256": "00620616ff75efeb259af807dbcb62fd8c09864f1eb758c0b88b476a526b024c"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_06/layer_04.pkl",
+      "bytes": 536988,
+      "sha256": "f34138f4e613eb4c507a04edb343d4106e4187e8f0ed8409b3d6aef59bbe6799"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_07/layer_04.pkl",
+      "bytes": 536988,
+      "sha256": "fd3f707a23c899d737c75c9a45d5932a4c88d8d10a747cd02c8ff96b3670812c"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_00/layer_05.pkl",
+      "bytes": 536988,
+      "sha256": "94bbc33ed286f49575b25b8d95c8a4467459ad282af9321f5ce98fc248bbcd5e"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_01/layer_05.pkl",
+      "bytes": 536988,
+      "sha256": "40a1755b059dc28956b36bbe8e216ced32f011746a58e56485268b67100ea717"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_02/layer_05.pkl",
+      "bytes": 536988,
+      "sha256": "e176e60123c053589b52d4bec379fe25f10c66018e3e019b30aa94f8fd980478"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_03/layer_05.pkl",
+      "bytes": 536988,
+      "sha256": "bd9336b34f443675ba9e6db7a0a7a426b721bc12a50eb718c1c2067429a2f57c"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_04/layer_05.pkl",
+      "bytes": 536988,
+      "sha256": "290a60d2083d182e4567ee1eb787e04eb667aa6245d9d1d666ec49b6040ee554"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_05/layer_05.pkl",
+      "bytes": 536988,
+      "sha256": "e69270f66e1a49cdf60a7db7ce03e5ddc864fdeafd9bd07104821bc3a30630ab"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_06/layer_05.pkl",
+      "bytes": 536988,
+      "sha256": "838fc8fe78b5f06f10fb081cd9f7bff028c6199988ab90c30b1132d3b158999f"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_07/layer_05.pkl",
+      "bytes": 536988,
+      "sha256": "24be5b41fb8ef396842d79128ee668d2318c59a45f1091528a678d5ee3cfff95"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_00/layer_06.pkl",
+      "bytes": 536988,
+      "sha256": "1e5f87b5aeaa36b2ead4c3d5de287afa94c710e5a3ba3d724f83ea922a77eac1"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_01/layer_06.pkl",
+      "bytes": 536988,
+      "sha256": "97557622e2ebe8f49116bcaf016b430559fcad0640b075c19d7e4d5b40da1856"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_02/layer_06.pkl",
+      "bytes": 536988,
+      "sha256": "881e25b30badb4a59c1bb60de473c6271e7c342c0723b2e650811c7a7f2ceb0b"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_03/layer_06.pkl",
+      "bytes": 536988,
+      "sha256": "9665912a37647af7ef86e4eef51f61392511f1854f5048dda3ffd2e018f3ba45"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_04/layer_06.pkl",
+      "bytes": 536988,
+      "sha256": "025e919f8254ce74ca7b9b952483a8d4a8b432f4a59bff9bab5049f9f6ca5db6"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_05/layer_06.pkl",
+      "bytes": 536988,
+      "sha256": "839fa10ce2a147b8d6bc61869b2860f12265eb340b87e7e57be63a9bd394ce14"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_06/layer_06.pkl",
+      "bytes": 536988,
+      "sha256": "8796c1b46d8e95589ba4754eb293c819553cee1dd02e3c329b3667364ebbde5f"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_07/layer_06.pkl",
+      "bytes": 536988,
+      "sha256": "48fceb0d43f10796ffef813eca112fe202a9a7af2f174d1bdfcaacf2a19dac6f"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_00/layer_07.pkl",
+      "bytes": 536988,
+      "sha256": "a61f065dcbec6c17554e8106b92e82f64dedd142dbcb99092b0288788bae0f5f"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_01/layer_07.pkl",
+      "bytes": 536988,
+      "sha256": "140a0b0c512b2b3210d6d4c3aa9549c6b84032cb7c011ed9147a41d32852691c"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_02/layer_07.pkl",
+      "bytes": 536988,
+      "sha256": "be4059edd5c85bb9ba2ca1b7e7aa50e2118ef41685600a76709d9074e9f71abe"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_03/layer_07.pkl",
+      "bytes": 536988,
+      "sha256": "7da0842a6650c1a46e6588987fe541608d21f978c19ee3f5b96b4670c3c157d4"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_04/layer_07.pkl",
+      "bytes": 536988,
+      "sha256": "9b360e6539404dccb158b21a52fdfdc6877fd1a96eaa606bfdbe6aa65d5717bb"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_05/layer_07.pkl",
+      "bytes": 536988,
+      "sha256": "28c1ead2f7534177771bb2dbbc03044b988a4481b69daa968f72f7d48e7e9ebe"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_06/layer_07.pkl",
+      "bytes": 536988,
+      "sha256": "71573a553b5e016ef9a11e21bd0cbc1669fde132184625ec7266b9ab159ce5c7"
+    },
+    {
+      "path": "inputs/iteration_4/microbatch_2/rank_07/layer_07.pkl",
+      "bytes": 536988,
+      "sha256": "bb014dac977de8b7e9e67d2ac33a540c659fb356df4e40f48c9399f5a517ea41"
+    }
+  ],
+  "limitations": [
+    "Only one iteration and one microbatch; no temporal stability evidence",
+    "Only int32 top-k expert IDs; no gate weights, logits, model identity, sequence lengths, padding mask, hidden dimension, dtype, or physical placement metadata",
+    "home[e]=e//44 follows MoonEP contiguous-home convention and is an explicit assumption",
+    "Source/token/top-k order preserved; token positions are not automatically semantic sequence positions",
+    "Slot-shuffled routes are diagnostic controls only and can contain duplicate expert IDs"
+  ],
+  "synthetic_comparison": [
+    {
+      "label": "synthetic_c8_concentrated",
+      "shape": [
+        8,
+        16384,
+        16
+      ],
+      "global_tokens": 131072,
+      "pairs": 2097152,
+      "num_experts": 352,
+      "top_k": 16,
+      "id_min": 0,
+      "id_max": 351,
+      "observed_experts": 352,
+      "unique_experts_per_token": true,
+      "expert_max_over_mean": 21.982711791992188,
+      "expert_max_count": 130969,
+      "expert_min_count": 1599,
+      "expert_effective_count_entropy": 123.40378345841722,
+      "home_assumption": "home[e]=e//44; verify with production expert map; dump has no placement metadata",
+      "home_loads": [
+        1062495,
+        146384,
+        154195,
+        150407,
+        145734,
+        140745,
+        156929,
+        140263
+      ],
+      "home_max_over_mean": 4.053096771240234,
+      "home_max_minus_min_over_mean": 3.518035888671875,
+      "source_rank_js_bits": 0.0008440679826495215,
+      "source_rank_total_variation_from_global": [
+        0.010334014892578125,
+        0.010848522186279297,
+        0.010600090026855469,
+        0.010594367980957031,
+        0.010276317596435547,
+        0.01044464111328125,
+        0.009846687316894531,
+        0.009967803955078125
+      ],
+      "top_experts": [
+        {
+          "id": 2,
+          "count": 130969,
+          "token_frequency": 0.9992141723632812
+        },
+        {
+          "id": 39,
+          "count": 130634,
+          "token_frequency": 0.9966583251953125
+        },
+        {
+          "id": 6,
+          "count": 129647,
+          "token_frequency": 0.9891281127929688
+        },
+        {
+          "id": 37,
+          "count": 126915,
+          "token_frequency": 0.9682846069335938
+        },
+        {
+          "id": 27,
+          "count": 121672,
+          "token_frequency": 0.92828369140625
+        },
+        {
+          "id": 13,
+          "count": 113308,
+          "token_frequency": 0.864471435546875
+        },
+        {
+          "id": 19,
+          "count": 102196,
+          "token_frequency": 0.779693603515625
+        },
+        {
+          "id": 24,
+          "count": 88787,
+          "token_frequency": 0.6773910522460938
+        },
+        {
+          "id": 168,
+          "count": 5901,
+          "token_frequency": 0.04502105712890625
+        },
+        {
+          "id": 289,
+          "count": 5764,
+          "token_frequency": 0.043975830078125
+        },
+        {
+          "id": 125,
+          "count": 5748,
+          "token_frequency": 0.043853759765625
+        },
+        {
+          "id": 281,
+          "count": 5620,
+          "token_frequency": 0.042877197265625
+        },
+        {
+          "id": 191,
+          "count": 5581,
+          "token_frequency": 0.04257965087890625
+        },
+        {
+          "id": 51,
+          "count": 5506,
+          "token_frequency": 0.0420074462890625
+        },
+        {
+          "id": 190,
+          "count": 5444,
+          "token_frequency": 0.041534423828125
+        },
+        {
+          "id": 170,
+          "count": 5230,
+          "token_frequency": 0.0399017333984375
+        },
+        {
+          "id": 52,
+          "count": 5189,
+          "token_frequency": 0.03958892822265625
+        },
+        {
+          "id": 104,
+          "count": 5058,
+          "token_frequency": 0.0385894775390625
+        },
+        {
+          "id": 120,
+          "count": 4990,
+          "token_frequency": 0.0380706787109375
+        },
+        {
+          "id": 131,
+          "count": 4967,
+          "token_frequency": 0.03789520263671875
+        },
+        {
+          "id": 238,
+          "count": 4928,
+          "token_frequency": 0.03759765625
+        },
+        {
+          "id": 228,
+          "count": 4926,
+          "token_frequency": 0.0375823974609375
+        },
+        {
+          "id": 50,
+          "count": 4921,
+          "token_frequency": 0.03754425048828125
+        },
+        {
+          "id": 210,
+          "count": 4891,
+          "token_frequency": 0.03731536865234375
+        }
+      ],
+      "top_expert_pair_share": {
+        "8": 0.4501953125,
+        "12": 0.4611783027648926,
+        "16": 0.4715547561645508,
+        "20": 0.4811887741088867,
+        "24": 0.4905662536621094,
+        "32": 0.509007453918457,
+        "64": 0.576380729675293
+      },
+      "top_expert_count_per_token": {
+        "8": [
+          0,
+          0,
+          0,
+          3,
+          186,
+          2866,
+          19677,
+          55737,
+          52603,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "16": [
+          0,
+          0,
+          0,
+          0,
+          115,
+          1899,
+          14023,
+          44354,
+          53749,
+          15063,
+          1771,
+          95,
+          2,
+          1,
+          0,
+          0,
+          0
+        ],
+        "24": [
+          0,
+          0,
+          0,
+          0,
+          78,
+          1261,
+          10230,
+          35501,
+          51588,
+          25445,
+          6142,
+          769,
+          54,
+          4,
+          0,
+          0,
+          0
+        ]
+      },
+      "home_remote_destinations_total": 679639,
+      "home_remote_destinations_per_token": 5.185234069824219,
+      "home_remote_destination_histogram": [
+        0,
+        0,
+        147,
+        3614,
+        24438,
+        54595,
+        40170,
+        8108,
+        0
+      ],
+      "home_remote_tokens_by_source_destination": [
+        [
+          0,
+          11539,
+          11775,
+          11688,
+          11500,
+          11221,
+          11921,
+          11015
+        ],
+        [
+          16384,
+          0,
+          11734,
+          11555,
+          11473,
+          11230,
+          11906,
+          11193
+        ],
+        [
+          16384,
+          11436,
+          0,
+          11643,
+          11327,
+          11167,
+          11884,
+          11232
+        ],
+        [
+          16384,
+          11436,
+          11807,
+          0,
+          11352,
+          11228,
+          11954,
+          11245
+        ],
+        [
+          16384,
+          11612,
+          11788,
+          11632,
+          0,
+          11219,
+          11931,
+          11218
+        ],
+        [
+          16384,
+          11472,
+          11822,
+          11703,
+          11443,
+          0,
+          11986,
+          11215
+        ],
+        [
+          16384,
+          11413,
+          11917,
+          11663,
+          11523,
+          11172,
+          0,
+          11230
+        ],
+        [
+          16384,
+          11514,
+          11913,
+          11538,
+          11501,
+          11097,
+          11968,
+          0
+        ]
+      ],
+      "distinct_unordered_topk_sets": 131072,
+      "most_repeated_unordered_topk_set_count": 1,
+      "unordered_topk_set_collision_fraction": 0.0,
+      "cooccurrence_pair_tv_vs_slot_shuffle": 0.03660796483357747,
+      "cooccurrence_top20_mass": 0.14631544748942057,
+      "cooccurrence_slot_shuffle_mass_on_real_top20": 0.13474610646565754,
+      "slot_shuffle_duplicate_token_fraction": 0.9424285888671875,
+      "cooccurrence_top20": [
+        {
+          "a": 2,
+          "b": 39,
+          "count": 130532,
+          "slot_shuffle_count": 114331
+        },
+        {
+          "a": 2,
+          "b": 6,
+          "count": 129544,
+          "slot_shuffle_count": 115261
+        },
+        {
+          "a": 6,
+          "b": 39,
+          "count": 129217,
+          "slot_shuffle_count": 116177
+        },
+        {
+          "a": 2,
+          "b": 37,
+          "count": 126816,
+          "slot_shuffle_count": 115099
+        },
+        {
+          "a": 37,
+          "b": 39,
+          "count": 126496,
+          "slot_shuffle_count": 115065
+        },
+        {
+          "a": 6,
+          "b": 37,
+          "count": 125547,
+          "slot_shuffle_count": 115183
+        },
+        {
+          "a": 2,
+          "b": 27,
+          "count": 121584,
+          "slot_shuffle_count": 112362
+        },
+        {
+          "a": 27,
+          "b": 39,
+          "count": 121281,
+          "slot_shuffle_count": 112082
+        },
+        {
+          "a": 6,
+          "b": 27,
+          "count": 120378,
+          "slot_shuffle_count": 111226
+        },
+        {
+          "a": 27,
+          "b": 37,
+          "count": 117850,
+          "slot_shuffle_count": 109438
+        },
+        {
+          "a": 2,
+          "b": 13,
+          "count": 113220,
+          "slot_shuffle_count": 105594
+        },
+        {
+          "a": 13,
+          "b": 39,
+          "count": 112959,
+          "slot_shuffle_count": 105143
+        },
+        {
+          "a": 6,
+          "b": 13,
+          "count": 112111,
+          "slot_shuffle_count": 104144
+        },
+        {
+          "a": 13,
+          "b": 37,
+          "count": 109761,
+          "slot_shuffle_count": 102122
+        },
+        {
+          "a": 13,
+          "b": 27,
+          "count": 105162,
+          "slot_shuffle_count": 98142
+        },
+        {
+          "a": 2,
+          "b": 19,
+          "count": 102118,
+          "slot_shuffle_count": 96097
+        },
+        {
+          "a": 19,
+          "b": 39,
+          "count": 101872,
+          "slot_shuffle_count": 95729
+        },
+        {
+          "a": 6,
+          "b": 19,
+          "count": 101103,
+          "slot_shuffle_count": 94606
+        },
+        {
+          "a": 19,
+          "b": 37,
+          "count": 98930,
+          "slot_shuffle_count": 92884
+        },
+        {
+          "a": 19,
+          "b": 27,
+          "count": 94862,
+          "slot_shuffle_count": 88688
+        }
+      ],
+      "sha256_topk_int32_c": "a53ec21a6d62761619b0c09abfcbfc4c5a296afbc30aecd489f76f2ead83e70e",
+      "generator_metadata": {
+        "tokens": 131072,
+        "top_k": 16,
+        "core_count": 8,
+        "layout": "concentrated",
+        "realized_core_per_token": 7.203125,
+        "expert_max_over_mean": 21.982711791992188,
+        "home_max_over_mean": 4.053096771240234
+      }
+    },
+    {
+      "label": "synthetic_c16_concentrated",
+      "shape": [
+        8,
+        16384,
+        16
+      ],
+      "global_tokens": 131072,
+      "pairs": 2097152,
+      "num_experts": 352,
+      "top_k": 16,
+      "id_min": 0,
+      "id_max": 351,
+      "observed_experts": 352,
+      "unique_experts_per_token": true,
+      "expert_max_over_mean": 21.968612670898438,
+      "expert_max_count": 130885,
+      "expert_min_count": 317,
+      "expert_effective_count_entropy": 29.78163444570776,
+      "home_assumption": "home[e]=e//44; verify with production expert map; dump has no placement metadata",
+      "home_loads": [
+        1903882,
+        27804,
+        28866,
+        27835,
+        27306,
+        25212,
+        28332,
+        27915
+      ],
+      "home_max_over_mean": 7.262733459472656,
+      "home_max_minus_min_over_mean": 7.166557312011719,
+      "source_rank_js_bits": 0.0007944712920467207,
+      "source_rank_total_variation_from_global": [
+        0.004948139190673828,
+        0.004607200622558594,
+        0.005424976348876953,
+        0.004859447479248047,
+        0.004691600799560547,
+        0.0049991607666015625,
+        0.004831790924072266,
+        0.0048770904541015625
+      ],
+      "top_experts": [
+        {
+          "id": 2,
+          "count": 130885,
+          "token_frequency": 0.9985733032226562
+        },
+        {
+          "id": 39,
+          "count": 130731,
+          "token_frequency": 0.9973983764648438
+        },
+        {
+          "id": 6,
+          "count": 130481,
+          "token_frequency": 0.9954910278320312
+        },
+        {
+          "id": 37,
+          "count": 130036,
+          "token_frequency": 0.992095947265625
+        },
+        {
+          "id": 27,
+          "count": 129303,
+          "token_frequency": 0.9865036010742188
+        },
+        {
+          "id": 13,
+          "count": 128188,
+          "token_frequency": 0.977996826171875
+        },
+        {
+          "id": 19,
+          "count": 126863,
+          "token_frequency": 0.9678878784179688
+        },
+        {
+          "id": 24,
+          "count": 124995,
+          "token_frequency": 0.9536361694335938
+        },
+        {
+          "id": 25,
+          "count": 122506,
+          "token_frequency": 0.9346466064453125
+        },
+        {
+          "id": 11,
+          "count": 119395,
+          "token_frequency": 0.9109115600585938
+        },
+        {
+          "id": 41,
+          "count": 115414,
+          "token_frequency": 0.8805389404296875
+        },
+        {
+          "id": 0,
+          "count": 110898,
+          "token_frequency": 0.8460845947265625
+        },
+        {
+          "id": 35,
+          "count": 105880,
+          "token_frequency": 0.80780029296875
+        },
+        {
+          "id": 12,
+          "count": 100171,
+          "token_frequency": 0.7642440795898438
+        },
+        {
+          "id": 32,
+          "count": 93991,
+          "token_frequency": 0.7170944213867188
+        },
+        {
+          "id": 10,
+          "count": 87172,
+          "token_frequency": 0.665069580078125
+        },
+        {
+          "id": 312,
+          "count": 1084,
+          "token_frequency": 0.008270263671875
+        },
+        {
+          "id": 308,
+          "count": 1075,
+          "token_frequency": 0.00820159912109375
+        },
+        {
+          "id": 84,
+          "count": 1072,
+          "token_frequency": 0.0081787109375
+        },
+        {
+          "id": 127,
+          "count": 1052,
+          "token_frequency": 0.008026123046875
+        },
+        {
+          "id": 59,
+          "count": 1051,
+          "token_frequency": 0.00801849365234375
+        },
+        {
+          "id": 297,
+          "count": 1026,
+          "token_frequency": 0.0078277587890625
+        },
+        {
+          "id": 60,
+          "count": 1000,
+          "token_frequency": 0.00762939453125
+        },
+        {
+          "id": 143,
+          "count": 984,
+          "token_frequency": 0.00750732421875
+        }
+      ],
+      "top_expert_pair_share": {
+        "8": 0.4918489456176758,
+        "12": 0.7151103019714355,
+        "16": 0.8997483253479004,
+        "20": 0.9017906188964844,
+        "24": 0.9037270545959473,
+        "32": 0.9073538780212402,
+        "64": 0.9204940795898438
+      },
+      "top_expert_count_per_token": {
+        "8": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          22,
+          924,
+          15180,
+          114946,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "16": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          27,
+          345,
+          3173,
+          17181,
+          46333,
+          51448,
+          12564
+        ],
+        "24": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          19,
+          296,
+          2749,
+          15711,
+          44587,
+          53002,
+          14708
+        ]
+      },
+      "home_remote_destinations_total": 272014,
+      "home_remote_destinations_per_token": 2.0753021240234375,
+      "home_remote_destination_histogram": [
+        2118,
+        29892,
+        61496,
+        31554,
+        5603,
+        399,
+        9,
+        1,
+        0
+      ],
+      "home_remote_tokens_by_source_destination": [
+        [
+          0,
+          3304,
+          3442,
+          3272,
+          3212,
+          2861,
+          3214,
+          3183
+        ],
+        [
+          16384,
+          0,
+          3418,
+          3251,
+          3184,
+          2949,
+          3336,
+          3188
+        ],
+        [
+          16384,
+          3088,
+          0,
+          3164,
+          3090,
+          3027,
+          3226,
+          3217
+        ],
+        [
+          16384,
+          3232,
+          3308,
+          0,
+          3215,
+          2940,
+          3292,
+          3255
+        ],
+        [
+          16384,
+          3225,
+          3291,
+          3291,
+          0,
+          2932,
+          3341,
+          3243
+        ],
+        [
+          16384,
+          3202,
+          3376,
+          3204,
+          3158,
+          0,
+          3320,
+          3344
+        ],
+        [
+          16384,
+          3248,
+          3326,
+          3219,
+          3211,
+          2970,
+          0,
+          3319
+        ],
+        [
+          16384,
+          3277,
+          3348,
+          3217,
+          3169,
+          2957,
+          3270,
+          0
+        ]
+      ],
+      "distinct_unordered_topk_sets": 70172,
+      "most_repeated_unordered_topk_set_count": 12564,
+      "unordered_topk_set_collision_fraction": 0.464630126953125,
+      "cooccurrence_pair_tv_vs_slot_shuffle": 0.031583913167317706,
+      "cooccurrence_top20_mass": 0.16293773651123047,
+      "cooccurrence_slot_shuffle_mass_on_real_top20": 0.15077006022135417,
+      "slot_shuffle_duplicate_token_fraction": 0.9995574951171875,
+      "cooccurrence_top20": [
+        {
+          "a": 2,
+          "b": 39,
+          "count": 130546,
+          "slot_shuffle_count": 118355
+        },
+        {
+          "a": 2,
+          "b": 6,
+          "count": 130295,
+          "slot_shuffle_count": 119476
+        },
+        {
+          "a": 6,
+          "b": 39,
+          "count": 130145,
+          "slot_shuffle_count": 119245
+        },
+        {
+          "a": 2,
+          "b": 37,
+          "count": 129851,
+          "slot_shuffle_count": 119011
+        },
+        {
+          "a": 37,
+          "b": 39,
+          "count": 129697,
+          "slot_shuffle_count": 119246
+        },
+        {
+          "a": 6,
+          "b": 37,
+          "count": 129450,
+          "slot_shuffle_count": 119382
+        },
+        {
+          "a": 2,
+          "b": 27,
+          "count": 129121,
+          "slot_shuffle_count": 119341
+        },
+        {
+          "a": 27,
+          "b": 39,
+          "count": 128973,
+          "slot_shuffle_count": 119188
+        },
+        {
+          "a": 6,
+          "b": 27,
+          "count": 128730,
+          "slot_shuffle_count": 118780
+        },
+        {
+          "a": 27,
+          "b": 37,
+          "count": 128286,
+          "slot_shuffle_count": 118705
+        },
+        {
+          "a": 2,
+          "b": 13,
+          "count": 128009,
+          "slot_shuffle_count": 119028
+        },
+        {
+          "a": 13,
+          "b": 39,
+          "count": 127855,
+          "slot_shuffle_count": 118637
+        },
+        {
+          "a": 6,
+          "b": 13,
+          "count": 127625,
+          "slot_shuffle_count": 119024
+        },
+        {
+          "a": 13,
+          "b": 37,
+          "count": 127185,
+          "slot_shuffle_count": 118247
+        },
+        {
+          "a": 2,
+          "b": 19,
+          "count": 126688,
+          "slot_shuffle_count": 118236
+        },
+        {
+          "a": 19,
+          "b": 39,
+          "count": 126538,
+          "slot_shuffle_count": 117861
+        },
+        {
+          "a": 13,
+          "b": 27,
+          "count": 126463,
+          "slot_shuffle_count": 118144
+        },
+        {
+          "a": 6,
+          "b": 19,
+          "count": 126301,
+          "slot_shuffle_count": 117560
+        },
+        {
+          "a": 19,
+          "b": 37,
+          "count": 125871,
+          "slot_shuffle_count": 117213
+        },
+        {
+          "a": 19,
+          "b": 27,
+          "count": 125160,
+          "slot_shuffle_count": 116729
+        }
+      ],
+      "sha256_topk_int32_c": "bcb4ea43fdd7eb23a34f595821c23d620693c37f40f2ecffbeaa39d3747c8584",
+      "generator_metadata": {
+        "tokens": 131072,
+        "top_k": 16,
+        "core_count": 16,
+        "layout": "concentrated",
+        "realized_core_per_token": 14.395973205566406,
+        "expert_max_over_mean": 21.968612670898438,
+        "home_max_over_mean": 7.262733459472656
+      }
+    },
+    {
+      "label": "synthetic_c24_concentrated",
+      "shape": [
+        8,
+        16384,
+        16
+      ],
+      "global_tokens": 131072,
+      "pairs": 2097152,
+      "num_experts": 352,
+      "top_k": 16,
+      "id_min": 0,
+      "id_max": 351,
+      "observed_experts": 352,
+      "unique_experts_per_token": true,
+      "expert_max_over_mean": 20.230560302734375,
+      "expert_max_count": 120530,
+      "expert_min_count": 310,
+      "expert_effective_count_entropy": 40.66188185343803,
+      "home_assumption": "home[e]=e//44; verify with production expert map; dump has no placement metadata",
+      "home_loads": [
+        1900315,
+        29582,
+        28717,
+        28340,
+        26140,
+        27279,
+        27560,
+        29219
+      ],
+      "home_max_over_mean": 7.249126434326172,
+      "home_max_minus_min_over_mean": 7.149410247802734,
+      "source_rank_js_bits": 0.0008150450440205022,
+      "source_rank_total_variation_from_global": [
+        0.0062961578369140625,
+        0.005623817443847656,
+        0.006474971771240234,
+        0.0058803558349609375,
+        0.00600433349609375,
+        0.006128787994384766,
+        0.006612300872802734,
+        0.0059719085693359375
+      ],
+      "top_experts": [
+        {
+          "id": 2,
+          "count": 120530,
+          "token_frequency": 0.9195709228515625
+        },
+        {
+          "id": 39,
+          "count": 118107,
+          "token_frequency": 0.9010848999023438
+        },
+        {
+          "id": 6,
+          "count": 115616,
+          "token_frequency": 0.882080078125
+        },
+        {
+          "id": 37,
+          "count": 112736,
+          "token_frequency": 0.860107421875
+        },
+        {
+          "id": 27,
+          "count": 109042,
+          "token_frequency": 0.8319244384765625
+        },
+        {
+          "id": 13,
+          "count": 105525,
+          "token_frequency": 0.8050918579101562
+        },
+        {
+          "id": 19,
+          "count": 101777,
+          "token_frequency": 0.7764968872070312
+        },
+        {
+          "id": 24,
+          "count": 97888,
+          "token_frequency": 0.746826171875
+        },
+        {
+          "id": 25,
+          "count": 93806,
+          "token_frequency": 0.7156829833984375
+        },
+        {
+          "id": 11,
+          "count": 89417,
+          "token_frequency": 0.6821975708007812
+        },
+        {
+          "id": 41,
+          "count": 85039,
+          "token_frequency": 0.6487960815429688
+        },
+        {
+          "id": 0,
+          "count": 80695,
+          "token_frequency": 0.6156539916992188
+        },
+        {
+          "id": 35,
+          "count": 76525,
+          "token_frequency": 0.5838394165039062
+        },
+        {
+          "id": 12,
+          "count": 72331,
+          "token_frequency": 0.5518417358398438
+        },
+        {
+          "id": 32,
+          "count": 67814,
+          "token_frequency": 0.5173797607421875
+        },
+        {
+          "id": 10,
+          "count": 63705,
+          "token_frequency": 0.48603057861328125
+        },
+        {
+          "id": 23,
+          "count": 60044,
+          "token_frequency": 0.458099365234375
+        },
+        {
+          "id": 36,
+          "count": 55740,
+          "token_frequency": 0.425262451171875
+        },
+        {
+          "id": 16,
+          "count": 52014,
+          "token_frequency": 0.3968353271484375
+        },
+        {
+          "id": 9,
+          "count": 48255,
+          "token_frequency": 0.36815643310546875
+        },
+        {
+          "id": 28,
+          "count": 44658,
+          "token_frequency": 0.3407135009765625
+        },
+        {
+          "id": 7,
+          "count": 41893,
+          "token_frequency": 0.31961822509765625
+        },
+        {
+          "id": 33,
+          "count": 38652,
+          "token_frequency": 0.294891357421875
+        },
+        {
+          "id": 40,
+          "count": 35944,
+          "token_frequency": 0.27423095703125
+        }
+      ],
+      "top_expert_pair_share": {
+        "8": 0.420198917388916,
+        "12": 0.5865945816040039,
+        "16": 0.7202877998352051,
+        "20": 0.8233098983764648,
+        "24": 0.9001507759094238,
+        "32": 0.9043111801147461,
+        "64": 0.9181318283081055
+      },
+      "top_expert_count_per_token": {
+        "8": [
+          0,
+          0,
+          11,
+          218,
+          2057,
+          11529,
+          35209,
+          52966,
+          29082,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "16": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          32,
+          197,
+          1380,
+          6294,
+          19339,
+          35470,
+          38675,
+          22636,
+          6354,
+          686,
+          7
+        ],
+        "24": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          12,
+          165,
+          1125,
+          5675,
+          18931,
+          39064,
+          45071,
+          21028
+        ]
+      },
+      "home_remote_destinations_total": 271828,
+      "home_remote_destinations_per_token": 2.073883056640625,
+      "home_remote_destination_histogram": [
+        2983,
+        34153,
+        54100,
+        30935,
+        7896,
+        944,
+        61,
+        0,
+        0
+      ],
+      "home_remote_tokens_by_source_destination": [
+        [
+          0,
+          3368,
+          3311,
+          3243,
+          2986,
+          3187,
+          3131,
+          3279
+        ],
+        [
+          16384,
+          0,
+          3318,
+          3246,
+          2999,
+          3036,
+          3091,
+          3462
+        ],
+        [
+          16384,
+          3336,
+          0,
+          3171,
+          2988,
+          3048,
+          3090,
+          3296
+        ],
+        [
+          16384,
+          3407,
+          3202,
+          0,
+          2967,
+          3174,
+          3172,
+          3356
+        ],
+        [
+          16384,
+          3365,
+          3223,
+          3244,
+          0,
+          3122,
+          3204,
+          3272
+        ],
+        [
+          16384,
+          3359,
+          3342,
+          3278,
+          3058,
+          0,
+          3180,
+          3271
+        ],
+        [
+          16384,
+          3324,
+          3301,
+          3144,
+          3001,
+          3167,
+          0,
+          3307
+        ],
+        [
+          16384,
+          3357,
+          3236,
+          3256,
+          3030,
+          3080,
+          3155,
+          0
+        ]
+      ],
+      "distinct_unordered_topk_sets": 126437,
+      "most_repeated_unordered_topk_set_count": 19,
+      "unordered_topk_set_collision_fraction": 0.03536224365234375,
+      "cooccurrence_pair_tv_vs_slot_shuffle": 0.02640523910522461,
+      "cooccurrence_top20_mass": 0.12243372599283854,
+      "cooccurrence_slot_shuffle_mass_on_real_top20": 0.11468098958333334,
+      "slot_shuffle_duplicate_token_fraction": 0.9939956665039062,
+      "cooccurrence_top20": [
+        {
+          "a": 2,
+          "b": 39,
+          "count": 108531,
+          "slot_shuffle_count": 100659
+        },
+        {
+          "a": 2,
+          "b": 6,
+          "count": 106221,
+          "slot_shuffle_count": 99427
+        },
+        {
+          "a": 6,
+          "b": 39,
+          "count": 104039,
+          "slot_shuffle_count": 96977
+        },
+        {
+          "a": 2,
+          "b": 37,
+          "count": 103532,
+          "slot_shuffle_count": 97458
+        },
+        {
+          "a": 37,
+          "b": 39,
+          "count": 101479,
+          "slot_shuffle_count": 94551
+        },
+        {
+          "a": 2,
+          "b": 27,
+          "count": 100122,
+          "slot_shuffle_count": 93714
+        },
+        {
+          "a": 6,
+          "b": 37,
+          "count": 99324,
+          "slot_shuffle_count": 93012
+        },
+        {
+          "a": 27,
+          "b": 39,
+          "count": 98100,
+          "slot_shuffle_count": 91330
+        },
+        {
+          "a": 2,
+          "b": 13,
+          "count": 96945,
+          "slot_shuffle_count": 91073
+        },
+        {
+          "a": 6,
+          "b": 27,
+          "count": 95976,
+          "slot_shuffle_count": 89615
+        },
+        {
+          "a": 13,
+          "b": 39,
+          "count": 94880,
+          "slot_shuffle_count": 88922
+        },
+        {
+          "a": 27,
+          "b": 37,
+          "count": 93606,
+          "slot_shuffle_count": 87982
+        },
+        {
+          "a": 2,
+          "b": 19,
+          "count": 93412,
+          "slot_shuffle_count": 87956
+        },
+        {
+          "a": 6,
+          "b": 13,
+          "count": 92830,
+          "slot_shuffle_count": 86984
+        },
+        {
+          "a": 19,
+          "b": 39,
+          "count": 91551,
+          "slot_shuffle_count": 85928
+        },
+        {
+          "a": 13,
+          "b": 37,
+          "count": 90450,
+          "slot_shuffle_count": 85069
+        },
+        {
+          "a": 2,
+          "b": 24,
+          "count": 89810,
+          "slot_shuffle_count": 83986
+        },
+        {
+          "a": 6,
+          "b": 19,
+          "count": 89504,
+          "slot_shuffle_count": 84410
+        },
+        {
+          "a": 24,
+          "b": 39,
+          "count": 87988,
+          "slot_shuffle_count": 82541
+        },
+        {
+          "a": 13,
+          "b": 27,
+          "count": 87416,
+          "slot_shuffle_count": 82182
+        }
+      ],
+      "sha256_topk_int32_c": "6336bb731c6bd62dbeffe422c2ad26b5e5dee7ed13530a8e48da4f590f91d0c4",
+      "generator_metadata": {
+        "tokens": 131072,
+        "top_k": 16,
+        "core_count": 24,
+        "layout": "concentrated",
+        "realized_core_per_token": 14.402412414550781,
+        "expert_max_over_mean": 20.230560302734375,
+        "home_max_over_mean": 7.249126434326172
+      }
+    },
+    {
+      "label": "synthetic_c16_spread",
+      "shape": [
+        8,
+        16384,
+        16
+      ],
+      "global_tokens": 131072,
+      "pairs": 2097152,
+      "num_experts": 352,
+      "top_k": 16,
+      "id_min": 0,
+      "id_max": 351,
+      "observed_experts": 352,
+      "unique_experts_per_token": true,
+      "expert_max_over_mean": 21.968612670898438,
+      "expert_max_count": 130885,
+      "expert_min_count": 317,
+      "expert_effective_count_entropy": 29.781634445707745,
+      "home_assumption": "home[e]=e//44; verify with production expert map; dump has no placement metadata",
+      "home_loads": [
+        278599,
+        276913,
+        273471,
+        268446,
+        260372,
+        252865,
+        248143,
+        238343
+      ],
+      "home_max_over_mean": 1.0627708435058594,
+      "home_max_minus_min_over_mean": 0.153564453125,
+      "source_rank_js_bits": 0.0007944712920467207,
+      "source_rank_total_variation_from_global": [
+        0.004948139190673828,
+        0.004607200622558594,
+        0.005424976348876953,
+        0.004859447479248047,
+        0.004691600799560547,
+        0.0049991607666015625,
+        0.004831790924072266,
+        0.0048770904541015625
+      ],
+      "top_experts": [
+        {
+          "id": 2,
+          "count": 130885,
+          "token_frequency": 0.9985733032226562
+        },
+        {
+          "id": 84,
+          "count": 130731,
+          "token_frequency": 0.9973983764648438
+        },
+        {
+          "id": 101,
+          "count": 130481,
+          "token_frequency": 0.9954910278320312
+        },
+        {
+          "id": 152,
+          "count": 130036,
+          "token_frequency": 0.992095947265625
+        },
+        {
+          "id": 187,
+          "count": 129303,
+          "token_frequency": 0.9865036010742188
+        },
+        {
+          "id": 225,
+          "count": 128188,
+          "token_frequency": 0.977996826171875
+        },
+        {
+          "id": 297,
+          "count": 126863,
+          "token_frequency": 0.9678878784179688
+        },
+        {
+          "id": 315,
+          "count": 124995,
+          "token_frequency": 0.9536361694335938
+        },
+        {
+          "id": 39,
+          "count": 122506,
+          "token_frequency": 0.9346466064453125
+        },
+        {
+          "id": 81,
+          "count": 119395,
+          "token_frequency": 0.9109115600585938
+        },
+        {
+          "id": 117,
+          "count": 115414,
+          "token_frequency": 0.8805389404296875
+        },
+        {
+          "id": 148,
+          "count": 110898,
+          "token_frequency": 0.8460845947265625
+        },
+        {
+          "id": 191,
+          "count": 105880,
+          "token_frequency": 0.80780029296875
+        },
+        {
+          "id": 253,
+          "count": 100171,
+          "token_frequency": 0.7642440795898438
+        },
+        {
+          "id": 282,
+          "count": 93991,
+          "token_frequency": 0.7170944213867188
+        },
+        {
+          "id": 344,
+          "count": 87172,
+          "token_frequency": 0.665069580078125
+        },
+        {
+          "id": 310,
+          "count": 1084,
+          "token_frequency": 0.008270263671875
+        },
+        {
+          "id": 306,
+          "count": 1075,
+          "token_frequency": 0.00820159912109375
+        },
+        {
+          "id": 70,
+          "count": 1072,
+          "token_frequency": 0.0081787109375
+        },
+        {
+          "id": 116,
+          "count": 1052,
+          "token_frequency": 0.008026123046875
+        },
+        {
+          "id": 45,
+          "count": 1051,
+          "token_frequency": 0.00801849365234375
+        },
+        {
+          "id": 294,
+          "count": 1026,
+          "token_frequency": 0.0078277587890625
+        },
+        {
+          "id": 46,
+          "count": 1000,
+          "token_frequency": 0.00762939453125
+        },
+        {
+          "id": 133,
+          "count": 984,
+          "token_frequency": 0.00750732421875
+        }
+      ],
+      "top_expert_pair_share": {
+        "8": 0.4918489456176758,
+        "12": 0.7151103019714355,
+        "16": 0.8997483253479004,
+        "20": 0.9017906188964844,
+        "24": 0.9037270545959473,
+        "32": 0.9073538780212402,
+        "64": 0.9204940795898438
+      },
+      "top_expert_count_per_token": {
+        "8": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          22,
+          924,
+          15180,
+          114946,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "16": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          27,
+          345,
+          3173,
+          17181,
+          46333,
+          51448,
+          12564
+        ],
+        "24": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          19,
+          296,
+          2749,
+          15711,
+          44587,
+          53002,
+          14708
+        ]
+      },
+      "home_remote_destinations_total": 915314,
+      "home_remote_destinations_per_token": 6.9832916259765625,
+      "home_remote_destination_histogram": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        4,
+        2182,
+        128886,
+        0
+      ],
+      "home_remote_tokens_by_source_destination": [
+        [
+          0,
+          16383,
+          16376,
+          16370,
+          16354,
+          16330,
+          16293,
+          16248
+        ],
+        [
+          16382,
+          0,
+          16374,
+          16371,
+          16365,
+          16336,
+          16306,
+          16237
+        ],
+        [
+          16384,
+          16382,
+          0,
+          16370,
+          16367,
+          16343,
+          16303,
+          16236
+        ],
+        [
+          16383,
+          16382,
+          16381,
+          0,
+          16357,
+          16336,
+          16290,
+          16245
+        ],
+        [
+          16384,
+          16383,
+          16381,
+          16374,
+          0,
+          16334,
+          16310,
+          16238
+        ],
+        [
+          16383,
+          16379,
+          16377,
+          16376,
+          16364,
+          0,
+          16305,
+          16245
+        ],
+        [
+          16383,
+          16380,
+          16382,
+          16375,
+          16358,
+          16340,
+          0,
+          16256
+        ],
+        [
+          16383,
+          16382,
+          16383,
+          16375,
+          16363,
+          16330,
+          16307,
+          0
+        ]
+      ],
+      "distinct_unordered_topk_sets": 70172,
+      "most_repeated_unordered_topk_set_count": 12564,
+      "unordered_topk_set_collision_fraction": 0.464630126953125,
+      "cooccurrence_pair_tv_vs_slot_shuffle": 0.031583913167317706,
+      "cooccurrence_top20_mass": 0.16293773651123047,
+      "cooccurrence_slot_shuffle_mass_on_real_top20": 0.15077006022135417,
+      "slot_shuffle_duplicate_token_fraction": 0.9995574951171875,
+      "cooccurrence_top20": [
+        {
+          "a": 2,
+          "b": 84,
+          "count": 130546,
+          "slot_shuffle_count": 118355
+        },
+        {
+          "a": 2,
+          "b": 101,
+          "count": 130295,
+          "slot_shuffle_count": 119476
+        },
+        {
+          "a": 84,
+          "b": 101,
+          "count": 130145,
+          "slot_shuffle_count": 119245
+        },
+        {
+          "a": 2,
+          "b": 152,
+          "count": 129851,
+          "slot_shuffle_count": 119011
+        },
+        {
+          "a": 84,
+          "b": 152,
+          "count": 129697,
+          "slot_shuffle_count": 119246
+        },
+        {
+          "a": 101,
+          "b": 152,
+          "count": 129450,
+          "slot_shuffle_count": 119382
+        },
+        {
+          "a": 2,
+          "b": 187,
+          "count": 129121,
+          "slot_shuffle_count": 119341
+        },
+        {
+          "a": 84,
+          "b": 187,
+          "count": 128973,
+          "slot_shuffle_count": 119188
+        },
+        {
+          "a": 101,
+          "b": 187,
+          "count": 128730,
+          "slot_shuffle_count": 118780
+        },
+        {
+          "a": 152,
+          "b": 187,
+          "count": 128286,
+          "slot_shuffle_count": 118705
+        },
+        {
+          "a": 2,
+          "b": 225,
+          "count": 128009,
+          "slot_shuffle_count": 119028
+        },
+        {
+          "a": 84,
+          "b": 225,
+          "count": 127855,
+          "slot_shuffle_count": 118637
+        },
+        {
+          "a": 101,
+          "b": 225,
+          "count": 127625,
+          "slot_shuffle_count": 119024
+        },
+        {
+          "a": 152,
+          "b": 225,
+          "count": 127185,
+          "slot_shuffle_count": 118247
+        },
+        {
+          "a": 2,
+          "b": 297,
+          "count": 126688,
+          "slot_shuffle_count": 118236
+        },
+        {
+          "a": 84,
+          "b": 297,
+          "count": 126538,
+          "slot_shuffle_count": 117861
+        },
+        {
+          "a": 187,
+          "b": 225,
+          "count": 126463,
+          "slot_shuffle_count": 118144
+        },
+        {
+          "a": 101,
+          "b": 297,
+          "count": 126301,
+          "slot_shuffle_count": 117560
+        },
+        {
+          "a": 152,
+          "b": 297,
+          "count": 125871,
+          "slot_shuffle_count": 117213
+        },
+        {
+          "a": 187,
+          "b": 297,
+          "count": 125160,
+          "slot_shuffle_count": 116729
+        }
+      ],
+      "sha256_topk_int32_c": "794fdfd5cefb4a1d5bee80d123f87d9a8476897dfeb4b3a31fb73c95aa43cdec",
+      "generator_metadata": {
+        "tokens": 131072,
+        "top_k": 16,
+        "core_count": 16,
+        "layout": "spread",
+        "realized_core_per_token": 14.395973205566406,
+        "expert_max_over_mean": 21.968612670898438,
+        "home_max_over_mean": 1.0627708435058594
+      }
+    },
+    {
+      "label": "synthetic_c16_random",
+      "shape": [
+        8,
+        16384,
+        16
+      ],
+      "global_tokens": 131072,
+      "pairs": 2097152,
+      "num_experts": 352,
+      "top_k": 16,
+      "id_min": 0,
+      "id_max": 351,
+      "observed_experts": 352,
+      "unique_experts_per_token": true,
+      "expert_max_over_mean": 21.968612670898438,
+      "expert_max_count": 130885,
+      "expert_min_count": 317,
+      "expert_effective_count_entropy": 29.781634445707745,
+      "home_assumption": "home[e]=e//44; verify with production expert map; dump has no placement metadata",
+      "home_loads": [
+        114658,
+        362396,
+        254388,
+        158333,
+        508886,
+        149787,
+        264650,
+        284054
+      ],
+      "home_max_over_mean": 1.9412460327148438,
+      "home_max_minus_min_over_mean": 1.5038604736328125,
+      "source_rank_js_bits": 0.0007944712920467207,
+      "source_rank_total_variation_from_global": [
+        0.004948139190673828,
+        0.004607200622558594,
+        0.005424976348876953,
+        0.004859447479248047,
+        0.004691600799560547,
+        0.0049991607666015625,
+        0.004831790924072266,
+        0.0048770904541015625
+      ],
+      "top_experts": [
+        {
+          "id": 147,
+          "count": 130885,
+          "token_frequency": 0.9985733032226562
+        },
+        {
+          "id": 184,
+          "count": 130731,
+          "token_frequency": 0.9973983764648438
+        },
+        {
+          "id": 329,
+          "count": 130481,
+          "token_frequency": 0.9954910278320312
+        },
+        {
+          "id": 204,
+          "count": 130036,
+          "token_frequency": 0.992095947265625
+        },
+        {
+          "id": 308,
+          "count": 129303,
+          "token_frequency": 0.9865036010742188
+        },
+        {
+          "id": 304,
+          "count": 128188,
+          "token_frequency": 0.977996826171875
+        },
+        {
+          "id": 99,
+          "count": 126863,
+          "token_frequency": 0.9678878784179688
+        },
+        {
+          "id": 234,
+          "count": 124995,
+          "token_frequency": 0.9536361694335938
+        },
+        {
+          "id": 53,
+          "count": 122506,
+          "token_frequency": 0.9346466064453125
+        },
+        {
+          "id": 84,
+          "count": 119395,
+          "token_frequency": 0.9109115600585938
+        },
+        {
+          "id": 179,
+          "count": 115414,
+          "token_frequency": 0.8805389404296875
+        },
+        {
+          "id": 264,
+          "count": 110898,
+          "token_frequency": 0.8460845947265625
+        },
+        {
+          "id": 178,
+          "count": 105880,
+          "token_frequency": 0.80780029296875
+        },
+        {
+          "id": 124,
+          "count": 100171,
+          "token_frequency": 0.7642440795898438
+        },
+        {
+          "id": 45,
+          "count": 93991,
+          "token_frequency": 0.7170944213867188
+        },
+        {
+          "id": 37,
+          "count": 87172,
+          "token_frequency": 0.665069580078125
+        },
+        {
+          "id": 248,
+          "count": 1084,
+          "token_frequency": 0.008270263671875
+        },
+        {
+          "id": 141,
+          "count": 1075,
+          "token_frequency": 0.00820159912109375
+        },
+        {
+          "id": 39,
+          "count": 1072,
+          "token_frequency": 0.0081787109375
+        },
+        {
+          "id": 93,
+          "count": 1052,
+          "token_frequency": 0.008026123046875
+        },
+        {
+          "id": 116,
+          "count": 1051,
+          "token_frequency": 0.00801849365234375
+        },
+        {
+          "id": 157,
+          "count": 1026,
+          "token_frequency": 0.0078277587890625
+        },
+        {
+          "id": 68,
+          "count": 1000,
+          "token_frequency": 0.00762939453125
+        },
+        {
+          "id": 60,
+          "count": 984,
+          "token_frequency": 0.00750732421875
+        }
+      ],
+      "top_expert_pair_share": {
+        "8": 0.4918489456176758,
+        "12": 0.7151103019714355,
+        "16": 0.8997483253479004,
+        "20": 0.9017906188964844,
+        "24": 0.9037270545959473,
+        "32": 0.9073538780212402,
+        "64": 0.9204940795898438
+      },
+      "top_expert_count_per_token": {
+        "8": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          22,
+          924,
+          15180,
+          114946,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "16": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          27,
+          345,
+          3173,
+          17181,
+          46333,
+          51448,
+          12564
+        ],
+        "24": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          19,
+          296,
+          2749,
+          15711,
+          44587,
+          53002,
+          14708
+        ]
+      },
+      "home_remote_destinations_total": 883424,
+      "home_remote_destinations_per_token": 6.739990234375,
+      "home_remote_destination_histogram": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        639,
+        32802,
+        97631,
+        0
+      ],
+      "home_remote_tokens_by_source_destination": [
+        [
+          0,
+          16374,
+          16331,
+          16369,
+          16384,
+          15821,
+          16358,
+          16383
+        ],
+        [
+          12206,
+          0,
+          16310,
+          16372,
+          16384,
+          15775,
+          16353,
+          16383
+        ],
+        [
+          12224,
+          16370,
+          0,
+          16374,
+          16384,
+          15820,
+          16352,
+          16382
+        ],
+        [
+          12243,
+          16374,
+          16326,
+          0,
+          16384,
+          15816,
+          16355,
+          16381
+        ],
+        [
+          12191,
+          16373,
+          16307,
+          16365,
+          0,
+          15813,
+          16345,
+          16383
+        ],
+        [
+          12161,
+          16376,
+          16324,
+          16368,
+          16384,
+          0,
+          16359,
+          16384
+        ],
+        [
+          12235,
+          16377,
+          16319,
+          16364,
+          16384,
+          15824,
+          0,
+          16383
+        ],
+        [
+          12211,
+          16371,
+          16306,
+          16363,
+          16384,
+          15840,
+          16342,
+          0
+        ]
+      ],
+      "distinct_unordered_topk_sets": 70172,
+      "most_repeated_unordered_topk_set_count": 12564,
+      "unordered_topk_set_collision_fraction": 0.464630126953125,
+      "cooccurrence_pair_tv_vs_slot_shuffle": 0.031583913167317706,
+      "cooccurrence_top20_mass": 0.16293773651123047,
+      "cooccurrence_slot_shuffle_mass_on_real_top20": 0.15077006022135417,
+      "slot_shuffle_duplicate_token_fraction": 0.9995574951171875,
+      "cooccurrence_top20": [
+        {
+          "a": 147,
+          "b": 184,
+          "count": 130546,
+          "slot_shuffle_count": 118355
+        },
+        {
+          "a": 147,
+          "b": 329,
+          "count": 130295,
+          "slot_shuffle_count": 119476
+        },
+        {
+          "a": 184,
+          "b": 329,
+          "count": 130145,
+          "slot_shuffle_count": 119245
+        },
+        {
+          "a": 147,
+          "b": 204,
+          "count": 129851,
+          "slot_shuffle_count": 119011
+        },
+        {
+          "a": 184,
+          "b": 204,
+          "count": 129697,
+          "slot_shuffle_count": 119246
+        },
+        {
+          "a": 204,
+          "b": 329,
+          "count": 129450,
+          "slot_shuffle_count": 119382
+        },
+        {
+          "a": 147,
+          "b": 308,
+          "count": 129121,
+          "slot_shuffle_count": 119341
+        },
+        {
+          "a": 184,
+          "b": 308,
+          "count": 128973,
+          "slot_shuffle_count": 119188
+        },
+        {
+          "a": 308,
+          "b": 329,
+          "count": 128730,
+          "slot_shuffle_count": 118780
+        },
+        {
+          "a": 204,
+          "b": 308,
+          "count": 128286,
+          "slot_shuffle_count": 118705
+        },
+        {
+          "a": 147,
+          "b": 304,
+          "count": 128009,
+          "slot_shuffle_count": 119028
+        },
+        {
+          "a": 184,
+          "b": 304,
+          "count": 127855,
+          "slot_shuffle_count": 118637
+        },
+        {
+          "a": 304,
+          "b": 329,
+          "count": 127625,
+          "slot_shuffle_count": 119024
+        },
+        {
+          "a": 204,
+          "b": 304,
+          "count": 127185,
+          "slot_shuffle_count": 118247
+        },
+        {
+          "a": 99,
+          "b": 147,
+          "count": 126688,
+          "slot_shuffle_count": 118236
+        },
+        {
+          "a": 99,
+          "b": 184,
+          "count": 126538,
+          "slot_shuffle_count": 117861
+        },
+        {
+          "a": 304,
+          "b": 308,
+          "count": 126463,
+          "slot_shuffle_count": 118144
+        },
+        {
+          "a": 99,
+          "b": 329,
+          "count": 126301,
+          "slot_shuffle_count": 117560
+        },
+        {
+          "a": 99,
+          "b": 204,
+          "count": 125871,
+          "slot_shuffle_count": 117213
+        },
+        {
+          "a": 99,
+          "b": 308,
+          "count": 125160,
+          "slot_shuffle_count": 116729
+        }
+      ],
+      "sha256_topk_int32_c": "bd5fa4321f7974b7f077bff7240da7f7f15bc637cf4990d9b291739d6d045ddb",
+      "generator_metadata": {
+        "tokens": 131072,
+        "top_k": 16,
+        "core_count": 16,
+        "layout": "random",
+        "realized_core_per_token": 14.395973205566406,
+        "expert_max_over_mean": 21.968612670898438,
+        "home_max_over_mean": 1.9412460327148438
+      }
+    }
+  ]
+}

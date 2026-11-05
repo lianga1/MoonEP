@@ -1,0 +1,12 @@
+{
+  "upstream_commit": "9af0e0d0e74f3577af1979c9b9e1ac2cad0104ee",
+  "scope": "build-only SM90 intranode RDC device-link completion; no communication kernel change",
+  "source_file": "vendor/DeepEP_v1/setup.py",
+  "upstream_sha256": "298ce348ddf81e1a22339fa0d78d0fbe4065ef59ef7c814937054d03b9b10940",
+  "parent_patch": "deepep-v1-disable-nvshmem.patch",
+  "parent_patched_sha256": "a9c0f207bc92733e27c739c1b1969f2460eaa45f8ba34c4000574bd4fe875f98",
+  "patched_sha256": "ae151fecfbae6c9244bc9f2a5a24fe75ea36951e64e7ad7b4f48772ae12b02ab",
+  "patch_sha256": "8b5d407eb97ab2384fa147c1990a5d02e6697b403686e7845389f01c29fb75ce",
+  "activation": "DISABLE_NVSHMEM=1 and SM90 features enabled",
+  "rdc_preserved": true
+}

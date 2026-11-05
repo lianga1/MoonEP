@@ -1,0 +1,37 @@
+{
+  "initial_discovery_failure": {
+    "api": "user.GetRoutes",
+    "successful_response": true,
+    "route_groups": [
+      "operations",
+      "jobs",
+      "explorations"
+    ],
+    "missing_group": "userWorkspaceList",
+    "versions_affected": [
+      "7.1.9",
+      "7.1.14"
+    ]
+  },
+  "recovery": {
+    "method": "SDK cached workspace identity used solely for live ListNotebooks, then GetNotebook and NotebookRef operations",
+    "target": "h100-omni",
+    "workspace": "分布式训练空间",
+    "project": "CI-扩散音视频生成",
+    "verified_gpu": "NVIDIA H100 80GB HBM3",
+    "memory_used_mib": 1,
+    "memory_total_mib": 81559,
+    "utilization_pct": 0,
+    "compute_processes": [],
+    "global_configuration_changed": false
+  },
+  "upload_failures": [
+    {
+      "file": "epmoe_h100_bootstrap_20261102.tgz",
+      "bytes": 50224371,
+      "error": "MutationUncertainError: Mutation may have succeeded; inspect state. Caused by PUT write TimeoutError.",
+      "follow_up": "Remote ls found no completed file; switched to 48 independent 1 MiB chunks, all succeeded, joined archive SHA256 verified."
+    }
+  ],
+  "archive_sha256": "19ca1974474a4054ae2c43aa91dd088bc0090a261d1b110246184f628732f140"
+}

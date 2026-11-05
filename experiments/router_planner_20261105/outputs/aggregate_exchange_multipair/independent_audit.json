@@ -1,0 +1,259 @@
+{
+  "dp_exhaustive_cases": 40,
+  "saved_plan_checks": [
+    {
+      "folder": "aggregate_exchange",
+      "layer": 0,
+      "mode": "equal_sizes",
+      "remote": 551892,
+      "pass_all": true
+    },
+    {
+      "folder": "aggregate_exchange",
+      "layer": 0,
+      "mode": "mixed_sizes",
+      "remote": 549921,
+      "pass_all": true
+    },
+    {
+      "folder": "aggregate_exchange",
+      "layer": 1,
+      "mode": "equal_sizes",
+      "remote": 500805,
+      "pass_all": true
+    },
+    {
+      "folder": "aggregate_exchange",
+      "layer": 1,
+      "mode": "mixed_sizes",
+      "remote": 495242,
+      "pass_all": true
+    },
+    {
+      "folder": "aggregate_exchange",
+      "layer": 2,
+      "mode": "equal_sizes",
+      "remote": 496479,
+      "pass_all": true
+    },
+    {
+      "folder": "aggregate_exchange",
+      "layer": 2,
+      "mode": "mixed_sizes",
+      "remote": 486144,
+      "pass_all": true
+    },
+    {
+      "folder": "aggregate_exchange",
+      "layer": 3,
+      "mode": "equal_sizes",
+      "remote": 501390,
+      "pass_all": true
+    },
+    {
+      "folder": "aggregate_exchange",
+      "layer": 3,
+      "mode": "mixed_sizes",
+      "remote": 495448,
+      "pass_all": true
+    },
+    {
+      "folder": "aggregate_exchange",
+      "layer": 4,
+      "mode": "equal_sizes",
+      "remote": 515765,
+      "pass_all": true
+    },
+    {
+      "folder": "aggregate_exchange",
+      "layer": 4,
+      "mode": "mixed_sizes",
+      "remote": 491410,
+      "pass_all": true
+    },
+    {
+      "folder": "aggregate_exchange",
+      "layer": 5,
+      "mode": "equal_sizes",
+      "remote": 520338,
+      "pass_all": true
+    },
+    {
+      "folder": "aggregate_exchange",
+      "layer": 5,
+      "mode": "mixed_sizes",
+      "remote": 509173,
+      "pass_all": true
+    },
+    {
+      "folder": "aggregate_exchange",
+      "layer": 6,
+      "mode": "equal_sizes",
+      "remote": 515596,
+      "pass_all": true
+    },
+    {
+      "folder": "aggregate_exchange",
+      "layer": 6,
+      "mode": "mixed_sizes",
+      "remote": 503439,
+      "pass_all": true
+    },
+    {
+      "folder": "aggregate_exchange",
+      "layer": 7,
+      "mode": "equal_sizes",
+      "remote": 517164,
+      "pass_all": true
+    },
+    {
+      "folder": "aggregate_exchange",
+      "layer": 7,
+      "mode": "mixed_sizes",
+      "remote": 497073,
+      "pass_all": true
+    },
+    {
+      "folder": "aggregate_exchange_multipair",
+      "layer": 0,
+      "mode": "equal_sizes",
+      "remote": 537683,
+      "pass_all": true
+    },
+    {
+      "folder": "aggregate_exchange_multipair",
+      "layer": 0,
+      "mode": "mixed_sizes",
+      "remote": 536800,
+      "pass_all": true
+    },
+    {
+      "folder": "aggregate_exchange_multipair",
+      "layer": 1,
+      "mode": "equal_sizes",
+      "remote": 477497,
+      "pass_all": true
+    },
+    {
+      "folder": "aggregate_exchange_multipair",
+      "layer": 1,
+      "mode": "mixed_sizes",
+      "remote": 462415,
+      "pass_all": true
+    },
+    {
+      "folder": "aggregate_exchange_multipair",
+      "layer": 2,
+      "mode": "equal_sizes",
+      "remote": 467436,
+      "pass_all": true
+    },
+    {
+      "folder": "aggregate_exchange_multipair",
+      "layer": 2,
+      "mode": "mixed_sizes",
+      "remote": 453456,
+      "pass_all": true
+    },
+    {
+      "folder": "aggregate_exchange_multipair",
+      "layer": 3,
+      "mode": "equal_sizes",
+      "remote": 451461,
+      "pass_all": true
+    },
+    {
+      "folder": "aggregate_exchange_multipair",
+      "layer": 3,
+      "mode": "mixed_sizes",
+      "remote": 445100,
+      "pass_all": true
+    },
+    {
+      "folder": "aggregate_exchange_multipair",
+      "layer": 4,
+      "mode": "equal_sizes",
+      "remote": 467030,
+      "pass_all": true
+    },
+    {
+      "folder": "aggregate_exchange_multipair",
+      "layer": 4,
+      "mode": "mixed_sizes",
+      "remote": 455954,
+      "pass_all": true
+    },
+    {
+      "folder": "aggregate_exchange_multipair",
+      "layer": 5,
+      "mode": "equal_sizes",
+      "remote": 462039,
+      "pass_all": true
+    },
+    {
+      "folder": "aggregate_exchange_multipair",
+      "layer": 5,
+      "mode": "mixed_sizes",
+      "remote": 451797,
+      "pass_all": true
+    },
+    {
+      "folder": "aggregate_exchange_multipair",
+      "layer": 6,
+      "mode": "equal_sizes",
+      "remote": 494389,
+      "pass_all": true
+    },
+    {
+      "folder": "aggregate_exchange_multipair",
+      "layer": 6,
+      "mode": "mixed_sizes",
+      "remote": 478117,
+      "pass_all": true
+    },
+    {
+      "folder": "aggregate_exchange_multipair",
+      "layer": 7,
+      "mode": "equal_sizes",
+      "remote": 446369,
+      "pass_all": true
+    },
+    {
+      "folder": "aggregate_exchange_multipair",
+      "layer": 7,
+      "mode": "mixed_sizes",
+      "remote": 424586,
+      "pass_all": true
+    }
+  ],
+  "summary": {
+    "aggregate_exchange_equal_sizes": {
+      "remote": 4119429,
+      "reduction_pct": 18.494370484540966,
+      "mean_cpu_seconds": 0.6843756979999999,
+      "representative_scans": 1628554,
+      "original_token_rounds": 4292608
+    },
+    "aggregate_exchange_mixed_sizes": {
+      "remote": 4027850,
+      "reduction_pct": 20.30632161791315,
+      "mean_cpu_seconds": 0.67645164575,
+      "representative_scans": 1628361,
+      "original_token_rounds": 4292608
+    },
+    "aggregate_exchange_multipair_equal_sizes": {
+      "remote": 3803904,
+      "reduction_pct": 24.73724146322884,
+      "mean_cpu_seconds": 0.6885162187499999,
+      "representative_scans": 1628634,
+      "original_token_rounds": 4292608
+    },
+    "aggregate_exchange_multipair_mixed_sizes": {
+      "remote": 3708225,
+      "reduction_pct": 26.630313810490946,
+      "mean_cpu_seconds": 0.6729071041249998,
+      "representative_scans": 1628333,
+      "original_token_rounds": 4292608
+    }
+  }
+}

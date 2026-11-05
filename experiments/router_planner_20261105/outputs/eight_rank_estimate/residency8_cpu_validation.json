@@ -1,0 +1,63 @@
+{
+  "status": "complete",
+  "scope": "CPU flattened-order oracle",
+  "layers": [
+    {
+      "layer": 0,
+      "cpu_history_exact": true,
+      "cpu_support_exact": true,
+      "packages": 1026,
+      "accepted": 32
+    },
+    {
+      "layer": 1,
+      "cpu_history_exact": true,
+      "cpu_support_exact": true,
+      "packages": 958,
+      "accepted": 35
+    },
+    {
+      "layer": 2,
+      "cpu_history_exact": true,
+      "cpu_support_exact": true,
+      "packages": 963,
+      "accepted": 36
+    },
+    {
+      "layer": 3,
+      "cpu_history_exact": true,
+      "cpu_support_exact": true,
+      "packages": 922,
+      "accepted": 33
+    },
+    {
+      "layer": 4,
+      "cpu_history_exact": true,
+      "cpu_support_exact": true,
+      "packages": 941,
+      "accepted": 36
+    },
+    {
+      "layer": 5,
+      "cpu_history_exact": true,
+      "cpu_support_exact": true,
+      "packages": 960,
+      "accepted": 39
+    },
+    {
+      "layer": 6,
+      "cpu_history_exact": true,
+      "cpu_support_exact": true,
+      "packages": 996,
+      "accepted": 35
+    },
+    {
+      "layer": 7,
+      "cpu_history_exact": true,
+      "cpu_support_exact": true,
+      "packages": 960,
+      "accepted": 35
+    }
+  ],
+  "failures": []
+}

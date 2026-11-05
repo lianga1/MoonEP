@@ -1,0 +1,46 @@
+H100 planner comparison, 2026-11-02
+
+Target: exact qz h100-omni Notebook, CI-扩散音视频生成 / 分布式训练空间.
+One physical NVIDIA H100 80GB HBM3; eight logical source/compute ranks in one process.
+GPU UUID GPU-916f69b6-b969-dae3-1bc3-c4368f606576; driver 570.124.06.
+All 8 real router layers: iteration4/microbatch2, shape [8,16768,8], E352.
+S=16768 per source, N=134144 tokens, 1073152 expert-token pairs per layer.
+Fixed same 256-sample/g2 saved residency, at most 8 extra experts/card.
+Seed owner is saved native rt0 CPU semantics; four exchange rounds.
+
+Methods:
+- Existing token-bundle CUDA (16 lanes/token) and exact 8-lane rewrite.
+- Full-state aggregate exact mixed-size DP, AoS representative reads vs SoA.
+- Shared-subset exact sequential 28 cardpairs, preserving old CPU output.
+- Shared-subset token-first simultaneous schedule; flat templates vs direct lookup.
+- Logical R8 MoonEP semantic CUDA port, with complete output and seed-only scopes.
+- Original supplied MoonEP CuTe planner at R1, concatenating all trace sources.
+  This R1 control has all experts local. Its latency must NOT form a same-task
+  speedup ratio with R8 methods. A real native R8 latency requires 8 physical GPUs.
+
+Scope:
+Input expert counts and fixed expert residency are prepared before timing.
+Shared-subset full preparation mines/reduces/selects templates on GPU.
+Exchange-only uses prepared templates; separate prepare+exchange is also measured.
+Seed+exchange+output includes seed-only port, exchange (with subset preparation),
+and compact physical slots, stable rows, padded offsets, zero-fill descriptors,
+source provenance, and deduplicated destination encoding.
+It excludes residency selection, actual expert weight movement, token dispatch,
+combine, expert matmul, and cross-device synchronization. Thus not training E2E.
+
+Correctness prerequisite:
+All layer outputs must match their CPU reference bitwise before timing.
+Check owner range, resident expert validity, equal 134144 pairs/rank, deduplicated
+remote token destinations, unique execution rows, provenance, padding, and output
+against an independent PyTorch materializer. Keep failures/logs separate.
+
+Timing protocol:
+No competing GPU processes during accepted runs. Warm each measured scope.
+Ten eager repetitions with rotated method order; retain CUDA-event and host wall.
+Twenty CUDA Graph repetitions with rotated order where capture supported.
+Aggregate uses Thrust allocations and cannot be graph captured in this version;
+compare all methods' eager rows separately, never label eager as graph.
+Summary: arithmetic mean of 8 per-layer medians. Keep per-layer raw samples.
+Compilation and graph capture excluded. No manual clock or power changes.
+All compile/test commands set TORCH_CUDA_ARCH_LIST=9.0 MAX_JOBS=4.
+Do not mix a default detected PTX target with the fixed sm_90 compilation cache.

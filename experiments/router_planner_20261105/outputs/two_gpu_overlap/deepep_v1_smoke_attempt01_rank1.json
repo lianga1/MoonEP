@@ -1,0 +1,11 @@
+{
+  "status": "failed",
+  "token_backend": "DeepEP v1.2.1 intranode",
+  "expert_backend": "torch.distributed NCCL batch P2P",
+  "reference_commit": "9af0e0d0e74f3577af1979c9b9e1ac2cad0104ee",
+  "workload": "synthetic correctness probe",
+  "failures": [
+    "ImportError: /inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/deep_ep_cpp.cpython-312-x86_64-linux-gnu.so: undefined symbol: __cudaRegisterLinkedBinary_b04d93c1_10_runtime_cu_a457eb97"
+  ],
+  "checks": []
+}

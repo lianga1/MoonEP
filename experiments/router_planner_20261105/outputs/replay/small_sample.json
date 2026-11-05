@@ -1,0 +1,676 @@
+{
+  "rows": [
+    {
+      "layer": 0,
+      "seed": 20261026,
+      "baseline": 621511,
+      "remote": 530732,
+      "cpu_support_seconds": 0.12395729099999997,
+      "audit_pass": true,
+      "reserved_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "active_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "layer": 0,
+      "seed": 20261027,
+      "baseline": 621511,
+      "remote": 532471,
+      "cpu_support_seconds": 0.10609512499999996,
+      "audit_pass": true,
+      "reserved_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "active_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "layer": 0,
+      "seed": 20261028,
+      "baseline": 621511,
+      "remote": 533745,
+      "cpu_support_seconds": 0.100498792,
+      "audit_pass": true,
+      "reserved_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        7,
+        8,
+        8
+      ],
+      "active_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        7,
+        8,
+        8
+      ]
+    },
+    {
+      "layer": 1,
+      "seed": 20261026,
+      "baseline": 643011,
+      "remote": 462932,
+      "cpu_support_seconds": 0.10449883299999985,
+      "audit_pass": true,
+      "reserved_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "active_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "layer": 1,
+      "seed": 20261027,
+      "baseline": 643011,
+      "remote": 469371,
+      "cpu_support_seconds": 0.12381904200000005,
+      "audit_pass": true,
+      "reserved_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "active_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "layer": 1,
+      "seed": 20261028,
+      "baseline": 643011,
+      "remote": 474421,
+      "cpu_support_seconds": 0.1078400829999997,
+      "audit_pass": true,
+      "reserved_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "active_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "layer": 2,
+      "seed": 20261026,
+      "baseline": 635585,
+      "remote": 447977,
+      "cpu_support_seconds": 0.09920445900000008,
+      "audit_pass": true,
+      "reserved_extras": [
+        8,
+        8,
+        7,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "active_extras": [
+        8,
+        8,
+        7,
+        8,
+        8,
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "layer": 2,
+      "seed": 20261027,
+      "baseline": 635585,
+      "remote": 468046,
+      "cpu_support_seconds": 0.10382479100000008,
+      "audit_pass": true,
+      "reserved_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        7,
+        8
+      ],
+      "active_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        7,
+        8
+      ]
+    },
+    {
+      "layer": 2,
+      "seed": 20261028,
+      "baseline": 635585,
+      "remote": 463933,
+      "cpu_support_seconds": 0.10420720800000005,
+      "audit_pass": true,
+      "reserved_extras": [
+        8,
+        8,
+        4,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "active_extras": [
+        8,
+        8,
+        4,
+        8,
+        8,
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "layer": 3,
+      "seed": 20261026,
+      "baseline": 623501,
+      "remote": 463132,
+      "cpu_support_seconds": 0.08739491700000013,
+      "audit_pass": true,
+      "reserved_extras": [
+        8,
+        8,
+        7,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "active_extras": [
+        8,
+        8,
+        7,
+        8,
+        8,
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "layer": 3,
+      "seed": 20261027,
+      "baseline": 623501,
+      "remote": 472425,
+      "cpu_support_seconds": 0.09379620800000055,
+      "audit_pass": true,
+      "reserved_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "active_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "layer": 3,
+      "seed": 20261028,
+      "baseline": 623501,
+      "remote": 468889,
+      "cpu_support_seconds": 0.088028875,
+      "audit_pass": true,
+      "reserved_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        7,
+        8,
+        8
+      ],
+      "active_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        7,
+        8,
+        8
+      ]
+    },
+    {
+      "layer": 4,
+      "seed": 20261026,
+      "baseline": 634668,
+      "remote": 469665,
+      "cpu_support_seconds": 0.10204216700000046,
+      "audit_pass": true,
+      "reserved_extras": [
+        8,
+        8,
+        8,
+        7,
+        8,
+        8,
+        8,
+        8
+      ],
+      "active_extras": [
+        8,
+        8,
+        8,
+        7,
+        8,
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "layer": 4,
+      "seed": 20261027,
+      "baseline": 634668,
+      "remote": 473251,
+      "cpu_support_seconds": 0.11008399999999963,
+      "audit_pass": true,
+      "reserved_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "active_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "layer": 4,
+      "seed": 20261028,
+      "baseline": 634668,
+      "remote": 467541,
+      "cpu_support_seconds": 0.0959732080000002,
+      "audit_pass": true,
+      "reserved_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        7,
+        8,
+        8
+      ],
+      "active_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        7,
+        8,
+        8
+      ]
+    },
+    {
+      "layer": 5,
+      "seed": 20261026,
+      "baseline": 625260,
+      "remote": 474026,
+      "cpu_support_seconds": 0.10849220899999956,
+      "audit_pass": true,
+      "reserved_extras": [
+        8,
+        7,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "active_extras": [
+        8,
+        7,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "layer": 5,
+      "seed": 20261027,
+      "baseline": 625260,
+      "remote": 467729,
+      "cpu_support_seconds": 0.10800091700000003,
+      "audit_pass": true,
+      "reserved_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "active_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "layer": 5,
+      "seed": 20261028,
+      "baseline": 625260,
+      "remote": 460763,
+      "cpu_support_seconds": 0.10644095800000031,
+      "audit_pass": true,
+      "reserved_extras": [
+        8,
+        7,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "active_extras": [
+        8,
+        7,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "layer": 6,
+      "seed": 20261026,
+      "baseline": 635436,
+      "remote": 475999,
+      "cpu_support_seconds": 0.10060220799999975,
+      "audit_pass": true,
+      "reserved_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        7
+      ],
+      "active_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        7
+      ]
+    },
+    {
+      "layer": 6,
+      "seed": 20261027,
+      "baseline": 635436,
+      "remote": 503168,
+      "cpu_support_seconds": 0.09347758299999942,
+      "audit_pass": true,
+      "reserved_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        4
+      ],
+      "active_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        4
+      ]
+    },
+    {
+      "layer": 6,
+      "seed": 20261028,
+      "baseline": 635436,
+      "remote": 492823,
+      "cpu_support_seconds": 0.09997387500000077,
+      "audit_pass": true,
+      "reserved_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        4
+      ],
+      "active_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        4
+      ]
+    },
+    {
+      "layer": 7,
+      "seed": 20261026,
+      "baseline": 635193,
+      "remote": 467202,
+      "cpu_support_seconds": 0.09118208299999964,
+      "audit_pass": true,
+      "reserved_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "active_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "layer": 7,
+      "seed": 20261027,
+      "baseline": 635193,
+      "remote": 429406,
+      "cpu_support_seconds": 0.09285512499999982,
+      "audit_pass": true,
+      "reserved_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "active_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "layer": 7,
+      "seed": 20261028,
+      "baseline": 635193,
+      "remote": 451772,
+      "cpu_support_seconds": 0.09194970799999957,
+      "audit_pass": true,
+      "reserved_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "active_extras": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ]
+    }
+  ]
+}

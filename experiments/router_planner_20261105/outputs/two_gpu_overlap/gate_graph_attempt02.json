@@ -1,0 +1,806 @@
+{
+  "schema_version": 1,
+  "policy": "exact_replay_finite_cohort_before_optimization",
+  "default": "native",
+  "future_positive_guaranteed": false,
+  "skip_optimized_planner_when_native_selected": true,
+  "decision_overhead_measured": false,
+  "scope": "planner + actual expert copies + dispatch + identity combine; no expert GEMM/training",
+  "evidence": {
+    "analysis_path": "outputs/two_gpu_overlap/analysis_graph_attempt02.json",
+    "analysis_sha256": "87bc26bc1b28e02613606eeb8150f4a13948a737b6598a2cdf8a1234ba8b9c89",
+    "raw_path": "outputs/two_gpu_overlap/benchmark_graph_attempt02.json",
+    "raw_sha256": "59007f4117a9ce81aef947304f0acfc67a18b708cef88fc71195878a22097691",
+    "raw_hash_verified": true,
+    "raw_status": "complete",
+    "raw_failures": [],
+    "analysis_failures": []
+  },
+  "cohorts": [
+    {
+      "layer": 0,
+      "cohort_id": "1a82eeae0f28ca4977e24a7f0d9b0d21325b4c22bf09b511cb1ac1f9590f0e30",
+      "contract": {
+        "layer": 0,
+        "input_sha256": "9070d5d269147c08f991f023f2e424c031d3649b3f3517e2e7c896f344e9de8b",
+        "shape": [
+          2,
+          67072,
+          8
+        ],
+        "configuration": {
+          "world": 2,
+          "gpu": "NVIDIA H200",
+          "torch": "2.11.0+cu130",
+          "cuda": "13.0",
+          "nccl": [
+            2,
+            28,
+            9
+          ],
+          "hidden": 7168,
+          "intermediate": 2048,
+          "weight_dtype": "BF16",
+          "expert_bytes": 88080384,
+          "experts": 352,
+          "extra_slots": 8,
+          "topk": 8,
+          "token_padding": 128,
+          "replica_target": 0,
+          "replica_max": 7,
+          "enable_pdl": false,
+          "rounds": 4,
+          "source_mapping": "original 0..3 to rank0; 4..7 to rank1; all router rows retained",
+          "num_sms": 32,
+          "prefetch_sms": 32,
+          "timing_mode": "graph",
+          "materializer": "reuse",
+          "residency": "combined",
+          "sources": {
+            "moonep_materialize_reuse.py": "5b15d1b889bd003e4a49e4fb25114c5e577fd93285d024449c3f2d0d1e560bae",
+            "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+            "moonep_materialize.cu": "94a46ff9ba6cc46ebbfec4502847d7138670bda9fe5a9ab92bac0ddac6a92d1a",
+            "deepep_v1_smoke.py": "db8e5c552edb362c07ba0ee3e229cd169dece5f1584fb12992755099c5e0cf4d",
+            "moonep_common.py": "e6987ae8e34d938575808421ff003d6ec2180cc7dc1370d9df9c8b8f8d332b6c",
+            "deepep_adapter.py": "90ce02cbd9ecae7723d6b407c7db21f394af88af1e37821125fb1d55234bb0e4",
+            "residency_reference_check.py": "0d43d46493dee5cdbd454702fd2ff987215e479e332c1bf2e10e94202b8a0da5",
+            "._deepep_v1_smoke.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+            "prepare_inputs.py": "1acc76d6b0f49eea8a607fd9ec9e1be1ab01d4b727810ef56738501b019050a6",
+            "moonep_materialize.py": "86b3b4b22cbb27260533ba51a6da40c22922ade93880ad7269a9842d720bfa94",
+            "two_gpu_smoke.py": "0decb839b2d48980b396dc37ea5d493f47492223071565dadf1f224320ef94b4",
+            "benchmark.py": "281cf81e1ca5e4f806d533b1a16a47579d7556a7fbae630da8986c2163dc1913",
+            "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956",
+            "moonep_materialize_reference.py": "cb2edff4d47e8bc08bb2af415086f0d3945e20f5c3aa1d2f91de4dd2b0263568",
+            "deepep_v1_adapter.py": "4f2dba9c74a6ccef8a52ce696be6c219e41ad6401185549b920d195f6331c8a8",
+            "residency_cuda_optimized.py": "eab0814a22a21198c22c22d6830c39112dba9782508bbb142f1d021c357899d4",
+            "analyze_results.py": "19befe9f8725169b699791e3ea1fbec4c1f66a8c35f335141d2b51e5e61a2e4f",
+            "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d",
+            "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+            "._deepep_trace_smoke.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+            "profile_residency.py": "b43987e8a056e917ee5dd094e0ce9cc9f686ff0a0c355bee41bb58771d96b9d7",
+            "residency_cuda_optimized.cu": "eb0d30bd8e7b3ff3e8950c1eaadf6757009b91b80946628270ae8ca9b10a4242",
+            "._deepep_v1_adapter.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+            "residency_smoke.py": "f86f9ef028dd0b30a2c8f2b321840e8cbfdfb7e0c82292c958f024546999a808",
+            "deepep_smoke.py": "e437ce9267fa0a05b93feb0986762df3594f4ad189fc88a81aa41f32e52a17d8",
+            "moonep_materialize_reuse.cu": "269cb85f0312818cd46a26a6b94fccc5897e9fa9e278b038a13a30f5e2e9d1a8",
+            "moonep_split.py": "171935a9f72dc1cc16fdcb37030fa4e1208e7329e656b81efb3fc38de719deff",
+            "benchmark_residency_variants.py": "bbc5f8bfc1b98b8867ed7fbb396ef68d45c6f68fa93bcdbd8bce74e20b03972c",
+            "deepep_trace_smoke.py": "f25f4325ac926a4219df56ba6b6e41707557898e1d03654e21c4498b9e704370",
+            "exchange_reference_check.py": "10d4f08410a93b9ed1f4a2a38a1173325d78207d371da1226920936d72383dfb",
+            "moonep_reuse_reference_check.py": "aadcd1099ac40b1319cf7936df463248c899987be1f83ae89491f15159eb98d4",
+            "timeline_overlap.py": "cb35008555881ee672a20f5f7f555c0f59919f6bfc248e257efa1eb6c1caee0d"
+          }
+        }
+      },
+      "contract_sha256": "fbf16559f9a20c008c594f6c5fb121cd01f80a771c06fb493e563d72ce3fbf39",
+      "qualified_modes": [],
+      "rejected_modes": {
+        "optimized_cold_serial": [
+          "cuda_ms: no positive complete cohort versus nativecoldserial",
+          "cuda_ms: no positive complete cohort versus nativecoldearly",
+          "host_ms: no positive complete cohort versus nativecoldserial",
+          "host_ms: no positive complete cohort versus nativecoldearly"
+        ],
+        "optimized_cold_early": [
+          "cuda_ms: no positive complete cohort versus nativecoldserial",
+          "cuda_ms: no positive complete cohort versus nativecoldearly",
+          "host_ms: no positive complete cohort versus nativecoldserial",
+          "host_ms: no positive complete cohort versus nativecoldearly"
+        ],
+        "optimized_hot": [
+          "cuda_ms: no positive complete cohort versus nativehot",
+          "host_ms: no positive complete cohort versus nativehot"
+        ]
+      },
+      "preplanning_default": "native",
+      "allow_analytical_amortization": false
+    },
+    {
+      "layer": 1,
+      "cohort_id": "570e1a40a1ad50eaf39e7362c904a7fe3d46d3392c42b8ec0e9e9dcb05fb7633",
+      "contract": {
+        "layer": 1,
+        "input_sha256": "dbbcdacc2a46d3ba2d581a00ba81139f20bc1413cff88edf57750370083671f6",
+        "shape": [
+          2,
+          67072,
+          8
+        ],
+        "configuration": {
+          "world": 2,
+          "gpu": "NVIDIA H200",
+          "torch": "2.11.0+cu130",
+          "cuda": "13.0",
+          "nccl": [
+            2,
+            28,
+            9
+          ],
+          "hidden": 7168,
+          "intermediate": 2048,
+          "weight_dtype": "BF16",
+          "expert_bytes": 88080384,
+          "experts": 352,
+          "extra_slots": 8,
+          "topk": 8,
+          "token_padding": 128,
+          "replica_target": 0,
+          "replica_max": 7,
+          "enable_pdl": false,
+          "rounds": 4,
+          "source_mapping": "original 0..3 to rank0; 4..7 to rank1; all router rows retained",
+          "num_sms": 32,
+          "prefetch_sms": 32,
+          "timing_mode": "graph",
+          "materializer": "reuse",
+          "residency": "combined",
+          "sources": {
+            "moonep_materialize_reuse.py": "5b15d1b889bd003e4a49e4fb25114c5e577fd93285d024449c3f2d0d1e560bae",
+            "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+            "moonep_materialize.cu": "94a46ff9ba6cc46ebbfec4502847d7138670bda9fe5a9ab92bac0ddac6a92d1a",
+            "deepep_v1_smoke.py": "db8e5c552edb362c07ba0ee3e229cd169dece5f1584fb12992755099c5e0cf4d",
+            "moonep_common.py": "e6987ae8e34d938575808421ff003d6ec2180cc7dc1370d9df9c8b8f8d332b6c",
+            "deepep_adapter.py": "90ce02cbd9ecae7723d6b407c7db21f394af88af1e37821125fb1d55234bb0e4",
+            "residency_reference_check.py": "0d43d46493dee5cdbd454702fd2ff987215e479e332c1bf2e10e94202b8a0da5",
+            "._deepep_v1_smoke.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+            "prepare_inputs.py": "1acc76d6b0f49eea8a607fd9ec9e1be1ab01d4b727810ef56738501b019050a6",
+            "moonep_materialize.py": "86b3b4b22cbb27260533ba51a6da40c22922ade93880ad7269a9842d720bfa94",
+            "two_gpu_smoke.py": "0decb839b2d48980b396dc37ea5d493f47492223071565dadf1f224320ef94b4",
+            "benchmark.py": "281cf81e1ca5e4f806d533b1a16a47579d7556a7fbae630da8986c2163dc1913",
+            "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956",
+            "moonep_materialize_reference.py": "cb2edff4d47e8bc08bb2af415086f0d3945e20f5c3aa1d2f91de4dd2b0263568",
+            "deepep_v1_adapter.py": "4f2dba9c74a6ccef8a52ce696be6c219e41ad6401185549b920d195f6331c8a8",
+            "residency_cuda_optimized.py": "eab0814a22a21198c22c22d6830c39112dba9782508bbb142f1d021c357899d4",
+            "analyze_results.py": "19befe9f8725169b699791e3ea1fbec4c1f66a8c35f335141d2b51e5e61a2e4f",
+            "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d",
+            "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+            "._deepep_trace_smoke.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+            "profile_residency.py": "b43987e8a056e917ee5dd094e0ce9cc9f686ff0a0c355bee41bb58771d96b9d7",
+            "residency_cuda_optimized.cu": "eb0d30bd8e7b3ff3e8950c1eaadf6757009b91b80946628270ae8ca9b10a4242",
+            "._deepep_v1_adapter.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+            "residency_smoke.py": "f86f9ef028dd0b30a2c8f2b321840e8cbfdfb7e0c82292c958f024546999a808",
+            "deepep_smoke.py": "e437ce9267fa0a05b93feb0986762df3594f4ad189fc88a81aa41f32e52a17d8",
+            "moonep_materialize_reuse.cu": "269cb85f0312818cd46a26a6b94fccc5897e9fa9e278b038a13a30f5e2e9d1a8",
+            "moonep_split.py": "171935a9f72dc1cc16fdcb37030fa4e1208e7329e656b81efb3fc38de719deff",
+            "benchmark_residency_variants.py": "bbc5f8bfc1b98b8867ed7fbb396ef68d45c6f68fa93bcdbd8bce74e20b03972c",
+            "deepep_trace_smoke.py": "f25f4325ac926a4219df56ba6b6e41707557898e1d03654e21c4498b9e704370",
+            "exchange_reference_check.py": "10d4f08410a93b9ed1f4a2a38a1173325d78207d371da1226920936d72383dfb",
+            "moonep_reuse_reference_check.py": "aadcd1099ac40b1319cf7936df463248c899987be1f83ae89491f15159eb98d4",
+            "timeline_overlap.py": "cb35008555881ee672a20f5f7f555c0f59919f6bfc248e257efa1eb6c1caee0d"
+          }
+        }
+      },
+      "contract_sha256": "9970e508c311127f3e7a977be2b27861a50db2e670b6669b1e3658545f235be7",
+      "qualified_modes": [],
+      "rejected_modes": {
+        "optimized_cold_serial": [
+          "cuda_ms: no positive complete cohort versus nativecoldserial",
+          "cuda_ms: no positive complete cohort versus nativecoldearly",
+          "host_ms: no positive complete cohort versus nativecoldserial",
+          "host_ms: no positive complete cohort versus nativecoldearly"
+        ],
+        "optimized_cold_early": [
+          "cuda_ms: no positive complete cohort versus nativecoldserial",
+          "cuda_ms: no positive complete cohort versus nativecoldearly",
+          "host_ms: no positive complete cohort versus nativecoldserial",
+          "host_ms: no positive complete cohort versus nativecoldearly"
+        ],
+        "optimized_hot": [
+          "cuda_ms: no positive complete cohort versus nativehot",
+          "host_ms: no positive complete cohort versus nativehot"
+        ]
+      },
+      "preplanning_default": "native",
+      "allow_analytical_amortization": false
+    },
+    {
+      "layer": 2,
+      "cohort_id": "658a0023647bc9ad315a245ab94cc0fb161db12ad8b678df598b2837b453cc4c",
+      "contract": {
+        "layer": 2,
+        "input_sha256": "844f64ee50dcec66a87a2163fa158e012bd9d74e1cfaa9d4423a9198aa52f0ff",
+        "shape": [
+          2,
+          67072,
+          8
+        ],
+        "configuration": {
+          "world": 2,
+          "gpu": "NVIDIA H200",
+          "torch": "2.11.0+cu130",
+          "cuda": "13.0",
+          "nccl": [
+            2,
+            28,
+            9
+          ],
+          "hidden": 7168,
+          "intermediate": 2048,
+          "weight_dtype": "BF16",
+          "expert_bytes": 88080384,
+          "experts": 352,
+          "extra_slots": 8,
+          "topk": 8,
+          "token_padding": 128,
+          "replica_target": 0,
+          "replica_max": 7,
+          "enable_pdl": false,
+          "rounds": 4,
+          "source_mapping": "original 0..3 to rank0; 4..7 to rank1; all router rows retained",
+          "num_sms": 32,
+          "prefetch_sms": 32,
+          "timing_mode": "graph",
+          "materializer": "reuse",
+          "residency": "combined",
+          "sources": {
+            "moonep_materialize_reuse.py": "5b15d1b889bd003e4a49e4fb25114c5e577fd93285d024449c3f2d0d1e560bae",
+            "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+            "moonep_materialize.cu": "94a46ff9ba6cc46ebbfec4502847d7138670bda9fe5a9ab92bac0ddac6a92d1a",
+            "deepep_v1_smoke.py": "db8e5c552edb362c07ba0ee3e229cd169dece5f1584fb12992755099c5e0cf4d",
+            "moonep_common.py": "e6987ae8e34d938575808421ff003d6ec2180cc7dc1370d9df9c8b8f8d332b6c",
+            "deepep_adapter.py": "90ce02cbd9ecae7723d6b407c7db21f394af88af1e37821125fb1d55234bb0e4",
+            "residency_reference_check.py": "0d43d46493dee5cdbd454702fd2ff987215e479e332c1bf2e10e94202b8a0da5",
+            "._deepep_v1_smoke.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+            "prepare_inputs.py": "1acc76d6b0f49eea8a607fd9ec9e1be1ab01d4b727810ef56738501b019050a6",
+            "moonep_materialize.py": "86b3b4b22cbb27260533ba51a6da40c22922ade93880ad7269a9842d720bfa94",
+            "two_gpu_smoke.py": "0decb839b2d48980b396dc37ea5d493f47492223071565dadf1f224320ef94b4",
+            "benchmark.py": "281cf81e1ca5e4f806d533b1a16a47579d7556a7fbae630da8986c2163dc1913",
+            "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956",
+            "moonep_materialize_reference.py": "cb2edff4d47e8bc08bb2af415086f0d3945e20f5c3aa1d2f91de4dd2b0263568",
+            "deepep_v1_adapter.py": "4f2dba9c74a6ccef8a52ce696be6c219e41ad6401185549b920d195f6331c8a8",
+            "residency_cuda_optimized.py": "eab0814a22a21198c22c22d6830c39112dba9782508bbb142f1d021c357899d4",
+            "analyze_results.py": "19befe9f8725169b699791e3ea1fbec4c1f66a8c35f335141d2b51e5e61a2e4f",
+            "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d",
+            "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+            "._deepep_trace_smoke.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+            "profile_residency.py": "b43987e8a056e917ee5dd094e0ce9cc9f686ff0a0c355bee41bb58771d96b9d7",
+            "residency_cuda_optimized.cu": "eb0d30bd8e7b3ff3e8950c1eaadf6757009b91b80946628270ae8ca9b10a4242",
+            "._deepep_v1_adapter.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+            "residency_smoke.py": "f86f9ef028dd0b30a2c8f2b321840e8cbfdfb7e0c82292c958f024546999a808",
+            "deepep_smoke.py": "e437ce9267fa0a05b93feb0986762df3594f4ad189fc88a81aa41f32e52a17d8",
+            "moonep_materialize_reuse.cu": "269cb85f0312818cd46a26a6b94fccc5897e9fa9e278b038a13a30f5e2e9d1a8",
+            "moonep_split.py": "171935a9f72dc1cc16fdcb37030fa4e1208e7329e656b81efb3fc38de719deff",
+            "benchmark_residency_variants.py": "bbc5f8bfc1b98b8867ed7fbb396ef68d45c6f68fa93bcdbd8bce74e20b03972c",
+            "deepep_trace_smoke.py": "f25f4325ac926a4219df56ba6b6e41707557898e1d03654e21c4498b9e704370",
+            "exchange_reference_check.py": "10d4f08410a93b9ed1f4a2a38a1173325d78207d371da1226920936d72383dfb",
+            "moonep_reuse_reference_check.py": "aadcd1099ac40b1319cf7936df463248c899987be1f83ae89491f15159eb98d4",
+            "timeline_overlap.py": "cb35008555881ee672a20f5f7f555c0f59919f6bfc248e257efa1eb6c1caee0d"
+          }
+        }
+      },
+      "contract_sha256": "e58f524afb12fb3467855e6253b6f021d44bb92ced68d73080dcbc5dc0c0d5ff",
+      "qualified_modes": [],
+      "rejected_modes": {
+        "optimized_cold_serial": [
+          "cuda_ms: no positive complete cohort versus nativecoldserial",
+          "cuda_ms: no positive complete cohort versus nativecoldearly",
+          "host_ms: no positive complete cohort versus nativecoldserial",
+          "host_ms: no positive complete cohort versus nativecoldearly"
+        ],
+        "optimized_cold_early": [
+          "cuda_ms: no positive complete cohort versus nativecoldserial",
+          "cuda_ms: no positive complete cohort versus nativecoldearly",
+          "host_ms: no positive complete cohort versus nativecoldserial",
+          "host_ms: no positive complete cohort versus nativecoldearly"
+        ],
+        "optimized_hot": [
+          "cuda_ms: no positive complete cohort versus nativehot",
+          "host_ms: no positive complete cohort versus nativehot"
+        ]
+      },
+      "preplanning_default": "native",
+      "allow_analytical_amortization": false
+    },
+    {
+      "layer": 3,
+      "cohort_id": "032179c72a6bf24551a5d1d830799bc87d032692df87d4add5aa01bb0ed50f83",
+      "contract": {
+        "layer": 3,
+        "input_sha256": "3238bd6b0ae54810c99040153d41007130eb80807e0d0de88a1dfeb2e13a117d",
+        "shape": [
+          2,
+          67072,
+          8
+        ],
+        "configuration": {
+          "world": 2,
+          "gpu": "NVIDIA H200",
+          "torch": "2.11.0+cu130",
+          "cuda": "13.0",
+          "nccl": [
+            2,
+            28,
+            9
+          ],
+          "hidden": 7168,
+          "intermediate": 2048,
+          "weight_dtype": "BF16",
+          "expert_bytes": 88080384,
+          "experts": 352,
+          "extra_slots": 8,
+          "topk": 8,
+          "token_padding": 128,
+          "replica_target": 0,
+          "replica_max": 7,
+          "enable_pdl": false,
+          "rounds": 4,
+          "source_mapping": "original 0..3 to rank0; 4..7 to rank1; all router rows retained",
+          "num_sms": 32,
+          "prefetch_sms": 32,
+          "timing_mode": "graph",
+          "materializer": "reuse",
+          "residency": "combined",
+          "sources": {
+            "moonep_materialize_reuse.py": "5b15d1b889bd003e4a49e4fb25114c5e577fd93285d024449c3f2d0d1e560bae",
+            "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+            "moonep_materialize.cu": "94a46ff9ba6cc46ebbfec4502847d7138670bda9fe5a9ab92bac0ddac6a92d1a",
+            "deepep_v1_smoke.py": "db8e5c552edb362c07ba0ee3e229cd169dece5f1584fb12992755099c5e0cf4d",
+            "moonep_common.py": "e6987ae8e34d938575808421ff003d6ec2180cc7dc1370d9df9c8b8f8d332b6c",
+            "deepep_adapter.py": "90ce02cbd9ecae7723d6b407c7db21f394af88af1e37821125fb1d55234bb0e4",
+            "residency_reference_check.py": "0d43d46493dee5cdbd454702fd2ff987215e479e332c1bf2e10e94202b8a0da5",
+            "._deepep_v1_smoke.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+            "prepare_inputs.py": "1acc76d6b0f49eea8a607fd9ec9e1be1ab01d4b727810ef56738501b019050a6",
+            "moonep_materialize.py": "86b3b4b22cbb27260533ba51a6da40c22922ade93880ad7269a9842d720bfa94",
+            "two_gpu_smoke.py": "0decb839b2d48980b396dc37ea5d493f47492223071565dadf1f224320ef94b4",
+            "benchmark.py": "281cf81e1ca5e4f806d533b1a16a47579d7556a7fbae630da8986c2163dc1913",
+            "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956",
+            "moonep_materialize_reference.py": "cb2edff4d47e8bc08bb2af415086f0d3945e20f5c3aa1d2f91de4dd2b0263568",
+            "deepep_v1_adapter.py": "4f2dba9c74a6ccef8a52ce696be6c219e41ad6401185549b920d195f6331c8a8",
+            "residency_cuda_optimized.py": "eab0814a22a21198c22c22d6830c39112dba9782508bbb142f1d021c357899d4",
+            "analyze_results.py": "19befe9f8725169b699791e3ea1fbec4c1f66a8c35f335141d2b51e5e61a2e4f",
+            "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d",
+            "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+            "._deepep_trace_smoke.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+            "profile_residency.py": "b43987e8a056e917ee5dd094e0ce9cc9f686ff0a0c355bee41bb58771d96b9d7",
+            "residency_cuda_optimized.cu": "eb0d30bd8e7b3ff3e8950c1eaadf6757009b91b80946628270ae8ca9b10a4242",
+            "._deepep_v1_adapter.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+            "residency_smoke.py": "f86f9ef028dd0b30a2c8f2b321840e8cbfdfb7e0c82292c958f024546999a808",
+            "deepep_smoke.py": "e437ce9267fa0a05b93feb0986762df3594f4ad189fc88a81aa41f32e52a17d8",
+            "moonep_materialize_reuse.cu": "269cb85f0312818cd46a26a6b94fccc5897e9fa9e278b038a13a30f5e2e9d1a8",
+            "moonep_split.py": "171935a9f72dc1cc16fdcb37030fa4e1208e7329e656b81efb3fc38de719deff",
+            "benchmark_residency_variants.py": "bbc5f8bfc1b98b8867ed7fbb396ef68d45c6f68fa93bcdbd8bce74e20b03972c",
+            "deepep_trace_smoke.py": "f25f4325ac926a4219df56ba6b6e41707557898e1d03654e21c4498b9e704370",
+            "exchange_reference_check.py": "10d4f08410a93b9ed1f4a2a38a1173325d78207d371da1226920936d72383dfb",
+            "moonep_reuse_reference_check.py": "aadcd1099ac40b1319cf7936df463248c899987be1f83ae89491f15159eb98d4",
+            "timeline_overlap.py": "cb35008555881ee672a20f5f7f555c0f59919f6bfc248e257efa1eb6c1caee0d"
+          }
+        }
+      },
+      "contract_sha256": "7bfde34c0e0abe006bf5c926a03080e53d4df25ab6f6e99208227d5a85f24050",
+      "qualified_modes": [],
+      "rejected_modes": {
+        "optimized_cold_serial": [
+          "cuda_ms: no positive complete cohort versus nativecoldserial",
+          "cuda_ms: no positive complete cohort versus nativecoldearly",
+          "host_ms: no positive complete cohort versus nativecoldserial",
+          "host_ms: no positive complete cohort versus nativecoldearly"
+        ],
+        "optimized_cold_early": [
+          "cuda_ms: no positive complete cohort versus nativecoldserial",
+          "cuda_ms: no positive complete cohort versus nativecoldearly",
+          "host_ms: no positive complete cohort versus nativecoldserial",
+          "host_ms: no positive complete cohort versus nativecoldearly"
+        ],
+        "optimized_hot": [
+          "cuda_ms: no positive complete cohort versus nativehot",
+          "host_ms: no positive complete cohort versus nativehot"
+        ]
+      },
+      "preplanning_default": "native",
+      "allow_analytical_amortization": false
+    },
+    {
+      "layer": 4,
+      "cohort_id": "75860f3c1abb6625276c2798d87fe7a79f33af0178a07f38110e64ee8292c156",
+      "contract": {
+        "layer": 4,
+        "input_sha256": "502bbef9e34edbb784659fd842cc12fb01e30a1bb0b6ded4c7cf0063fc9b9e4c",
+        "shape": [
+          2,
+          67072,
+          8
+        ],
+        "configuration": {
+          "world": 2,
+          "gpu": "NVIDIA H200",
+          "torch": "2.11.0+cu130",
+          "cuda": "13.0",
+          "nccl": [
+            2,
+            28,
+            9
+          ],
+          "hidden": 7168,
+          "intermediate": 2048,
+          "weight_dtype": "BF16",
+          "expert_bytes": 88080384,
+          "experts": 352,
+          "extra_slots": 8,
+          "topk": 8,
+          "token_padding": 128,
+          "replica_target": 0,
+          "replica_max": 7,
+          "enable_pdl": false,
+          "rounds": 4,
+          "source_mapping": "original 0..3 to rank0; 4..7 to rank1; all router rows retained",
+          "num_sms": 32,
+          "prefetch_sms": 32,
+          "timing_mode": "graph",
+          "materializer": "reuse",
+          "residency": "combined",
+          "sources": {
+            "moonep_materialize_reuse.py": "5b15d1b889bd003e4a49e4fb25114c5e577fd93285d024449c3f2d0d1e560bae",
+            "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+            "moonep_materialize.cu": "94a46ff9ba6cc46ebbfec4502847d7138670bda9fe5a9ab92bac0ddac6a92d1a",
+            "deepep_v1_smoke.py": "db8e5c552edb362c07ba0ee3e229cd169dece5f1584fb12992755099c5e0cf4d",
+            "moonep_common.py": "e6987ae8e34d938575808421ff003d6ec2180cc7dc1370d9df9c8b8f8d332b6c",
+            "deepep_adapter.py": "90ce02cbd9ecae7723d6b407c7db21f394af88af1e37821125fb1d55234bb0e4",
+            "residency_reference_check.py": "0d43d46493dee5cdbd454702fd2ff987215e479e332c1bf2e10e94202b8a0da5",
+            "._deepep_v1_smoke.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+            "prepare_inputs.py": "1acc76d6b0f49eea8a607fd9ec9e1be1ab01d4b727810ef56738501b019050a6",
+            "moonep_materialize.py": "86b3b4b22cbb27260533ba51a6da40c22922ade93880ad7269a9842d720bfa94",
+            "two_gpu_smoke.py": "0decb839b2d48980b396dc37ea5d493f47492223071565dadf1f224320ef94b4",
+            "benchmark.py": "281cf81e1ca5e4f806d533b1a16a47579d7556a7fbae630da8986c2163dc1913",
+            "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956",
+            "moonep_materialize_reference.py": "cb2edff4d47e8bc08bb2af415086f0d3945e20f5c3aa1d2f91de4dd2b0263568",
+            "deepep_v1_adapter.py": "4f2dba9c74a6ccef8a52ce696be6c219e41ad6401185549b920d195f6331c8a8",
+            "residency_cuda_optimized.py": "eab0814a22a21198c22c22d6830c39112dba9782508bbb142f1d021c357899d4",
+            "analyze_results.py": "19befe9f8725169b699791e3ea1fbec4c1f66a8c35f335141d2b51e5e61a2e4f",
+            "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d",
+            "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+            "._deepep_trace_smoke.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+            "profile_residency.py": "b43987e8a056e917ee5dd094e0ce9cc9f686ff0a0c355bee41bb58771d96b9d7",
+            "residency_cuda_optimized.cu": "eb0d30bd8e7b3ff3e8950c1eaadf6757009b91b80946628270ae8ca9b10a4242",
+            "._deepep_v1_adapter.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+            "residency_smoke.py": "f86f9ef028dd0b30a2c8f2b321840e8cbfdfb7e0c82292c958f024546999a808",
+            "deepep_smoke.py": "e437ce9267fa0a05b93feb0986762df3594f4ad189fc88a81aa41f32e52a17d8",
+            "moonep_materialize_reuse.cu": "269cb85f0312818cd46a26a6b94fccc5897e9fa9e278b038a13a30f5e2e9d1a8",
+            "moonep_split.py": "171935a9f72dc1cc16fdcb37030fa4e1208e7329e656b81efb3fc38de719deff",
+            "benchmark_residency_variants.py": "bbc5f8bfc1b98b8867ed7fbb396ef68d45c6f68fa93bcdbd8bce74e20b03972c",
+            "deepep_trace_smoke.py": "f25f4325ac926a4219df56ba6b6e41707557898e1d03654e21c4498b9e704370",
+            "exchange_reference_check.py": "10d4f08410a93b9ed1f4a2a38a1173325d78207d371da1226920936d72383dfb",
+            "moonep_reuse_reference_check.py": "aadcd1099ac40b1319cf7936df463248c899987be1f83ae89491f15159eb98d4",
+            "timeline_overlap.py": "cb35008555881ee672a20f5f7f555c0f59919f6bfc248e257efa1eb6c1caee0d"
+          }
+        }
+      },
+      "contract_sha256": "6dbc4cc7e9eaeeec114ddaaa7e849dd28610a8f3b3b8afcd6235c637726b01ff",
+      "qualified_modes": [],
+      "rejected_modes": {
+        "optimized_cold_serial": [
+          "cuda_ms: no positive complete cohort versus nativecoldserial",
+          "cuda_ms: no positive complete cohort versus nativecoldearly",
+          "host_ms: no positive complete cohort versus nativecoldserial",
+          "host_ms: no positive complete cohort versus nativecoldearly"
+        ],
+        "optimized_cold_early": [
+          "cuda_ms: no positive complete cohort versus nativecoldserial",
+          "cuda_ms: no positive complete cohort versus nativecoldearly",
+          "host_ms: no positive complete cohort versus nativecoldserial",
+          "host_ms: no positive complete cohort versus nativecoldearly"
+        ],
+        "optimized_hot": [
+          "cuda_ms: no positive complete cohort versus nativehot",
+          "host_ms: no positive complete cohort versus nativehot"
+        ]
+      },
+      "preplanning_default": "native",
+      "allow_analytical_amortization": false
+    },
+    {
+      "layer": 5,
+      "cohort_id": "444ce5365afaed825c17f68165b838a9d45a504bd9870eccb6a88200c82d2371",
+      "contract": {
+        "layer": 5,
+        "input_sha256": "cf72b7f79316d6ef7515c48ab829a3f54e5c45b58263eb4cf06ac734c65e2a56",
+        "shape": [
+          2,
+          67072,
+          8
+        ],
+        "configuration": {
+          "world": 2,
+          "gpu": "NVIDIA H200",
+          "torch": "2.11.0+cu130",
+          "cuda": "13.0",
+          "nccl": [
+            2,
+            28,
+            9
+          ],
+          "hidden": 7168,
+          "intermediate": 2048,
+          "weight_dtype": "BF16",
+          "expert_bytes": 88080384,
+          "experts": 352,
+          "extra_slots": 8,
+          "topk": 8,
+          "token_padding": 128,
+          "replica_target": 0,
+          "replica_max": 7,
+          "enable_pdl": false,
+          "rounds": 4,
+          "source_mapping": "original 0..3 to rank0; 4..7 to rank1; all router rows retained",
+          "num_sms": 32,
+          "prefetch_sms": 32,
+          "timing_mode": "graph",
+          "materializer": "reuse",
+          "residency": "combined",
+          "sources": {
+            "moonep_materialize_reuse.py": "5b15d1b889bd003e4a49e4fb25114c5e577fd93285d024449c3f2d0d1e560bae",
+            "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+            "moonep_materialize.cu": "94a46ff9ba6cc46ebbfec4502847d7138670bda9fe5a9ab92bac0ddac6a92d1a",
+            "deepep_v1_smoke.py": "db8e5c552edb362c07ba0ee3e229cd169dece5f1584fb12992755099c5e0cf4d",
+            "moonep_common.py": "e6987ae8e34d938575808421ff003d6ec2180cc7dc1370d9df9c8b8f8d332b6c",
+            "deepep_adapter.py": "90ce02cbd9ecae7723d6b407c7db21f394af88af1e37821125fb1d55234bb0e4",
+            "residency_reference_check.py": "0d43d46493dee5cdbd454702fd2ff987215e479e332c1bf2e10e94202b8a0da5",
+            "._deepep_v1_smoke.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+            "prepare_inputs.py": "1acc76d6b0f49eea8a607fd9ec9e1be1ab01d4b727810ef56738501b019050a6",
+            "moonep_materialize.py": "86b3b4b22cbb27260533ba51a6da40c22922ade93880ad7269a9842d720bfa94",
+            "two_gpu_smoke.py": "0decb839b2d48980b396dc37ea5d493f47492223071565dadf1f224320ef94b4",
+            "benchmark.py": "281cf81e1ca5e4f806d533b1a16a47579d7556a7fbae630da8986c2163dc1913",
+            "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956",
+            "moonep_materialize_reference.py": "cb2edff4d47e8bc08bb2af415086f0d3945e20f5c3aa1d2f91de4dd2b0263568",
+            "deepep_v1_adapter.py": "4f2dba9c74a6ccef8a52ce696be6c219e41ad6401185549b920d195f6331c8a8",
+            "residency_cuda_optimized.py": "eab0814a22a21198c22c22d6830c39112dba9782508bbb142f1d021c357899d4",
+            "analyze_results.py": "19befe9f8725169b699791e3ea1fbec4c1f66a8c35f335141d2b51e5e61a2e4f",
+            "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d",
+            "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+            "._deepep_trace_smoke.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+            "profile_residency.py": "b43987e8a056e917ee5dd094e0ce9cc9f686ff0a0c355bee41bb58771d96b9d7",
+            "residency_cuda_optimized.cu": "eb0d30bd8e7b3ff3e8950c1eaadf6757009b91b80946628270ae8ca9b10a4242",
+            "._deepep_v1_adapter.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+            "residency_smoke.py": "f86f9ef028dd0b30a2c8f2b321840e8cbfdfb7e0c82292c958f024546999a808",
+            "deepep_smoke.py": "e437ce9267fa0a05b93feb0986762df3594f4ad189fc88a81aa41f32e52a17d8",
+            "moonep_materialize_reuse.cu": "269cb85f0312818cd46a26a6b94fccc5897e9fa9e278b038a13a30f5e2e9d1a8",
+            "moonep_split.py": "171935a9f72dc1cc16fdcb37030fa4e1208e7329e656b81efb3fc38de719deff",
+            "benchmark_residency_variants.py": "bbc5f8bfc1b98b8867ed7fbb396ef68d45c6f68fa93bcdbd8bce74e20b03972c",
+            "deepep_trace_smoke.py": "f25f4325ac926a4219df56ba6b6e41707557898e1d03654e21c4498b9e704370",
+            "exchange_reference_check.py": "10d4f08410a93b9ed1f4a2a38a1173325d78207d371da1226920936d72383dfb",
+            "moonep_reuse_reference_check.py": "aadcd1099ac40b1319cf7936df463248c899987be1f83ae89491f15159eb98d4",
+            "timeline_overlap.py": "cb35008555881ee672a20f5f7f555c0f59919f6bfc248e257efa1eb6c1caee0d"
+          }
+        }
+      },
+      "contract_sha256": "f5bc8c23d10cb3a819e68f7e3b837c4030688d8ac7df5b0e59a413b9adb34a01",
+      "qualified_modes": [],
+      "rejected_modes": {
+        "optimized_cold_serial": [
+          "cuda_ms: no positive complete cohort versus nativecoldserial",
+          "cuda_ms: no positive complete cohort versus nativecoldearly",
+          "host_ms: no positive complete cohort versus nativecoldserial",
+          "host_ms: no positive complete cohort versus nativecoldearly"
+        ],
+        "optimized_cold_early": [
+          "cuda_ms: no positive complete cohort versus nativecoldserial",
+          "cuda_ms: no positive complete cohort versus nativecoldearly",
+          "host_ms: no positive complete cohort versus nativecoldserial",
+          "host_ms: no positive complete cohort versus nativecoldearly"
+        ],
+        "optimized_hot": [
+          "cuda_ms: no positive complete cohort versus nativehot",
+          "host_ms: no positive complete cohort versus nativehot"
+        ]
+      },
+      "preplanning_default": "native",
+      "allow_analytical_amortization": false
+    },
+    {
+      "layer": 6,
+      "cohort_id": "d09de5e7baf55aaa7e35a82681bb1638325f720310e7a5352f591a18ec289fbb",
+      "contract": {
+        "layer": 6,
+        "input_sha256": "07b245a0267b26a726c60f263c661ade189262bf4e62c8e6bfe671a5a6b21d33",
+        "shape": [
+          2,
+          67072,
+          8
+        ],
+        "configuration": {
+          "world": 2,
+          "gpu": "NVIDIA H200",
+          "torch": "2.11.0+cu130",
+          "cuda": "13.0",
+          "nccl": [
+            2,
+            28,
+            9
+          ],
+          "hidden": 7168,
+          "intermediate": 2048,
+          "weight_dtype": "BF16",
+          "expert_bytes": 88080384,
+          "experts": 352,
+          "extra_slots": 8,
+          "topk": 8,
+          "token_padding": 128,
+          "replica_target": 0,
+          "replica_max": 7,
+          "enable_pdl": false,
+          "rounds": 4,
+          "source_mapping": "original 0..3 to rank0; 4..7 to rank1; all router rows retained",
+          "num_sms": 32,
+          "prefetch_sms": 32,
+          "timing_mode": "graph",
+          "materializer": "reuse",
+          "residency": "combined",
+          "sources": {
+            "moonep_materialize_reuse.py": "5b15d1b889bd003e4a49e4fb25114c5e577fd93285d024449c3f2d0d1e560bae",
+            "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+            "moonep_materialize.cu": "94a46ff9ba6cc46ebbfec4502847d7138670bda9fe5a9ab92bac0ddac6a92d1a",
+            "deepep_v1_smoke.py": "db8e5c552edb362c07ba0ee3e229cd169dece5f1584fb12992755099c5e0cf4d",
+            "moonep_common.py": "e6987ae8e34d938575808421ff003d6ec2180cc7dc1370d9df9c8b8f8d332b6c",
+            "deepep_adapter.py": "90ce02cbd9ecae7723d6b407c7db21f394af88af1e37821125fb1d55234bb0e4",
+            "residency_reference_check.py": "0d43d46493dee5cdbd454702fd2ff987215e479e332c1bf2e10e94202b8a0da5",
+            "._deepep_v1_smoke.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+            "prepare_inputs.py": "1acc76d6b0f49eea8a607fd9ec9e1be1ab01d4b727810ef56738501b019050a6",
+            "moonep_materialize.py": "86b3b4b22cbb27260533ba51a6da40c22922ade93880ad7269a9842d720bfa94",
+            "two_gpu_smoke.py": "0decb839b2d48980b396dc37ea5d493f47492223071565dadf1f224320ef94b4",
+            "benchmark.py": "281cf81e1ca5e4f806d533b1a16a47579d7556a7fbae630da8986c2163dc1913",
+            "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956",
+            "moonep_materialize_reference.py": "cb2edff4d47e8bc08bb2af415086f0d3945e20f5c3aa1d2f91de4dd2b0263568",
+            "deepep_v1_adapter.py": "4f2dba9c74a6ccef8a52ce696be6c219e41ad6401185549b920d195f6331c8a8",
+            "residency_cuda_optimized.py": "eab0814a22a21198c22c22d6830c39112dba9782508bbb142f1d021c357899d4",
+            "analyze_results.py": "19befe9f8725169b699791e3ea1fbec4c1f66a8c35f335141d2b51e5e61a2e4f",
+            "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d",
+            "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+            "._deepep_trace_smoke.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+            "profile_residency.py": "b43987e8a056e917ee5dd094e0ce9cc9f686ff0a0c355bee41bb58771d96b9d7",
+            "residency_cuda_optimized.cu": "eb0d30bd8e7b3ff3e8950c1eaadf6757009b91b80946628270ae8ca9b10a4242",
+            "._deepep_v1_adapter.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+            "residency_smoke.py": "f86f9ef028dd0b30a2c8f2b321840e8cbfdfb7e0c82292c958f024546999a808",
+            "deepep_smoke.py": "e437ce9267fa0a05b93feb0986762df3594f4ad189fc88a81aa41f32e52a17d8",
+            "moonep_materialize_reuse.cu": "269cb85f0312818cd46a26a6b94fccc5897e9fa9e278b038a13a30f5e2e9d1a8",
+            "moonep_split.py": "171935a9f72dc1cc16fdcb37030fa4e1208e7329e656b81efb3fc38de719deff",
+            "benchmark_residency_variants.py": "bbc5f8bfc1b98b8867ed7fbb396ef68d45c6f68fa93bcdbd8bce74e20b03972c",
+            "deepep_trace_smoke.py": "f25f4325ac926a4219df56ba6b6e41707557898e1d03654e21c4498b9e704370",
+            "exchange_reference_check.py": "10d4f08410a93b9ed1f4a2a38a1173325d78207d371da1226920936d72383dfb",
+            "moonep_reuse_reference_check.py": "aadcd1099ac40b1319cf7936df463248c899987be1f83ae89491f15159eb98d4",
+            "timeline_overlap.py": "cb35008555881ee672a20f5f7f555c0f59919f6bfc248e257efa1eb6c1caee0d"
+          }
+        }
+      },
+      "contract_sha256": "4b8985c5d4efc33df925871fd385e4209cb0f546ecf289910f103b088db7a42a",
+      "qualified_modes": [],
+      "rejected_modes": {
+        "optimized_cold_serial": [
+          "cuda_ms: no positive complete cohort versus nativecoldserial",
+          "cuda_ms: no positive complete cohort versus nativecoldearly",
+          "host_ms: no positive complete cohort versus nativecoldserial",
+          "host_ms: no positive complete cohort versus nativecoldearly"
+        ],
+        "optimized_cold_early": [
+          "cuda_ms: no positive complete cohort versus nativecoldserial",
+          "cuda_ms: no positive complete cohort versus nativecoldearly",
+          "host_ms: no positive complete cohort versus nativecoldserial",
+          "host_ms: no positive complete cohort versus nativecoldearly"
+        ],
+        "optimized_hot": [
+          "cuda_ms: no positive complete cohort versus nativehot",
+          "host_ms: no positive complete cohort versus nativehot"
+        ]
+      },
+      "preplanning_default": "native",
+      "allow_analytical_amortization": false
+    },
+    {
+      "layer": 7,
+      "cohort_id": "5cab5960d3ec3ae7c17f5db1ce7e11f79f1789b85ed25e5f7a2ba9435bbab537",
+      "contract": {
+        "layer": 7,
+        "input_sha256": "b005244357fa30dea03327859a928359ec3971ea0d5718053a9f1351b5d36b6e",
+        "shape": [
+          2,
+          67072,
+          8
+        ],
+        "configuration": {
+          "world": 2,
+          "gpu": "NVIDIA H200",
+          "torch": "2.11.0+cu130",
+          "cuda": "13.0",
+          "nccl": [
+            2,
+            28,
+            9
+          ],
+          "hidden": 7168,
+          "intermediate": 2048,
+          "weight_dtype": "BF16",
+          "expert_bytes": 88080384,
+          "experts": 352,
+          "extra_slots": 8,
+          "topk": 8,
+          "token_padding": 128,
+          "replica_target": 0,
+          "replica_max": 7,
+          "enable_pdl": false,
+          "rounds": 4,
+          "source_mapping": "original 0..3 to rank0; 4..7 to rank1; all router rows retained",
+          "num_sms": 32,
+          "prefetch_sms": 32,
+          "timing_mode": "graph",
+          "materializer": "reuse",
+          "residency": "combined",
+          "sources": {
+            "moonep_materialize_reuse.py": "5b15d1b889bd003e4a49e4fb25114c5e577fd93285d024449c3f2d0d1e560bae",
+            "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+            "moonep_materialize.cu": "94a46ff9ba6cc46ebbfec4502847d7138670bda9fe5a9ab92bac0ddac6a92d1a",
+            "deepep_v1_smoke.py": "db8e5c552edb362c07ba0ee3e229cd169dece5f1584fb12992755099c5e0cf4d",
+            "moonep_common.py": "e6987ae8e34d938575808421ff003d6ec2180cc7dc1370d9df9c8b8f8d332b6c",
+            "deepep_adapter.py": "90ce02cbd9ecae7723d6b407c7db21f394af88af1e37821125fb1d55234bb0e4",
+            "residency_reference_check.py": "0d43d46493dee5cdbd454702fd2ff987215e479e332c1bf2e10e94202b8a0da5",
+            "._deepep_v1_smoke.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+            "prepare_inputs.py": "1acc76d6b0f49eea8a607fd9ec9e1be1ab01d4b727810ef56738501b019050a6",
+            "moonep_materialize.py": "86b3b4b22cbb27260533ba51a6da40c22922ade93880ad7269a9842d720bfa94",
+            "two_gpu_smoke.py": "0decb839b2d48980b396dc37ea5d493f47492223071565dadf1f224320ef94b4",
+            "benchmark.py": "281cf81e1ca5e4f806d533b1a16a47579d7556a7fbae630da8986c2163dc1913",
+            "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956",
+            "moonep_materialize_reference.py": "cb2edff4d47e8bc08bb2af415086f0d3945e20f5c3aa1d2f91de4dd2b0263568",
+            "deepep_v1_adapter.py": "4f2dba9c74a6ccef8a52ce696be6c219e41ad6401185549b920d195f6331c8a8",
+            "residency_cuda_optimized.py": "eab0814a22a21198c22c22d6830c39112dba9782508bbb142f1d021c357899d4",
+            "analyze_results.py": "19befe9f8725169b699791e3ea1fbec4c1f66a8c35f335141d2b51e5e61a2e4f",
+            "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d",
+            "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+            "._deepep_trace_smoke.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+            "profile_residency.py": "b43987e8a056e917ee5dd094e0ce9cc9f686ff0a0c355bee41bb58771d96b9d7",
+            "residency_cuda_optimized.cu": "eb0d30bd8e7b3ff3e8950c1eaadf6757009b91b80946628270ae8ca9b10a4242",
+            "._deepep_v1_adapter.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+            "residency_smoke.py": "f86f9ef028dd0b30a2c8f2b321840e8cbfdfb7e0c82292c958f024546999a808",
+            "deepep_smoke.py": "e437ce9267fa0a05b93feb0986762df3594f4ad189fc88a81aa41f32e52a17d8",
+            "moonep_materialize_reuse.cu": "269cb85f0312818cd46a26a6b94fccc5897e9fa9e278b038a13a30f5e2e9d1a8",
+            "moonep_split.py": "171935a9f72dc1cc16fdcb37030fa4e1208e7329e656b81efb3fc38de719deff",
+            "benchmark_residency_variants.py": "bbc5f8bfc1b98b8867ed7fbb396ef68d45c6f68fa93bcdbd8bce74e20b03972c",
+            "deepep_trace_smoke.py": "f25f4325ac926a4219df56ba6b6e41707557898e1d03654e21c4498b9e704370",
+            "exchange_reference_check.py": "10d4f08410a93b9ed1f4a2a38a1173325d78207d371da1226920936d72383dfb",
+            "moonep_reuse_reference_check.py": "aadcd1099ac40b1319cf7936df463248c899987be1f83ae89491f15159eb98d4",
+            "timeline_overlap.py": "cb35008555881ee672a20f5f7f555c0f59919f6bfc248e257efa1eb6c1caee0d"
+          }
+        }
+      },
+      "contract_sha256": "ba653803d18d70f84f9e82b6b57d2f20ac01da3ae134f70b5490e39a09dd29ce",
+      "qualified_modes": [],
+      "rejected_modes": {
+        "optimized_cold_serial": [
+          "cuda_ms: no positive complete cohort versus nativecoldserial",
+          "cuda_ms: no positive complete cohort versus nativecoldearly",
+          "host_ms: no positive complete cohort versus nativecoldserial",
+          "host_ms: no positive complete cohort versus nativecoldearly"
+        ],
+        "optimized_cold_early": [
+          "cuda_ms: no positive complete cohort versus nativecoldserial",
+          "cuda_ms: no positive complete cohort versus nativecoldearly",
+          "host_ms: no positive complete cohort versus nativecoldserial",
+          "host_ms: no positive complete cohort versus nativecoldearly"
+        ],
+        "optimized_hot": [
+          "cuda_ms: no positive complete cohort versus nativehot",
+          "host_ms: no positive complete cohort versus nativehot"
+        ]
+      },
+      "preplanning_default": "native",
+      "allow_analytical_amortization": false
+    }
+  ],
+  "caution": "Eligibility applies only to retained measured cohorts. Unknown weight version or mapping lifetime uses native. Do not compute the optimized plan to decide whether to run it; its sunk cost cannot be refunded."
+}

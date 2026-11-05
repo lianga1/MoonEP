@@ -1,0 +1,1296 @@
+{
+  "status": "passed",
+  "scope_zh": "两张物理H200独立测原始八逻辑rank维度；每来源实际扫描16768个token，未折叠路由、未将全量时间除以8。",
+  "aggregation_zh": "每个配置先取10个原始样本的中位数；来源计算再取8来源及2张物理卡的最大中位数；最后对8层取算术平均。两物理卡是独立微基准副本，不是八卡同步采样。",
+  "units": "microseconds",
+  "layers": [
+    {
+      "layer": 0,
+      "global_residency_per_physical_median_us": [
+        858.2383632659912,
+        857.9815864562988
+      ],
+      "global_residency_max_physical_median_us": 858.2383632659912,
+      "old_sort_max_source_and_physical_median_us": 180.5343985557556,
+      "prefix_max_source_and_physical_median_us": 86.19599938392639,
+      "prefix_reduction_pct": 52.2550826471411,
+      "sources": [
+        {
+          "source": 0,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              173.73040318489075,
+              173.95119667053223
+            ],
+            "max_of_two_physical_medians_us": 173.95119667053223
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              78.58080267906189,
+              78.69040071964264
+            ],
+            "max_of_two_physical_medians_us": 78.69040071964264
+          },
+          "reduction_pct": 54.76294373031296
+        },
+        {
+          "source": 1,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              177.98959612846377,
+              177.50399708747864
+            ],
+            "max_of_two_physical_medians_us": 177.98959612846377
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              85.83999872207642,
+              85.76559722423553
+            ],
+            "max_of_two_physical_medians_us": 85.83999872207642
+          },
+          "reduction_pct": 51.7724627791607
+        },
+        {
+          "source": 2,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              177.6136040687561,
+              177.26320028305054
+            ],
+            "max_of_two_physical_medians_us": 177.6136040687561
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              85.97040176391602,
+              86.02159917354584
+            ],
+            "max_of_two_physical_medians_us": 86.02159917354584
+          },
+          "reduction_pct": 51.56812473652301
+        },
+        {
+          "source": 3,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              177.86160111427307,
+              177.72160172462463
+            ],
+            "max_of_two_physical_medians_us": 177.86160111427307
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              84.9159985780716,
+              85.04319787025452
+            ],
+            "max_of_two_physical_medians_us": 85.04319787025452
+          },
+          "reduction_pct": 52.185745918470786
+        },
+        {
+          "source": 4,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              176.69360041618347,
+              177.12720036506653
+            ],
+            "max_of_two_physical_medians_us": 177.12720036506653
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              84.89279747009277,
+              84.89199876785278
+            ],
+            "max_of_two_physical_medians_us": 84.89279747009277
+          },
+          "reduction_pct": 52.07241050774518
+        },
+        {
+          "source": 5,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              178.80080342292786,
+              179.89279627799988
+            ],
+            "max_of_two_physical_medians_us": 179.89279627799988
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              85.5648010969162,
+              85.74799895286561
+            ],
+            "max_of_two_physical_medians_us": 85.74799895286561
+          },
+          "reduction_pct": 52.33383396834094
+        },
+        {
+          "source": 6,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              180.5343985557556,
+              178.94960045814514
+            ],
+            "max_of_two_physical_medians_us": 180.5343985557556
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              86.19599938392639,
+              85.8024001121521
+            ],
+            "max_of_two_physical_medians_us": 86.19599938392639
+          },
+          "reduction_pct": 52.2550826471411
+        },
+        {
+          "source": 7,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              179.47440147399902,
+              177.3104012012482
+            ],
+            "max_of_two_physical_medians_us": 179.47440147399902
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              85.61519980430604,
+              85.13759970664978
+            ],
+            "max_of_two_physical_medians_us": 85.61519980430604
+          },
+          "reduction_pct": 52.29670688345527
+        }
+      ]
+    },
+    {
+      "layer": 1,
+      "global_residency_per_physical_median_us": [
+        882.2639942169191,
+        883.3183765411377
+      ],
+      "global_residency_max_physical_median_us": 883.3183765411377,
+      "old_sort_max_source_and_physical_median_us": 180.79199790954593,
+      "prefix_max_source_and_physical_median_us": 88.9488011598587,
+      "prefix_reduction_pct": 50.80047668682677,
+      "sources": [
+        {
+          "source": 0,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              178.51999998092649,
+              179.0232002735138
+            ],
+            "max_of_two_physical_medians_us": 179.0232002735138
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              85.09440124034882,
+              85.17040014266969
+            ],
+            "max_of_two_physical_medians_us": 85.17040014266969
+          },
+          "reduction_pct": 52.42493709611641
+        },
+        {
+          "source": 1,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              179.92079854011536,
+              179.830402135849
+            ],
+            "max_of_two_physical_medians_us": 179.92079854011536
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              86.58640086650848,
+              86.4872008562088
+            ],
+            "max_of_two_physical_medians_us": 86.58640086650848
+          },
+          "reduction_pct": 51.87526869096067
+        },
+        {
+          "source": 2,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              179.28320169448853,
+              179.73520159721375
+            ],
+            "max_of_two_physical_medians_us": 179.73520159721375
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              86.27040088176727,
+              86.23760044574738
+            ],
+            "max_of_two_physical_medians_us": 86.27040088176727
+          },
+          "reduction_pct": 52.00138864555921
+        },
+        {
+          "source": 3,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              180.79199790954593,
+              179.25519943237305
+            ],
+            "max_of_two_physical_medians_us": 180.79199790954593
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              88.9488011598587,
+              88.33839893341064
+            ],
+            "max_of_two_physical_medians_us": 88.9488011598587
+          },
+          "reduction_pct": 50.80047668682677
+        },
+        {
+          "source": 4,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              179.9015998840332,
+              180.27520179748535
+            ],
+            "max_of_two_physical_medians_us": 180.27520179748535
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              86.60160005092621,
+              86.20240092277525
+            ],
+            "max_of_two_physical_medians_us": 86.60160005092621
+          },
+          "reduction_pct": 51.961446062774996
+        },
+        {
+          "source": 5,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              178.17360162734985,
+              178.09600234031677
+            ],
+            "max_of_two_physical_medians_us": 178.17360162734985
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              86.19119822978973,
+              86.15360260009766
+            ],
+            "max_of_two_physical_medians_us": 86.19119822978973
+          },
+          "reduction_pct": 51.62515802421805
+        },
+        {
+          "source": 6,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              179.41359877586365,
+              179.03359532356262
+            ],
+            "max_of_two_physical_medians_us": 179.41359877586365
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              87.60400116443634,
+              87.67040073871613
+            ],
+            "max_of_two_physical_medians_us": 87.67040073871613
+          },
+          "reduction_pct": 51.1350302669976
+        },
+        {
+          "source": 7,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              175.81279873847961,
+              176.3311982154846
+            ],
+            "max_of_two_physical_medians_us": 176.3311982154846
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              85.30399799346924,
+              85.41600108146667
+            ],
+            "max_of_two_physical_medians_us": 85.41600108146667
+          },
+          "reduction_pct": 51.559337232493306
+        }
+      ]
+    },
+    {
+      "layer": 2,
+      "global_residency_per_physical_median_us": [
+        891.7840003967285,
+        880.7735919952393
+      ],
+      "global_residency_max_physical_median_us": 891.7840003967285,
+      "old_sort_max_source_and_physical_median_us": 178.9135992527008,
+      "prefix_max_source_and_physical_median_us": 85.61119735240936,
+      "prefix_reduction_pct": 52.14941865235714,
+      "sources": [
+        {
+          "source": 0,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              174.38479661941528,
+              173.67040514945987
+            ],
+            "max_of_two_physical_medians_us": 174.38479661941528
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              83.543998003006,
+              83.51600170135498
+            ],
+            "max_of_two_physical_medians_us": 83.543998003006
+          },
+          "reduction_pct": 52.09215503726743
+        },
+        {
+          "source": 1,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              174.42960143089294,
+              174.21759963035583
+            ],
+            "max_of_two_physical_medians_us": 174.42960143089294
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              84.69039797782898,
+              84.80879962444305
+            ],
+            "max_of_two_physical_medians_us": 84.80879962444305
+          },
+          "reduction_pct": 51.379353659737994
+        },
+        {
+          "source": 2,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              176.77519917488098,
+              177.45360136032107
+            ],
+            "max_of_two_physical_medians_us": 177.45360136032107
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              84.55840051174162,
+              84.77119803428651
+            ],
+            "max_of_two_physical_medians_us": 84.77119803428651
+          },
+          "reduction_pct": 52.22909121908557
+        },
+        {
+          "source": 3,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              176.22160315513614,
+              176.13360285758972
+            ],
+            "max_of_two_physical_medians_us": 176.22160315513614
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              85.37600040435791,
+              85.56479811668396
+            ],
+            "max_of_two_physical_medians_us": 85.56479811668396
+          },
+          "reduction_pct": 51.44477374811007
+        },
+        {
+          "source": 4,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              178.9135992527008,
+              177.02879905700686
+            ],
+            "max_of_two_physical_medians_us": 178.9135992527008
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              85.61119735240936,
+              85.08159816265106
+            ],
+            "max_of_two_physical_medians_us": 85.61119735240936
+          },
+          "reduction_pct": 52.14941865235714
+        },
+        {
+          "source": 5,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              175.20800232887268,
+              175.31520128250122
+            ],
+            "max_of_two_physical_medians_us": 175.31520128250122
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              85.00239849090576,
+              84.53040122985838
+            ],
+            "max_of_two_physical_medians_us": 85.00239849090576
+          },
+          "reduction_pct": 51.5145304747797
+        },
+        {
+          "source": 6,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              175.90799927711487,
+              176.93919539451596
+            ],
+            "max_of_two_physical_medians_us": 176.93919539451596
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              84.59599912166595,
+              84.74399745464325
+            ],
+            "max_of_two_physical_medians_us": 84.74399745464325
+          },
+          "reduction_pct": 52.105582222360546
+        },
+        {
+          "source": 7,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              177.85280346870422,
+              177.2520005702972
+            ],
+            "max_of_two_physical_medians_us": 177.85280346870422
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              84.66159999370576,
+              84.65040028095245
+            ],
+            "max_of_two_physical_medians_us": 84.66159999370576
+          },
+          "reduction_pct": 52.3979390020674
+        }
+      ]
+    },
+    {
+      "layer": 3,
+      "global_residency_per_physical_median_us": [
+        872.3120212554932,
+        874.1623878479004
+      ],
+      "global_residency_max_physical_median_us": 874.1623878479004,
+      "old_sort_max_source_and_physical_median_us": 179.09520268440247,
+      "prefix_max_source_and_physical_median_us": 85.37999987602234,
+      "prefix_reduction_pct": 52.32703132396179,
+      "sources": [
+        {
+          "source": 0,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              172.09920287132263,
+              172.43840098381042
+            ],
+            "max_of_two_physical_medians_us": 172.43840098381042
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              81.39680027961731,
+              81.56079947948456
+            ],
+            "max_of_two_physical_medians_us": 81.56079947948456
+          },
+          "reduction_pct": 52.701487015562165
+        },
+        {
+          "source": 1,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              177.17599868774414,
+              177.19680070877075
+            ],
+            "max_of_two_physical_medians_us": 177.19680070877075
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              84.76960062980652,
+              84.77680087089539
+            ],
+            "max_of_two_physical_medians_us": 84.77680087089539
+          },
+          "reduction_pct": 52.156697789239956
+        },
+        {
+          "source": 2,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              175.66639780998227,
+              176.50880217552185
+            ],
+            "max_of_two_physical_medians_us": 176.50880217552185
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              84.03840065002441,
+              84.09840166568756
+            ],
+            "max_of_two_physical_medians_us": 84.09840166568756
+          },
+          "reduction_pct": 52.35455647018703
+        },
+        {
+          "source": 3,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              178.59920263290408,
+              179.09520268440247
+            ],
+            "max_of_two_physical_medians_us": 179.09520268440247
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              85.29999852180481,
+              85.33360064029694
+            ],
+            "max_of_two_physical_medians_us": 85.33360064029694
+          },
+          "reduction_pct": 52.352938905532895
+        },
+        {
+          "source": 4,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              174.97600317001343,
+              175.4808008670807
+            ],
+            "max_of_two_physical_medians_us": 175.4808008670807
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              83.7039977312088,
+              83.84159803390503
+            ],
+            "max_of_two_physical_medians_us": 83.84159803390503
+          },
+          "reduction_pct": 52.221782884720525
+        },
+        {
+          "source": 5,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              175.92719793319702,
+              174.92079734802246
+            ],
+            "max_of_two_physical_medians_us": 175.92719793319702
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              85.37999987602234,
+              84.93280112743379
+            ],
+            "max_of_two_physical_medians_us": 85.37999987602234
+          },
+          "reduction_pct": 51.46856149641923
+        },
+        {
+          "source": 6,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              176.7575979232788,
+              176.29200220108032
+            ],
+            "max_of_two_physical_medians_us": 176.7575979232788
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              84.36319828033447,
+              83.91200006008148
+            ],
+            "max_of_two_physical_medians_us": 84.36319828033447
+          },
+          "reduction_pct": 52.27181220410559
+        },
+        {
+          "source": 7,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              174.4863986968994,
+              173.6303985118866
+            ],
+            "max_of_two_physical_medians_us": 174.4863986968994
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              83.6656004190445,
+              83.81359875202179
+            ],
+            "max_of_two_physical_medians_us": 83.81359875202179
+          },
+          "reduction_pct": 51.96554036420081
+        }
+      ]
+    },
+    {
+      "layer": 4,
+      "global_residency_per_physical_median_us": [
+        901.3167858123779,
+        900.9912014007568
+      ],
+      "global_residency_max_physical_median_us": 901.3167858123779,
+      "old_sort_max_source_and_physical_median_us": 179.51120138168335,
+      "prefix_max_source_and_physical_median_us": 86.1295998096466,
+      "prefix_reduction_pct": 52.01993015103572,
+      "sources": [
+        {
+          "source": 0,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              169.10719871520996,
+              169.26239728927612
+            ],
+            "max_of_two_physical_medians_us": 169.26239728927612
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              80.73039948940277,
+              80.75200021266937
+            ],
+            "max_of_two_physical_medians_us": 80.75200021266937
+          },
+          "reduction_pct": 52.29182529261889
+        },
+        {
+          "source": 1,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              174.4704008102417,
+              175.42960047721863
+            ],
+            "max_of_two_physical_medians_us": 175.42960047721863
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              83.69839787483215,
+              83.89759957790375
+            ],
+            "max_of_two_physical_medians_us": 83.89759957790375
+          },
+          "reduction_pct": 52.175915951653366
+        },
+        {
+          "source": 2,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              177.69200205802917,
+              177.49599814414978
+            ],
+            "max_of_two_physical_medians_us": 177.69200205802917
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              86.07279956340791,
+              86.10800206661223
+            ],
+            "max_of_two_physical_medians_us": 86.10800206661223
+          },
+          "reduction_pct": 51.54086786725956
+        },
+        {
+          "source": 3,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              176.86240077018738,
+              177.3080050945282
+            ],
+            "max_of_two_physical_medians_us": 177.3080050945282
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              86.12399995326996,
+              86.1295998096466
+            ],
+            "max_of_two_physical_medians_us": 86.1295998096466
+          },
+          "reduction_pct": 51.42373872870074
+        },
+        {
+          "source": 4,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              176.37919783592227,
+              176.3440012931824
+            ],
+            "max_of_two_physical_medians_us": 176.37919783592227
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              85.67439913749695,
+              85.91680228710175
+            ],
+            "max_of_two_physical_medians_us": 85.91680228710175
+          },
+          "reduction_pct": 51.28858542205962
+        },
+        {
+          "source": 5,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              178.66320013999936,
+              179.51120138168335
+            ],
+            "max_of_two_physical_medians_us": 179.51120138168335
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              85.76479852199554,
+              85.88719964027405
+            ],
+            "max_of_two_physical_medians_us": 85.88719964027405
+          },
+          "reduction_pct": 52.154963601598595
+        },
+        {
+          "source": 6,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              179.27039861679077,
+              176.60719752311707
+            ],
+            "max_of_two_physical_medians_us": 179.27039861679077
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              85.05520224571228,
+              84.59440171718597
+            ],
+            "max_of_two_physical_medians_us": 85.05520224571228
+          },
+          "reduction_pct": 52.554798281267466
+        },
+        {
+          "source": 7,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              177.87919640541077,
+              177.33200192451477
+            ],
+            "max_of_two_physical_medians_us": 177.87919640541077
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              84.55360233783722,
+              84.17519927024841
+            ],
+            "max_of_two_physical_medians_us": 84.55360233783722
+          },
+          "reduction_pct": 52.46571603284731
+        }
+      ]
+    },
+    {
+      "layer": 5,
+      "global_residency_per_physical_median_us": [
+        913.0799770355225,
+        930.6623935699463
+      ],
+      "global_residency_max_physical_median_us": 930.6623935699463,
+      "old_sort_max_source_and_physical_median_us": 178.7496030330658,
+      "prefix_max_source_and_physical_median_us": 87.18239963054658,
+      "prefix_reduction_pct": 51.22652126146583,
+      "sources": [
+        {
+          "source": 0,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              172.64960408210754,
+              172.41599559783938
+            ],
+            "max_of_two_physical_medians_us": 172.64960408210754
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              81.78640007972717,
+              81.80319964885712
+            ],
+            "max_of_two_physical_medians_us": 81.80319964885712
+          },
+          "reduction_pct": 52.61894744342786
+        },
+        {
+          "source": 1,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              172.65759706497192,
+              172.74240255355835
+            ],
+            "max_of_two_physical_medians_us": 172.74240255355835
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              83.27839970588684,
+              83.22319984436035
+            ],
+            "max_of_two_physical_medians_us": 83.27839970588684
+          },
+          "reduction_pct": 51.790412501605346
+        },
+        {
+          "source": 2,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              174.75279569625854,
+              174.49600100517273
+            ],
+            "max_of_two_physical_medians_us": 174.75279569625854
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              83.32560062408447,
+              83.40160250663757
+            ],
+            "max_of_two_physical_medians_us": 83.40160250663757
+          },
+          "reduction_pct": 52.274524608121496
+        },
+        {
+          "source": 3,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              177.39920020103455,
+              177.80799865722656
+            ],
+            "max_of_two_physical_medians_us": 177.80799865722656
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              87.16639876365662,
+              87.18239963054658
+            ],
+            "max_of_two_physical_medians_us": 87.18239963054658
+          },
+          "reduction_pct": 50.968235237485324
+        },
+        {
+          "source": 4,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              175.31039714813232,
+              175.80879926681519
+            ],
+            "max_of_two_physical_medians_us": 175.80879926681519
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              85.22560000419617,
+              85.27279794216156
+            ],
+            "max_of_two_physical_medians_us": 85.27279794216156
+          },
+          "reduction_pct": 51.49685436805254
+        },
+        {
+          "source": 5,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              176.92880034446716,
+              176.54399871826172
+            ],
+            "max_of_two_physical_medians_us": 176.92880034446716
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              83.40480029582977,
+              83.42159986495972
+            ],
+            "max_of_two_physical_medians_us": 83.42159986495972
+          },
+          "reduction_pct": 52.85018623166828
+        },
+        {
+          "source": 6,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              178.7496030330658,
+              178.4431993961334
+            ],
+            "max_of_two_physical_medians_us": 178.7496030330658
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              86.4439994096756,
+              86.4703983068466
+            ],
+            "max_of_two_physical_medians_us": 86.4703983068466
+          },
+          "reduction_pct": 51.62484456491298
+        },
+        {
+          "source": 7,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              177.4728000164032,
+              175.29760003089905
+            ],
+            "max_of_two_physical_medians_us": 177.4728000164032
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              83.27760100364684,
+              82.82560110092163
+            ],
+            "max_of_two_physical_medians_us": 83.27760100364684
+          },
+          "reduction_pct": 53.07585106227559
+        }
+      ]
+    },
+    {
+      "layer": 6,
+      "global_residency_per_physical_median_us": [
+        900.6671905517578,
+        899.9688148498535
+      ],
+      "global_residency_max_physical_median_us": 900.6671905517578,
+      "old_sort_max_source_and_physical_median_us": 177.20080018043515,
+      "prefix_max_source_and_physical_median_us": 85.11359989643097,
+      "prefix_reduction_pct": 51.96771131407768,
+      "sources": [
+        {
+          "source": 0,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              171.66879773139954,
+              171.90879583358765
+            ],
+            "max_of_two_physical_medians_us": 171.90879583358765
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              80.90800046920776,
+              80.52000105381012
+            ],
+            "max_of_two_physical_medians_us": 80.90800046920776
+          },
+          "reduction_pct": 52.9355085777409
+        },
+        {
+          "source": 1,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              175.83280205726624,
+              175.64560174942017
+            ],
+            "max_of_two_physical_medians_us": 175.83280205726624
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              83.77839922904968,
+              83.8271975517273
+            ],
+            "max_of_two_physical_medians_us": 83.8271975517273
+          },
+          "reduction_pct": 52.325620378599226
+        },
+        {
+          "source": 2,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              174.36240315437317,
+              174.7759997844696
+            ],
+            "max_of_two_physical_medians_us": 174.7759997844696
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              84.54640209674835,
+              84.68080163002014
+            ],
+            "max_of_two_physical_medians_us": 84.68080163002014
+          },
+          "reduction_pct": 51.548953097423635
+        },
+        {
+          "source": 3,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              174.14560317993164,
+              174.49920177459717
+            ],
+            "max_of_two_physical_medians_us": 174.49920177459717
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              83.10160040855408,
+              83.32159817218782
+            ],
+            "max_of_two_physical_medians_us": 83.32159817218782
+          },
+          "reduction_pct": 52.25101471821322
+        },
+        {
+          "source": 4,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              176.26799941062927,
+              176.71520113945007
+            ],
+            "max_of_two_physical_medians_us": 176.71520113945007
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              83.90879929065704,
+              83.95919799804688
+            ],
+            "max_of_two_physical_medians_us": 83.95919799804688
+          },
+          "reduction_pct": 52.4889780524355
+        },
+        {
+          "source": 5,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              174.19440150260925,
+              174.55119490623474
+            ],
+            "max_of_two_physical_medians_us": 174.55119490623474
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              83.50320160388947,
+              83.55759978294373
+            ],
+            "max_of_two_physical_medians_us": 83.55759978294373
+          },
+          "reduction_pct": 52.130032780452105
+        },
+        {
+          "source": 6,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              177.047997713089,
+              177.20080018043515
+            ],
+            "max_of_two_physical_medians_us": 177.20080018043515
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              83.61199796199799,
+              83.73919725418091
+            ],
+            "max_of_two_physical_medians_us": 83.73919725418091
+          },
+          "reduction_pct": 52.74333007022922
+        },
+        {
+          "source": 7,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              174.66319799423218,
+              174.54240322113034
+            ],
+            "max_of_two_physical_medians_us": 174.66319799423218
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              85.00640094280243,
+              85.11359989643097
+            ],
+            "max_of_two_physical_medians_us": 85.11359989643097
+          },
+          "reduction_pct": 51.26987203151883
+        }
+      ]
+    },
+    {
+      "layer": 7,
+      "global_residency_per_physical_median_us": [
+        854.5992374420166,
+        862.5775814056396
+      ],
+      "global_residency_max_physical_median_us": 862.5775814056396,
+      "old_sort_max_source_and_physical_median_us": 178.50720286369327,
+      "prefix_max_source_and_physical_median_us": 85.95040142536165,
+      "prefix_reduction_pct": 51.85045754652673,
+      "sources": [
+        {
+          "source": 0,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              173.86080026626587,
+              171.72399759292603
+            ],
+            "max_of_two_physical_medians_us": 173.86080026626587
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              82.38959908485413,
+              81.82159960269928
+            ],
+            "max_of_two_physical_medians_us": 82.38959908485413
+          },
+          "reduction_pct": 52.61174516700983
+        },
+        {
+          "source": 1,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              177.19839811325073,
+              177.13119983673099
+            ],
+            "max_of_two_physical_medians_us": 177.19839811325073
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              83.54640007019043,
+              83.12479853630066
+            ],
+            "max_of_two_physical_medians_us": 83.54640007019043
+          },
+          "reduction_pct": 52.85149247410554
+        },
+        {
+          "source": 2,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              178.50160002708435,
+              178.50720286369327
+            ],
+            "max_of_two_physical_medians_us": 178.50720286369327
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              84.96559858322144,
+              85.08799970149994
+            ],
+            "max_of_two_physical_medians_us": 85.08799970149994
+          },
+          "reduction_pct": 52.333576272284944
+        },
+        {
+          "source": 3,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              175.627201795578,
+              175.44320225715637
+            ],
+            "max_of_two_physical_medians_us": 175.627201795578
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              85.95040142536165,
+              85.94079911708832
+            ],
+            "max_of_two_physical_medians_us": 85.95040142536165
+          },
+          "reduction_pct": 51.060883196554045
+        },
+        {
+          "source": 4,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              175.72240233421326,
+              176.59359574317932
+            ],
+            "max_of_two_physical_medians_us": 176.59359574317932
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              83.9104026556015,
+              84.01679992675781
+            ],
+            "max_of_two_physical_medians_us": 84.01679992675781
+          },
+          "reduction_pct": 52.42364278660268
+        },
+        {
+          "source": 5,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              177.5879979133606,
+              177.6863992214203
+            ],
+            "max_of_two_physical_medians_us": 177.6863992214203
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              84.94240045547485,
+              84.89680290222168
+            ],
+            "max_of_two_physical_medians_us": 84.94240045547485
+          },
+          "reduction_pct": 52.195327932991866
+        },
+        {
+          "source": 6,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              175.56560039520264,
+              176.26320123672485
+            ],
+            "max_of_two_physical_medians_us": 176.26320123672485
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              85.72239875793457,
+              85.79600155353546
+            ],
+            "max_of_two_physical_medians_us": 85.79600155353546
+          },
+          "reduction_pct": 51.32506334188849
+        },
+        {
+          "source": 7,
+          "sort_L4_conditional": {
+            "per_physical_median_us": [
+              173.25279712677002,
+              173.9072024822235
+            ],
+            "max_of_two_physical_medians_us": 173.9072024822235
+          },
+          "prefix_L4_conditional": {
+            "per_physical_median_us": [
+              83.08559954166411,
+              83.09760093688965
+            ],
+            "max_of_two_physical_medians_us": 83.09760093688965
+          },
+          "reduction_pct": 52.217274643709054
+        }
+      ]
+    }
+  ],
+  "eight_layer_mean": {
+    "global_residency_us": 887.8408849239349,
+    "old_sort_source_L4_us": 179.1630007326603,
+    "prefix_source_L4_us": 86.31399981677532,
+    "prefix_reduction_pct": 51.82375855293384,
+    "prefix_speedup": 2.075711948385916
+  },
+  "measured_scope": {
+    "global_residency": "完整R8驻留选择的GPU计算；所有来源数据已在同一GPU，含runtime样本索引读取，不含跨卡收集和发布",
+    "source_L4": "固定四轮global count表已可用条件下：本来源cache准备、seed恢复、四轮提议/桶计数、本GPU全局计数折叠及配额、提交。",
+    "old_sort": "已有R8 CUB排序交换实现；不是原生MoonEP planner",
+    "prefix": "R8缓存与稳定桶前缀交换端口"
+  },
+  "not_measured": [
+    "原生MoonEP八卡planner时间",
+    "真实八卡样本/计数集合通信及等待",
+    "expert plan跨卡发布",
+    "最终地址重建及发布",
+    "八卡端到端训练时间"
+  ],
+  "total_planner_time_measured": false,
+  "global_positive_benefit_guaranteed": false,
+  "raw_results": [
+    {
+      "path": "outputs/eight_rank_estimate/kernel_graph_attempt01_physical0.json",
+      "sha256": "ae84a9e7433edbb87b0b8428659a9a4f0ecd29725dcafa2bb38fa1199e561cb4"
+    },
+    {
+      "path": "outputs/eight_rank_estimate/kernel_graph_attempt01_physical1.json",
+      "sha256": "913fc7f71f319b84eaa75bdb45417f3ac304c39f14f91ef6a189612ecdd53d9d"
+    }
+  ]
+}

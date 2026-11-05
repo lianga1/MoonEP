@@ -1,0 +1,12 @@
+[
+  {
+    "source": "/Users/liangzuning/Documents/dev_env/EP/experiments/moe_placement/hotcore128k/residency.py",
+    "copy": "analysis/vendor/residency.py",
+    "sha256": "8df5df6de2448bcbf412a0f129a9e91f47c698baa8babdcc15b0f7529d1dd1bc"
+  },
+  {
+    "source": "/Users/liangzuning/Documents/dev_env/EP/experiments/moe_placement/hotcore128k/bucket_optimizer.py",
+    "copy": "analysis/vendor/bucket_optimizer.py",
+    "sha256": "4b75659305c7b045cad4e7920e7bd36205e34f13821b263e4310c27663b77dfa"
+  }
+]

@@ -1,0 +1,1051 @@
+{
+  "status": "complete",
+  "metadata": {
+    "training": true,
+    "microbatches_per_update": 1,
+    "weight_refresh_every_update": true,
+    "rank_count": 2,
+    "gpu": "NVIDIA H200",
+    "torch": "2.11.0+cu130",
+    "cuda": "13.0",
+    "nccl": [
+      2,
+      28,
+      9
+    ],
+    "hidden": 128,
+    "intermediate": 1024,
+    "experts": 352,
+    "extra_slots_per_rank": 8,
+    "topk": 8,
+    "replica_target": 0,
+    "replica_max": 7,
+    "enable_pdl": false,
+    "rounds": 1,
+    "weight_dtype": "BF16",
+    "gradient_dtype": "FP32",
+    "activation_dtype": "BF16",
+    "router_scalar_dtype": "FP32",
+    "expert_parameter_count": 393216,
+    "weight_bytes_per_expert": 786432,
+    "gradient_bytes_per_expert": 1572864,
+    "residency": "fused_warp",
+    "materializer": "reuse",
+    "num_sms": 32,
+    "prefetch_sms": 32,
+    "samples": 2,
+    "warmup": 1,
+    "timing_mode": "eager",
+    "source_mapping": "original source shards0..3->rank0 and4..7->rank1; all routes retained",
+    "scope": "M=1 planning + BF16 expert copies + forward x/y + backward dY/dX + FP32 replica-gradient reduction",
+    "excluded": "expert GEMM, actual gradient generation, activation retention, optimizer, data/model parallel collectives, graph/JIT/allocation/setup",
+    "synthetic_payloads": "unique per-token integer hidden/dY, known router scalars, projection/expert/rank-specific FP32 gradients",
+    "router_transport": "forward scalar weights and backward synthetic scalar gradients included; generation represented by a counted scalar-buffer copy",
+    "preparation": "local tpe and fixed random sample IDs provided; reset gradients and update source weights outside timing; invalidate copy slots before every full sample",
+    "safety": "single in-flight microbatch per buffer; saved forward plan/dedup retained through backward; gradient ready publish and reduction serialized with token communication",
+    "sources": {
+      "moonep_materialize_reuse.py": "5b15d1b889bd003e4a49e4fb25114c5e577fd93285d024449c3f2d0d1e560bae",
+      "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+      "moonep_materialize.cu": "94a46ff9ba6cc46ebbfec4502847d7138670bda9fe5a9ab92bac0ddac6a92d1a",
+      "deepep_v1_smoke.py": "bfb7c304b997c24812b01f5576f8124b835054d5e78c6308c6a45794f357e09e",
+      "moonep_common.py": "e6987ae8e34d938575808421ff003d6ec2180cc7dc1370d9df9c8b8f8d332b6c",
+      "deepep_adapter.py": "90ce02cbd9ecae7723d6b407c7db21f394af88af1e37821125fb1d55234bb0e4",
+      "residency_reference_check.py": "0d43d46493dee5cdbd454702fd2ff987215e479e332c1bf2e10e94202b8a0da5",
+      "._deepep_v1_smoke.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+      "training_grad.py": "c3321f5f2e1c731340a197f6c86376e1cdffc6aa8c44308bec4ecc25868aa77a",
+      "timeline_overlap_graph.py": "3aa7deaceaa8193ee1b6ad44b968bea8acf87f6b4d803d7cb2751f26c078bdb1",
+      "prepare_inputs.py": "1acc76d6b0f49eea8a607fd9ec9e1be1ab01d4b727810ef56738501b019050a6",
+      "moonep_materialize.py": "86b3b4b22cbb27260533ba51a6da40c22922ade93880ad7269a9842d720bfa94",
+      "two_gpu_smoke.py": "0decb839b2d48980b396dc37ea5d493f47492223071565dadf1f224320ef94b4",
+      "benchmark.py": "ba960cdf3b1439ec0c6260453cdf049fb3e2993b727b0700637d8c91386e73aa",
+      "benchmark_training.py": "713c2d95f906f254554dbedb895efd31b7ff1e86eb9a6f6b3ad77217565c00a7",
+      "residency_cuda_fused.cu": "a69fe9c215e8fe5623ffb69d40d2921c9cd969182e8313916137690e2dd17bad",
+      "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956",
+      "moonep_materialize_reference.py": "cb2edff4d47e8bc08bb2af415086f0d3945e20f5c3aa1d2f91de4dd2b0263568",
+      "deepep_v1_adapter.py": "a2d3b8af003c8de4c0c27b3bc15d323803870d208f8dd2de1bb4dbc8160b4315",
+      "residency_cuda_optimized.py": "eab0814a22a21198c22c22d6830c39112dba9782508bbb142f1d021c357899d4",
+      "analyze_results.py": "19befe9f8725169b699791e3ea1fbec4c1f66a8c35f335141d2b51e5e61a2e4f",
+      "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d",
+      "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+      "._deepep_trace_smoke.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+      "profile_residency.py": "b43987e8a056e917ee5dd094e0ce9cc9f686ff0a0c355bee41bb58771d96b9d7",
+      "residency_cuda_optimized.cu": "eb0d30bd8e7b3ff3e8950c1eaadf6757009b91b80946628270ae8ca9b10a4242",
+      "._deepep_v1_adapter.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+      "residency_smoke.py": "f86f9ef028dd0b30a2c8f2b321840e8cbfdfb7e0c82292c958f024546999a808",
+      "deepep_smoke.py": "e437ce9267fa0a05b93feb0986762df3594f4ad189fc88a81aa41f32e52a17d8",
+      "residency_cuda_fused.py": "da23ccabc52115a972757d4ea3dbdb5745771ee62a4a332145ca8b8f3220cada",
+      "moonep_materialize_reuse.cu": "269cb85f0312818cd46a26a6b94fccc5897e9fa9e278b038a13a30f5e2e9d1a8",
+      "moonep_split.py": "171935a9f72dc1cc16fdcb37030fa4e1208e7329e656b81efb3fc38de719deff",
+      "preplanning_gate.py": "f1d354b67810d834fddd262f4d2a29107213961800982cd1f212cee75b0349c9",
+      "benchmark_residency_variants.py": "fa301046d51c67e09a658fe40baf8bf38e61448abb61461a6dd2594191905be2",
+      "deepep_trace_smoke.py": "9b00099aa7a27d795bcb6e85c0e2d13c27fae2d0b262a665842f9e14f80eb900",
+      "exchange_reference_check.py": "10d4f08410a93b9ed1f4a2a38a1173325d78207d371da1226920936d72383dfb",
+      "moonep_reuse_reference_check.py": "aadcd1099ac40b1319cf7936df463248c899987be1f83ae89491f15159eb98d4",
+      "timeline_overlap.py": "cb35008555881ee672a20f5f7f555c0f59919f6bfc248e257efa1eb6c1caee0d"
+    }
+  },
+  "layers": [
+    {
+      "layer": 0,
+      "shape": [
+        2,
+        67072,
+        8
+      ],
+      "input_sha256": "9070d5d269147c08f991f023f2e424c031d3649b3f3517e2e7c896f344e9de8b",
+      "communication": {
+        "remote_before_by_rank": [
+          66842,
+          66844
+        ],
+        "remote_after_by_rank": [
+          66617,
+          66642
+        ],
+        "native_copies": [
+          0,
+          1
+        ],
+        "optimized_copies": [
+          7,
+          8
+        ],
+        "activation_bytes_saved_per_microbatch": 437248,
+        "incremental_weight_bytes_per_update": 11010048,
+        "incremental_gradient_bytes_per_update": 22020096
+      },
+      "correctness": {
+        "native_cpu": true,
+        "sampled_support_cpu": true,
+        "balanced": true,
+        "residency_legal": true
+      },
+      "measurements": {
+        "native_planner": [
+          {
+            "sample": 0,
+            "per_rank": [
+              {
+                "cuda_ms": 0.350271999835968,
+                "host_ms": 0.3635809989646077
+              },
+              {
+                "cuda_ms": 0.3575359880924225,
+                "host_ms": 0.3713569603860378
+              }
+            ],
+            "max_cuda_ms": 0.3575359880924225,
+            "max_host_ms": 0.3713569603860378,
+            "weight_version": null,
+            "per_rank_audits": [
+              {},
+              {}
+            ]
+          },
+          {
+            "sample": 1,
+            "per_rank": [
+              {
+                "cuda_ms": 0.39232000708580017,
+                "host_ms": 0.40365103632211685
+              },
+              {
+                "cuda_ms": 0.3944000005722046,
+                "host_ms": 0.4056390607729554
+              }
+            ],
+            "max_cuda_ms": 0.3944000005722046,
+            "max_host_ms": 0.4056390607729554,
+            "weight_version": null,
+            "per_rank_audits": [
+              {},
+              {}
+            ]
+          }
+        ],
+        "optimized_planner": [
+          {
+            "sample": 0,
+            "per_rank": [
+              {
+                "cuda_ms": 0.6023679971694946,
+                "host_ms": 0.6155789596959949
+              },
+              {
+                "cuda_ms": 0.6161919832229614,
+                "host_ms": 0.6288730073720217
+              }
+            ],
+            "max_cuda_ms": 0.6161919832229614,
+            "max_host_ms": 0.6288730073720217,
+            "weight_version": null,
+            "per_rank_audits": [
+              {},
+              {}
+            ]
+          },
+          {
+            "sample": 1,
+            "per_rank": [
+              {
+                "cuda_ms": 0.6441599726676941,
+                "host_ms": 0.6558879977092147
+              },
+              {
+                "cuda_ms": 0.6420159935951233,
+                "host_ms": 0.6535769207403064
+              }
+            ],
+            "max_cuda_ms": 0.6441599726676941,
+            "max_host_ms": 0.6558879977092147,
+            "weight_version": null,
+            "per_rank_audits": [
+              {},
+              {}
+            ]
+          }
+        ],
+        "native_grad_reduce": [
+          {
+            "sample": 0,
+            "per_rank": [
+              {
+                "cuda_ms": 0.27452799677848816,
+                "host_ms": 0.2859350061044097
+              },
+              {
+                "cuda_ms": 0.29129600524902344,
+                "host_ms": 0.30300801154226065
+              }
+            ],
+            "max_cuda_ms": 0.29129600524902344,
+            "max_host_ms": 0.30300801154226065,
+            "weight_version": null,
+            "per_rank_audits": [
+              {
+                "gradients": {
+                  "rank": 0,
+                  "layout": "fused",
+                  "dtype": "float32",
+                  "epoch": 8,
+                  "full_home_and_slot_check": true,
+                  "inactive_preserved": true,
+                  "active_slots_cleared": true,
+                  "bytes_per_expert": 1572864,
+                  "active_home": 1,
+                  "inactive_home": 175,
+                  "active_slots": 0,
+                  "inactive_slots": 8
+                }
+              },
+              {
+                "gradients": {
+                  "rank": 1,
+                  "layout": "fused",
+                  "dtype": "float32",
+                  "epoch": 8,
+                  "full_home_and_slot_check": true,
+                  "inactive_preserved": true,
+                  "active_slots_cleared": true,
+                  "bytes_per_expert": 1572864,
+                  "active_home": 0,
+                  "inactive_home": 176,
+                  "active_slots": 1,
+                  "inactive_slots": 7
+                }
+              }
+            ]
+          },
+          {
+            "sample": 1,
+            "per_rank": [
+              {
+                "cuda_ms": 0.27878400683403015,
+                "host_ms": 0.29006192926317453
+              },
+              {
+                "cuda_ms": 0.27535998821258545,
+                "host_ms": 0.2867570146918297
+              }
+            ],
+            "max_cuda_ms": 0.27878400683403015,
+            "max_host_ms": 0.29006192926317453,
+            "weight_version": null,
+            "per_rank_audits": [
+              {
+                "gradients": {
+                  "rank": 0,
+                  "layout": "fused",
+                  "dtype": "float32",
+                  "epoch": 14,
+                  "full_home_and_slot_check": true,
+                  "inactive_preserved": true,
+                  "active_slots_cleared": true,
+                  "bytes_per_expert": 1572864,
+                  "active_home": 1,
+                  "inactive_home": 175,
+                  "active_slots": 0,
+                  "inactive_slots": 8
+                }
+              },
+              {
+                "gradients": {
+                  "rank": 1,
+                  "layout": "fused",
+                  "dtype": "float32",
+                  "epoch": 14,
+                  "full_home_and_slot_check": true,
+                  "inactive_preserved": true,
+                  "active_slots_cleared": true,
+                  "bytes_per_expert": 1572864,
+                  "active_home": 0,
+                  "inactive_home": 176,
+                  "active_slots": 1,
+                  "inactive_slots": 7
+                }
+              }
+            ]
+          }
+        ],
+        "optimized_grad_reduce": [
+          {
+            "sample": 0,
+            "per_rank": [
+              {
+                "cuda_ms": 0.28569599986076355,
+                "host_ms": 0.2971639623865485
+              },
+              {
+                "cuda_ms": 0.28460800647735596,
+                "host_ms": 0.29579398687928915
+              }
+            ],
+            "max_cuda_ms": 0.28569599986076355,
+            "max_host_ms": 0.2971639623865485,
+            "weight_version": null,
+            "per_rank_audits": [
+              {
+                "gradients": {
+                  "rank": 0,
+                  "layout": "fused",
+                  "dtype": "float32",
+                  "epoch": 9,
+                  "full_home_and_slot_check": true,
+                  "inactive_preserved": true,
+                  "active_slots_cleared": true,
+                  "bytes_per_expert": 1572864,
+                  "active_home": 8,
+                  "inactive_home": 168,
+                  "active_slots": 7,
+                  "inactive_slots": 1
+                }
+              },
+              {
+                "gradients": {
+                  "rank": 1,
+                  "layout": "fused",
+                  "dtype": "float32",
+                  "epoch": 9,
+                  "full_home_and_slot_check": true,
+                  "inactive_preserved": true,
+                  "active_slots_cleared": true,
+                  "bytes_per_expert": 1572864,
+                  "active_home": 7,
+                  "inactive_home": 169,
+                  "active_slots": 8,
+                  "inactive_slots": 0
+                }
+              }
+            ]
+          },
+          {
+            "sample": 1,
+            "per_rank": [
+              {
+                "cuda_ms": 0.28748801350593567,
+                "host_ms": 0.29908306896686554
+              },
+              {
+                "cuda_ms": 0.29046401381492615,
+                "host_ms": 0.30188506934791803
+              }
+            ],
+            "max_cuda_ms": 0.29046401381492615,
+            "max_host_ms": 0.30188506934791803,
+            "weight_version": null,
+            "per_rank_audits": [
+              {
+                "gradients": {
+                  "rank": 0,
+                  "layout": "fused",
+                  "dtype": "float32",
+                  "epoch": 15,
+                  "full_home_and_slot_check": true,
+                  "inactive_preserved": true,
+                  "active_slots_cleared": true,
+                  "bytes_per_expert": 1572864,
+                  "active_home": 8,
+                  "inactive_home": 168,
+                  "active_slots": 7,
+                  "inactive_slots": 1
+                }
+              },
+              {
+                "gradients": {
+                  "rank": 1,
+                  "layout": "fused",
+                  "dtype": "float32",
+                  "epoch": 15,
+                  "full_home_and_slot_check": true,
+                  "inactive_preserved": true,
+                  "active_slots_cleared": true,
+                  "bytes_per_expert": 1572864,
+                  "active_home": 7,
+                  "inactive_home": 169,
+                  "active_slots": 8,
+                  "inactive_slots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "native_training_serial": [
+          {
+            "sample": 0,
+            "per_rank": [
+              {
+                "cuda_ms": 12.144415855407715,
+                "host_ms": 12.156155076809227
+              },
+              {
+                "cuda_ms": 12.154272079467773,
+                "host_ms": 12.16729893349111
+              }
+            ],
+            "max_cuda_ms": 12.154272079467773,
+            "max_host_ms": 12.16729893349111,
+            "weight_version": 7,
+            "per_rank_audits": [
+              {
+                "backward_hidden_exact": true,
+                "backward_router_exact": true,
+                "weights": {
+                  "version_id": 7,
+                  "pattern_phase": 0,
+                  "active_full_slots_checked": 0
+                },
+                "gradients": {
+                  "rank": 0,
+                  "layout": "fused",
+                  "dtype": "float32",
+                  "epoch": 10,
+                  "full_home_and_slot_check": true,
+                  "inactive_preserved": true,
+                  "active_slots_cleared": true,
+                  "bytes_per_expert": 1572864,
+                  "active_home": 1,
+                  "inactive_home": 175,
+                  "active_slots": 0,
+                  "inactive_slots": 8
+                }
+              },
+              {
+                "backward_hidden_exact": true,
+                "backward_router_exact": true,
+                "weights": {
+                  "version_id": 7,
+                  "pattern_phase": 0,
+                  "active_full_slots_checked": 1
+                },
+                "gradients": {
+                  "rank": 1,
+                  "layout": "fused",
+                  "dtype": "float32",
+                  "epoch": 10,
+                  "full_home_and_slot_check": true,
+                  "inactive_preserved": true,
+                  "active_slots_cleared": true,
+                  "bytes_per_expert": 1572864,
+                  "active_home": 0,
+                  "inactive_home": 176,
+                  "active_slots": 1,
+                  "inactive_slots": 7
+                }
+              }
+            ]
+          },
+          {
+            "sample": 1,
+            "per_rank": [
+              {
+                "cuda_ms": 11.899744033813477,
+                "host_ms": 11.912036105059087
+              },
+              {
+                "cuda_ms": 11.900416374206543,
+                "host_ms": 11.912529938854277
+              }
+            ],
+            "max_cuda_ms": 11.900416374206543,
+            "max_host_ms": 11.912529938854277,
+            "weight_version": 11,
+            "per_rank_audits": [
+              {
+                "backward_hidden_exact": true,
+                "backward_router_exact": true,
+                "weights": {
+                  "version_id": 11,
+                  "pattern_phase": 4,
+                  "active_full_slots_checked": 0
+                },
+                "gradients": {
+                  "rank": 0,
+                  "layout": "fused",
+                  "dtype": "float32",
+                  "epoch": 16,
+                  "full_home_and_slot_check": true,
+                  "inactive_preserved": true,
+                  "active_slots_cleared": true,
+                  "bytes_per_expert": 1572864,
+                  "active_home": 1,
+                  "inactive_home": 175,
+                  "active_slots": 0,
+                  "inactive_slots": 8
+                }
+              },
+              {
+                "backward_hidden_exact": true,
+                "backward_router_exact": true,
+                "weights": {
+                  "version_id": 11,
+                  "pattern_phase": 4,
+                  "active_full_slots_checked": 1
+                },
+                "gradients": {
+                  "rank": 1,
+                  "layout": "fused",
+                  "dtype": "float32",
+                  "epoch": 16,
+                  "full_home_and_slot_check": true,
+                  "inactive_preserved": true,
+                  "active_slots_cleared": true,
+                  "bytes_per_expert": 1572864,
+                  "active_home": 0,
+                  "inactive_home": 176,
+                  "active_slots": 1,
+                  "inactive_slots": 7
+                }
+              }
+            ]
+          }
+        ],
+        "native_training_early": [
+          {
+            "sample": 0,
+            "per_rank": [
+              {
+                "cuda_ms": 12.011615753173828,
+                "host_ms": 12.02431705314666
+              },
+              {
+                "cuda_ms": 12.01200008392334,
+                "host_ms": 12.024099007248878
+              }
+            ],
+            "max_cuda_ms": 12.01200008392334,
+            "max_host_ms": 12.02431705314666,
+            "weight_version": 8,
+            "per_rank_audits": [
+              {
+                "backward_hidden_exact": true,
+                "backward_router_exact": true,
+                "weights": {
+                  "version_id": 8,
+                  "pattern_phase": 1,
+                  "active_full_slots_checked": 0
+                },
+                "gradients": {
+                  "rank": 0,
+                  "layout": "fused",
+                  "dtype": "float32",
+                  "epoch": 11,
+                  "full_home_and_slot_check": true,
+                  "inactive_preserved": true,
+                  "active_slots_cleared": true,
+                  "bytes_per_expert": 1572864,
+                  "active_home": 1,
+                  "inactive_home": 175,
+                  "active_slots": 0,
+                  "inactive_slots": 8
+                }
+              },
+              {
+                "backward_hidden_exact": true,
+                "backward_router_exact": true,
+                "weights": {
+                  "version_id": 8,
+                  "pattern_phase": 1,
+                  "active_full_slots_checked": 1
+                },
+                "gradients": {
+                  "rank": 1,
+                  "layout": "fused",
+                  "dtype": "float32",
+                  "epoch": 11,
+                  "full_home_and_slot_check": true,
+                  "inactive_preserved": true,
+                  "active_slots_cleared": true,
+                  "bytes_per_expert": 1572864,
+                  "active_home": 0,
+                  "inactive_home": 176,
+                  "active_slots": 1,
+                  "inactive_slots": 7
+                }
+              }
+            ]
+          },
+          {
+            "sample": 1,
+            "per_rank": [
+              {
+                "cuda_ms": 12.017279624938965,
+                "host_ms": 12.029568897560239
+              },
+              {
+                "cuda_ms": 12.017215728759766,
+                "host_ms": 12.029730016365647
+              }
+            ],
+            "max_cuda_ms": 12.017279624938965,
+            "max_host_ms": 12.029730016365647,
+            "weight_version": 12,
+            "per_rank_audits": [
+              {
+                "backward_hidden_exact": true,
+                "backward_router_exact": true,
+                "weights": {
+                  "version_id": 12,
+                  "pattern_phase": 5,
+                  "active_full_slots_checked": 0
+                },
+                "gradients": {
+                  "rank": 0,
+                  "layout": "fused",
+                  "dtype": "float32",
+                  "epoch": 17,
+                  "full_home_and_slot_check": true,
+                  "inactive_preserved": true,
+                  "active_slots_cleared": true,
+                  "bytes_per_expert": 1572864,
+                  "active_home": 1,
+                  "inactive_home": 175,
+                  "active_slots": 0,
+                  "inactive_slots": 8
+                }
+              },
+              {
+                "backward_hidden_exact": true,
+                "backward_router_exact": true,
+                "weights": {
+                  "version_id": 12,
+                  "pattern_phase": 5,
+                  "active_full_slots_checked": 1
+                },
+                "gradients": {
+                  "rank": 1,
+                  "layout": "fused",
+                  "dtype": "float32",
+                  "epoch": 17,
+                  "full_home_and_slot_check": true,
+                  "inactive_preserved": true,
+                  "active_slots_cleared": true,
+                  "bytes_per_expert": 1572864,
+                  "active_home": 0,
+                  "inactive_home": 176,
+                  "active_slots": 1,
+                  "inactive_slots": 7
+                }
+              }
+            ]
+          }
+        ],
+        "optimized_training_serial": [
+          {
+            "sample": 0,
+            "per_rank": [
+              {
+                "cuda_ms": 12.42950439453125,
+                "host_ms": 12.443708954378963
+              },
+              {
+                "cuda_ms": 12.430047988891602,
+                "host_ms": 12.443735962733626
+              }
+            ],
+            "max_cuda_ms": 12.430047988891602,
+            "max_host_ms": 12.443735962733626,
+            "weight_version": 9,
+            "per_rank_audits": [
+              {
+                "backward_hidden_exact": true,
+                "backward_router_exact": true,
+                "weights": {
+                  "version_id": 9,
+                  "pattern_phase": 2,
+                  "active_full_slots_checked": 7
+                },
+                "gradients": {
+                  "rank": 0,
+                  "layout": "fused",
+                  "dtype": "float32",
+                  "epoch": 12,
+                  "full_home_and_slot_check": true,
+                  "inactive_preserved": true,
+                  "active_slots_cleared": true,
+                  "bytes_per_expert": 1572864,
+                  "active_home": 8,
+                  "inactive_home": 168,
+                  "active_slots": 7,
+                  "inactive_slots": 1
+                }
+              },
+              {
+                "backward_hidden_exact": true,
+                "backward_router_exact": true,
+                "weights": {
+                  "version_id": 9,
+                  "pattern_phase": 2,
+                  "active_full_slots_checked": 8
+                },
+                "gradients": {
+                  "rank": 1,
+                  "layout": "fused",
+                  "dtype": "float32",
+                  "epoch": 12,
+                  "full_home_and_slot_check": true,
+                  "inactive_preserved": true,
+                  "active_slots_cleared": true,
+                  "bytes_per_expert": 1572864,
+                  "active_home": 7,
+                  "inactive_home": 169,
+                  "active_slots": 8,
+                  "inactive_slots": 0
+                }
+              }
+            ]
+          },
+          {
+            "sample": 1,
+            "per_rank": [
+              {
+                "cuda_ms": 12.375167846679688,
+                "host_ms": 12.388763017952442
+              },
+              {
+                "cuda_ms": 12.374112129211426,
+                "host_ms": 12.38816895056516
+              }
+            ],
+            "max_cuda_ms": 12.375167846679688,
+            "max_host_ms": 12.388763017952442,
+            "weight_version": 13,
+            "per_rank_audits": [
+              {
+                "backward_hidden_exact": true,
+                "backward_router_exact": true,
+                "weights": {
+                  "version_id": 13,
+                  "pattern_phase": 6,
+                  "active_full_slots_checked": 7
+                },
+                "gradients": {
+                  "rank": 0,
+                  "layout": "fused",
+                  "dtype": "float32",
+                  "epoch": 18,
+                  "full_home_and_slot_check": true,
+                  "inactive_preserved": true,
+                  "active_slots_cleared": true,
+                  "bytes_per_expert": 1572864,
+                  "active_home": 8,
+                  "inactive_home": 168,
+                  "active_slots": 7,
+                  "inactive_slots": 1
+                }
+              },
+              {
+                "backward_hidden_exact": true,
+                "backward_router_exact": true,
+                "weights": {
+                  "version_id": 13,
+                  "pattern_phase": 6,
+                  "active_full_slots_checked": 8
+                },
+                "gradients": {
+                  "rank": 1,
+                  "layout": "fused",
+                  "dtype": "float32",
+                  "epoch": 18,
+                  "full_home_and_slot_check": true,
+                  "inactive_preserved": true,
+                  "active_slots_cleared": true,
+                  "bytes_per_expert": 1572864,
+                  "active_home": 7,
+                  "inactive_home": 169,
+                  "active_slots": 8,
+                  "inactive_slots": 0
+                }
+              }
+            ]
+          }
+        ],
+        "optimized_training_early": [
+          {
+            "sample": 0,
+            "per_rank": [
+              {
+                "cuda_ms": 12.488032341003418,
+                "host_ms": 12.501136981882155
+              },
+              {
+                "cuda_ms": 12.488096237182617,
+                "host_ms": 12.500858982093632
+              }
+            ],
+            "max_cuda_ms": 12.488096237182617,
+            "max_host_ms": 12.501136981882155,
+            "weight_version": 10,
+            "per_rank_audits": [
+              {
+                "backward_hidden_exact": true,
+                "backward_router_exact": true,
+                "weights": {
+                  "version_id": 10,
+                  "pattern_phase": 3,
+                  "active_full_slots_checked": 7
+                },
+                "gradients": {
+                  "rank": 0,
+                  "layout": "fused",
+                  "dtype": "float32",
+                  "epoch": 13,
+                  "full_home_and_slot_check": true,
+                  "inactive_preserved": true,
+                  "active_slots_cleared": true,
+                  "bytes_per_expert": 1572864,
+                  "active_home": 8,
+                  "inactive_home": 168,
+                  "active_slots": 7,
+                  "inactive_slots": 1
+                }
+              },
+              {
+                "backward_hidden_exact": true,
+                "backward_router_exact": true,
+                "weights": {
+                  "version_id": 10,
+                  "pattern_phase": 3,
+                  "active_full_slots_checked": 8
+                },
+                "gradients": {
+                  "rank": 1,
+                  "layout": "fused",
+                  "dtype": "float32",
+                  "epoch": 13,
+                  "full_home_and_slot_check": true,
+                  "inactive_preserved": true,
+                  "active_slots_cleared": true,
+                  "bytes_per_expert": 1572864,
+                  "active_home": 7,
+                  "inactive_home": 169,
+                  "active_slots": 8,
+                  "inactive_slots": 0
+                }
+              }
+            ]
+          },
+          {
+            "sample": 1,
+            "per_rank": [
+              {
+                "cuda_ms": 12.486175537109375,
+                "host_ms": 12.49941298738122
+              },
+              {
+                "cuda_ms": 12.486495971679688,
+                "host_ms": 12.49967492185533
+              }
+            ],
+            "max_cuda_ms": 12.486495971679688,
+            "max_host_ms": 12.49967492185533,
+            "weight_version": 14,
+            "per_rank_audits": [
+              {
+                "backward_hidden_exact": true,
+                "backward_router_exact": true,
+                "weights": {
+                  "version_id": 14,
+                  "pattern_phase": 0,
+                  "active_full_slots_checked": 7
+                },
+                "gradients": {
+                  "rank": 0,
+                  "layout": "fused",
+                  "dtype": "float32",
+                  "epoch": 19,
+                  "full_home_and_slot_check": true,
+                  "inactive_preserved": true,
+                  "active_slots_cleared": true,
+                  "bytes_per_expert": 1572864,
+                  "active_home": 8,
+                  "inactive_home": 168,
+                  "active_slots": 7,
+                  "inactive_slots": 1
+                }
+              },
+              {
+                "backward_hidden_exact": true,
+                "backward_router_exact": true,
+                "weights": {
+                  "version_id": 14,
+                  "pattern_phase": 0,
+                  "active_full_slots_checked": 8
+                },
+                "gradients": {
+                  "rank": 1,
+                  "layout": "fused",
+                  "dtype": "float32",
+                  "epoch": 19,
+                  "full_home_and_slot_check": true,
+                  "inactive_preserved": true,
+                  "active_slots_cleared": true,
+                  "bytes_per_expert": 1572864,
+                  "active_home": 7,
+                  "inactive_home": 169,
+                  "active_slots": 8,
+                  "inactive_slots": 0
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "audits": [
+        {
+          "stage": "eager_full",
+          "mode": "native_training_early",
+          "per_rank": [
+            {
+              "backward_hidden_exact": true,
+              "backward_router_exact": true,
+              "weights": {
+                "version_id": 1,
+                "pattern_phase": 1,
+                "active_full_slots_checked": 0
+              },
+              "gradients": {
+                "rank": 0,
+                "layout": "fused",
+                "dtype": "float32",
+                "epoch": 0,
+                "full_home_and_slot_check": true,
+                "inactive_preserved": true,
+                "active_slots_cleared": true,
+                "bytes_per_expert": 1572864,
+                "active_home": 1,
+                "inactive_home": 175,
+                "active_slots": 0,
+                "inactive_slots": 8
+              }
+            },
+            {
+              "backward_hidden_exact": true,
+              "backward_router_exact": true,
+              "weights": {
+                "version_id": 1,
+                "pattern_phase": 1,
+                "active_full_slots_checked": 1
+              },
+              "gradients": {
+                "rank": 1,
+                "layout": "fused",
+                "dtype": "float32",
+                "epoch": 0,
+                "full_home_and_slot_check": true,
+                "inactive_preserved": true,
+                "active_slots_cleared": true,
+                "bytes_per_expert": 1572864,
+                "active_home": 0,
+                "inactive_home": 176,
+                "active_slots": 1,
+                "inactive_slots": 7
+              }
+            }
+          ]
+        },
+        {
+          "stage": "eager_full",
+          "mode": "optimized_training_early",
+          "per_rank": [
+            {
+              "backward_hidden_exact": true,
+              "backward_router_exact": true,
+              "weights": {
+                "version_id": 2,
+                "pattern_phase": 2,
+                "active_full_slots_checked": 7
+              },
+              "gradients": {
+                "rank": 0,
+                "layout": "fused",
+                "dtype": "float32",
+                "epoch": 1,
+                "full_home_and_slot_check": true,
+                "inactive_preserved": true,
+                "active_slots_cleared": true,
+                "bytes_per_expert": 1572864,
+                "active_home": 8,
+                "inactive_home": 168,
+                "active_slots": 7,
+                "inactive_slots": 1
+              }
+            },
+            {
+              "backward_hidden_exact": true,
+              "backward_router_exact": true,
+              "weights": {
+                "version_id": 2,
+                "pattern_phase": 2,
+                "active_full_slots_checked": 8
+              },
+              "gradients": {
+                "rank": 1,
+                "layout": "fused",
+                "dtype": "float32",
+                "epoch": 1,
+                "full_home_and_slot_check": true,
+                "inactive_preserved": true,
+                "active_slots_cleared": true,
+                "bytes_per_expert": 1572864,
+                "active_home": 7,
+                "inactive_home": 169,
+                "active_slots": 8,
+                "inactive_slots": 0
+              }
+            }
+          ]
+        }
+      ],
+      "rounds": [
+        [
+          225,
+          576,
+          450,
+          427
+        ]
+      ],
+      "post_timing_checked": true
+    }
+  ],
+  "failures": []
+}

@@ -1,0 +1,102 @@
+workflow:
+  rules:
+    - if: '$CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+([.-].*)?$/'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS && $CI_PIPELINE_SOURCE == "push"'
+      when: never
+    - if: '$CI_COMMIT_BRANCH'
+    - when: never
+
+stages:
+  - bdist
+  - publish
+
+variables:
+  MOONEP_CI_IMAGE: "hub.i.basemind.com/juyunzhou/nvidia/cuda:12.8.0-devel-ubuntu22.04-with-torch280-py310"
+  MOONEP_CONTAINER_VENV: "/venv-3.10/bin/activate"
+  MOONEP_PIP_INDEX_URL: "http://mirrors.i.basemind.com/pypi/simple/"
+  MOONEP_PIP_EXTRA_INDEX_URL: "http://pypi.i.basemind.com/brain/dev/+simple"
+  MOONEP_PIP_TRUSTED_HOSTS: "mirrors.i.basemind.com pypi.i.basemind.com"
+  MOONEP_PY_PREFIX: "/tmp/moonep-python-deps"
+  MOONEP_CUTLASS_DSL_PACKAGE: "nvidia-cutlass-dsl==4.4.2"
+  MOONEP_DEVPI_SERVER: "http://pypi.i.basemind.com/brain/dev/"
+  MOONEP_DEVPI_INDEX: "brain/dev"
+  CUDA_HOME: "/usr/local/cuda-12.8"
+  TORCH_CUDA_ARCH_LIST: "9.0"
+  PIP_DISABLE_PIP_VERSION_CHECK: "1"
+
+.wheel-build:
+  stage: bdist
+  image:
+    name: "${MOONEP_CI_IMAGE}"
+    entrypoint: [""]
+  resource_group: moonep-h20-wheel-build
+  interruptible: true
+  before_script:
+    - chmod +x ci/build_wheel.sh
+  script:
+    - ci/build_wheel.sh
+  artifacts:
+    name: "${CI_JOB_NAME}-${CI_COMMIT_SHORT_SHA}"
+    paths:
+      - dist/*.whl
+    expire_in: 1 week
+
+wheel-h20-torch280-cuda128-py310:
+  extends: .wheel-build
+  rules:
+    - if: '$CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+([.-].*)?$/'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH'
+      when: manual
+      allow_failure: true
+    - when: never
+
+dev-wheel-h20-torch280-cuda128-py310:
+  extends: .wheel-build
+  variables:
+    MOONEP_DEV_RELEASE: "${CI_PIPELINE_IID}"
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+      when: manual
+    - when: never
+
+.devpi-upload:
+  stage: publish
+  image:
+    name: "${MOONEP_CI_IMAGE}"
+    entrypoint: [""]
+  resource_group: moonep-devpi-publish
+  interruptible: false
+  before_script:
+    - '. "${MOONEP_CONTAINER_VENV}"'
+    - >
+      python3 -m pip install --no-cache-dir
+      -i "${MOONEP_PIP_INDEX_URL}"
+      --extra-index-url "${MOONEP_PIP_EXTRA_INDEX_URL}"
+      --trusted-host mirrors.i.basemind.com
+      --trusted-host pypi.i.basemind.com
+      devpi-client
+    - chmod +x ci/upload.sh
+  script:
+    - ci/upload.sh
+
+upload-devpi:
+  extends: .devpi-upload
+  needs:
+    - job: wheel-h20-torch280-cuda128-py310
+      artifacts: true
+  rules:
+    - if: '$CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+([.-].*)?$/'
+      when: manual
+    - when: never
+
+dev-upload-devpi:
+  extends: .devpi-upload
+  needs:
+    - job: dev-wheel-h20-torch280-cuda128-py310
+      artifacts: true
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+      when: manual
+    - when: never

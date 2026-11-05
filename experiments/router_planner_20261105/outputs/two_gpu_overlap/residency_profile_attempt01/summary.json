@@ -1,0 +1,2622 @@
+{
+  "status": "complete",
+  "metadata": {
+    "created_at": "2026-11-05T04:43:38.786572+00:00",
+    "torch": "2.11.0+cu130",
+    "cuda": "13.0",
+    "nccl": [
+      2,
+      28,
+      9
+    ],
+    "devices": [
+      {
+        "rank": 0,
+        "gpu": "NVIDIA H200",
+        "uuid": "b0dbb5c8-c2e2-f770-1cb6-cc1e680c7958",
+        "capability": [
+          9,
+          0
+        ]
+      },
+      {
+        "rank": 1,
+        "gpu": "NVIDIA H200",
+        "uuid": "e6f50625-4c8c-5404-19d3-af75854f63fd",
+        "capability": [
+          9,
+          0
+        ]
+      }
+    ],
+    "args": {
+      "input_dir": "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/outputs/two_gpu_overlap/inputs",
+      "layers": [
+        0,
+        7
+      ],
+      "output": "outputs/two_gpu_overlap/residency_profile_attempt01",
+      "warmup": 5,
+      "samples": 10,
+      "timing_repeats": 10,
+      "profile_repeats": 3,
+      "profile_modes": [
+        "eager",
+        "graph"
+      ]
+    },
+    "scope": "residency only; native owner decode is excluded",
+    "timing_protocol": "unprofiled Graph component samples; max rank CUDA event time per sample; separate diagnostic cohort",
+    "profiler_protocol": "CPU+CUDA eager mapping and warmed Graph traces; both physical ranks retained",
+    "sources": {
+      "profile_residency.py": "b43987e8a056e917ee5dd094e0ce9cc9f686ff0a0c355bee41bb58771d96b9d7",
+      "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+      "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956"
+    }
+  },
+  "layers": [
+    {
+      "layer": 0,
+      "shape": [
+        2,
+        67072,
+        8
+      ],
+      "sample_count": 256,
+      "input_sha256": "9070d5d269147c08f991f023f2e424c031d3649b3f3517e2e7c896f344e9de8b",
+      "graph_timings": {
+        "select_only": [
+          {
+            "sample": 0,
+            "per_rank": [
+              {
+                "cuda_ms": 0.13411200046539307,
+                "host_ms": 0.13541230000555515
+              },
+              {
+                "cuda_ms": 0.1345919966697693,
+                "host_ms": 0.13585350243374705
+              }
+            ],
+            "max_cuda_ms": 0.1345919966697693,
+            "max_host_ms": 0.13585350243374705
+          },
+          {
+            "sample": 1,
+            "per_rank": [
+              {
+                "cuda_ms": 0.13405760526657104,
+                "host_ms": 0.13508249539881945
+              },
+              {
+                "cuda_ms": 0.13449599742889404,
+                "host_ms": 0.13555169571191072
+              }
+            ],
+            "max_cuda_ms": 0.13449599742889404,
+            "max_host_ms": 0.13555169571191072
+          },
+          {
+            "sample": 2,
+            "per_rank": [
+              {
+                "cuda_ms": 0.1340831995010376,
+                "host_ms": 0.1351512037217617
+              },
+              {
+                "cuda_ms": 0.13447680473327636,
+                "host_ms": 0.1354974927380681
+              }
+            ],
+            "max_cuda_ms": 0.13447680473327636,
+            "max_host_ms": 0.1354974927380681
+          },
+          {
+            "sample": 3,
+            "per_rank": [
+              {
+                "cuda_ms": 0.13435200452804566,
+                "host_ms": 0.13544009998440742
+              },
+              {
+                "cuda_ms": 0.1343808054924011,
+                "host_ms": 0.13540860963985324
+              }
+            ],
+            "max_cuda_ms": 0.1343808054924011,
+            "max_host_ms": 0.13544009998440742
+          },
+          {
+            "sample": 4,
+            "per_rank": [
+              {
+                "cuda_ms": 0.13400959968566895,
+                "host_ms": 0.13504399685189128
+              },
+              {
+                "cuda_ms": 0.1344864010810852,
+                "host_ms": 0.13552769087255
+              }
+            ],
+            "max_cuda_ms": 0.1344864010810852,
+            "max_host_ms": 0.13552769087255
+          },
+          {
+            "sample": 5,
+            "per_rank": [
+              {
+                "cuda_ms": 0.13408000469207765,
+                "host_ms": 0.13516630278900266
+              },
+              {
+                "cuda_ms": 0.13437440395355224,
+                "host_ms": 0.13537630438804626
+              }
+            ],
+            "max_cuda_ms": 0.13437440395355224,
+            "max_host_ms": 0.13537630438804626
+          },
+          {
+            "sample": 6,
+            "per_rank": [
+              {
+                "cuda_ms": 0.13431999683380128,
+                "host_ms": 0.1353816012851894
+              },
+              {
+                "cuda_ms": 0.13447680473327636,
+                "host_ms": 0.13550290605053306
+              }
+            ],
+            "max_cuda_ms": 0.13447680473327636,
+            "max_host_ms": 0.13550290605053306
+          },
+          {
+            "sample": 7,
+            "per_rank": [
+              {
+                "cuda_ms": 0.13409279584884642,
+                "host_ms": 0.13512660516425967
+              },
+              {
+                "cuda_ms": 0.1343808054924011,
+                "host_ms": 0.1353889936581254
+              }
+            ],
+            "max_cuda_ms": 0.1343808054924011,
+            "max_host_ms": 0.1353889936581254
+          },
+          {
+            "sample": 8,
+            "per_rank": [
+              {
+                "cuda_ms": 0.13406720161437988,
+                "host_ms": 0.13513090088963509
+              },
+              {
+                "cuda_ms": 0.13453439474105836,
+                "host_ms": 0.1355237909592688
+              }
+            ],
+            "max_cuda_ms": 0.13453439474105836,
+            "max_host_ms": 0.1355237909592688
+          },
+          {
+            "sample": 9,
+            "per_rank": [
+              {
+                "cuda_ms": 0.13428479433059692,
+                "host_ms": 0.1354789943434298
+              },
+              {
+                "cuda_ms": 0.13445440530776978,
+                "host_ms": 0.135453708935529
+              }
+            ],
+            "max_cuda_ms": 0.13445440530776978,
+            "max_host_ms": 0.1354789943434298
+          }
+        ],
+        "samples_only": [
+          {
+            "sample": 0,
+            "per_rank": [
+              {
+                "cuda_ms": 0.017177599668502807,
+                "host_ms": 0.018734997138381004
+              },
+              {
+                "cuda_ms": 0.0166143998503685,
+                "host_ms": 0.018001010175794363
+              }
+            ],
+            "max_cuda_ms": 0.017177599668502807,
+            "max_host_ms": 0.018734997138381004
+          },
+          {
+            "sample": 1,
+            "per_rank": [
+              {
+                "cuda_ms": 0.016803200542926788,
+                "host_ms": 0.018243794329464436
+              },
+              {
+                "cuda_ms": 0.020579199492931365,
+                "host_ms": 0.021845800802111626
+              }
+            ],
+            "max_cuda_ms": 0.020579199492931365,
+            "max_host_ms": 0.021845800802111626
+          },
+          {
+            "sample": 2,
+            "per_rank": [
+              {
+                "cuda_ms": 0.016204799711704253,
+                "host_ms": 0.017468095757067204
+              },
+              {
+                "cuda_ms": 0.016896000504493712,
+                "host_ms": 0.018095504492521286
+              }
+            ],
+            "max_cuda_ms": 0.016896000504493712,
+            "max_host_ms": 0.018095504492521286
+          },
+          {
+            "sample": 3,
+            "per_rank": [
+              {
+                "cuda_ms": 0.016204799711704253,
+                "host_ms": 0.017515895888209343
+              },
+              {
+                "cuda_ms": 0.017343999445438386,
+                "host_ms": 0.018571096006780863
+              }
+            ],
+            "max_cuda_ms": 0.017343999445438386,
+            "max_host_ms": 0.018571096006780863
+          },
+          {
+            "sample": 4,
+            "per_rank": [
+              {
+                "cuda_ms": 0.016540800034999848,
+                "host_ms": 0.017939391545951366
+              },
+              {
+                "cuda_ms": 0.019398400187492372,
+                "host_ms": 0.020621600560843945
+              }
+            ],
+            "max_cuda_ms": 0.019398400187492372,
+            "max_host_ms": 0.020621600560843945
+          },
+          {
+            "sample": 5,
+            "per_rank": [
+              {
+                "cuda_ms": 0.015974399447441102,
+                "host_ms": 0.017284101340919733
+              },
+              {
+                "cuda_ms": 0.016838400065898894,
+                "host_ms": 0.018035504035651684
+              }
+            ],
+            "max_cuda_ms": 0.016838400065898894,
+            "max_host_ms": 0.018035504035651684
+          },
+          {
+            "sample": 6,
+            "per_rank": [
+              {
+                "cuda_ms": 0.016259199380874632,
+                "host_ms": 0.017528794705867767
+              },
+              {
+                "cuda_ms": 0.017203199863433837,
+                "host_ms": 0.018446403555572033
+              }
+            ],
+            "max_cuda_ms": 0.017203199863433837,
+            "max_host_ms": 0.018446403555572033
+          },
+          {
+            "sample": 7,
+            "per_rank": [
+              {
+                "cuda_ms": 0.01650879979133606,
+                "host_ms": 0.017812999431043863
+              },
+              {
+                "cuda_ms": 0.018943999707698823,
+                "host_ms": 0.02013719640672207
+              }
+            ],
+            "max_cuda_ms": 0.018943999707698823,
+            "max_host_ms": 0.02013719640672207
+          },
+          {
+            "sample": 8,
+            "per_rank": [
+              {
+                "cuda_ms": 0.016102400422096253,
+                "host_ms": 0.01744059845805168
+              },
+              {
+                "cuda_ms": 0.01687999963760376,
+                "host_ms": 0.018082803580909967
+              }
+            ],
+            "max_cuda_ms": 0.01687999963760376,
+            "max_host_ms": 0.018082803580909967
+          },
+          {
+            "sample": 9,
+            "per_rank": [
+              {
+                "cuda_ms": 0.016246399283409117,
+                "host_ms": 0.017658504657447338
+              },
+              {
+                "cuda_ms": 0.017286400496959686,
+                "host_ms": 0.018472597002983093
+              }
+            ],
+            "max_cuda_ms": 0.017286400496959686,
+            "max_host_ms": 0.018472597002983093
+          }
+        ],
+        "samples_select": [
+          {
+            "sample": 0,
+            "per_rank": [
+              {
+                "cuda_ms": 0.1485599994659424,
+                "host_ms": 0.14989519258961082
+              },
+              {
+                "cuda_ms": 0.1494976043701172,
+                "host_ms": 0.15062160091474652
+              }
+            ],
+            "max_cuda_ms": 0.1494976043701172,
+            "max_host_ms": 0.15062160091474652
+          },
+          {
+            "sample": 1,
+            "per_rank": [
+              {
+                "cuda_ms": 0.14861119985580445,
+                "host_ms": 0.149965297896415
+              },
+              {
+                "cuda_ms": 0.14995839595794677,
+                "host_ms": 0.15105130150914192
+              }
+            ],
+            "max_cuda_ms": 0.14995839595794677,
+            "max_host_ms": 0.15105130150914192
+          },
+          {
+            "sample": 2,
+            "per_rank": [
+              {
+                "cuda_ms": 0.1488960027694702,
+                "host_ms": 0.15018199337646365
+              },
+              {
+                "cuda_ms": 0.15140479803085327,
+                "host_ms": 0.15253920573741198
+              }
+            ],
+            "max_cuda_ms": 0.15140479803085327,
+            "max_host_ms": 0.15253920573741198
+          },
+          {
+            "sample": 3,
+            "per_rank": [
+              {
+                "cuda_ms": 0.14850560426712037,
+                "host_ms": 0.1499615958891809
+              },
+              {
+                "cuda_ms": 0.1493183970451355,
+                "host_ms": 0.15044299652799964
+              }
+            ],
+            "max_cuda_ms": 0.1493183970451355,
+            "max_host_ms": 0.15044299652799964
+          },
+          {
+            "sample": 4,
+            "per_rank": [
+              {
+                "cuda_ms": 0.14853119850158691,
+                "host_ms": 0.14983699657022953
+              },
+              {
+                "cuda_ms": 0.15009599924087524,
+                "host_ms": 0.15115169808268547
+              }
+            ],
+            "max_cuda_ms": 0.15009599924087524,
+            "max_host_ms": 0.15115169808268547
+          },
+          {
+            "sample": 5,
+            "per_rank": [
+              {
+                "cuda_ms": 0.14905920028686523,
+                "host_ms": 0.15032219234853983
+              },
+              {
+                "cuda_ms": 0.152291202545166,
+                "host_ms": 0.15344279818236828
+              }
+            ],
+            "max_cuda_ms": 0.152291202545166,
+            "max_host_ms": 0.15344279818236828
+          },
+          {
+            "sample": 6,
+            "per_rank": [
+              {
+                "cuda_ms": 0.1484895944595337,
+                "host_ms": 0.1498120022006333
+              },
+              {
+                "cuda_ms": 0.14952000379562377,
+                "host_ms": 0.15062129823490977
+              }
+            ],
+            "max_cuda_ms": 0.14952000379562377,
+            "max_host_ms": 0.15062129823490977
+          },
+          {
+            "sample": 7,
+            "per_rank": [
+              {
+                "cuda_ms": 0.14851839542388917,
+                "host_ms": 0.1499030040577054
+              },
+              {
+                "cuda_ms": 0.1495776057243347,
+                "host_ms": 0.15068139182403684
+              }
+            ],
+            "max_cuda_ms": 0.1495776057243347,
+            "max_host_ms": 0.15068139182403684
+          },
+          {
+            "sample": 8,
+            "per_rank": [
+              {
+                "cuda_ms": 0.14885760545730592,
+                "host_ms": 0.15013619558885694
+              },
+              {
+                "cuda_ms": 0.1515776038169861,
+                "host_ms": 0.1526887994259596
+              }
+            ],
+            "max_cuda_ms": 0.1515776038169861,
+            "max_host_ms": 0.1526887994259596
+          },
+          {
+            "sample": 9,
+            "per_rank": [
+              {
+                "cuda_ms": 0.14845759868621827,
+                "host_ms": 0.14976010425016284
+              },
+              {
+                "cuda_ms": 0.14911680221557616,
+                "host_ms": 0.15020769787952304
+              }
+            ],
+            "max_cuda_ms": 0.14911680221557616,
+            "max_host_ms": 0.15020769787952304
+          }
+        ]
+      },
+      "profiles": [
+        {
+          "rank": 0,
+          "scope": "select_only",
+          "mode": "eager",
+          "trace": "layer00_rank0_select_only_eager.trace.json",
+          "trace_sha256": "1a7b738d906aa07877f49eb7f131d86cfca9c358143752ab5ad9bd1377949a98",
+          "kernel_events": 15,
+          "kernel_duration_sum_us": 394.945,
+          "kernel_busy_union_us": 394.94482421875,
+          "kernel_envelope_us": 556.92822265625,
+          "gpu_memory_event_count": 0,
+          "gpu_memory_duration_sum_us": 0,
+          "kernels": [
+            {
+              "name": "(anonymous namespace)::tops_kernel(int const*, int const*, unsigned long long const*, unsigned long long const*, int*, int*, int)",
+              "count": 3,
+              "total_us": 189.183,
+              "mean_us": 63.061,
+              "fraction_of_kernel_sum": 0.4790110015318589,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::greedy_kernel(int const*, int const*, int const*, int const*, int const*, bool*, int*, int*, int*, int*, int*, int, int)",
+              "count": 3,
+              "total_us": 126.87899999999999,
+              "mean_us": 42.293,
+              "fraction_of_kernel_sum": 0.3212573902695312,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::frequency_kernel(int const*, unsigned long long const*, unsigned long long const*, int*, int)",
+              "count": 3,
+              "total_us": 58.881,
+              "mean_us": 19.627,
+              "fraction_of_kernel_sum": 0.14908658167592956,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::sample_groups(int const*, long const*, int const*, bool const*, int const*, int*, int*, unsigned long long*, unsigned long long*, int, int, int)",
+              "count": 3,
+              "total_us": 12.225000000000001,
+              "mean_us": 4.075,
+              "fraction_of_kernel_sum": 0.030953677094278955,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::mandatory_kernel(int const*, bool*, int*, int)",
+              "count": 3,
+              "total_us": 7.777000000000001,
+              "mean_us": 2.592333333333334,
+              "fraction_of_kernel_sum": 0.019691349428401426,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            }
+          ],
+          "warning": "Duration shares are attribution, not additive removable latency or a speedup prediction."
+        },
+        {
+          "rank": 1,
+          "scope": "select_only",
+          "mode": "eager",
+          "trace": "layer00_rank1_select_only_eager.trace.json",
+          "trace_sha256": "2dce8c1cea7f5991fbe8e4a2840972e5d9c7ae1ed3638cb65a605305de7c7a8c",
+          "kernel_events": 15,
+          "kernel_duration_sum_us": 396.26,
+          "kernel_busy_union_us": 396.26025390625,
+          "kernel_envelope_us": 490.2119140625,
+          "gpu_memory_event_count": 0,
+          "gpu_memory_duration_sum_us": 0,
+          "kernels": [
+            {
+              "name": "(anonymous namespace)::tops_kernel(int const*, int const*, unsigned long long const*, unsigned long long const*, int*, int*, int)",
+              "count": 3,
+              "total_us": 190.04899999999998,
+              "mean_us": 63.34966666666666,
+              "fraction_of_kernel_sum": 0.4796068238025538,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::greedy_kernel(int const*, int const*, int const*, int const*, int const*, bool*, int*, int*, int*, int*, int*, int, int)",
+              "count": 3,
+              "total_us": 126.946,
+              "mean_us": 42.315333333333335,
+              "fraction_of_kernel_sum": 0.3203603694543986,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::frequency_kernel(int const*, unsigned long long const*, unsigned long long const*, int*, int)",
+              "count": 3,
+              "total_us": 59.2,
+              "mean_us": 19.733333333333334,
+              "fraction_of_kernel_sum": 0.14939686064704993,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::sample_groups(int const*, long const*, int const*, bool const*, int const*, int*, int*, unsigned long long*, unsigned long long*, int, int, int)",
+              "count": 3,
+              "total_us": 12.321,
+              "mean_us": 4.107,
+              "fraction_of_kernel_sum": 0.031093221622167263,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::mandatory_kernel(int const*, bool*, int*, int)",
+              "count": 3,
+              "total_us": 7.744,
+              "mean_us": 2.5813333333333333,
+              "fraction_of_kernel_sum": 0.019542724473830313,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            }
+          ],
+          "warning": "Duration shares are attribution, not additive removable latency or a speedup prediction."
+        },
+        {
+          "rank": 0,
+          "scope": "samples_select",
+          "mode": "eager",
+          "trace": "layer00_rank0_samples_select_eager.trace.json",
+          "trace_sha256": "f5b7ed05134b30068706b8601cf1fd41e7fbe0e5932cf37672ada1a4ba1892f7",
+          "kernel_events": 24,
+          "kernel_duration_sum_us": 425.375,
+          "kernel_busy_union_us": 425.37548828125,
+          "kernel_envelope_us": 788.1240234375,
+          "gpu_memory_event_count": 0,
+          "gpu_memory_duration_sum_us": 0,
+          "kernels": [
+            {
+              "name": "(anonymous namespace)::tops_kernel(int const*, int const*, unsigned long long const*, unsigned long long const*, int*, int*, int)",
+              "count": 3,
+              "total_us": 189.183,
+              "mean_us": 63.061,
+              "fraction_of_kernel_sum": 0.4447440493682045,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::greedy_kernel(int const*, int const*, int const*, int const*, int const*, bool*, int*, int*, int*, int*, int*, int, int)",
+              "count": 3,
+              "total_us": 126.976,
+              "mean_us": 42.32533333333333,
+              "fraction_of_kernel_sum": 0.2985036732295034,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::frequency_kernel(int const*, unsigned long long const*, unsigned long long const*, int*, int)",
+              "count": 3,
+              "total_us": 58.879999999999995,
+              "mean_us": 19.626666666666665,
+              "fraction_of_kernel_sum": 0.13841904202174551,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "ncclDevKernel_AllReduce_Sum_u32_RING_LL(ncclDevKernelArgsStorage<4096ul>)",
+              "count": 3,
+              "total_us": 23.713,
+              "mean_us": 7.904333333333334,
+              "fraction_of_kernel_sum": 0.05574610637672642,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::sample_groups(int const*, long const*, int const*, bool const*, int const*, int*, int*, unsigned long long*, unsigned long long*, int, int, int)",
+              "count": 3,
+              "total_us": 12.801,
+              "mean_us": 4.267,
+              "fraction_of_kernel_sum": 0.030093446958565973,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::mandatory_kernel(int const*, bool*, int*, int)",
+              "count": 3,
+              "total_us": 7.263999999999999,
+              "mean_us": 2.421333333333333,
+              "fraction_of_kernel_sum": 0.01707669703203056,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::gather_joint_kernel(int const*, int const*, long const*, int*, int, int, int)",
+              "count": 3,
+              "total_us": 3.3920000000000003,
+              "mean_us": 1.1306666666666667,
+              "fraction_of_kernel_sum": 0.00797414046429621,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::unpack_joint_kernel(int const*, int*, int*, int)",
+              "count": 3,
+              "total_us": 3.166,
+              "mean_us": 1.0553333333333332,
+              "fraction_of_kernel_sum": 0.007442844548927417,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            }
+          ],
+          "warning": "Duration shares are attribution, not additive removable latency or a speedup prediction."
+        },
+        {
+          "rank": 1,
+          "scope": "samples_select",
+          "mode": "eager",
+          "trace": "layer00_rank1_samples_select_eager.trace.json",
+          "trace_sha256": "da643e9c8449f6bb95242af0b6ae1a49c2bd00ca749311cedd7967f99b3110b8",
+          "kernel_events": 24,
+          "kernel_duration_sum_us": 519.847,
+          "kernel_busy_union_us": 519.84814453125,
+          "kernel_envelope_us": 814.95703125,
+          "gpu_memory_event_count": 0,
+          "gpu_memory_duration_sum_us": 0,
+          "kernels": [
+            {
+              "name": "(anonymous namespace)::tops_kernel(int const*, int const*, unsigned long long const*, unsigned long long const*, int*, int*, int)",
+              "count": 3,
+              "total_us": 190.052,
+              "mean_us": 63.35066666666666,
+              "fraction_of_kernel_sum": 0.36559218385409553,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::greedy_kernel(int const*, int const*, int const*, int const*, int const*, bool*, int*, int*, int*, int*, int*, int, int)",
+              "count": 3,
+              "total_us": 127.041,
+              "mean_us": 42.347,
+              "fraction_of_kernel_sum": 0.24438151994721524,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "ncclDevKernel_AllReduce_Sum_u32_RING_LL(ncclDevKernelArgsStorage<4096ul>)",
+              "count": 3,
+              "total_us": 117.37799999999999,
+              "mean_us": 39.126,
+              "fraction_of_kernel_sum": 0.22579335843046125,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::frequency_kernel(int const*, unsigned long long const*, unsigned long long const*, int*, int)",
+              "count": 3,
+              "total_us": 59.233000000000004,
+              "mean_us": 19.744333333333334,
+              "fraction_of_kernel_sum": 0.1139431409626294,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::sample_groups(int const*, long const*, int const*, bool const*, int const*, int*, int*, unsigned long long*, unsigned long long*, int, int, int)",
+              "count": 3,
+              "total_us": 12.704,
+              "mean_us": 4.234666666666667,
+              "fraction_of_kernel_sum": 0.024437959630429724,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::mandatory_kernel(int const*, bool*, int*, int)",
+              "count": 3,
+              "total_us": 7.263,
+              "mean_us": 2.421,
+              "fraction_of_kernel_sum": 0.013971418513524172,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::unpack_joint_kernel(int const*, int*, int*, int)",
+              "count": 3,
+              "total_us": 3.168,
+              "mean_us": 1.056,
+              "fraction_of_kernel_sum": 0.006094100764263332,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::gather_joint_kernel(int const*, int const*, long const*, int*, int, int, int)",
+              "count": 3,
+              "total_us": 3.008,
+              "mean_us": 1.0026666666666666,
+              "fraction_of_kernel_sum": 0.0057863178973813455,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            }
+          ],
+          "warning": "Duration shares are attribution, not additive removable latency or a speedup prediction."
+        },
+        {
+          "rank": 0,
+          "scope": "select_only",
+          "mode": "graph",
+          "trace": "layer00_rank0_select_only_graph.trace.json",
+          "trace_sha256": "ca4a5231af3728a2ad5e7667845c3d1416985e76b01e15a593c466c48baa427b",
+          "kernel_events": 15,
+          "kernel_duration_sum_us": 396.193,
+          "kernel_busy_union_us": 396.193359375,
+          "kernel_envelope_us": 402.49365234375,
+          "gpu_memory_event_count": 0,
+          "gpu_memory_duration_sum_us": 0,
+          "kernels": [
+            {
+              "name": "(anonymous namespace)::tops_kernel(int const*, int const*, unsigned long long const*, unsigned long long const*, int*, int*, int)",
+              "count": 3,
+              "total_us": 189.40800000000002,
+              "mean_us": 63.136,
+              "fraction_of_kernel_sum": 0.47807003152503963,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::greedy_kernel(int const*, int const*, int const*, int const*, int const*, bool*, int*, int*, int*, int*, int*, int, int)",
+              "count": 3,
+              "total_us": 127.392,
+              "mean_us": 42.464,
+              "fraction_of_kernel_sum": 0.32154025941902054,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::frequency_kernel(int const*, unsigned long long const*, unsigned long long const*, int*, int)",
+              "count": 3,
+              "total_us": 59.135999999999996,
+              "mean_us": 19.712,
+              "fraction_of_kernel_sum": 0.1492605876428912,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::sample_groups(int const*, long const*, int const*, bool const*, int const*, int*, int*, unsigned long long*, unsigned long long*, int, int, int)",
+              "count": 3,
+              "total_us": 12.448,
+              "mean_us": 4.149333333333334,
+              "fraction_of_kernel_sum": 0.031419030623963576,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::mandatory_kernel(int const*, bool*, int*, int)",
+              "count": 3,
+              "total_us": 7.809000000000001,
+              "mean_us": 2.603,
+              "fraction_of_kernel_sum": 0.01971009078908512,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            }
+          ],
+          "warning": "Duration shares are attribution, not additive removable latency or a speedup prediction."
+        },
+        {
+          "rank": 1,
+          "scope": "select_only",
+          "mode": "graph",
+          "trace": "layer00_rank1_select_only_graph.trace.json",
+          "trace_sha256": "ff6067fc0c34ecf12e73991e054d8fba90e27bd8d92d48f24860e42f4a18bd1f",
+          "kernel_events": 15,
+          "kernel_duration_sum_us": 397.69100000000003,
+          "kernel_busy_union_us": 397.6904296875,
+          "kernel_envelope_us": 404.125,
+          "gpu_memory_event_count": 0,
+          "gpu_memory_duration_sum_us": 0,
+          "kernels": [
+            {
+              "name": "(anonymous namespace)::tops_kernel(int const*, int const*, unsigned long long const*, unsigned long long const*, int*, int*, int)",
+              "count": 3,
+              "total_us": 190.336,
+              "mean_us": 63.44533333333334,
+              "fraction_of_kernel_sum": 0.47860273428365235,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::greedy_kernel(int const*, int const*, int const*, int const*, int const*, bool*, int*, int*, int*, int*, int*, int, int)",
+              "count": 3,
+              "total_us": 127.19900000000001,
+              "mean_us": 42.39966666666667,
+              "fraction_of_kernel_sum": 0.31984379832583587,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::frequency_kernel(int const*, unsigned long long const*, unsigned long long const*, int*, int)",
+              "count": 3,
+              "total_us": 59.391000000000005,
+              "mean_us": 19.797,
+              "fraction_of_kernel_sum": 0.14933956262525427,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::sample_groups(int const*, long const*, int const*, bool const*, int const*, int*, int*, unsigned long long*, unsigned long long*, int, int, int)",
+              "count": 3,
+              "total_us": 12.927,
+              "mean_us": 4.309,
+              "fraction_of_kernel_sum": 0.03250513589696523,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::mandatory_kernel(int const*, bool*, int*, int)",
+              "count": 3,
+              "total_us": 7.838,
+              "mean_us": 2.6126666666666667,
+              "fraction_of_kernel_sum": 0.019708768868292214,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            }
+          ],
+          "warning": "Duration shares are attribution, not additive removable latency or a speedup prediction."
+        },
+        {
+          "rank": 0,
+          "scope": "samples_select",
+          "mode": "graph",
+          "trace": "layer00_rank0_samples_select_graph.trace.json",
+          "trace_sha256": "ddb0768803c0ab6fcf6f0d164aeb2101687a7c788095f2b81c60d904504fc969",
+          "kernel_events": 24,
+          "kernel_duration_sum_us": 427.36,
+          "kernel_busy_union_us": 427.36083984375,
+          "kernel_envelope_us": 462.07958984375,
+          "gpu_memory_event_count": 0,
+          "gpu_memory_duration_sum_us": 0,
+          "kernels": [
+            {
+              "name": "(anonymous namespace)::tops_kernel(int const*, int const*, unsigned long long const*, unsigned long long const*, int*, int*, int)",
+              "count": 3,
+              "total_us": 189.472,
+              "mean_us": 63.157333333333334,
+              "fraction_of_kernel_sum": 0.4433545488581056,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::greedy_kernel(int const*, int const*, int const*, int const*, int const*, bool*, int*, int*, int*, int*, int*, int, int)",
+              "count": 3,
+              "total_us": 127.584,
+              "mean_us": 42.528,
+              "fraction_of_kernel_sum": 0.29853987270685134,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::frequency_kernel(int const*, unsigned long long const*, unsigned long long const*, int*, int)",
+              "count": 3,
+              "total_us": 59.104,
+              "mean_us": 19.701333333333334,
+              "fraction_of_kernel_sum": 0.13830026207412954,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "ncclDevKernel_AllReduce_Sum_u32_RING_LL(ncclDevKernelArgsStorage<4096ul>)",
+              "count": 3,
+              "total_us": 24.352,
+              "mean_us": 8.117333333333333,
+              "fraction_of_kernel_sum": 0.056982403594159486,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::sample_groups(int const*, long const*, int const*, bool const*, int const*, int*, int*, unsigned long long*, unsigned long long*, int, int, int)",
+              "count": 3,
+              "total_us": 13.024000000000001,
+              "mean_us": 4.341333333333334,
+              "fraction_of_kernel_sum": 0.030475477349307376,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::mandatory_kernel(int const*, bool*, int*, int)",
+              "count": 3,
+              "total_us": 7.359999999999999,
+              "mean_us": 2.453333333333333,
+              "fraction_of_kernel_sum": 0.017222014226881317,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::unpack_joint_kernel(int const*, int*, int*, int)",
+              "count": 3,
+              "total_us": 3.3600000000000003,
+              "mean_us": 1.12,
+              "fraction_of_kernel_sum": 0.00786222388618495,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::gather_joint_kernel(int const*, int const*, long const*, int*, int, int, int)",
+              "count": 3,
+              "total_us": 3.104,
+              "mean_us": 1.0346666666666666,
+              "fraction_of_kernel_sum": 0.007263197304380382,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            }
+          ],
+          "warning": "Duration shares are attribution, not additive removable latency or a speedup prediction."
+        },
+        {
+          "rank": 1,
+          "scope": "samples_select",
+          "mode": "graph",
+          "trace": "layer00_rank1_samples_select_graph.trace.json",
+          "trace_sha256": "0c5ca79ae873dab55a619753d8651bcbfd26503007c89ee22349bb92b258d7b0",
+          "kernel_events": 24,
+          "kernel_duration_sum_us": 437.346,
+          "kernel_busy_union_us": 437.34521484375,
+          "kernel_envelope_us": 473.24853515625,
+          "gpu_memory_event_count": 0,
+          "gpu_memory_duration_sum_us": 0,
+          "kernels": [
+            {
+              "name": "(anonymous namespace)::tops_kernel(int const*, int const*, unsigned long long const*, unsigned long long const*, int*, int*, int)",
+              "count": 3,
+              "total_us": 190.27100000000002,
+              "mean_us": 63.42366666666667,
+              "fraction_of_kernel_sum": 0.43505828337289015,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::greedy_kernel(int const*, int const*, int const*, int const*, int const*, bool*, int*, int*, int*, int*, int*, int, int)",
+              "count": 3,
+              "total_us": 127.393,
+              "mean_us": 42.464333333333336,
+              "fraction_of_kernel_sum": 0.29128653285956657,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::frequency_kernel(int const*, unsigned long long const*, unsigned long long const*, int*, int)",
+              "count": 3,
+              "total_us": 59.424,
+              "mean_us": 19.808,
+              "fraction_of_kernel_sum": 0.1358741134022033,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "ncclDevKernel_AllReduce_Sum_u32_RING_LL(ncclDevKernelArgsStorage<4096ul>)",
+              "count": 3,
+              "total_us": 33.697,
+              "mean_us": 11.232333333333335,
+              "fraction_of_kernel_sum": 0.07704883547580177,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::sample_groups(int const*, long const*, int const*, bool const*, int const*, int*, int*, unsigned long long*, unsigned long long*, int, int, int)",
+              "count": 3,
+              "total_us": 13.152,
+              "mean_us": 4.3839999999999995,
+              "fraction_of_kernel_sum": 0.030072299735221082,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::mandatory_kernel(int const*, bool*, int*, int)",
+              "count": 3,
+              "total_us": 7.4239999999999995,
+              "mean_us": 2.4746666666666663,
+              "fraction_of_kernel_sum": 0.016975118098713604,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::unpack_joint_kernel(int const*, int*, int*, int)",
+              "count": 3,
+              "total_us": 3.3920000000000003,
+              "mean_us": 1.1306666666666667,
+              "fraction_of_kernel_sum": 0.007755872924412251,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::gather_joint_kernel(int const*, int const*, long const*, int*, int, int, int)",
+              "count": 3,
+              "total_us": 2.593,
+              "mean_us": 0.8643333333333333,
+              "fraction_of_kernel_sum": 0.005928944131191322,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            }
+          ],
+          "warning": "Duration shares are attribution, not additive removable latency or a speedup prediction."
+        }
+      ],
+      "exact_support_before": true,
+      "graph_median_ms": {
+        "select_only": 0.13447680473327636,
+        "samples_only": 0.01724480018019676,
+        "samples_select": 0.14976800084114072
+      },
+      "exact_support_after": true
+    },
+    {
+      "layer": 7,
+      "shape": [
+        2,
+        67072,
+        8
+      ],
+      "sample_count": 256,
+      "input_sha256": "b005244357fa30dea03327859a928359ec3971ea0d5718053a9f1351b5d36b6e",
+      "graph_timings": {
+        "select_only": [
+          {
+            "sample": 0,
+            "per_rank": [
+              {
+                "cuda_ms": 0.12275520563125611,
+                "host_ms": 0.12417230755090714
+              },
+              {
+                "cuda_ms": 0.12278720140457153,
+                "host_ms": 0.1242178026586771
+              }
+            ],
+            "max_cuda_ms": 0.12278720140457153,
+            "max_host_ms": 0.1242178026586771
+          },
+          {
+            "sample": 1,
+            "per_rank": [
+              {
+                "cuda_ms": 0.12286080121994018,
+                "host_ms": 0.12410579947754741
+              },
+              {
+                "cuda_ms": 0.12277439832687378,
+                "host_ms": 0.12396650854498148
+              }
+            ],
+            "max_cuda_ms": 0.12286080121994018,
+            "max_host_ms": 0.12410579947754741
+          },
+          {
+            "sample": 2,
+            "per_rank": [
+              {
+                "cuda_ms": 0.12297600507736206,
+                "host_ms": 0.12425730237737298
+              },
+              {
+                "cuda_ms": 0.12274880409240722,
+                "host_ms": 0.1239673001691699
+              }
+            ],
+            "max_cuda_ms": 0.12297600507736206,
+            "max_host_ms": 0.12425730237737298
+          },
+          {
+            "sample": 3,
+            "per_rank": [
+              {
+                "cuda_ms": 0.12322560548782349,
+                "host_ms": 0.12446499895304441
+              },
+              {
+                "cuda_ms": 0.12268799543380737,
+                "host_ms": 0.12390249175950885
+              }
+            ],
+            "max_cuda_ms": 0.12322560548782349,
+            "max_host_ms": 0.12446499895304441
+          },
+          {
+            "sample": 4,
+            "per_rank": [
+              {
+                "cuda_ms": 0.12273919582366943,
+                "host_ms": 0.12403579894453287
+              },
+              {
+                "cuda_ms": 0.1228063941001892,
+                "host_ms": 0.12398359831422567
+              }
+            ],
+            "max_cuda_ms": 0.1228063941001892,
+            "max_host_ms": 0.12403579894453287
+          },
+          {
+            "sample": 5,
+            "per_rank": [
+              {
+                "cuda_ms": 0.12290560007095337,
+                "host_ms": 0.12415429810062051
+              },
+              {
+                "cuda_ms": 0.1227455973625183,
+                "host_ms": 0.12397200334817171
+              }
+            ],
+            "max_cuda_ms": 0.12290560007095337,
+            "max_host_ms": 0.12415429810062051
+          },
+          {
+            "sample": 6,
+            "per_rank": [
+              {
+                "cuda_ms": 0.12317759990692138,
+                "host_ms": 0.12443779269233346
+              },
+              {
+                "cuda_ms": 0.12282880544662475,
+                "host_ms": 0.12402760330587626
+              }
+            ],
+            "max_cuda_ms": 0.12317759990692138,
+            "max_host_ms": 0.12443779269233346
+          },
+          {
+            "sample": 7,
+            "per_rank": [
+              {
+                "cuda_ms": 0.12297279834747314,
+                "host_ms": 0.12423730222508311
+              },
+              {
+                "cuda_ms": 0.1226848006248474,
+                "host_ms": 0.12389600742608309
+              }
+            ],
+            "max_cuda_ms": 0.12297279834747314,
+            "max_host_ms": 0.12423730222508311
+          },
+          {
+            "sample": 8,
+            "per_rank": [
+              {
+                "cuda_ms": 0.12286720275878907,
+                "host_ms": 0.12412760406732559
+              },
+              {
+                "cuda_ms": 0.12264959812164307,
+                "host_ms": 0.12385878944769502
+              }
+            ],
+            "max_cuda_ms": 0.12286720275878907,
+            "max_host_ms": 0.12412760406732559
+          },
+          {
+            "sample": 9,
+            "per_rank": [
+              {
+                "cuda_ms": 0.1232640027999878,
+                "host_ms": 0.12457891134545207
+              },
+              {
+                "cuda_ms": 0.12266559600830078,
+                "host_ms": 0.12402129359543324
+              }
+            ],
+            "max_cuda_ms": 0.1232640027999878,
+            "max_host_ms": 0.12457891134545207
+          }
+        ],
+        "samples_only": [
+          {
+            "sample": 0,
+            "per_rank": [
+              {
+                "cuda_ms": 0.022844800353050233,
+                "host_ms": 0.024615507572889328
+              },
+              {
+                "cuda_ms": 0.02305919975042343,
+                "host_ms": 0.024467601906508207
+              }
+            ],
+            "max_cuda_ms": 0.02305919975042343,
+            "max_host_ms": 0.024615507572889328
+          },
+          {
+            "sample": 1,
+            "per_rank": [
+              {
+                "cuda_ms": 0.024540799856185912,
+                "host_ms": 0.02607959322631359
+              },
+              {
+                "cuda_ms": 0.027881601452827455,
+                "host_ms": 0.02914409851655364
+              }
+            ],
+            "max_cuda_ms": 0.027881601452827455,
+            "max_host_ms": 0.02914409851655364
+          },
+          {
+            "sample": 2,
+            "per_rank": [
+              {
+                "cuda_ms": 0.023708799481391908,
+                "host_ms": 0.025203207042068243
+              },
+              {
+                "cuda_ms": 0.024006399512290954,
+                "host_ms": 0.025257794186472893
+              }
+            ],
+            "max_cuda_ms": 0.024006399512290954,
+            "max_host_ms": 0.025257794186472893
+          },
+          {
+            "sample": 3,
+            "per_rank": [
+              {
+                "cuda_ms": 0.02505599856376648,
+                "host_ms": 0.02656819997355342
+              },
+              {
+                "cuda_ms": 0.02598400115966797,
+                "host_ms": 0.027243897784501314
+              }
+            ],
+            "max_cuda_ms": 0.02598400115966797,
+            "max_host_ms": 0.027243897784501314
+          },
+          {
+            "sample": 4,
+            "per_rank": [
+              {
+                "cuda_ms": 0.023974399268627166,
+                "host_ms": 0.025639403611421585
+              },
+              {
+                "cuda_ms": 0.026851201057434083,
+                "host_ms": 0.028106500394642353
+              }
+            ],
+            "max_cuda_ms": 0.026851201057434083,
+            "max_host_ms": 0.028106500394642353
+          },
+          {
+            "sample": 5,
+            "per_rank": [
+              {
+                "cuda_ms": 0.023286400735378264,
+                "host_ms": 0.02501120325177908
+              },
+              {
+                "cuda_ms": 0.02344000041484833,
+                "host_ms": 0.02472309861332178
+              }
+            ],
+            "max_cuda_ms": 0.02344000041484833,
+            "max_host_ms": 0.02501120325177908
+          },
+          {
+            "sample": 6,
+            "per_rank": [
+              {
+                "cuda_ms": 0.023478400707244874,
+                "host_ms": 0.025048106908798218
+              },
+              {
+                "cuda_ms": 0.024073599278926848,
+                "host_ms": 0.025320507120341063
+              }
+            ],
+            "max_cuda_ms": 0.024073599278926848,
+            "max_host_ms": 0.025320507120341063
+          },
+          {
+            "sample": 7,
+            "per_rank": [
+              {
+                "cuda_ms": 0.023545600473880768,
+                "host_ms": 0.02514709485694766
+              },
+              {
+                "cuda_ms": 0.026675200462341307,
+                "host_ms": 0.027962110470980406
+              }
+            ],
+            "max_cuda_ms": 0.026675200462341307,
+            "max_host_ms": 0.027962110470980406
+          },
+          {
+            "sample": 8,
+            "per_rank": [
+              {
+                "cuda_ms": 0.024054400622844696,
+                "host_ms": 0.0255353981629014
+              },
+              {
+                "cuda_ms": 0.02455040067434311,
+                "host_ms": 0.025781302247196436
+              }
+            ],
+            "max_cuda_ms": 0.02455040067434311,
+            "max_host_ms": 0.025781302247196436
+          },
+          {
+            "sample": 9,
+            "per_rank": [
+              {
+                "cuda_ms": 0.023244799673557283,
+                "host_ms": 0.02484070137143135
+              },
+              {
+                "cuda_ms": 0.023788799345493317,
+                "host_ms": 0.025026302319020033
+              }
+            ],
+            "max_cuda_ms": 0.023788799345493317,
+            "max_host_ms": 0.025026302319020033
+          }
+        ],
+        "samples_select": [
+          {
+            "sample": 0,
+            "per_rank": [
+              {
+                "cuda_ms": 0.13789119720458984,
+                "host_ms": 0.13929590350016952
+              },
+              {
+                "cuda_ms": 0.13921279907226564,
+                "host_ms": 0.1405457966029644
+              }
+            ],
+            "max_cuda_ms": 0.13921279907226564,
+            "max_host_ms": 0.1405457966029644
+          },
+          {
+            "sample": 1,
+            "per_rank": [
+              {
+                "cuda_ms": 0.1378783941268921,
+                "host_ms": 0.13938489137217402
+              },
+              {
+                "cuda_ms": 0.1397055983543396,
+                "host_ms": 0.14104600995779037
+              }
+            ],
+            "max_cuda_ms": 0.1397055983543396,
+            "max_host_ms": 0.14104600995779037
+          },
+          {
+            "sample": 2,
+            "per_rank": [
+              {
+                "cuda_ms": 0.1382815957069397,
+                "host_ms": 0.13972590677440166
+              },
+              {
+                "cuda_ms": 0.14232640266418456,
+                "host_ms": 0.1435962039977312
+              }
+            ],
+            "max_cuda_ms": 0.14232640266418456,
+            "max_host_ms": 0.1435962039977312
+          },
+          {
+            "sample": 3,
+            "per_rank": [
+              {
+                "cuda_ms": 0.13768960237503053,
+                "host_ms": 0.13931369176134467
+              },
+              {
+                "cuda_ms": 0.13916159868240358,
+                "host_ms": 0.14055119827389717
+              }
+            ],
+            "max_cuda_ms": 0.13916159868240358,
+            "max_host_ms": 0.14055119827389717
+          },
+          {
+            "sample": 4,
+            "per_rank": [
+              {
+                "cuda_ms": 0.13782399892807007,
+                "host_ms": 0.13946709223091602
+              },
+              {
+                "cuda_ms": 0.139792001247406,
+                "host_ms": 0.14107829192653298
+              }
+            ],
+            "max_cuda_ms": 0.139792001247406,
+            "max_host_ms": 0.14107829192653298
+          },
+          {
+            "sample": 5,
+            "per_rank": [
+              {
+                "cuda_ms": 0.13821120262145997,
+                "host_ms": 0.13970250729471445
+              },
+              {
+                "cuda_ms": 0.14237120151519775,
+                "host_ms": 0.14363130321726203
+              }
+            ],
+            "max_cuda_ms": 0.14237120151519775,
+            "max_host_ms": 0.14363130321726203
+          },
+          {
+            "sample": 6,
+            "per_rank": [
+              {
+                "cuda_ms": 0.13762240409851073,
+                "host_ms": 0.1391453086398542
+              },
+              {
+                "cuda_ms": 0.1391487956047058,
+                "host_ms": 0.14042910188436508
+              }
+            ],
+            "max_cuda_ms": 0.1391487956047058,
+            "max_host_ms": 0.14042910188436508
+          },
+          {
+            "sample": 7,
+            "per_rank": [
+              {
+                "cuda_ms": 0.1377951979637146,
+                "host_ms": 0.13937419280409813
+              },
+              {
+                "cuda_ms": 0.13992320299148558,
+                "host_ms": 0.14122100546956062
+              }
+            ],
+            "max_cuda_ms": 0.13992320299148558,
+            "max_host_ms": 0.14122100546956062
+          },
+          {
+            "sample": 8,
+            "per_rank": [
+              {
+                "cuda_ms": 0.13826240301132203,
+                "host_ms": 0.13985560508444905
+              },
+              {
+                "cuda_ms": 0.14249919652938842,
+                "host_ms": 0.14383589150384068
+              }
+            ],
+            "max_cuda_ms": 0.14249919652938842,
+            "max_host_ms": 0.14383589150384068
+          },
+          {
+            "sample": 9,
+            "per_rank": [
+              {
+                "cuda_ms": 0.13767679929733276,
+                "host_ms": 0.13914459850639105
+              },
+              {
+                "cuda_ms": 0.13915200233459474,
+                "host_ms": 0.14043661067262292
+              }
+            ],
+            "max_cuda_ms": 0.13915200233459474,
+            "max_host_ms": 0.14043661067262292
+          }
+        ]
+      },
+      "profiles": [
+        {
+          "rank": 0,
+          "scope": "select_only",
+          "mode": "eager",
+          "trace": "layer07_rank0_select_only_eager.trace.json",
+          "trace_sha256": "9578f10ac7dfac639749bf7d7343b478d8c90e25082c4385dd7ff637f15a910d",
+          "kernel_events": 15,
+          "kernel_duration_sum_us": 355.807,
+          "kernel_busy_union_us": 355.8076171875,
+          "kernel_envelope_us": 384.73388671875,
+          "gpu_memory_event_count": 0,
+          "gpu_memory_duration_sum_us": 0,
+          "kernels": [
+            {
+              "name": "(anonymous namespace)::tops_kernel(int const*, int const*, unsigned long long const*, unsigned long long const*, int*, int*, int)",
+              "count": 3,
+              "total_us": 155.29399999999998,
+              "mean_us": 51.76466666666666,
+              "fraction_of_kernel_sum": 0.43645571897123997,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::greedy_kernel(int const*, int const*, int const*, int const*, int const*, bool*, int*, int*, int*, int*, int*, int, int)",
+              "count": 3,
+              "total_us": 126.335,
+              "mean_us": 42.111666666666665,
+              "fraction_of_kernel_sum": 0.3550660892000438,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::frequency_kernel(int const*, unsigned long long const*, unsigned long long const*, int*, int)",
+              "count": 3,
+              "total_us": 53.69600000000001,
+              "mean_us": 17.89866666666667,
+              "fraction_of_kernel_sum": 0.1509132760176163,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::sample_groups(int const*, long const*, int const*, bool const*, int const*, int*, int*, unsigned long long*, unsigned long long*, int, int, int)",
+              "count": 3,
+              "total_us": 12.609000000000002,
+              "mean_us": 4.203,
+              "fraction_of_kernel_sum": 0.035437751365206424,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::mandatory_kernel(int const*, bool*, int*, int)",
+              "count": 3,
+              "total_us": 7.873,
+              "mean_us": 2.6243333333333334,
+              "fraction_of_kernel_sum": 0.02212716444589342,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            }
+          ],
+          "warning": "Duration shares are attribution, not additive removable latency or a speedup prediction."
+        },
+        {
+          "rank": 1,
+          "scope": "select_only",
+          "mode": "eager",
+          "trace": "layer07_rank1_select_only_eager.trace.json",
+          "trace_sha256": "3bed427cfbe34de3a9a2880dd66526e00fa4187b7a011829e9411bd905384aae",
+          "kernel_events": 15,
+          "kernel_duration_sum_us": 355.454,
+          "kernel_busy_union_us": 355.45458984375,
+          "kernel_envelope_us": 384.7646484375,
+          "gpu_memory_event_count": 0,
+          "gpu_memory_duration_sum_us": 0,
+          "kernels": [
+            {
+              "name": "(anonymous namespace)::tops_kernel(int const*, int const*, unsigned long long const*, unsigned long long const*, int*, int*, int)",
+              "count": 3,
+              "total_us": 155.168,
+              "mean_us": 51.72266666666667,
+              "fraction_of_kernel_sum": 0.4365346852194658,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::greedy_kernel(int const*, int const*, int const*, int const*, int const*, bool*, int*, int*, int*, int*, int*, int, int)",
+              "count": 3,
+              "total_us": 126.526,
+              "mean_us": 42.175333333333334,
+              "fraction_of_kernel_sum": 0.3559560449453375,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::frequency_kernel(int const*, unsigned long long const*, unsigned long long const*, int*, int)",
+              "count": 3,
+              "total_us": 53.631,
+              "mean_us": 17.877,
+              "fraction_of_kernel_sum": 0.1508802826807407,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::sample_groups(int const*, long const*, int const*, bool const*, int const*, int*, int*, unsigned long long*, unsigned long long*, int, int, int)",
+              "count": 3,
+              "total_us": 12.416,
+              "mean_us": 4.1386666666666665,
+              "fraction_of_kernel_sum": 0.03492997687464482,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::mandatory_kernel(int const*, bool*, int*, int)",
+              "count": 3,
+              "total_us": 7.713000000000001,
+              "mean_us": 2.571,
+              "fraction_of_kernel_sum": 0.021699010279811172,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            }
+          ],
+          "warning": "Duration shares are attribution, not additive removable latency or a speedup prediction."
+        },
+        {
+          "rank": 0,
+          "scope": "samples_select",
+          "mode": "eager",
+          "trace": "layer07_rank0_samples_select_eager.trace.json",
+          "trace_sha256": "01c03c4629d7eb108b74a0adc5f08dad1f5495f43ec7e0f00f91aee319994739",
+          "kernel_events": 24,
+          "kernel_duration_sum_us": 655.373,
+          "kernel_busy_union_us": 655.37255859375,
+          "kernel_envelope_us": 826.6357421875,
+          "gpu_memory_event_count": 0,
+          "gpu_memory_duration_sum_us": 0,
+          "kernels": [
+            {
+              "name": "ncclDevKernel_AllReduce_Sum_u32_RING_LL(ncclDevKernelArgsStorage<4096ul>)",
+              "count": 3,
+              "total_us": 292.953,
+              "mean_us": 97.651,
+              "fraction_of_kernel_sum": 0.44700193630192264,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::tops_kernel(int const*, int const*, unsigned long long const*, unsigned long long const*, int*, int*, int)",
+              "count": 3,
+              "total_us": 155.324,
+              "mean_us": 51.77466666666667,
+              "fraction_of_kernel_sum": 0.23700091398333467,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::greedy_kernel(int const*, int const*, int const*, int const*, int const*, bool*, int*, int*, int*, int*, int*, int, int)",
+              "count": 3,
+              "total_us": 126.781,
+              "mean_us": 42.260333333333335,
+              "fraction_of_kernel_sum": 0.19344861628416185,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::frequency_kernel(int const*, unsigned long long const*, unsigned long long const*, int*, int)",
+              "count": 3,
+              "total_us": 53.757999999999996,
+              "mean_us": 17.91933333333333,
+              "fraction_of_kernel_sum": 0.08202657112819721,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::sample_groups(int const*, long const*, int const*, bool const*, int const*, int*, int*, unsigned long long*, unsigned long long*, int, int, int)",
+              "count": 3,
+              "total_us": 12.543,
+              "mean_us": 4.181,
+              "fraction_of_kernel_sum": 0.019138719477305288,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::mandatory_kernel(int const*, bool*, int*, int)",
+              "count": 3,
+              "total_us": 7.423,
+              "mean_us": 2.4743333333333335,
+              "fraction_of_kernel_sum": 0.011326374446307675,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::gather_joint_kernel(int const*, int const*, long const*, int*, int, int, int)",
+              "count": 3,
+              "total_us": 3.4240000000000004,
+              "mean_us": 1.1413333333333335,
+              "fraction_of_kernel_sum": 0.005224505739479655,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::unpack_joint_kernel(int const*, int*, int*, int)",
+              "count": 3,
+              "total_us": 3.167,
+              "mean_us": 1.0556666666666665,
+              "fraction_of_kernel_sum": 0.004832362639290907,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            }
+          ],
+          "warning": "Duration shares are attribution, not additive removable latency or a speedup prediction."
+        },
+        {
+          "rank": 1,
+          "scope": "samples_select",
+          "mode": "eager",
+          "trace": "layer07_rank1_samples_select_eager.trace.json",
+          "trace_sha256": "dbe35b0527c205497ac47f26f604fe49bb57830f5434537bd309a5f551dba44e",
+          "kernel_events": 24,
+          "kernel_duration_sum_us": 385.446,
+          "kernel_busy_union_us": 385.4462890625,
+          "kernel_envelope_us": 675.65478515625,
+          "gpu_memory_event_count": 0,
+          "gpu_memory_duration_sum_us": 0,
+          "kernels": [
+            {
+              "name": "(anonymous namespace)::tops_kernel(int const*, int const*, unsigned long long const*, unsigned long long const*, int*, int*, int)",
+              "count": 3,
+              "total_us": 155.139,
+              "mean_us": 51.713,
+              "fraction_of_kernel_sum": 0.4024921778926231,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::greedy_kernel(int const*, int const*, int const*, int const*, int const*, bool*, int*, int*, int*, int*, int*, int, int)",
+              "count": 3,
+              "total_us": 126.43300000000002,
+              "mean_us": 42.14433333333334,
+              "fraction_of_kernel_sum": 0.3280174135936033,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::frequency_kernel(int const*, unsigned long long const*, unsigned long long const*, int*, int)",
+              "count": 3,
+              "total_us": 53.664,
+              "mean_us": 17.888,
+              "fraction_of_kernel_sum": 0.13922572811755732,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "ncclDevKernel_AllReduce_Sum_u32_RING_LL(ncclDevKernelArgsStorage<4096ul>)",
+              "count": 3,
+              "total_us": 24.321,
+              "mean_us": 8.107000000000001,
+              "fraction_of_kernel_sum": 0.06309833284039788,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::sample_groups(int const*, long const*, int const*, bool const*, int const*, int*, int*, unsigned long long*, unsigned long long*, int, int, int)",
+              "count": 3,
+              "total_us": 12.417000000000002,
+              "mean_us": 4.139,
+              "fraction_of_kernel_sum": 0.032214629286592675,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::mandatory_kernel(int const*, bool*, int*, int)",
+              "count": 3,
+              "total_us": 7.3919999999999995,
+              "mean_us": 2.464,
+              "fraction_of_kernel_sum": 0.01917778365841129,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::unpack_joint_kernel(int const*, int*, int*, int)",
+              "count": 3,
+              "total_us": 3.168,
+              "mean_us": 1.056,
+              "fraction_of_kernel_sum": 0.008219050139319126,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::gather_joint_kernel(int const*, int const*, long const*, int*, int, int, int)",
+              "count": 3,
+              "total_us": 2.912,
+              "mean_us": 0.9706666666666667,
+              "fraction_of_kernel_sum": 0.007554884471495358,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            }
+          ],
+          "warning": "Duration shares are attribution, not additive removable latency or a speedup prediction."
+        },
+        {
+          "rank": 0,
+          "scope": "select_only",
+          "mode": "graph",
+          "trace": "layer07_rank0_select_only_graph.trace.json",
+          "trace_sha256": "e111be512e38817c055a2e37d947c724f4fe14c5f1220a596bb76018bf45c85e",
+          "kernel_events": 15,
+          "kernel_duration_sum_us": 357.663,
+          "kernel_busy_union_us": 357.662109375,
+          "kernel_envelope_us": 365.91943359375,
+          "gpu_memory_event_count": 0,
+          "gpu_memory_duration_sum_us": 0,
+          "kernels": [
+            {
+              "name": "(anonymous namespace)::tops_kernel(int const*, int const*, unsigned long long const*, unsigned long long const*, int*, int*, int)",
+              "count": 3,
+              "total_us": 155.68,
+              "mean_us": 51.89333333333334,
+              "fraction_of_kernel_sum": 0.435270072666169,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::greedy_kernel(int const*, int const*, int const*, int const*, int const*, bool*, int*, int*, int*, int*, int*, int, int)",
+              "count": 3,
+              "total_us": 126.911,
+              "mean_us": 42.303666666666665,
+              "fraction_of_kernel_sum": 0.3548340197336599,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::frequency_kernel(int const*, unsigned long long const*, unsigned long long const*, int*, int)",
+              "count": 3,
+              "total_us": 53.953,
+              "mean_us": 17.984333333333336,
+              "fraction_of_kernel_sum": 0.15084870394757077,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::sample_groups(int const*, long const*, int const*, bool const*, int const*, int*, int*, unsigned long long*, unsigned long long*, int, int, int)",
+              "count": 3,
+              "total_us": 13.120000000000001,
+              "mean_us": 4.373333333333334,
+              "fraction_of_kernel_sum": 0.0366825754970461,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::mandatory_kernel(int const*, bool*, int*, int)",
+              "count": 3,
+              "total_us": 7.9990000000000006,
+              "mean_us": 2.6663333333333337,
+              "fraction_of_kernel_sum": 0.02236462815555425,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            }
+          ],
+          "warning": "Duration shares are attribution, not additive removable latency or a speedup prediction."
+        },
+        {
+          "rank": 1,
+          "scope": "select_only",
+          "mode": "graph",
+          "trace": "layer07_rank1_select_only_graph.trace.json",
+          "trace_sha256": "070351265643e5e81ecd9185ac4d7b2ebfaff10fca375f983fedb0fb4e43f9bf",
+          "kernel_events": 15,
+          "kernel_duration_sum_us": 356.92900000000003,
+          "kernel_busy_union_us": 356.92919921875,
+          "kernel_envelope_us": 365.02392578125,
+          "gpu_memory_event_count": 0,
+          "gpu_memory_duration_sum_us": 0,
+          "kernels": [
+            {
+              "name": "(anonymous namespace)::tops_kernel(int const*, int const*, unsigned long long const*, unsigned long long const*, int*, int*, int)",
+              "count": 3,
+              "total_us": 155.424,
+              "mean_us": 51.808,
+              "fraction_of_kernel_sum": 0.4354479462302026,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::greedy_kernel(int const*, int const*, int const*, int const*, int const*, bool*, int*, int*, int*, int*, int*, int, int)",
+              "count": 3,
+              "total_us": 126.944,
+              "mean_us": 42.31466666666667,
+              "fraction_of_kernel_sum": 0.3556561669127473,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::frequency_kernel(int const*, unsigned long long const*, unsigned long long const*, int*, int)",
+              "count": 3,
+              "total_us": 53.921,
+              "mean_us": 17.973666666666666,
+              "fraction_of_kernel_sum": 0.15106926027305148,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::sample_groups(int const*, long const*, int const*, bool const*, int const*, int*, int*, unsigned long long*, unsigned long long*, int, int, int)",
+              "count": 3,
+              "total_us": 12.768,
+              "mean_us": 4.256,
+              "fraction_of_kernel_sum": 0.03577182016591535,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::mandatory_kernel(int const*, bool*, int*, int)",
+              "count": 3,
+              "total_us": 7.872,
+              "mean_us": 2.624,
+              "fraction_of_kernel_sum": 0.022054806418083148,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            }
+          ],
+          "warning": "Duration shares are attribution, not additive removable latency or a speedup prediction."
+        },
+        {
+          "rank": 0,
+          "scope": "samples_select",
+          "mode": "graph",
+          "trace": "layer07_rank0_samples_select_graph.trace.json",
+          "trace_sha256": "4d034aa1d1f4cfc665a3d364c8b69c56f4411340c1e7afe9525846ebafe5bb1d",
+          "kernel_events": 24,
+          "kernel_duration_sum_us": 387.23,
+          "kernel_busy_union_us": 387.23095703125,
+          "kernel_envelope_us": 425.662109375,
+          "gpu_memory_event_count": 0,
+          "gpu_memory_duration_sum_us": 0,
+          "kernels": [
+            {
+              "name": "(anonymous namespace)::tops_kernel(int const*, int const*, unsigned long long const*, unsigned long long const*, int*, int*, int)",
+              "count": 3,
+              "total_us": 155.775,
+              "mean_us": 51.925000000000004,
+              "fraction_of_kernel_sum": 0.40228029853058905,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::greedy_kernel(int const*, int const*, int const*, int const*, int const*, bool*, int*, int*, int*, int*, int*, int, int)",
+              "count": 3,
+              "total_us": 127.039,
+              "mean_us": 42.346333333333334,
+              "fraction_of_kernel_sum": 0.3280711721715776,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::frequency_kernel(int const*, unsigned long long const*, unsigned long long const*, int*, int)",
+              "count": 3,
+              "total_us": 53.952000000000005,
+              "mean_us": 17.984,
+              "fraction_of_kernel_sum": 0.1393280479301707,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "ncclDevKernel_AllReduce_Sum_u32_RING_LL(ncclDevKernelArgsStorage<4096ul>)",
+              "count": 3,
+              "total_us": 24.0,
+              "mean_us": 8.0,
+              "fraction_of_kernel_sum": 0.06197866900808305,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::sample_groups(int const*, long const*, int const*, bool const*, int const*, int*, int*, unsigned long long*, unsigned long long*, int, int, int)",
+              "count": 3,
+              "total_us": 12.512,
+              "mean_us": 4.1706666666666665,
+              "fraction_of_kernel_sum": 0.0323115461095473,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::mandatory_kernel(int const*, bool*, int*, int)",
+              "count": 3,
+              "total_us": 7.4879999999999995,
+              "mean_us": 2.496,
+              "fraction_of_kernel_sum": 0.01933734473052191,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::unpack_joint_kernel(int const*, int*, int*, int)",
+              "count": 3,
+              "total_us": 3.3600000000000003,
+              "mean_us": 1.12,
+              "fraction_of_kernel_sum": 0.008677013661131628,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::gather_joint_kernel(int const*, int const*, long const*, int*, int, int, int)",
+              "count": 3,
+              "total_us": 3.104,
+              "mean_us": 1.0346666666666666,
+              "fraction_of_kernel_sum": 0.00801590785837874,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "0"
+              ]
+            }
+          ],
+          "warning": "Duration shares are attribution, not additive removable latency or a speedup prediction."
+        },
+        {
+          "rank": 1,
+          "scope": "samples_select",
+          "mode": "graph",
+          "trace": "layer07_rank1_samples_select_graph.trace.json",
+          "trace_sha256": "2ccd53a8eb24f3ad86a9e648f2f06fa503915bc4c48b099a26ded15f5e757d4c",
+          "kernel_events": 24,
+          "kernel_duration_sum_us": 2037.079,
+          "kernel_busy_union_us": 2037.07958984375,
+          "kernel_envelope_us": 2075.47802734375,
+          "gpu_memory_event_count": 0,
+          "gpu_memory_duration_sum_us": 0,
+          "kernels": [
+            {
+              "name": "ncclDevKernel_AllReduce_Sum_u32_RING_LL(ncclDevKernelArgsStorage<4096ul>)",
+              "count": 3,
+              "total_us": 1674.073,
+              "mean_us": 558.0243333333334,
+              "fraction_of_kernel_sum": 0.8218007254505103,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::tops_kernel(int const*, int const*, unsigned long long const*, unsigned long long const*, int*, int*, int)",
+              "count": 3,
+              "total_us": 155.615,
+              "mean_us": 51.87166666666667,
+              "fraction_of_kernel_sum": 0.07639124452218103,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::greedy_kernel(int const*, int const*, int const*, int const*, int const*, bool*, int*, int*, int*, int*, int*, int, int)",
+              "count": 3,
+              "total_us": 127.167,
+              "mean_us": 42.389,
+              "fraction_of_kernel_sum": 0.062426150384938435,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::frequency_kernel(int const*, unsigned long long const*, unsigned long long const*, int*, int)",
+              "count": 3,
+              "total_us": 53.888000000000005,
+              "mean_us": 17.962666666666667,
+              "fraction_of_kernel_sum": 0.026453564147487656,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::sample_groups(int const*, long const*, int const*, bool const*, int const*, int*, int*, unsigned long long*, unsigned long long*, int, int, int)",
+              "count": 3,
+              "total_us": 12.641,
+              "mean_us": 4.213666666666667,
+              "fraction_of_kernel_sum": 0.00620545398582971,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::mandatory_kernel(int const*, bool*, int*, int)",
+              "count": 3,
+              "total_us": 7.4559999999999995,
+              "mean_us": 2.485333333333333,
+              "fraction_of_kernel_sum": 0.0036601427828768544,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::unpack_joint_kernel(int const*, int*, int*, int)",
+              "count": 3,
+              "total_us": 3.4240000000000004,
+              "mean_us": 1.1413333333333335,
+              "fraction_of_kernel_sum": 0.001680838102007826,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            },
+            {
+              "name": "(anonymous namespace)::gather_joint_kernel(int const*, int const*, long const*, int*, int, int, int)",
+              "count": 3,
+              "total_us": 2.815,
+              "mean_us": 0.9383333333333334,
+              "fraction_of_kernel_sum": 0.001381880624168233,
+              "streams": [
+                "7"
+              ],
+              "devices": [
+                "1"
+              ]
+            }
+          ],
+          "warning": "Duration shares are attribution, not additive removable latency or a speedup prediction."
+        }
+      ],
+      "exact_support_before": true,
+      "graph_median_ms": {
+        "select_only": 0.12293919920921326,
+        "samples_only": 0.02431199997663498,
+        "samples_select": 0.1397487998008728
+      },
+      "exact_support_after": true
+    }
+  ],
+  "failures": []
+}

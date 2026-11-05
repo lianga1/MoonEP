@@ -1,0 +1,116 @@
+{
+  "status": "complete",
+  "layer": 0,
+  "ranks": 2,
+  "tokens_per_rank": 256,
+  "hidden": 128,
+  "intermediate": 1024,
+  "failures": [],
+  "trace_sha256": "22bd2a9496dbc0e377d72b7a71c44e94adaa1e0ff86bc3e590264c31abd2393b",
+  "trace_transform": "contiguous eight-source rows folded into two sources; optional per-source prefix",
+  "checks": [
+    {
+      "rank": 0,
+      "native": {
+        "valid_rows": 2048,
+        "dispatch_hidden": true,
+        "dispatch_weights": true,
+        "combine_identity": true,
+        "weight_slots": {
+          "checked_active_slots": 0,
+          "bytes_per_expert": 786432
+        }
+      },
+      "optimized": {
+        "valid_rows": 2048,
+        "dispatch_hidden": true,
+        "dispatch_weights": true,
+        "combine_identity": true,
+        "weight_slots": {
+          "checked_active_slots": 8,
+          "bytes_per_expert": 786432
+        }
+      }
+    },
+    {
+      "rank": 1,
+      "native": {
+        "valid_rows": 2048,
+        "dispatch_hidden": true,
+        "dispatch_weights": true,
+        "combine_identity": true,
+        "weight_slots": {
+          "checked_active_slots": 2,
+          "bytes_per_expert": 786432
+        }
+      },
+      "optimized": {
+        "valid_rows": 2048,
+        "dispatch_hidden": true,
+        "dispatch_weights": true,
+        "combine_identity": true,
+        "weight_slots": {
+          "checked_active_slots": 8,
+          "bytes_per_expert": 786432
+        }
+      }
+    }
+  ],
+  "native_matches_cpu": true,
+  "all_materialized_fields_match": true,
+  "seed_communication": {
+    "remote_token_destinations": 511,
+    "all_token_destinations": 1020,
+    "remote_pairs": 2256,
+    "source_remote_payloads": [
+      256,
+      255
+    ],
+    "destination_remote_payloads": [
+      255,
+      256
+    ],
+    "pair_loads": [
+      2048,
+      2048
+    ],
+    "max_min_pair_load": 0,
+    "max_mean_pair_load": 1.0,
+    "active_extra_experts": [
+      0,
+      2
+    ]
+  },
+  "optimized_communication": {
+    "remote_token_destinations": 499,
+    "all_token_destinations": 1008,
+    "remote_pairs": 2214,
+    "source_remote_payloads": [
+      248,
+      251
+    ],
+    "destination_remote_payloads": [
+      251,
+      248
+    ],
+    "pair_loads": [
+      2048,
+      2048
+    ],
+    "max_min_pair_load": 0,
+    "max_mean_pair_load": 1.0,
+    "active_extra_experts": [
+      6,
+      8
+    ]
+  },
+  "weight_bytes_per_expert": 786432,
+  "physical_devices": [
+    [
+      150111977472
+    ],
+    [
+      150111977472
+    ]
+  ]
+}

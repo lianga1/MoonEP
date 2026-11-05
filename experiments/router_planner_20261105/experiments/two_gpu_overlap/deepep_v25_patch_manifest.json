@@ -1,0 +1,11 @@
+{
+  "repository": "https://github.com/deepseek-ai/DeepEP",
+  "reference_commit": "f6aa38fe06cd4a0489e7730365d4e0114970a2f3",
+  "status": "uncompiled_optional_patch",
+  "baseline_files": {
+    "deep_ep/buffers/ep.py": "a8f72c3975bbf0433b7c2bad7574053c2b8b42296c2d692336beade92b4ed737",
+    "csrc/buffers/ep.hpp": "e00e92a793b8e5a448db6f704ccd2c391ff9943cba30ec470c9d3945460c0193",
+    "csrc/comm/stream.hpp": "b9a5de2d39c71b2ee826fb84f7bd53ac68eed6d95190188cfeab1c4e00a2d947"
+  },
+  "patch_sha256": "46a1d86f039e6e82ef9529f39ec833dc0355f61d683d10f58a47e19b42032ee9"
+}

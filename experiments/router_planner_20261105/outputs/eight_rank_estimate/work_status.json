@@ -1,0 +1,38 @@
+{
+  "status": "complete_original_eight_rank_estimate_and_component_measurement",
+  "original_R": 8,
+  "physical_calibration_gpus": 2,
+  "host": "test-mtp-retrieval-copy",
+  "device": "H200",
+  "traffic": "traffic.json",
+  "calibration": "bandwidth_attempt02.json",
+  "kernel_raw": [
+    "kernel_graph_attempt01_physical0.json",
+    "kernel_graph_attempt01_physical1.json"
+  ],
+  "estimate": "estimate_attempt03.json",
+  "report": "report.html",
+  "input_retained": {
+    "N": 134144,
+    "K": 8,
+    "E": 352,
+    "B": 8,
+    "d": 256,
+    "L": 4,
+    "seed": 20261026
+  },
+  "training_assumption": "M1; BF16 activation and weights; FP32 replica gradients; once-refreshed weights retained F->B; two-refresh sensitivity included",
+  "measured_full_eight_gpu_training": false,
+  "measured_complete_native_eight_gpu_planner": false,
+  "route_checks": "all8 CPU replay exact plus all8 GPU residency intermediates/history and global4round owners exact",
+  "observed_component_exchange_speedup_pct": 51.823758553,
+  "modeled_serial_saved_ms_vs_rt0_excluding_planner": -35.65236489365634,
+  "modeled_serial_saved_ms_vs_rt2_excluding_planner": -6.748973761612433,
+  "kernel_independent_readback": "kernel_independent_readback.json",
+  "formula_audit": "report_validation.json",
+  "retained_failures": [
+    "bandwidth_attempt01.json"
+  ],
+  "gpu_released": true,
+  "user_instance_left_running": true
+}

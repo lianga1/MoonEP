@@ -1,0 +1,419 @@
+{
+  "status": "passed",
+  "rank": 1,
+  "metadata": {
+    "physical_ranks": 2,
+    "gpu": "NVIDIA H200",
+    "torch": "2.11.0+cu130",
+    "cuda": "13.0",
+    "nccl": [
+      2,
+      28,
+      9
+    ],
+    "hidden": 7168,
+    "token_backend": "DeepEP v1.2.1 intranode",
+    "reference_commit": "9af0e0d0e74f3577af1979c9b9e1ac2cad0104ee",
+    "expert_backend": "MoonEP one-sided NVLink prefetch",
+    "source_mapping": "original trace shards 0..3 -> physical rank 0; 4..7 -> physical rank 1",
+    "scope": "real router backend-adapter correctness; prepared reference seed; no native planner timing; no GEMM",
+    "hidden_payload": "synthetic BF16 unique per-token base16 pattern",
+    "online_inputs": "routes and owners sampled on GPU each run with one joint collective; d IDs fixed",
+    "sources": {
+      "moonep_materialize_reuse.py": "5b15d1b889bd003e4a49e4fb25114c5e577fd93285d024449c3f2d0d1e560bae",
+      "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+      "moonep_materialize.cu": "94a46ff9ba6cc46ebbfec4502847d7138670bda9fe5a9ab92bac0ddac6a92d1a",
+      "deepep_v1_smoke.py": "bfb7c304b997c24812b01f5576f8124b835054d5e78c6308c6a45794f357e09e",
+      "moonep_common.py": "e6987ae8e34d938575808421ff003d6ec2180cc7dc1370d9df9c8b8f8d332b6c",
+      "deepep_adapter.py": "90ce02cbd9ecae7723d6b407c7db21f394af88af1e37821125fb1d55234bb0e4",
+      "residency_reference_check.py": "0d43d46493dee5cdbd454702fd2ff987215e479e332c1bf2e10e94202b8a0da5",
+      "._deepep_v1_smoke.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+      "timeline_overlap_graph.py": "3aa7deaceaa8193ee1b6ad44b968bea8acf87f6b4d803d7cb2751f26c078bdb1",
+      "prepare_inputs.py": "1acc76d6b0f49eea8a607fd9ec9e1be1ab01d4b727810ef56738501b019050a6",
+      "moonep_materialize.py": "86b3b4b22cbb27260533ba51a6da40c22922ade93880ad7269a9842d720bfa94",
+      "two_gpu_smoke.py": "0decb839b2d48980b396dc37ea5d493f47492223071565dadf1f224320ef94b4",
+      "benchmark.py": "ba960cdf3b1439ec0c6260453cdf049fb3e2993b727b0700637d8c91386e73aa",
+      "residency_cuda_fused.cu": "a69fe9c215e8fe5623ffb69d40d2921c9cd969182e8313916137690e2dd17bad",
+      "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956",
+      "moonep_materialize_reference.py": "cb2edff4d47e8bc08bb2af415086f0d3945e20f5c3aa1d2f91de4dd2b0263568",
+      "deepep_v1_adapter.py": "a2d3b8af003c8de4c0c27b3bc15d323803870d208f8dd2de1bb4dbc8160b4315",
+      "residency_cuda_optimized.py": "eab0814a22a21198c22c22d6830c39112dba9782508bbb142f1d021c357899d4",
+      "analyze_results.py": "19befe9f8725169b699791e3ea1fbec4c1f66a8c35f335141d2b51e5e61a2e4f",
+      "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d",
+      "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+      "._deepep_trace_smoke.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+      "profile_residency.py": "b43987e8a056e917ee5dd094e0ce9cc9f686ff0a0c355bee41bb58771d96b9d7",
+      "residency_cuda_optimized.cu": "eb0d30bd8e7b3ff3e8950c1eaadf6757009b91b80946628270ae8ca9b10a4242",
+      "._deepep_v1_adapter.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+      "residency_smoke.py": "f86f9ef028dd0b30a2c8f2b321840e8cbfdfb7e0c82292c958f024546999a808",
+      "deepep_smoke.py": "e437ce9267fa0a05b93feb0986762df3594f4ad189fc88a81aa41f32e52a17d8",
+      "residency_cuda_fused.py": "da23ccabc52115a972757d4ea3dbdb5745771ee62a4a332145ca8b8f3220cada",
+      "moonep_materialize_reuse.cu": "269cb85f0312818cd46a26a6b94fccc5897e9fa9e278b038a13a30f5e2e9d1a8",
+      "moonep_split.py": "171935a9f72dc1cc16fdcb37030fa4e1208e7329e656b81efb3fc38de719deff",
+      "preplanning_gate.py": "f1d354b67810d834fddd262f4d2a29107213961800982cd1f212cee75b0349c9",
+      "benchmark_residency_variants.py": "fa301046d51c67e09a658fe40baf8bf38e61448abb61461a6dd2594191905be2",
+      "deepep_trace_smoke.py": "9b00099aa7a27d795bcb6e85c0e2d13c27fae2d0b262a665842f9e14f80eb900",
+      "exchange_reference_check.py": "10d4f08410a93b9ed1f4a2a38a1173325d78207d371da1226920936d72383dfb",
+      "moonep_reuse_reference_check.py": "aadcd1099ac40b1319cf7936df463248c899987be1f83ae89491f15159eb98d4",
+      "timeline_overlap.py": "cb35008555881ee672a20f5f7f555c0f59919f6bfc248e257efa1eb6c1caee0d"
+    },
+    "build_provenance": {
+      "upstream_commit": "9af0e0d0e74f3577af1979c9b9e1ac2cad0104ee",
+      "local_variant": "build fixes plus notify launch 128/256 threads",
+      "files": {
+        "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/deep_ep/__init__.py": "14bc5e4bdf184ad3bee7da4b6da70f063c950789d004c092e81bd0fad6aedc13",
+        "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/deep_ep_cpp.cpython-312-x86_64-linux-gnu.so": "37fc4b4be1d747c0b9034881236055fc12f153c0b0cb392460e0ad068a347117",
+        "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/setup.py": "ae151fecfbae6c9244bc9f2a5a24fe75ea36951e64e7ad7b4f48772ae12b02ab",
+        "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/csrc/kernels/intranode.cu": "794946b5241fbb20cbdc899108b43d041244691aa58d53e52f19bc85354831e5",
+        "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/deepep-v1-disable-nvshmem.patch": "a06aee336c93a2a1cc772c7c5496e06c3065a330efeba65d9d7352f6d5c72a9c",
+        "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/deepep-v1-intranode-dlink.patch": "8b5d407eb97ab2384fa147c1990a5d02e6697b403686e7845389f01c29fb75ce",
+        "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/deepep-v1-notify-256.patch": "45efbdb02ffae2d7c98b91862baa6a9b947c0a5a1d4dc9e0dc9c38aaea4ae907"
+      }
+    }
+  },
+  "layers": [
+    {
+      "layer": 0,
+      "input_sha256": "9070d5d269147c08f991f023f2e424c031d3649b3f3517e2e7c896f344e9de8b",
+      "shape": [
+        2,
+        67072,
+        8
+      ],
+      "checks": [
+        {
+          "no_cpu_sync": false,
+          "runtime_residency_cpu_equal": true,
+          "balanced_global_load": [
+            536576,
+            536576
+          ],
+          "physical_slots_valid": true,
+          "identity_combine_exact": true,
+          "max_abs_error": 0.0,
+          "received": {
+            "exact_source_token_and_payload": true,
+            "exact_per_token_expert_slots": true,
+            "unique_receive_token_per_rank": true,
+            "expert_counts_exact": true,
+            "received_valid_tokens": 133501,
+            "received_expert_tasks": 536576,
+            "receive_capacity": 133501
+          },
+          "weight_check": {
+            "checked_active_slots": 8,
+            "bytes_per_expert": 88080384
+          },
+          "remote_before_by_source": [
+            66842,
+            66844
+          ],
+          "remote_after_by_source": [
+            66615,
+            66642
+          ],
+          "expert_map": [
+            [
+              177,
+              183,
+              215,
+              283,
+              289,
+              304,
+              351,
+              -1
+            ],
+            [
+              2,
+              3,
+              30,
+              55,
+              68,
+              75,
+              119,
+              164
+            ]
+          ],
+          "exchange_stats": [
+            [
+              225,
+              576,
+              450,
+              427
+            ],
+            [
+              2,
+              12,
+              4,
+              2
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "no_cpu_sync": true,
+          "runtime_residency_cpu_equal": true,
+          "balanced_global_load": [
+            536576,
+            536576
+          ],
+          "physical_slots_valid": true,
+          "identity_combine_exact": true,
+          "max_abs_error": 0.0,
+          "received": {
+            "exact_source_token_and_payload": true,
+            "exact_per_token_expert_slots": true,
+            "unique_receive_token_per_rank": true,
+            "expert_counts_exact": true,
+            "received_valid_tokens": 133501,
+            "received_expert_tasks": 536576,
+            "receive_capacity": 134144
+          },
+          "weight_check": {
+            "checked_active_slots": 8,
+            "bytes_per_expert": 88080384
+          },
+          "remote_before_by_source": [
+            66842,
+            66844
+          ],
+          "remote_after_by_source": [
+            66615,
+            66642
+          ],
+          "expert_map": [
+            [
+              177,
+              183,
+              215,
+              283,
+              289,
+              304,
+              351,
+              -1
+            ],
+            [
+              2,
+              3,
+              30,
+              55,
+              68,
+              75,
+              119,
+              164
+            ]
+          ],
+          "exchange_stats": [
+            [
+              225,
+              576,
+              450,
+              427
+            ],
+            [
+              2,
+              12,
+              4,
+              2
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "layer": 7,
+      "input_sha256": "b005244357fa30dea03327859a928359ec3971ea0d5718053a9f1351b5d36b6e",
+      "shape": [
+        2,
+        67072,
+        8
+      ],
+      "checks": [
+        {
+          "no_cpu_sync": false,
+          "runtime_residency_cpu_equal": true,
+          "balanced_global_load": [
+            536576,
+            536576
+          ],
+          "physical_slots_valid": true,
+          "identity_combine_exact": true,
+          "max_abs_error": 0.0,
+          "received": {
+            "exact_source_token_and_payload": true,
+            "exact_per_token_expert_slots": true,
+            "unique_receive_token_per_rank": true,
+            "expert_counts_exact": true,
+            "received_valid_tokens": 130546,
+            "received_expert_tasks": 536576,
+            "receive_capacity": 130546
+          },
+          "weight_check": {
+            "checked_active_slots": 8,
+            "bytes_per_expert": 88080384
+          },
+          "remote_before_by_source": [
+            66594,
+            66374
+          ],
+          "remote_after_by_source": [
+            63476,
+            62588
+          ],
+          "expert_map": [
+            [
+              216,
+              273,
+              282,
+              283,
+              289,
+              320,
+              334,
+              -1
+            ],
+            [
+              36,
+              63,
+              82,
+              99,
+              123,
+              132,
+              142,
+              172
+            ]
+          ],
+          "exchange_stats": [
+            [
+              3898,
+              14134,
+              7796,
+              6799
+            ],
+            [
+              78,
+              584,
+              156,
+              78
+            ],
+            [
+              27,
+              162,
+              54,
+              27
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "no_cpu_sync": true,
+          "runtime_residency_cpu_equal": true,
+          "balanced_global_load": [
+            536576,
+            536576
+          ],
+          "physical_slots_valid": true,
+          "identity_combine_exact": true,
+          "max_abs_error": 0.0,
+          "received": {
+            "exact_source_token_and_payload": true,
+            "exact_per_token_expert_slots": true,
+            "unique_receive_token_per_rank": true,
+            "expert_counts_exact": true,
+            "received_valid_tokens": 130546,
+            "received_expert_tasks": 536576,
+            "receive_capacity": 134144
+          },
+          "weight_check": {
+            "checked_active_slots": 8,
+            "bytes_per_expert": 88080384
+          },
+          "remote_before_by_source": [
+            66594,
+            66374
+          ],
+          "remote_after_by_source": [
+            63476,
+            62588
+          ],
+          "expert_map": [
+            [
+              216,
+              273,
+              282,
+              283,
+              289,
+              320,
+              334,
+              -1
+            ],
+            [
+              36,
+              63,
+              82,
+              99,
+              123,
+              132,
+              142,
+              172
+            ]
+          ],
+          "exchange_stats": [
+            [
+              3898,
+              14134,
+              7796,
+              6799
+            ],
+            [
+              78,
+              584,
+              156,
+              78
+            ],
+            [
+              27,
+              162,
+              54,
+              27
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "failures": []
+}

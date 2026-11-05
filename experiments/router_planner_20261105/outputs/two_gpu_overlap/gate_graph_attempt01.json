@@ -1,0 +1,638 @@
+{
+  "schema_version": 1,
+  "policy": "exact_replay_finite_cohort_before_optimization",
+  "default": "native",
+  "future_positive_guaranteed": false,
+  "skip_optimized_planner_when_native_selected": true,
+  "decision_overhead_measured": false,
+  "scope": "planner + actual expert copies + dispatch + identity combine; no expert GEMM/training",
+  "evidence": {
+    "analysis_path": "outputs/two_gpu_overlap/analysis_graph_attempt01.json",
+    "analysis_sha256": "0102189ae053e3efb4e206e309d6ea286965297b9efa6e8ea286526c8b50e6f4",
+    "raw_path": "outputs/two_gpu_overlap/benchmark_graph_attempt01.json",
+    "raw_sha256": "6599054b4b858e2d1ecdb7bf0521acad703b4bd2889be4380c765189a8a6266b",
+    "raw_hash_verified": true,
+    "raw_status": "complete",
+    "raw_failures": [],
+    "analysis_failures": []
+  },
+  "cohorts": [
+    {
+      "layer": 0,
+      "cohort_id": "e794c14282b16a2f35166d267677e24bcb984c9602b6b9c5392ad972c18e6ba3",
+      "contract": {
+        "layer": 0,
+        "input_sha256": "9070d5d269147c08f991f023f2e424c031d3649b3f3517e2e7c896f344e9de8b",
+        "shape": [
+          2,
+          67072,
+          8
+        ],
+        "configuration": {
+          "world": 2,
+          "gpu": "NVIDIA H200",
+          "torch": "2.11.0+cu130",
+          "cuda": "13.0",
+          "nccl": [
+            2,
+            28,
+            9
+          ],
+          "hidden": 7168,
+          "intermediate": 2048,
+          "weight_dtype": "BF16",
+          "expert_bytes": 88080384,
+          "rounds": 4,
+          "source_mapping": "original 0..3 to rank0; 4..7 to rank1; all router rows retained",
+          "num_sms": 32,
+          "prefetch_sms": 32,
+          "timing_mode": "graph",
+          "sources": {
+            "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+            "moonep_materialize.cu": "94a46ff9ba6cc46ebbfec4502847d7138670bda9fe5a9ab92bac0ddac6a92d1a",
+            "deepep_v1_smoke.py": "305e64542c121339157c7b9401106608882c7f169e4abe2d05fe122e29a68218",
+            "moonep_common.py": "e6987ae8e34d938575808421ff003d6ec2180cc7dc1370d9df9c8b8f8d332b6c",
+            "deepep_adapter.py": "90ce02cbd9ecae7723d6b407c7db21f394af88af1e37821125fb1d55234bb0e4",
+            "residency_reference_check.py": "0d43d46493dee5cdbd454702fd2ff987215e479e332c1bf2e10e94202b8a0da5",
+            "prepare_inputs.py": "1acc76d6b0f49eea8a607fd9ec9e1be1ab01d4b727810ef56738501b019050a6",
+            "moonep_materialize.py": "86b3b4b22cbb27260533ba51a6da40c22922ade93880ad7269a9842d720bfa94",
+            "two_gpu_smoke.py": "552c553b2aba18f468d9753208a6366207f5f2aa123b272e2e4c1a977e4cab82",
+            "benchmark.py": "ab09e8f984fdf776838315c6111519b81589262d60842449bd1b77dfcfaec931",
+            "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956",
+            "moonep_materialize_reference.py": "cb2edff4d47e8bc08bb2af415086f0d3945e20f5c3aa1d2f91de4dd2b0263568",
+            "deepep_v1_adapter.py": "bb9acb60cdaf43f0ca559264d33a551f6aceb0e6e91e2ba2066b9a59ab77123d",
+            "analyze_results.py": "19befe9f8725169b699791e3ea1fbec4c1f66a8c35f335141d2b51e5e61a2e4f",
+            "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d",
+            "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+            "residency_smoke.py": "f86f9ef028dd0b30a2c8f2b321840e8cbfdfb7e0c82292c958f024546999a808",
+            "deepep_smoke.py": "e437ce9267fa0a05b93feb0986762df3594f4ad189fc88a81aa41f32e52a17d8",
+            "moonep_split.py": "171935a9f72dc1cc16fdcb37030fa4e1208e7329e656b81efb3fc38de719deff",
+            "exchange_reference_check.py": "10d4f08410a93b9ed1f4a2a38a1173325d78207d371da1226920936d72383dfb"
+          }
+        }
+      },
+      "contract_sha256": "75f3eb1ab8d93aa2fb1b524022269ff20f023aff7b6f6249a52815bc79967bd5",
+      "qualified_modes": [],
+      "rejected_modes": {
+        "optimized_cold_serial": [
+          "cuda_ms: no positive complete cohort versus nativecoldserial",
+          "cuda_ms: no positive complete cohort versus nativecoldearly",
+          "host_ms: no positive complete cohort versus nativecoldserial",
+          "host_ms: no positive complete cohort versus nativecoldearly"
+        ],
+        "optimized_cold_early": [
+          "cuda_ms: no positive complete cohort versus nativecoldserial",
+          "cuda_ms: no positive complete cohort versus nativecoldearly",
+          "host_ms: no positive complete cohort versus nativecoldserial",
+          "host_ms: no positive complete cohort versus nativecoldearly"
+        ],
+        "optimized_hot": [
+          "cuda_ms: no positive complete cohort versus nativehot",
+          "host_ms: no positive complete cohort versus nativehot"
+        ]
+      },
+      "preplanning_default": "native",
+      "allow_analytical_amortization": false
+    },
+    {
+      "layer": 1,
+      "cohort_id": "b2eeba307f772826e3baaa0d40466aefd0e4caaa2d70606cd34533c36b8a67a5",
+      "contract": {
+        "layer": 1,
+        "input_sha256": "dbbcdacc2a46d3ba2d581a00ba81139f20bc1413cff88edf57750370083671f6",
+        "shape": [
+          2,
+          67072,
+          8
+        ],
+        "configuration": {
+          "world": 2,
+          "gpu": "NVIDIA H200",
+          "torch": "2.11.0+cu130",
+          "cuda": "13.0",
+          "nccl": [
+            2,
+            28,
+            9
+          ],
+          "hidden": 7168,
+          "intermediate": 2048,
+          "weight_dtype": "BF16",
+          "expert_bytes": 88080384,
+          "rounds": 4,
+          "source_mapping": "original 0..3 to rank0; 4..7 to rank1; all router rows retained",
+          "num_sms": 32,
+          "prefetch_sms": 32,
+          "timing_mode": "graph",
+          "sources": {
+            "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+            "moonep_materialize.cu": "94a46ff9ba6cc46ebbfec4502847d7138670bda9fe5a9ab92bac0ddac6a92d1a",
+            "deepep_v1_smoke.py": "305e64542c121339157c7b9401106608882c7f169e4abe2d05fe122e29a68218",
+            "moonep_common.py": "e6987ae8e34d938575808421ff003d6ec2180cc7dc1370d9df9c8b8f8d332b6c",
+            "deepep_adapter.py": "90ce02cbd9ecae7723d6b407c7db21f394af88af1e37821125fb1d55234bb0e4",
+            "residency_reference_check.py": "0d43d46493dee5cdbd454702fd2ff987215e479e332c1bf2e10e94202b8a0da5",
+            "prepare_inputs.py": "1acc76d6b0f49eea8a607fd9ec9e1be1ab01d4b727810ef56738501b019050a6",
+            "moonep_materialize.py": "86b3b4b22cbb27260533ba51a6da40c22922ade93880ad7269a9842d720bfa94",
+            "two_gpu_smoke.py": "552c553b2aba18f468d9753208a6366207f5f2aa123b272e2e4c1a977e4cab82",
+            "benchmark.py": "ab09e8f984fdf776838315c6111519b81589262d60842449bd1b77dfcfaec931",
+            "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956",
+            "moonep_materialize_reference.py": "cb2edff4d47e8bc08bb2af415086f0d3945e20f5c3aa1d2f91de4dd2b0263568",
+            "deepep_v1_adapter.py": "bb9acb60cdaf43f0ca559264d33a551f6aceb0e6e91e2ba2066b9a59ab77123d",
+            "analyze_results.py": "19befe9f8725169b699791e3ea1fbec4c1f66a8c35f335141d2b51e5e61a2e4f",
+            "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d",
+            "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+            "residency_smoke.py": "f86f9ef028dd0b30a2c8f2b321840e8cbfdfb7e0c82292c958f024546999a808",
+            "deepep_smoke.py": "e437ce9267fa0a05b93feb0986762df3594f4ad189fc88a81aa41f32e52a17d8",
+            "moonep_split.py": "171935a9f72dc1cc16fdcb37030fa4e1208e7329e656b81efb3fc38de719deff",
+            "exchange_reference_check.py": "10d4f08410a93b9ed1f4a2a38a1173325d78207d371da1226920936d72383dfb"
+          }
+        }
+      },
+      "contract_sha256": "38c4faa563b7df9bc8b62f1463a86718753d7de9bf6bd960f0f28138703cd031",
+      "qualified_modes": [],
+      "rejected_modes": {
+        "optimized_cold_serial": [
+          "cuda_ms: no positive complete cohort versus nativecoldserial",
+          "cuda_ms: no positive complete cohort versus nativecoldearly",
+          "host_ms: no positive complete cohort versus nativecoldserial",
+          "host_ms: no positive complete cohort versus nativecoldearly"
+        ],
+        "optimized_cold_early": [
+          "cuda_ms: no positive complete cohort versus nativecoldserial",
+          "cuda_ms: no positive complete cohort versus nativecoldearly",
+          "host_ms: no positive complete cohort versus nativecoldserial",
+          "host_ms: no positive complete cohort versus nativecoldearly"
+        ],
+        "optimized_hot": [
+          "cuda_ms: no positive complete cohort versus nativehot",
+          "host_ms: no positive complete cohort versus nativehot"
+        ]
+      },
+      "preplanning_default": "native",
+      "allow_analytical_amortization": false
+    },
+    {
+      "layer": 2,
+      "cohort_id": "a7189ad72aece8eeb8f7d50227950de246c848ab82bb00c2986ac896f5c729cc",
+      "contract": {
+        "layer": 2,
+        "input_sha256": "844f64ee50dcec66a87a2163fa158e012bd9d74e1cfaa9d4423a9198aa52f0ff",
+        "shape": [
+          2,
+          67072,
+          8
+        ],
+        "configuration": {
+          "world": 2,
+          "gpu": "NVIDIA H200",
+          "torch": "2.11.0+cu130",
+          "cuda": "13.0",
+          "nccl": [
+            2,
+            28,
+            9
+          ],
+          "hidden": 7168,
+          "intermediate": 2048,
+          "weight_dtype": "BF16",
+          "expert_bytes": 88080384,
+          "rounds": 4,
+          "source_mapping": "original 0..3 to rank0; 4..7 to rank1; all router rows retained",
+          "num_sms": 32,
+          "prefetch_sms": 32,
+          "timing_mode": "graph",
+          "sources": {
+            "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+            "moonep_materialize.cu": "94a46ff9ba6cc46ebbfec4502847d7138670bda9fe5a9ab92bac0ddac6a92d1a",
+            "deepep_v1_smoke.py": "305e64542c121339157c7b9401106608882c7f169e4abe2d05fe122e29a68218",
+            "moonep_common.py": "e6987ae8e34d938575808421ff003d6ec2180cc7dc1370d9df9c8b8f8d332b6c",
+            "deepep_adapter.py": "90ce02cbd9ecae7723d6b407c7db21f394af88af1e37821125fb1d55234bb0e4",
+            "residency_reference_check.py": "0d43d46493dee5cdbd454702fd2ff987215e479e332c1bf2e10e94202b8a0da5",
+            "prepare_inputs.py": "1acc76d6b0f49eea8a607fd9ec9e1be1ab01d4b727810ef56738501b019050a6",
+            "moonep_materialize.py": "86b3b4b22cbb27260533ba51a6da40c22922ade93880ad7269a9842d720bfa94",
+            "two_gpu_smoke.py": "552c553b2aba18f468d9753208a6366207f5f2aa123b272e2e4c1a977e4cab82",
+            "benchmark.py": "ab09e8f984fdf776838315c6111519b81589262d60842449bd1b77dfcfaec931",
+            "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956",
+            "moonep_materialize_reference.py": "cb2edff4d47e8bc08bb2af415086f0d3945e20f5c3aa1d2f91de4dd2b0263568",
+            "deepep_v1_adapter.py": "bb9acb60cdaf43f0ca559264d33a551f6aceb0e6e91e2ba2066b9a59ab77123d",
+            "analyze_results.py": "19befe9f8725169b699791e3ea1fbec4c1f66a8c35f335141d2b51e5e61a2e4f",
+            "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d",
+            "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+            "residency_smoke.py": "f86f9ef028dd0b30a2c8f2b321840e8cbfdfb7e0c82292c958f024546999a808",
+            "deepep_smoke.py": "e437ce9267fa0a05b93feb0986762df3594f4ad189fc88a81aa41f32e52a17d8",
+            "moonep_split.py": "171935a9f72dc1cc16fdcb37030fa4e1208e7329e656b81efb3fc38de719deff",
+            "exchange_reference_check.py": "10d4f08410a93b9ed1f4a2a38a1173325d78207d371da1226920936d72383dfb"
+          }
+        }
+      },
+      "contract_sha256": "f0ad6ca9d076fd7528b09f544dd4abdfacdba048074eedf01f982f116c2d1234",
+      "qualified_modes": [],
+      "rejected_modes": {
+        "optimized_cold_serial": [
+          "cuda_ms: no positive complete cohort versus nativecoldserial",
+          "cuda_ms: no positive complete cohort versus nativecoldearly",
+          "host_ms: no positive complete cohort versus nativecoldserial",
+          "host_ms: no positive complete cohort versus nativecoldearly"
+        ],
+        "optimized_cold_early": [
+          "cuda_ms: no positive complete cohort versus nativecoldserial",
+          "cuda_ms: no positive complete cohort versus nativecoldearly",
+          "host_ms: no positive complete cohort versus nativecoldserial",
+          "host_ms: no positive complete cohort versus nativecoldearly"
+        ],
+        "optimized_hot": [
+          "cuda_ms: no positive complete cohort versus nativehot",
+          "host_ms: no positive complete cohort versus nativehot"
+        ]
+      },
+      "preplanning_default": "native",
+      "allow_analytical_amortization": false
+    },
+    {
+      "layer": 3,
+      "cohort_id": "cd7dd8cba5014a7db41e9c21480ec3e823ab7e9d4fefe0b0b654e5d3b73a6de3",
+      "contract": {
+        "layer": 3,
+        "input_sha256": "3238bd6b0ae54810c99040153d41007130eb80807e0d0de88a1dfeb2e13a117d",
+        "shape": [
+          2,
+          67072,
+          8
+        ],
+        "configuration": {
+          "world": 2,
+          "gpu": "NVIDIA H200",
+          "torch": "2.11.0+cu130",
+          "cuda": "13.0",
+          "nccl": [
+            2,
+            28,
+            9
+          ],
+          "hidden": 7168,
+          "intermediate": 2048,
+          "weight_dtype": "BF16",
+          "expert_bytes": 88080384,
+          "rounds": 4,
+          "source_mapping": "original 0..3 to rank0; 4..7 to rank1; all router rows retained",
+          "num_sms": 32,
+          "prefetch_sms": 32,
+          "timing_mode": "graph",
+          "sources": {
+            "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+            "moonep_materialize.cu": "94a46ff9ba6cc46ebbfec4502847d7138670bda9fe5a9ab92bac0ddac6a92d1a",
+            "deepep_v1_smoke.py": "305e64542c121339157c7b9401106608882c7f169e4abe2d05fe122e29a68218",
+            "moonep_common.py": "e6987ae8e34d938575808421ff003d6ec2180cc7dc1370d9df9c8b8f8d332b6c",
+            "deepep_adapter.py": "90ce02cbd9ecae7723d6b407c7db21f394af88af1e37821125fb1d55234bb0e4",
+            "residency_reference_check.py": "0d43d46493dee5cdbd454702fd2ff987215e479e332c1bf2e10e94202b8a0da5",
+            "prepare_inputs.py": "1acc76d6b0f49eea8a607fd9ec9e1be1ab01d4b727810ef56738501b019050a6",
+            "moonep_materialize.py": "86b3b4b22cbb27260533ba51a6da40c22922ade93880ad7269a9842d720bfa94",
+            "two_gpu_smoke.py": "552c553b2aba18f468d9753208a6366207f5f2aa123b272e2e4c1a977e4cab82",
+            "benchmark.py": "ab09e8f984fdf776838315c6111519b81589262d60842449bd1b77dfcfaec931",
+            "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956",
+            "moonep_materialize_reference.py": "cb2edff4d47e8bc08bb2af415086f0d3945e20f5c3aa1d2f91de4dd2b0263568",
+            "deepep_v1_adapter.py": "bb9acb60cdaf43f0ca559264d33a551f6aceb0e6e91e2ba2066b9a59ab77123d",
+            "analyze_results.py": "19befe9f8725169b699791e3ea1fbec4c1f66a8c35f335141d2b51e5e61a2e4f",
+            "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d",
+            "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+            "residency_smoke.py": "f86f9ef028dd0b30a2c8f2b321840e8cbfdfb7e0c82292c958f024546999a808",
+            "deepep_smoke.py": "e437ce9267fa0a05b93feb0986762df3594f4ad189fc88a81aa41f32e52a17d8",
+            "moonep_split.py": "171935a9f72dc1cc16fdcb37030fa4e1208e7329e656b81efb3fc38de719deff",
+            "exchange_reference_check.py": "10d4f08410a93b9ed1f4a2a38a1173325d78207d371da1226920936d72383dfb"
+          }
+        }
+      },
+      "contract_sha256": "4fd3466938c9ce6be1881f23b5df51c26bfe323f556001a638ed37b2dff77ce3",
+      "qualified_modes": [],
+      "rejected_modes": {
+        "optimized_cold_serial": [
+          "cuda_ms: no positive complete cohort versus nativecoldserial",
+          "cuda_ms: no positive complete cohort versus nativecoldearly",
+          "host_ms: no positive complete cohort versus nativecoldserial",
+          "host_ms: no positive complete cohort versus nativecoldearly"
+        ],
+        "optimized_cold_early": [
+          "cuda_ms: no positive complete cohort versus nativecoldserial",
+          "cuda_ms: no positive complete cohort versus nativecoldearly",
+          "host_ms: no positive complete cohort versus nativecoldserial",
+          "host_ms: no positive complete cohort versus nativecoldearly"
+        ],
+        "optimized_hot": [
+          "cuda_ms: no positive complete cohort versus nativehot",
+          "host_ms: no positive complete cohort versus nativehot"
+        ]
+      },
+      "preplanning_default": "native",
+      "allow_analytical_amortization": false
+    },
+    {
+      "layer": 4,
+      "cohort_id": "d66774e63282a80536f7695bae4b5cf543b3ca4b78ca87943f3c66c733b480d0",
+      "contract": {
+        "layer": 4,
+        "input_sha256": "502bbef9e34edbb784659fd842cc12fb01e30a1bb0b6ded4c7cf0063fc9b9e4c",
+        "shape": [
+          2,
+          67072,
+          8
+        ],
+        "configuration": {
+          "world": 2,
+          "gpu": "NVIDIA H200",
+          "torch": "2.11.0+cu130",
+          "cuda": "13.0",
+          "nccl": [
+            2,
+            28,
+            9
+          ],
+          "hidden": 7168,
+          "intermediate": 2048,
+          "weight_dtype": "BF16",
+          "expert_bytes": 88080384,
+          "rounds": 4,
+          "source_mapping": "original 0..3 to rank0; 4..7 to rank1; all router rows retained",
+          "num_sms": 32,
+          "prefetch_sms": 32,
+          "timing_mode": "graph",
+          "sources": {
+            "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+            "moonep_materialize.cu": "94a46ff9ba6cc46ebbfec4502847d7138670bda9fe5a9ab92bac0ddac6a92d1a",
+            "deepep_v1_smoke.py": "305e64542c121339157c7b9401106608882c7f169e4abe2d05fe122e29a68218",
+            "moonep_common.py": "e6987ae8e34d938575808421ff003d6ec2180cc7dc1370d9df9c8b8f8d332b6c",
+            "deepep_adapter.py": "90ce02cbd9ecae7723d6b407c7db21f394af88af1e37821125fb1d55234bb0e4",
+            "residency_reference_check.py": "0d43d46493dee5cdbd454702fd2ff987215e479e332c1bf2e10e94202b8a0da5",
+            "prepare_inputs.py": "1acc76d6b0f49eea8a607fd9ec9e1be1ab01d4b727810ef56738501b019050a6",
+            "moonep_materialize.py": "86b3b4b22cbb27260533ba51a6da40c22922ade93880ad7269a9842d720bfa94",
+            "two_gpu_smoke.py": "552c553b2aba18f468d9753208a6366207f5f2aa123b272e2e4c1a977e4cab82",
+            "benchmark.py": "ab09e8f984fdf776838315c6111519b81589262d60842449bd1b77dfcfaec931",
+            "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956",
+            "moonep_materialize_reference.py": "cb2edff4d47e8bc08bb2af415086f0d3945e20f5c3aa1d2f91de4dd2b0263568",
+            "deepep_v1_adapter.py": "bb9acb60cdaf43f0ca559264d33a551f6aceb0e6e91e2ba2066b9a59ab77123d",
+            "analyze_results.py": "19befe9f8725169b699791e3ea1fbec4c1f66a8c35f335141d2b51e5e61a2e4f",
+            "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d",
+            "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+            "residency_smoke.py": "f86f9ef028dd0b30a2c8f2b321840e8cbfdfb7e0c82292c958f024546999a808",
+            "deepep_smoke.py": "e437ce9267fa0a05b93feb0986762df3594f4ad189fc88a81aa41f32e52a17d8",
+            "moonep_split.py": "171935a9f72dc1cc16fdcb37030fa4e1208e7329e656b81efb3fc38de719deff",
+            "exchange_reference_check.py": "10d4f08410a93b9ed1f4a2a38a1173325d78207d371da1226920936d72383dfb"
+          }
+        }
+      },
+      "contract_sha256": "338f1dab39ed602f0fc3cbf11bf84ca2bd1a93ea920a138d862933600bc1e64e",
+      "qualified_modes": [],
+      "rejected_modes": {
+        "optimized_cold_serial": [
+          "cuda_ms: no positive complete cohort versus nativecoldserial",
+          "cuda_ms: no positive complete cohort versus nativecoldearly",
+          "host_ms: no positive complete cohort versus nativecoldserial",
+          "host_ms: no positive complete cohort versus nativecoldearly"
+        ],
+        "optimized_cold_early": [
+          "cuda_ms: no positive complete cohort versus nativecoldserial",
+          "cuda_ms: no positive complete cohort versus nativecoldearly",
+          "host_ms: no positive complete cohort versus nativecoldserial",
+          "host_ms: no positive complete cohort versus nativecoldearly"
+        ],
+        "optimized_hot": [
+          "cuda_ms: no positive complete cohort versus nativehot",
+          "host_ms: no positive complete cohort versus nativehot"
+        ]
+      },
+      "preplanning_default": "native",
+      "allow_analytical_amortization": false
+    },
+    {
+      "layer": 5,
+      "cohort_id": "6e6041b031fea685197e7bdd1827754f5d2cb85244871ca8e5895dacca068fb4",
+      "contract": {
+        "layer": 5,
+        "input_sha256": "cf72b7f79316d6ef7515c48ab829a3f54e5c45b58263eb4cf06ac734c65e2a56",
+        "shape": [
+          2,
+          67072,
+          8
+        ],
+        "configuration": {
+          "world": 2,
+          "gpu": "NVIDIA H200",
+          "torch": "2.11.0+cu130",
+          "cuda": "13.0",
+          "nccl": [
+            2,
+            28,
+            9
+          ],
+          "hidden": 7168,
+          "intermediate": 2048,
+          "weight_dtype": "BF16",
+          "expert_bytes": 88080384,
+          "rounds": 4,
+          "source_mapping": "original 0..3 to rank0; 4..7 to rank1; all router rows retained",
+          "num_sms": 32,
+          "prefetch_sms": 32,
+          "timing_mode": "graph",
+          "sources": {
+            "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+            "moonep_materialize.cu": "94a46ff9ba6cc46ebbfec4502847d7138670bda9fe5a9ab92bac0ddac6a92d1a",
+            "deepep_v1_smoke.py": "305e64542c121339157c7b9401106608882c7f169e4abe2d05fe122e29a68218",
+            "moonep_common.py": "e6987ae8e34d938575808421ff003d6ec2180cc7dc1370d9df9c8b8f8d332b6c",
+            "deepep_adapter.py": "90ce02cbd9ecae7723d6b407c7db21f394af88af1e37821125fb1d55234bb0e4",
+            "residency_reference_check.py": "0d43d46493dee5cdbd454702fd2ff987215e479e332c1bf2e10e94202b8a0da5",
+            "prepare_inputs.py": "1acc76d6b0f49eea8a607fd9ec9e1be1ab01d4b727810ef56738501b019050a6",
+            "moonep_materialize.py": "86b3b4b22cbb27260533ba51a6da40c22922ade93880ad7269a9842d720bfa94",
+            "two_gpu_smoke.py": "552c553b2aba18f468d9753208a6366207f5f2aa123b272e2e4c1a977e4cab82",
+            "benchmark.py": "ab09e8f984fdf776838315c6111519b81589262d60842449bd1b77dfcfaec931",
+            "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956",
+            "moonep_materialize_reference.py": "cb2edff4d47e8bc08bb2af415086f0d3945e20f5c3aa1d2f91de4dd2b0263568",
+            "deepep_v1_adapter.py": "bb9acb60cdaf43f0ca559264d33a551f6aceb0e6e91e2ba2066b9a59ab77123d",
+            "analyze_results.py": "19befe9f8725169b699791e3ea1fbec4c1f66a8c35f335141d2b51e5e61a2e4f",
+            "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d",
+            "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+            "residency_smoke.py": "f86f9ef028dd0b30a2c8f2b321840e8cbfdfb7e0c82292c958f024546999a808",
+            "deepep_smoke.py": "e437ce9267fa0a05b93feb0986762df3594f4ad189fc88a81aa41f32e52a17d8",
+            "moonep_split.py": "171935a9f72dc1cc16fdcb37030fa4e1208e7329e656b81efb3fc38de719deff",
+            "exchange_reference_check.py": "10d4f08410a93b9ed1f4a2a38a1173325d78207d371da1226920936d72383dfb"
+          }
+        }
+      },
+      "contract_sha256": "78347d93abd5c67f189f2b429c13d7189ca260b0eec0a41072fe96aecfa1a43c",
+      "qualified_modes": [],
+      "rejected_modes": {
+        "optimized_cold_serial": [
+          "cuda_ms: no positive complete cohort versus nativecoldserial",
+          "cuda_ms: no positive complete cohort versus nativecoldearly",
+          "host_ms: no positive complete cohort versus nativecoldserial",
+          "host_ms: no positive complete cohort versus nativecoldearly"
+        ],
+        "optimized_cold_early": [
+          "cuda_ms: no positive complete cohort versus nativecoldserial",
+          "cuda_ms: no positive complete cohort versus nativecoldearly",
+          "host_ms: no positive complete cohort versus nativecoldserial",
+          "host_ms: no positive complete cohort versus nativecoldearly"
+        ],
+        "optimized_hot": [
+          "cuda_ms: no positive complete cohort versus nativehot",
+          "host_ms: no positive complete cohort versus nativehot"
+        ]
+      },
+      "preplanning_default": "native",
+      "allow_analytical_amortization": false
+    },
+    {
+      "layer": 6,
+      "cohort_id": "862ccd7249bf6d0cac3a859db1224757ec94465bb9499cd5f22106d36677cede",
+      "contract": {
+        "layer": 6,
+        "input_sha256": "07b245a0267b26a726c60f263c661ade189262bf4e62c8e6bfe671a5a6b21d33",
+        "shape": [
+          2,
+          67072,
+          8
+        ],
+        "configuration": {
+          "world": 2,
+          "gpu": "NVIDIA H200",
+          "torch": "2.11.0+cu130",
+          "cuda": "13.0",
+          "nccl": [
+            2,
+            28,
+            9
+          ],
+          "hidden": 7168,
+          "intermediate": 2048,
+          "weight_dtype": "BF16",
+          "expert_bytes": 88080384,
+          "rounds": 4,
+          "source_mapping": "original 0..3 to rank0; 4..7 to rank1; all router rows retained",
+          "num_sms": 32,
+          "prefetch_sms": 32,
+          "timing_mode": "graph",
+          "sources": {
+            "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+            "moonep_materialize.cu": "94a46ff9ba6cc46ebbfec4502847d7138670bda9fe5a9ab92bac0ddac6a92d1a",
+            "deepep_v1_smoke.py": "305e64542c121339157c7b9401106608882c7f169e4abe2d05fe122e29a68218",
+            "moonep_common.py": "e6987ae8e34d938575808421ff003d6ec2180cc7dc1370d9df9c8b8f8d332b6c",
+            "deepep_adapter.py": "90ce02cbd9ecae7723d6b407c7db21f394af88af1e37821125fb1d55234bb0e4",
+            "residency_reference_check.py": "0d43d46493dee5cdbd454702fd2ff987215e479e332c1bf2e10e94202b8a0da5",
+            "prepare_inputs.py": "1acc76d6b0f49eea8a607fd9ec9e1be1ab01d4b727810ef56738501b019050a6",
+            "moonep_materialize.py": "86b3b4b22cbb27260533ba51a6da40c22922ade93880ad7269a9842d720bfa94",
+            "two_gpu_smoke.py": "552c553b2aba18f468d9753208a6366207f5f2aa123b272e2e4c1a977e4cab82",
+            "benchmark.py": "ab09e8f984fdf776838315c6111519b81589262d60842449bd1b77dfcfaec931",
+            "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956",
+            "moonep_materialize_reference.py": "cb2edff4d47e8bc08bb2af415086f0d3945e20f5c3aa1d2f91de4dd2b0263568",
+            "deepep_v1_adapter.py": "bb9acb60cdaf43f0ca559264d33a551f6aceb0e6e91e2ba2066b9a59ab77123d",
+            "analyze_results.py": "19befe9f8725169b699791e3ea1fbec4c1f66a8c35f335141d2b51e5e61a2e4f",
+            "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d",
+            "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+            "residency_smoke.py": "f86f9ef028dd0b30a2c8f2b321840e8cbfdfb7e0c82292c958f024546999a808",
+            "deepep_smoke.py": "e437ce9267fa0a05b93feb0986762df3594f4ad189fc88a81aa41f32e52a17d8",
+            "moonep_split.py": "171935a9f72dc1cc16fdcb37030fa4e1208e7329e656b81efb3fc38de719deff",
+            "exchange_reference_check.py": "10d4f08410a93b9ed1f4a2a38a1173325d78207d371da1226920936d72383dfb"
+          }
+        }
+      },
+      "contract_sha256": "8435679434ed6914e1c4cc8812afa550636c611b24ec29a95adc863fa3c99b4e",
+      "qualified_modes": [],
+      "rejected_modes": {
+        "optimized_cold_serial": [
+          "cuda_ms: no positive complete cohort versus nativecoldserial",
+          "cuda_ms: no positive complete cohort versus nativecoldearly",
+          "host_ms: no positive complete cohort versus nativecoldserial",
+          "host_ms: no positive complete cohort versus nativecoldearly"
+        ],
+        "optimized_cold_early": [
+          "cuda_ms: no positive complete cohort versus nativecoldserial",
+          "cuda_ms: no positive complete cohort versus nativecoldearly",
+          "host_ms: no positive complete cohort versus nativecoldserial",
+          "host_ms: no positive complete cohort versus nativecoldearly"
+        ],
+        "optimized_hot": [
+          "cuda_ms: no positive complete cohort versus nativehot",
+          "host_ms: no positive complete cohort versus nativehot"
+        ]
+      },
+      "preplanning_default": "native",
+      "allow_analytical_amortization": false
+    },
+    {
+      "layer": 7,
+      "cohort_id": "d961b4b04cceed0b1dad49e2abf22d80abb2391e6b0b7c40c96b8d8f5da55aa3",
+      "contract": {
+        "layer": 7,
+        "input_sha256": "b005244357fa30dea03327859a928359ec3971ea0d5718053a9f1351b5d36b6e",
+        "shape": [
+          2,
+          67072,
+          8
+        ],
+        "configuration": {
+          "world": 2,
+          "gpu": "NVIDIA H200",
+          "torch": "2.11.0+cu130",
+          "cuda": "13.0",
+          "nccl": [
+            2,
+            28,
+            9
+          ],
+          "hidden": 7168,
+          "intermediate": 2048,
+          "weight_dtype": "BF16",
+          "expert_bytes": 88080384,
+          "rounds": 4,
+          "source_mapping": "original 0..3 to rank0; 4..7 to rank1; all router rows retained",
+          "num_sms": 32,
+          "prefetch_sms": 32,
+          "timing_mode": "graph",
+          "sources": {
+            "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+            "moonep_materialize.cu": "94a46ff9ba6cc46ebbfec4502847d7138670bda9fe5a9ab92bac0ddac6a92d1a",
+            "deepep_v1_smoke.py": "305e64542c121339157c7b9401106608882c7f169e4abe2d05fe122e29a68218",
+            "moonep_common.py": "e6987ae8e34d938575808421ff003d6ec2180cc7dc1370d9df9c8b8f8d332b6c",
+            "deepep_adapter.py": "90ce02cbd9ecae7723d6b407c7db21f394af88af1e37821125fb1d55234bb0e4",
+            "residency_reference_check.py": "0d43d46493dee5cdbd454702fd2ff987215e479e332c1bf2e10e94202b8a0da5",
+            "prepare_inputs.py": "1acc76d6b0f49eea8a607fd9ec9e1be1ab01d4b727810ef56738501b019050a6",
+            "moonep_materialize.py": "86b3b4b22cbb27260533ba51a6da40c22922ade93880ad7269a9842d720bfa94",
+            "two_gpu_smoke.py": "552c553b2aba18f468d9753208a6366207f5f2aa123b272e2e4c1a977e4cab82",
+            "benchmark.py": "ab09e8f984fdf776838315c6111519b81589262d60842449bd1b77dfcfaec931",
+            "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956",
+            "moonep_materialize_reference.py": "cb2edff4d47e8bc08bb2af415086f0d3945e20f5c3aa1d2f91de4dd2b0263568",
+            "deepep_v1_adapter.py": "bb9acb60cdaf43f0ca559264d33a551f6aceb0e6e91e2ba2066b9a59ab77123d",
+            "analyze_results.py": "19befe9f8725169b699791e3ea1fbec4c1f66a8c35f335141d2b51e5e61a2e4f",
+            "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d",
+            "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+            "residency_smoke.py": "f86f9ef028dd0b30a2c8f2b321840e8cbfdfb7e0c82292c958f024546999a808",
+            "deepep_smoke.py": "e437ce9267fa0a05b93feb0986762df3594f4ad189fc88a81aa41f32e52a17d8",
+            "moonep_split.py": "171935a9f72dc1cc16fdcb37030fa4e1208e7329e656b81efb3fc38de719deff",
+            "exchange_reference_check.py": "10d4f08410a93b9ed1f4a2a38a1173325d78207d371da1226920936d72383dfb"
+          }
+        }
+      },
+      "contract_sha256": "3f4ed13ca96369ea8be1307c89eff2167382dd599f22262957c91285a92b70bc",
+      "qualified_modes": [],
+      "rejected_modes": {
+        "optimized_cold_serial": [
+          "cuda_ms: no positive complete cohort versus nativecoldserial",
+          "cuda_ms: no positive complete cohort versus nativecoldearly",
+          "host_ms: no positive complete cohort versus nativecoldserial",
+          "host_ms: no positive complete cohort versus nativecoldearly"
+        ],
+        "optimized_cold_early": [
+          "cuda_ms: no positive complete cohort versus nativecoldserial",
+          "cuda_ms: no positive complete cohort versus nativecoldearly",
+          "host_ms: no positive complete cohort versus nativecoldserial",
+          "host_ms: no positive complete cohort versus nativecoldearly"
+        ],
+        "optimized_hot": [
+          "cuda_ms: no positive complete cohort versus nativehot",
+          "host_ms: no positive complete cohort versus nativehot"
+        ]
+      },
+      "preplanning_default": "native",
+      "allow_analytical_amortization": false
+    }
+  ],
+  "caution": "Eligibility applies only to retained measured cohorts. Unknown weight version or mapping lifetime uses native. Do not compute the optimized plan to decide whether to run it; its sunk cost cannot be refunded."
+}

@@ -1,0 +1,122 @@
+/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+rank 1: precompile complete
+rank 0: precompile complete
+/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+{
+  "status": "complete",
+  "layer": 0,
+  "ranks": 2,
+  "tokens_per_rank": 67072,
+  "hidden": 7168,
+  "intermediate": 2048,
+  "failures": [],
+  "trace_sha256": "22bd2a9496dbc0e377d72b7a71c44e94adaa1e0ff86bc3e590264c31abd2393b",
+  "trace_transform": "contiguous eight-source rows folded into two sources; optional per-source prefix",
+  "checks": [
+    {
+      "rank": 0,
+      "native": {
+        "valid_rows": 536576,
+        "dispatch_hidden": true,
+        "dispatch_weights": true,
+        "combine_identity": true,
+        "weight_slots": {
+          "checked_active_slots": 0,
+          "bytes_per_expert": 88080384
+        }
+      },
+      "optimized": {
+        "valid_rows": 536576,
+        "dispatch_hidden": true,
+        "dispatch_weights": true,
+        "combine_identity": true,
+        "weight_slots": {
+          "checked_active_slots": 8,
+          "bytes_per_expert": 88080384
+        }
+      }
+    },
+    {
+      "rank": 1,
+      "native": {
+        "valid_rows": 536576,
+        "dispatch_hidden": true,
+        "dispatch_weights": true,
+        "combine_identity": true,
+        "weight_slots": {
+          "checked_active_slots": 1,
+          "bytes_per_expert": 88080384
+        }
+      },
+      "optimized": {
+        "valid_rows": 536576,
+        "dispatch_hidden": true,
+        "dispatch_weights": true,
+        "combine_identity": true,
+        "weight_slots": {
+          "checked_active_slots": 8,
+          "bytes_per_expert": 88080384
+        }
+      }
+    }
+  ],
+  "native_matches_cpu": true,
+  "all_materialized_fields_match": true,
+  "seed_communication": {
+    "remote_token_destinations": 133686,
+    "all_token_destinations": 267500,
+    "remote_pairs": 528048,
+    "source_remote_payloads": [
+      66842,
+      66844
+    ],
+    "destination_remote_payloads": [
+      66844,
+      66842
+    ],
+    "pair_loads": [
+      536576,
+      536576
+    ],
+    "max_min_pair_load": 0,
+    "max_mean_pair_load": 1.0,
+    "active_extra_experts": [
+      0,
+      1
+    ]
+  },
+  "optimized_communication": {
+    "remote_token_destinations": 132440,
+    "all_token_destinations": 266217,
+    "remote_pairs": 525742,
+    "source_remote_payloads": [
+      66394,
+      66046
+    ],
+    "destination_remote_payloads": [
+      66046,
+      66394
+    ],
+    "pair_loads": [
+      536576,
+      536576
+    ],
+    "max_min_pair_load": 0,
+    "max_mean_pair_load": 1.0,
+    "active_extra_experts": [
+      8,
+      8
+    ]
+  },
+  "weight_bytes_per_expert": 88080384,
+  "physical_devices": [
+    [
+      150111977472
+    ],
+    [
+      150111977472
+    ]
+  ]
+}

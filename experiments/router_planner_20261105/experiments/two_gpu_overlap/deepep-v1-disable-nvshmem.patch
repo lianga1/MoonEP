@@ -1,0 +1,18 @@
+--- a/setup.py
++++ b/setup.py
+@@ -16,10 +16,13 @@
+ 
+ 
+ if __name__ == '__main__':
+-    disable_nvshmem = False
++    disable_nvshmem = bool(int(os.getenv('DISABLE_NVSHMEM', '0')))
+     nvshmem_dir = os.getenv('NVSHMEM_DIR', None)
+     nvshmem_host_lib = 'libnvshmem_host.so'
+-    if nvshmem_dir is None:
++    if disable_nvshmem:
++        # Explicit intranode-only build; do not probe installed NVSHMEM packages.
++        nvshmem_dir = None
++    elif nvshmem_dir is None:
+         try:
+             nvshmem_dir = importlib.util.find_spec("nvidia.nvshmem").submodule_search_locations[0]
+             nvshmem_host_lib = get_nvshmem_host_lib_name(nvshmem_dir)

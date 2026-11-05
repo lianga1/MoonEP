@@ -1,0 +1,10 @@
+/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/profiler/profiler.py:224: UserWarning: Warning: Profiler clears events at the end of each cycle.Only events from the current cycle will be reported.To keep events across cycles, set acc_events=True.
+  _warn_once(
+/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/profiler/profiler.py:224: UserWarning: Warning: Profiler clears events at the end of each cycle.Only events from the current cycle will be reported.To keep events across cycles, set acc_events=True.
+  _warn_once(
+/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+{"layer": 0, "graph_median_ms": {"select_only": 0.13447680473327636, "samples_only": 0.01724480018019676, "samples_select": 0.14976800084114072}, "profile_rows": 8}
+{"layer": 7, "graph_median_ms": {"select_only": 0.12293919920921326, "samples_only": 0.02431199997663498, "samples_select": 0.1397487998008728}, "profile_rows": 8}

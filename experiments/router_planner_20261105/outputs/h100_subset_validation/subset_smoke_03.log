@@ -1,0 +1,18 @@
+[1/2] /usr/local/cuda/bin/nvcc -MD -MF subset_cuda.cuda.o.d -DTORCH_EXTENSION_NAME=epmoe_subset_h100 -DTORCH_API_INCLUDE_EXTENSION_H -isystem /usr/local/lib/python3.12/dist-packages/torch/include -isystem /usr/local/lib/python3.12/dist-packages/torch/include/torch/csrc/api/include -isystem /usr/local/cuda/include -isystem /usr/include/python3.12 -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr -gencode=arch=compute_90,code=sm_90 --compiler-options '-fPIC' -O3 -lineinfo -std=c++20 -c /inspire/hdd/project/video-generation/liangzuning-253108090053/epmoe_h100_planner_20261102/experiments/h100_planner/subset_cuda.cu -o subset_cuda.cuda.o 
+[2/2] c++ subset_cuda.cuda.o -shared -L/usr/local/lib/python3.12/dist-packages/torch/lib -lc10 -lc10_cuda -ltorch_cpu -ltorch_cuda -ltorch -ltorch_python -L/usr/local/cuda/lib64 -lcudart -o epmoe_subset_h100.so
+{"layer": 0, "variant": "parallel", "bitwise": true, "graph_bitwise": true, "graph_us": [], "median_us": null}
+{"layer": 0, "variant": "indexed", "bitwise": true, "graph_bitwise": true, "graph_us": [], "median_us": null}
+{"layer": 1, "variant": "parallel", "bitwise": true, "graph_bitwise": true, "graph_us": [], "median_us": null}
+{"layer": 1, "variant": "indexed", "bitwise": true, "graph_bitwise": true, "graph_us": [], "median_us": null}
+{"layer": 2, "variant": "parallel", "bitwise": true, "graph_bitwise": true, "graph_us": [], "median_us": null}
+{"layer": 2, "variant": "indexed", "bitwise": true, "graph_bitwise": true, "graph_us": [], "median_us": null}
+{"layer": 3, "variant": "parallel", "bitwise": true, "graph_bitwise": true, "graph_us": [], "median_us": null}
+{"layer": 3, "variant": "indexed", "bitwise": true, "graph_bitwise": true, "graph_us": [], "median_us": null}
+{"layer": 4, "variant": "parallel", "bitwise": true, "graph_bitwise": true, "graph_us": [], "median_us": null}
+{"layer": 4, "variant": "indexed", "bitwise": true, "graph_bitwise": true, "graph_us": [], "median_us": null}
+{"layer": 5, "variant": "parallel", "bitwise": true, "graph_bitwise": true, "graph_us": [], "median_us": null}
+{"layer": 5, "variant": "indexed", "bitwise": true, "graph_bitwise": true, "graph_us": [], "median_us": null}
+{"layer": 6, "variant": "parallel", "bitwise": true, "graph_bitwise": true, "graph_us": [], "median_us": null}
+{"layer": 6, "variant": "indexed", "bitwise": true, "graph_bitwise": true, "graph_us": [], "median_us": null}
+{"layer": 7, "variant": "parallel", "bitwise": true, "graph_bitwise": true, "graph_us": [], "median_us": null}
+{"layer": 7, "variant": "indexed", "bitwise": true, "graph_bitwise": true, "graph_us": [], "median_us": null}

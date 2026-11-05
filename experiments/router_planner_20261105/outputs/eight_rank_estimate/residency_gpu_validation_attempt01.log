@@ -1,0 +1,8 @@
+{"layer": 0, "cpu_history_exact": true, "cpu_support_exact": true, "packages": 1026, "accepted": 32, "gpu_all_intermediates_exact": true, "gpu_history_exact": true, "repeated_reset_exact": true, "graph_exact": true}
+{"layer": 1, "cpu_history_exact": true, "cpu_support_exact": true, "packages": 958, "accepted": 35, "gpu_all_intermediates_exact": true, "gpu_history_exact": true, "repeated_reset_exact": true, "graph_exact": true}
+{"layer": 2, "cpu_history_exact": true, "cpu_support_exact": true, "packages": 963, "accepted": 36, "gpu_all_intermediates_exact": true, "gpu_history_exact": true, "repeated_reset_exact": true, "graph_exact": true}
+{"layer": 3, "cpu_history_exact": true, "cpu_support_exact": true, "packages": 922, "accepted": 33, "gpu_all_intermediates_exact": true, "gpu_history_exact": true, "repeated_reset_exact": true, "graph_exact": true}
+{"layer": 4, "cpu_history_exact": true, "cpu_support_exact": true, "packages": 941, "accepted": 36, "gpu_all_intermediates_exact": true, "gpu_history_exact": true, "repeated_reset_exact": true, "graph_exact": true}
+{"layer": 5, "cpu_history_exact": true, "cpu_support_exact": true, "packages": 960, "accepted": 39, "gpu_all_intermediates_exact": true, "gpu_history_exact": true, "repeated_reset_exact": true, "graph_exact": true}
+{"layer": 6, "cpu_history_exact": true, "cpu_support_exact": true, "packages": 996, "accepted": 35, "gpu_all_intermediates_exact": true, "gpu_history_exact": true, "repeated_reset_exact": true, "graph_exact": true}
+{"layer": 7, "cpu_history_exact": true, "cpu_support_exact": true, "packages": 960, "accepted": 35, "gpu_all_intermediates_exact": true, "gpu_history_exact": true, "repeated_reset_exact": true, "graph_exact": true}

@@ -1,0 +1,85 @@
+{
+  "cpu_semantics_only": true,
+  "layers": [
+    {
+      "layer": 0,
+      "exact_support_history_diagnostics": true,
+      "gain_zero_samples": 0,
+      "diagnostics": [
+        28,
+        7,
+        8
+      ]
+    },
+    {
+      "layer": 1,
+      "exact_support_history_diagnostics": true,
+      "gain_zero_samples": 0,
+      "diagnostics": [
+        24,
+        7,
+        5
+      ]
+    },
+    {
+      "layer": 2,
+      "exact_support_history_diagnostics": true,
+      "gain_zero_samples": 0,
+      "diagnostics": [
+        24,
+        6,
+        8
+      ]
+    },
+    {
+      "layer": 3,
+      "exact_support_history_diagnostics": true,
+      "gain_zero_samples": 0,
+      "diagnostics": [
+        26,
+        6,
+        7
+      ]
+    },
+    {
+      "layer": 4,
+      "exact_support_history_diagnostics": true,
+      "gain_zero_samples": 0,
+      "diagnostics": [
+        24,
+        7,
+        8
+      ]
+    },
+    {
+      "layer": 5,
+      "exact_support_history_diagnostics": true,
+      "gain_zero_samples": 0,
+      "diagnostics": [
+        26,
+        8,
+        7
+      ]
+    },
+    {
+      "layer": 6,
+      "exact_support_history_diagnostics": true,
+      "gain_zero_samples": 0,
+      "diagnostics": [
+        26,
+        7,
+        7
+      ]
+    },
+    {
+      "layer": 7,
+      "exact_support_history_diagnostics": true,
+      "gain_zero_samples": 0,
+      "diagnostics": [
+        24,
+        7,
+        8
+      ]
+    }
+  ]
+}

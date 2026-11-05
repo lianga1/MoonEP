@@ -1,0 +1,96 @@
+{
+  "implementation": "independent Python adapter; original MoonEP source unmodified by this subtask",
+  "source_sha256": {
+    "inputs/MoonEP/moonep/api.py": "a6adc929b04bad72ec89a20ee6509a27ee70cac98b5276f27989ce8947c4830c",
+    "inputs/MoonEP/moonep/planning.py": "7d0a13ea41cc6b420ae1260f470ded997dd380a92fa7175ee740ddea03cc5bea",
+    "inputs/MoonEP/moonep/prefetch.py": "98f81a9a49e284ed5135617b8512fe78e141422b99dbdccba295d5c97ae0b0a3",
+    "inputs/MoonEP/moonep/dispatch.py": "5415544783b54ac9def877c72a388c288c062c952a826981391ed2731628e56b",
+    "inputs/MoonEP/moonep/dispatch_epilogue.py": "a0f36c989bafe13b2f61cafc29cd4f0e0e763b1e673e4641cc8962cab91570c1",
+    "inputs/MoonEP/moonep/buffer.py": "6d220e27d0dc9b66a1e4478beee4ac827959ad3b70f0e0dae500d80be475cf8a",
+    "inputs/MoonEP/csrc/nvl_shared_buffer.cuh": "30d4c5a9897bc4a2afe82c7501c8853bbe463335aae974bd47eefe54166f8b0d",
+    "experiments/two_gpu_overlap/moonep_split.py": "171935a9f72dc1cc16fdcb37030fa4e1208e7329e656b81efb3fc38de719deff",
+    "experiments/two_gpu_overlap/moonep_materialize_reference.py": "cb2edff4d47e8bc08bb2af415086f0d3945e20f5c3aa1d2f91de4dd2b0263568",
+    "experiments/two_gpu_overlap/moonep_common.py": "47198aa40980935fb90c7d7adb7f293f23f41bb0522bd7404cf9b44b16a3f70b",
+    "experiments/two_gpu_overlap/moonep_materialize.py": "86b3b4b22cbb27260533ba51a6da40c22922ade93880ad7269a9842d720bfa94",
+    "experiments/two_gpu_overlap/moonep_materialize.cu": "94a46ff9ba6cc46ebbfec4502847d7138670bda9fe5a9ab92bac0ddac6a92d1a",
+    "experiments/two_gpu_overlap/two_gpu_smoke.py": "552c553b2aba18f468d9753208a6366207f5f2aa123b272e2e4c1a977e4cab82"
+  },
+  "static_validation": "Python AST parse passed; local CUDA unavailable; GPU execution pending",
+  "minimum_ranks": 2,
+  "native_kernel_boundary": "A5 internal selection -> Phase B/C token addresses -> Phase D public expert outputs; ready event only after full native planner",
+  "external_planner_boundary": "final stable [R,B] expert plan can launch prefetch while token exchange and address construction continue",
+  "stream_dependencies": {
+    "expert_stream": [
+      "final expert-plan event",
+      "local source-weight producer event",
+      "optional remote weights-version-ready event"
+    ],
+    "token_stream": [
+      "final token-plan/address/provenance event",
+      "input-token producer event"
+    ],
+    "expert_compute_stream": [
+      "weight-copy completion",
+      "token-dispatch completion"
+    ]
+  },
+  "required_contracts": [
+    "gate/up arguments alias the same fused W1; down is W2",
+    "physical B slot ordering remains stable through token plan, compute and backward",
+    "source expert weights immutable during remote reads",
+    "fresh plan dispatch must build dedup structures; Buffer.dispatch(plan=plan_from_Buffer_plan) is unsafe for first use",
+    "external token planner must publish MoonEP-compatible dst, physical_topk, zero-fill and remote src_info metadata, not only owner IDs",
+    "one in-flight step per Buffer; consumers completed before plan/slot reuse",
+    "adapter.close before Buffer.destroy and process-group teardown"
+  ],
+  "weight_examples": [
+    {
+      "H": 3584,
+      "I": 3072,
+      "dtype": "BF16",
+      "projection_count": 3,
+      "bytes_per_expert": 66060288,
+      "MiB_per_expert": 63
+    },
+    {
+      "H": 7168,
+      "I": 2048,
+      "dtype": "BF16",
+      "projection_count": 3,
+      "bytes_per_expert": 88080384,
+      "MiB_per_expert": 84
+    },
+    {
+      "H": 4096,
+      "I": 13824,
+      "dtype": "FP8 excluding scales",
+      "projection_count": 3,
+      "bytes_per_expert": 169869312,
+      "MiB_per_expert": 162
+    }
+  ],
+  "not_proven": [
+    "GPU correctness or timing",
+    "net speedup",
+    "overlap before internal native A5 completes",
+    "training full-step improvement including gradient reduction"
+  ],
+  "cpu_reference_validation": {
+    "scope": "folded real layer0 prefix 2x256x8",
+    "pairs": 4096,
+    "address_unique": true,
+    "source_provenance_inverse": true,
+    "one_primary_per_token_destination": true,
+    "counts_conserved": true
+  },
+  "gpu_output_builder": {
+    "scope": "two physical ranks, E+B<=512",
+    "per_source_count_collective_int32": 720,
+    "source_sharded": true,
+    "stable_local_sort": "CUB integer radix sort; source-prefix offsets",
+    "native_segment_rows": "E+B",
+    "physical_expert_slots": "E/R+B",
+    "same_step_expert_prefetch": "after prepare_support; may overlap exchange and output construction",
+    "gpu_validation": "pending remote smoke"
+  }
+}

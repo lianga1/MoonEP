@@ -1,0 +1,20 @@
+{
+  "local_links_verified": 30,
+  "sample_rows_verified": true,
+  "browser_checks": [
+    "animation steps 1 through 6; remote payload 3 to 2",
+    "seed 20261027 shows 24.5005 percent",
+    "m=134144 and g=4 shows 10752 candidate upper bound",
+    "final diagram visually inspected"
+  ],
+  "scope": "document and interactions; no new GPU benchmark",
+  "previous_document_sha256": "4452d42e54345fecfac3fd8710575decf0c88a6b7accce13e230cf2f018f993c",
+  "document_sha256": "881c67eb68d94c81677e7d1978438abd6c3c81f37eba5ef1751d7cfc5cdc7462",
+  "new_section_checks": [
+    "aggregate section and source links exist",
+    "results from independent audit: 26.630313810490946 percent",
+    "updated complexity A and factor explanation"
+  ],
+  "browser_checks_scope": "Earlier animation unchanged; new section statically checked, not browser revalidated",
+  "latest_section": "subset pruning, static source/result/link check; existing animations unchanged"
+}

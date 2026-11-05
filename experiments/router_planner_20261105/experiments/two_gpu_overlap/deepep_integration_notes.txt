@@ -1,0 +1,192 @@
+DeepEP integration: two separate readiness points
+Reference date: 2026-11-05 (Asia/Shanghai)
+
+1. Versions and execution status
+
+Current official v2.5 reference: f6aa38fe06cd4a0489e7730365d4e0114970a2f3.
+This version provides EPBuffer.lb_prefetch_weights and lb_reduce_grads. Its
+requirements (CUDA 13.1+, NCCL 2.32.3+) do not match the target's CUDA 13.0 /
+NCCL 2.28.9. The v2.5 adapter and optional patch are source-level work only until
+built and tested. A successful `git apply --check` is not a GPU validation.
+
+Compatible intranode probe: official v1.2.1 commit
+9af0e0d0e74f3577af1979c9b9e1ac2cad0104ee, copied without source edits to
+vendor/DeepEP_v1. setup.py automatically disables NVSHMEM-dependent kernels when
+NVSHMEM is absent. The Torch/NCCL installation is not upgraded. Build in place:
+
+  TORCH_CUDA_ARCH_LIST=9.0 MAX_JOBS=4 python setup.py build_ext --inplace
+
+Set PYTHONPATH to this directory for the two-rank smoke. This really invokes
+DeepEP dispatch/combine. Its weight transfer is separately labelled Torch/NCCL
+batch P2P, not a DeepEP weight operation. An existing MoonEP one-sided prefetch
+operation may replace the weight ticket without modifying the token adapter.
+
+2. Minimum integration data
+
+The expert planner publishes redundancy_mapping[R,B], GPU int32, expert ID or -1.
+The full token planner later publishes execution_rank[S,K]. Original logical
+expert IDs remain unchanged. Physical expert IDs passed to DeepEP are:
+
+  target_rank * (E/R+B) + slot_on_target
+
+The home slots are 0..E/R-1 and redundant slots are E/R..E/R+B-1. DeepEP receives
+num_experts=E+R*B, so its existing rank-major division routes to the planned GPU.
+No token payload is sent while the planner is still changing its destination.
+`start_physical_dispatch` bypasses the reference remapping work if the final
+planner already writes physical IDs; that is the preferred fused implementation.
+
+3. Dependency order
+
+  expert plan ready -> launch weight prefetch ----------------> weights ready
+                |                                                |
+                +-> full token planner -> physical IDs -> dispatch -> tokens ready
+                                                                 |         |
+                                                                 +----+----+
+                                                                      |
+                                                              expert computation
+                                                                      |
+                                                            weighted combine
+
+Weight prefetch begins after the finalized expert table, without waiting for the
+full-token scan. Dispatch depends on token/physical-ID readiness only. Expert
+compute waits on both tickets. All ranks submit collective operations in the same
+order, including ranks with no requested replicas. Keep mapping, source weights,
+replica storage, routing indices, and handles alive until their consumers finish.
+Do not mutate topk IDs while a saved dispatch/combine handle is in use.
+
+4. v1 implementation and limits
+
+DeepEPV1PlannedAdapter uses get_dispatch_layout, dispatch(async_finish=True), and
+combine(async_finish=True), with CUDA event dependencies and fixed capacity
+num_worst_tokens=2*S to avoid dispatch's receive-count CPU synchronization.
+The dispatch output is deduplicated by source token / target rank; it is NOT the
+expanded grouped-GEMM layout of v2 or MoonEP. A real expert compute path needs
+permute + GEMM + unpermute/reduction. The smoke uses a labelled scalar toy expert
+to test replica values and combine correctness, not model execution latency.
+Do not compare raw v1 communication timing against fused-permute MoonEP and call
+it an end-to-end win without including these extra steps.
+
+The NCCLReplicaPrefetch reference precompiles exact P2P views from a CPU-visible
+mapping. If an online GPU plan changes, D2H synchronization and schedule creation
+must be counted. It is not a fully GPU-resident planning-to-weight pipeline.
+MoonEP's GPU-indexed one-sided prefetch avoids that particular host dependency.
+
+5. v2.5 default vs optional independent stream
+
+Unmodified v2.5 uses a single global communication stream for LB weights and EP
+tokens. Starting LB early overlaps it with later compute-stream planning, but a
+dispatch submitted while weights are in flight queues behind the same stream.
+This is still useful prefetch, but does not prove simultaneous weight and token
+traffic.
+
+lb-current-stream.patch adds an optional use_current_stream argument only to
+lb_prefetch_weights. Existing default behavior remains unchanged. The adapter's
+independent mode uses TWO EPBuffer objects (separate contexts/workspace/barrier
+signals), and a separate torch CUDA stream for LB. Moving LB to another stream
+while reusing the same EPBuffer would race the shared collective barriers and is
+not permitted. Both traffic classes still share NVLink and SM/HBM resources;
+independent streams do not imply a bandwidth or latency benefit.
+
+The patch changes two files: deep_ep/buffers/ep.py and csrc/buffers/ep.hpp. It is
+not applied to the saved upstream checkout. No CUDA compilation or correctness
+claim is made for this optional version on the present target.
+
+6. Correct accounting
+
+Report exact weight bytes and token dispatch/combine bytes independently. The
+incremental weight cost is the optimized plan minus the baseline plan, not all
+optimized copies charged against a baseline whose copies were ignored. Cold
+copies and repeated fresh model versions cost differently. Reusing weights across
+microbatches is valid only while the weight version is unchanged. Training also
+needs replica gradient accumulation before the owning optimizer update; the v1
+smoke covers forward communication only. Full critical-path comparison includes
+plan generation, address mapping, metadata collectives, all visible weight cost,
+token communication, and any changed permute/output materialization work.
+
+Primary source references (fixed revisions):
+https://github.com/deepseek-ai/DeepEP/blob/f6aa38fe06cd4a0489e7730365d4e0114970a2f3/deep_ep/buffers/ep.py
+https://github.com/deepseek-ai/DeepEP/blob/f6aa38fe06cd4a0489e7730365d4e0114970a2f3/csrc/comm/stream.hpp
+https://github.com/deepseek-ai/DeepEP/blob/f6aa38fe06cd4a0489e7730365d4e0114970a2f3/csrc/buffers/ep.hpp
+https://github.com/deepseek-ai/DeepEP/blob/9af0e0d0e74f3577af1979c9b9e1ac2cad0104ee/deep_ep/buffer.py
+
+7. CUDA 13 split-header packaging on the target
+
+The first in-place v1 build attempt reported missing cusparse.h from Torch's
+headers. This is a header discovery error, not evidence that DeepEP's kernel API
+is incompatible. The target packages CUDA libraries as separate Python wheels;
+provide their existing include directories through the BUILD COMMAND's CPATH,
+including nvidia/cusparse/include, cublas/include, cusolver/include, etc., and the
+existing Triton NVIDIA backend include directory if needed. Keep this environment
+override local to the build; do not modify the user's installed Torch/NCCL or
+system compiler configuration. Preserve both the failed attempt log and the next
+attempt's full command. A build success still requires the two-rank smoke.
+
+8. Explicit intranode-only build override (local build patch)
+
+The target actually contains an NVSHMEM wheel, so upstream v1 setup.py enables
+internode compilation automatically and then encounters an unavailable
+cuda/std/tuple header through nvshmem_tensor.h. The experiment now carries
+`deepep-v1-disable-nvshmem.patch`, adding DISABLE_NVSHMEM=1 to setup.py and bypassing
+NVSHMEM auto-discovery only when explicitly requested. This is a build-selection
+patch, not a communication-kernel change. Without the flag, upstream detection is
+unchanged. Do not uninstall the user's NVSHMEM package to force this mode.
+
+Use DISABLE_NVSHMEM=1 together with the command-local CPATH and existing build
+settings. The original setup.py SHA256 remains in deepep_v1_source_manifest.json;
+original/patched hashes and patch hash are in deepep_v1_build_patch_manifest.json.
+
+9. Intranode RDC device link and real trace probe
+
+The next v1 build completed compilation but failed to import with an undefined
+__cudaRegisterLinkedBinary_* symbol. SM90 compilation retains -rdc=true; upstream
+setup only provided an nvcc device-link stage when NVSHMEM was enabled.
+`deepep-v1-intranode-dlink.patch` adds -dlink to the intranode-only SM90 branch.
+It does not remove RDC or change kernels. The setup hash chain is preserved in
+deepep_v1_dlink_patch_manifest.json. Rebuild in place with the same command-local
+include directories and DISABLE_NVSHMEM=1, then rerun two-rank validation.
+
+`deepep_trace_smoke.py` now exercises the actual eight-layer router data's derived
+two-rank topology (default selected layers 0 and 7). It starts from the prepared
+MoonEP CPU-reference owner, refreshes sample routes/owners collectively on GPU,
+runs GPU residency and prefix exchange, remaps to physical expert slots, then
+uses actual DeepEP v1 dispatch/combine. Source payloads use unique base-16 token
+identities with exact BF16 integer arithmetic. The probe reconstructs each
+received source token, checks its full hidden vector and exact per-token local
+expert-slot sequence, checks global load, and verifies combine equals K*x.
+Both CPU-sync and fixed-capacity dispatch modes run. This is correctness evidence
+for the adapter, not native-planner timing, real activations or model speedup.
+Optional --weights moonep launches real MoonEP prefetch immediately after expert
+map readiness, before full-token exchange; default --weights none tests routing.
+
+10. Intranode notify capacity for 184 local slots
+
+Smoke02 imported the built library but dispatch rejected 368 physical experts
+over two ranks: upstream notify_dispatch launches 128 threads and assigns one
+local-expert counter to each thread, so its host assertion rejects 184 slots.
+The upstream Buffer already allocates 1024 mapped expert counters; there is no
+need to reduce the trace, drop experts, or change physical numbering.
+
+deepep-v1-notify-256.patch selects 128 threads for <=128 slots (unchanged old
+launch), or 256 for 129..256 slots, retaining a hard assertion above that limit.
+The notification kernel uses blockDim.x for its warp/loop partitioning and has
+no fixed shared arrays or launch bound. Existing per-expert sums, peer barriers,
+and payload dispatch/combine algorithms are unchanged. This is a local kernel
+launch-capacity patch, NOT a build-only fix and NOT unmodified upstream v1.
+The original and patched file/patch hashes are in
+deepep_v1_notify_patch_manifest.json. Rebuild the in-place extension, retain
+smoke02 as a failure, and run a new correctness attempt. Both probes now retain
+the actual imported .so hash and local source/patch hashes. Runtime validation
+of this launch is pending until new two-rank JSON evidence is obtained.
+
+11. Conservative BF16 hidden-width boundary
+
+H=128 synthetic probes passed received payload, router weights, and per-token
+expert-slot checks but failed exact combine. These failures remain as raw
+attempts. Inspection found full-mask __syncwarp calls inside a lane-indexed
+TMA combine loop: H128 gives 16 int4 values, only half a warp. This is a suspected
+shape constraint, not a verified causal fix. The adapter now rejects hidden
+sizes not divisible by 256 (BF16), and v1 synthetic/trace probe defaults are
+7168, the actual target width. Other multiples are not automatically certified.
+No upstream combine kernel is modified. Retain H7168 result JSON and its actual
+extension/source fingerprints independently from H128 failures; revalidation
+after this guard updates source provenance without relaxing exact output checks.

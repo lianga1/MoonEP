@@ -1,0 +1,568 @@
+{
+  "status": "failed",
+  "metadata": {
+    "physical_gpus": 2,
+    "gpu": "NVIDIA H200",
+    "torch": "2.11.0+cu130",
+    "cuda": "13.0",
+    "nccl": [
+      2,
+      28,
+      9
+    ],
+    "H": 7168,
+    "I": 2048,
+    "weight_bytes": 88080384,
+    "gradient_bytes": 176160768,
+    "num_sms": 32,
+    "prefetch_sms": 32,
+    "scope": "bandwidth calibration, synthetic balanced routes; not a two-rank routing-quality result",
+    "timing": "CUDA Graph, max rank elapsed/sample; initialization and validation excluded",
+    "bandwidth": "max per-endpoint payload bytes / max rank time; decimal GB/s, one direction, no TX+RX double count",
+    "extrapolation": "8-way NVSwitch contention and native R8 synchronization are not measured",
+    "sources": {
+      "experiments/eight_rank_estimate/calibrate_bandwidth.py": "6e1af80c2d7491c7eea4e181675e13cdba10b8e79b52a87e1b182c1f84b30618",
+      "experiments/two_gpu_overlap/training_grad.py": "c3321f5f2e1c731340a197f6c86376e1cdffc6aa8c44308bec4ecc25868aa77a",
+      "experiments/two_gpu_overlap/moonep_split.py": "171935a9f72dc1cc16fdcb37030fa4e1208e7329e656b81efb3fc38de719deff"
+    }
+  },
+  "cases": [
+    {
+      "name": "dispatch_S16768",
+      "tx_bytes_by_rank": [
+        240386048,
+        240386048
+      ],
+      "rx_bytes_by_rank": [
+        240386048,
+        240386048
+      ],
+      "extra": {
+        "remote_destinations_per_rank": 16768,
+        "router_bytes_per_rank": 536576,
+        "dedup": "existing map; build excluded",
+        "activation_bytes_only_in_rate": true
+      },
+      "raw": [
+        {
+          "sample": 0,
+          "per_rank": [
+            {
+              "cuda_ms": 1.5900160074234009,
+              "host_ms": 1.5980650205165148
+            },
+            {
+              "cuda_ms": 1.5736960172653198,
+              "host_ms": 1.5825519803911448
+            }
+          ],
+          "max_cuda_ms": 1.5900160074234009,
+          "max_host_ms": 1.5980650205165148
+        },
+        {
+          "sample": 1,
+          "per_rank": [
+            {
+              "cuda_ms": 1.5590720176696777,
+              "host_ms": 1.5708580613136292
+            },
+            {
+              "cuda_ms": 1.5624639987945557,
+              "host_ms": 1.574915018863976
+            }
+          ],
+          "max_cuda_ms": 1.5624639987945557,
+          "max_host_ms": 1.574915018863976
+        },
+        {
+          "sample": 2,
+          "per_rank": [
+            {
+              "cuda_ms": 1.5623040199279785,
+              "host_ms": 1.5732019674032927
+            },
+            {
+              "cuda_ms": 1.5599039793014526,
+              "host_ms": 1.5706809936091304
+            }
+          ],
+          "max_cuda_ms": 1.5623040199279785,
+          "max_host_ms": 1.5732019674032927
+        },
+        {
+          "sample": 3,
+          "per_rank": [
+            {
+              "cuda_ms": 1.557088017463684,
+              "host_ms": 1.5681409277021885
+            },
+            {
+              "cuda_ms": 1.5582400560379028,
+              "host_ms": 1.5692919259890914
+            }
+          ],
+          "max_cuda_ms": 1.5582400560379028,
+          "max_host_ms": 1.5692919259890914
+        },
+        {
+          "sample": 4,
+          "per_rank": [
+            {
+              "cuda_ms": 1.555999994277954,
+              "host_ms": 1.5666359104216099
+            },
+            {
+              "cuda_ms": 1.553536057472229,
+              "host_ms": 1.56400294508785
+            }
+          ],
+          "max_cuda_ms": 1.555999994277954,
+          "max_host_ms": 1.5666359104216099
+        },
+        {
+          "sample": 5,
+          "per_rank": [
+            {
+              "cuda_ms": 1.5568000078201294,
+              "host_ms": 1.567260012961924
+            },
+            {
+              "cuda_ms": 1.5589760541915894,
+              "host_ms": 1.5693710884079337
+            }
+          ],
+          "max_cuda_ms": 1.5589760541915894,
+          "max_host_ms": 1.5693710884079337
+        },
+        {
+          "sample": 6,
+          "per_rank": [
+            {
+              "cuda_ms": 1.5559040307998657,
+              "host_ms": 1.5661619836464524
+            },
+            {
+              "cuda_ms": 1.5577600002288818,
+              "host_ms": 1.5682269586250186
+            }
+          ],
+          "max_cuda_ms": 1.5577600002288818,
+          "max_host_ms": 1.5682269586250186
+        },
+        {
+          "sample": 7,
+          "per_rank": [
+            {
+              "cuda_ms": 1.5488959550857544,
+              "host_ms": 1.5595000004395843
+            },
+            {
+              "cuda_ms": 1.5501760244369507,
+              "host_ms": 1.5604729996994138
+            }
+          ],
+          "max_cuda_ms": 1.5501760244369507,
+          "max_host_ms": 1.5604729996994138
+        },
+        {
+          "sample": 8,
+          "per_rank": [
+            {
+              "cuda_ms": 1.5516480207443237,
+              "host_ms": 1.5618300531059504
+            },
+            {
+              "cuda_ms": 1.5505280494689941,
+              "host_ms": 1.5605870867148042
+            }
+          ],
+          "max_cuda_ms": 1.5516480207443237,
+          "max_host_ms": 1.5618300531059504
+        },
+        {
+          "sample": 9,
+          "per_rank": [
+            {
+              "cuda_ms": 1.5616639852523804,
+              "host_ms": 1.571707078255713
+            },
+            {
+              "cuda_ms": 1.548416018486023,
+              "host_ms": 1.5590130351483822
+            }
+          ],
+          "max_cuda_ms": 1.5616639852523804,
+          "max_host_ms": 1.571707078255713
+        }
+      ],
+      "correctness_checked": true,
+      "median_ms": 1.558608055114746,
+      "effective_endpoint_GBs": 154.2312367828117
+    },
+    {
+      "name": "combine_S16768",
+      "tx_bytes_by_rank": [
+        240386048,
+        240386048
+      ],
+      "rx_bytes_by_rank": [
+        240386048,
+        240386048
+      ],
+      "extra": {
+        "remote_destinations_per_rank": 16768,
+        "router_return": false
+      },
+      "raw": [
+        {
+          "sample": 0,
+          "per_rank": [
+            {
+              "cuda_ms": 1.3236160278320312,
+              "host_ms": 1.334317959845066
+            },
+            {
+              "cuda_ms": 1.322208046913147,
+              "host_ms": 1.3330259826034307
+            }
+          ],
+          "max_cuda_ms": 1.3236160278320312,
+          "max_host_ms": 1.334317959845066
+        },
+        {
+          "sample": 1,
+          "per_rank": [
+            {
+              "cuda_ms": 1.313439965248108,
+              "host_ms": 1.3245230074971914
+            },
+            {
+              "cuda_ms": 1.3078080415725708,
+              "host_ms": 1.3190960744395852
+            }
+          ],
+          "max_cuda_ms": 1.313439965248108,
+          "max_host_ms": 1.3245230074971914
+        },
+        {
+          "sample": 2,
+          "per_rank": [
+            {
+              "cuda_ms": 1.3119360208511353,
+              "host_ms": 1.3224799185991287
+            },
+            {
+              "cuda_ms": 1.3209279775619507,
+              "host_ms": 1.3312440132722259
+            }
+          ],
+          "max_cuda_ms": 1.3209279775619507,
+          "max_host_ms": 1.3312440132722259
+        },
+        {
+          "sample": 3,
+          "per_rank": [
+            {
+              "cuda_ms": 1.3161280155181885,
+              "host_ms": 1.3344190083444118
+            },
+            {
+              "cuda_ms": 1.3229440450668335,
+              "host_ms": 1.3378099538385868
+            }
+          ],
+          "max_cuda_ms": 1.3229440450668335,
+          "max_host_ms": 1.3378099538385868
+        },
+        {
+          "sample": 4,
+          "per_rank": [
+            {
+              "cuda_ms": 1.3265600204467773,
+              "host_ms": 1.3371789827942848
+            },
+            {
+              "cuda_ms": 1.317728042602539,
+              "host_ms": 1.3282370055094361
+            }
+          ],
+          "max_cuda_ms": 1.3265600204467773,
+          "max_host_ms": 1.3371789827942848
+        },
+        {
+          "sample": 5,
+          "per_rank": [
+            {
+              "cuda_ms": 1.309183955192566,
+              "host_ms": 1.319546950981021
+            },
+            {
+              "cuda_ms": 1.3131200075149536,
+              "host_ms": 1.3236389495432377
+            }
+          ],
+          "max_cuda_ms": 1.3131200075149536,
+          "max_host_ms": 1.3236389495432377
+        },
+        {
+          "sample": 6,
+          "per_rank": [
+            {
+              "cuda_ms": 1.3226560354232788,
+              "host_ms": 1.3328840723261237
+            },
+            {
+              "cuda_ms": 1.3227200508117676,
+              "host_ms": 1.3330079382285476
+            }
+          ],
+          "max_cuda_ms": 1.3227200508117676,
+          "max_host_ms": 1.3330079382285476
+        },
+        {
+          "sample": 7,
+          "per_rank": [
+            {
+              "cuda_ms": 1.313088059425354,
+              "host_ms": 1.3234169455245137
+            },
+            {
+              "cuda_ms": 1.3098560571670532,
+              "host_ms": 1.3216780498623848
+            }
+          ],
+          "max_cuda_ms": 1.313088059425354,
+          "max_host_ms": 1.3234169455245137
+        },
+        {
+          "sample": 8,
+          "per_rank": [
+            {
+              "cuda_ms": 1.3099199533462524,
+              "host_ms": 1.3205469585955143
+            },
+            {
+              "cuda_ms": 1.3165119886398315,
+              "host_ms": 1.3271559728309512
+            }
+          ],
+          "max_cuda_ms": 1.3165119886398315,
+          "max_host_ms": 1.3271559728309512
+        },
+        {
+          "sample": 9,
+          "per_rank": [
+            {
+              "cuda_ms": 1.321727991104126,
+              "host_ms": 1.3319660210981965
+            },
+            {
+              "cuda_ms": 1.3050559759140015,
+              "host_ms": 1.3152180472388864
+            }
+          ],
+          "max_cuda_ms": 1.321727991104126,
+          "max_host_ms": 1.3319660210981965
+        }
+      ],
+      "correctness_checked": true,
+      "median_ms": 1.3213279843330383,
+      "effective_endpoint_GBs": 181.92761437754513
+    },
+    {
+      "name": "weight_0_1",
+      "tx_bytes_by_rank": [
+        88080384,
+        0
+      ],
+      "rx_bytes_by_rank": [
+        0,
+        88080384
+      ],
+      "extra": {
+        "copies_by_destination": [
+          0,
+          1
+        ]
+      },
+      "raw": [
+        {
+          "sample": 0,
+          "per_rank": [
+            {
+              "cuda_ms": 0.030719999223947525,
+              "host_ms": 0.040156999602913857
+            },
+            {
+              "cuda_ms": 0.27142399549484253,
+              "host_ms": 0.28065405786037445
+            }
+          ],
+          "max_cuda_ms": 0.27142399549484253,
+          "max_host_ms": 0.28065405786037445
+        },
+        {
+          "sample": 1,
+          "per_rank": [
+            {
+              "cuda_ms": 0.02236800082027912,
+              "host_ms": 0.033022952266037464
+            },
+            {
+              "cuda_ms": 0.2632960081100464,
+              "host_ms": 0.274072983302176
+            }
+          ],
+          "max_cuda_ms": 0.2632960081100464,
+          "max_host_ms": 0.274072983302176
+        },
+        {
+          "sample": 2,
+          "per_rank": [
+            {
+              "cuda_ms": 0.021344000473618507,
+              "host_ms": 0.031998963095247746
+            },
+            {
+              "cuda_ms": 0.25974398851394653,
+              "host_ms": 0.2703979844227433
+            }
+          ],
+          "max_cuda_ms": 0.25974398851394653,
+          "max_host_ms": 0.2703979844227433
+        },
+        {
+          "sample": 3,
+          "per_rank": [
+            {
+              "cuda_ms": 0.02054399996995926,
+              "host_ms": 0.030908966436982155
+            },
+            {
+              "cuda_ms": 0.26019200682640076,
+              "host_ms": 0.2709929831326008
+            }
+          ],
+          "max_cuda_ms": 0.26019200682640076,
+          "max_host_ms": 0.2709929831326008
+        },
+        {
+          "sample": 4,
+          "per_rank": [
+            {
+              "cuda_ms": 0.019487999379634857,
+              "host_ms": 0.029804999940097332
+            },
+            {
+              "cuda_ms": 0.260672003030777,
+              "host_ms": 0.27112895622849464
+            }
+          ],
+          "max_cuda_ms": 0.260672003030777,
+          "max_host_ms": 0.27112895622849464
+        },
+        {
+          "sample": 5,
+          "per_rank": [
+            {
+              "cuda_ms": 0.021183999255299568,
+              "host_ms": 0.0312920892611146
+            },
+            {
+              "cuda_ms": 0.2619520127773285,
+              "host_ms": 0.27273502200841904
+            }
+          ],
+          "max_cuda_ms": 0.2619520127773285,
+          "max_host_ms": 0.27273502200841904
+        },
+        {
+          "sample": 6,
+          "per_rank": [
+            {
+              "cuda_ms": 0.020896000787615776,
+              "host_ms": 0.03140105400234461
+            },
+            {
+              "cuda_ms": 0.2611840069293976,
+              "host_ms": 0.2720719203352928
+            }
+          ],
+          "max_cuda_ms": 0.2611840069293976,
+          "max_host_ms": 0.2720719203352928
+        },
+        {
+          "sample": 7,
+          "per_rank": [
+            {
+              "cuda_ms": 0.01945599913597107,
+              "host_ms": 0.02969603519886732
+            },
+            {
+              "cuda_ms": 0.2733759880065918,
+              "host_ms": 0.28413801919668913
+            }
+          ],
+          "max_cuda_ms": 0.2733759880065918,
+          "max_host_ms": 0.28413801919668913
+        },
+        {
+          "sample": 8,
+          "per_rank": [
+            {
+              "cuda_ms": 0.019231999292969704,
+              "host_ms": 0.029483926482498646
+            },
+            {
+              "cuda_ms": 0.259552001953125,
+              "host_ms": 0.2700010081753135
+            }
+          ],
+          "max_cuda_ms": 0.259552001953125,
+          "max_host_ms": 0.2700010081753135
+        },
+        {
+          "sample": 9,
+          "per_rank": [
+            {
+              "cuda_ms": 0.01990400068461895,
+              "host_ms": 0.030028983019292355
+            },
+            {
+              "cuda_ms": 0.2600640058517456,
+              "host_ms": 0.27048494666814804
+            }
+          ],
+          "max_cuda_ms": 0.2600640058517456,
+          "max_host_ms": 0.27048494666814804
+        }
+      ],
+      "correctness_checked": true,
+      "median_ms": 0.2609280049800873,
+      "effective_endpoint_GBs": 337.5658508051746
+    },
+    {
+      "name": "gradient_0_1",
+      "tx_bytes_by_rank": [
+        0,
+        176160768
+      ],
+      "rx_bytes_by_rank": [
+        176160768,
+        0
+      ],
+      "extra": {
+        "copies_by_source": [
+          0,
+          1
+        ],
+        "input_ready_barrier_included": true
+      },
+      "raw": [],
+      "correctness_checked": true
+    }
+  ],
+  "failures": [
+    "Traceback (most recent call last):\n  File \"/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/eight_rank_estimate/calibrate_bandwidth.py\", line 124, in main\n    measure(f'gradient_{n0}_{n1}',reduce,[n0*b,n1*b],[n1*b,n0*b],prepare=reset,\n  File \"/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/eight_rank_estimate/calibrate_bandwidth.py\", line 62, in measure\n    if prepare:prepare()\n               ^^^^^^^^^\n  File \"/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/eight_rank_estimate/calibrate_bandwidth.py\", line 111, in reset\n    epoch[0]+=1;grads.reset(epoch=epoch[0])\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/training_grad.py\", line 80, in reset\n    if self._done is not None: torch.cuda.current_stream().wait_event(self._done)\n                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/cuda/streams.py\", line 63, in wait_event\n    event.wait(self)\n  File \"/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/cuda/streams.py\", line 223, in wait\n    super().wait(stream)\ntorch.AcceleratorError: CUDA error: invalid argument\nSearch for `cudaErrorInvalidValue' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.\nCUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.\nFor debugging consider passing CUDA_LAUNCH_BLOCKING=1\nCompile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.\n\n"
+  ]
+}

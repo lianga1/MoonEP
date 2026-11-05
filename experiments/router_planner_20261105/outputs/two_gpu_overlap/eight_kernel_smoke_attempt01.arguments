@@ -1,0 +1,12 @@
+experiments/eight_rank_estimate/benchmark_kernels.py
+--layers
+0
+--sources
+0
+--samples
+2
+--repeats
+2
+--require-residency
+--output
+outputs/eight_rank_estimate/kernel_smoke_attempt01.json

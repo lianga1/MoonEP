@@ -1,0 +1,133 @@
+{"status": "running", "cases": 0}
+/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+{"status": "running", "cases": 1}
+{"status": "running", "cases": 2}
+{"status": "running", "cases": 3}
+{"status": "failed", "cases": 4}
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/eight_rank_estimate/calibrate_bandwidth.py", line 124, in main
+[rank1]:     measure(f'gradient_{n0}_{n1}',reduce,[n0*b,n1*b],[n1*b,n0*b],prepare=reset,
+[rank1]:   File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/eight_rank_estimate/calibrate_bandwidth.py", line 62, in measure
+[rank1]:     if prepare:prepare()
+[rank1]:                ^^^^^^^^^
+[rank1]:   File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/eight_rank_estimate/calibrate_bandwidth.py", line 111, in reset
+[rank1]:     epoch[0]+=1;grads.reset(epoch=epoch[0])
+[rank1]:                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/training_grad.py", line 80, in reset
+[rank1]:     if self._done is not None: torch.cuda.current_stream().wait_event(self._done)
+[rank1]:                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/cuda/streams.py", line 63, in wait_event
+[rank1]:     event.wait(self)
+[rank1]:   File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/cuda/streams.py", line 223, in wait
+[rank1]:     super().wait(stream)
+[rank1]: torch.AcceleratorError: CUDA error: invalid argument
+[rank1]: Search for `cudaErrorInvalidValue' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+[rank1]: CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+[rank1]: For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+[rank1]: Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+
+[rank1]: During handling of the above exception, another exception occurred:
+
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/eight_rank_estimate/calibrate_bandwidth.py", line 141, in <module>
+[rank1]:     if __name__=='__main__':main()
+[rank1]:                             ^^^^^^
+[rank1]:   File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/eight_rank_estimate/calibrate_bandwidth.py", line 135, in main
+[rank1]:     if grads is not None:grads.close()
+[rank1]:                          ^^^^^^^^^^^^^
+[rank1]:   File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/training_grad.py", line 190, in close
+[rank1]:     if self._done is not None:self._done.synchronize()
+[rank1]:                               ^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/cuda/streams.py", line 254, in synchronize
+[rank1]:     super().synchronize()
+[rank1]: torch.AcceleratorError: CUDA error: invalid argument
+[rank1]: Search for `cudaErrorInvalidValue' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+[rank1]: CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+[rank1]: For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+[rank1]: Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/eight_rank_estimate/calibrate_bandwidth.py", line 124, in main
+[rank0]:     measure(f'gradient_{n0}_{n1}',reduce,[n0*b,n1*b],[n1*b,n0*b],prepare=reset,
+[rank0]:   File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/eight_rank_estimate/calibrate_bandwidth.py", line 62, in measure
+[rank0]:     if prepare:prepare()
+[rank0]:                ^^^^^^^^^
+[rank0]:   File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/eight_rank_estimate/calibrate_bandwidth.py", line 111, in reset
+[rank0]:     epoch[0]+=1;grads.reset(epoch=epoch[0])
+[rank0]:                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/training_grad.py", line 80, in reset
+[rank0]:     if self._done is not None: torch.cuda.current_stream().wait_event(self._done)
+[rank0]:                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/cuda/streams.py", line 63, in wait_event
+[rank0]:     event.wait(self)
+[rank0]:   File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/cuda/streams.py", line 223, in wait
+[rank0]:     super().wait(stream)
+[rank0]: torch.AcceleratorError: CUDA error: invalid argument
+[rank0]: Search for `cudaErrorInvalidValue' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+[rank0]: CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+[rank0]: For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+[rank0]: Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+
+[rank0]: During handling of the above exception, another exception occurred:
+
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/eight_rank_estimate/calibrate_bandwidth.py", line 141, in <module>
+[rank0]:     if __name__=='__main__':main()
+[rank0]:                             ^^^^^^
+[rank0]:   File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/eight_rank_estimate/calibrate_bandwidth.py", line 135, in main
+[rank0]:     if grads is not None:grads.close()
+[rank0]:                          ^^^^^^^^^^^^^
+[rank0]:   File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/training_grad.py", line 190, in close
+[rank0]:     if self._done is not None:self._done.synchronize()
+[rank0]:                               ^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/cuda/streams.py", line 254, in synchronize
+[rank0]:     super().synchronize()
+[rank0]: torch.AcceleratorError: CUDA error: invalid argument
+[rank0]: Search for `cudaErrorInvalidValue' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+[rank0]: CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+[rank0]: For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+[rank0]: Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+W1105 07:26:47.343000 1102402 site-packages/torch/distributed/elastic/multiprocessing/api.py:1012] Sending process 1102408 closing signal SIGTERM
+E1105 07:26:47.458000 1102402 site-packages/torch/distributed/elastic/multiprocessing/api.py:986] failed (exitcode: 1) local_rank: 0 (pid: 1102407) of binary: /root/anaconda3/envs/sglang/bin/python3.12
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/sglang/bin/torchrun", line 6, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 362, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/distributed/run.py", line 990, in main
+    run(args)
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/distributed/run.py", line 981, in run
+    elastic_launch(
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 170, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 317, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+experiments/eight_rank_estimate/calibrate_bandwidth.py FAILED
+------------------------------------------------------------
+Failures:
+[1]:
+  time      : 2026-11-05_07:26:47
+  host      : test-mtp-retrieval-copy--0f7927a8f653-sf4levrpw6
+  rank      : 1 (local_rank: 1)
+  exitcode  : 1 (pid: 1102408)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-11-05_07:26:47
+  host      : test-mtp-retrieval-copy--0f7927a8f653-sf4levrpw6
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 1102407)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

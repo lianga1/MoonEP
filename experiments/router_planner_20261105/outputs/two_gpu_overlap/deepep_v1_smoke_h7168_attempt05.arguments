@@ -1,0 +1,5 @@
+experiments/two_gpu_overlap/deepep_v1_smoke.py
+--hidden
+7168
+--output
+outputs/two_gpu_overlap/deepep_v1_smoke_h7168_attempt05

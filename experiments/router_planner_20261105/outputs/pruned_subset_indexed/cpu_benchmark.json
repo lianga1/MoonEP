@@ -1,0 +1,497 @@
+{
+  "scope": "local CPU, 3 paired rotating-order repetitions per layer; fixed in-memory seed/support; includes candidate mining, selection, filtered index and four rounds; excludes compile, input IO, seed generation, residency selection, physical addresses, GPU communication",
+  "python": "3.9.6 (default, Oct 17 2025, 17:15:53) \n[Clang 17.0.0 (clang-1700.4.4.1)]",
+  "numpy": "2.0.2",
+  "numba": "0.60.0",
+  "platform": "macOS-26.1-arm64-arm-64bit",
+  "rows": [
+    {
+      "layer": 0,
+      "seconds": {
+        "token_bundle": [
+          0.1003480000000001,
+          0.09606791599999998,
+          0.0948973750000004
+        ],
+        "aggregate_mixed": [
+          0.739748834,
+          0.7084474169999995,
+          0.7466738749999999
+        ],
+        "subset_h1_g8": [
+          0.08713970800000004,
+          0.07985812500000034,
+          0.07992920899999945
+        ],
+        "subset_h2_g2": [
+          0.09207158299999962,
+          0.09129791700000034,
+          0.09201070800000011
+        ],
+        "subset_h2_g8": [
+          0.09459624999999994,
+          0.09628345799999982,
+          0.09484675000000031
+        ],
+        "subset_h2_all": [
+          0.0962370840000002,
+          0.09534795800000007,
+          0.09482541599999994
+        ]
+      },
+      "execution_orders": [
+        [
+          "token_bundle",
+          "aggregate_mixed",
+          "subset_h1_g8",
+          "subset_h2_g2",
+          "subset_h2_g8",
+          "subset_h2_all"
+        ],
+        [
+          "subset_h1_g8",
+          "subset_h2_g2",
+          "subset_h2_g8",
+          "subset_h2_all",
+          "token_bundle",
+          "aggregate_mixed"
+        ],
+        [
+          "subset_h2_g8",
+          "subset_h2_all",
+          "token_bundle",
+          "aggregate_mixed",
+          "subset_h1_g8",
+          "subset_h2_g2"
+        ]
+      ]
+    },
+    {
+      "layer": 1,
+      "seconds": {
+        "token_bundle": [
+          0.13454066599999948,
+          0.13536091699999986,
+          0.1354419999999994
+        ],
+        "aggregate_mixed": [
+          0.7644062920000003,
+          0.7468904590000003,
+          0.747049500000001
+        ],
+        "subset_h1_g8": [
+          0.14579883299999974,
+          0.14216937499999993,
+          0.14386874999999932
+        ],
+        "subset_h2_g2": [
+          0.15823233299999995,
+          0.1593713749999992,
+          0.16032670899999957
+        ],
+        "subset_h2_g8": [
+          0.16487125000000002,
+          0.16556166699999952,
+          0.1649974580000002
+        ],
+        "subset_h2_all": [
+          0.16570333299999973,
+          0.16667341600000007,
+          0.1700847079999992
+        ]
+      },
+      "execution_orders": [
+        [
+          "aggregate_mixed",
+          "subset_h1_g8",
+          "subset_h2_g2",
+          "subset_h2_g8",
+          "subset_h2_all",
+          "token_bundle"
+        ],
+        [
+          "subset_h2_g2",
+          "subset_h2_g8",
+          "subset_h2_all",
+          "token_bundle",
+          "aggregate_mixed",
+          "subset_h1_g8"
+        ],
+        [
+          "subset_h2_all",
+          "token_bundle",
+          "aggregate_mixed",
+          "subset_h1_g8",
+          "subset_h2_g2",
+          "subset_h2_g8"
+        ]
+      ]
+    },
+    {
+      "layer": 2,
+      "seconds": {
+        "token_bundle": [
+          0.11673433400000022,
+          0.11254275000000113,
+          0.11384333400000024
+        ],
+        "aggregate_mixed": [
+          0.6745161250000002,
+          0.6715302919999999,
+          0.6641948749999997
+        ],
+        "subset_h1_g8": [
+          0.12618175000000065,
+          0.12297991700000033,
+          0.11974083299999982
+        ],
+        "subset_h2_g2": [
+          0.13433825000000077,
+          0.12884450000000136,
+          0.12636625000000024
+        ],
+        "subset_h2_g8": [
+          0.14539191699999954,
+          0.13913808299999886,
+          0.13851616700000058
+        ],
+        "subset_h2_all": [
+          0.14245825000000067,
+          0.13733720799999993,
+          0.13786354099999976
+        ]
+      },
+      "execution_orders": [
+        [
+          "subset_h1_g8",
+          "subset_h2_g2",
+          "subset_h2_g8",
+          "subset_h2_all",
+          "token_bundle",
+          "aggregate_mixed"
+        ],
+        [
+          "subset_h2_g8",
+          "subset_h2_all",
+          "token_bundle",
+          "aggregate_mixed",
+          "subset_h1_g8",
+          "subset_h2_g2"
+        ],
+        [
+          "token_bundle",
+          "aggregate_mixed",
+          "subset_h1_g8",
+          "subset_h2_g2",
+          "subset_h2_g8",
+          "subset_h2_all"
+        ]
+      ]
+    },
+    {
+      "layer": 3,
+      "seconds": {
+        "token_bundle": [
+          0.1076834170000005,
+          0.10902212499999919,
+          0.10849845799999969
+        ],
+        "aggregate_mixed": [
+          0.647001083000001,
+          0.6456195000000005,
+          0.650658374999999
+        ],
+        "subset_h1_g8": [
+          0.11078983300000012,
+          0.11044795900000004,
+          0.11086041699999782
+        ],
+        "subset_h2_g2": [
+          0.1288697919999997,
+          0.12559129099999922,
+          0.12740112499999867
+        ],
+        "subset_h2_g8": [
+          0.12953704200000082,
+          0.1323204579999988,
+          0.13026066699999816
+        ],
+        "subset_h2_all": [
+          0.13066712500000044,
+          0.13119983400000024,
+          0.13057991700000215
+        ]
+      },
+      "execution_orders": [
+        [
+          "subset_h2_g2",
+          "subset_h2_g8",
+          "subset_h2_all",
+          "token_bundle",
+          "aggregate_mixed",
+          "subset_h1_g8"
+        ],
+        [
+          "subset_h2_all",
+          "token_bundle",
+          "aggregate_mixed",
+          "subset_h1_g8",
+          "subset_h2_g2",
+          "subset_h2_g8"
+        ],
+        [
+          "aggregate_mixed",
+          "subset_h1_g8",
+          "subset_h2_g2",
+          "subset_h2_g8",
+          "subset_h2_all",
+          "token_bundle"
+        ]
+      ]
+    },
+    {
+      "layer": 4,
+      "seconds": {
+        "token_bundle": [
+          0.12540133299999923,
+          0.11409737500000006,
+          0.11485158400000017
+        ],
+        "aggregate_mixed": [
+          0.6637972500000018,
+          0.6499382080000018,
+          0.6557609999999983
+        ],
+        "subset_h1_g8": [
+          0.12574641699999844,
+          0.12518054099999887,
+          0.1258573339999991
+        ],
+        "subset_h2_g2": [
+          0.13963170800000313,
+          0.14181379100000058,
+          0.140926125
+        ],
+        "subset_h2_g8": [
+          0.14825825000000137,
+          0.14565966700000033,
+          0.14812445799999807
+        ],
+        "subset_h2_all": [
+          0.14893066699999835,
+          0.14825866600000026,
+          0.147818749999999
+        ]
+      },
+      "execution_orders": [
+        [
+          "subset_h2_g8",
+          "subset_h2_all",
+          "token_bundle",
+          "aggregate_mixed",
+          "subset_h1_g8",
+          "subset_h2_g2"
+        ],
+        [
+          "token_bundle",
+          "aggregate_mixed",
+          "subset_h1_g8",
+          "subset_h2_g2",
+          "subset_h2_g8",
+          "subset_h2_all"
+        ],
+        [
+          "subset_h1_g8",
+          "subset_h2_g2",
+          "subset_h2_g8",
+          "subset_h2_all",
+          "token_bundle",
+          "aggregate_mixed"
+        ]
+      ]
+    },
+    {
+      "layer": 5,
+      "seconds": {
+        "token_bundle": [
+          0.10736483399999841,
+          0.1043859160000018,
+          0.10653483399999786
+        ],
+        "aggregate_mixed": [
+          0.624753333000001,
+          0.6310246660000018,
+          0.6273412920000005
+        ],
+        "subset_h1_g8": [
+          0.13254274999999893,
+          0.13638904100000104,
+          0.13322637499999956
+        ],
+        "subset_h2_g2": [
+          0.1386275409999982,
+          0.13942233299999884,
+          0.14137845800000193
+        ],
+        "subset_h2_g8": [
+          0.14989608299999801,
+          0.15083658300000025,
+          0.15407929100000217
+        ],
+        "subset_h2_all": [
+          0.15584362499999926,
+          0.15000420799999858,
+          0.1523675830000002
+        ]
+      },
+      "execution_orders": [
+        [
+          "subset_h2_all",
+          "token_bundle",
+          "aggregate_mixed",
+          "subset_h1_g8",
+          "subset_h2_g2",
+          "subset_h2_g8"
+        ],
+        [
+          "aggregate_mixed",
+          "subset_h1_g8",
+          "subset_h2_g2",
+          "subset_h2_g8",
+          "subset_h2_all",
+          "token_bundle"
+        ],
+        [
+          "subset_h2_g2",
+          "subset_h2_g8",
+          "subset_h2_all",
+          "token_bundle",
+          "aggregate_mixed",
+          "subset_h1_g8"
+        ]
+      ]
+    },
+    {
+      "layer": 6,
+      "seconds": {
+        "token_bundle": [
+          0.10293462500000317,
+          0.10597608399999814,
+          0.10542979099999883
+        ],
+        "aggregate_mixed": [
+          0.6469960830000012,
+          0.6499416250000003,
+          0.6519349999999982
+        ],
+        "subset_h1_g8": [
+          0.10865395800000144,
+          0.10698133300000023,
+          0.10728745899999836
+        ],
+        "subset_h2_g2": [
+          0.12194562500000217,
+          0.11919883399999875,
+          0.1198295829999978
+        ],
+        "subset_h2_g8": [
+          0.1223756250000001,
+          0.1232235000000017,
+          0.12612333300000245
+        ],
+        "subset_h2_all": [
+          0.12168024999999716,
+          0.12557520799999722,
+          0.12718445799999856
+        ]
+      },
+      "execution_orders": [
+        [
+          "token_bundle",
+          "aggregate_mixed",
+          "subset_h1_g8",
+          "subset_h2_g2",
+          "subset_h2_g8",
+          "subset_h2_all"
+        ],
+        [
+          "subset_h1_g8",
+          "subset_h2_g2",
+          "subset_h2_g8",
+          "subset_h2_all",
+          "token_bundle",
+          "aggregate_mixed"
+        ],
+        [
+          "subset_h2_g8",
+          "subset_h2_all",
+          "token_bundle",
+          "aggregate_mixed",
+          "subset_h1_g8",
+          "subset_h2_g2"
+        ]
+      ]
+    },
+    {
+      "layer": 7,
+      "seconds": {
+        "token_bundle": [
+          0.10699291699999947,
+          0.10635149999999882,
+          0.1049343339999993
+        ],
+        "aggregate_mixed": [
+          0.6528512920000011,
+          0.6345845830000023,
+          0.6378692920000049
+        ],
+        "subset_h1_g8": [
+          0.10983233299999995,
+          0.10564870900000045,
+          0.10578741700000194
+        ],
+        "subset_h2_g2": [
+          0.1211509169999978,
+          0.12198579200000026,
+          0.12009991600000092
+        ],
+        "subset_h2_g8": [
+          0.1271418329999996,
+          0.1272132909999968,
+          0.12593295799999993
+        ],
+        "subset_h2_all": [
+          0.12668491700000217,
+          0.1263660840000007,
+          0.12722937499999887
+        ]
+      },
+      "execution_orders": [
+        [
+          "aggregate_mixed",
+          "subset_h1_g8",
+          "subset_h2_g2",
+          "subset_h2_g8",
+          "subset_h2_all",
+          "token_bundle"
+        ],
+        [
+          "subset_h2_g2",
+          "subset_h2_g8",
+          "subset_h2_all",
+          "token_bundle",
+          "aggregate_mixed",
+          "subset_h1_g8"
+        ],
+        [
+          "subset_h2_all",
+          "token_bundle",
+          "aggregate_mixed",
+          "subset_h1_g8",
+          "subset_h2_g2",
+          "subset_h2_g8"
+        ]
+      ]
+    }
+  ]
+}

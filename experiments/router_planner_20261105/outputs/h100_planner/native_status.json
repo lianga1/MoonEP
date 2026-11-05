@@ -1,0 +1,16 @@
+{
+  "status": "unavailable",
+  "phase": "initialization",
+  "kernel_executed": false,
+  "timing_us": null,
+  "physical_gpu_count": 1,
+  "gpu": "NVIDIA H100 80GB HBM3",
+  "logical_ranks": 1,
+  "intended_workload": "Concatenate all eight source trace shards; E=352,K=8,B=8,rt=0. Degenerate R1 control only.",
+  "api": "cuMulticastCreate",
+  "error": "invalid argument",
+  "source_location": "inputs/MoonEP/csrc/nvl_shared_buffer.cuh:578",
+  "source_unchanged": true,
+  "log": "native_r1_compile_only_failed.log",
+  "port_comparison": "baseline_virtual.cu is a separately implemented R8 semantic CUDA port, not the native distributed MoonEP kernel."
+}

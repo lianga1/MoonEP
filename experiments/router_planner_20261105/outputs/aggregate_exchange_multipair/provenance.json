@@ -1,0 +1,19 @@
+{
+  "files": {
+    "analysis/vendor/aggregate_exchange.py": "66689327037ccf95920a75a7766446b2976645949a31d8438f1ab5cfb9f14639",
+    "analysis/replay_aggregate.py": "41effe6dd2a9fa22878bba5928ef5d5f79506e8549f36a4896b1f54dc5d4bee3",
+    "analysis/replay_aggregate_multipair.py": "732a2ad986af9e50998a0b538208cbc8c3f425b7d8097d5668c5c995e5142f86",
+    "analysis/audit_aggregate.py": "12f42f2a0c4bb0961f1ba5269b6c30e0b4782589b39d57efe5ad2c83ec74990a",
+    "analysis/vendor/residency.py": "8df5df6de2448bcbf412a0f129a9e91f47c698baa8babdcc15b0f7529d1dd1bc",
+    "analysis/vendor/bucket_optimizer.py": "4b75659305c7b045cad4e7920e7bd36205e34f13821b263e4310c27663b77dfa"
+  },
+  "fixed_residency": "outputs/replay/layerXX_b8_small256_global_4.npz",
+  "sampling_seed": 20261026,
+  "rounds": 4,
+  "gpu_timing": false,
+  "limitations": [
+    "conservative full-state aggregation, not minimal expert-group-only aggregation",
+    "pair schedule and proposal tie rules differ from token baseline",
+    "CPU timings are single observations, not a performance conclusion"
+  ]
+}

@@ -1,0 +1,63 @@
+Two-rank combined-cost protocol review, 2026-11-05
+
+Measured scope: GPU/runtime planner, full expert weight transfer, actual token
+dispatch and identity-output combine. No expert GEMM, model forward pass or
+backward/optimizer step is represented by this experiment.
+
+Required comparisons (same layer, physical devices, route rows, expert shapes,
+precision, load constraints, slot limits and SM budgets):
+- native_cold_serial and native_cold_early
+- optimized_cold_serial and optimized_cold_early
+- native_hot and optimized_hot only with exact same-version slot contents
+
+Each repetition rotates mode order; preserve every per-rank sample and failure.
+Take max(rank0, rank1) for each repetition BEFORE computing aggregate statistics.
+Do not compare average-rank time, min-rank time, or isolated component sums.
+The complete early-copy path must be timed directly: independent-stream kernels
+share HBM, SM and NVLink resources, and isolated overlap estimates miss contention.
+
+Cold means copies are issued in this invocation, for both methods. Report each
+method's copy count, the DIFFERENCE in copied expert bytes, and distinct remote
+(token,destination rank) counts for token payload. The BF16 hidden-vector payload
+reduction for dispatch plus rank-reduced combine is 2 * H * 2 * removed_remote.
+That expression excludes metadata, router weights, padding, protocol overhead,
+and gradients. It is not a substitute for end-to-end latency.
+
+Hot correctness requires preparing the exact requested expert/slot mapping before
+EVERY timed hot sample when variants share destination slots. A prior optimized
+cold call can otherwise overwrite slots subsequently assumed hot by native.
+Preload+verify outside the hot interval, then execute the full planner again in
+the measured interval. Record that this is same-version/same-map reuse. Identity
+expert outputs alone cannot detect an incorrect replica value, because they do
+not read expert weights. Verify all active replica contents separately.
+For synthetic weight verification, W1=e%31+1 and W2=e//31+1 jointly encode each
+expert uniquely. Two modulo-31 values do not: experts e and e+31 would collide.
+
+Full GPU timing must refresh sampled routes and owners from this iteration's
+source shards; fixed random sample IDs can be prepared, but cached sample route
+contents are a narrower component experiment. The current benchmark's
+res.run(..., local_routes=routes) uses the complete route+owner collective.
+
+The analysis helper tests each optimized cold schedule against BOTH native cold
+schedules. Its conservative measured gate requires >=10 paired samples, every
+observed paired advantage exceeding a guardband, and a positive paired-bootstrap
+95% lower bound for the mean. It evaluates both CUDA and host segment durations.
+This is a finite-cohort eligibility rule, not a guarantee about future batches.
+If it fails, do not enable the optimization by default or report zero cost for
+rejected exploration. Falling back after residency/exchange cannot refund that
+already executed GPU work. A real online guard must cover this sunk cost, or use
+an independently calibrated pre-planning rule whose own overhead is measured.
+
+For unchanged weights and unchanged mapping, reuse is an analytical what-if:
+  average saving(M) = hot_saving + (cold_saving-hot_saving)/M.
+Both baseline and candidate get one cold invocation and M-1 hot invocations.
+A weight update invalidates reuse. A change of mapping invalidates affected slots.
+An inference or microbatch reuse threshold is not a training end-to-end result.
+Training also needs replica gradient accumulation/version ordering before the
+owner's optimizer update. Weight bytes and full-path time should be reported for
+the tested H/I shapes; router traces alone do not establish expert parameter size.
+
+DeepEP v1's deduplicated receive rows need extra permute/GEMM/unpermute for a real
+model. Its raw dispatch/combine probe cannot be substituted for MoonEP's expanded
+expert layout in a global latency claim. All DeepEP version/backend names and
+weight-transport names must remain explicit in the result tables.

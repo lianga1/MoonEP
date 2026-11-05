@@ -1,0 +1,56 @@
+{
+  "status": "validated_negative_net_result",
+  "date": "2026-11-05",
+  "host": "test-mtp-retrieval-copy",
+  "devices": "2 physical NVIDIA H200, NV18",
+  "scope": "planner + actual expert copies + dispatch/combine; identity expert output; no expert GEMM/backward",
+  "primary_benchmark": "benchmark_graph_attempt03.json",
+  "prior_benchmarks": [
+    "benchmark_graph_attempt01.json",
+    "benchmark_graph_attempt02.json"
+  ],
+  "formal_rounds": {
+    "attempt01": 4,
+    "attempt02": 4,
+    "attempt03": 1
+  },
+  "native_baseline": {
+    "replica_target": 0,
+    "replica_max": 7,
+    "extra_slots_per_rank": 8
+  },
+  "two_rank_derivation": "original source ranks0..3 ->0 and4..7 ->1; all token expert choices retained",
+  "globally_positive_observed": false,
+  "default_dynamic_replication_enabled": false,
+  "default_selection": "native before additional optimization",
+  "gate": "gate_graph_attempt03.json",
+  "original_moonep_sources_unchanged": {
+    "inputs/MoonEP/moonep/api.py": true,
+    "inputs/MoonEP/moonep/planning.py": true,
+    "inputs/MoonEP/moonep/prefetch.py": true,
+    "inputs/MoonEP/moonep/dispatch.py": true,
+    "inputs/MoonEP/moonep/dispatch_epilogue.py": true,
+    "inputs/MoonEP/moonep/buffer.py": true,
+    "inputs/MoonEP/csrc/nvl_shared_buffer.cuh": true
+  },
+  "validation": [
+    "8 real layers and14 synthetic residency cases exact for optimized/fused variants",
+    "prefix vs sort every round exact",
+    "all materialized addresses/payloads/weight slots checked",
+    "3 complete formal cohorts,8 layers,10 raw samples,2 physical ranks",
+    "DeepEP v1.2.1 patched intranode+MoonEP prefetch: layers0,7 both sync modes, both ranks exact"
+  ],
+  "retained_failure_boundary": "H128 DeepEP combine probes failed; final adapter rejects hidden dimensions not divisible by256; no vendor combine fix or general validity claim",
+  "attempt01_transport_note": "CLI completion marker unavailable after complete result; subsequently confirmed GPU idle; no exit0 claimed for that transport. Attempts02/03 have independent exitcode0.",
+  "gpu_released": true,
+  "user_instance_left_running": true,
+  "raw_sources": {
+    "MoonEP.zip": "e9c9608b6612d5b29ab673d6247116905b68caf92c2cfe988f69633ab77b9846",
+    "router_dump_iteration_4.tar.gz": "ca497662e9f3069c0cdca6a3e16b1a80a1adbe0cb670290a5b9dd541d99c43a7"
+  },
+  "scope_correction_20261105": {
+    "user_target": "original 8 ranks; two physical GPUs only for kernel and bandwidth calibration",
+    "prior_two_rank_negative_result_does_not_establish_eight_rank_result": true,
+    "replacement_report": "../eight_rank_estimate/report.html"
+  }
+}

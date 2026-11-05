@@ -1,0 +1,126 @@
+{
+  "cpu_semantics_only": true,
+  "cases": [
+    {
+      "S": 1,
+      "seed": 17,
+      "rounds": 4,
+      "exact": true
+    },
+    {
+      "S": 1,
+      "seed": 29,
+      "rounds": 4,
+      "exact": true
+    },
+    {
+      "S": 7,
+      "seed": 17,
+      "rounds": 4,
+      "exact": true
+    },
+    {
+      "S": 7,
+      "seed": 29,
+      "rounds": 4,
+      "exact": true
+    },
+    {
+      "S": 31,
+      "seed": 17,
+      "rounds": 4,
+      "exact": true
+    },
+    {
+      "S": 31,
+      "seed": 29,
+      "rounds": 4,
+      "exact": true
+    },
+    {
+      "S": 32,
+      "seed": 17,
+      "rounds": 4,
+      "exact": true
+    },
+    {
+      "S": 32,
+      "seed": 29,
+      "rounds": 4,
+      "exact": true
+    },
+    {
+      "S": 33,
+      "seed": 17,
+      "rounds": 4,
+      "exact": true
+    },
+    {
+      "S": 33,
+      "seed": 29,
+      "rounds": 4,
+      "exact": true
+    },
+    {
+      "S": 255,
+      "seed": 17,
+      "rounds": 4,
+      "exact": true
+    },
+    {
+      "S": 255,
+      "seed": 29,
+      "rounds": 4,
+      "exact": true
+    },
+    {
+      "S": 256,
+      "seed": 17,
+      "rounds": 4,
+      "exact": true
+    },
+    {
+      "S": 256,
+      "seed": 29,
+      "rounds": 4,
+      "exact": true
+    },
+    {
+      "S": 257,
+      "seed": 17,
+      "rounds": 4,
+      "exact": true
+    },
+    {
+      "S": 257,
+      "seed": 29,
+      "rounds": 4,
+      "exact": true
+    },
+    {
+      "S": 258,
+      "seed": 17,
+      "rounds": 4,
+      "exact": true
+    },
+    {
+      "S": 258,
+      "seed": 29,
+      "rounds": 4,
+      "exact": true
+    },
+    {
+      "S": 513,
+      "seed": 17,
+      "rounds": 4,
+      "exact": true
+    },
+    {
+      "S": 513,
+      "seed": 29,
+      "rounds": 4,
+      "exact": true
+    }
+  ],
+  "round_comparisons": 80
+}

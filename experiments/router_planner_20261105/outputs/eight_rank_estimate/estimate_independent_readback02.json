@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "estimate_sha256": "d59cd04036fe216b64df59fcd736da842b57e7003c9c8fccb3a998d1d8f03cca",
+  "checks": {
+    "current_source_and_input_hashes_match": true,
+    "native_rt0_copy_count": true,
+    "native_rt0_training_payload": true,
+    "native_rt0_phase_timings": true,
+    "native_rt0_serial_training_time": true,
+    "native_rt2_copy_count": true,
+    "native_rt2_training_payload": true,
+    "native_rt2_phase_timings": true,
+    "native_rt2_serial_training_time": true,
+    "sample256_g2_bundle_copy_count": true,
+    "sample256_g2_bundle_training_payload": true,
+    "sample256_g2_bundle_phase_timings": true,
+    "sample256_g2_bundle_serial_training_time": true,
+    "all_checks_passed": true
+  },
+  "scope": "Independent stdlib recomputation from original matrices, with input/source hash readback; not hardware verification"
+}

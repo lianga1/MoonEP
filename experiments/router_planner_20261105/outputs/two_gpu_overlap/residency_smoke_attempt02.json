@@ -1,0 +1,1847 @@
+{
+  "status": "complete",
+  "physical_gpus": 2,
+  "layers": [
+    {
+      "layer": 0,
+      "rank_checks": [
+        {
+          "layer": 0,
+          "rank": 0,
+          "exact_support": true,
+          "exact_history": true,
+          "exact_candidate_count": true,
+          "exact_joint_gather": true,
+          "exact_copy_list": true,
+          "expected_history": [
+            [
+              0,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2
+            ],
+            [
+              0,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2
+            ],
+            [
+              0,
+              1,
+              2,
+              1,
+              2,
+              2,
+              3
+            ],
+            [
+              0,
+              1,
+              1,
+              2,
+              2,
+              2,
+              3
+            ],
+            [
+              0,
+              1,
+              2,
+              2,
+              3,
+              2,
+              4
+            ]
+          ],
+          "diagnostics": [
+            28,
+            7,
+            8
+          ],
+          "exchange_rounds": [
+            {
+              "round": 1,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                225,
+                576,
+                450,
+                427
+              ]
+            },
+            {
+              "round": 2,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                2,
+                12,
+                4,
+                2
+              ]
+            },
+            {
+              "round": 3,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "round": 4,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "load_conservation": true,
+          "exact_predicted_gain": true,
+          "remote_before": 133686,
+          "remote_after": 133257,
+          "final_owner_sha256": "f4b8e3e87b6d37fd0a50bff9e57fa778500830c0bc8cba5d12076aba481e1366",
+          "input_sha256": "9070d5d269147c08f991f023f2e424c031d3649b3f3517e2e7c896f344e9de8b",
+          "residency_sources": {
+            "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+            "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956"
+          },
+          "exchange_sources": {
+            "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+            "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d"
+          }
+        },
+        {
+          "layer": 0,
+          "rank": 1,
+          "exact_support": true,
+          "exact_history": true,
+          "exact_candidate_count": true,
+          "exact_joint_gather": true,
+          "exact_copy_list": true,
+          "expected_history": [
+            [
+              0,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2
+            ],
+            [
+              0,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2
+            ],
+            [
+              0,
+              1,
+              2,
+              1,
+              2,
+              2,
+              3
+            ],
+            [
+              0,
+              1,
+              1,
+              2,
+              2,
+              2,
+              3
+            ],
+            [
+              0,
+              1,
+              2,
+              2,
+              3,
+              2,
+              4
+            ]
+          ],
+          "diagnostics": [
+            28,
+            7,
+            8
+          ],
+          "exchange_rounds": [
+            {
+              "round": 1,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                225,
+                576,
+                450,
+                427
+              ]
+            },
+            {
+              "round": 2,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                2,
+                12,
+                4,
+                2
+              ]
+            },
+            {
+              "round": 3,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "round": 4,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "load_conservation": true,
+          "exact_predicted_gain": true,
+          "remote_before": 133686,
+          "remote_after": 133257,
+          "final_owner_sha256": "f4b8e3e87b6d37fd0a50bff9e57fa778500830c0bc8cba5d12076aba481e1366",
+          "input_sha256": "9070d5d269147c08f991f023f2e424c031d3649b3f3517e2e7c896f344e9de8b",
+          "residency_sources": {
+            "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+            "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956"
+          },
+          "exchange_sources": {
+            "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+            "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d"
+          }
+        }
+      ]
+    },
+    {
+      "layer": 1,
+      "rank_checks": [
+        {
+          "layer": 1,
+          "rank": 0,
+          "exact_support": true,
+          "exact_history": true,
+          "exact_candidate_count": true,
+          "exact_joint_gather": true,
+          "exact_copy_list": true,
+          "expected_history": [
+            [
+              0,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2
+            ],
+            [
+              0,
+              1,
+              3,
+              2,
+              3,
+              4,
+              5
+            ],
+            [
+              0,
+              1,
+              3,
+              1,
+              4,
+              4,
+              4
+            ]
+          ],
+          "diagnostics": [
+            24,
+            7,
+            5
+          ],
+          "exchange_rounds": [
+            {
+              "round": 1,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                1778,
+                8370,
+                3556,
+                3099
+              ]
+            },
+            {
+              "round": 2,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "round": 3,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "round": 4,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "load_conservation": true,
+          "exact_predicted_gain": true,
+          "remote_before": 133701,
+          "remote_after": 130602,
+          "final_owner_sha256": "b8e6d009e917bd0ca05a727dc8f30a48ad7915292e7d9d7c3514882c13977387",
+          "input_sha256": "dbbcdacc2a46d3ba2d581a00ba81139f20bc1413cff88edf57750370083671f6",
+          "residency_sources": {
+            "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+            "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956"
+          },
+          "exchange_sources": {
+            "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+            "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d"
+          }
+        },
+        {
+          "layer": 1,
+          "rank": 1,
+          "exact_support": true,
+          "exact_history": true,
+          "exact_candidate_count": true,
+          "exact_joint_gather": true,
+          "exact_copy_list": true,
+          "expected_history": [
+            [
+              0,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2
+            ],
+            [
+              0,
+              1,
+              3,
+              2,
+              3,
+              4,
+              5
+            ],
+            [
+              0,
+              1,
+              3,
+              1,
+              4,
+              4,
+              4
+            ]
+          ],
+          "diagnostics": [
+            24,
+            7,
+            5
+          ],
+          "exchange_rounds": [
+            {
+              "round": 1,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                1778,
+                8370,
+                3556,
+                3099
+              ]
+            },
+            {
+              "round": 2,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "round": 3,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "round": 4,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "load_conservation": true,
+          "exact_predicted_gain": true,
+          "remote_before": 133701,
+          "remote_after": 130602,
+          "final_owner_sha256": "b8e6d009e917bd0ca05a727dc8f30a48ad7915292e7d9d7c3514882c13977387",
+          "input_sha256": "dbbcdacc2a46d3ba2d581a00ba81139f20bc1413cff88edf57750370083671f6",
+          "residency_sources": {
+            "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+            "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956"
+          },
+          "exchange_sources": {
+            "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+            "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d"
+          }
+        }
+      ]
+    },
+    {
+      "layer": 2,
+      "rank_checks": [
+        {
+          "layer": 2,
+          "rank": 0,
+          "exact_support": true,
+          "exact_history": true,
+          "exact_candidate_count": true,
+          "exact_joint_gather": true,
+          "exact_copy_list": true,
+          "expected_history": [
+            [
+              0,
+              1,
+              1,
+              1,
+              1,
+              4,
+              2
+            ],
+            [
+              0,
+              1,
+              0,
+              1,
+              1,
+              2,
+              1
+            ],
+            [
+              0,
+              1,
+              2,
+              2,
+              2,
+              4,
+              4
+            ],
+            [
+              0,
+              1,
+              2,
+              2,
+              4,
+              4,
+              4
+            ],
+            [
+              0,
+              1,
+              0,
+              2,
+              2,
+              2,
+              2
+            ]
+          ],
+          "diagnostics": [
+            24,
+            6,
+            8
+          ],
+          "exchange_rounds": [
+            {
+              "round": 1,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                5640,
+                16394,
+                11280,
+                8064
+              ]
+            },
+            {
+              "round": 2,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                154,
+                1122,
+                308,
+                154
+              ]
+            },
+            {
+              "round": 3,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                168,
+                1222,
+                336,
+                168
+              ]
+            },
+            {
+              "round": 4,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                123,
+                974,
+                246,
+                123
+              ]
+            }
+          ],
+          "load_conservation": true,
+          "exact_predicted_gain": true,
+          "remote_before": 133679,
+          "remote_after": 125170,
+          "final_owner_sha256": "6591eb58e0c9cfa91d2b2a19347a75e8c0d8e64dc0aad3af9c2d1f458c987215",
+          "input_sha256": "844f64ee50dcec66a87a2163fa158e012bd9d74e1cfaa9d4423a9198aa52f0ff",
+          "residency_sources": {
+            "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+            "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956"
+          },
+          "exchange_sources": {
+            "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+            "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d"
+          }
+        },
+        {
+          "layer": 2,
+          "rank": 1,
+          "exact_support": true,
+          "exact_history": true,
+          "exact_candidate_count": true,
+          "exact_joint_gather": true,
+          "exact_copy_list": true,
+          "expected_history": [
+            [
+              0,
+              1,
+              1,
+              1,
+              1,
+              4,
+              2
+            ],
+            [
+              0,
+              1,
+              0,
+              1,
+              1,
+              2,
+              1
+            ],
+            [
+              0,
+              1,
+              2,
+              2,
+              2,
+              4,
+              4
+            ],
+            [
+              0,
+              1,
+              2,
+              2,
+              4,
+              4,
+              4
+            ],
+            [
+              0,
+              1,
+              0,
+              2,
+              2,
+              2,
+              2
+            ]
+          ],
+          "diagnostics": [
+            24,
+            6,
+            8
+          ],
+          "exchange_rounds": [
+            {
+              "round": 1,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                5640,
+                16394,
+                11280,
+                8064
+              ]
+            },
+            {
+              "round": 2,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                154,
+                1122,
+                308,
+                154
+              ]
+            },
+            {
+              "round": 3,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                168,
+                1222,
+                336,
+                168
+              ]
+            },
+            {
+              "round": 4,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                123,
+                974,
+                246,
+                123
+              ]
+            }
+          ],
+          "load_conservation": true,
+          "exact_predicted_gain": true,
+          "remote_before": 133679,
+          "remote_after": 125170,
+          "final_owner_sha256": "6591eb58e0c9cfa91d2b2a19347a75e8c0d8e64dc0aad3af9c2d1f458c987215",
+          "input_sha256": "844f64ee50dcec66a87a2163fa158e012bd9d74e1cfaa9d4423a9198aa52f0ff",
+          "residency_sources": {
+            "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+            "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956"
+          },
+          "exchange_sources": {
+            "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+            "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d"
+          }
+        }
+      ]
+    },
+    {
+      "layer": 3,
+      "rank_checks": [
+        {
+          "layer": 3,
+          "rank": 0,
+          "exact_support": true,
+          "exact_history": true,
+          "exact_candidate_count": true,
+          "exact_joint_gather": true,
+          "exact_copy_list": true,
+          "expected_history": [
+            [
+              0,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2
+            ],
+            [
+              0,
+              1,
+              1,
+              0,
+              1,
+              2,
+              1
+            ],
+            [
+              0,
+              1,
+              3,
+              2,
+              3,
+              4,
+              5
+            ],
+            [
+              0,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2
+            ],
+            [
+              0,
+              1,
+              0,
+              2,
+              2,
+              2,
+              2
+            ]
+          ],
+          "diagnostics": [
+            26,
+            6,
+            7
+          ],
+          "exchange_rounds": [
+            {
+              "round": 1,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                3177,
+                9946,
+                6354,
+                4822
+              ]
+            },
+            {
+              "round": 2,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "round": 3,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                3,
+                22,
+                6,
+                3
+              ]
+            },
+            {
+              "round": 4,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                1,
+                8,
+                2,
+                1
+              ]
+            }
+          ],
+          "load_conservation": true,
+          "exact_predicted_gain": true,
+          "remote_before": 133952,
+          "remote_after": 129126,
+          "final_owner_sha256": "094977e541dd58014cbdc1a092c5c511b2b72eb64a382b8031ac6ac7a2b332c5",
+          "input_sha256": "3238bd6b0ae54810c99040153d41007130eb80807e0d0de88a1dfeb2e13a117d",
+          "residency_sources": {
+            "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+            "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956"
+          },
+          "exchange_sources": {
+            "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+            "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d"
+          }
+        },
+        {
+          "layer": 3,
+          "rank": 1,
+          "exact_support": true,
+          "exact_history": true,
+          "exact_candidate_count": true,
+          "exact_joint_gather": true,
+          "exact_copy_list": true,
+          "expected_history": [
+            [
+              0,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2
+            ],
+            [
+              0,
+              1,
+              1,
+              0,
+              1,
+              2,
+              1
+            ],
+            [
+              0,
+              1,
+              3,
+              2,
+              3,
+              4,
+              5
+            ],
+            [
+              0,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2
+            ],
+            [
+              0,
+              1,
+              0,
+              2,
+              2,
+              2,
+              2
+            ]
+          ],
+          "diagnostics": [
+            26,
+            6,
+            7
+          ],
+          "exchange_rounds": [
+            {
+              "round": 1,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                3177,
+                9946,
+                6354,
+                4822
+              ]
+            },
+            {
+              "round": 2,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "round": 3,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                3,
+                22,
+                6,
+                3
+              ]
+            },
+            {
+              "round": 4,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                1,
+                8,
+                2,
+                1
+              ]
+            }
+          ],
+          "load_conservation": true,
+          "exact_predicted_gain": true,
+          "remote_before": 133952,
+          "remote_after": 129126,
+          "final_owner_sha256": "094977e541dd58014cbdc1a092c5c511b2b72eb64a382b8031ac6ac7a2b332c5",
+          "input_sha256": "3238bd6b0ae54810c99040153d41007130eb80807e0d0de88a1dfeb2e13a117d",
+          "residency_sources": {
+            "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+            "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956"
+          },
+          "exchange_sources": {
+            "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+            "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d"
+          }
+        }
+      ]
+    },
+    {
+      "layer": 4,
+      "rank_checks": [
+        {
+          "layer": 4,
+          "rank": 0,
+          "exact_support": true,
+          "exact_history": true,
+          "exact_candidate_count": true,
+          "exact_joint_gather": true,
+          "exact_copy_list": true,
+          "expected_history": [
+            [
+              0,
+              1,
+              1,
+              1,
+              1,
+              4,
+              2
+            ],
+            [
+              0,
+              1,
+              0,
+              1,
+              1,
+              2,
+              1
+            ],
+            [
+              0,
+              1,
+              2,
+              1,
+              2,
+              4,
+              3
+            ],
+            [
+              0,
+              1,
+              2,
+              2,
+              2,
+              4,
+              4
+            ],
+            [
+              0,
+              1,
+              2,
+              2,
+              3,
+              4,
+              4
+            ]
+          ],
+          "diagnostics": [
+            24,
+            7,
+            8
+          ],
+          "exchange_rounds": [
+            {
+              "round": 1,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                2403,
+                8080,
+                4806,
+                3749
+              ]
+            },
+            {
+              "round": 2,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                525,
+                2100,
+                1050,
+                525
+              ]
+            },
+            {
+              "round": 3,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "round": 4,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "load_conservation": true,
+          "exact_predicted_gain": true,
+          "remote_before": 133886,
+          "remote_after": 129612,
+          "final_owner_sha256": "b8767bb6d0e529d692b170c14ae5bd1b088180c94e2a5553e70abf3743ce41ac",
+          "input_sha256": "502bbef9e34edbb784659fd842cc12fb01e30a1bb0b6ded4c7cf0063fc9b9e4c",
+          "residency_sources": {
+            "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+            "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956"
+          },
+          "exchange_sources": {
+            "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+            "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d"
+          }
+        },
+        {
+          "layer": 4,
+          "rank": 1,
+          "exact_support": true,
+          "exact_history": true,
+          "exact_candidate_count": true,
+          "exact_joint_gather": true,
+          "exact_copy_list": true,
+          "expected_history": [
+            [
+              0,
+              1,
+              1,
+              1,
+              1,
+              4,
+              2
+            ],
+            [
+              0,
+              1,
+              0,
+              1,
+              1,
+              2,
+              1
+            ],
+            [
+              0,
+              1,
+              2,
+              1,
+              2,
+              4,
+              3
+            ],
+            [
+              0,
+              1,
+              2,
+              2,
+              2,
+              4,
+              4
+            ],
+            [
+              0,
+              1,
+              2,
+              2,
+              3,
+              4,
+              4
+            ]
+          ],
+          "diagnostics": [
+            24,
+            7,
+            8
+          ],
+          "exchange_rounds": [
+            {
+              "round": 1,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                2403,
+                8080,
+                4806,
+                3749
+              ]
+            },
+            {
+              "round": 2,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                525,
+                2100,
+                1050,
+                525
+              ]
+            },
+            {
+              "round": 3,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "round": 4,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "load_conservation": true,
+          "exact_predicted_gain": true,
+          "remote_before": 133886,
+          "remote_after": 129612,
+          "final_owner_sha256": "b8767bb6d0e529d692b170c14ae5bd1b088180c94e2a5553e70abf3743ce41ac",
+          "input_sha256": "502bbef9e34edbb784659fd842cc12fb01e30a1bb0b6ded4c7cf0063fc9b9e4c",
+          "residency_sources": {
+            "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+            "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956"
+          },
+          "exchange_sources": {
+            "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+            "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d"
+          }
+        }
+      ]
+    },
+    {
+      "layer": 5,
+      "rank_checks": [
+        {
+          "layer": 5,
+          "rank": 0,
+          "exact_support": true,
+          "exact_history": true,
+          "exact_candidate_count": true,
+          "exact_joint_gather": true,
+          "exact_copy_list": true,
+          "expected_history": [
+            [
+              0,
+              1,
+              2,
+              2,
+              2,
+              4,
+              4
+            ],
+            [
+              0,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2
+            ],
+            [
+              0,
+              1,
+              0,
+              1,
+              1,
+              2,
+              1
+            ],
+            [
+              0,
+              1,
+              3,
+              2,
+              3,
+              4,
+              5
+            ],
+            [
+              0,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2
+            ]
+          ],
+          "diagnostics": [
+            26,
+            8,
+            7
+          ],
+          "exchange_rounds": [
+            {
+              "round": 1,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                1925,
+                7264,
+                3850,
+                2756
+              ]
+            },
+            {
+              "round": 2,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                10,
+                60,
+                20,
+                10
+              ]
+            },
+            {
+              "round": 3,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                12,
+                72,
+                24,
+                12
+              ]
+            },
+            {
+              "round": 4,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "load_conservation": true,
+          "exact_predicted_gain": true,
+          "remote_before": 133903,
+          "remote_after": 131125,
+          "final_owner_sha256": "e2d8d1c42f7699d4cfff3e8e656164c76db45a141a84012ea7ede00990e044f8",
+          "input_sha256": "cf72b7f79316d6ef7515c48ab829a3f54e5c45b58263eb4cf06ac734c65e2a56",
+          "residency_sources": {
+            "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+            "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956"
+          },
+          "exchange_sources": {
+            "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+            "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d"
+          }
+        },
+        {
+          "layer": 5,
+          "rank": 1,
+          "exact_support": true,
+          "exact_history": true,
+          "exact_candidate_count": true,
+          "exact_joint_gather": true,
+          "exact_copy_list": true,
+          "expected_history": [
+            [
+              0,
+              1,
+              2,
+              2,
+              2,
+              4,
+              4
+            ],
+            [
+              0,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2
+            ],
+            [
+              0,
+              1,
+              0,
+              1,
+              1,
+              2,
+              1
+            ],
+            [
+              0,
+              1,
+              3,
+              2,
+              3,
+              4,
+              5
+            ],
+            [
+              0,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2
+            ]
+          ],
+          "diagnostics": [
+            26,
+            8,
+            7
+          ],
+          "exchange_rounds": [
+            {
+              "round": 1,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                1925,
+                7264,
+                3850,
+                2756
+              ]
+            },
+            {
+              "round": 2,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                10,
+                60,
+                20,
+                10
+              ]
+            },
+            {
+              "round": 3,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                12,
+                72,
+                24,
+                12
+              ]
+            },
+            {
+              "round": 4,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "load_conservation": true,
+          "exact_predicted_gain": true,
+          "remote_before": 133903,
+          "remote_after": 131125,
+          "final_owner_sha256": "e2d8d1c42f7699d4cfff3e8e656164c76db45a141a84012ea7ede00990e044f8",
+          "input_sha256": "cf72b7f79316d6ef7515c48ab829a3f54e5c45b58263eb4cf06ac734c65e2a56",
+          "residency_sources": {
+            "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+            "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956"
+          },
+          "exchange_sources": {
+            "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+            "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d"
+          }
+        }
+      ]
+    },
+    {
+      "layer": 6,
+      "rank_checks": [
+        {
+          "layer": 6,
+          "rank": 0,
+          "exact_support": true,
+          "exact_history": true,
+          "exact_candidate_count": true,
+          "exact_joint_gather": true,
+          "exact_copy_list": true,
+          "expected_history": [
+            [
+              0,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2
+            ],
+            [
+              0,
+              1,
+              3,
+              2,
+              3,
+              4,
+              5
+            ],
+            [
+              0,
+              1,
+              3,
+              3,
+              3,
+              4,
+              6
+            ]
+          ],
+          "diagnostics": [
+            26,
+            7,
+            7
+          ],
+          "exchange_rounds": [
+            {
+              "round": 1,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                1885,
+                7034,
+                3770,
+                3085
+              ]
+            },
+            {
+              "round": 2,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                4,
+                32,
+                8,
+                4
+              ]
+            },
+            {
+              "round": 3,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                1,
+                8,
+                2,
+                1
+              ]
+            },
+            {
+              "round": 4,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                2,
+                16,
+                4,
+                2
+              ]
+            }
+          ],
+          "load_conservation": true,
+          "exact_predicted_gain": true,
+          "remote_before": 134003,
+          "remote_after": 130911,
+          "final_owner_sha256": "5762a91174fb0ea93c1e1c670a253fc24de314be4b0db913b4b9dbb018bea21d",
+          "input_sha256": "07b245a0267b26a726c60f263c661ade189262bf4e62c8e6bfe671a5a6b21d33",
+          "residency_sources": {
+            "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+            "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956"
+          },
+          "exchange_sources": {
+            "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+            "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d"
+          }
+        },
+        {
+          "layer": 6,
+          "rank": 1,
+          "exact_support": true,
+          "exact_history": true,
+          "exact_candidate_count": true,
+          "exact_joint_gather": true,
+          "exact_copy_list": true,
+          "expected_history": [
+            [
+              0,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2
+            ],
+            [
+              0,
+              1,
+              3,
+              2,
+              3,
+              4,
+              5
+            ],
+            [
+              0,
+              1,
+              3,
+              3,
+              3,
+              4,
+              6
+            ]
+          ],
+          "diagnostics": [
+            26,
+            7,
+            7
+          ],
+          "exchange_rounds": [
+            {
+              "round": 1,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                1885,
+                7034,
+                3770,
+                3085
+              ]
+            },
+            {
+              "round": 2,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                4,
+                32,
+                8,
+                4
+              ]
+            },
+            {
+              "round": 3,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                1,
+                8,
+                2,
+                1
+              ]
+            },
+            {
+              "round": 4,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                2,
+                16,
+                4,
+                2
+              ]
+            }
+          ],
+          "load_conservation": true,
+          "exact_predicted_gain": true,
+          "remote_before": 134003,
+          "remote_after": 130911,
+          "final_owner_sha256": "5762a91174fb0ea93c1e1c670a253fc24de314be4b0db913b4b9dbb018bea21d",
+          "input_sha256": "07b245a0267b26a726c60f263c661ade189262bf4e62c8e6bfe671a5a6b21d33",
+          "residency_sources": {
+            "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+            "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956"
+          },
+          "exchange_sources": {
+            "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+            "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d"
+          }
+        }
+      ]
+    },
+    {
+      "layer": 7,
+      "rank_checks": [
+        {
+          "layer": 7,
+          "rank": 0,
+          "exact_support": true,
+          "exact_history": true,
+          "exact_candidate_count": true,
+          "exact_joint_gather": true,
+          "exact_copy_list": true,
+          "expected_history": [
+            [
+              0,
+              1,
+              1,
+              1,
+              1,
+              4,
+              2
+            ],
+            [
+              0,
+              1,
+              0,
+              1,
+              1,
+              2,
+              1
+            ],
+            [
+              0,
+              1,
+              3,
+              2,
+              3,
+              6,
+              5
+            ],
+            [
+              0,
+              1,
+              1,
+              2,
+              2,
+              4,
+              3
+            ],
+            [
+              0,
+              1,
+              2,
+              1,
+              3,
+              4,
+              3
+            ]
+          ],
+          "diagnostics": [
+            24,
+            7,
+            8
+          ],
+          "exchange_rounds": [
+            {
+              "round": 1,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                3898,
+                14134,
+                7796,
+                6799
+              ]
+            },
+            {
+              "round": 2,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                78,
+                584,
+                156,
+                78
+              ]
+            },
+            {
+              "round": 3,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                27,
+                162,
+                54,
+                27
+              ]
+            },
+            {
+              "round": 4,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "load_conservation": true,
+          "exact_predicted_gain": true,
+          "remote_before": 132968,
+          "remote_after": 126064,
+          "final_owner_sha256": "e61755db18f342495e60868634901d3267598def53905c16ac2c90bb4b8fdf8b",
+          "input_sha256": "b005244357fa30dea03327859a928359ec3971ea0d5718053a9f1351b5d36b6e",
+          "residency_sources": {
+            "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+            "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956"
+          },
+          "exchange_sources": {
+            "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+            "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d"
+          }
+        },
+        {
+          "layer": 7,
+          "rank": 1,
+          "exact_support": true,
+          "exact_history": true,
+          "exact_candidate_count": true,
+          "exact_joint_gather": true,
+          "exact_copy_list": true,
+          "expected_history": [
+            [
+              0,
+              1,
+              1,
+              1,
+              1,
+              4,
+              2
+            ],
+            [
+              0,
+              1,
+              0,
+              1,
+              1,
+              2,
+              1
+            ],
+            [
+              0,
+              1,
+              3,
+              2,
+              3,
+              6,
+              5
+            ],
+            [
+              0,
+              1,
+              1,
+              2,
+              2,
+              4,
+              3
+            ],
+            [
+              0,
+              1,
+              2,
+              1,
+              3,
+              4,
+              3
+            ]
+          ],
+          "diagnostics": [
+            24,
+            7,
+            8
+          ],
+          "exchange_rounds": [
+            {
+              "round": 1,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                3898,
+                14134,
+                7796,
+                6799
+              ]
+            },
+            {
+              "round": 2,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                78,
+                584,
+                156,
+                78
+              ]
+            },
+            {
+              "round": 3,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                27,
+                162,
+                54,
+                27
+              ]
+            },
+            {
+              "round": 4,
+              "exact_owner_counts_stats": true,
+              "global_stats": [
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "load_conservation": true,
+          "exact_predicted_gain": true,
+          "remote_before": 132968,
+          "remote_after": 126064,
+          "final_owner_sha256": "e61755db18f342495e60868634901d3267598def53905c16ac2c90bb4b8fdf8b",
+          "input_sha256": "b005244357fa30dea03327859a928359ec3971ea0d5718053a9f1351b5d36b6e",
+          "residency_sources": {
+            "residency_cuda.py": "a4979b2b9b1f22a015cb6c638f45cc7a9073e419eb76309dddd7d5af385a51b7",
+            "residency_cuda.cu": "f8415b84484d9e6dda8fad0b9829f1379b37b32c48acf38ae8d7ccea3b60d956"
+          },
+          "exchange_sources": {
+            "exchange_cuda.py": "028c3347aaaeb86f5a797e1e597d36efe9d0865e24db174d7200402de3ec4bd5",
+            "exchange_cuda.cu": "54368438ae4e965727bf4b516841acbae51a7f1395c949ec4cb3744f2f8d910d"
+          }
+        }
+      ]
+    }
+  ],
+  "failures": []
+}

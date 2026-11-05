@@ -1,0 +1,57 @@
+[
+  {
+    "file": "epmoe_two_gpu_code_01.tar.gz",
+    "sha256": "be33618916c800ee6b4882d450db32ac2ca9251a325a18b7ba5cb226f55776a9"
+  },
+  {
+    "file": "epmoe_two_gpu_code_02.tar.gz",
+    "sha256": "8b3e97610dbab7bd7fcb32e5c4d35c87433e3449cf8789abd24d31b88f82be41",
+    "benchmark_py_sha256": "4cec560055941a0c08c2376713c15295b12815477c2a7034d27cf13504c0b629"
+  },
+  {
+    "file": "epmoe_two_gpu_code_03.tar.gz",
+    "sha256": "a3b5a73dbdae3b0a10aa8ab35ed6a5765534f32857b10f050dc34fcbe994dfb9",
+    "benchmark_py_sha256": "a207263b6767b7f3f76622efcf19a7c9ea0cf0794b51b0d893363976c0dc3b28"
+  },
+  {
+    "file": "epmoe_two_gpu_code_04.tar.gz",
+    "sha256": "ce2c9a21aee776819eef41dd7121e44997286a881ed6f7fc8bc139de75b26f4d",
+    "benchmark_py_sha256": "3e6884422f6af66527984ca6e21ddac50bc50ebd1932738be0269f806b79c4d0"
+  },
+  {
+    "file": "epmoe_two_gpu_code_05.tar.gz",
+    "sha256": "6b0ac385dbef2a6c51bb65e976455b69f7ea4e68338143bd570e2579beac1a90",
+    "benchmark_py_sha256": "3e6884422f6af66527984ca6e21ddac50bc50ebd1932738be0269f806b79c4d0"
+  },
+  {
+    "file": "epmoe_two_gpu_code_06.tar.gz",
+    "sha256": "f4aea1b2a155ea96fc1eb2b201b788878a6628939d580e3565704dd3329591ee",
+    "benchmark_py_sha256": "ab09e8f984fdf776838315c6111519b81589262d60842449bd1b77dfcfaec931"
+  },
+  {
+    "file": "epmoe_two_gpu_code_07.tar.gz",
+    "sha256": "9bdf0ed4710b07a7fc16a99a28fd20f90bb0e22b3f6939caa558f4231cd8867a",
+    "benchmark_py_sha256": "a18f357568fd2e7ab8aacd63ae35d89d042df706989529474d7ad93251b4d46d"
+  },
+  {
+    "file": "epmoe_deepep_fix08.tar.gz",
+    "sha256": "818774513dd555d9c296ebc8ac31c28e457b27f48e6abefa09006e38690983e4"
+  },
+  {
+    "file": "epmoe_residency_fix09.tar.gz",
+    "sha256": "069dc01097223dac895b3b586806389f34ed712493a0436a2d77ee9fe487b4f6",
+    "benchmark_py_sha256": "281cf81e1ca5e4f806d533b1a16a47579d7556a7fbae630da8986c2163dc1913"
+  },
+  {
+    "file": "epmoe_fused_fix10.tar.gz",
+    "sha256": "7270870fc8d136c2e49d8014865bf57b89fca0c246951021e7303da23a2ee882"
+  },
+  {
+    "file": "epmoe_final_fix11.tar.gz",
+    "sha256": "abdc8d8dc153a91447541bb2faf27e3ee9cd18139c81439155fee16b745acb64"
+  },
+  {
+    "file": "epmoe_deepep_guard12.tar.gz",
+    "sha256": "c3a91ca1e96eb72a2dba705c244c5b948768b29d150f3abc1f49738824bab442"
+  }
+]

@@ -1,0 +1,1893 @@
+{
+  "scope": "CPU semantic prototype; fixed saved 256/g2 residency; no GPU benchmark",
+  "rows": [
+    {
+      "layer": 0,
+      "baseline": 621511,
+      "input_sha256": "22bd2a9496dbc0e377d72b7a71c44e94adaa1e0ff86bc3e590264c31abd2393b",
+      "support_sha256": "892b7bd3aa75fe81500a276c9f088bc3a484b7dc187fe212390e74e5e22f5dd6",
+      "variants": {
+        "equal_sizes": {
+          "metrics": {
+            "remote_token_destinations": 537683,
+            "all_token_destinations": 629204,
+            "remote_pairs": 917834,
+            "source_remote_payloads": [
+              61606,
+              66171,
+              67217,
+              67273,
+              68486,
+              68070,
+              69331,
+              69529
+            ],
+            "destination_remote_payloads": [
+              64262,
+              65423,
+              67530,
+              62805,
+              70968,
+              67433,
+              65032,
+              74230
+            ],
+            "pair_loads": [
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144
+            ],
+            "max_min_pair_load": 0,
+            "max_mean_pair_load": 1.0,
+            "active_extra_experts": [
+              8,
+              8,
+              8,
+              8,
+              8,
+              8,
+              8,
+              8
+            ]
+          },
+          "history": [
+            {
+              "round": 1,
+              "unique_states": 126984,
+              "tokens": 134144,
+              "predicted_gain": 60017,
+              "moved_pairs": 70212,
+              "accepted_tokens": 68388,
+              "dp_cells": 0,
+              "max_dp_capacity": 0,
+              "cpu_seconds": {
+                "group": 0.11282520800000007,
+                "planning": 0.05012970800000005,
+                "expand": 0.15187841599999996
+              }
+            },
+            {
+              "round": 2,
+              "unique_states": 126984,
+              "tokens": 134144,
+              "predicted_gain": 19778,
+              "moved_pairs": 25802,
+              "accepted_tokens": 24502,
+              "dp_cells": 0,
+              "max_dp_capacity": 0,
+              "cpu_seconds": {
+                "group": 0.1125085830000001,
+                "planning": 0.04945116599999988,
+                "expand": 0.017264292000000125
+              }
+            },
+            {
+              "round": 3,
+              "unique_states": 126987,
+              "tokens": 134144,
+              "predicted_gain": 3491,
+              "moved_pairs": 5818,
+              "accepted_tokens": 5364,
+              "dp_cells": 0,
+              "max_dp_capacity": 0,
+              "cpu_seconds": {
+                "group": 0.10921495800000036,
+                "planning": 0.04999704199999977,
+                "expand": 0.017863833000000273
+              }
+            },
+            {
+              "round": 4,
+              "unique_states": 126987,
+              "tokens": 134144,
+              "predicted_gain": 542,
+              "moved_pairs": 846,
+              "accepted_tokens": 750,
+              "dp_cells": 0,
+              "max_dp_capacity": 0,
+              "cpu_seconds": {
+                "group": 0.11066537499999995,
+                "planning": 0.048610709000000085,
+                "expand": 0.017313500000000204
+              }
+            }
+          ],
+          "cpu_seconds": 0.8563258750000002,
+          "reduction_pct": 13.487774150417287,
+          "audit_pass": true
+        },
+        "mixed_sizes": {
+          "metrics": {
+            "remote_token_destinations": 536800,
+            "all_token_destinations": 628011,
+            "remote_pairs": 918218,
+            "source_remote_payloads": [
+              61544,
+              66257,
+              67227,
+              66854,
+              68637,
+              67869,
+              68916,
+              69496
+            ],
+            "destination_remote_payloads": [
+              64046,
+              65104,
+              67879,
+              62725,
+              70768,
+              67063,
+              65106,
+              74109
+            ],
+            "pair_loads": [
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144
+            ],
+            "max_min_pair_load": 0,
+            "max_mean_pair_load": 1.0,
+            "active_extra_experts": [
+              8,
+              8,
+              8,
+              8,
+              8,
+              8,
+              8,
+              8
+            ]
+          },
+          "history": [
+            {
+              "round": 1,
+              "unique_states": 126984,
+              "tokens": 134144,
+              "predicted_gain": 60474,
+              "moved_pairs": 70610,
+              "accepted_tokens": 68851,
+              "dp_cells": 1355776,
+              "max_dp_capacity": 5911,
+              "cpu_seconds": {
+                "group": 0.11198091599999982,
+                "planning": 0.043424750000000234,
+                "expand": 0.01707937500000023
+              }
+            },
+            {
+              "round": 2,
+              "unique_states": 126984,
+              "tokens": 134144,
+              "predicted_gain": 19852,
+              "moved_pairs": 25564,
+              "accepted_tokens": 24594,
+              "dp_cells": 618528,
+              "max_dp_capacity": 4171,
+              "cpu_seconds": {
+                "group": 0.10819220799999973,
+                "planning": 0.04933570800000009,
+                "expand": 0.017492624999999595
+              }
+            },
+            {
+              "round": 3,
+              "unique_states": 126985,
+              "tokens": 134144,
+              "predicted_gain": 3739,
+              "moved_pairs": 6108,
+              "accepted_tokens": 5775,
+              "dp_cells": 290304,
+              "max_dp_capacity": 3181,
+              "cpu_seconds": {
+                "group": 0.10788462500000007,
+                "planning": 0.06988595799999997,
+                "expand": 0.017277667000000108
+              }
+            },
+            {
+              "round": 4,
+              "unique_states": 126986,
+              "tokens": 134144,
+              "predicted_gain": 646,
+              "moved_pairs": 992,
+              "accepted_tokens": 942,
+              "dp_cells": 210240,
+              "max_dp_capacity": 2941,
+              "cpu_seconds": {
+                "group": 0.11152804099999969,
+                "planning": 0.04677633400000003,
+                "expand": 0.01726725000000018
+              }
+            }
+          ],
+          "cpu_seconds": 0.7281294999999997,
+          "reduction_pct": 13.629847259340544,
+          "audit_pass": true
+        }
+      }
+    },
+    {
+      "layer": 1,
+      "baseline": 643011,
+      "input_sha256": "4a85f36543028ee06888370cc6d2d9f5569839d080ed472525aa60d377088829",
+      "support_sha256": "d6927345b49520254f37a1b2dd220c90e874a679ef42eb31850d0f1f6b0ba8fb",
+      "variants": {
+        "equal_sizes": {
+          "metrics": {
+            "remote_token_destinations": 477497,
+            "all_token_destinations": 564432,
+            "remote_pairs": 906377,
+            "source_remote_payloads": [
+              61874,
+              59797,
+              59062,
+              55972,
+              63018,
+              63823,
+              55948,
+              58003
+            ],
+            "destination_remote_payloads": [
+              56730,
+              59911,
+              54869,
+              50155,
+              59310,
+              63509,
+              57799,
+              75214
+            ],
+            "pair_loads": [
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144
+            ],
+            "max_min_pair_load": 0,
+            "max_mean_pair_load": 1.0,
+            "active_extra_experts": [
+              8,
+              8,
+              8,
+              8,
+              8,
+              8,
+              8,
+              8
+            ]
+          },
+          "history": [
+            {
+              "round": 1,
+              "unique_states": 105843,
+              "tokens": 134144,
+              "predicted_gain": 87149,
+              "moved_pairs": 107654,
+              "accepted_tokens": 103870,
+              "dp_cells": 0,
+              "max_dp_capacity": 0,
+              "cpu_seconds": {
+                "group": 0.13462820900000017,
+                "planning": 0.024129792000000094,
+                "expand": 0.011760624999999969
+              }
+            },
+            {
+              "round": 2,
+              "unique_states": 105844,
+              "tokens": 134144,
+              "predicted_gain": 47666,
+              "moved_pairs": 70810,
+              "accepted_tokens": 61262,
+              "dp_cells": 0,
+              "max_dp_capacity": 0,
+              "cpu_seconds": {
+                "group": 0.13483145900000038,
+                "planning": 0.0361532910000002,
+                "expand": 0.01348191700000001
+              }
+            },
+            {
+              "round": 3,
+              "unique_states": 105841,
+              "tokens": 134144,
+              "predicted_gain": 22467,
+              "moved_pairs": 38700,
+              "accepted_tokens": 30792,
+              "dp_cells": 0,
+              "max_dp_capacity": 0,
+              "cpu_seconds": {
+                "group": 0.1340496670000002,
+                "planning": 0.0404182500000001,
+                "expand": 0.012876707999999404
+              }
+            },
+            {
+              "round": 4,
+              "unique_states": 105848,
+              "tokens": 134144,
+              "predicted_gain": 8232,
+              "moved_pairs": 16582,
+              "accepted_tokens": 12026,
+              "dp_cells": 0,
+              "max_dp_capacity": 0,
+              "cpu_seconds": {
+                "group": 0.13256087499999936,
+                "planning": 0.03985012500000007,
+                "expand": 0.011891916999999808
+              }
+            }
+          ],
+          "cpu_seconds": 0.7357606669999996,
+          "reduction_pct": 25.740461671728788,
+          "audit_pass": true
+        },
+        "mixed_sizes": {
+          "metrics": {
+            "remote_token_destinations": 462415,
+            "all_token_destinations": 549243,
+            "remote_pairs": 902864,
+            "source_remote_payloads": [
+              60387,
+              59205,
+              57463,
+              52018,
+              59500,
+              61753,
+              54528,
+              57561
+            ],
+            "destination_remote_payloads": [
+              57029,
+              59172,
+              53364,
+              49662,
+              58923,
+              61992,
+              56435,
+              65838
+            ],
+            "pair_loads": [
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144
+            ],
+            "max_min_pair_load": 0,
+            "max_mean_pair_load": 1.0,
+            "active_extra_experts": [
+              8,
+              8,
+              8,
+              8,
+              8,
+              8,
+              8,
+              8
+            ]
+          },
+          "history": [
+            {
+              "round": 1,
+              "unique_states": 105843,
+              "tokens": 134144,
+              "predicted_gain": 91016,
+              "moved_pairs": 109002,
+              "accepted_tokens": 103339,
+              "dp_cells": 2127776,
+              "max_dp_capacity": 14308,
+              "cpu_seconds": {
+                "group": 0.13592650000000006,
+                "planning": 0.027001249999999644,
+                "expand": 0.012028291000000024
+              }
+            },
+            {
+              "round": 2,
+              "unique_states": 105841,
+              "tokens": 134144,
+              "predicted_gain": 51024,
+              "moved_pairs": 76000,
+              "accepted_tokens": 65871,
+              "dp_cells": 1689888,
+              "max_dp_capacity": 9287,
+              "cpu_seconds": {
+                "group": 0.13310325000000045,
+                "planning": 0.03741054099999985,
+                "expand": 0.012157708000000156
+              }
+            },
+            {
+              "round": 3,
+              "unique_states": 105838,
+              "tokens": 134144,
+              "predicted_gain": 27152,
+              "moved_pairs": 44774,
+              "accepted_tokens": 37268,
+              "dp_cells": 1062400,
+              "max_dp_capacity": 4542,
+              "cpu_seconds": {
+                "group": 0.13183941700000013,
+                "planning": 0.03854587500000051,
+                "expand": 0.012313167000000291
+              }
+            },
+            {
+              "round": 4,
+              "unique_states": 105838,
+              "tokens": 134144,
+              "predicted_gain": 11404,
+              "moved_pairs": 19336,
+              "accepted_tokens": 15636,
+              "dp_cells": 727296,
+              "max_dp_capacity": 4256,
+              "cpu_seconds": {
+                "group": 0.13097704099999952,
+                "planning": 0.03825720900000018,
+                "expand": 0.01227625000000021
+              }
+            }
+          ],
+          "cpu_seconds": 0.7310297080000003,
+          "reduction_pct": 28.08598919769646,
+          "audit_pass": true
+        }
+      }
+    },
+    {
+      "layer": 2,
+      "baseline": 635585,
+      "input_sha256": "d947eacd11a5707b45b59eda85cbbf6f13fe16ec2beb671980274aed7907cd06",
+      "support_sha256": "f3fcb46a230b1dc3589bb262b2551f713ad26ac22d1a917ae5f92e026912caeb",
+      "variants": {
+        "equal_sizes": {
+          "metrics": {
+            "remote_token_destinations": 467436,
+            "all_token_destinations": 563223,
+            "remote_pairs": 883437,
+            "source_remote_payloads": [
+              60522,
+              59225,
+              54668,
+              55699,
+              56754,
+              61976,
+              57373,
+              61219
+            ],
+            "destination_remote_payloads": [
+              60043,
+              60066,
+              53302,
+              49362,
+              53394,
+              61359,
+              66063,
+              63847
+            ],
+            "pair_loads": [
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144
+            ],
+            "max_min_pair_load": 0,
+            "max_mean_pair_load": 1.0,
+            "active_extra_experts": [
+              8,
+              8,
+              7,
+              8,
+              8,
+              8,
+              8,
+              8
+            ]
+          },
+          "history": [
+            {
+              "round": 1,
+              "unique_states": 52882,
+              "tokens": 134144,
+              "predicted_gain": 94460,
+              "moved_pairs": 118032,
+              "accepted_tokens": 107852,
+              "dp_cells": 0,
+              "max_dp_capacity": 0,
+              "cpu_seconds": {
+                "group": 0.14681816700000017,
+                "planning": 0.015730708000000426,
+                "expand": 0.010539709000000563
+              }
+            },
+            {
+              "round": 2,
+              "unique_states": 52896,
+              "tokens": 134144,
+              "predicted_gain": 47203,
+              "moved_pairs": 75846,
+              "accepted_tokens": 61268,
+              "dp_cells": 0,
+              "max_dp_capacity": 0,
+              "cpu_seconds": {
+                "group": 0.14331916699999958,
+                "planning": 0.017240541999999692,
+                "expand": 0.010911000000000115
+              }
+            },
+            {
+              "round": 3,
+              "unique_states": 52904,
+              "tokens": 134144,
+              "predicted_gain": 19430,
+              "moved_pairs": 33630,
+              "accepted_tokens": 24936,
+              "dp_cells": 0,
+              "max_dp_capacity": 0,
+              "cpu_seconds": {
+                "group": 0.14201012499999965,
+                "planning": 0.019179291000000376,
+                "expand": 0.009590540999999675
+              }
+            },
+            {
+              "round": 4,
+              "unique_states": 52904,
+              "tokens": 134144,
+              "predicted_gain": 7056,
+              "moved_pairs": 12770,
+              "accepted_tokens": 9026,
+              "dp_cells": 0,
+              "max_dp_capacity": 0,
+              "cpu_seconds": {
+                "group": 0.14031154200000007,
+                "planning": 0.018703041000000198,
+                "expand": 0.005621000000000542
+              }
+            }
+          ],
+          "cpu_seconds": 0.6881918750000002,
+          "reduction_pct": 26.455784828150442,
+          "audit_pass": true
+        },
+        "mixed_sizes": {
+          "metrics": {
+            "remote_token_destinations": 453456,
+            "all_token_destinations": 550416,
+            "remote_pairs": 877546,
+            "source_remote_payloads": [
+              60009,
+              59193,
+              53386,
+              53579,
+              54521,
+              59790,
+              54811,
+              58167
+            ],
+            "destination_remote_payloads": [
+              59503,
+              61742,
+              50203,
+              48050,
+              53640,
+              58895,
+              64436,
+              56987
+            ],
+            "pair_loads": [
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144
+            ],
+            "max_min_pair_load": 0,
+            "max_mean_pair_load": 1.0,
+            "active_extra_experts": [
+              8,
+              8,
+              7,
+              8,
+              8,
+              8,
+              8,
+              8
+            ]
+          },
+          "history": [
+            {
+              "round": 1,
+              "unique_states": 52882,
+              "tokens": 134144,
+              "predicted_gain": 94479,
+              "moved_pairs": 118366,
+              "accepted_tokens": 109299,
+              "dp_cells": 1958336,
+              "max_dp_capacity": 12479,
+              "cpu_seconds": {
+                "group": 0.14360716700000076,
+                "planning": 0.01556745799999959,
+                "expand": 0.006829166999999359
+              }
+            },
+            {
+              "round": 2,
+              "unique_states": 52883,
+              "tokens": 134144,
+              "predicted_gain": 53053,
+              "moved_pairs": 80006,
+              "accepted_tokens": 66386,
+              "dp_cells": 1639872,
+              "max_dp_capacity": 11092,
+              "cpu_seconds": {
+                "group": 0.14131408300000015,
+                "planning": 0.01958116700000012,
+                "expand": 0.006399040999999883
+              }
+            },
+            {
+              "round": 3,
+              "unique_states": 52881,
+              "tokens": 134144,
+              "predicted_gain": 25984,
+              "moved_pairs": 38662,
+              "accepted_tokens": 30562,
+              "dp_cells": 1000256,
+              "max_dp_capacity": 7233,
+              "cpu_seconds": {
+                "group": 0.14096995899999953,
+                "planning": 0.019564833999999642,
+                "expand": 0.006014375000000349
+              }
+            },
+            {
+              "round": 4,
+              "unique_states": 52876,
+              "tokens": 134144,
+              "predicted_gain": 8613,
+              "moved_pairs": 14164,
+              "accepted_tokens": 10928,
+              "dp_cells": 602944,
+              "max_dp_capacity": 6244,
+              "cpu_seconds": {
+                "group": 0.1403642920000001,
+                "planning": 0.01952187499999969,
+                "expand": 0.005965291999999955
+              }
+            }
+          ],
+          "cpu_seconds": 0.6746394999999996,
+          "reduction_pct": 28.655333275643702,
+          "audit_pass": true
+        }
+      }
+    },
+    {
+      "layer": 3,
+      "baseline": 623501,
+      "input_sha256": "39b1dfad9d146fbe5b177fa401f8471b4f4035127b70feae9dee661a92f6688a",
+      "support_sha256": "8c5a8a7161f7a4b56c1a3c8388a1bbb5309e8723bec0d64655be9912fc1a242e",
+      "variants": {
+        "equal_sizes": {
+          "metrics": {
+            "remote_token_destinations": 451461,
+            "all_token_destinations": 550881,
+            "remote_pairs": 867827,
+            "source_remote_payloads": [
+              55502,
+              57503,
+              50558,
+              51338,
+              64633,
+              57754,
+              54116,
+              60057
+            ],
+            "destination_remote_payloads": [
+              52176,
+              57802,
+              44842,
+              60767,
+              53979,
+              54921,
+              60909,
+              66065
+            ],
+            "pair_loads": [
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144
+            ],
+            "max_min_pair_load": 0,
+            "max_mean_pair_load": 1.0,
+            "active_extra_experts": [
+              8,
+              8,
+              7,
+              8,
+              8,
+              8,
+              8,
+              8
+            ]
+          },
+          "history": [
+            {
+              "round": 1,
+              "unique_states": 35688,
+              "tokens": 134144,
+              "predicted_gain": 87311,
+              "moved_pairs": 109620,
+              "accepted_tokens": 104646,
+              "dp_cells": 0,
+              "max_dp_capacity": 0,
+              "cpu_seconds": {
+                "group": 0.15525962499999935,
+                "planning": 0.008998749999999944,
+                "expand": 0.004847208000000158
+              }
+            },
+            {
+              "round": 2,
+              "unique_states": 35701,
+              "tokens": 134144,
+              "predicted_gain": 52193,
+              "moved_pairs": 77478,
+              "accepted_tokens": 67648,
+              "dp_cells": 0,
+              "max_dp_capacity": 0,
+              "cpu_seconds": {
+                "group": 0.14540279199999961,
+                "planning": 0.012226250000000327,
+                "expand": 0.004845082999999306
+              }
+            },
+            {
+              "round": 3,
+              "unique_states": 35714,
+              "tokens": 134144,
+              "predicted_gain": 23867,
+              "moved_pairs": 38310,
+              "accepted_tokens": 31762,
+              "dp_cells": 0,
+              "max_dp_capacity": 0,
+              "cpu_seconds": {
+                "group": 0.14391916699999996,
+                "planning": 0.013685624999999924,
+                "expand": 0.00446470799999954
+              }
+            },
+            {
+              "round": 4,
+              "unique_states": 35736,
+              "tokens": 134144,
+              "predicted_gain": 8669,
+              "moved_pairs": 17832,
+              "accepted_tokens": 13562,
+              "dp_cells": 0,
+              "max_dp_capacity": 0,
+              "cpu_seconds": {
+                "group": 0.14512229099999985,
+                "planning": 0.013746332999999389,
+                "expand": 0.004346583000000237
+              }
+            }
+          ],
+          "cpu_seconds": 0.666667458,
+          "reduction_pct": 27.592578039169148,
+          "audit_pass": true
+        },
+        "mixed_sizes": {
+          "metrics": {
+            "remote_token_destinations": 445100,
+            "all_token_destinations": 544269,
+            "remote_pairs": 864516,
+            "source_remote_payloads": [
+              54686,
+              57420,
+              49697,
+              51475,
+              61483,
+              57410,
+              53833,
+              59096
+            ],
+            "destination_remote_payloads": [
+              50423,
+              57258,
+              43252,
+              60434,
+              52561,
+              54385,
+              60129,
+              66658
+            ],
+            "pair_loads": [
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144
+            ],
+            "max_min_pair_load": 0,
+            "max_mean_pair_load": 1.0,
+            "active_extra_experts": [
+              8,
+              8,
+              7,
+              8,
+              8,
+              8,
+              8,
+              8
+            ]
+          },
+          "history": [
+            {
+              "round": 1,
+              "unique_states": 35688,
+              "tokens": 134144,
+              "predicted_gain": 91166,
+              "moved_pairs": 113052,
+              "accepted_tokens": 105896,
+              "dp_cells": 2031584,
+              "max_dp_capacity": 11555,
+              "cpu_seconds": {
+                "group": 0.1472450409999997,
+                "planning": 0.01172374999999981,
+                "expand": 0.004962708999999954
+              }
+            },
+            {
+              "round": 2,
+              "unique_states": 35694,
+              "tokens": 134144,
+              "predicted_gain": 53539,
+              "moved_pairs": 80094,
+              "accepted_tokens": 71552,
+              "dp_cells": 1622144,
+              "max_dp_capacity": 11130,
+              "cpu_seconds": {
+                "group": 0.14393708400000005,
+                "planning": 0.014460458000000287,
+                "expand": 0.004686500000000038
+              }
+            },
+            {
+              "round": 3,
+              "unique_states": 35701,
+              "tokens": 134144,
+              "predicted_gain": 23416,
+              "moved_pairs": 39012,
+              "accepted_tokens": 31801,
+              "dp_cells": 1101344,
+              "max_dp_capacity": 8801,
+              "cpu_seconds": {
+                "group": 0.14335304099999924,
+                "planning": 0.01467612500000115,
+                "expand": 0.004433791999998604
+              }
+            },
+            {
+              "round": 4,
+              "unique_states": 35702,
+              "tokens": 134144,
+              "predicted_gain": 10280,
+              "moved_pairs": 20452,
+              "accepted_tokens": 15839,
+              "dp_cells": 767456,
+              "max_dp_capacity": 5571,
+              "cpu_seconds": {
+                "group": 0.1445363749999995,
+                "planning": 0.01437533400000035,
+                "expand": 0.003976416999998733
+              }
+            }
+          ],
+          "cpu_seconds": 0.6611823330000011,
+          "reduction_pct": 28.612784903312104,
+          "audit_pass": true
+        }
+      }
+    },
+    {
+      "layer": 4,
+      "baseline": 634668,
+      "input_sha256": "826c138dd62a7af4d50693906c397cf5d947eba84d7a6fd091178e7a7e64fb59",
+      "support_sha256": "1cbea7e3c511eade50ed38d85bf37893f71fd907c4811b83a22adaf138845c68",
+      "variants": {
+        "equal_sizes": {
+          "metrics": {
+            "remote_token_destinations": 467030,
+            "all_token_destinations": 558010,
+            "remote_pairs": 901775,
+            "source_remote_payloads": [
+              61258,
+              55978,
+              60742,
+              52492,
+              57227,
+              58792,
+              58886,
+              61655
+            ],
+            "destination_remote_payloads": [
+              51312,
+              56224,
+              58304,
+              59750,
+              59568,
+              56760,
+              66920,
+              58192
+            ],
+            "pair_loads": [
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144
+            ],
+            "max_min_pair_load": 0,
+            "max_mean_pair_load": 1.0,
+            "active_extra_experts": [
+              8,
+              8,
+              8,
+              7,
+              8,
+              8,
+              8,
+              8
+            ]
+          },
+          "history": [
+            {
+              "round": 1,
+              "unique_states": 29144,
+              "tokens": 134144,
+              "predicted_gain": 86833,
+              "moved_pairs": 114194,
+              "accepted_tokens": 107582,
+              "dp_cells": 0,
+              "max_dp_capacity": 0,
+              "cpu_seconds": {
+                "group": 0.1503909580000009,
+                "planning": 0.006780708000000857,
+                "expand": 0.004499042000000841
+              }
+            },
+            {
+              "round": 2,
+              "unique_states": 29166,
+              "tokens": 134144,
+              "predicted_gain": 51990,
+              "moved_pairs": 77242,
+              "accepted_tokens": 67790,
+              "dp_cells": 0,
+              "max_dp_capacity": 0,
+              "cpu_seconds": {
+                "group": 0.14555400000000063,
+                "planning": 0.009776541999999111,
+                "expand": 0.004024416000000031
+              }
+            },
+            {
+              "round": 3,
+              "unique_states": 29179,
+              "tokens": 134144,
+              "predicted_gain": 21366,
+              "moved_pairs": 38328,
+              "accepted_tokens": 30246,
+              "dp_cells": 0,
+              "max_dp_capacity": 0,
+              "cpu_seconds": {
+                "group": 0.1458541249999996,
+                "planning": 0.011078250000000622,
+                "expand": 0.0035013330000008835
+              }
+            },
+            {
+              "round": 4,
+              "unique_states": 29198,
+              "tokens": 134144,
+              "predicted_gain": 7449,
+              "moved_pairs": 15936,
+              "accepted_tokens": 11684,
+              "dp_cells": 0,
+              "max_dp_capacity": 0,
+              "cpu_seconds": {
+                "group": 0.14496858299999893,
+                "planning": 0.01138941700000018,
+                "expand": 0.0034172090000001987
+              }
+            }
+          ],
+          "cpu_seconds": 0.6495946659999987,
+          "reduction_pct": 26.4134949296325,
+          "audit_pass": true
+        },
+        "mixed_sizes": {
+          "metrics": {
+            "remote_token_destinations": 455954,
+            "all_token_destinations": 543479,
+            "remote_pairs": 909485,
+            "source_remote_payloads": [
+              60676,
+              55139,
+              59966,
+              51267,
+              56284,
+              56022,
+              56750,
+              59850
+            ],
+            "destination_remote_payloads": [
+              49387,
+              55178,
+              57767,
+              58413,
+              59722,
+              56368,
+              63305,
+              55814
+            ],
+            "pair_loads": [
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144
+            ],
+            "max_min_pair_load": 0,
+            "max_mean_pair_load": 1.0,
+            "active_extra_experts": [
+              8,
+              8,
+              8,
+              7,
+              8,
+              8,
+              8,
+              8
+            ]
+          },
+          "history": [
+            {
+              "round": 1,
+              "unique_states": 29144,
+              "tokens": 134144,
+              "predicted_gain": 89789,
+              "moved_pairs": 116416,
+              "accepted_tokens": 108964,
+              "dp_cells": 2186848,
+              "max_dp_capacity": 11039,
+              "cpu_seconds": {
+                "group": 0.14826704200000052,
+                "planning": 0.010242500000000376,
+                "expand": 0.004242582999999911
+              }
+            },
+            {
+              "round": 2,
+              "unique_states": 29158,
+              "tokens": 134144,
+              "predicted_gain": 55609,
+              "moved_pairs": 81706,
+              "accepted_tokens": 70068,
+              "dp_cells": 1741664,
+              "max_dp_capacity": 9631,
+              "cpu_seconds": {
+                "group": 0.14891733299999999,
+                "planning": 0.01209795800000002,
+                "expand": 0.003968999999999667
+              }
+            },
+            {
+              "round": 3,
+              "unique_states": 29171,
+              "tokens": 134144,
+              "predicted_gain": 24656,
+              "moved_pairs": 46992,
+              "accepted_tokens": 36317,
+              "dp_cells": 1285472,
+              "max_dp_capacity": 8316,
+              "cpu_seconds": {
+                "group": 0.14712766699999946,
+                "planning": 0.013164292000000799,
+                "expand": 0.0038237089999988427
+              }
+            },
+            {
+              "round": 4,
+              "unique_states": 29172,
+              "tokens": 134144,
+              "predicted_gain": 8660,
+              "moved_pairs": 16402,
+              "accepted_tokens": 12704,
+              "dp_cells": 784064,
+              "max_dp_capacity": 2794,
+              "cpu_seconds": {
+                "group": 0.14517108300000103,
+                "planning": 0.013253875000000193,
+                "expand": 0.0034473750000003633
+              }
+            }
+          ],
+          "cpu_seconds": 0.6622816249999985,
+          "reduction_pct": 28.15865933054762,
+          "audit_pass": true
+        }
+      }
+    },
+    {
+      "layer": 5,
+      "baseline": 625260,
+      "input_sha256": "b1bba721c45b72c90b983c54f20cc5c0b6d520c285e26d9131ca8e8eee08cc6a",
+      "support_sha256": "904e02c07825c879c5e342a8c1579e470b7dde568c19a76d69269fa26441d5c1",
+      "variants": {
+        "equal_sizes": {
+          "metrics": {
+            "remote_token_destinations": 462039,
+            "all_token_destinations": 548081,
+            "remote_pairs": 899804,
+            "source_remote_payloads": [
+              60166,
+              51867,
+              56147,
+              50720,
+              62975,
+              58081,
+              57364,
+              64719
+            ],
+            "destination_remote_payloads": [
+              65920,
+              61294,
+              49651,
+              54193,
+              57104,
+              50686,
+              57438,
+              65753
+            ],
+            "pair_loads": [
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144
+            ],
+            "max_min_pair_load": 0,
+            "max_mean_pair_load": 1.0,
+            "active_extra_experts": [
+              8,
+              7,
+              8,
+              8,
+              8,
+              8,
+              8,
+              8
+            ]
+          },
+          "history": [
+            {
+              "round": 1,
+              "unique_states": 21695,
+              "tokens": 134144,
+              "predicted_gain": 83977,
+              "moved_pairs": 111456,
+              "accepted_tokens": 102786,
+              "dp_cells": 0,
+              "max_dp_capacity": 0,
+              "cpu_seconds": {
+                "group": 0.1436759580000011,
+                "planning": 0.006769084000000092,
+                "expand": 0.005031750000000557
+              }
+            },
+            {
+              "round": 2,
+              "unique_states": 21713,
+              "tokens": 134144,
+              "predicted_gain": 53575,
+              "moved_pairs": 75602,
+              "accepted_tokens": 64842,
+              "dp_cells": 0,
+              "max_dp_capacity": 0,
+              "cpu_seconds": {
+                "group": 0.14246999999999943,
+                "planning": 0.008776583999999588,
+                "expand": 0.004976958000000309
+              }
+            },
+            {
+              "round": 3,
+              "unique_states": 21734,
+              "tokens": 134144,
+              "predicted_gain": 19729,
+              "moved_pairs": 33874,
+              "accepted_tokens": 25314,
+              "dp_cells": 0,
+              "max_dp_capacity": 0,
+              "cpu_seconds": {
+                "group": 0.14329024999999973,
+                "planning": 0.00956329199999928,
+                "expand": 0.004274167000000162
+              }
+            },
+            {
+              "round": 4,
+              "unique_states": 21752,
+              "tokens": 134144,
+              "predicted_gain": 5940,
+              "moved_pairs": 14790,
+              "accepted_tokens": 9200,
+              "dp_cells": 0,
+              "max_dp_capacity": 0,
+              "cpu_seconds": {
+                "group": 0.14025095799999932,
+                "planning": 0.008099334000000624,
+                "expand": 0.002431250000000773
+              }
+            }
+          ],
+          "cpu_seconds": 0.6280284169999995,
+          "reduction_pct": 26.104500527780438,
+          "audit_pass": true
+        },
+        "mixed_sizes": {
+          "metrics": {
+            "remote_token_destinations": 451797,
+            "all_token_destinations": 537546,
+            "remote_pairs": 897273,
+            "source_remote_payloads": [
+              60162,
+              51522,
+              54459,
+              48127,
+              61894,
+              56678,
+              55329,
+              63626
+            ],
+            "destination_remote_payloads": [
+              66099,
+              60880,
+              49186,
+              54301,
+              56663,
+              50519,
+              56583,
+              57566
+            ],
+            "pair_loads": [
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144
+            ],
+            "max_min_pair_load": 0,
+            "max_mean_pair_load": 1.0,
+            "active_extra_experts": [
+              8,
+              7,
+              8,
+              8,
+              8,
+              8,
+              8,
+              8
+            ]
+          },
+          "history": [
+            {
+              "round": 1,
+              "unique_states": 21695,
+              "tokens": 134144,
+              "predicted_gain": 83965,
+              "moved_pairs": 115910,
+              "accepted_tokens": 106034,
+              "dp_cells": 1911776,
+              "max_dp_capacity": 12639,
+              "cpu_seconds": {
+                "group": 0.14395091599999965,
+                "planning": 0.00884879199999844,
+                "expand": 0.0036455409999991417
+              }
+            },
+            {
+              "round": 2,
+              "unique_states": 21709,
+              "tokens": 134144,
+              "predicted_gain": 53240,
+              "moved_pairs": 75324,
+              "accepted_tokens": 65366,
+              "dp_cells": 1434208,
+              "max_dp_capacity": 10549,
+              "cpu_seconds": {
+                "group": 0.14243462499999993,
+                "planning": 0.010144916999999865,
+                "expand": 0.0031957909999995593
+              }
+            },
+            {
+              "round": 3,
+              "unique_states": 21718,
+              "tokens": 134144,
+              "predicted_gain": 26186,
+              "moved_pairs": 41982,
+              "accepted_tokens": 32880,
+              "dp_cells": 955808,
+              "max_dp_capacity": 6554,
+              "cpu_seconds": {
+                "group": 0.14562945900000024,
+                "planning": 0.00960591700000002,
+                "expand": 0.0029660420000006127
+              }
+            },
+            {
+              "round": 4,
+              "unique_states": 21724,
+              "tokens": 134144,
+              "predicted_gain": 10072,
+              "moved_pairs": 19822,
+              "accepted_tokens": 14395,
+              "dp_cells": 626432,
+              "max_dp_capacity": 5884,
+              "cpu_seconds": {
+                "group": 0.14075787500000025,
+                "planning": 0.009075499999999792,
+                "expand": 0.0026477080000013586
+              }
+            }
+          ],
+          "cpu_seconds": 0.6315505419999994,
+          "reduction_pct": 27.742539103732845,
+          "audit_pass": true
+        }
+      }
+    },
+    {
+      "layer": 6,
+      "baseline": 635436,
+      "input_sha256": "9c98bd5c50fb8a7462c2a67f55a113c46e7811f8b7db51c064ce89ec11962cd4",
+      "support_sha256": "6941584fa8ba93b74d167707c2092e7f70d9bcf7079bd4ff535f9d306f4027e7",
+      "variants": {
+        "equal_sizes": {
+          "metrics": {
+            "remote_token_destinations": 494389,
+            "all_token_destinations": 579217,
+            "remote_pairs": 913865,
+            "source_remote_payloads": [
+              69506,
+              59172,
+              60299,
+              62653,
+              65192,
+              62150,
+              58564,
+              56853
+            ],
+            "destination_remote_payloads": [
+              53044,
+              60663,
+              63248,
+              58868,
+              60262,
+              63107,
+              71773,
+              63424
+            ],
+            "pair_loads": [
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144
+            ],
+            "max_min_pair_load": 0,
+            "max_mean_pair_load": 1.0,
+            "active_extra_experts": [
+              7,
+              8,
+              8,
+              8,
+              8,
+              8,
+              8,
+              6
+            ]
+          },
+          "history": [
+            {
+              "round": 1,
+              "unique_states": 19553,
+              "tokens": 134144,
+              "predicted_gain": 84641,
+              "moved_pairs": 104426,
+              "accepted_tokens": 98566,
+              "dp_cells": 0,
+              "max_dp_capacity": 0,
+              "cpu_seconds": {
+                "group": 0.15034349999999996,
+                "planning": 0.005282000000001119,
+                "expand": 0.003326417000000248
+              }
+            },
+            {
+              "round": 2,
+              "unique_states": 19560,
+              "tokens": 134144,
+              "predicted_gain": 37619,
+              "moved_pairs": 54490,
+              "accepted_tokens": 50212,
+              "dp_cells": 0,
+              "max_dp_capacity": 0,
+              "cpu_seconds": {
+                "group": 0.15520133299999905,
+                "planning": 0.007531459000000851,
+                "expand": 0.0028260419999988073
+              }
+            },
+            {
+              "round": 3,
+              "unique_states": 19580,
+              "tokens": 134144,
+              "predicted_gain": 14836,
+              "moved_pairs": 22914,
+              "accepted_tokens": 19952,
+              "dp_cells": 0,
+              "max_dp_capacity": 0,
+              "cpu_seconds": {
+                "group": 0.14602129100000028,
+                "planning": 0.007637833000000427,
+                "expand": 0.002323666000000557
+              }
+            },
+            {
+              "round": 4,
+              "unique_states": 19596,
+              "tokens": 134144,
+              "predicted_gain": 3951,
+              "moved_pairs": 7156,
+              "accepted_tokens": 5494,
+              "dp_cells": 0,
+              "max_dp_capacity": 0,
+              "cpu_seconds": {
+                "group": 0.14756187499999918,
+                "planning": 0.00786912500000092,
+                "expand": 0.00210512499999993
+              }
+            }
+          ],
+          "cpu_seconds": 0.6470194580000008,
+          "reduction_pct": 22.196885288211554,
+          "audit_pass": true
+        },
+        "mixed_sizes": {
+          "metrics": {
+            "remote_token_destinations": 478117,
+            "all_token_destinations": 563388,
+            "remote_pairs": 910908,
+            "source_remote_payloads": [
+              70988,
+              56673,
+              56596,
+              59141,
+              63599,
+              60537,
+              57421,
+              53162
+            ],
+            "destination_remote_payloads": [
+              52735,
+              57673,
+              63855,
+              57448,
+              59783,
+              61801,
+              62726,
+              62096
+            ],
+            "pair_loads": [
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144
+            ],
+            "max_min_pair_load": 0,
+            "max_mean_pair_load": 1.0,
+            "active_extra_experts": [
+              6,
+              8,
+              8,
+              8,
+              8,
+              8,
+              8,
+              6
+            ]
+          },
+          "history": [
+            {
+              "round": 1,
+              "unique_states": 19553,
+              "tokens": 134144,
+              "predicted_gain": 86804,
+              "moved_pairs": 109990,
+              "accepted_tokens": 102526,
+              "dp_cells": 1833792,
+              "max_dp_capacity": 15660,
+              "cpu_seconds": {
+                "group": 0.15132241600000107,
+                "planning": 0.007679417000000299,
+                "expand": 0.003285790999999705
+              }
+            },
+            {
+              "round": 2,
+              "unique_states": 19553,
+              "tokens": 134144,
+              "predicted_gain": 43720,
+              "moved_pairs": 62296,
+              "accepted_tokens": 56627,
+              "dp_cells": 1270752,
+              "max_dp_capacity": 6811,
+              "cpu_seconds": {
+                "group": 0.14999420799999896,
+                "planning": 0.008871791000000684,
+                "expand": 0.002712292000000005
+              }
+            },
+            {
+              "round": 3,
+              "unique_states": 19569,
+              "tokens": 134144,
+              "predicted_gain": 20005,
+              "moved_pairs": 31388,
+              "accepted_tokens": 26857,
+              "dp_cells": 941408,
+              "max_dp_capacity": 6872,
+              "cpu_seconds": {
+                "group": 0.14853200000000122,
+                "planning": 0.009102874999999955,
+                "expand": 0.0025074169999985685
+              }
+            },
+            {
+              "round": 4,
+              "unique_states": 19571,
+              "tokens": 134144,
+              "predicted_gain": 6790,
+              "moved_pairs": 10642,
+              "accepted_tokens": 9353,
+              "dp_cells": 569056,
+              "max_dp_capacity": 8500,
+              "cpu_seconds": {
+                "group": 0.148291167,
+                "planning": 0.008405375000000603,
+                "expand": 0.0022099159999999785
+              }
+            }
+          ],
+          "cpu_seconds": 0.6516034580000003,
+          "reduction_pct": 24.757646718158867,
+          "audit_pass": true
+        }
+      }
+    },
+    {
+      "layer": 7,
+      "baseline": 635193,
+      "input_sha256": "6611d17243bdf35730027eb6b3b9277649ca5cc1d84625af680baa0b0d8fac0e",
+      "support_sha256": "026cec2143b9ab42721222ee6ce59d1b0f2402a6586bbd7897991d2749090843",
+      "variants": {
+        "equal_sizes": {
+          "metrics": {
+            "remote_token_destinations": 446369,
+            "all_token_destinations": 543816,
+            "remote_pairs": 877872,
+            "source_remote_payloads": [
+              60122,
+              52417,
+              53268,
+              55506,
+              54981,
+              57394,
+              52820,
+              59861
+            ],
+            "destination_remote_payloads": [
+              55449,
+              47585,
+              54584,
+              52218,
+              54317,
+              63990,
+              58401,
+              59825
+            ],
+            "pair_loads": [
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144
+            ],
+            "max_min_pair_load": 0,
+            "max_mean_pair_load": 1.0,
+            "active_extra_experts": [
+              8,
+              8,
+              8,
+              8,
+              8,
+              8,
+              8,
+              8
+            ]
+          },
+          "history": [
+            {
+              "round": 1,
+              "unique_states": 15226,
+              "tokens": 134144,
+              "predicted_gain": 93487,
+              "moved_pairs": 118092,
+              "accepted_tokens": 109866,
+              "dp_cells": 0,
+              "max_dp_capacity": 0,
+              "cpu_seconds": {
+                "group": 0.148259083000001,
+                "planning": 0.004667207999998979,
+                "expand": 0.0028049170000006285
+              }
+            },
+            {
+              "round": 2,
+              "unique_states": 15243,
+              "tokens": 134144,
+              "predicted_gain": 59298,
+              "moved_pairs": 92876,
+              "accepted_tokens": 76410,
+              "dp_cells": 0,
+              "max_dp_capacity": 0,
+              "cpu_seconds": {
+                "group": 0.14990754200000111,
+                "planning": 0.005964625000000723,
+                "expand": 0.002489999999999881
+              }
+            },
+            {
+              "round": 3,
+              "unique_states": 15264,
+              "tokens": 134144,
+              "predicted_gain": 27845,
+              "moved_pairs": 44126,
+              "accepted_tokens": 36810,
+              "dp_cells": 0,
+              "max_dp_capacity": 0,
+              "cpu_seconds": {
+                "group": 0.1479317499999997,
+                "planning": 0.007206000000000046,
+                "expand": 0.0023960410000007926
+              }
+            },
+            {
+              "round": 4,
+              "unique_states": 15288,
+              "tokens": 134144,
+              "predicted_gain": 8194,
+              "moved_pairs": 15612,
+              "accepted_tokens": 11494,
+              "dp_cells": 0,
+              "max_dp_capacity": 0,
+              "cpu_seconds": {
+                "group": 0.14790858299999954,
+                "planning": 0.006917708000001355,
+                "expand": 0.0018220840000005012
+              }
+            }
+          ],
+          "cpu_seconds": 0.6365413340000003,
+          "reduction_pct": 29.727027848228804,
+          "audit_pass": true
+        },
+        "mixed_sizes": {
+          "metrics": {
+            "remote_token_destinations": 424586,
+            "all_token_destinations": 522768,
+            "remote_pairs": 872634,
+            "source_remote_payloads": [
+              58328,
+              53202,
+              51081,
+              49175,
+              52261,
+              55826,
+              47444,
+              57269
+            ],
+            "destination_remote_payloads": [
+              55338,
+              43394,
+              50040,
+              49797,
+              58878,
+              52664,
+              58714,
+              55761
+            ],
+            "pair_loads": [
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144,
+              134144
+            ],
+            "max_min_pair_load": 0,
+            "max_mean_pair_load": 1.0,
+            "active_extra_experts": [
+              8,
+              8,
+              8,
+              8,
+              8,
+              8,
+              8,
+              8
+            ]
+          },
+          "history": [
+            {
+              "round": 1,
+              "unique_states": 15226,
+              "tokens": 134144,
+              "predicted_gain": 98369,
+              "moved_pairs": 124518,
+              "accepted_tokens": 113632,
+              "dp_cells": 2035488,
+              "max_dp_capacity": 12435,
+              "cpu_seconds": {
+                "group": 0.14847100000000069,
+                "planning": 0.007728833999999907,
+                "expand": 0.002956375000000122
+              }
+            },
+            {
+              "round": 2,
+              "unique_states": 15243,
+              "tokens": 134144,
+              "predicted_gain": 66831,
+              "moved_pairs": 104316,
+              "accepted_tokens": 82435,
+              "dp_cells": 1903200,
+              "max_dp_capacity": 11653,
+              "cpu_seconds": {
+                "group": 0.14849208300000072,
+                "planning": 0.008866999999998626,
+                "expand": 0.0027275410000004996
+              }
+            },
+            {
+              "round": 3,
+              "unique_states": 15255,
+              "tokens": 134144,
+              "predicted_gain": 33983,
+              "moved_pairs": 56464,
+              "accepted_tokens": 45666,
+              "dp_cells": 1270432,
+              "max_dp_capacity": 6167,
+              "cpu_seconds": {
+                "group": 0.14786574999999935,
+                "planning": 0.008552958000000999,
+                "expand": 0.0024457500000014676
+              }
+            },
+            {
+              "round": 4,
+              "unique_states": 15266,
+              "tokens": 134144,
+              "predicted_gain": 11424,
+              "moved_pairs": 20734,
+              "accepted_tokens": 16586,
+              "dp_cells": 836448,
+              "max_dp_capacity": 4799,
+              "cpu_seconds": {
+                "group": 0.14690462499999946,
+                "planning": 0.007689082999998931,
+                "expand": 0.0020432079999999075
+              }
+            }
+          ],
+          "cpu_seconds": 0.6428401669999992,
+          "reduction_pct": 33.15637924221457,
+          "audit_pass": true
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+--- a/deep_ep/buffers/ep.py
++++ b/deep_ep/buffers/ep.py
+@@ -856,7 +856,8 @@
+                             expert_weights: Sequence[torch.Tensor] | torch.Tensor,
+                             redundancy_mapping: torch.Tensor,
+                             num_sms: int = 0,
+-                            previous_event: Optional[EventHandle] = None) -> EventOverlap:
++                            previous_event: Optional[EventHandle] = None,
++                            use_current_stream: bool = False) -> EventOverlap:
+         """Push this rank's expert weights into the redundant expert slots requested by peers.
+ 
+         Collective: every rank in the LSA domain must call it, and the fused barriers make the redundant weights
+@@ -874,6 +875,8 @@
+                 Expert ids are local to the LSA domain, in [0, num_nvlink_ranks * num_local_experts).
+             num_sms: the number of SMs to use; 0 uses `lb_get_theoretical_num_sms()`.
+             previous_event: the event to wait for before communication; defaults to waiting for the current stream
++            use_current_stream: launch on the caller stream. Concurrent token communication MUST use
++                a different EPBuffer/context so workspace and collective barriers remain independent.
+         """
+         redundant_expert_weights = ([redundant_expert_weights] if isinstance(redundant_expert_weights, torch.Tensor)
+                                     else list(redundant_expert_weights))
+@@ -881,7 +884,7 @@
+ 
+         num_sms = self.lb_get_theoretical_num_sms() if num_sms == 0 else align(num_sms, 2)
+         return EventOverlap(self.runtime.lb_prefetch_weights(
+-            redundant_expert_weights, expert_weights, redundancy_mapping, num_sms, previous_event))
++            redundant_expert_weights, expert_weights, redundancy_mapping, num_sms, previous_event, use_current_stream))
+ 
+     def lb_reduce_grads(self,
+                         redundant_expert_grads: torch.Tensor,
+--- a/csrc/buffers/ep.hpp
++++ b/csrc/buffers/ep.hpp
+@@ -985,7 +985,8 @@
+                         const std::vector<torch::Tensor>& expert_weights,
+                         const torch::Tensor& redundancy_mapping,
+                         const int& num_sms,
+-                        const std::optional<EventHandle>& previous_event) const {
++                        const std::optional<EventHandle>& previous_event,
++                        const bool& use_current_stream) const {
+         // Checks
+         EP_HOST_ASSERT(num_sms > 0 and num_sms <= jit->device.get_num_sms());
+         EP_HOST_ASSERT(redundant_expert_weights.size() == expert_weights.size());
+@@ -1025,18 +1026,31 @@
+         }
+ 
+         // Stream control
+-        const auto compute_stream = stream_control_prologue(previous_event);
++        const auto compute_stream = at::cuda::getCurrentCUDAStream();
++        const auto execution_stream = use_current_stream ? compute_stream : comm::get_comm_stream();
++        if (use_current_stream) {
++            if (previous_event.has_value())
++                comm::stream_wait(execution_stream, previous_event.value());
++        } else {
++            stream_control_prologue(previous_event);
++        }
+ 
+         // Launch
+         launch_lb_prefetch_weights(
+             *context, num_weights, weights, redundancy_mapping.data_ptr<int>(),
+             num_redundant_experts, num_local_experts,
+-            num_sms, comm::get_comm_stream());
++            num_sms, execution_stream);
+ 
+         // Stream epilogue
+         tensor_list_t tensors_to_record = {redundancy_mapping};
+         tensors_to_record.insert(tensors_to_record.end(), redundant_expert_weights.begin(), redundant_expert_weights.end());
+         tensors_to_record.insert(tensors_to_record.end(), expert_weights.begin(), expert_weights.end());
++        if (use_current_stream) {
++            auto event = EventHandle(execution_stream);
++            // Retain sources, destinations, and plan until asynchronous use ends.
++            event.tensors_to_record = tensors_to_record;
++            return event;
++        }
+         return stream_control_epilogue(tensors_to_record, compute_stream, false, true);
+     }
+ 

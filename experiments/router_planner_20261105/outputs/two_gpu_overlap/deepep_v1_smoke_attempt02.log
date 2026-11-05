@@ -1,0 +1,71 @@
+/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/deepep_v1_smoke.py", line 95, in <module>
+[rank1]:     main()
+[rank1]:   File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/deepep_v1_smoke.py", line 56, in main
+[rank1]:     token = adapter.start_token_dispatch(x, logical, owner, mapping, router,
+[rank1]:             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/deepep_v1_adapter.py", line 115, in start_token_dispatch
+[rank1]:     return self.start_physical_dispatch(x, physical, topk_weights,
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/deepep_v1_adapter.py", line 125, in start_physical_dispatch
+[rank1]:     result = self.buffer.dispatch(
+[rank1]:              ^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/deep_ep/buffer.py", line 379, in dispatch
+[rank1]:     self.runtime.intranode_dispatch(x, x_scales, topk_idx, topk_weights,
+[rank1]: RuntimeError: Failed: Assertion error /inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/csrc/kernels/intranode.cu:123 'num_experts / num_ranks <= kNumThreads and num_ranks <= kNumThreads'
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/deepep_v1_smoke.py", line 95, in <module>
+[rank0]:     main()
+[rank0]:   File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/deepep_v1_smoke.py", line 56, in main
+[rank0]:     token = adapter.start_token_dispatch(x, logical, owner, mapping, router,
+[rank0]:             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/deepep_v1_adapter.py", line 115, in start_token_dispatch
+[rank0]:     return self.start_physical_dispatch(x, physical, topk_weights,
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/deepep_v1_adapter.py", line 125, in start_physical_dispatch
+[rank0]:     result = self.buffer.dispatch(
+[rank0]:              ^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/deep_ep/buffer.py", line 379, in dispatch
+[rank0]:     self.runtime.intranode_dispatch(x, x_scales, topk_idx, topk_weights,
+[rank0]: RuntimeError: Failed: Assertion error /inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/csrc/kernels/intranode.cu:123 'num_experts / num_ranks <= kNumThreads and num_ranks <= kNumThreads'
+E1105 04:38:29.396000 257177 site-packages/torch/distributed/elastic/multiprocessing/api.py:986] failed (exitcode: 1) local_rank: 0 (pid: 257182) of binary: /root/anaconda3/envs/sglang/bin/python3.12
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/sglang/bin/torchrun", line 6, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 362, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/distributed/run.py", line 990, in main
+    run(args)
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/distributed/run.py", line 981, in run
+    elastic_launch(
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 170, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 317, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+experiments/two_gpu_overlap/deepep_v1_smoke.py FAILED
+------------------------------------------------------------
+Failures:
+[1]:
+  time      : 2026-11-05_04:38:29
+  host      : test-mtp-retrieval-copy--0f7927a8f653-sf4levrpw6
+  rank      : 1 (local_rank: 1)
+  exitcode  : 1 (pid: 257183)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-11-05_04:38:29
+  host      : test-mtp-retrieval-copy--0f7927a8f653-sf4levrpw6
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 257182)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

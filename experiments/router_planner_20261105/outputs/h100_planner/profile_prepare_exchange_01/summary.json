@@ -1,0 +1,443 @@
+{
+  "metadata": {
+    "created_at": "2026-11-02T09:14:38.665777+00:00",
+    "gpu": "NVIDIA H100 80GB HBM3",
+    "torch": "2.13.0+cu130",
+    "cuda": "13.0",
+    "layer": 0,
+    "shape": [
+      8,
+      16768,
+      8
+    ],
+    "scope": "prepare_exchange",
+    "warmup": 3,
+    "repeats": 3,
+    "physical_gpus": 1,
+    "logical_ranks": 8,
+    "warning": "Profiled eager diagnostics only. Kernel sum, busy union and envelope are distinct; none is a replacement for unprofiled benchmark latency.",
+    "code_sha256": {
+      "._aggregate_tiny.npz": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+      "materialize.py": "b6a0e10da3ffd90a515c66d11fe40fa93cd10657ac3c64785b351b43a0ef5433",
+      "subset_formula_check.py": "2d8d2c3c137af26b0732c3080a9c6af63cd0981bb0842357641693ed95fde5f4",
+      "baseline_native_r1.py": "2c407ef5288aba6f182bc9cb917391f1f3beb49fb73578f2b3d4a5a54c836704",
+      "materialize_cuda.cu": "394a76b76f1df4a14bd07b063b538361ef34be85584a0b512fbb70243aea9e29",
+      "bundle_lane8.cu": "efde4104163cf20059734b342c36d0ebebd66df555282863e7d0c347cb390fe7",
+      "baseline_virtual.py": "4b961a2b6a3b6fa24ae7ca2fbf7c304413c182d0b486150007684eaa183de821",
+      "._aggregate_cuda.cu": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+      "aggregate.py": "f32ccf2fd7cbb342267d33d6e210a66868ec1530700d24f7963f772a3938ad5a",
+      "aggregate_cuda.cu": "f5f6120fe0c5b83304a5d31af9523f2dcef41ded9224ec99e94a9e4d2a353636",
+      "baseline_smoke.py": "15d84832086801627bcd40b48006fc42a9f47c22b117b8b05ea229ed404e1a0b",
+      "subset_cuda.py": "080272595ffb7c746996aa5c20c9517db91d2f2d821348da17863ed43c3f8104",
+      "benchmark.py": "50419ed346730e98460c100ca0487ce5e4371858cd4c3a47e396423127b6eab3",
+      "subset_README.md": "d8d1e62c3fd17ead5142ec53baf9b2a2a662063da7d3d9c770bbb24661df0fc2",
+      "aggregate_tiny.npz": "958f3434cb0fdcdad1908ed5696075801b2eb47f8198e076f04b72a8d45279c9",
+      "._aggregate.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+      "subset_cuda.cu": "c5ef3cf6ac37e5f839550f702bd987fb1ffb4d2c39c62676ef0891444cac1c29",
+      "bundle_lane8.py": "835fb74aefd022ed061d1e634fe77a7d8f2a464e4dea0be1b7f5b8288432abb2",
+      "bundle_wrapper.py": "85345d2797dde96101bd07352a233bd5f4119439628038ef9c0b35e83a39fc4f",
+      "subset_reference.py": "a9a0021ab822782239edb76428617e2e5777b110d862daa8aa28a0914a4338e1",
+      "._subset_README.md": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+      "._subset_cuda.cu": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+      "subset_smoke.py": "a772561eba792313db5843f6ff4fd592f38bdee744f80029c9952f62b3b97362",
+      "._aggregate_check.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+      "materialize_cuda.py": "112073723586290cb160e4c075297ff3255ccb8b7e9ace75d66b25838248309c",
+      "baseline_virtual.cu": "62f140c337979885749f57a7ccf74386c022a5ebbd3553424ae9d00d01fd771c",
+      "profile_components.py": "7158dedcc204ae4f69e1be5eca10e779e42e74c68c17c8f9c6114d46410063b9",
+      "._subset_smoke.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb",
+      "aggregate_check.py": "ead744dca754c96a41dc5330948476cef2e4396eeaece51de5d12ec73ba5719e",
+      "._subset_cuda.py": "5c9bdeb4c319630f41f75bda24d6dfe08401bbd77a07739adabe8e1267b28afb"
+    }
+  },
+  "rows": [
+    {
+      "variant": "bundle8",
+      "exact_cpu": true,
+      "trace": "outputs/h100_planner/profile_prepare_exchange_01/layer00_bundle8_prepare_exchange.trace.json",
+      "kernel_events": 120,
+      "kernel_duration_sum_us": 662.118,
+      "kernel_busy_union_us": 662.11181640625,
+      "kernel_envelope_us": 1716.44580078125,
+      "gpu_memory_event_count": 87,
+      "gpu_memory_duration_sum_us": 91.65100000000001,
+      "kernels": [
+        {
+          "name": "(anonymous namespace)::propose_kernel(int const*, int const*, int const*, unsigned long long*, int*, int, int, int, int, int)",
+          "count": 12,
+          "total_us": 336.193,
+          "mean_us": 28.01608333333333
+        },
+        {
+          "name": "void cub::CUB_300001_SM_900::detail::radix_sort::DeviceRadixSortOnesweepKernel<cub::CUB_300001_SM_900::detail::radix::policy_hub<unsigned long long, cub::CUB_300001_SM_900::NullType, unsigned int>::Policy1000, (cub::CUB_300001_SM_900::SortOrder)0, unsigned long long, cub::CUB_300001_SM_900::NullType, unsigned int, int, int, cub::CUB_300001_SM_900::detail::identity_decomposer_t>(int*, int*, unsigned int*, unsigned int const*, unsigned long long*, unsigned long long const*, cub::CUB_300001_SM_900::NullType*, cub::CUB_300001_SM_900::NullType const*, int, int, int, cub::CUB_300001_SM_900::detail::identity_decomposer_t)",
+          "count": 24,
+          "total_us": 188.57999999999998,
+          "mean_us": 7.857499999999999
+        },
+        {
+          "name": "void cub::CUB_300001_SM_900::detail::radix_sort::DeviceRadixSortHistogramKernel<cub::CUB_300001_SM_900::detail::radix::policy_hub<unsigned long long, cub::CUB_300001_SM_900::NullType, unsigned int>::Policy1000, (cub::CUB_300001_SM_900::SortOrder)0, unsigned long long, unsigned int, cub::CUB_300001_SM_900::detail::identity_decomposer_t>(unsigned int*, unsigned long long const*, unsigned int, int, int, cub::CUB_300001_SM_900::detail::identity_decomposer_t)",
+          "count": 12,
+          "total_us": 29.630999999999997,
+          "mean_us": 2.4692499999999997
+        },
+        {
+          "name": "(anonymous namespace)::commit_kernel(unsigned long long const*, int const*, int const*, int const*, int const*, int*, int, int)",
+          "count": 12,
+          "total_us": 29.153999999999996,
+          "mean_us": 2.4294999999999995
+        },
+        {
+          "name": "(anonymous namespace)::bucket_boundaries_kernel(unsigned long long const*, int*, int*, int, int)",
+          "count": 12,
+          "total_us": 20.543,
+          "mean_us": 1.7119166666666665
+        },
+        {
+          "name": "(anonymous namespace)::quota_kernel(int const*, int*, unsigned long long*)",
+          "count": 12,
+          "total_us": 15.519999999999998,
+          "mean_us": 1.2933333333333332
+        },
+        {
+          "name": "void cub::CUB_300001_SM_900::detail::radix_sort::DeviceRadixSortExclusiveSumKernel<cub::CUB_300001_SM_900::detail::radix::policy_hub<unsigned long long, cub::CUB_300001_SM_900::NullType, unsigned int>::Policy1000, unsigned int>(unsigned int*)",
+          "count": 12,
+          "total_us": 14.687999999999997,
+          "mean_us": 1.2239999999999998
+        },
+        {
+          "name": "(anonymous namespace)::fold_counts_kernel(int const*, int*, int*, int, int)",
+          "count": 12,
+          "total_us": 14.047999999999996,
+          "mean_us": 1.1706666666666663
+        },
+        {
+          "name": "(anonymous namespace)::counts_kernel(int const*, int const*, int*)",
+          "count": 12,
+          "total_us": 13.760999999999997,
+          "mean_us": 1.1467499999999997
+        }
+      ]
+    },
+    {
+      "variant": "subset_parallel",
+      "exact_cpu": true,
+      "trace": "outputs/h100_planner/profile_prepare_exchange_01/layer00_subset_parallel_prepare_exchange.trace.json",
+      "kernel_events": 150,
+      "kernel_duration_sum_us": 3007.148,
+      "kernel_busy_union_us": 3007.14892578125,
+      "kernel_envelope_us": 3542.5048828125,
+      "gpu_memory_event_count": 105,
+      "gpu_memory_duration_sum_us": 129.894,
+      "kernels": [
+        {
+          "name": "propose_parallel(int const*, int const*, int const*, int const*, unsigned long long*, int*, int*, int, int, int, int, int)",
+          "count": 12,
+          "total_us": 1477.208,
+          "mean_us": 123.10066666666667
+        },
+        {
+          "name": "void cub::CUB_300001_SM_900::detail::radix_sort::DeviceRadixSortOnesweepKernel<cub::CUB_300001_SM_900::detail::radix::policy_hub<unsigned long long, cub::CUB_300001_SM_900::NullType, unsigned int>::Policy1000, (cub::CUB_300001_SM_900::SortOrder)0, unsigned long long, cub::CUB_300001_SM_900::NullType, unsigned int, int, int, cub::CUB_300001_SM_900::detail::identity_decomposer_t>(int*, int*, unsigned int*, unsigned int const*, unsigned long long*, unsigned long long const*, cub::CUB_300001_SM_900::NullType*, cub::CUB_300001_SM_900::NullType const*, int, int, int, cub::CUB_300001_SM_900::detail::identity_decomposer_t)",
+          "count": 48,
+          "total_us": 376.41099999999994,
+          "mean_us": 7.841895833333332
+        },
+        {
+          "name": "histogram_offsets(int const*, int*)",
+          "count": 12,
+          "total_us": 358.81600000000003,
+          "mean_us": 29.901333333333337
+        },
+        {
+          "name": "quota_parallel(int const*, int*)",
+          "count": 12,
+          "total_us": 289.054,
+          "mean_us": 24.087833333333332
+        },
+        {
+          "name": "mine_kernel(int const*, int const*, int const*, int const*, int*, int, int, int)",
+          "count": 3,
+          "total_us": 173.15099999999998,
+          "mean_us": 57.71699999999999
+        },
+        {
+          "name": "flatten_patterns(int const*, int const*, int*, int*)",
+          "count": 3,
+          "total_us": 57.792,
+          "mean_us": 19.264
+        },
+        {
+          "name": "select_kernel(int const*, int const*, int*, int)",
+          "count": 3,
+          "total_us": 52.352000000000004,
+          "mean_us": 17.450666666666667
+        },
+        {
+          "name": "slots_kernel(bool const*, int*, int*)",
+          "count": 3,
+          "total_us": 45.535,
+          "mean_us": 15.178333333333333
+        },
+        {
+          "name": "assemble_kernel(int const*, int*, int*, int)",
+          "count": 3,
+          "total_us": 43.103,
+          "mean_us": 14.367666666666667
+        },
+        {
+          "name": "transpose(int const*, int*, int)",
+          "count": 9,
+          "total_us": 41.72800000000001,
+          "mean_us": 4.636444444444446
+        },
+        {
+          "name": "void cub::CUB_300001_SM_900::detail::radix_sort::DeviceRadixSortHistogramKernel<cub::CUB_300001_SM_900::detail::radix::policy_hub<unsigned long long, cub::CUB_300001_SM_900::NullType, unsigned int>::Policy1000, (cub::CUB_300001_SM_900::SortOrder)0, unsigned long long, unsigned int, cub::CUB_300001_SM_900::detail::identity_decomposer_t>(unsigned int*, unsigned long long const*, unsigned int, int, int, cub::CUB_300001_SM_900::detail::identity_decomposer_t)",
+          "count": 12,
+          "total_us": 31.709999999999997,
+          "mean_us": 2.6424999999999996
+        },
+        {
+          "name": "commit_parallel(unsigned long long const*, int const*, int const*, int const*, int*, int, int)",
+          "count": 12,
+          "total_us": 28.479,
+          "mean_us": 2.37325
+        },
+        {
+          "name": "void cub::CUB_300001_SM_900::detail::radix_sort::DeviceRadixSortExclusiveSumKernel<cub::CUB_300001_SM_900::detail::radix::policy_hub<unsigned long long, cub::CUB_300001_SM_900::NullType, unsigned int>::Policy1000, unsigned int>(unsigned int*)",
+          "count": 12,
+          "total_us": 15.808999999999997,
+          "mean_us": 1.3174166666666665
+        },
+        {
+          "name": "untranspose(int const*, int*, int)",
+          "count": 3,
+          "total_us": 11.456,
+          "mean_us": 3.8186666666666667
+        },
+        {
+          "name": "resident_kernel(bool const*, int*)",
+          "count": 3,
+          "total_us": 4.5440000000000005,
+          "mean_us": 1.5146666666666668
+        }
+      ]
+    },
+    {
+      "variant": "subset_indexed",
+      "exact_cpu": true,
+      "trace": "outputs/h100_planner/profile_prepare_exchange_01/layer00_subset_indexed_prepare_exchange.trace.json",
+      "kernel_events": 153,
+      "kernel_duration_sum_us": 2315.176,
+      "kernel_busy_union_us": 2315.17626953125,
+      "kernel_envelope_us": 2834.30126953125,
+      "gpu_memory_event_count": 108,
+      "gpu_memory_duration_sum_us": 132.541,
+      "kernels": [
+        {
+          "name": "propose_indexed(int const*, int const*, int const*, int const*, int const*, unsigned long long*, int*, int*, int, int, int, int, int)",
+          "count": 12,
+          "total_us": 776.5349999999999,
+          "mean_us": 64.71124999999999
+        },
+        {
+          "name": "void cub::CUB_300001_SM_900::detail::radix_sort::DeviceRadixSortOnesweepKernel<cub::CUB_300001_SM_900::detail::radix::policy_hub<unsigned long long, cub::CUB_300001_SM_900::NullType, unsigned int>::Policy1000, (cub::CUB_300001_SM_900::SortOrder)0, unsigned long long, cub::CUB_300001_SM_900::NullType, unsigned int, int, int, cub::CUB_300001_SM_900::detail::identity_decomposer_t>(int*, int*, unsigned int*, unsigned int const*, unsigned long long*, unsigned long long const*, cub::CUB_300001_SM_900::NullType*, cub::CUB_300001_SM_900::NullType const*, int, int, int, cub::CUB_300001_SM_900::detail::identity_decomposer_t)",
+          "count": 48,
+          "total_us": 380.893,
+          "mean_us": 7.935270833333333
+        },
+        {
+          "name": "histogram_offsets(int const*, int*)",
+          "count": 12,
+          "total_us": 350.74800000000005,
+          "mean_us": 29.229000000000003
+        },
+        {
+          "name": "quota_parallel(int const*, int*)",
+          "count": 12,
+          "total_us": 288.28399999999993,
+          "mean_us": 24.02366666666666
+        },
+        {
+          "name": "mine_kernel(int const*, int const*, int const*, int const*, int*, int, int, int)",
+          "count": 3,
+          "total_us": 173.37300000000002,
+          "mean_us": 57.791000000000004
+        },
+        {
+          "name": "flatten_patterns(int const*, int const*, int*, int*)",
+          "count": 3,
+          "total_us": 59.007999999999996,
+          "mean_us": 19.66933333333333
+        },
+        {
+          "name": "select_kernel(int const*, int const*, int*, int)",
+          "count": 3,
+          "total_us": 53.248000000000005,
+          "mean_us": 17.749333333333336
+        },
+        {
+          "name": "transpose(int const*, int*, int)",
+          "count": 9,
+          "total_us": 45.665000000000006,
+          "mean_us": 5.07388888888889
+        },
+        {
+          "name": "slots_kernel(bool const*, int*, int*)",
+          "count": 3,
+          "total_us": 45.599,
+          "mean_us": 15.199666666666666
+        },
+        {
+          "name": "assemble_kernel(int const*, int*, int*, int)",
+          "count": 3,
+          "total_us": 44.416,
+          "mean_us": 14.805333333333332
+        },
+        {
+          "name": "void cub::CUB_300001_SM_900::detail::radix_sort::DeviceRadixSortHistogramKernel<cub::CUB_300001_SM_900::detail::radix::policy_hub<unsigned long long, cub::CUB_300001_SM_900::NullType, unsigned int>::Policy1000, (cub::CUB_300001_SM_900::SortOrder)0, unsigned long long, unsigned int, cub::CUB_300001_SM_900::detail::identity_decomposer_t>(unsigned int*, unsigned long long const*, unsigned int, int, int, cub::CUB_300001_SM_900::detail::identity_decomposer_t)",
+          "count": 12,
+          "total_us": 32.001,
+          "mean_us": 2.66675
+        },
+        {
+          "name": "commit_parallel(unsigned long long const*, int const*, int const*, int const*, int*, int, int)",
+          "count": 12,
+          "total_us": 28.192,
+          "mean_us": 2.3493333333333335
+        },
+        {
+          "name": "void cub::CUB_300001_SM_900::detail::radix_sort::DeviceRadixSortExclusiveSumKernel<cub::CUB_300001_SM_900::detail::radix::policy_hub<unsigned long long, cub::CUB_300001_SM_900::NullType, unsigned int>::Policy1000, unsigned int>(unsigned int*)",
+          "count": 12,
+          "total_us": 14.590999999999996,
+          "mean_us": 1.2159166666666663
+        },
+        {
+          "name": "untranspose(int const*, int*, int)",
+          "count": 3,
+          "total_us": 13.664000000000001,
+          "mean_us": 4.554666666666667
+        },
+        {
+          "name": "index_patterns(int const*, int const*, int const*, int*)",
+          "count": 3,
+          "total_us": 4.895,
+          "mean_us": 1.6316666666666666
+        },
+        {
+          "name": "resident_kernel(bool const*, int*)",
+          "count": 3,
+          "total_us": 4.064,
+          "mean_us": 1.3546666666666667
+        }
+      ]
+    },
+    {
+      "variant": "aggregate_soa",
+      "exact_cpu": true,
+      "trace": "outputs/h100_planner/profile_prepare_exchange_01/layer00_aggregate_soa_prepare_exchange.trace.json",
+      "kernel_events": 1908,
+      "kernel_duration_sum_us": 407260.129,
+      "kernel_busy_union_us": 394580.24951171875,
+      "kernel_envelope_us": 399992.4931640625,
+      "gpu_memory_event_count": 24,
+      "gpu_memory_duration_sum_us": 146.369,
+      "kernels": [
+        {
+          "name": "solve_dp(int const*, int*, int*, int*, int)",
+          "count": 336,
+          "total_us": 291029.9690000004,
+          "mean_us": 866.1606220238107
+        },
+        {
+          "name": "category_scan(int const*, int const*, int const*, int*, int*, int)",
+          "count": 336,
+          "total_us": 84182.51600000003,
+          "mean_us": 250.54320238095247
+        },
+        {
+          "name": "void cub::CUB_300001_SM_900::detail::merge_sort::DeviceMergeSortPartitionKernel<int*, unsigned int, StateLess, int>(bool, int*, int*, unsigned int, unsigned int, unsigned int*, StateLess, unsigned int, int)",
+          "count": 60,
+          "total_us": 13543.971000000001,
+          "mean_us": 225.73285
+        },
+        {
+          "name": "void cub::CUB_300001_SM_900::detail::merge_sort::DeviceMergeSortBlockSortKernel<cub::CUB_300001_SM_900::detail::merge_sort::policy_hub<int*>::Policy600, int*, cub::CUB_300001_SM_900::NullType*, int*, cub::CUB_300001_SM_900::NullType*, unsigned int, StateLess, int, cub::CUB_300001_SM_900::NullType>(bool, int*, cub::CUB_300001_SM_900::NullType*, int*, cub::CUB_300001_SM_900::NullType*, unsigned int, int*, cub::CUB_300001_SM_900::NullType*, StateLess, cub::CUB_300001_SM_900::detail::vsmem_t)",
+          "count": 12,
+          "total_us": 10718.276999999998,
+          "mean_us": 893.1897499999999
+        },
+        {
+          "name": "void cub::CUB_300001_SM_900::detail::merge_sort::DeviceMergeSortMergeKernel<cub::CUB_300001_SM_900::detail::merge_sort::policy_hub<int*>::Policy600, int*, cub::CUB_300001_SM_900::NullType*, int*, cub::CUB_300001_SM_900::NullType*, unsigned int, StateLess, int, cub::CUB_300001_SM_900::NullType>(bool, int*, cub::CUB_300001_SM_900::NullType*, unsigned int, int*, cub::CUB_300001_SM_900::NullType*, StateLess, unsigned int*, unsigned int, cub::CUB_300001_SM_900::detail::vsmem_t)",
+          "count": 60,
+          "total_us": 2513.657,
+          "mean_us": 41.894283333333334
+        },
+        {
+          "name": "reconstruct(int const*, int const*, int const*, int*, int)",
+          "count": 336,
+          "total_us": 1570.9069999999992,
+          "mean_us": 4.67531845238095
+        },
+        {
+          "name": "propose(int const*, int const*, int const*, int const*, bool const*, int*, int, int, int, int, int, int const*, bool)",
+          "count": 336,
+          "total_us": 1404.578000000001,
+          "mean_us": 4.18029166666667
+        },
+        {
+          "name": "expand_kernel(int const*, int const*, int const*, int const*, int*, int)",
+          "count": 12,
+          "total_us": 694.014,
+          "mean_us": 57.8345
+        },
+        {
+          "name": "allocate(int const*, int const*, int const*, int*, int*, int, int, int)",
+          "count": 336,
+          "total_us": 673.9230000000008,
+          "mean_us": 2.005723214285717
+        },
+        {
+          "name": "make_states(int const*, int const*, int*, int*, int, int)",
+          "count": 12,
+          "total_us": 518.524,
+          "mean_us": 43.21033333333333
+        },
+        {
+          "name": "compact_states(int const*, int const*, int const*, int*, int)",
+          "count": 12,
+          "total_us": 141.76000000000002,
+          "mean_us": 11.813333333333334
+        },
+        {
+          "name": "groups(int const*, int const*, int const*, int*, int*, int*, int*, int)",
+          "count": 12,
+          "total_us": 99.55100000000002,
+          "mean_us": 8.295916666666669
+        },
+        {
+          "name": "mark_heads(int const*, int const*, int*, int)",
+          "count": 12,
+          "total_us": 74.402,
+          "mean_us": 6.200166666666667
+        },
+        {
+          "name": "void cub::CUB_300001_SM_900::detail::scan::DeviceScanKernel<cub::CUB_300001_SM_900::detail::scan::policy_hub<int, int, int, unsigned int, cuda::std::__4::plus<void> >::Policy1000, int*, int*, cub::CUB_300001_SM_900::ScanTileState<int, true>, cuda::std::__4::plus<void>, cub::CUB_300001_SM_900::NullType, unsigned int, int, false, cub::CUB_300001_SM_900::NullType>(int*, int*, cub::CUB_300001_SM_900::ScanTileState<int, true>, int, cuda::std::__4::plus<void>, cub::CUB_300001_SM_900::NullType, unsigned int)",
+          "count": 12,
+          "total_us": 41.82300000000001,
+          "mean_us": 3.4852500000000006
+        },
+        {
+          "name": "ordinals(int const*, int const*, int const*, int*, int)",
+          "count": 12,
+          "total_us": 40.225,
+          "mean_us": 3.3520833333333333
+        },
+        {
+          "name": "void cub::CUB_300001_SM_900::detail::scan::DeviceScanInitKernel<cub::CUB_300001_SM_900::ScanTileState<int, true> >(cub::CUB_300001_SM_900::ScanTileState<int, true>, int)",
+          "count": 12,
+          "total_us": 12.032000000000002,
+          "mean_us": 1.0026666666666668
+        }
+      ]
+    }
+  ],
+  "failures": []
+}

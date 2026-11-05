@@ -1,0 +1,151 @@
+{
+  "status": "passed",
+  "cases": 32,
+  "checked_pairs": 17170432,
+  "rows": [
+    {
+      "layer": 0,
+      "rank": 0,
+      "pairs": 536576,
+      "native_assignment": true,
+      "arbitrary_assignment": true,
+      "max_expert_pairs": 9664,
+      "source_sha256": "9070d5d269147c08f991f023f2e424c031d3649b3f3517e2e7c896f344e9de8b"
+    },
+    {
+      "layer": 0,
+      "rank": 1,
+      "pairs": 536576,
+      "native_assignment": true,
+      "arbitrary_assignment": true,
+      "max_expert_pairs": 9681,
+      "source_sha256": "9070d5d269147c08f991f023f2e424c031d3649b3f3517e2e7c896f344e9de8b"
+    },
+    {
+      "layer": 1,
+      "rank": 0,
+      "pairs": 536576,
+      "native_assignment": true,
+      "arbitrary_assignment": true,
+      "max_expert_pairs": 27878,
+      "source_sha256": "dbbcdacc2a46d3ba2d581a00ba81139f20bc1413cff88edf57750370083671f6"
+    },
+    {
+      "layer": 1,
+      "rank": 1,
+      "pairs": 536576,
+      "native_assignment": true,
+      "arbitrary_assignment": true,
+      "max_expert_pairs": 27319,
+      "source_sha256": "dbbcdacc2a46d3ba2d581a00ba81139f20bc1413cff88edf57750370083671f6"
+    },
+    {
+      "layer": 2,
+      "rank": 0,
+      "pairs": 536576,
+      "native_assignment": true,
+      "arbitrary_assignment": true,
+      "max_expert_pairs": 22550,
+      "source_sha256": "844f64ee50dcec66a87a2163fa158e012bd9d74e1cfaa9d4423a9198aa52f0ff"
+    },
+    {
+      "layer": 2,
+      "rank": 1,
+      "pairs": 536576,
+      "native_assignment": true,
+      "arbitrary_assignment": true,
+      "max_expert_pairs": 27312,
+      "source_sha256": "844f64ee50dcec66a87a2163fa158e012bd9d74e1cfaa9d4423a9198aa52f0ff"
+    },
+    {
+      "layer": 3,
+      "rank": 0,
+      "pairs": 536576,
+      "native_assignment": true,
+      "arbitrary_assignment": true,
+      "max_expert_pairs": 23394,
+      "source_sha256": "3238bd6b0ae54810c99040153d41007130eb80807e0d0de88a1dfeb2e13a117d"
+    },
+    {
+      "layer": 3,
+      "rank": 1,
+      "pairs": 536576,
+      "native_assignment": true,
+      "arbitrary_assignment": true,
+      "max_expert_pairs": 26556,
+      "source_sha256": "3238bd6b0ae54810c99040153d41007130eb80807e0d0de88a1dfeb2e13a117d"
+    },
+    {
+      "layer": 4,
+      "rank": 0,
+      "pairs": 536576,
+      "native_assignment": true,
+      "arbitrary_assignment": true,
+      "max_expert_pairs": 31474,
+      "source_sha256": "502bbef9e34edbb784659fd842cc12fb01e30a1bb0b6ded4c7cf0063fc9b9e4c"
+    },
+    {
+      "layer": 4,
+      "rank": 1,
+      "pairs": 536576,
+      "native_assignment": true,
+      "arbitrary_assignment": true,
+      "max_expert_pairs": 29272,
+      "source_sha256": "502bbef9e34edbb784659fd842cc12fb01e30a1bb0b6ded4c7cf0063fc9b9e4c"
+    },
+    {
+      "layer": 5,
+      "rank": 0,
+      "pairs": 536576,
+      "native_assignment": true,
+      "arbitrary_assignment": true,
+      "max_expert_pairs": 42517,
+      "source_sha256": "cf72b7f79316d6ef7515c48ab829a3f54e5c45b58263eb4cf06ac734c65e2a56"
+    },
+    {
+      "layer": 5,
+      "rank": 1,
+      "pairs": 536576,
+      "native_assignment": true,
+      "arbitrary_assignment": true,
+      "max_expert_pairs": 47570,
+      "source_sha256": "cf72b7f79316d6ef7515c48ab829a3f54e5c45b58263eb4cf06ac734c65e2a56"
+    },
+    {
+      "layer": 6,
+      "rank": 0,
+      "pairs": 536576,
+      "native_assignment": true,
+      "arbitrary_assignment": true,
+      "max_expert_pairs": 28986,
+      "source_sha256": "07b245a0267b26a726c60f263c661ade189262bf4e62c8e6bfe671a5a6b21d33"
+    },
+    {
+      "layer": 6,
+      "rank": 1,
+      "pairs": 536576,
+      "native_assignment": true,
+      "arbitrary_assignment": true,
+      "max_expert_pairs": 24924,
+      "source_sha256": "07b245a0267b26a726c60f263c661ade189262bf4e62c8e6bfe671a5a6b21d33"
+    },
+    {
+      "layer": 7,
+      "rank": 0,
+      "pairs": 536576,
+      "native_assignment": true,
+      "arbitrary_assignment": true,
+      "max_expert_pairs": 29262,
+      "source_sha256": "b005244357fa30dea03327859a928359ec3971ea0d5718053a9f1351b5d36b6e"
+    },
+    {
+      "layer": 7,
+      "rank": 1,
+      "pairs": 536576,
+      "native_assignment": true,
+      "arbitrary_assignment": true,
+      "max_expert_pairs": 34314,
+      "source_sha256": "b005244357fa30dea03327859a928359ec3971ea0d5718053a9f1351b5d36b6e"
+    }
+  ]
+}

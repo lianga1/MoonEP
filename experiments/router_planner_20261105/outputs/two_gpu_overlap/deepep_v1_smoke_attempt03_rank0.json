@@ -1,0 +1,24 @@
+{
+  "status": "failed",
+  "token_backend": "DeepEP v1.2.1 intranode",
+  "expert_backend": "torch.distributed NCCL batch P2P",
+  "reference_commit": "9af0e0d0e74f3577af1979c9b9e1ac2cad0104ee",
+  "workload": "synthetic correctness probe",
+  "failures": [
+    "AssertionError: 4.125"
+  ],
+  "checks": [],
+  "build_provenance": {
+    "upstream_commit": "9af0e0d0e74f3577af1979c9b9e1ac2cad0104ee",
+    "local_variant": "build fixes plus notify launch 128/256 threads",
+    "files": {
+      "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/deep_ep/__init__.py": "14bc5e4bdf184ad3bee7da4b6da70f063c950789d004c092e81bd0fad6aedc13",
+      "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/deep_ep_cpp.cpython-312-x86_64-linux-gnu.so": "37fc4b4be1d747c0b9034881236055fc12f153c0b0cb392460e0ad068a347117",
+      "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/setup.py": "ae151fecfbae6c9244bc9f2a5a24fe75ea36951e64e7ad7b4f48772ae12b02ab",
+      "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/csrc/kernels/intranode.cu": "794946b5241fbb20cbdc899108b43d041244691aa58d53e52f19bc85354831e5",
+      "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/deepep-v1-disable-nvshmem.patch": "a06aee336c93a2a1cc772c7c5496e06c3065a330efeba65d9d7352f6d5c72a9c",
+      "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/deepep-v1-intranode-dlink.patch": "8b5d407eb97ab2384fa147c1990a5d02e6697b403686e7845389f01c29fb75ce",
+      "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/deepep-v1-notify-256.patch": "45efbdb02ffae2d7c98b91862baa6a9b947c0a5a1d4dc9e0dc9c38aaea4ae907"
+    }
+  }
+}

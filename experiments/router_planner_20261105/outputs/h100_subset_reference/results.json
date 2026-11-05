@@ -1,0 +1,461 @@
+{
+  "scope": "CPU reference for new simultaneous token-first subset GPU algorithm",
+  "rows": [
+    {
+      "layer": 0,
+      "baseline": 621511,
+      "metrics": {
+        "remote_token_destinations": 532684,
+        "all_token_destinations": 626072,
+        "remote_pairs": 917814,
+        "source_remote_payloads": [
+          63317,
+          65833,
+          66691,
+          66058,
+          67879,
+          66836,
+          67261,
+          68809
+        ],
+        "destination_remote_payloads": [
+          66604,
+          65903,
+          67502,
+          63866,
+          68799,
+          67582,
+          63530,
+          68898
+        ],
+        "pair_loads": [
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144
+        ],
+        "max_min_pair_load": 0,
+        "max_mean_pair_load": 1.0,
+        "active_extra_experts": [
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8
+        ]
+      },
+      "round_gains": [
+        63611,
+        18700,
+        5242,
+        1274
+      ]
+    },
+    {
+      "layer": 1,
+      "baseline": 643011,
+      "metrics": {
+        "remote_token_destinations": 468091,
+        "all_token_destinations": 563761,
+        "remote_pairs": 893166,
+        "source_remote_payloads": [
+          58724,
+          58862,
+          56273,
+          52378,
+          61815,
+          63490,
+          56554,
+          59995
+        ],
+        "destination_remote_payloads": [
+          61303,
+          61605,
+          55006,
+          53829,
+          59190,
+          58701,
+          56541,
+          61916
+        ],
+        "pair_loads": [
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144
+        ],
+        "max_min_pair_load": 0,
+        "max_mean_pair_load": 1.0,
+        "active_extra_experts": [
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8
+        ]
+      },
+      "round_gains": [
+        86143,
+        56247,
+        23573,
+        8957
+      ]
+    },
+    {
+      "layer": 2,
+      "baseline": 635585,
+      "metrics": {
+        "remote_token_destinations": 448297,
+        "all_token_destinations": 545952,
+        "remote_pairs": 883003,
+        "source_remote_payloads": [
+          58006,
+          58273,
+          53515,
+          53104,
+          53036,
+          59851,
+          53523,
+          58989
+        ],
+        "destination_remote_payloads": [
+          59633,
+          60333,
+          58222,
+          48070,
+          51298,
+          56630,
+          59816,
+          54295
+        ],
+        "pair_loads": [
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144
+        ],
+        "max_min_pair_load": 0,
+        "max_mean_pair_load": 1.0,
+        "active_extra_experts": [
+          8,
+          8,
+          7,
+          8,
+          8,
+          8,
+          8,
+          8
+        ]
+      },
+      "round_gains": [
+        93843,
+        57763,
+        26794,
+        8888
+      ]
+    },
+    {
+      "layer": 3,
+      "baseline": 623501,
+      "metrics": {
+        "remote_token_destinations": 465565,
+        "all_token_destinations": 568386,
+        "remote_pairs": 867871,
+        "source_remote_payloads": [
+          55153,
+          56790,
+          52601,
+          52726,
+          64017,
+          62883,
+          58075,
+          63320
+        ],
+        "destination_remote_payloads": [
+          55494,
+          59528,
+          48561,
+          66134,
+          58797,
+          53364,
+          57924,
+          65763
+        ],
+        "pair_loads": [
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144
+        ],
+        "max_min_pair_load": 0,
+        "max_mean_pair_load": 1.0,
+        "active_extra_experts": [
+          8,
+          8,
+          7,
+          8,
+          8,
+          8,
+          8,
+          8
+        ]
+      },
+      "round_gains": [
+        75520,
+        51762,
+        21846,
+        8808
+      ]
+    },
+    {
+      "layer": 4,
+      "baseline": 634668,
+      "metrics": {
+        "remote_token_destinations": 459178,
+        "all_token_destinations": 556538,
+        "remote_pairs": 905426,
+        "source_remote_payloads": [
+          60518,
+          55540,
+          58760,
+          49437,
+          56632,
+          56846,
+          59292,
+          62153
+        ],
+        "destination_remote_payloads": [
+          51115,
+          57557,
+          57323,
+          58914,
+          59754,
+          57218,
+          63589,
+          53708
+        ],
+        "pair_loads": [
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144
+        ],
+        "max_min_pair_load": 0,
+        "max_mean_pair_load": 1.0,
+        "active_extra_experts": [
+          8,
+          8,
+          8,
+          7,
+          8,
+          8,
+          8,
+          8
+        ]
+      },
+      "round_gains": [
+        85700,
+        54317,
+        25510,
+        9963
+      ]
+    },
+    {
+      "layer": 5,
+      "baseline": 625260,
+      "metrics": {
+        "remote_token_destinations": 469284,
+        "all_token_destinations": 557697,
+        "remote_pairs": 899558,
+        "source_remote_payloads": [
+          61353,
+          53926,
+          55826,
+          47741,
+          61764,
+          61084,
+          58348,
+          69242
+        ],
+        "destination_remote_payloads": [
+          70029,
+          65036,
+          56856,
+          55619,
+          54950,
+          51032,
+          56924,
+          58838
+        ],
+        "pair_loads": [
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144
+        ],
+        "max_min_pair_load": 0,
+        "max_mean_pair_load": 1.0,
+        "active_extra_experts": [
+          8,
+          7,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8
+        ]
+      },
+      "round_gains": [
+        73650,
+        46647,
+        23825,
+        11854
+      ]
+    },
+    {
+      "layer": 6,
+      "baseline": 635436,
+      "metrics": {
+        "remote_token_destinations": 469038,
+        "all_token_destinations": 557178,
+        "remote_pairs": 911494,
+        "source_remote_payloads": [
+          63180,
+          55208,
+          54508,
+          57729,
+          61536,
+          60767,
+          57614,
+          58496
+        ],
+        "destination_remote_payloads": [
+          51500,
+          59433,
+          63906,
+          60634,
+          60397,
+          59063,
+          53957,
+          60148
+        ],
+        "pair_loads": [
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144
+        ],
+        "max_min_pair_load": 0,
+        "max_mean_pair_load": 1.0,
+        "active_extra_experts": [
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          7
+        ]
+      },
+      "round_gains": [
+        79524,
+        50615,
+        24786,
+        11473
+      ]
+    },
+    {
+      "layer": 7,
+      "baseline": 635193,
+      "metrics": {
+        "remote_token_destinations": 463972,
+        "all_token_destinations": 562886,
+        "remote_pairs": 890298,
+        "source_remote_payloads": [
+          60731,
+          55192,
+          54744,
+          57955,
+          58875,
+          61383,
+          52490,
+          62602
+        ],
+        "destination_remote_payloads": [
+          59072,
+          48194,
+          61231,
+          56071,
+          63216,
+          58569,
+          57013,
+          60606
+        ],
+        "pair_loads": [
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144
+        ],
+        "max_min_pair_load": 0,
+        "max_mean_pair_load": 1.0,
+        "active_extra_experts": [
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8
+        ]
+      },
+      "round_gains": [
+        77394,
+        53923,
+        26447,
+        13457
+      ]
+    }
+  ]
+}

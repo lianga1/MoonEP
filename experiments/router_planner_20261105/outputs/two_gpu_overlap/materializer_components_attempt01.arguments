@@ -1,0 +1,12 @@
+experiments/two_gpu_overlap/benchmark.py
+--layers
+0,7
+--mode
+graph
+--components-only
+--materializer
+reuse
+--samples
+10
+--output
+outputs/two_gpu_overlap/materializer_components_attempt01.json

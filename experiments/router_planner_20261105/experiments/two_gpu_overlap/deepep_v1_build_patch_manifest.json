@@ -1,0 +1,10 @@
+{
+  "upstream_commit": "9af0e0d0e74f3577af1979c9b9e1ac2cad0104ee",
+  "scope": "build-only explicit intranode selection; no communication kernel change",
+  "source_file": "vendor/DeepEP_v1/setup.py",
+  "upstream_sha256": "298ce348ddf81e1a22339fa0d78d0fbe4065ef59ef7c814937054d03b9b10940",
+  "patched_sha256": "a9c0f207bc92733e27c739c1b1969f2460eaa45f8ba34c4000574bd4fe875f98",
+  "patch_sha256": "a06aee336c93a2a1cc772c7c5496e06c3065a330efeba65d9d7352f6d5c72a9c",
+  "activation": "DISABLE_NVSHMEM=1",
+  "default_behavior_unchanged": true
+}

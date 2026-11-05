@@ -1,0 +1,66 @@
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/deepep_v1_smoke.py", line 95, in <module>
+[rank0]:     main()
+[rank0]:   File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/deepep_v1_smoke.py", line 36, in main
+[rank0]:     adapter = DeepEPV1PlannedAdapter(dist.group.WORLD, per_source=a.tokens,
+[rank0]:               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/deepep_v1_adapter.py", line 94, in __init__
+[rank0]:     import deep_ep
+[rank0]:   File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/deep_ep/__init__.py", line 3, in <module>
+[rank0]:     from .utils import EventOverlap
+[rank0]:   File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/deep_ep/utils.py", line 8, in <module>
+[rank0]:     from deep_ep_cpp import Config, EventHandle
+[rank0]: ImportError: /inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/deep_ep_cpp.cpython-312-x86_64-linux-gnu.so: undefined symbol: __cudaRegisterLinkedBinary_b04d93c1_10_runtime_cu_a457eb97
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/deepep_v1_smoke.py", line 95, in <module>
+[rank1]:     main()
+[rank1]:   File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/deepep_v1_smoke.py", line 36, in main
+[rank1]:     adapter = DeepEPV1PlannedAdapter(dist.group.WORLD, per_source=a.tokens,
+[rank1]:               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/deepep_v1_adapter.py", line 94, in __init__
+[rank1]:     import deep_ep
+[rank1]:   File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/deep_ep/__init__.py", line 3, in <module>
+[rank1]:     from .utils import EventOverlap
+[rank1]:   File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/deep_ep/utils.py", line 8, in <module>
+[rank1]:     from deep_ep_cpp import Config, EventHandle
+[rank1]: ImportError: /inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/deep_ep_cpp.cpython-312-x86_64-linux-gnu.so: undefined symbol: __cudaRegisterLinkedBinary_b04d93c1_10_runtime_cu_a457eb97
+W1105 04:25:35.128000 154993 site-packages/torch/distributed/elastic/multiprocessing/api.py:1012] Sending process 155779 closing signal SIGTERM
+E1105 04:25:35.192000 154993 site-packages/torch/distributed/elastic/multiprocessing/api.py:986] failed (exitcode: 1) local_rank: 1 (pid: 155780) of binary: /root/anaconda3/envs/sglang/bin/python3.12
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/sglang/bin/torchrun", line 6, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 362, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/distributed/run.py", line 990, in main
+    run(args)
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/distributed/run.py", line 981, in run
+    elastic_launch(
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 170, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 317, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+experiments/two_gpu_overlap/deepep_v1_smoke.py FAILED
+------------------------------------------------------------
+Failures:
+[1]:
+  time      : 2026-11-05_04:25:35
+  host      : test-mtp-retrieval-copy--0f7927a8f653-sf4levrpw6
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 155779)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-11-05_04:25:35
+  host      : test-mtp-retrieval-copy--0f7927a8f653-sf4levrpw6
+  rank      : 1 (local_rank: 1)
+  exitcode  : 1 (pid: 155780)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

@@ -1,0 +1,479 @@
+{
+  "scope": "eager CUDA extension; all four round GPU grouping, prefix, mixed DP, expansion included; fixed resident input and seed excluded; Thrust sorting may synchronize host; no CPU grouping/tensor readback in timed run",
+  "gpu": "NVIDIA H100 80GB HBM3",
+  "torch": "2.13.0+cu130",
+  "rows": [
+    {
+      "layer": 0,
+      "exact": true,
+      "communication": {
+        "remote_token_destinations": 536800,
+        "all_token_destinations": 628011,
+        "remote_pairs": 918218,
+        "source_remote_payloads": [
+          61544,
+          66257,
+          67227,
+          66854,
+          68637,
+          67869,
+          68916,
+          69496
+        ],
+        "destination_remote_payloads": [
+          64046,
+          65104,
+          67879,
+          62725,
+          70768,
+          67063,
+          65106,
+          74109
+        ],
+        "pair_loads": [
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144
+        ],
+        "max_min_pair_load": 0,
+        "max_mean_pair_load": 1.0,
+        "active_extra_experts": [
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8
+        ]
+      },
+      "event_ms": {
+        "False": [],
+        "True": []
+      },
+      "host_wall_ms": {
+        "False": [],
+        "True": []
+      }
+    },
+    {
+      "layer": 1,
+      "exact": true,
+      "communication": {
+        "remote_token_destinations": 462415,
+        "all_token_destinations": 549243,
+        "remote_pairs": 902864,
+        "source_remote_payloads": [
+          60387,
+          59205,
+          57463,
+          52018,
+          59500,
+          61753,
+          54528,
+          57561
+        ],
+        "destination_remote_payloads": [
+          57029,
+          59172,
+          53364,
+          49662,
+          58923,
+          61992,
+          56435,
+          65838
+        ],
+        "pair_loads": [
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144
+        ],
+        "max_min_pair_load": 0,
+        "max_mean_pair_load": 1.0,
+        "active_extra_experts": [
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8
+        ]
+      },
+      "event_ms": {
+        "False": [],
+        "True": []
+      },
+      "host_wall_ms": {
+        "False": [],
+        "True": []
+      }
+    },
+    {
+      "layer": 2,
+      "exact": true,
+      "communication": {
+        "remote_token_destinations": 453456,
+        "all_token_destinations": 550416,
+        "remote_pairs": 877546,
+        "source_remote_payloads": [
+          60009,
+          59193,
+          53386,
+          53579,
+          54521,
+          59790,
+          54811,
+          58167
+        ],
+        "destination_remote_payloads": [
+          59503,
+          61742,
+          50203,
+          48050,
+          53640,
+          58895,
+          64436,
+          56987
+        ],
+        "pair_loads": [
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144
+        ],
+        "max_min_pair_load": 0,
+        "max_mean_pair_load": 1.0,
+        "active_extra_experts": [
+          8,
+          8,
+          7,
+          8,
+          8,
+          8,
+          8,
+          8
+        ]
+      },
+      "event_ms": {
+        "False": [],
+        "True": []
+      },
+      "host_wall_ms": {
+        "False": [],
+        "True": []
+      }
+    },
+    {
+      "layer": 3,
+      "exact": true,
+      "communication": {
+        "remote_token_destinations": 445100,
+        "all_token_destinations": 544269,
+        "remote_pairs": 864516,
+        "source_remote_payloads": [
+          54686,
+          57420,
+          49697,
+          51475,
+          61483,
+          57410,
+          53833,
+          59096
+        ],
+        "destination_remote_payloads": [
+          50423,
+          57258,
+          43252,
+          60434,
+          52561,
+          54385,
+          60129,
+          66658
+        ],
+        "pair_loads": [
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144
+        ],
+        "max_min_pair_load": 0,
+        "max_mean_pair_load": 1.0,
+        "active_extra_experts": [
+          8,
+          8,
+          7,
+          8,
+          8,
+          8,
+          8,
+          8
+        ]
+      },
+      "event_ms": {
+        "False": [],
+        "True": []
+      },
+      "host_wall_ms": {
+        "False": [],
+        "True": []
+      }
+    },
+    {
+      "layer": 4,
+      "exact": true,
+      "communication": {
+        "remote_token_destinations": 455954,
+        "all_token_destinations": 543479,
+        "remote_pairs": 909485,
+        "source_remote_payloads": [
+          60676,
+          55139,
+          59966,
+          51267,
+          56284,
+          56022,
+          56750,
+          59850
+        ],
+        "destination_remote_payloads": [
+          49387,
+          55178,
+          57767,
+          58413,
+          59722,
+          56368,
+          63305,
+          55814
+        ],
+        "pair_loads": [
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144
+        ],
+        "max_min_pair_load": 0,
+        "max_mean_pair_load": 1.0,
+        "active_extra_experts": [
+          8,
+          8,
+          8,
+          7,
+          8,
+          8,
+          8,
+          8
+        ]
+      },
+      "event_ms": {
+        "False": [],
+        "True": []
+      },
+      "host_wall_ms": {
+        "False": [],
+        "True": []
+      }
+    },
+    {
+      "layer": 5,
+      "exact": true,
+      "communication": {
+        "remote_token_destinations": 451797,
+        "all_token_destinations": 537546,
+        "remote_pairs": 897273,
+        "source_remote_payloads": [
+          60162,
+          51522,
+          54459,
+          48127,
+          61894,
+          56678,
+          55329,
+          63626
+        ],
+        "destination_remote_payloads": [
+          66099,
+          60880,
+          49186,
+          54301,
+          56663,
+          50519,
+          56583,
+          57566
+        ],
+        "pair_loads": [
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144
+        ],
+        "max_min_pair_load": 0,
+        "max_mean_pair_load": 1.0,
+        "active_extra_experts": [
+          8,
+          7,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8
+        ]
+      },
+      "event_ms": {
+        "False": [],
+        "True": []
+      },
+      "host_wall_ms": {
+        "False": [],
+        "True": []
+      }
+    },
+    {
+      "layer": 6,
+      "exact": true,
+      "communication": {
+        "remote_token_destinations": 478117,
+        "all_token_destinations": 563388,
+        "remote_pairs": 910908,
+        "source_remote_payloads": [
+          70988,
+          56673,
+          56596,
+          59141,
+          63599,
+          60537,
+          57421,
+          53162
+        ],
+        "destination_remote_payloads": [
+          52735,
+          57673,
+          63855,
+          57448,
+          59783,
+          61801,
+          62726,
+          62096
+        ],
+        "pair_loads": [
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144
+        ],
+        "max_min_pair_load": 0,
+        "max_mean_pair_load": 1.0,
+        "active_extra_experts": [
+          6,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          6
+        ]
+      },
+      "event_ms": {
+        "False": [],
+        "True": []
+      },
+      "host_wall_ms": {
+        "False": [],
+        "True": []
+      }
+    },
+    {
+      "layer": 7,
+      "exact": true,
+      "communication": {
+        "remote_token_destinations": 424586,
+        "all_token_destinations": 522768,
+        "remote_pairs": 872634,
+        "source_remote_payloads": [
+          58328,
+          53202,
+          51081,
+          49175,
+          52261,
+          55826,
+          47444,
+          57269
+        ],
+        "destination_remote_payloads": [
+          55338,
+          43394,
+          50040,
+          49797,
+          58878,
+          52664,
+          58714,
+          55761
+        ],
+        "pair_loads": [
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144,
+          134144
+        ],
+        "max_min_pair_load": 0,
+        "max_mean_pair_load": 1.0,
+        "active_extra_experts": [
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8
+        ]
+      },
+      "event_ms": {
+        "False": [],
+        "True": []
+      },
+      "host_wall_ms": {
+        "False": [],
+        "True": []
+      }
+    }
+  ]
+}

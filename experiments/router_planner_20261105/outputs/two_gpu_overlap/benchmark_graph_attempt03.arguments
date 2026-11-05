@@ -1,0 +1,16 @@
+experiments/two_gpu_overlap/benchmark.py
+--mode
+graph
+--materializer
+reuse
+--residency
+fused_warp
+--rounds
+1
+--timeline
+--samples
+10
+--prefetch-sms
+32
+--output
+outputs/two_gpu_overlap/benchmark_graph_attempt03.json

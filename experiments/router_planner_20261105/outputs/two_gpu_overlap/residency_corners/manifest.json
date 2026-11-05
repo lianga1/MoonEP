@@ -1,0 +1,448 @@
+{
+  "scope": "synthetic correctness edge controls only",
+  "cases": [
+    {
+      "name": "budget3_seed19",
+      "file": "budget3_seed19.npz",
+      "shape": [
+        2,
+        256,
+        8
+      ],
+      "samples": 256,
+      "sha256": "f7fc9c630e1b23bb25fed5b16439bcf2be65e5826f9b6b58e208e56d66959912",
+      "history": [
+        [
+          0,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2
+        ],
+        [
+          0,
+          1,
+          0,
+          1,
+          1,
+          2,
+          1
+        ],
+        [
+          0,
+          1,
+          1,
+          2,
+          2,
+          2,
+          3
+        ]
+      ],
+      "diagnostics": [
+        28,
+        2,
+        7
+      ],
+      "gain_zero_samples": 15
+    },
+    {
+      "name": "budget3_seed23",
+      "file": "budget3_seed23.npz",
+      "shape": [
+        2,
+        256,
+        8
+      ],
+      "samples": 256,
+      "sha256": "ad1c4c2c71cd15db4e60b7ec824b6f19cb81eae1d8b304236ae91a836b6c0169",
+      "history": [
+        [
+          0,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2
+        ],
+        [
+          0,
+          1,
+          2,
+          2,
+          2,
+          2,
+          4
+        ],
+        [
+          0,
+          1,
+          2,
+          2,
+          2,
+          2,
+          4
+        ]
+      ],
+      "diagnostics": [
+        24,
+        5,
+        8
+      ],
+      "gain_zero_samples": 20
+    },
+    {
+      "name": "budget3_seed41",
+      "file": "budget3_seed41.npz",
+      "shape": [
+        2,
+        256,
+        8
+      ],
+      "samples": 256,
+      "sha256": "7fdb10d66baed1b67299e000fb822ca31a0db2a28a5f80cd124633f0d38a760f",
+      "history": [
+        [
+          0,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2
+        ],
+        [
+          0,
+          1,
+          2,
+          2,
+          2,
+          2,
+          4
+        ],
+        [
+          0,
+          1,
+          2,
+          2,
+          2,
+          2,
+          4
+        ]
+      ],
+      "diagnostics": [
+        26,
+        5,
+        8
+      ],
+      "gain_zero_samples": 13
+    },
+    {
+      "name": "budget5_seed19",
+      "file": "budget5_seed19.npz",
+      "shape": [
+        2,
+        256,
+        8
+      ],
+      "samples": 256,
+      "sha256": "8e90098e1d742b2fc9dd6bfaedf3ab45a22f1f750682bef5fb5234b533fc847f",
+      "history": [
+        [
+          0,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2
+        ],
+        [
+          0,
+          1,
+          0,
+          1,
+          1,
+          2,
+          1
+        ]
+      ],
+      "diagnostics": [
+        28,
+        1,
+        7
+      ],
+      "gain_zero_samples": 74
+    },
+    {
+      "name": "budget5_seed23",
+      "file": "budget5_seed23.npz",
+      "shape": [
+        2,
+        256,
+        8
+      ],
+      "samples": 256,
+      "sha256": "eff7a53db3254c9053f870bdbddb6485290b43836022ef385dfac38d80adf94c",
+      "history": [
+        [
+          0,
+          1,
+          0,
+          1,
+          1,
+          2,
+          1
+        ],
+        [
+          0,
+          1,
+          2,
+          2,
+          2,
+          2,
+          4
+        ]
+      ],
+      "diagnostics": [
+        28,
+        2,
+        8
+      ],
+      "gain_zero_samples": 82
+    },
+    {
+      "name": "budget5_seed41",
+      "file": "budget5_seed41.npz",
+      "shape": [
+        2,
+        256,
+        8
+      ],
+      "samples": 256,
+      "sha256": "a9d852ca4076ca1179d32255f08499da8f0be11913556f11fab0bcc5066e0f64",
+      "history": [
+        [
+          0,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2
+        ],
+        [
+          0,
+          1,
+          2,
+          2,
+          2,
+          2,
+          4
+        ]
+      ],
+      "diagnostics": [
+        22,
+        3,
+        8
+      ],
+      "gain_zero_samples": 79
+    },
+    {
+      "name": "budget7_seed19",
+      "file": "budget7_seed19.npz",
+      "shape": [
+        2,
+        256,
+        8
+      ],
+      "samples": 256,
+      "sha256": "53fb7a9d197b8a850b54b35ade01c7d6a6b3854fe04f771c75730556745d2d68",
+      "history": [
+        [
+          0,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2
+        ]
+      ],
+      "diagnostics": [
+        12,
+        1,
+        8
+      ],
+      "gain_zero_samples": 114
+    },
+    {
+      "name": "budget7_seed23",
+      "file": "budget7_seed23.npz",
+      "shape": [
+        2,
+        256,
+        8
+      ],
+      "samples": 256,
+      "sha256": "536123b47d068415b9b2e9fa4979a0baf04a9eddee6060acc9b9c578819e54de",
+      "history": [
+        [
+          0,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2
+        ]
+      ],
+      "diagnostics": [
+        8,
+        1,
+        8
+      ],
+      "gain_zero_samples": 128
+    },
+    {
+      "name": "budget7_seed41",
+      "file": "budget7_seed41.npz",
+      "shape": [
+        2,
+        256,
+        8
+      ],
+      "samples": 256,
+      "sha256": "82e0d027ba8be05b4264bfb6db8aa9a8fd1bdb74ac78cc2099cd14bb31efecf6",
+      "history": [
+        [
+          0,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2
+        ]
+      ],
+      "diagnostics": [
+        10,
+        1,
+        8
+      ],
+      "gain_zero_samples": 127
+    },
+    {
+      "name": "budget8_seed19",
+      "file": "budget8_seed19.npz",
+      "shape": [
+        2,
+        256,
+        8
+      ],
+      "samples": 256,
+      "sha256": "f55ae8ee5a081f2a948ee20fa200d79a20ce00ec0496ebc4d804f915d3d90774",
+      "history": [],
+      "diagnostics": [
+        0,
+        0,
+        8
+      ],
+      "gain_zero_samples": 122
+    },
+    {
+      "name": "budget8_seed23",
+      "file": "budget8_seed23.npz",
+      "shape": [
+        2,
+        256,
+        8
+      ],
+      "samples": 256,
+      "sha256": "394bd510dd3a2d9bf16c076dc5a7a47ec85ceb9156c983492260ada188fb882d",
+      "history": [],
+      "diagnostics": [
+        0,
+        0,
+        8
+      ],
+      "gain_zero_samples": 130
+    },
+    {
+      "name": "budget8_seed41",
+      "file": "budget8_seed41.npz",
+      "shape": [
+        2,
+        256,
+        8
+      ],
+      "samples": 256,
+      "sha256": "ec561b0837d972b8f4a18e838d49e6563182196f4cdd39706c66f5fd6939075f",
+      "history": [],
+      "diagnostics": [
+        0,
+        0,
+        8
+      ],
+      "gain_zero_samples": 133
+    },
+    {
+      "name": "packages80_repeat1",
+      "file": "packages80_repeat1.npz",
+      "shape": [
+        2,
+        29,
+        8
+      ],
+      "samples": 58,
+      "sha256": "6dc60848db45898a61672c37be965acdc44fd8f4fb359ad82e307d1f194a32d7",
+      "history": [
+        [
+          0,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2
+        ]
+      ],
+      "diagnostics": [
+        80,
+        8,
+        8
+      ],
+      "gain_zero_samples": 24
+    },
+    {
+      "name": "packages80_repeat5",
+      "file": "packages80_repeat5.npz",
+      "shape": [
+        2,
+        145,
+        8
+      ],
+      "samples": 290,
+      "sha256": "3ff473ef48136c8802aeb582d0f0e154d34c8cf4de891c7ec0f0275c717b01f7",
+      "history": [
+        [
+          0,
+          1,
+          1,
+          1,
+          1,
+          10,
+          2
+        ]
+      ],
+      "diagnostics": [
+        80,
+        8,
+        8
+      ],
+      "gain_zero_samples": 120
+    }
+  ]
+}

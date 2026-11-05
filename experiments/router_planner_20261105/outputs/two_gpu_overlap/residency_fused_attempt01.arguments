@@ -1,0 +1,7 @@
+experiments/two_gpu_overlap/benchmark_residency_variants.py
+--variants
+combined
+fused
+fused_warp
+--output
+outputs/two_gpu_overlap/residency_fused_attempt01.json

@@ -1,0 +1,8 @@
+experiments/eight_rank_estimate/benchmark_kernels.py
+--samples
+10
+--repeats
+20
+--require-residency
+--output
+outputs/eight_rank_estimate/kernel_graph_attempt01.json

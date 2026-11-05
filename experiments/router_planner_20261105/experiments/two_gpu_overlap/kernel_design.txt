@@ -1,0 +1,143 @@
+Two-rank GPU planner components
+==============================
+
+Scope
+-----
+R=2 physical ranks, K=8, E=352, at most B=8 extra experts/card.
+Same canonical bundle proposals, top-2 sample groups and reciprocal quotas as
+the existing CPU algorithms. The two-rank input is a documented folding of
+the original eight source shards, not an original two-rank production dump.
+
+Sampled residency
+-----------------
+residency_cuda.py: TwoRankResidency.run(native_etc, owner, local_routes=routes)
+includes source-shard sample route/owner gathering, one MAX all-reduce of
+d*16 int32 values, mandatory support, sample groups, frequency, top-2 and
+greedy selection. Omitting local_routes is a narrower cached-route component.
+
+Native experts_to_copy can replace the NK mandatory scan only after checking
+that it contains every non-home expert required by the native seed. The
+runtime starts from home experts plus that list; copying experts is not
+performed by this class. It publishes support and a complete sorted copy list.
+
+Each sorted expert group has an exact 72-bit signature (eight 9-bit expert
+IDs, split 63+9). Padding is 511, distinct from IDs 0..351, and group size is
+part of the category. There is no hash-collision approximation. The small
+d-by-d frequency comparison does not materialize a d-by-d matrix. This changes
+frequency work to O(d^2) versus the CPU dictionary/sort path; it is a deliberate
+fixed-d GPU tradeoff, not a lower asymptotic complexity claim.
+
+Each expert set is six 64-bit words. Missing-copy count uses popcount, and
+whether a retained group becomes executable uses bitwise inclusion tests.
+All candidate packages are evaluated in parallel within one CTA; a deterministic
+reduction selects the same (gain/cost, gain, -cost, -package_index) winner.
+Up to 2B successful selections occur, followed by an unsuccessful scan.
+Candidate package order preserves the CPU dictionary's first occurrence of
+each gain class, then count/lexicographic top-2 order.
+
+R2 usually yields only gain-1 sample groups, but this is not assumed: after
+an infeasible gain-1 group is filtered by the remaining budget, a gain-0
+reverse group can still be recorded. Both gain classes are supported, up to
+96 packages. Current real inputs yielded 24..28 packages and no gain-0 samples.
+
+Work: O(RE + dK + d^2 + 36d + (2B+1) P ceil(E/64)), where P<=96;
+K/E/R/B are fixed in this specialization. Space is O(RE+dK+P+BK), without
+the original input/seed tensors. Full timing must include sample gathering.
+
+Verified residency optimization (two H200s, this replay only)
+------------------------------------------------------------
+The initial rank-0/rank-1 Torch Profiler captures on layers 0 and 7 attributed
+about 44--48% of select's kernel-duration sum to the serial top-2 scan,
+32--36% to greedy selection, and 15% to frequency counting. These are diagnostic
+duration shares, not additive removable latency. Raw capture summaries:
+  outputs/two_gpu_overlap/residency_profile_attempt01_summary.json
+
+residency_cuda_optimized replaces the top-2 scan's 36 active threads, each
+scanning all d samples serially, with one 256-thread CTA per category. Each
+thread examines a disjoint sample subset; two exact reductions preserve
+frequency, expert-tuple ordering and the category's first occurrence.
+The optional single-warp greedy mapping retains candidate order and evaluates
+packages in lane-strided order when P>32. Its standalone benefit was only
+about 1 us here; the observed first-stage gain mainly came from parallel top-2.
+
+residency_cuda_fused reuses a shared-memory table of all sample categories and
+exact signatures within each category CTA. For d<=256, matching sample lanes
+count group occurrences using that table, retain frequencies in registers,
+and feed them directly into the two top-2 reductions. Frequencies are still
+written to the audit output; top-2 no longer rereads that intermediate table.
+The separate frequency/top-2 launches become one launch. For d>256 it uses
+the separate frequency plus parallel top-2 path. Frequency work remains O(d^2),
+and no d-by-d matrix is allocated. The gains come from data reuse, shorter
+serial work and fewer launches, not a lower asymptotic complexity.
+
+Paired unprofiled CUDA Graph component measurements, in microseconds:
+  variant                 select only       sample gather + select
+  original                  126.61                 142.16
+  parallel top-2 + warp       74.43                  89.82
+  fused frequency/top-2       60.25                  75.67
+  fused + warp greedy        59.38                  74.48
+
+This cohort used two physical NVIDIA H200 GPUs, PyTorch 2.11.0+cu130 and CUDA
+13.0. Each layer retained 10 paired samples, each with 10 Graph replays;
+the table averages the eight layer medians of per-sample maximum-rank CUDA
+event times. Warmup was five calls. The fused+warp gather/select component
+was 47.61% faster than the original in this cohort. Native owner decoding,
+native planning, final address construction, expert copies, token dispatch/
+combine and expert computation are excluded. This does not establish a
+full-planner or end-to-end speedup, and is not a guarantee for other workloads.
+
+All eight real layers and 14 separately labelled synthetic correctness cases
+passed exact support, accepted-history, intermediate-table and copy-list
+checks after repeated GPU calls. All eight real layers also passed support
+and history checks after Graph replay. The controls include gain-0 candidates,
+P=80 packages and d=290 fallback; they were not included in timing averages.
+No failures were recorded in either cohort:
+  outputs/two_gpu_overlap/residency_variants_attempt01.json
+  outputs/two_gpu_overlap/residency_fused_attempt01.json
+Original residency_cuda.cu remains unchanged; the selected fused+warp path
+is exposed by residency_cuda_fused.py, variant='fused_warp'.
+
+Full-token exchange
+-------------------
+exchange_cuda.py: TwoRankExchange supports variant='sort' and 'prefix'.
+Both preserve identical proposal, tie, token order and quota semantics.
+
+sort: per round reads routes/owner, creates masks, chooses a proposal, sorts
+the 7 bucket bits with stable CUB radix sort, derives counts and commits.
+
+prefix: prepare_support reads each local token's eight expert IDs once and
+caches two executability masks. reset copies the dense seed and creates an
+8-bit ownership mask. Every round reads these three compact masks; accepted
+proposals update compact and dense ownership together. No repeated route
+or support gathers are needed while the residency table is fixed.
+
+Each CTA handles 256 consecutive tokens. Warp match-any gives each proposal
+its local bucket ordinal. A 72-by-CTA count table is scanned by bucket, giving
+the exact prefix across earlier CTAs. Together with the preceding source
+rank count, this preserves global source/token order without sorting. The
+table is bucket-major for contiguous scan reads; its small per-CTA write
+is strided, a tradeoff to be evaluated by the paired measurements.
+
+Each round exchanges 72 int32 counts/source. Neither variant matches token
+pairs individually. Quotas depend only on equal bundle size and positive
+combined gain. A token that loses its best proposal has no same-round fallback.
+
+Per-card work at fixed R=2/K=8:
+  preparation O(SK + E), reset O(SK);
+  sort round O(SK + pS + 72), p = constant radix passes;
+  prefix round O(S + 72 ceil(S/256)) plus accepted sparse writes <= O(SK).
+Both are linear in S. The prefix variant removes sorting traffic/launches
+and repeated route/support loads; it does not change the linear complexity.
+Extra memory is O(S + 72 ceil(S/256)). Buffers are reused across L rounds;
+only round statistics grow as O(L).
+
+Validation artifacts
+--------------------
+exchange_reference_check_result.json: 80 CPU round comparisons including
+tail blocks against the existing generic bucket_optimizer reference.
+residency_reference_check_result.json: all eight real folded layers, exact
+CPU support/history/package count against the existing saved select_support.
+residency_smoke.py: two-GPU runtime gathering/residency/history/copy-list and
+four-round prefix-vs-sort/communication/load audit; root owns remote execution.
+
+These local CPU checks are not CUDA validation or performance evidence.

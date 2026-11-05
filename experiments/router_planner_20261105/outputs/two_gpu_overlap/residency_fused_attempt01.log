@@ -1,0 +1,24 @@
+budget3_seed19: exact validation passed
+budget3_seed23: exact validation passed
+budget3_seed41: exact validation passed
+budget5_seed19: exact validation passed
+budget5_seed23: exact validation passed
+budget5_seed41: exact validation passed
+budget7_seed19: exact validation passed
+budget7_seed23: exact validation passed
+budget7_seed41: exact validation passed
+budget8_seed19: exact validation passed
+budget8_seed23: exact validation passed
+budget8_seed41: exact validation passed
+packages80_repeat1: exact validation passed
+packages80_repeat5: exact validation passed
+/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+{"case": "layer00", "median_cuda_ms": {"base/select": 0.13549920320510866, "base/gather_select": 0.1512383997440338, "combined/select": 0.07510719895362854, "combined/gather_select": 0.09055199921131134, "fused/select": 0.06120480000972748, "fused/gather_select": 0.07683199942111969, "fused_warp/select": 0.060196799039840695, "fused_warp/gather_select": 0.0745952010154724}}
+{"case": "layer01", "median_cuda_ms": {"base/select": 0.12863839864730836, "base/gather_select": 0.14388800263404844, "combined/select": 0.07408319711685181, "combined/gather_select": 0.08920640051364899, "fused/select": 0.05661439895629883, "fused/gather_select": 0.07217119932174683, "fused_warp/select": 0.05661120116710663, "fused_warp/gather_select": 0.07219840288162231}}
+{"case": "layer02", "median_cuda_ms": {"base/select": 0.13003680109977722, "base/gather_select": 0.14631199836730957, "combined/select": 0.07339039742946624, "combined/gather_select": 0.08854079842567444, "fused/select": 0.061368000507354734, "fused/gather_select": 0.07723360061645508, "fused_warp/select": 0.06047520041465759, "fused_warp/gather_select": 0.07559039890766144}}
+{"case": "layer03", "median_cuda_ms": {"base/select": 0.1287184000015259, "base/gather_select": 0.14353600144386292, "combined/select": 0.07767360210418701, "combined/gather_select": 0.09316960275173186, "fused/select": 0.06149120032787323, "fused/gather_select": 0.07727520167827606, "fused_warp/select": 0.060452798008918764, "fused_warp/gather_select": 0.07559359967708587}}
+{"case": "layer04", "median_cuda_ms": {"base/select": 0.12489280104637146, "base/gather_select": 0.14045119881629944, "combined/select": 0.07543520033359527, "combined/gather_select": 0.09086720049381256, "fused/select": 0.06185120046138763, "fused/gather_select": 0.07672960162162781, "fused_warp/select": 0.059966400265693665, "fused_warp/gather_select": 0.07489440143108367}}
+{"case": "layer05", "median_cuda_ms": {"base/select": 0.12378560304641723, "base/gather_select": 0.13914399743080139, "combined/select": 0.07431039810180665, "combined/gather_select": 0.08974720239639282, "fused/select": 0.061366400122642516, "fused/gather_select": 0.07670240104198456, "fused_warp/select": 0.06014240086078644, "fused_warp/gather_select": 0.07525919973850251}}
+{"case": "layer06", "median_cuda_ms": {"base/select": 0.11928479671478272, "base/gather_select": 0.13563680052757265, "combined/select": 0.07211360037326812, "combined/gather_select": 0.08775199949741364, "fused/select": 0.05704320073127747, "fused/gather_select": 0.07220479846000671, "fused_warp/select": 0.05687519907951355, "fused_warp/gather_select": 0.07193119823932648}}
+{"case": "layer07", "median_cuda_ms": {"base/select": 0.12198400497436523, "base/gather_select": 0.13705120086669922, "combined/select": 0.07335200011730195, "combined/gather_select": 0.08869920074939727, "fused/select": 0.061075201630592345, "fused/gather_select": 0.0762336015701294, "fused_warp/select": 0.060283198952674866, "fused_warp/gather_select": 0.07576640248298645}}

@@ -1,0 +1,76 @@
+fatal: not a git repository (or any parent up to mount point /inspire/hdd/project/qianghuaxuexi)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+Build summary:
+ > Sources: ['csrc/deep_ep.cpp', 'csrc/kernels/runtime.cu', 'csrc/kernels/layout.cu', 'csrc/kernels/intranode.cu', 'csrc/kernels/internode.cu', 'csrc/kernels/internode_ll.cu']
+ > Includes: ['csrc/', '/root/anaconda3/envs/sglang/lib/python3.12/site-packages/nvidia/nvshmem/include']
+ > Libraries: ['/root/anaconda3/envs/sglang/lib/python3.12/site-packages/nvidia/nvshmem/lib']
+ > Compilation flags: {'cxx': ['-O3', '-Wno-deprecated-declarations', '-Wno-unused-variable', '-Wno-sign-compare', '-Wno-reorder', '-Wno-attributes', '-DDISABLE_AGGRESSIVE_PTX_INSTRS'], 'nvcc': ['-O3', '-Xcompiler', '-O3', '-rdc=true', '--ptxas-options=--register-usage-level=10', '-DDISABLE_AGGRESSIVE_PTX_INSTRS'], 'nvcc_dlink': ['-dlink', '-L/root/anaconda3/envs/sglang/lib/python3.12/site-packages/nvidia/nvshmem/lib', '-lnvshmem_device']}
+ > Link flags: ['-l:libnvshmem_host.so.3', '-l:libnvshmem_device.a', '-Wl,-rpath,/root/anaconda3/envs/sglang/lib/python3.12/site-packages/nvidia/nvshmem/lib']
+ > Arch list: 9.0
+ > NVSHMEM path: /root/anaconda3/envs/sglang/lib/python3.12/site-packages/nvidia/nvshmem
+
+running build_ext
+building 'deep_ep_cpp' extension
+creating /inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/build/temp.linux-x86_64-cpython-312/csrc
+creating /inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/build/temp.linux-x86_64-cpython-312/csrc/kernels
+[1/7] c++ -MMD -MF /inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/build/temp.linux-x86_64-cpython-312/csrc/deep_ep.o.d -pthread -B /root/anaconda3/envs/sglang/compiler_compat -fno-strict-overflow -Wsign-compare -DNDEBUG -O2 -Wall -fPIC -O2 -isystem /root/anaconda3/envs/sglang/include -fPIC -O2 -isystem /root/anaconda3/envs/sglang/include -fPIC -Icsrc/ -I/root/anaconda3/envs/sglang/lib/python3.12/site-packages/nvidia/nvshmem/include -I/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/include -I/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -I/usr/local/cuda/include -I/root/anaconda3/envs/sglang/include/python3.12 -c -c /inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/csrc/deep_ep.cpp -o /inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/build/temp.linux-x86_64-cpython-312/csrc/deep_ep.o -O3 -Wno-deprecated-declarations -Wno-unused-variable -Wno-sign-compare -Wno-reorder -Wno-attributes -DDISABLE_AGGRESSIVE_PTX_INSTRS -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=deep_ep_cpp -std=c++17
+FAILED: [code=1] /inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/build/temp.linux-x86_64-cpython-312/csrc/deep_ep.o 
+c++ -MMD -MF /inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/build/temp.linux-x86_64-cpython-312/csrc/deep_ep.o.d -pthread -B /root/anaconda3/envs/sglang/compiler_compat -fno-strict-overflow -Wsign-compare -DNDEBUG -O2 -Wall -fPIC -O2 -isystem /root/anaconda3/envs/sglang/include -fPIC -O2 -isystem /root/anaconda3/envs/sglang/include -fPIC -Icsrc/ -I/root/anaconda3/envs/sglang/lib/python3.12/site-packages/nvidia/nvshmem/include -I/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/include -I/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -I/usr/local/cuda/include -I/root/anaconda3/envs/sglang/include/python3.12 -c -c /inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/csrc/deep_ep.cpp -o /inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/build/temp.linux-x86_64-cpython-312/csrc/deep_ep.o -O3 -Wno-deprecated-declarations -Wno-unused-variable -Wno-sign-compare -Wno-reorder -Wno-attributes -DDISABLE_AGGRESSIVE_PTX_INSTRS -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=deep_ep_cpp -std=c++17
+In file included from /root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/include/ATen/cuda/CUDAContext.h:4,
+                 from /inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/csrc/deep_ep.cpp:1:
+/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/include/ATen/cuda/CUDAContextLight.h:10:10: fatal error: cusparse.h: No such file or directory
+   10 | #include <cusparse.h>
+      |          ^~~~~~~~~~~~
+compilation terminated.
+[2/7] /usr/local/cuda/bin/nvcc -MD -MF /inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/build/temp.linux-x86_64-cpython-312/csrc/kernels/intranode.o.d -Icsrc/ -I/root/anaconda3/envs/sglang/lib/python3.12/site-packages/nvidia/nvshmem/include -I/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/include -I/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -I/usr/local/cuda/include -I/root/anaconda3/envs/sglang/include/python3.12 -c -c /inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/csrc/kernels/intranode.cu -o /inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/build/temp.linux-x86_64-cpython-312/csrc/kernels/intranode.o -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options ''"'"'-fPIC'"'"'' -O3 -Xcompiler -O3 -rdc=true --ptxas-options=--register-usage-level=10 -DDISABLE_AGGRESSIVE_PTX_INSTRS -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=deep_ep_cpp -gencode=arch=compute_90,code=sm_90 -std=c++17
+[3/7] /usr/local/cuda/bin/nvcc -MD -MF /inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/build/temp.linux-x86_64-cpython-312/csrc/kernels/internode_ll.o.d -Icsrc/ -I/root/anaconda3/envs/sglang/lib/python3.12/site-packages/nvidia/nvshmem/include -I/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/include -I/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -I/usr/local/cuda/include -I/root/anaconda3/envs/sglang/include/python3.12 -c -c /inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/csrc/kernels/internode_ll.cu -o /inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/build/temp.linux-x86_64-cpython-312/csrc/kernels/internode_ll.o -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options ''"'"'-fPIC'"'"'' -O3 -Xcompiler -O3 -rdc=true --ptxas-options=--register-usage-level=10 -DDISABLE_AGGRESSIVE_PTX_INSTRS -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=deep_ep_cpp -gencode=arch=compute_90,code=sm_90 -std=c++17
+[4/7] /usr/local/cuda/bin/nvcc -MD -MF /inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/build/temp.linux-x86_64-cpython-312/csrc/kernels/internode.o.d -Icsrc/ -I/root/anaconda3/envs/sglang/lib/python3.12/site-packages/nvidia/nvshmem/include -I/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/include -I/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -I/usr/local/cuda/include -I/root/anaconda3/envs/sglang/include/python3.12 -c -c /inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/csrc/kernels/internode.cu -o /inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/build/temp.linux-x86_64-cpython-312/csrc/kernels/internode.o -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options ''"'"'-fPIC'"'"'' -O3 -Xcompiler -O3 -rdc=true --ptxas-options=--register-usage-level=10 -DDISABLE_AGGRESSIVE_PTX_INSTRS -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=deep_ep_cpp -gencode=arch=compute_90,code=sm_90 -std=c++17
+ninja: build stopped: subcommand failed.
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/utils/cpp_extension.py", line 2774, in _run_ninja_build
+    subprocess.run(
+  File "/root/anaconda3/envs/sglang/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['ninja', '-v', '-j', '4']' returned non-zero exit status 1.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/inspire/hdd/project/qianghuaxuexi/liangzuning-253108090053/epmoe_two_gpu_20261105/experiments/two_gpu_overlap/vendor/DeepEP_v1/setup.py", line 109, in <module>
+    setuptools.setup(
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/setuptools/__init__.py", line 117, in setup
+    return distutils.core.setup(**attrs)  # type: ignore[return-value]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/setuptools/_distutils/core.py", line 186, in setup
+    return run_commands(dist)
+           ^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/setuptools/_distutils/core.py", line 202, in run_commands
+    dist.run_commands()
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/setuptools/_distutils/dist.py", line 1000, in run_commands
+    self.run_command(cmd)
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/setuptools/dist.py", line 1107, in run_command
+    super().run_command(command)
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/setuptools/_distutils/dist.py", line 1019, in run_command
+    cmd_obj.run()
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/setuptools/command/build_ext.py", line 97, in run
+    _build_ext.run(self)
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/setuptools/_distutils/command/build_ext.py", line 367, in run
+    self.build_extensions()
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/utils/cpp_extension.py", line 1184, in build_extensions
+    build_ext.build_extensions(self)
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/setuptools/_distutils/command/build_ext.py", line 483, in build_extensions
+    self._build_extensions_serial()
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/setuptools/_distutils/command/build_ext.py", line 509, in _build_extensions_serial
+    self.build_extension(ext)
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/setuptools/command/build_ext.py", line 262, in build_extension
+    _build_ext.build_extension(self, ext)
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/setuptools/_distutils/command/build_ext.py", line 564, in build_extension
+    objects = self.compiler.compile(
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/utils/cpp_extension.py", line 924, in unix_wrap_ninja_compile
+    _write_ninja_file_and_compile_objects(
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/utils/cpp_extension.py", line 2361, in _write_ninja_file_and_compile_objects
+    _run_ninja_build(
+  File "/root/anaconda3/envs/sglang/lib/python3.12/site-packages/torch/utils/cpp_extension.py", line 2791, in _run_ninja_build
+    raise RuntimeError(message) from e
+RuntimeError: Error compiling objects for extension
