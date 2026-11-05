@@ -462,6 +462,8 @@ class Buffer:
         explicitly_destroy: bool = False,
         planning_backend: str = "moon",
         planning_sweeps: int = 2,
+        planning_rounds: int = 4,
+        planning_sample_seed: int = 20261026,
     ):
         """Allocate and hold all communication buffers.
 
@@ -485,13 +487,20 @@ class Buffer:
                 False falls back to plain same-stream serial launches.
             explicitly_destroy: if True, warn (instead of auto-destroying)
                 when the Buffer is garbage-collected without ``destroy()``.
-            planning_backend: "moon" (default) or "affinity_gpu". The latter
+            planning_backend: "moon" (default), "affinity_gpu", or "sampled_group".
+                sampled_group uses 256 live samples and source-local balanced
+                bundle exchange; requires R=8, E=352, K=8, 1<=B<=44.
+                See docs/sampled_group.md. affinity_gpu
                 refines the original planner with GPU expert residency and
                 equal-count swaps. All EP ranks must use the same setting.
                 Requires a CUDA toolkit and ninja for one-time JIT compilation.
             planning_sweeps: non-negative number of rank-pair exchange sweeps
                 for affinity_gpu (default 2). Initialize and warm up the Buffer
                 before CUDA Graph capture. See docs/affinity_gpu.md.
+            planning_rounds: positive number of sampled_group exchange rounds
+                (default 4), with one live count all-gather per round.
+            planning_sample_seed: integer controlling the fixed global sample
+                indices; sampled route and execution data are refreshed each call.
         """
         assert isinstance(comm_stream_priority, int), (
             f"comm_stream_priority must be an int, got "
@@ -500,7 +509,7 @@ class Buffer:
         assert isinstance(enable_pdl, bool), (
             f"enable_pdl must be a bool, got {type(enable_pdl).__name__}"
         )
-        if planning_backend not in ("moon", "affinity_gpu"):
+        if planning_backend not in ("moon", "affinity_gpu", "sampled_group"):
             raise ValueError(f"unknown planning_backend: {planning_backend}")
         if not isinstance(planning_sweeps, int) or planning_sweeps < 0:
             raise ValueError("planning_sweeps must be a non-negative integer")
@@ -513,6 +522,14 @@ class Buffer:
                     1 <= K <= min(32, E) and 0 < slots <= E - E // num_ep_ranks):
                 raise ValueError("affinity_gpu requires 2<=R<=16, K<=32, E<=1024, "
                                  "E%R=0, 0<B<=E-E/R")
+        if planning_backend == "sampled_group":
+            slots = E // num_ep_ranks if B is None else B
+            if (num_ep_ranks, E, K) != (8, 352, 8) or S < 32 or not 1 <= slots <= 44:
+                raise ValueError("sampled_group requires R=8, E=352, K=8, S>=32, 1<=B<=44")
+            if not isinstance(planning_rounds, int) or isinstance(planning_rounds, bool) or planning_rounds < 1:
+                raise ValueError("planning_rounds must be a positive integer")
+            if not isinstance(planning_sample_seed, int) or isinstance(planning_sample_seed, bool) or planning_sample_seed < 0:
+                raise ValueError("planning_sample_seed must be a non-negative integer")
         self.explicitly_destroy = explicitly_destroy
         self.comm_stream_priority = comm_stream_priority
         self.enable_pdl = enable_pdl
@@ -530,6 +547,11 @@ class Buffer:
             # Compile and allocate before graph capture; dispatch reuses buffers.
             self._ctx['affinity_gpu_planner'] = AffinityGpuPlanner(
                 self._ctx, sweeps=planning_sweeps,
+            )
+        if planning_backend == "sampled_group":
+            from .sampled_group import SampledGroupPlanner
+            self._ctx['sampled_group_planner'] = SampledGroupPlanner(
+                self._ctx, rounds=planning_rounds, sample_seed=planning_sample_seed,
             )
         self._comm_stream = torch.cuda.Stream(
             device=int(self._ctx['device']),

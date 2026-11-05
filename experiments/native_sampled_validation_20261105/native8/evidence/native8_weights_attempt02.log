@@ -1,0 +1,2010 @@
+........................................FFFFFFFF
+=================================== FAILURES ===================================
+__________ test_sampled_plan_weight_and_parameter_gradient_lifecycle ___________
+
+dist_env = (5, 8)
+
+    def test_sampled_plan_weight_and_parameter_gradient_lifecycle(dist_env):
+        rank, world = dist_env
+        if world != R:
+            pytest.skip("requires eight actual GPUs on one NVLink host")
+        assert int(os.environ.get("LOCAL_WORLD_SIZE", 0)) == R
+        assert torch.cuda.device_count() >= R
+        identities = [None]*R
+        dist.all_gather_object(identities, (socket.gethostname(), torch.cuda.current_device()))
+        assert len(set(identities)) == R, "ranks must not share a physical GPU"
+    
+        from moonep._C import get_vmm_granularity
+        granularity = get_vmm_granularity()
+        granularities = [None]*R
+        dist.all_gather_object(granularities, granularity)
+        assert len(set(granularities)) == 1, "this test requires homogeneous VMM alignment"
+        intermediate = 128
+        while B*H*intermediate*2 % granularity:
+            intermediate *= 2
+        shapes = ((intermediate, H), (intermediate, H), (H, intermediate))
+        buffer = Buffer(S, H, K, E, R, B=B, token_padding=128, num_sms=32,
+                        planning_backend="sampled_group", planning_rounds=4,
+                        planning_sample_seed=20261026, enable_pdl=False, explicitly_destroy=True)
+        weights, gradients = [], []
+        try:
+>           _compile_all(buffer, intermediate)
+
+tests/test_sampled_weights.py:235: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_sampled_weights.py:69: in _compile_all
+    grad_reduce._get_compiled(E, h, hp, R, B, stride, sms, device)
+moonep/grad_reduce.py:424: in _get_compiled
+    return cute.compile(
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/compiler.py:1250: in __call__
+    return self._compile(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/compiler.py:1396: in _compile
+    return func._dsl_object._func(func, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py:2782: in _func
+    return self._func_impl(funcBody, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py:2795: in _func_impl
+    result = self.generate_mlir(
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py:2318: in generate_mlir
+    module, module_hash, result = self.generate_original_ir(
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py:1987: in generate_original_ir
+    module, result = build_ir_module()
+                     ^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py:1948: in build_ir_module
+    result = funcBody(*ir_args, **ir_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+moonep/grad_reduce.py:142: in __call__
+    rank, barrier_off).launch(
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/cutlass_dsl/cutlass.py:2118: in launch
+    ret, name = kernel_generator(*self.func_args, **self.func_kwargs, config=config)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py:3135: in kernel_wrapper
+    kernel_ret = funcBody(*ir_args, **ir_kwargs)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <moonep.grad_reduce.GradReduceKernel object at 0x7fb8f84f8290>
+
+expert_grad = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7fb884ee1e50>
+
+
+reduce_buf = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7fb8f854f4d0>
+
+tma_g2s_red = <cutlass.cute.atom.CopyAtom object at 0x7fb884d5bfe0>
+tma_red = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7fb884d5b470>=================================== FAILURES ===================================
+
+experts = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7fb8f83ef260>
+meta = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7fb8f8498dd0>=================================== FAILURES ===================================
+__________ test_sampled_plan_weight_and_parameter_gradient_lifecycle ___________
+=================================== FAILURES ====================================================================== FAILURES ===================================bar = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7fb8f854dbe0>
+
+
+
+__________ test_sampled_plan_weight_and_parameter_gradient_lifecycle ___________
+rank = Int32(?), barrier_off = Int32(?)
+__________ test_sampled_plan_weight_and_parameter_gradient_lifecycle ___________
+__________ test_sampled_plan_weight_and_parameter_gradient_lifecycle ___________dist_env = (6, 8)
+
+
+
+
+
+
+dist_env = (7, 8)dist_env = (0, 8)
+
+
+
+
+    def test_sampled_plan_weight_and_parameter_gradient_lifecycle(dist_env):dist_env = (3, 8)
+
+        rank, world = dist_env    def kernel(
+
+    def test_sampled_plan_weight_and_parameter_gradient_lifecycle(dist_env):
+    def test_sampled_plan_weight_and_parameter_gradient_lifecycle(dist_env):        if world != R:
+        self,
+
+        rank, world = dist_env
+        rank, world = dist_env            pytest.skip("requires eight actual GPUs on one NVLink host")    def test_sampled_plan_weight_and_parameter_gradient_lifecycle(dist_env):
+        expert_grad: cute.Tensor,
+
+
+        if world != R:
+        if world != R:        assert int(os.environ.get("LOCAL_WORLD_SIZE", 0)) == R        rank, world = dist_env
+        reduce_buf: cute.Tensor,
+
+
+            pytest.skip("requires eight actual GPUs on one NVLink host")
+            pytest.skip("requires eight actual GPUs on one NVLink host")        assert torch.cuda.device_count() >= R        if world != R:
+        tma_g2s_red: cute.CopyAtom,
+
+
+        assert int(os.environ.get("LOCAL_WORLD_SIZE", 0)) == R
+        assert int(os.environ.get("LOCAL_WORLD_SIZE", 0)) == R        identities = [None]*R            pytest.skip("requires eight actual GPUs on one NVLink host")
+        tma_red: cute.Tensor,
+
+
+        assert torch.cuda.device_count() >= R
+        assert torch.cuda.device_count() >= R        dist.all_gather_object(identities, (socket.gethostname(), torch.cuda.current_device()))        assert int(os.environ.get("LOCAL_WORLD_SIZE", 0)) == R
+        experts: cute.Tensor,
+
+
+        identities = [None]*R
+        identities = [None]*R        assert len(set(identities)) == R, "ranks must not share a physical GPU"        assert torch.cuda.device_count() >= R
+        meta: cute.Tensor,
+
+
+        dist.all_gather_object(identities, (socket.gethostname(), torch.cuda.current_device()))
+        dist.all_gather_object(identities, (socket.gethostname(), torch.cuda.current_device()))            identities = [None]*R
+        bar: cute.Tensor,
+
+
+        assert len(set(identities)) == R, "ranks must not share a physical GPU"
+        assert len(set(identities)) == R, "ranks must not share a physical GPU"        from moonep._C import get_vmm_granularity        dist.all_gather_object(identities, (socket.gethostname(), torch.cuda.current_device()))
+        rank: Int32,
+
+
+    
+
+            granularity = get_vmm_granularity()        assert len(set(identities)) == R, "ranks must not share a physical GPU"
+        barrier_off: Int32,
+
+
+        from moonep._C import get_vmm_granularity
+        from moonep._C import get_vmm_granularity        granularities = [None]*R    
+    ):
+
+=================================== FAILURES ===================================
+        granularity = get_vmm_granularity()
+        granularity = get_vmm_granularity()        dist.all_gather_object(granularities, granularity)
+        from moonep._C import get_vmm_granularity
+        E = cutlass.const_expr(self.E)
+
+
+        granularities = [None]*R
+__________ test_sampled_plan_weight_and_parameter_gradient_lifecycle ___________        granularities = [None]*R        assert len(set(granularities)) == 1, "this test requires homogeneous VMM alignment"        granularity = get_vmm_granularity()
+        H = cutlass.const_expr(self.H)
+
+
+
+        dist.all_gather_object(granularities, granularity)
+        dist.all_gather_object(granularities, granularity)        intermediate = 128
+        granularities = [None]*R
+        Hp = cutlass.const_expr(self.Hp)
+
+
+        assert len(set(granularities)) == 1, "this test requires homogeneous VMM alignment"dist_env = (1, 8)
+        assert len(set(granularities)) == 1, "this test requires homogeneous VMM alignment"        while B*H*intermediate*2 % granularity:        dist.all_gather_object(granularities, granularity)
+
+        R = cutlass.const_expr(self.R)
+
+
+        intermediate = 128
+
+        intermediate = 128            intermediate *= 2        assert len(set(granularities)) == 1, "this test requires homogeneous VMM alignment"
+        B = cutlass.const_expr(self.B)
+
+
+        while B*H*intermediate*2 % granularity:
+    def test_sampled_plan_weight_and_parameter_gradient_lifecycle(dist_env):        while B*H*intermediate*2 % granularity:        shapes = ((intermediate, H), (intermediate, H), (H, intermediate))        intermediate = 128
+        M_BLOCK = cutlass.const_expr(self.M_BLOCK)
+
+
+
+            intermediate *= 2
+        rank, world = dist_env            intermediate *= 2        buffer = Buffer(S, H, K, E, R, B=B, token_padding=128, num_sms=32,        while B*H*intermediate*2 % granularity:
+        N_BLOCK = cutlass.const_expr(self.N_BLOCK)
+
+
+
+        shapes = ((intermediate, H), (intermediate, H), (H, intermediate))
+        if world != R:        shapes = ((intermediate, H), (intermediate, H), (H, intermediate))                        planning_backend="sampled_group", planning_rounds=4,            intermediate *= 2
+        meta_stride = cutlass.const_expr(self.meta_stride)
+
+
+
+        buffer = Buffer(S, H, K, E, R, B=B, token_padding=128, num_sms=32,
+            pytest.skip("requires eight actual GPUs on one NVLink host")        buffer = Buffer(S, H, K, E, R, B=B, token_padding=128, num_sms=32,                        planning_sample_seed=20261026, enable_pdl=False, explicitly_destroy=True)        shapes = ((intermediate, H), (intermediate, H), (H, intermediate))
+        num_ranks = cutlass.const_expr(self.R)
+
+
+
+                        planning_backend="sampled_group", planning_rounds=4,
+        assert int(os.environ.get("LOCAL_WORLD_SIZE", 0)) == R                        planning_backend="sampled_group", planning_rounds=4,        weights, gradients = [], []        buffer = Buffer(S, H, K, E, R, B=B, token_padding=128, num_sms=32,
+        TILE_ELEMS = cutlass.const_expr(M_BLOCK * N_BLOCK)
+
+
+
+                        planning_sample_seed=20261026, enable_pdl=False, explicitly_destroy=True)
+        assert torch.cuda.device_count() >= R                        planning_sample_seed=20261026, enable_pdl=False, explicitly_destroy=True)        try:                        planning_backend="sampled_group", planning_rounds=4,
+        MTILES = cutlass.const_expr(H // M_BLOCK)
+
+
+
+        weights, gradients = [], []
+        identities = [None]*R        weights, gradients = [], []>           _compile_all(buffer, intermediate)                        planning_sample_seed=20261026, enable_pdl=False, explicitly_destroy=True)
+        NTILES = cutlass.const_expr(Hp // N_BLOCK)
+
+
+
+        try:
+        dist.all_gather_object(identities, (socket.gethostname(), torch.cuda.current_device()))        try:        weights, gradients = [], []
+
+        TILES_PER_EXPERT = cutlass.const_expr(MTILES * NTILES)
+
+
+tests/test_sampled_weights.py>           _compile_all(buffer, intermediate)
+        assert len(set(identities)) == R, "ranks must not share a physical GPU">           _compile_all(buffer, intermediate)        try::235: 
+        EPN = cutlass.const_expr(E // R)
+
+
+
+
+
+    
+>           _compile_all(buffer, intermediate)_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ tests/test_sampled_weights.py    
+tests/test_sampled_weights.py
+
+:235: 
+        from moonep._C import get_vmm_granularity:235: 
+tests/test_sampled_weights.py
+        STAGES = cutlass.const_expr(self.STAGES)
+
+tests/test_sampled_weights.py:69: in _compile_all
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _         granularity = get_vmm_granularity()_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ :235: 
+        ACC_THREADS = cutlass.const_expr(self.ACC_THREADS)
+
+
+
+
+    grad_reduce._get_compiled(E, h, hp, R, B, stride, sms, device)tests/test_sampled_weights.py        granularities = [None]*Rtests/test_sampled_weights.py        num_threads = cutlass.const_expr(self.NUM_THREADS)_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+:69: in _compile_all
+:69: in _compile_all
+
+moonep/grad_reduce.py
+        dist.all_gather_object(granularities, granularity)
+        TILE_BYTES = cutlass.const_expr(TILE_ELEMS * 4)tests/test_sampled_weights.py:424: in _get_compiled    grad_reduce._get_compiled(E, h, hp, R, B, stride, sms, device)
+
+    grad_reduce._get_compiled(E, h, hp, R, B, stride, sms, device):69: in _compile_all
+
+        assert len(set(granularities)) == 1, "this test requires homogeneous VMM alignment"    
+
+    return cute.compile(moonep/grad_reduce.py
+
+moonep/grad_reduce.py
+    grad_reduce._get_compiled(E, h, hp, R, B, stride, sms, device):424: in _get_compiled        intermediate = 128        tidx, _, _ = cute.arch.thread_idx():424: in _get_compiled/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/compiler.py
+
+
+
+
+:1250: in __call__moonep/grad_reduce.py    return cute.compile(        while B*H*intermediate*2 % granularity:        bidx, _, _ = cute.arch.block_idx()    return cute.compile(
+:424: in _get_compiled
+
+
+
+    return self._compile(*args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/compiler.py            intermediate *= 2        warp_idx = cute.arch.make_warp_uniform(cute.arch.warp_idx())/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/compiler.py
+    return cute.compile(:1250: in __call__
+
+:1250: in __call__           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+        shapes = ((intermediate, H), (intermediate, H), (H, intermediate))    
+
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/compiler.py    return self._compile(*args, **kwargs)
+
+    return self._compile(*args, **kwargs)/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/compiler.py:1250: in __call__
+        buffer = Buffer(S, H, K, E, R, B=B, token_padding=128, num_sms=32,        smem = utils.SmemAllocator()
+:1396: in _compile
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    return self._compile(*args, **kwargs)
+                        planning_backend="sampled_group", planning_rounds=4,        load_mbar = smem.allocate_array(Int64, num_elems=2 * STAGES)
+    return func._dsl_object._func(func, *args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/compiler.py
+
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/compiler.py
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^:1396: in _compile                        planning_sample_seed=20261026, enable_pdl=False, explicitly_destroy=True)        stage_smem = smem.allocate_tensor(:1396: in _compile           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+
+
+    return func._dsl_object._func(func, *args, **kwargs)/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/compiler.py    return func._dsl_object._func(func, *args, **kwargs)        weights, gradients = [], []            Float32,/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py
+:1396: in _compile
+
+
+:2782: in _func           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        try:            cute.make_ordered_layout((M_BLOCK, N_BLOCK, STAGES), order=(1, 0, 2)),
+
+    return func._dsl_object._func(func, *args, **kwargs)
+
+
+    return self._func_impl(funcBody, *args, **kwargs)/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py>           _compile_all(buffer, intermediate)            byte_alignment=128,
+:2782: in _func           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^:2782: in _func
+
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+        )
+    return self._func_impl(funcBody, *args, **kwargs)/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py    return self._func_impl(funcBody, *args, **kwargs)tests/test_sampled_weights.py
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py
+:2782: in _func
+:235:         # flat per-stage view of the same smem for the acc warps.:2795: in _func_impl           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+    return self._func_impl(funcBody, *args, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _         stage_flat = cute.make_tensor(    result = self.generate_mlir(/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py
+
+
+:2795: in _func_impl           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^:2795: in _func_impltests/test_sampled_weights.py            stage_smem.iterator,/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py
+
+
+:69: in _compile_all
+:2318: in generate_mlir    result = self.generate_mlir(/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py    result = self.generate_mlir(
+            cute.make_ordered_layout((TILE_ELEMS, STAGES), order=(0, 1)),
+
+:2795: in _func_impl
+
+    grad_reduce._get_compiled(E, h, hp, R, B, stride, sms, device)    module, module_hash, result = self.generate_original_ir(/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py        )
+
+:2318: in generate_mlir    result = self.generate_mlir(:2318: in generate_mlir
+moonep/grad_reduce.py/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py
+
+
+        # prescan: cnt[le] and a per-expert-grouped slot list. cnt[EPN] holds:424: in _get_compiled:1987: in generate_original_ir    module, module_hash, result = self.generate_original_ir(/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py    module, module_hash, result = self.generate_original_ir(
+
+
+
+:2318: in generate_mlir
+        # running prefix; slist[off[le] .. off[le]+cnt[le]) are the matching rb.    return cute.compile(    module, result = build_ir_module()/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py
+
+
+:1987: in generate_original_ir    module, module_hash, result = self.generate_original_ir(:1987: in generate_original_ir        off = smem.allocate_tensor(Int32, cute.make_layout((EPN + 1,)), byte_alignment=16)/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/compiler.py                     ^^^^^^^^^^^^^^^^^
+
+
+
+:1250: in __call__
+    module, result = build_ir_module()/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py    module, result = build_ir_module()        # compacted list of active local experts (off[le+1] > off[le]).
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py
+:1987: in generate_original_ir
+
+    return self._compile(*args, **kwargs):1948: in build_ir_module                     ^^^^^^^^^^^^^^^^^
+                     ^^^^^^^^^^^^^^^^^        alist = smem.allocate_tensor(Int32, cute.make_layout((EPN,)), byte_alignment=16)
+
+
+    module, result = build_ir_module()
+
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^    result = funcBody(*ir_args, **ir_kwargs)/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py        acnt = smem.allocate_tensor(Int32, cute.make_layout((1,)), byte_alignment=16)
+
+:1948: in build_ir_module                     ^^^^^^^^^^^^^^^^^:1948: in build_ir_module
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/compiler.py             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+        slist = smem.allocate_tensor(Int32, cute.make_layout((R * B,)), byte_alignment=16):1396: in _compile
+    result = funcBody(*ir_args, **ir_kwargs)/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py    result = funcBody(*ir_args, **ir_kwargs)
+
+moonep/grad_reduce.py
+:1948: in build_ir_module
+        # smem stage of experts[] (pre-biased to local ids) for the prescan.    return func._dsl_object._func(func, *args, **kwargs):142: in __call__             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+    result = funcBody(*ir_args, **ir_kwargs)
+        sexp = smem.allocate_tensor(Int32, cute.make_layout((R * B,)), byte_alignment=16)           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^    rank, barrier_off).launch(moonep/grad_reduce.py
+moonep/grad_reduce.py
+
+
+:142: in __call__             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^:142: in __call__        # slist fill cursors; cur[EPN] is a dummy bucket for invalid lanes./usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/cutlass_dsl/cutlass.py
+
+
+
+:2782: in _func:2118: in launch    rank, barrier_off).launch(moonep/grad_reduce.py    rank, barrier_off).launch(        cur = smem.allocate_tensor(Int32, cute.make_layout((EPN + 1,)), byte_alignment=16)
+
+
+:142: in __call__
+
+    return self._func_impl(funcBody, *args, **kwargs)    ret, name = kernel_generator(*self.func_args, **self.func_kwargs, config=config)/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/cutlass_dsl/cutlass.py
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/cutlass_dsl/cutlass.py        # this rank's own consumed slots (experts[rank,b] >= 0) for clearing.
+
+:2118: in launch    rank, barrier_off).launch(:2118: in launch
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+        clist = smem.allocate_tensor(Int32, cute.make_layout((B,)), byte_alignment=16)
+
+    ret, name = kernel_generator(*self.func_args, **self.func_kwargs, config=config)/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/cutlass_dsl/cutlass.py    ret, name = kernel_generator(*self.func_args, **self.func_kwargs, config=config)
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py
+:2118: in launch
+        ccnt = smem.allocate_tensor(Int32, cute.make_layout((1,)), byte_alignment=16):2795: in _func_impl:3135: in kernel_wrapper                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+    ret, name = kernel_generator(*self.func_args, **self.func_kwargs, config=config)
+        result = self.generate_mlir(    kernel_ret = funcBody(*ir_args, **ir_kwargs)/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py
+
+
+:3135: in kernel_wrapper                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^:3135: in kernel_wrapper        rank_epn = rank * EPN/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+:2318: in generate_mlir
+    kernel_ret = funcBody(*ir_args, **ir_kwargs)/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py    kernel_ret = funcBody(*ir_args, **ir_kwargs)    
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+:3135: in kernel_wrapper
+
+    module, module_hash, result = self.generate_original_ir(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        # ---- prescan experts once (parallel): bucket slots per local expert.
+
+
+    kernel_ret = funcBody(*ir_args, **ir_kwargs)
+
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.pyself = <moonep.grad_reduce.GradReduceKernel object at 0x7f8c20dd2f90>
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _         # A single-thread gmem scan of all R*B entries is bottlenecked by a:1987: in generate_original_ir
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+expert_grad = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7f8c20e11ac0>
+
+
+        # serial load latency chain, so it must be cooperative: stage the    module, result = build_ir_module()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ self = <moonep.grad_reduce.GradReduceKernel object at 0x7f3b982adb80>
+self = <moonep.grad_reduce.GradReduceKernel object at 0x7fd9303eec00>
+reduce_buf = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7f8c10f2a8a0>
+
+        # table to smem with all threads, count with cta atomics, then have
+                     ^^^^^^^^^^^^^^^^^
+
+expert_grad = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7f3b9843a810>
+expert_grad = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7fd9300ea510>
+tma_g2s_red = <cutlass.cute.atom.CopyAtom object at 0x7f8c1837ac90>
+self = <moonep.grad_reduce.GradReduceKernel object at 0x7fb5001a1b50>        # warp 0 fill slist chunk-by-chunk with match_any so the final order
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py
+reduce_buf = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7f3b3c13e690>
+
+reduce_buf = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7fd9300ff1a0>:1948: in build_ir_moduletma_red = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7f8c20f7f650>
+expert_grad = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7fb27c4f2e70>        # stays rb-ascending (bitwise-identical to the serial scan).
+
+
+tma_g2s_red = <cutlass.cute.atom.CopyAtom object at 0x7f3b3c13ea50>
+
+tma_g2s_red = <cutlass.cute.atom.CopyAtom object at 0x7fd8bcce0dd0>    result = funcBody(*ir_args, **ir_kwargs)experts = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7f8c20ee9400>
+reduce_buf = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7fb27c0629c0>        for i in cutlass.range(tidx, R * B, self.NUM_THREADS, unroll=1):
+
+
+tma_red = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7f3b983edf10>
+
+tma_g2s_red = <cutlass.cute.atom.CopyAtom object at 0x7fb2ec100ec0>tma_red = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7fd8bcce3ef0>             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^meta = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7f8c20f7d6a0>
+            sexp[i] = experts[i] - rank_epn
+
+
+
+experts = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7f3b3c0bd790>
+tma_red = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7fb2ec1037d0>experts = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7fd8bccbc980>moonep/grad_reduce.pybar = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7f8c10f29e20>
+        for i in cutlass.range(tidx, EPN + 1, self.NUM_THREADS, unroll=1):
+
+:142: in __call__
+meta = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7f3b984001a0>
+experts = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7fb27c0a53a0>meta = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7fd8bccde660>
+rank = Int32(?), barrier_off = Int32(?)
+            off[i] = Int32(0)
+
+    rank, barrier_off).launch(
+bar = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7f3b3c11fe90>
+meta = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7fb27c04b230>bar = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7fd8bd24c8c0>
+
+
+        if tidx == 0:
+
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/cutlass_dsl/cutlass.pyrank = Int32(?), barrier_off = Int32(?)
+bar = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7fb27c0c7d10>rank = Int32(?), barrier_off = Int32(?):2118: in launch
+            ccnt[0] = Int32(0)
+
+
+
+    def kernel(
+rank = Int32(?), barrier_off = Int32(?)
+    ret, name = kernel_generator(*self.func_args, **self.func_kwargs, config=config)
+        cute.arch.sync_threads()
+
+        self,
+
+    def kernel(                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        for i in cutlass.range(tidx, R * B, self.NUM_THREADS, unroll=1):
+
+    def kernel(        expert_grad: cute.Tensor,
+        self,/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py
+
+            e = sexp[i]
+:3135: in kernel_wrapper        self,        reduce_buf: cute.Tensor,
+        expert_grad: cute.Tensor,    def kernel(
+
+
+            if e >= Int32(0) and e < Int32(EPN):
+
+    kernel_ret = funcBody(*ir_args, **ir_kwargs)        expert_grad: cute.Tensor,        tma_g2s_red: cute.CopyAtom,
+        reduce_buf: cute.Tensor,        self,
+
+
+                cute.arch.atomic_add(off.iterator + (e + Int32(1)), Int32(1),
+
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        reduce_buf: cute.Tensor,        tma_red: cute.Tensor,
+        tma_g2s_red: cute.CopyAtom,        expert_grad: cute.Tensor,
+
+
+                                     scope="cta")
+
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _         tma_g2s_red: cute.CopyAtom,        experts: cute.Tensor,
+        tma_red: cute.Tensor,        reduce_buf: cute.Tensor,
+
+
+        # this rank's own consumed slots (experts[rank,b] >= 0), unordered.
+
+
+        tma_red: cute.Tensor,        meta: cute.Tensor,
+        experts: cute.Tensor,        tma_g2s_red: cute.CopyAtom,
+self = <moonep.grad_reduce.GradReduceKernel object at 0x7f781071e840>
+        for b in cutlass.range(tidx, B, self.NUM_THREADS, unroll=1):
+
+        experts: cute.Tensor,
+        bar: cute.Tensor,
+        meta: cute.Tensor,        tma_red: cute.Tensor,
+expert_grad = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7f785462fb00>
+            if sexp[rank * B + b] >= Int32(0) - rank_epn:
+
+        meta: cute.Tensor,
+        rank: Int32,
+        bar: cute.Tensor,        experts: cute.Tensor,
+reduce_buf = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7f781070b680>
+                pos = cute.arch.atomic_add(ccnt.iterator, Int32(1), scope="cta")
+
+        bar: cute.Tensor,
+        barrier_off: Int32,
+        rank: Int32,        meta: cute.Tensor,
+tma_g2s_red = <cutlass.cute.atom.CopyAtom object at 0x7f7810728830>
+                clist[pos] = Int32(b)
+
+        rank: Int32,
+    ):
+        barrier_off: Int32,        bar: cute.Tensor,
+tma_red = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7f781072aff0>
+        cute.arch.sync_threads()
+
+        barrier_off: Int32,
+        E = cutlass.const_expr(self.E)
+    ):        rank: Int32,
+experts = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7f7810fe8620>
+        # serial prefix + active-expert compaction over EPN (smem-only).
+
+    ):
+        H = cutlass.const_expr(self.H)
+        E = cutlass.const_expr(self.E)        barrier_off: Int32,
+meta = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7f781074dc10>
+        if tidx == 0:
+
+        E = cutlass.const_expr(self.E)
+        Hp = cutlass.const_expr(self.Hp)
+        H = cutlass.const_expr(self.H)    ):
+bar = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7f781070aba0>
+            run = Int32(0)
+
+        H = cutlass.const_expr(self.H)
+        R = cutlass.const_expr(self.R)
+        Hp = cutlass.const_expr(self.Hp)        E = cutlass.const_expr(self.E)
+rank = Int32(?), barrier_off = Int32(?)
+            ac = Int32(0)
+
+        Hp = cutlass.const_expr(self.Hp)
+        B = cutlass.const_expr(self.B)
+        R = cutlass.const_expr(self.R)        H = cutlass.const_expr(self.H)
+
+
+            for le in cutlass.range(EPN, unroll=1):
+
+        R = cutlass.const_expr(self.R)        M_BLOCK = cutlass.const_expr(self.M_BLOCK)
+        B = cutlass.const_expr(self.B)        Hp = cutlass.const_expr(self.Hp)
+
+                c = off[le + 1]
+
+        B = cutlass.const_expr(self.B)        N_BLOCK = cutlass.const_expr(self.N_BLOCK)
+        M_BLOCK = cutlass.const_expr(self.M_BLOCK)        R = cutlass.const_expr(self.R)    def kernel(
+
+                if c > Int32(0):
+
+
+        M_BLOCK = cutlass.const_expr(self.M_BLOCK)        meta_stride = cutlass.const_expr(self.meta_stride)
+        N_BLOCK = cutlass.const_expr(self.N_BLOCK)        B = cutlass.const_expr(self.B)        self,
+
+                    alist[ac] = Int32(le)
+
+
+        N_BLOCK = cutlass.const_expr(self.N_BLOCK)        num_ranks = cutlass.const_expr(self.R)
+        meta_stride = cutlass.const_expr(self.meta_stride)        M_BLOCK = cutlass.const_expr(self.M_BLOCK)        expert_grad: cute.Tensor,
+
+                    ac = ac + Int32(1)
+
+
+        meta_stride = cutlass.const_expr(self.meta_stride)        TILE_ELEMS = cutlass.const_expr(M_BLOCK * N_BLOCK)
+        num_ranks = cutlass.const_expr(self.R)        N_BLOCK = cutlass.const_expr(self.N_BLOCK)        reduce_buf: cute.Tensor,
+
+                run = run + c
+
+
+        num_ranks = cutlass.const_expr(self.R)        MTILES = cutlass.const_expr(H // M_BLOCK)
+        TILE_ELEMS = cutlass.const_expr(M_BLOCK * N_BLOCK)        meta_stride = cutlass.const_expr(self.meta_stride)        tma_g2s_red: cute.CopyAtom,
+
+                off[le + 1] = run
+
+
+        TILE_ELEMS = cutlass.const_expr(M_BLOCK * N_BLOCK)        NTILES = cutlass.const_expr(Hp // N_BLOCK)
+        MTILES = cutlass.const_expr(H // M_BLOCK)        num_ranks = cutlass.const_expr(self.R)        tma_red: cute.Tensor,
+
+            acnt[0] = ac
+
+
+        MTILES = cutlass.const_expr(H // M_BLOCK)        TILES_PER_EXPERT = cutlass.const_expr(MTILES * NTILES)
+        NTILES = cutlass.const_expr(Hp // N_BLOCK)        TILE_ELEMS = cutlass.const_expr(M_BLOCK * N_BLOCK)        experts: cute.Tensor,
+
+        cute.arch.sync_threads()
+
+
+        NTILES = cutlass.const_expr(Hp // N_BLOCK)        EPN = cutlass.const_expr(E // R)
+        TILES_PER_EXPERT = cutlass.const_expr(MTILES * NTILES)        MTILES = cutlass.const_expr(H // M_BLOCK)        meta: cute.Tensor,
+
+        for i in cutlass.range(tidx, EPN + 1, self.NUM_THREADS, unroll=1):
+
+
+        TILES_PER_EXPERT = cutlass.const_expr(MTILES * NTILES)    
+        EPN = cutlass.const_expr(E // R)        NTILES = cutlass.const_expr(Hp // N_BLOCK)        bar: cute.Tensor,
+
+            cur[i] = off[i]
+
+
+        EPN = cutlass.const_expr(E // R)        STAGES = cutlass.const_expr(self.STAGES)
+            TILES_PER_EXPERT = cutlass.const_expr(MTILES * NTILES)        rank: Int32,
+
+        cute.arch.sync_threads()
+
+
+            ACC_THREADS = cutlass.const_expr(self.ACC_THREADS)
+        STAGES = cutlass.const_expr(self.STAGES)        EPN = cutlass.const_expr(E // R)        barrier_off: Int32,
+
+        if warp_idx == 0:
+
+
+        STAGES = cutlass.const_expr(self.STAGES)        num_threads = cutlass.const_expr(self.NUM_THREADS)
+        ACC_THREADS = cutlass.const_expr(self.ACC_THREADS)        ):
+
+            lane = cute.arch.lane_idx()
+
+
+        ACC_THREADS = cutlass.const_expr(self.ACC_THREADS)        TILE_BYTES = cutlass.const_expr(TILE_ELEMS * 4)
+        num_threads = cutlass.const_expr(self.NUM_THREADS)        STAGES = cutlass.const_expr(self.STAGES)        E = cutlass.const_expr(self.E)
+
+            lanes_lt = (Uint32(1) << lane) - Uint32(1)
+
+
+        num_threads = cutlass.const_expr(self.NUM_THREADS)    
+        TILE_BYTES = cutlass.const_expr(TILE_ELEMS * 4)        ACC_THREADS = cutlass.const_expr(self.ACC_THREADS)        H = cutlass.const_expr(self.H)
+
+            NCHUNK = cutlass.const_expr((R * B + 31) // 32)
+
+
+        TILE_BYTES = cutlass.const_expr(TILE_ELEMS * 4)        tidx, _, _ = cute.arch.thread_idx()
+            num_threads = cutlass.const_expr(self.NUM_THREADS)        Hp = cutlass.const_expr(self.Hp)
+
+            for c0 in cutlass.range(NCHUNK, unroll=1):
+
+
+            bidx, _, _ = cute.arch.block_idx()
+        tidx, _, _ = cute.arch.thread_idx()        TILE_BYTES = cutlass.const_expr(TILE_ELEMS * 4)        R = cutlass.const_expr(self.R)
+
+                rb = c0 * 32 + lane
+
+
+        tidx, _, _ = cute.arch.thread_idx()        warp_idx = cute.arch.make_warp_uniform(cute.arch.warp_idx())
+        bidx, _, _ = cute.arch.block_idx()            B = cutlass.const_expr(self.B)
+
+                e = Int32(EPN)
+
+
+        bidx, _, _ = cute.arch.block_idx()    
+        warp_idx = cute.arch.make_warp_uniform(cute.arch.warp_idx())        tidx, _, _ = cute.arch.thread_idx()        M_BLOCK = cutlass.const_expr(self.M_BLOCK)
+
+                if rb < Int32(R * B):
+
+
+        warp_idx = cute.arch.make_warp_uniform(cute.arch.warp_idx())        smem = utils.SmemAllocator()
+            bidx, _, _ = cute.arch.block_idx()        N_BLOCK = cutlass.const_expr(self.N_BLOCK)
+
+                    ee = sexp[rb]
+
+
+            load_mbar = smem.allocate_array(Int64, num_elems=2 * STAGES)
+        smem = utils.SmemAllocator()        warp_idx = cute.arch.make_warp_uniform(cute.arch.warp_idx())        meta_stride = cutlass.const_expr(self.meta_stride)
+
+                    if ee >= Int32(0) and ee < Int32(EPN):
+
+
+        smem = utils.SmemAllocator()        stage_smem = smem.allocate_tensor(
+        load_mbar = smem.allocate_array(Int64, num_elems=2 * STAGES)            num_ranks = cutlass.const_expr(self.R)
+
+                        e = ee
+
+
+        load_mbar = smem.allocate_array(Int64, num_elems=2 * STAGES)            Float32,
+        stage_smem = smem.allocate_tensor(        smem = utils.SmemAllocator()        TILE_ELEMS = cutlass.const_expr(M_BLOCK * N_BLOCK)
+
+                peers = match_any_b32(e)
+
+
+        stage_smem = smem.allocate_tensor(            cute.make_ordered_layout((M_BLOCK, N_BLOCK, STAGES), order=(1, 0, 2)),
+            Float32,        load_mbar = smem.allocate_array(Int64, num_elems=2 * STAGES)        MTILES = cutlass.const_expr(H // M_BLOCK)
+
+                cell = cur.iterator + e
+
+
+            Float32,            byte_alignment=128,
+            cute.make_ordered_layout((M_BLOCK, N_BLOCK, STAGES), order=(1, 0, 2)),        stage_smem = smem.allocate_tensor(        NTILES = cutlass.const_expr(Hp // N_BLOCK)
+
+                base = cute.arch.load(cell, Int32)
+
+
+            cute.make_ordered_layout((M_BLOCK, N_BLOCK, STAGES), order=(1, 0, 2)),        )
+            byte_alignment=128,            Float32,        TILES_PER_EXPERT = cutlass.const_expr(MTILES * NTILES)
+
+                pos = base + Int32(cute.arch.popc(peers & lanes_lt))
+
+
+            byte_alignment=128,        # flat per-stage view of the same smem for the acc warps.
+        )            cute.make_ordered_layout((M_BLOCK, N_BLOCK, STAGES), order=(1, 0, 2)),        EPN = cutlass.const_expr(E // R)
+
+                cute.arch.sync_warp()
+
+
+        )        stage_flat = cute.make_tensor(
+        # flat per-stage view of the same smem for the acc warps.            byte_alignment=128,    
+
+                if (peers & lanes_lt) == Uint32(0):
+
+
+        # flat per-stage view of the same smem for the acc warps.            stage_smem.iterator,
+        stage_flat = cute.make_tensor(        )        STAGES = cutlass.const_expr(self.STAGES)
+
+                    cute.arch.store(cell, base + Int32(cute.arch.popc(peers)))
+
+
+        stage_flat = cute.make_tensor(            cute.make_ordered_layout((TILE_ELEMS, STAGES), order=(0, 1)),
+            stage_smem.iterator,        # flat per-stage view of the same smem for the acc warps.        ACC_THREADS = cutlass.const_expr(self.ACC_THREADS)
+
+                cute.arch.sync_warp()
+
+
+            stage_smem.iterator,        )
+            cute.make_ordered_layout((TILE_ELEMS, STAGES), order=(0, 1)),        stage_flat = cute.make_tensor(        num_threads = cutlass.const_expr(self.NUM_THREADS)
+
+                if e < Int32(EPN):
+
+
+            cute.make_ordered_layout((TILE_ELEMS, STAGES), order=(0, 1)),        # prescan: cnt[le] and a per-expert-grouped slot list. cnt[EPN] holds
+        )            stage_smem.iterator,        TILE_BYTES = cutlass.const_expr(TILE_ELEMS * 4)
+
+                    slist[pos] = Int32(rb)
+
+
+        )        # running prefix; slist[off[le] .. off[le]+cnt[le]) are the matching rb.
+        # prescan: cnt[le] and a per-expert-grouped slot list. cnt[EPN] holds            cute.make_ordered_layout((TILE_ELEMS, STAGES), order=(0, 1)),    
+
+        cute.arch.sync_threads()
+
+
+        # prescan: cnt[le] and a per-expert-grouped slot list. cnt[EPN] holds        off = smem.allocate_tensor(Int32, cute.make_layout((EPN + 1,)), byte_alignment=16)
+        # running prefix; slist[off[le] .. off[le]+cnt[le]) are the matching rb.        )        tidx, _, _ = cute.arch.thread_idx()
+
+    
+
+
+        # running prefix; slist[off[le] .. off[le]+cnt[le]) are the matching rb.        # compacted list of active local experts (off[le+1] > off[le]).
+        off = smem.allocate_tensor(Int32, cute.make_layout((EPN + 1,)), byte_alignment=16)        # prescan: cnt[le] and a per-expert-grouped slot list. cnt[EPN] holds        bidx, _, _ = cute.arch.block_idx()
+
+        cta_tiler = (M_BLOCK, N_BLOCK)
+
+
+        off = smem.allocate_tensor(Int32, cute.make_layout((EPN + 1,)), byte_alignment=16)        alist = smem.allocate_tensor(Int32, cute.make_layout((EPN,)), byte_alignment=16)
+        # compacted list of active local experts (off[le+1] > off[le]).        # running prefix; slist[off[le] .. off[le]+cnt[le]) are the matching rb.        warp_idx = cute.arch.make_warp_uniform(cute.arch.warp_idx())
+
+        smem_for_tma = cute.group_modes(stage_smem, 0, 2)
+
+
+        # compacted list of active local experts (off[le+1] > off[le]).        acnt = smem.allocate_tensor(Int32, cute.make_layout((1,)), byte_alignment=16)
+        alist = smem.allocate_tensor(Int32, cute.make_layout((EPN,)), byte_alignment=16)        off = smem.allocate_tensor(Int32, cute.make_layout((EPN + 1,)), byte_alignment=16)    
+
+        red_tiles = cute.zipped_divide(tma_red, cta_tiler)
+
+
+        alist = smem.allocate_tensor(Int32, cute.make_layout((EPN,)), byte_alignment=16)        slist = smem.allocate_tensor(Int32, cute.make_layout((R * B,)), byte_alignment=16)
+        acnt = smem.allocate_tensor(Int32, cute.make_layout((1,)), byte_alignment=16)        # compacted list of active local experts (off[le+1] > off[le]).        smem = utils.SmemAllocator()
+
+        tRsR, tRgR = cpasync.tma_partition(
+
+
+        acnt = smem.allocate_tensor(Int32, cute.make_layout((1,)), byte_alignment=16)        # smem stage of experts[] (pre-biased to local ids) for the prescan.
+        slist = smem.allocate_tensor(Int32, cute.make_layout((R * B,)), byte_alignment=16)        alist = smem.allocate_tensor(Int32, cute.make_layout((EPN,)), byte_alignment=16)        load_mbar = smem.allocate_array(Int64, num_elems=2 * STAGES)
+
+            tma_g2s_red, 0, cute.make_layout(1), smem_for_tma, red_tiles,
+
+
+        slist = smem.allocate_tensor(Int32, cute.make_layout((R * B,)), byte_alignment=16)        sexp = smem.allocate_tensor(Int32, cute.make_layout((R * B,)), byte_alignment=16)
+        # smem stage of experts[] (pre-biased to local ids) for the prescan.        acnt = smem.allocate_tensor(Int32, cute.make_layout((1,)), byte_alignment=16)        stage_smem = smem.allocate_tensor(
+
+        )
+
+
+        # smem stage of experts[] (pre-biased to local ids) for the prescan.        # slist fill cursors; cur[EPN] is a dummy bucket for invalid lanes.
+        sexp = smem.allocate_tensor(Int32, cute.make_layout((R * B,)), byte_alignment=16)        slist = smem.allocate_tensor(Int32, cute.make_layout((R * B,)), byte_alignment=16)            Float32,
+
+        load_pipe = pipeline.PipelineTmaAsync.create(
+
+
+        sexp = smem.allocate_tensor(Int32, cute.make_layout((R * B,)), byte_alignment=16)        cur = smem.allocate_tensor(Int32, cute.make_layout((EPN + 1,)), byte_alignment=16)
+        # slist fill cursors; cur[EPN] is a dummy bucket for invalid lanes.        # smem stage of experts[] (pre-biased to local ids) for the prescan.            cute.make_ordered_layout((M_BLOCK, N_BLOCK, STAGES), order=(1, 0, 2)),
+
+            barrier_storage=load_mbar, num_stages=STAGES,
+
+
+        # slist fill cursors; cur[EPN] is a dummy bucket for invalid lanes.        # this rank's own consumed slots (experts[rank,b] >= 0) for clearing.
+        cur = smem.allocate_tensor(Int32, cute.make_layout((EPN + 1,)), byte_alignment=16)        sexp = smem.allocate_tensor(Int32, cute.make_layout((R * B,)), byte_alignment=16)            byte_alignment=128,
+
+            producer_group=pipeline.CooperativeGroup(pipeline.Agent.Thread, 1),
+
+
+        cur = smem.allocate_tensor(Int32, cute.make_layout((EPN + 1,)), byte_alignment=16)        clist = smem.allocate_tensor(Int32, cute.make_layout((B,)), byte_alignment=16)
+        # this rank's own consumed slots (experts[rank,b] >= 0) for clearing.        # slist fill cursors; cur[EPN] is a dummy bucket for invalid lanes.        )
+
+            consumer_group=pipeline.CooperativeGroup(pipeline.Agent.Thread, 4),
+
+
+        # this rank's own consumed slots (experts[rank,b] >= 0) for clearing.        ccnt = smem.allocate_tensor(Int32, cute.make_layout((1,)), byte_alignment=16)
+        clist = smem.allocate_tensor(Int32, cute.make_layout((B,)), byte_alignment=16)        cur = smem.allocate_tensor(Int32, cute.make_layout((EPN + 1,)), byte_alignment=16)        # flat per-stage view of the same smem for the acc warps.
+
+            tx_count=TILE_BYTES,
+
+
+        clist = smem.allocate_tensor(Int32, cute.make_layout((B,)), byte_alignment=16)    
+        ccnt = smem.allocate_tensor(Int32, cute.make_layout((1,)), byte_alignment=16)        # this rank's own consumed slots (experts[rank,b] >= 0) for clearing.        stage_flat = cute.make_tensor(
+
+        )
+
+
+        ccnt = smem.allocate_tensor(Int32, cute.make_layout((1,)), byte_alignment=16)        rank_epn = rank * EPN
+            clist = smem.allocate_tensor(Int32, cute.make_layout((B,)), byte_alignment=16)            stage_smem.iterator,
+
+        ld_state = pipeline.make_pipeline_state(pipeline.PipelineUserType.Producer, STAGES)
+
+
+        
+        rank_epn = rank * EPN        ccnt = smem.allocate_tensor(Int32, cute.make_layout((1,)), byte_alignment=16)            cute.make_ordered_layout((TILE_ELEMS, STAGES), order=(0, 1)),
+
+        cd_state = pipeline.make_pipeline_state(pipeline.PipelineUserType.Consumer, STAGES)
+
+
+        rank_epn = rank * EPN        # ---- prescan experts once (parallel): bucket slots per local expert.
+                )
+
+        acc_tid = tidx - 32
+
+
+            # A single-thread gmem scan of all R*B entries is bottlenecked by a
+        # ---- prescan experts once (parallel): bucket slots per local expert.        rank_epn = rank * EPN        # prescan: cnt[le] and a per-expert-grouped slot list. cnt[EPN] holds
+
+        H_PER = cutlass.const_expr(TILE_ELEMS // ACC_THREADS)
+
+
+        # ---- prescan experts once (parallel): bucket slots per local expert.        # serial load latency chain, so it must be cooperative: stage the
+        # A single-thread gmem scan of all R*B entries is bottlenecked by a            # running prefix; slist[off[le] .. off[le]+cnt[le]) are the matching rb.
+
+>       acc_reg = cute.make_fragment((H_PER,), Float32)
+
+
+        # A single-thread gmem scan of all R*B entries is bottlenecked by a        # table to smem with all threads, count with cta atomics, then have
+        # serial load latency chain, so it must be cooperative: stage the        # ---- prescan experts once (parallel): bucket slots per local expert.        off = smem.allocate_tensor(Int32, cute.make_layout((EPN + 1,)), byte_alignment=16)
+
+                  ^^^^^^^^^^^^^^^^^^
+
+
+        # serial load latency chain, so it must be cooperative: stage the        # warp 0 fill slist chunk-by-chunk with match_any so the final order
+        # table to smem with all threads, count with cta atomics, then have        # A single-thread gmem scan of all R*B entries is bottlenecked by a        # compacted list of active local experts (off[le+1] > off[le]).
+
+
+E       AttributeError: module 'cutlass.cute' has no attribute 'make_fragment'. Did you mean: 'make_fragment_like'?
+
+        # table to smem with all threads, count with cta atomics, then have        # stays rb-ascending (bitwise-identical to the serial scan).        # warp 0 fill slist chunk-by-chunk with match_any so the final order
+        # serial load latency chain, so it must be cooperative: stage the        alist = smem.allocate_tensor(Int32, cute.make_layout((EPN,)), byte_alignment=16)
+
+
+
+
+
+        # warp 0 fill slist chunk-by-chunk with match_any so the final order        for i in cutlass.range(tidx, R * B, self.NUM_THREADS, unroll=1):        # stays rb-ascending (bitwise-identical to the serial scan).moonep/grad_reduce.py        # table to smem with all threads, count with cta atomics, then have        acnt = smem.allocate_tensor(Int32, cute.make_layout((1,)), byte_alignment=16)
+
+
+:295: AttributeError
+
+        # stays rb-ascending (bitwise-identical to the serial scan).            sexp[i] = experts[i] - rank_epn        for i in cutlass.range(tidx, R * B, self.NUM_THREADS, unroll=1):
+        # warp 0 fill slist chunk-by-chunk with match_any so the final order        slist = smem.allocate_tensor(Int32, cute.make_layout((R * B,)), byte_alignment=16)
+
+
+
+
+        for i in cutlass.range(tidx, R * B, self.NUM_THREADS, unroll=1):        for i in cutlass.range(tidx, EPN + 1, self.NUM_THREADS, unroll=1):            sexp[i] = experts[i] - rank_epn        # stays rb-ascending (bitwise-identical to the serial scan).        # smem stage of experts[] (pre-biased to local ids) for the prescan.
+=============================== warnings summary ===============================
+
+
+
+            sexp[i] = experts[i] - rank_epn
+            off[i] = Int32(0)        for i in cutlass.range(tidx, EPN + 1, self.NUM_THREADS, unroll=1):        for i in cutlass.range(tidx, R * B, self.NUM_THREADS, unroll=1):        sexp = smem.allocate_tensor(Int32, cute.make_layout((R * B,)), byte_alignment=16)
+
+
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[44-True]
+tests/test_sampled_group.py::test_nondefault_group_and_collective_fallback
+tests/test_sampled_group.py::test_graph_replay_reads_new_routes
+
+        for i in cutlass.range(tidx, EPN + 1, self.NUM_THREADS, unroll=1):        if tidx == 0:            off[i] = Int32(0)
+            sexp[i] = experts[i] - rank_epn        # slist fill cursors; cur[EPN] is a dummy bucket for invalid lanes.
+
+
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+            off[i] = Int32(0)            ccnt[0] = Int32(0)        if tidx == 0:
+        for i in cutlass.range(tidx, EPN + 1, self.NUM_THREADS, unroll=1):        cur = smem.allocate_tensor(Int32, cute.make_layout((EPN + 1,)), byte_alignment=16)
+
+
+
+
+
+        if tidx == 0:        cute.arch.sync_threads()            ccnt[0] = Int32(0)-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html            off[i] = Int32(0)        # this rank's own consumed slots (experts[rank,b] >= 0) for clearing.
+
+
+
+
+
+            ccnt[0] = Int32(0)        for i in cutlass.range(tidx, R * B, self.NUM_THREADS, unroll=1):        cute.arch.sync_threads()        if tidx == 0:        clist = smem.allocate_tensor(Int32, cute.make_layout((B,)), byte_alignment=16)
+
+
+
+
+        cute.arch.sync_threads()            e = sexp[i]        for i in cutlass.range(tidx, R * B, self.NUM_THREADS, unroll=1):            ccnt[0] = Int32(0)        ccnt = smem.allocate_tensor(Int32, cute.make_layout((1,)), byte_alignment=16)
+
+
+
+
+        for i in cutlass.range(tidx, R * B, self.NUM_THREADS, unroll=1):            if e >= Int32(0) and e < Int32(EPN):            e = sexp[i]        cute.arch.sync_threads()    
+
+
+
+
+=========================== short test summary info ============================            e = sexp[i]                cute.arch.atomic_add(off.iterator + (e + Int32(1)), Int32(1),            if e >= Int32(0) and e < Int32(EPN):        for i in cutlass.range(tidx, R * B, self.NUM_THREADS, unroll=1):        rank_epn = rank * EPN
+
+
+
+
+
+FAILED tests/test_sampled_weights.py::test_sampled_plan_weight_and_parameter_gradient_lifecycle            if e >= Int32(0) and e < Int32(EPN):                                     scope="cta")                cute.arch.atomic_add(off.iterator + (e + Int32(1)), Int32(1),            e = sexp[i]    
+
+
+
+
+
+                cute.arch.atomic_add(off.iterator + (e + Int32(1)), Int32(1),        # this rank's own consumed slots (experts[rank,b] >= 0), unordered.                                     scope="cta")            if e >= Int32(0) and e < Int32(EPN):        # ---- prescan experts once (parallel): bucket slots per local expert.
+
+
+
+
+                                     scope="cta")        for b in cutlass.range(tidx, B, self.NUM_THREADS, unroll=1):        # this rank's own consumed slots (experts[rank,b] >= 0), unordered.                cute.arch.atomic_add(off.iterator + (e + Int32(1)), Int32(1),1 failed, 5 passed, 5 warnings in 18.07s        # A single-thread gmem scan of all R*B entries is bottlenecked by a
+
+
+
+
+
+        # this rank's own consumed slots (experts[rank,b] >= 0), unordered.            if sexp[rank * B + b] >= Int32(0) - rank_epn:        for b in cutlass.range(tidx, B, self.NUM_THREADS, unroll=1):                                     scope="cta")        # serial load latency chain, so it must be cooperative: stage the
+
+
+
+
+        for b in cutlass.range(tidx, B, self.NUM_THREADS, unroll=1):                pos = cute.arch.atomic_add(ccnt.iterator, Int32(1), scope="cta")            if sexp[rank * B + b] >= Int32(0) - rank_epn:        # this rank's own consumed slots (experts[rank,b] >= 0), unordered.        # table to smem with all threads, count with cta atomics, then have
+
+
+
+
+            if sexp[rank * B + b] >= Int32(0) - rank_epn:                clist[pos] = Int32(b)                pos = cute.arch.atomic_add(ccnt.iterator, Int32(1), scope="cta")        for b in cutlass.range(tidx, B, self.NUM_THREADS, unroll=1):        # warp 0 fill slist chunk-by-chunk with match_any so the final order
+
+
+
+
+                pos = cute.arch.atomic_add(ccnt.iterator, Int32(1), scope="cta")        cute.arch.sync_threads()                clist[pos] = Int32(b)            if sexp[rank * B + b] >= Int32(0) - rank_epn:        # stays rb-ascending (bitwise-identical to the serial scan).
+
+
+
+
+                clist[pos] = Int32(b)        # serial prefix + active-expert compaction over EPN (smem-only).        cute.arch.sync_threads()                pos = cute.arch.atomic_add(ccnt.iterator, Int32(1), scope="cta")        for i in cutlass.range(tidx, R * B, self.NUM_THREADS, unroll=1):
+
+
+
+
+        cute.arch.sync_threads()        if tidx == 0:        # serial prefix + active-expert compaction over EPN (smem-only).                clist[pos] = Int32(b)            sexp[i] = experts[i] - rank_epn
+
+
+
+
+        # serial prefix + active-expert compaction over EPN (smem-only).            run = Int32(0)        if tidx == 0:        cute.arch.sync_threads()        for i in cutlass.range(tidx, EPN + 1, self.NUM_THREADS, unroll=1):
+
+
+
+
+        if tidx == 0:            ac = Int32(0)            run = Int32(0)        # serial prefix + active-expert compaction over EPN (smem-only).            off[i] = Int32(0)
+
+
+
+
+            run = Int32(0)            for le in cutlass.range(EPN, unroll=1):            ac = Int32(0)        if tidx == 0:        if tidx == 0:
+
+
+
+
+            ac = Int32(0)                c = off[le + 1]            for le in cutlass.range(EPN, unroll=1):            run = Int32(0)            ccnt[0] = Int32(0)
+
+
+
+
+            for le in cutlass.range(EPN, unroll=1):                if c > Int32(0):                c = off[le + 1]            ac = Int32(0)        cute.arch.sync_threads()
+
+
+
+
+                c = off[le + 1]                    alist[ac] = Int32(le)                if c > Int32(0):            for le in cutlass.range(EPN, unroll=1):        for i in cutlass.range(tidx, R * B, self.NUM_THREADS, unroll=1):
+
+
+
+
+                if c > Int32(0):                    ac = ac + Int32(1)                    alist[ac] = Int32(le)                c = off[le + 1]            e = sexp[i]
+
+
+
+
+                    alist[ac] = Int32(le)                run = run + c                    ac = ac + Int32(1)                if c > Int32(0):            if e >= Int32(0) and e < Int32(EPN):
+
+
+
+
+                    ac = ac + Int32(1)                off[le + 1] = run                run = run + c                    alist[ac] = Int32(le)                cute.arch.atomic_add(off.iterator + (e + Int32(1)), Int32(1),
+
+
+
+
+                run = run + c            acnt[0] = ac                off[le + 1] = run                    ac = ac + Int32(1)                                     scope="cta")
+
+
+
+
+                off[le + 1] = run        cute.arch.sync_threads()            acnt[0] = ac                run = run + c        # this rank's own consumed slots (experts[rank,b] >= 0), unordered.
+
+
+
+
+            acnt[0] = ac        for i in cutlass.range(tidx, EPN + 1, self.NUM_THREADS, unroll=1):        cute.arch.sync_threads()                off[le + 1] = run        for b in cutlass.range(tidx, B, self.NUM_THREADS, unroll=1):
+
+
+
+
+        cute.arch.sync_threads()            cur[i] = off[i]        for i in cutlass.range(tidx, EPN + 1, self.NUM_THREADS, unroll=1):            acnt[0] = ac            if sexp[rank * B + b] >= Int32(0) - rank_epn:
+
+
+
+
+        for i in cutlass.range(tidx, EPN + 1, self.NUM_THREADS, unroll=1):        cute.arch.sync_threads()            cur[i] = off[i]        cute.arch.sync_threads()                pos = cute.arch.atomic_add(ccnt.iterator, Int32(1), scope="cta")
+
+
+
+
+            cur[i] = off[i]        if warp_idx == 0:        cute.arch.sync_threads()        for i in cutlass.range(tidx, EPN + 1, self.NUM_THREADS, unroll=1):                clist[pos] = Int32(b)
+
+
+
+
+        cute.arch.sync_threads()            lane = cute.arch.lane_idx()        if warp_idx == 0:            cur[i] = off[i]        cute.arch.sync_threads()
+
+
+
+
+        if warp_idx == 0:            lanes_lt = (Uint32(1) << lane) - Uint32(1)            lane = cute.arch.lane_idx()        cute.arch.sync_threads()        # serial prefix + active-expert compaction over EPN (smem-only).
+
+
+
+
+            lane = cute.arch.lane_idx()            NCHUNK = cutlass.const_expr((R * B + 31) // 32)            lanes_lt = (Uint32(1) << lane) - Uint32(1)        if warp_idx == 0:        if tidx == 0:
+
+
+
+
+            lanes_lt = (Uint32(1) << lane) - Uint32(1)            for c0 in cutlass.range(NCHUNK, unroll=1):            NCHUNK = cutlass.const_expr((R * B + 31) // 32)            lane = cute.arch.lane_idx()            run = Int32(0)
+
+
+
+
+            NCHUNK = cutlass.const_expr((R * B + 31) // 32)                rb = c0 * 32 + lane            for c0 in cutlass.range(NCHUNK, unroll=1):            lanes_lt = (Uint32(1) << lane) - Uint32(1)            ac = Int32(0)
+
+
+
+
+            for c0 in cutlass.range(NCHUNK, unroll=1):                e = Int32(EPN)                rb = c0 * 32 + lane            NCHUNK = cutlass.const_expr((R * B + 31) // 32)            for le in cutlass.range(EPN, unroll=1):
+
+
+
+
+                rb = c0 * 32 + lane                if rb < Int32(R * B):                e = Int32(EPN)            for c0 in cutlass.range(NCHUNK, unroll=1):                c = off[le + 1]
+
+
+
+
+                e = Int32(EPN)                    ee = sexp[rb]                if rb < Int32(R * B):                rb = c0 * 32 + lane                if c > Int32(0):
+
+
+
+
+                if rb < Int32(R * B):                    if ee >= Int32(0) and ee < Int32(EPN):                    ee = sexp[rb]                e = Int32(EPN)                    alist[ac] = Int32(le)
+
+
+
+
+                    ee = sexp[rb]                        e = ee                    if ee >= Int32(0) and ee < Int32(EPN):                if rb < Int32(R * B):                    ac = ac + Int32(1)
+
+
+
+
+                    if ee >= Int32(0) and ee < Int32(EPN):                peers = match_any_b32(e)                        e = ee                    ee = sexp[rb]                run = run + c
+
+
+
+
+                        e = ee                cell = cur.iterator + e                peers = match_any_b32(e)                    if ee >= Int32(0) and ee < Int32(EPN):                off[le + 1] = run
+
+
+
+
+                peers = match_any_b32(e)                base = cute.arch.load(cell, Int32)                cell = cur.iterator + e                        e = ee            acnt[0] = ac
+
+
+
+
+                cell = cur.iterator + e                pos = base + Int32(cute.arch.popc(peers & lanes_lt))                base = cute.arch.load(cell, Int32)                peers = match_any_b32(e)        cute.arch.sync_threads()
+
+
+
+
+                base = cute.arch.load(cell, Int32)                cute.arch.sync_warp()                pos = base + Int32(cute.arch.popc(peers & lanes_lt))                cell = cur.iterator + e        for i in cutlass.range(tidx, EPN + 1, self.NUM_THREADS, unroll=1):
+
+
+
+
+                pos = base + Int32(cute.arch.popc(peers & lanes_lt))                if (peers & lanes_lt) == Uint32(0):                cute.arch.sync_warp()                base = cute.arch.load(cell, Int32)            cur[i] = off[i]
+
+
+
+
+                cute.arch.sync_warp()                    cute.arch.store(cell, base + Int32(cute.arch.popc(peers)))                if (peers & lanes_lt) == Uint32(0):                pos = base + Int32(cute.arch.popc(peers & lanes_lt))        cute.arch.sync_threads()
+
+
+
+
+                if (peers & lanes_lt) == Uint32(0):                cute.arch.sync_warp()                    cute.arch.store(cell, base + Int32(cute.arch.popc(peers)))                cute.arch.sync_warp()        if warp_idx == 0:
+
+
+
+
+                    cute.arch.store(cell, base + Int32(cute.arch.popc(peers)))                if e < Int32(EPN):                cute.arch.sync_warp()                if (peers & lanes_lt) == Uint32(0):            lane = cute.arch.lane_idx()
+
+
+
+
+                cute.arch.sync_warp()                    slist[pos] = Int32(rb)                if e < Int32(EPN):                    cute.arch.store(cell, base + Int32(cute.arch.popc(peers)))            lanes_lt = (Uint32(1) << lane) - Uint32(1)
+
+
+
+
+                if e < Int32(EPN):        cute.arch.sync_threads()                    slist[pos] = Int32(rb)                cute.arch.sync_warp()            NCHUNK = cutlass.const_expr((R * B + 31) // 32)
+
+
+
+
+                    slist[pos] = Int32(rb)            cute.arch.sync_threads()                if e < Int32(EPN):            for c0 in cutlass.range(NCHUNK, unroll=1):
+
+
+
+
+        cute.arch.sync_threads()        cta_tiler = (M_BLOCK, N_BLOCK)                        slist[pos] = Int32(rb)                rb = c0 * 32 + lane
+
+
+
+
+            smem_for_tma = cute.group_modes(stage_smem, 0, 2)        cta_tiler = (M_BLOCK, N_BLOCK)        cute.arch.sync_threads()                e = Int32(EPN)
+
+
+
+
+        cta_tiler = (M_BLOCK, N_BLOCK)        red_tiles = cute.zipped_divide(tma_red, cta_tiler)        smem_for_tma = cute.group_modes(stage_smem, 0, 2)                    if rb < Int32(R * B):
+
+
+
+
+        smem_for_tma = cute.group_modes(stage_smem, 0, 2)        tRsR, tRgR = cpasync.tma_partition(        red_tiles = cute.zipped_divide(tma_red, cta_tiler)        cta_tiler = (M_BLOCK, N_BLOCK)                    ee = sexp[rb]
+
+
+
+
+        red_tiles = cute.zipped_divide(tma_red, cta_tiler)            tma_g2s_red, 0, cute.make_layout(1), smem_for_tma, red_tiles,        tRsR, tRgR = cpasync.tma_partition(        smem_for_tma = cute.group_modes(stage_smem, 0, 2)                    if ee >= Int32(0) and ee < Int32(EPN):
+
+
+
+
+        tRsR, tRgR = cpasync.tma_partition(        )            tma_g2s_red, 0, cute.make_layout(1), smem_for_tma, red_tiles,        red_tiles = cute.zipped_divide(tma_red, cta_tiler)                        e = ee
+
+
+
+
+            tma_g2s_red, 0, cute.make_layout(1), smem_for_tma, red_tiles,        load_pipe = pipeline.PipelineTmaAsync.create(        )        tRsR, tRgR = cpasync.tma_partition(                peers = match_any_b32(e)
+
+
+
+
+        )            barrier_storage=load_mbar, num_stages=STAGES,        load_pipe = pipeline.PipelineTmaAsync.create(            tma_g2s_red, 0, cute.make_layout(1), smem_for_tma, red_tiles,                cell = cur.iterator + e
+
+
+
+
+        load_pipe = pipeline.PipelineTmaAsync.create(            producer_group=pipeline.CooperativeGroup(pipeline.Agent.Thread, 1),            barrier_storage=load_mbar, num_stages=STAGES,        )                base = cute.arch.load(cell, Int32)
+
+
+
+
+            barrier_storage=load_mbar, num_stages=STAGES,            consumer_group=pipeline.CooperativeGroup(pipeline.Agent.Thread, 4),            producer_group=pipeline.CooperativeGroup(pipeline.Agent.Thread, 1),        load_pipe = pipeline.PipelineTmaAsync.create(                pos = base + Int32(cute.arch.popc(peers & lanes_lt))
+
+
+
+
+            producer_group=pipeline.CooperativeGroup(pipeline.Agent.Thread, 1),            tx_count=TILE_BYTES,            consumer_group=pipeline.CooperativeGroup(pipeline.Agent.Thread, 4),            barrier_storage=load_mbar, num_stages=STAGES,                cute.arch.sync_warp()
+
+
+
+
+            consumer_group=pipeline.CooperativeGroup(pipeline.Agent.Thread, 4),        )            tx_count=TILE_BYTES,            producer_group=pipeline.CooperativeGroup(pipeline.Agent.Thread, 1),                if (peers & lanes_lt) == Uint32(0):
+
+
+
+
+            tx_count=TILE_BYTES,        ld_state = pipeline.make_pipeline_state(pipeline.PipelineUserType.Producer, STAGES)        )            consumer_group=pipeline.CooperativeGroup(pipeline.Agent.Thread, 4),                    cute.arch.store(cell, base + Int32(cute.arch.popc(peers)))
+
+
+
+
+        )        cd_state = pipeline.make_pipeline_state(pipeline.PipelineUserType.Consumer, STAGES)        ld_state = pipeline.make_pipeline_state(pipeline.PipelineUserType.Producer, STAGES)            tx_count=TILE_BYTES,                cute.arch.sync_warp()
+
+
+
+
+        ld_state = pipeline.make_pipeline_state(pipeline.PipelineUserType.Producer, STAGES)        acc_tid = tidx - 32        cd_state = pipeline.make_pipeline_state(pipeline.PipelineUserType.Consumer, STAGES)        )                if e < Int32(EPN):
+
+
+
+
+        cd_state = pipeline.make_pipeline_state(pipeline.PipelineUserType.Consumer, STAGES)        H_PER = cutlass.const_expr(TILE_ELEMS // ACC_THREADS)        acc_tid = tidx - 32        ld_state = pipeline.make_pipeline_state(pipeline.PipelineUserType.Producer, STAGES)                    slist[pos] = Int32(rb)
+
+
+
+
+        acc_tid = tidx - 32>       acc_reg = cute.make_fragment((H_PER,), Float32)        H_PER = cutlass.const_expr(TILE_ELEMS // ACC_THREADS)        cd_state = pipeline.make_pipeline_state(pipeline.PipelineUserType.Consumer, STAGES)
+        cute.arch.sync_threads()
+
+
+        acc_tid = tidx - 32
+        H_PER = cutlass.const_expr(TILE_ELEMS // ACC_THREADS)                  ^^^^^^^^^^^^^^^^^^>       acc_reg = cute.make_fragment((H_PER,), Float32)
+    
+
+
+        H_PER = cutlass.const_expr(TILE_ELEMS // ACC_THREADS)
+>       acc_reg = cute.make_fragment((H_PER,), Float32)                  ^^^^^^^^^^^^^^^^^^E       AttributeError: module 'cutlass.cute' has no attribute 'make_fragment'. Did you mean: 'make_fragment_like'?
+        cta_tiler = (M_BLOCK, N_BLOCK)
+
+
+>       acc_reg = cute.make_fragment((H_PER,), Float32)
+                  ^^^^^^^^^^^^^^^^^^E       AttributeError: module 'cutlass.cute' has no attribute 'make_fragment'. Did you mean: 'make_fragment_like'?
+
+        smem_for_tma = cute.group_modes(stage_smem, 0, 2)
+
+moonep/grad_reduce.py                  ^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'cutlass.cute' has no attribute 'make_fragment'. Did you mean: 'make_fragment_like'?
+:295: AttributeError
+        red_tiles = cute.zipped_divide(tma_red, cta_tiler)
+moonep/grad_reduce.py
+E       AttributeError: module 'cutlass.cute' has no attribute 'make_fragment'. Did you mean: 'make_fragment_like'?
+
+:295: AttributeError
+        tRsR, tRgR = cpasync.tma_partition(moonep/grad_reduce.py
+
+=============================== warnings summary ===============================
+:295: AttributeErrormoonep/grad_reduce.py
+            tma_g2s_red, 0, cute.make_layout(1), smem_for_tma, red_tiles,
+:295: AttributeError
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[44-True]
+tests/test_sampled_group.py::test_nondefault_group_and_collective_fallback
+tests/test_sampled_group.py::test_graph_replay_reads_new_routes=============================== warnings summary ===============================
+        )
+
+
+=============================== warnings summary ===============================  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)        load_pipe = pipeline.PipelineTmaAsync.create(tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[44-True]
+tests/test_sampled_group.py::test_nondefault_group_and_collective_fallback
+tests/test_sampled_group.py::test_graph_replay_reads_new_routes
+tests/test_sampled_weights.py::test_sampled_plan_weight_and_parameter_gradient_lifecycle
+
+
+
+
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[44-True]
+tests/test_sampled_group.py::test_nondefault_group_and_collective_fallback
+tests/test_sampled_group.py::test_graph_replay_reads_new_routes            barrier_storage=load_mbar, num_stages=STAGES,=============================== warnings summary ===============================  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+    return func(*args, **kwargs)-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+
+
+
+
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)            producer_group=pipeline.CooperativeGroup(pipeline.Agent.Thread, 1),
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[44-True]
+tests/test_sampled_group.py::test_nondefault_group_and_collective_fallback
+tests/test_sampled_group.py::test_graph_replay_reads_new_routes
+
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[44-True]
+tests/test_sampled_group.py::test_nondefault_group_and_collective_fallback
+tests/test_sampled_group.py::test_graph_replay_reads_new_routes
+
+            consumer_group=pipeline.CooperativeGroup(pipeline.Agent.Thread, 4),
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+            tx_count=TILE_BYTES,
+
+
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html        )=========================== short test summary info ============================-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+
+
+
+        ld_state = pipeline.make_pipeline_state(pipeline.PipelineUserType.Producer, STAGES)FAILED tests/test_sampled_weights.py::test_sampled_plan_weight_and_parameter_gradient_lifecycle
+
+        cd_state = pipeline.make_pipeline_state(pipeline.PipelineUserType.Consumer, STAGES)
+        acc_tid = tidx - 32
+        H_PER = cutlass.const_expr(TILE_ELEMS // ACC_THREADS)
+>       acc_reg = cute.make_fragment((H_PER,), Float32)
+                  ^^^^^^^^^^^^^^^^^^=========================== short test summary info ============================
+
+E       AttributeError: module 'cutlass.cute' has no attribute 'make_fragment'. Did you mean: 'make_fragment_like'?FAILED tests/test_sampled_weights.py::test_sampled_plan_weight_and_parameter_gradient_lifecycle1 failed, 5 passed, 5 warnings in 18.06s
+
+
+
+moonep/grad_reduce.py:295: AttributeError
+=========================== short test summary info ============================
+FAILED tests/test_sampled_weights.py::test_sampled_plan_weight_and_parameter_gradient_lifecycle
+=========================== short test summary info ============================
+FAILED tests/test_sampled_weights.py::test_sampled_plan_weight_and_parameter_gradient_lifecycle
+1 failed, 5 passed, 5 warnings in 18.06s
+=============================== warnings summary ===============================
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[44-True]
+tests/test_sampled_group.py::test_nondefault_group_and_collective_fallback
+tests/test_sampled_group.py::test_graph_replay_reads_new_routes
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html1 failed, 5 passed, 11 warnings in 18.07s
+
+1 failed, 5 passed, 5 warnings in 18.06s
+=========================== short test summary info ============================
+FAILED tests/test_sampled_weights.py::test_sampled_plan_weight_and_parameter_gradient_lifecycle
+1 failed, 5 passed, 5 warnings in 18.07s
+
+=================================== FAILURES ===================================
+__________ test_sampled_plan_weight_and_parameter_gradient_lifecycle ___________
+
+dist_env = (2, 8)
+
+    def test_sampled_plan_weight_and_parameter_gradient_lifecycle(dist_env):
+        rank, world = dist_env
+        if world != R:
+            pytest.skip("requires eight actual GPUs on one NVLink host")
+        assert int(os.environ.get("LOCAL_WORLD_SIZE", 0)) == R
+        assert torch.cuda.device_count() >= R
+        identities = [None]*R
+        dist.all_gather_object(identities, (socket.gethostname(), torch.cuda.current_device()))
+        assert len(set(identities)) == R, "ranks must not share a physical GPU"
+    
+        from moonep._C import get_vmm_granularity
+        granularity = get_vmm_granularity()
+        granularities = [None]*R
+        dist.all_gather_object(granularities, granularity)
+        assert len(set(granularities)) == 1, "this test requires homogeneous VMM alignment"
+        intermediate = 128
+        while B*H*intermediate*2 % granularity:
+            intermediate *= 2
+        shapes = ((intermediate, H), (intermediate, H), (H, intermediate))
+        buffer = Buffer(S, H, K, E, R, B=B, token_padding=128, num_sms=32,
+                        planning_backend="sampled_group", planning_rounds=4,
+                        planning_sample_seed=20261026, enable_pdl=False, explicitly_destroy=True)
+        weights, gradients = [], []
+        try:
+>           _compile_all(buffer, intermediate)
+
+tests/test_sampled_weights.py:235: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_sampled_weights.py:69: in _compile_all
+    grad_reduce._get_compiled(E, h, hp, R, B, stride, sms, device)
+moonep/grad_reduce.py:424: in _get_compiled
+    return cute.compile(
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/compiler.py:1250: in __call__
+    return self._compile(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/compiler.py:1396: in _compile
+    return func._dsl_object._func(func, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py:2782: in _func
+    return self._func_impl(funcBody, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py:2795: in _func_impl
+    result = self.generate_mlir(
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py:2318: in generate_mlir
+    module, module_hash, result = self.generate_original_ir(
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py:1987: in generate_original_ir
+    module, result = build_ir_module()
+                     ^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py:1948: in build_ir_module
+    result = funcBody(*ir_args, **ir_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+moonep/grad_reduce.py:142: in __call__
+    rank, barrier_off).launch(
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/cutlass_dsl/cutlass.py:2118: in launch
+    ret, name = kernel_generator(*self.func_args, **self.func_kwargs, config=config)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py:3135: in kernel_wrapper
+    kernel_ret = funcBody(*ir_args, **ir_kwargs)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <moonep.grad_reduce.GradReduceKernel object at 0x7f107d8b95e0>
+expert_grad = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7f10e021e000>
+reduce_buf = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7f10e0212510>
+tma_g2s_red = <cutlass.cute.atom.CopyAtom object at 0x7f10d859d5e0>
+tma_red = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7f10d859c260>
+experts = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7f10e025a180>
+meta = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7f10d850ba40>
+bar = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7f10d859d7c0>
+rank = Int32(?), barrier_off = Int32(?)
+
+    def kernel(
+        self,
+        expert_grad: cute.Tensor,
+        reduce_buf: cute.Tensor,
+        tma_g2s_red: cute.CopyAtom,
+        tma_red: cute.Tensor,
+        experts: cute.Tensor,
+        meta: cute.Tensor,
+        bar: cute.Tensor,
+        rank: Int32,
+        barrier_off: Int32,
+    ):
+        E = cutlass.const_expr(self.E)
+        H = cutlass.const_expr(self.H)
+        Hp = cutlass.const_expr(self.Hp)
+        R = cutlass.const_expr(self.R)
+        B = cutlass.const_expr(self.B)
+        M_BLOCK = cutlass.const_expr(self.M_BLOCK)
+        N_BLOCK = cutlass.const_expr(self.N_BLOCK)
+        meta_stride = cutlass.const_expr(self.meta_stride)
+        num_ranks = cutlass.const_expr(self.R)
+        TILE_ELEMS = cutlass.const_expr(M_BLOCK * N_BLOCK)
+        MTILES = cutlass.const_expr(H // M_BLOCK)
+        NTILES = cutlass.const_expr(Hp // N_BLOCK)
+        TILES_PER_EXPERT = cutlass.const_expr(MTILES * NTILES)
+        EPN = cutlass.const_expr(E // R)
+    
+        STAGES = cutlass.const_expr(self.STAGES)
+        ACC_THREADS = cutlass.const_expr(self.ACC_THREADS)
+        num_threads = cutlass.const_expr(self.NUM_THREADS)
+        TILE_BYTES = cutlass.const_expr(TILE_ELEMS * 4)
+    
+        tidx, _, _ = cute.arch.thread_idx()
+        bidx, _, _ = cute.arch.block_idx()
+        warp_idx = cute.arch.make_warp_uniform(cute.arch.warp_idx())
+    
+        smem = utils.SmemAllocator()
+        load_mbar = smem.allocate_array(Int64, num_elems=2 * STAGES)
+        stage_smem = smem.allocate_tensor(
+            Float32,
+            cute.make_ordered_layout((M_BLOCK, N_BLOCK, STAGES), order=(1, 0, 2)),
+            byte_alignment=128,
+        )
+        # flat per-stage view of the same smem for the acc warps.
+        stage_flat = cute.make_tensor(
+            stage_smem.iterator,
+            cute.make_ordered_layout((TILE_ELEMS, STAGES), order=(0, 1)),
+        )
+        # prescan: cnt[le] and a per-expert-grouped slot list. cnt[EPN] holds
+        # running prefix; slist[off[le] .. off[le]+cnt[le]) are the matching rb.
+        off = smem.allocate_tensor(Int32, cute.make_layout((EPN + 1,)), byte_alignment=16)
+        # compacted list of active local experts (off[le+1] > off[le]).
+        alist = smem.allocate_tensor(Int32, cute.make_layout((EPN,)), byte_alignment=16)
+        acnt = smem.allocate_tensor(Int32, cute.make_layout((1,)), byte_alignment=16)
+        slist = smem.allocate_tensor(Int32, cute.make_layout((R * B,)), byte_alignment=16)
+        # smem stage of experts[] (pre-biased to local ids) for the prescan.
+        sexp = smem.allocate_tensor(Int32, cute.make_layout((R * B,)), byte_alignment=16)
+        # slist fill cursors; cur[EPN] is a dummy bucket for invalid lanes.
+        cur = smem.allocate_tensor(Int32, cute.make_layout((EPN + 1,)), byte_alignment=16)
+        # this rank's own consumed slots (experts[rank,b] >= 0) for clearing.
+        clist = smem.allocate_tensor(Int32, cute.make_layout((B,)), byte_alignment=16)
+        ccnt = smem.allocate_tensor(Int32, cute.make_layout((1,)), byte_alignment=16)
+    
+        rank_epn = rank * EPN
+    
+        # ---- prescan experts once (parallel): bucket slots per local expert.
+        # A single-thread gmem scan of all R*B entries is bottlenecked by a
+        # serial load latency chain, so it must be cooperative: stage the
+        # table to smem with all threads, count with cta atomics, then have
+        # warp 0 fill slist chunk-by-chunk with match_any so the final order
+        # stays rb-ascending (bitwise-identical to the serial scan).
+        for i in cutlass.range(tidx, R * B, self.NUM_THREADS, unroll=1):
+            sexp[i] = experts[i] - rank_epn
+        for i in cutlass.range(tidx, EPN + 1, self.NUM_THREADS, unroll=1):
+            off[i] = Int32(0)
+        if tidx == 0:
+            ccnt[0] = Int32(0)
+        cute.arch.sync_threads()
+        for i in cutlass.range(tidx, R * B, self.NUM_THREADS, unroll=1):
+            e = sexp[i]
+            if e >= Int32(0) and e < Int32(EPN):
+                cute.arch.atomic_add(off.iterator + (e + Int32(1)), Int32(1),
+                                     scope="cta")
+        # this rank's own consumed slots (experts[rank,b] >= 0), unordered.
+        for b in cutlass.range(tidx, B, self.NUM_THREADS, unroll=1):
+            if sexp[rank * B + b] >= Int32(0) - rank_epn:
+                pos = cute.arch.atomic_add(ccnt.iterator, Int32(1), scope="cta")
+                clist[pos] = Int32(b)
+        cute.arch.sync_threads()
+        # serial prefix + active-expert compaction over EPN (smem-only).
+        if tidx == 0:
+            run = Int32(0)
+            ac = Int32(0)
+            for le in cutlass.range(EPN, unroll=1):
+                c = off[le + 1]
+                if c > Int32(0):
+                    alist[ac] = Int32(le)
+                    ac = ac + Int32(1)
+                run = run + c
+                off[le + 1] = run
+            acnt[0] = ac
+        cute.arch.sync_threads()
+        for i in cutlass.range(tidx, EPN + 1, self.NUM_THREADS, unroll=1):
+            cur[i] = off[i]
+        cute.arch.sync_threads()
+        if warp_idx == 0:
+            lane = cute.arch.lane_idx()
+            lanes_lt = (Uint32(1) << lane) - Uint32(1)
+            NCHUNK = cutlass.const_expr((R * B + 31) // 32)
+            for c0 in cutlass.range(NCHUNK, unroll=1):
+                rb = c0 * 32 + lane
+                e = Int32(EPN)
+                if rb < Int32(R * B):
+                    ee = sexp[rb]
+                    if ee >= Int32(0) and ee < Int32(EPN):
+                        e = ee
+                peers = match_any_b32(e)
+                cell = cur.iterator + e
+                base = cute.arch.load(cell, Int32)
+                pos = base + Int32(cute.arch.popc(peers & lanes_lt))
+                cute.arch.sync_warp()
+                if (peers & lanes_lt) == Uint32(0):
+                    cute.arch.store(cell, base + Int32(cute.arch.popc(peers)))
+                cute.arch.sync_warp()
+                if e < Int32(EPN):
+                    slist[pos] = Int32(rb)
+        cute.arch.sync_threads()
+    
+        cta_tiler = (M_BLOCK, N_BLOCK)
+        smem_for_tma = cute.group_modes(stage_smem, 0, 2)
+        red_tiles = cute.zipped_divide(tma_red, cta_tiler)
+        tRsR, tRgR = cpasync.tma_partition(
+            tma_g2s_red, 0, cute.make_layout(1), smem_for_tma, red_tiles,
+        )
+        load_pipe = pipeline.PipelineTmaAsync.create(
+            barrier_storage=load_mbar, num_stages=STAGES,
+            producer_group=pipeline.CooperativeGroup(pipeline.Agent.Thread, 1),
+            consumer_group=pipeline.CooperativeGroup(pipeline.Agent.Thread, 4),
+            tx_count=TILE_BYTES,
+        )
+        ld_state = pipeline.make_pipeline_state(pipeline.PipelineUserType.Producer, STAGES)
+        cd_state = pipeline.make_pipeline_state(pipeline.PipelineUserType.Consumer, STAGES)
+        acc_tid = tidx - 32
+        H_PER = cutlass.const_expr(TILE_ELEMS // ACC_THREADS)
+>       acc_reg = cute.make_fragment((H_PER,), Float32)
+                  ^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'cutlass.cute' has no attribute 'make_fragment'. Did you mean: 'make_fragment_like'?
+
+moonep/grad_reduce.py:295: AttributeError
+=============================== warnings summary ===============================
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[44-True]
+tests/test_sampled_group.py::test_nondefault_group_and_collective_fallback
+tests/test_sampled_group.py::test_graph_replay_reads_new_routes
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_sampled_weights.py::test_sampled_plan_weight_and_parameter_gradient_lifecycle
+1 failed, 5 passed, 5 warnings in 18.41s
+
+=================================== FAILURES ===================================
+__________ test_sampled_plan_weight_and_parameter_gradient_lifecycle ___________
+
+dist_env = (4, 8)
+
+    def test_sampled_plan_weight_and_parameter_gradient_lifecycle(dist_env):
+        rank, world = dist_env
+        if world != R:
+            pytest.skip("requires eight actual GPUs on one NVLink host")
+        assert int(os.environ.get("LOCAL_WORLD_SIZE", 0)) == R
+        assert torch.cuda.device_count() >= R
+        identities = [None]*R
+        dist.all_gather_object(identities, (socket.gethostname(), torch.cuda.current_device()))
+        assert len(set(identities)) == R, "ranks must not share a physical GPU"
+    
+        from moonep._C import get_vmm_granularity
+        granularity = get_vmm_granularity()
+        granularities = [None]*R
+        dist.all_gather_object(granularities, granularity)
+        assert len(set(granularities)) == 1, "this test requires homogeneous VMM alignment"
+        intermediate = 128
+        while B*H*intermediate*2 % granularity:
+            intermediate *= 2
+        shapes = ((intermediate, H), (intermediate, H), (H, intermediate))
+        buffer = Buffer(S, H, K, E, R, B=B, token_padding=128, num_sms=32,
+                        planning_backend="sampled_group", planning_rounds=4,
+                        planning_sample_seed=20261026, enable_pdl=False, explicitly_destroy=True)
+        weights, gradients = [], []
+        try:
+>           _compile_all(buffer, intermediate)
+
+tests/test_sampled_weights.py:235: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_sampled_weights.py:69: in _compile_all
+    grad_reduce._get_compiled(E, h, hp, R, B, stride, sms, device)
+moonep/grad_reduce.py:424: in _get_compiled
+    return cute.compile(
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/compiler.py:1250: in __call__
+    return self._compile(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/compiler.py:1396: in _compile
+    return func._dsl_object._func(func, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py:2782: in _func
+    return self._func_impl(funcBody, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py:2795: in _func_impl
+    result = self.generate_mlir(
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py:2318: in generate_mlir
+    module, module_hash, result = self.generate_original_ir(
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py:1987: in generate_original_ir
+    module, result = build_ir_module()
+                     ^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py:1948: in build_ir_module
+    result = funcBody(*ir_args, **ir_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+moonep/grad_reduce.py:142: in __call__
+    rank, barrier_off).launch(
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/cutlass_dsl/cutlass.py:2118: in launch
+    ret, name = kernel_generator(*self.func_args, **self.func_kwargs, config=config)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/dsl.py:3135: in kernel_wrapper
+    kernel_ret = funcBody(*ir_args, **ir_kwargs)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <moonep.grad_reduce.GradReduceKernel object at 0x7fb62866edb0>
+expert_grad = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7fb66c525520>
+reduce_buf = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7fb628b9cad0>
+tma_g2s_red = <cutlass.cute.atom.CopyAtom object at 0x7fb66c3d6de0>
+tma_red = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7fb66c3d6e70>
+experts = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7fb66c4790a0>
+meta = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7fb66c3cc050>
+bar = <[RuntimeError("An MLIR function requires a Location but none was provided in the call or from the surrounding environ...n with a 'loc=' argument or establish a default using 'with loc:'") raised in repr()] _Tensor object at 0x7fb62866c8f0>
+rank = Int32(?), barrier_off = Int32(?)
+
+    def kernel(
+        self,
+        expert_grad: cute.Tensor,
+        reduce_buf: cute.Tensor,
+        tma_g2s_red: cute.CopyAtom,
+        tma_red: cute.Tensor,
+        experts: cute.Tensor,
+        meta: cute.Tensor,
+        bar: cute.Tensor,
+        rank: Int32,
+        barrier_off: Int32,
+    ):
+        E = cutlass.const_expr(self.E)
+        H = cutlass.const_expr(self.H)
+        Hp = cutlass.const_expr(self.Hp)
+        R = cutlass.const_expr(self.R)
+        B = cutlass.const_expr(self.B)
+        M_BLOCK = cutlass.const_expr(self.M_BLOCK)
+        N_BLOCK = cutlass.const_expr(self.N_BLOCK)
+        meta_stride = cutlass.const_expr(self.meta_stride)
+        num_ranks = cutlass.const_expr(self.R)
+        TILE_ELEMS = cutlass.const_expr(M_BLOCK * N_BLOCK)
+        MTILES = cutlass.const_expr(H // M_BLOCK)
+        NTILES = cutlass.const_expr(Hp // N_BLOCK)
+        TILES_PER_EXPERT = cutlass.const_expr(MTILES * NTILES)
+        EPN = cutlass.const_expr(E // R)
+    
+        STAGES = cutlass.const_expr(self.STAGES)
+        ACC_THREADS = cutlass.const_expr(self.ACC_THREADS)
+        num_threads = cutlass.const_expr(self.NUM_THREADS)
+        TILE_BYTES = cutlass.const_expr(TILE_ELEMS * 4)
+    
+        tidx, _, _ = cute.arch.thread_idx()
+        bidx, _, _ = cute.arch.block_idx()
+        warp_idx = cute.arch.make_warp_uniform(cute.arch.warp_idx())
+    
+        smem = utils.SmemAllocator()
+        load_mbar = smem.allocate_array(Int64, num_elems=2 * STAGES)
+        stage_smem = smem.allocate_tensor(
+            Float32,
+            cute.make_ordered_layout((M_BLOCK, N_BLOCK, STAGES), order=(1, 0, 2)),
+            byte_alignment=128,
+        )
+        # flat per-stage view of the same smem for the acc warps.
+        stage_flat = cute.make_tensor(
+            stage_smem.iterator,
+            cute.make_ordered_layout((TILE_ELEMS, STAGES), order=(0, 1)),
+        )
+        # prescan: cnt[le] and a per-expert-grouped slot list. cnt[EPN] holds
+        # running prefix; slist[off[le] .. off[le]+cnt[le]) are the matching rb.
+        off = smem.allocate_tensor(Int32, cute.make_layout((EPN + 1,)), byte_alignment=16)
+        # compacted list of active local experts (off[le+1] > off[le]).
+        alist = smem.allocate_tensor(Int32, cute.make_layout((EPN,)), byte_alignment=16)
+        acnt = smem.allocate_tensor(Int32, cute.make_layout((1,)), byte_alignment=16)
+        slist = smem.allocate_tensor(Int32, cute.make_layout((R * B,)), byte_alignment=16)
+        # smem stage of experts[] (pre-biased to local ids) for the prescan.
+        sexp = smem.allocate_tensor(Int32, cute.make_layout((R * B,)), byte_alignment=16)
+        # slist fill cursors; cur[EPN] is a dummy bucket for invalid lanes.
+        cur = smem.allocate_tensor(Int32, cute.make_layout((EPN + 1,)), byte_alignment=16)
+        # this rank's own consumed slots (experts[rank,b] >= 0) for clearing.
+        clist = smem.allocate_tensor(Int32, cute.make_layout((B,)), byte_alignment=16)
+        ccnt = smem.allocate_tensor(Int32, cute.make_layout((1,)), byte_alignment=16)
+    
+        rank_epn = rank * EPN
+    
+        # ---- prescan experts once (parallel): bucket slots per local expert.
+        # A single-thread gmem scan of all R*B entries is bottlenecked by a
+        # serial load latency chain, so it must be cooperative: stage the
+        # table to smem with all threads, count with cta atomics, then have
+        # warp 0 fill slist chunk-by-chunk with match_any so the final order
+        # stays rb-ascending (bitwise-identical to the serial scan).
+        for i in cutlass.range(tidx, R * B, self.NUM_THREADS, unroll=1):
+            sexp[i] = experts[i] - rank_epn
+        for i in cutlass.range(tidx, EPN + 1, self.NUM_THREADS, unroll=1):
+            off[i] = Int32(0)
+        if tidx == 0:
+            ccnt[0] = Int32(0)
+        cute.arch.sync_threads()
+        for i in cutlass.range(tidx, R * B, self.NUM_THREADS, unroll=1):
+            e = sexp[i]
+            if e >= Int32(0) and e < Int32(EPN):
+                cute.arch.atomic_add(off.iterator + (e + Int32(1)), Int32(1),
+                                     scope="cta")
+        # this rank's own consumed slots (experts[rank,b] >= 0), unordered.
+        for b in cutlass.range(tidx, B, self.NUM_THREADS, unroll=1):
+            if sexp[rank * B + b] >= Int32(0) - rank_epn:
+                pos = cute.arch.atomic_add(ccnt.iterator, Int32(1), scope="cta")
+                clist[pos] = Int32(b)
+        cute.arch.sync_threads()
+        # serial prefix + active-expert compaction over EPN (smem-only).
+        if tidx == 0:
+            run = Int32(0)
+            ac = Int32(0)
+            for le in cutlass.range(EPN, unroll=1):
+                c = off[le + 1]
+                if c > Int32(0):
+                    alist[ac] = Int32(le)
+                    ac = ac + Int32(1)
+                run = run + c
+                off[le + 1] = run
+            acnt[0] = ac
+        cute.arch.sync_threads()
+        for i in cutlass.range(tidx, EPN + 1, self.NUM_THREADS, unroll=1):
+            cur[i] = off[i]
+        cute.arch.sync_threads()
+        if warp_idx == 0:
+            lane = cute.arch.lane_idx()
+            lanes_lt = (Uint32(1) << lane) - Uint32(1)
+            NCHUNK = cutlass.const_expr((R * B + 31) // 32)
+            for c0 in cutlass.range(NCHUNK, unroll=1):
+                rb = c0 * 32 + lane
+                e = Int32(EPN)
+                if rb < Int32(R * B):
+                    ee = sexp[rb]
+                    if ee >= Int32(0) and ee < Int32(EPN):
+                        e = ee
+                peers = match_any_b32(e)
+                cell = cur.iterator + e
+                base = cute.arch.load(cell, Int32)
+                pos = base + Int32(cute.arch.popc(peers & lanes_lt))
+                cute.arch.sync_warp()
+                if (peers & lanes_lt) == Uint32(0):
+                    cute.arch.store(cell, base + Int32(cute.arch.popc(peers)))
+                cute.arch.sync_warp()
+                if e < Int32(EPN):
+                    slist[pos] = Int32(rb)
+        cute.arch.sync_threads()
+    
+        cta_tiler = (M_BLOCK, N_BLOCK)
+        smem_for_tma = cute.group_modes(stage_smem, 0, 2)
+        red_tiles = cute.zipped_divide(tma_red, cta_tiler)
+        tRsR, tRgR = cpasync.tma_partition(
+            tma_g2s_red, 0, cute.make_layout(1), smem_for_tma, red_tiles,
+        )
+        load_pipe = pipeline.PipelineTmaAsync.create(
+            barrier_storage=load_mbar, num_stages=STAGES,
+            producer_group=pipeline.CooperativeGroup(pipeline.Agent.Thread, 1),
+            consumer_group=pipeline.CooperativeGroup(pipeline.Agent.Thread, 4),
+            tx_count=TILE_BYTES,
+        )
+        ld_state = pipeline.make_pipeline_state(pipeline.PipelineUserType.Producer, STAGES)
+        cd_state = pipeline.make_pipeline_state(pipeline.PipelineUserType.Consumer, STAGES)
+        acc_tid = tidx - 32
+        H_PER = cutlass.const_expr(TILE_ELEMS // ACC_THREADS)
+>       acc_reg = cute.make_fragment((H_PER,), Float32)
+                  ^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'cutlass.cute' has no attribute 'make_fragment'. Did you mean: 'make_fragment_like'?
+
+moonep/grad_reduce.py:295: AttributeError
+=============================== warnings summary ===============================
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[44-True]
+tests/test_sampled_group.py::test_nondefault_group_and_collective_fallback
+tests/test_sampled_group.py::test_graph_replay_reads_new_routes
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_sampled_weights.py::test_sampled_plan_weight_and_parameter_gradient_lifecycle
+1 failed, 5 passed, 5 warnings in 18.42s
+W1105 09:12:29.811000 171388 torch/distributed/elastic/multiprocessing/api.py:1028] Sending process 171981 closing signal SIGTERM
+W1105 09:12:29.812000 171388 torch/distributed/elastic/multiprocessing/api.py:1028] Sending process 171982 closing signal SIGTERM
+W1105 09:12:29.812000 171388 torch/distributed/elastic/multiprocessing/api.py:1028] Sending process 171983 closing signal SIGTERM
+W1105 09:12:29.812000 171388 torch/distributed/elastic/multiprocessing/api.py:1028] Sending process 171984 closing signal SIGTERM
+W1105 09:12:29.813000 171388 torch/distributed/elastic/multiprocessing/api.py:1028] Sending process 171985 closing signal SIGTERM
+W1105 09:12:29.813000 171388 torch/distributed/elastic/multiprocessing/api.py:1028] Sending process 171986 closing signal SIGTERM
+W1105 09:12:29.813000 171388 torch/distributed/elastic/multiprocessing/api.py:1028] Sending process 171988 closing signal SIGTERM
+E1105 09:12:30.606000 171388 torch/distributed/elastic/multiprocessing/api.py:1002] failed (exitcode: 1) local_rank: 6 (pid: 171987) of binary: /usr/bin/python
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/run.py", line 1032, in <module>
+    main()
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 367, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/run.py", line 1028, in main
+    run(args)
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/run.py", line 1019, in run
+    elastic_launch(
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/launcher/api.py", line 194, in __call__
+    return launch_agent(
+           ^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/launcher/api.py", line 383, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+pytest FAILED
+------------------------------------------------------------
+Failures:
+[1]:
+  time      : 2026-11-05_09:12:30
+  host      : omni-dev--e2549984aa65-fkao76l7ui
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 171981) 
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[2]:
+  time      : 2026-11-05_09:12:30
+  host      : omni-dev--e2549984aa65-fkao76l7ui
+  rank      : 1 (local_rank: 1)
+  exitcode  : 1 (pid: 171982) 
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[3]:
+  time      : 2026-11-05_09:12:30
+  host      : omni-dev--e2549984aa65-fkao76l7ui
+  rank      : 2 (local_rank: 2)
+  exitcode  : -15 (pid: 171983)  (SIGTERM)
+  error_file: <N/A>
+  traceback : Signal 15 (SIGTERM) received by PID 171983
+[4]:
+  time      : 2026-11-05_09:12:30
+  host      : omni-dev--e2549984aa65-fkao76l7ui
+  rank      : 3 (local_rank: 3)
+  exitcode  : 1 (pid: 171984) 
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[5]:
+  time      : 2026-11-05_09:12:30
+  host      : omni-dev--e2549984aa65-fkao76l7ui
+  rank      : 4 (local_rank: 4)
+  exitcode  : -15 (pid: 171985)  (SIGTERM)
+  error_file: <N/A>
+  traceback : Signal 15 (SIGTERM) received by PID 171985
+[6]:
+  time      : 2026-11-05_09:12:30
+  host      : omni-dev--e2549984aa65-fkao76l7ui
+  rank      : 5 (local_rank: 5)
+  exitcode  : 1 (pid: 171986) 
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[7]:
+  time      : 2026-11-05_09:12:30
+  host      : omni-dev--e2549984aa65-fkao76l7ui
+  rank      : 7 (local_rank: 7)
+  exitcode  : 1 (pid: 171988) 
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-11-05_09:12:29
+  host      : omni-dev--e2549984aa65-fkao76l7ui
+  rank      : 6 (local_rank: 6)
+  exitcode  : 1 (pid: 171987) 
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

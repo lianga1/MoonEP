@@ -71,9 +71,10 @@ setup(
     packages=find_packages(include=["moonep", "moonep.*"]),
     install_requires=[
         "nvidia-cutlass-dsl==4.4.2",
+        "numpy>=1.24",
     ],
-    package_data={"moonep": ["csrc/affinity_planner.cu"]},
-    extras_require={"affinity": ["ninja"]},
+    package_data={"moonep": ["csrc/*.cu"]},
+    extras_require={"affinity": ["ninja"], "sampled_group": ["ninja"]},
     ext_modules=ext_modules,
     cmdclass={"build_ext": BuildExtension},
 )

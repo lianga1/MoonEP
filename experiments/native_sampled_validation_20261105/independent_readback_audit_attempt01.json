@@ -1,0 +1,5833 @@
+{
+  "status": "failed",
+  "created_at_utc": "2026-11-05T09:27:21.823899+00:00",
+  "scope": "Independent CPU readback of retained evidence; no GPU kernels rerun. Timing arithmetic, fixture ownership/traffic/support, source provenance, and test logs verified independently.",
+  "inputs": {
+    "outputs/native_sampled_integration/planner_native8_attempt01.json": "63fe3ea94d76f9d6c8c4854f418136ba344c7dd889812cc8cc741f8bc7e9df6d",
+    "outputs/native_sampled_integration/components_attempt01.json": "94749958c65835b2bdbc862a498059ee16f136e77b113130626232a19571d529",
+    "outputs/native_sampled_integration/native8/evidence/source_final.json": "c1c4ea6a8ba8eb0aaae5e4580bc074f4d1dcdf92d9894929b0d260536b3cf3c2",
+    "outputs/eight_rank_estimate/kernel_inputs/manifest.json": "38cc2daacc1ef6e95f7e9cad02d15d614aaa8e2db9e3b2dce537ea8e3b0bab54",
+    "outputs/native_sampled_integration/publication_manifest.json": "dcefeb704fc704b9e85ae46be55550378d70ab3e7b781d8da0f7bca51f6a96a4"
+  },
+  "summary": {
+    "all_checks_passed": false,
+    "checks_count": 1252,
+    "failed_checks": [
+      "components.L1.repeat0.rank_status_history",
+      "components.L1.repeat1.rank_status_history",
+      "components.L2.repeat0.rank_status_history",
+      "components.L2.repeat1.rank_status_history",
+      "components.L3.repeat0.rank_status_history",
+      "components.L3.repeat1.rank_status_history",
+      "components.L4.repeat0.rank_status_history",
+      "components.L4.repeat1.rank_status_history",
+      "components.L5.repeat0.rank_status_history",
+      "components.L5.repeat1.rank_status_history",
+      "components.L6.repeat0.rank_status_history",
+      "components.L6.repeat1.rank_status_history",
+      "components.L7.repeat0.rank_status_history",
+      "components.L7.repeat1.rank_status_history"
+    ],
+    "layers": 8,
+    "physical_ranks_in_native_benchmark": 8,
+    "source_local_tokens_per_rank": 16768,
+    "global_tokens_per_layer": 134144,
+    "compute_pairs_per_layer": 1073152,
+    "owner_entries_matched_by_hash_both_variants_all_layers": 17170432,
+    "recorded_gpu_audit_boolean_count": 712,
+    "planner_status_values_checked": 64,
+    "all_status_zero": true,
+    "fallback_layers": [],
+    "native_planner_sum_layer_ms": 0.5441888004541398,
+    "sampled_planner_sum_layer_ms": 10.288716793060303,
+    "additional_planner_sum_layer_ms": 9.744527992606162,
+    "sampled_over_native_planner_ratio": 18.90652064958724,
+    "native_remote_token_destinations_sum": 5054165,
+    "sampled_remote_token_destinations_sum": 3791665,
+    "saved_remote_token_destinations_sum": 1262500,
+    "remote_token_destination_reduction_percent": 24.979398179521247,
+    "native_expert_copies_sum": 71,
+    "sampled_expert_copies_sum": 507,
+    "additional_expert_copies_sum": 436,
+    "eight_rank_main_test_cases_per_rank": 5,
+    "eight_rank_weight_lifecycle_cases_per_rank": 1,
+    "two_rank_component_replay_cases": 16,
+    "two_rank_component_rank_statuses_checked": 32
+  },
+  "timing_definition": {
+    "primary": "For each layer and variant, median of each rank's 10 per-replay CUDA durations, then maximum across 8 ranks. Layer totals sum these eight maxima. median(max rank per sample) is independently recomputed and retained separately.",
+    "per_rank_observations": 1280,
+    "timed_group_graph_replays": 800,
+    "timed_gpu_rank_graph_replays": 6400,
+    "unit": "milliseconds; raw entries already divided by five replays",
+    "not_included": [
+      "fixture load",
+      "tpe histogram",
+      "JIT",
+      "audits",
+      "dedup-map builder in token dispatch",
+      "expert weight transport",
+      "token dispatch/combine",
+      "gradient payload",
+      "GEMM",
+      "optimizer"
+    ]
+  },
+  "layers": [
+    {
+      "layer": 0,
+      "timing": {
+        "moon": {
+          "max_rank_median_cuda_ms": 0.08065920174121857,
+          "max_rank_median_host_ms": 0.08626938797533512,
+          "median_sample_max_rank_cuda_ms": 0.08072320222854615,
+          "median_sample_max_rank_host_ms": 0.08628121577203274,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "cuda_ms": 0.0792928010225296,
+              "host_ms": 0.0853201374411583
+            },
+            {
+              "rank": 1,
+              "cuda_ms": 0.08065920174121857,
+              "host_ms": 0.08626938797533512
+            },
+            {
+              "rank": 2,
+              "cuda_ms": 0.07948480248451233,
+              "host_ms": 0.08563902229070663
+            },
+            {
+              "rank": 3,
+              "cuda_ms": 0.07854080200195312,
+              "host_ms": 0.08507287129759789
+            },
+            {
+              "rank": 4,
+              "cuda_ms": 0.0791808009147644,
+              "host_ms": 0.08599031716585159
+            },
+            {
+              "rank": 5,
+              "cuda_ms": 0.07895680069923401,
+              "host_ms": 0.08565136231482029
+            },
+            {
+              "rank": 6,
+              "cuda_ms": 0.07987840175628663,
+              "host_ms": 0.08549243211746216
+            },
+            {
+              "rank": 7,
+              "cuda_ms": 0.07875199913978577,
+              "host_ms": 0.0846590381115675
+            }
+          ]
+        },
+        "sampled_group": {
+          "max_rank_median_cuda_ms": 1.293612813949585,
+          "max_rank_median_host_ms": 1.2993250973522663,
+          "median_sample_max_rank_cuda_ms": 1.2936448097229003,
+          "median_sample_max_rank_host_ms": 1.2993250973522663,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "cuda_ms": 1.2928352355957031,
+              "host_ms": 1.2987487949430943
+            },
+            {
+              "rank": 1,
+              "cuda_ms": 1.293612813949585,
+              "host_ms": 1.2993250973522663
+            },
+            {
+              "rank": 2,
+              "cuda_ms": 1.2929183959960937,
+              "host_ms": 1.2989013455808163
+            },
+            {
+              "rank": 3,
+              "cuda_ms": 1.2928800106048586,
+              "host_ms": 1.2988504953682423
+            },
+            {
+              "rank": 4,
+              "cuda_ms": 1.29267840385437,
+              "host_ms": 1.2989485636353493
+            },
+            {
+              "rank": 5,
+              "cuda_ms": 1.293280029296875,
+              "host_ms": 1.2989640701562166
+            },
+            {
+              "rank": 6,
+              "cuda_ms": 1.2927423954010009,
+              "host_ms": 1.298619620501995
+            },
+            {
+              "rank": 7,
+              "cuda_ms": 1.2921760082244873,
+              "host_ms": 1.2981906533241272
+            }
+          ]
+        }
+      },
+      "routing": {
+        "native": {
+          "owner_sha256": "b9445ef549d39230f0e007d060ee635ab87e7c308e6429fb8c1226932d798bcc",
+          "loads": [
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144
+          ],
+          "dispatch_matrix": [
+            [
+              0,
+              12720,
+              12744,
+              12060,
+              12138,
+              8184,
+              8590,
+              12152
+            ],
+            [
+              12216,
+              0,
+              11283,
+              9776,
+              11273,
+              10722,
+              10789,
+              11282
+            ],
+            [
+              11307,
+              11093,
+              0,
+              10986,
+              10217,
+              11346,
+              11639,
+              11106
+            ],
+            [
+              11258,
+              10815,
+              11093,
+              0,
+              10369,
+              11743,
+              10985,
+              10722
+            ],
+            [
+              10817,
+              11334,
+              11337,
+              11237,
+              0,
+              10490,
+              11805,
+              10612
+            ],
+            [
+              10924,
+              10688,
+              11060,
+              11194,
+              10919,
+              0,
+              11784,
+              10768
+            ],
+            [
+              10405,
+              11082,
+              10787,
+              11165,
+              11420,
+              11492,
+              0,
+              11669
+            ],
+            [
+              10380,
+              10836,
+              10118,
+              10595,
+              11870,
+              12254,
+              11861,
+              0
+            ]
+          ],
+          "remote_token_destinations": 621511,
+          "max_endpoint_remote_tokens": 78588,
+          "home_to_replica_matrix": [
+            [
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              4
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "expert_copies": 11,
+          "expert_copies_by_rank": [
+            0,
+            1,
+            2,
+            1,
+            1,
+            1,
+            1,
+            4
+          ],
+          "active_remote_experts_with_assigned_tasks": 11,
+          "runtime_address_and_dedup_audit_flags_all_passed": true
+        },
+        "sampled_group": {
+          "owner_sha256": "0a341aa34e20b9c3d3d83a216536906907a649aaceace1a9b3078d9715e70f94",
+          "loads": [
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144
+          ],
+          "dispatch_matrix": [
+            [
+              0,
+              8972,
+              7936,
+              8520,
+              10717,
+              7738,
+              7097,
+              11341
+            ],
+            [
+              10030,
+              0,
+              9897,
+              7967,
+              9689,
+              9609,
+              8462,
+              10085
+            ],
+            [
+              9780,
+              9515,
+              0,
+              9322,
+              9043,
+              9936,
+              9451,
+              9607
+            ],
+            [
+              9452,
+              9776,
+              9840,
+              0,
+              9268,
+              10295,
+              8269,
+              9148
+            ],
+            [
+              9487,
+              9207,
+              10007,
+              9704,
+              0,
+              9356,
+              10072,
+              9606
+            ],
+            [
+              9471,
+              9204,
+              9203,
+              9398,
+              9625,
+              0,
+              10011,
+              9479
+            ],
+            [
+              8803,
+              9687,
+              10012,
+              9384,
+              10106,
+              9913,
+              0,
+              9330
+            ],
+            [
+              9514,
+              9362,
+              9377,
+              9343,
+              10410,
+              10752,
+              10147,
+              0
+            ]
+          ],
+          "remote_token_destinations": 530732,
+          "max_endpoint_remote_tokens": 68905,
+          "home_to_replica_matrix": [
+            [
+              0,
+              4,
+              1,
+              3,
+              2,
+              3,
+              2,
+              0
+            ],
+            [
+              2,
+              0,
+              1,
+              1,
+              2,
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1
+            ],
+            [
+              2,
+              1,
+              1,
+              0,
+              2,
+              1,
+              3,
+              0
+            ],
+            [
+              2,
+              1,
+              1,
+              2,
+              0,
+              1,
+              0,
+              1
+            ],
+            [
+              0,
+              1,
+              3,
+              1,
+              0,
+              0,
+              2,
+              0
+            ],
+            [
+              2,
+              1,
+              1,
+              1,
+              1,
+              2,
+              0,
+              6
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "expert_copies": 64,
+          "expert_copies_by_rank": [
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8
+          ],
+          "active_remote_experts_with_assigned_tasks": 64,
+          "runtime_address_and_dedup_audit_flags_all_passed": true
+        }
+      },
+      "additional_planner_ms": 1.2129536122083664,
+      "saved_remote_token_destinations": 90779,
+      "additional_expert_copies": 53
+    },
+    {
+      "layer": 1,
+      "timing": {
+        "moon": {
+          "max_rank_median_cuda_ms": 0.06928640007972717,
+          "max_rank_median_host_ms": 0.07513640448451042,
+          "median_sample_max_rank_cuda_ms": 0.06932800114154816,
+          "median_sample_max_rank_host_ms": 0.07513640448451042,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "cuda_ms": 0.06860159933567048,
+              "host_ms": 0.07458510808646679
+            },
+            {
+              "rank": 1,
+              "cuda_ms": 0.06928640007972717,
+              "host_ms": 0.07513640448451042
+            },
+            {
+              "rank": 2,
+              "cuda_ms": 0.06911360025405883,
+              "host_ms": 0.0748154241591692
+            },
+            {
+              "rank": 3,
+              "cuda_ms": 0.06849279999732971,
+              "host_ms": 0.07452140562236309
+            },
+            {
+              "rank": 4,
+              "cuda_ms": 0.06884799897670746,
+              "host_ms": 0.07479633204638958
+            },
+            {
+              "rank": 5,
+              "cuda_ms": 0.06903679966926575,
+              "host_ms": 0.07436149753630161
+            },
+            {
+              "rank": 6,
+              "cuda_ms": 0.06885440051555633,
+              "host_ms": 0.07469058036804199
+            },
+            {
+              "rank": 7,
+              "cuda_ms": 0.06855680048465729,
+              "host_ms": 0.07443255744874477
+            }
+          ]
+        },
+        "sampled_group": {
+          "max_rank_median_cuda_ms": 1.2950559616088868,
+          "max_rank_median_host_ms": 1.300647296011448,
+          "median_sample_max_rank_cuda_ms": 1.2950559616088868,
+          "median_sample_max_rank_host_ms": 1.3007196132093668,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "cuda_ms": 1.2936800003051758,
+              "host_ms": 1.2999888975173235
+            },
+            {
+              "rank": 1,
+              "cuda_ms": 1.2950559616088868,
+              "host_ms": 1.300647296011448
+            },
+            {
+              "rank": 2,
+              "cuda_ms": 1.2949471950531004,
+              "host_ms": 1.3005010783672333
+            },
+            {
+              "rank": 3,
+              "cuda_ms": 1.293932819366455,
+              "host_ms": 1.3000034727156162
+            },
+            {
+              "rank": 4,
+              "cuda_ms": 1.2935743808746336,
+              "host_ms": 1.2999473605304956
+            },
+            {
+              "rank": 5,
+              "cuda_ms": 1.2944000244140625,
+              "host_ms": 1.3000242877751589
+            },
+            {
+              "rank": 6,
+              "cuda_ms": 1.2945152282714845,
+              "host_ms": 1.3001301791518927
+            },
+            {
+              "rank": 7,
+              "cuda_ms": 1.294374370574951,
+              "host_ms": 1.3000357430428267
+            }
+          ]
+        }
+      },
+      "routing": {
+        "native": {
+          "owner_sha256": "0437f397119aab84125d22c01e94805c267aa262aa75474835c19d21efb41850",
+          "loads": [
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144
+          ],
+          "dispatch_matrix": [
+            [
+              0,
+              13001,
+              10179,
+              10058,
+              10532,
+              13631,
+              8399,
+              10979
+            ],
+            [
+              12307,
+              0,
+              12847,
+              12317,
+              11370,
+              10274,
+              11366,
+              10298
+            ],
+            [
+              11511,
+              13110,
+              0,
+              10016,
+              9633,
+              8342,
+              12918,
+              12562
+            ],
+            [
+              13969,
+              11285,
+              14758,
+              0,
+              8833,
+              9983,
+              12342,
+              10919
+            ],
+            [
+              11089,
+              12115,
+              9796,
+              11617,
+              0,
+              10869,
+              10800,
+              13062
+            ],
+            [
+              11530,
+              11294,
+              10848,
+              13485,
+              10741,
+              0,
+              11786,
+              13130
+            ],
+            [
+              11167,
+              9499,
+              10855,
+              14501,
+              12567,
+              12473,
+              0,
+              12403
+            ],
+            [
+              11779,
+              8933,
+              8320,
+              12654,
+              13403,
+              13102,
+              11454,
+              0
+            ]
+          ],
+          "remote_token_destinations": 643011,
+          "max_endpoint_remote_tokens": 84648,
+          "home_to_replica_matrix": [
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "expert_copies": 7,
+          "expert_copies_by_rank": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          "active_remote_experts_with_assigned_tasks": 7,
+          "runtime_address_and_dedup_audit_flags_all_passed": true
+        },
+        "sampled_group": {
+          "owner_sha256": "faafa7aa85a6be058b379712160acaf2c9e738ce4874b63e2384fbc25d0fc730",
+          "loads": [
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144
+          ],
+          "dispatch_matrix": [
+            [
+              0,
+              11483,
+              7023,
+              8149,
+              6986,
+              8563,
+              6731,
+              9308
+            ],
+            [
+              7332,
+              0,
+              7202,
+              6445,
+              11365,
+              8662,
+              8857,
+              8529
+            ],
+            [
+              8187,
+              8428,
+              0,
+              5199,
+              9633,
+              7150,
+              8478,
+              8879
+            ],
+            [
+              7301,
+              7532,
+              9413,
+              0,
+              6188,
+              7020,
+              7533,
+              6439
+            ],
+            [
+              9003,
+              9916,
+              7689,
+              7931,
+              0,
+              9275,
+              7861,
+              9433
+            ],
+            [
+              9036,
+              8643,
+              9529,
+              8872,
+              8063,
+              0,
+              8601,
+              10205
+            ],
+            [
+              8151,
+              7184,
+              6807,
+              9188,
+              8003,
+              8307,
+              0,
+              8013
+            ],
+            [
+              10381,
+              8377,
+              6270,
+              7958,
+              8854,
+              8628,
+              8739,
+              0
+            ]
+          ],
+          "remote_token_destinations": 462932,
+          "max_endpoint_remote_tokens": 62949,
+          "home_to_replica_matrix": [
+            [
+              0,
+              0,
+              1,
+              1,
+              2,
+              1,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              2,
+              2,
+              0
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              3,
+              1,
+              3,
+              0,
+              2,
+              1,
+              2,
+              2
+            ],
+            [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              2,
+              1,
+              2,
+              1,
+              0,
+              3,
+              2
+            ],
+            [
+              0,
+              3,
+              2,
+              2,
+              0,
+              3,
+              0,
+              2
+            ],
+            [
+              2,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              0
+            ]
+          ],
+          "expert_copies": 64,
+          "expert_copies_by_rank": [
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8
+          ],
+          "active_remote_experts_with_assigned_tasks": 64,
+          "runtime_address_and_dedup_audit_flags_all_passed": true
+        }
+      },
+      "additional_planner_ms": 1.2257695615291597,
+      "saved_remote_token_destinations": 180079,
+      "additional_expert_copies": 57
+    },
+    {
+      "layer": 2,
+      "timing": {
+        "moon": {
+          "max_rank_median_cuda_ms": 0.06651839911937714,
+          "max_rank_median_host_ms": 0.07196879014372826,
+          "median_sample_max_rank_cuda_ms": 0.06652480065822602,
+          "median_sample_max_rank_host_ms": 0.07196879014372826,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "cuda_ms": 0.06564160287380219,
+              "host_ms": 0.07117213681340218
+            },
+            {
+              "rank": 1,
+              "cuda_ms": 0.06651839911937714,
+              "host_ms": 0.07196879014372826
+            },
+            {
+              "rank": 2,
+              "cuda_ms": 0.06605760157108306,
+              "host_ms": 0.07160604000091553
+            },
+            {
+              "rank": 3,
+              "cuda_ms": 0.06615680158138276,
+              "host_ms": 0.07174592465162277
+            },
+            {
+              "rank": 4,
+              "cuda_ms": 0.06582719981670379,
+              "host_ms": 0.07134857587516308
+            },
+            {
+              "rank": 5,
+              "cuda_ms": 0.06613759994506835,
+              "host_ms": 0.07133199833333492
+            },
+            {
+              "rank": 6,
+              "cuda_ms": 0.06585919857025146,
+              "host_ms": 0.07125767879188061
+            },
+            {
+              "rank": 7,
+              "cuda_ms": 0.06590719819068909,
+              "host_ms": 0.07133348844945431
+            }
+          ]
+        },
+        "sampled_group": {
+          "max_rank_median_cuda_ms": 1.2707808017730713,
+          "max_rank_median_host_ms": 1.2766733299940825,
+          "median_sample_max_rank_cuda_ms": 1.271014404296875,
+          "median_sample_max_rank_host_ms": 1.2767943553626537,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "cuda_ms": 1.269929599761963,
+              "host_ms": 1.2760528363287449
+            },
+            {
+              "rank": 1,
+              "cuda_ms": 1.2707808017730713,
+              "host_ms": 1.2766733299940825
+            },
+            {
+              "rank": 2,
+              "cuda_ms": 1.2705984115600586,
+              "host_ms": 1.2764716986566782
+            },
+            {
+              "rank": 3,
+              "cuda_ms": 1.2701535701751707,
+              "host_ms": 1.2764111626893282
+            },
+            {
+              "rank": 4,
+              "cuda_ms": 1.269920015335083,
+              "host_ms": 1.27598918043077
+            },
+            {
+              "rank": 5,
+              "cuda_ms": 1.270512008666992,
+              "host_ms": 1.2763021048158407
+            },
+            {
+              "rank": 6,
+              "cuda_ms": 1.270310401916504,
+              "host_ms": 1.2762120924890041
+            },
+            {
+              "rank": 7,
+              "cuda_ms": 1.2701312065124513,
+              "host_ms": 1.2760412879288197
+            }
+          ]
+        }
+      },
+      "routing": {
+        "native": {
+          "owner_sha256": "93f514248b7633c3b3c98e31f90e330c50205f8bd08fbe0a45bf808dccb2b9f4",
+          "loads": [
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144
+          ],
+          "dispatch_matrix": [
+            [
+              0,
+              12131,
+              13549,
+              10977,
+              9560,
+              13204,
+              8303,
+              8319
+            ],
+            [
+              9445,
+              0,
+              11885,
+              11223,
+              12187,
+              12964,
+              12995,
+              12174
+            ],
+            [
+              11552,
+              12272,
+              0,
+              10642,
+              10859,
+              11870,
+              9928,
+              11046
+            ],
+            [
+              14912,
+              11882,
+              7331,
+              0,
+              11677,
+              9772,
+              10141,
+              11022
+            ],
+            [
+              12757,
+              10759,
+              11780,
+              13283,
+              0,
+              10446,
+              10299,
+              9721
+            ],
+            [
+              10390,
+              12387,
+              10397,
+              13666,
+              12601,
+              0,
+              12415,
+              9505
+            ],
+            [
+              9387,
+              11959,
+              10930,
+              8870,
+              13190,
+              12617,
+              0,
+              11156
+            ],
+            [
+              10415,
+              11698,
+              12459,
+              13197,
+              10666,
+              12677,
+              12136,
+              0
+            ]
+          ],
+          "remote_token_destinations": 635585,
+          "max_endpoint_remote_tokens": 83550,
+          "home_to_replica_matrix": [
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              1,
+              0,
+              0,
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "expert_copies": 7,
+          "expert_copies_by_rank": [
+            1,
+            1,
+            1,
+            0,
+            1,
+            1,
+            1,
+            1
+          ],
+          "active_remote_experts_with_assigned_tasks": 7,
+          "runtime_address_and_dedup_audit_flags_all_passed": true
+        },
+        "sampled_group": {
+          "owner_sha256": "bdda7b58b9f9faac1ca82a3abaee6a5bc0b3e8445d75880d14c17604d6a4f929",
+          "loads": [
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144
+          ],
+          "dispatch_matrix": [
+            [
+              0,
+              10517,
+              10461,
+              5592,
+              7286,
+              9706,
+              6149,
+              8159
+            ],
+            [
+              6631,
+              0,
+              5496,
+              5460,
+              9988,
+              9104,
+              10552,
+              10828
+            ],
+            [
+              8225,
+              8275,
+              0,
+              6220,
+              6070,
+              8730,
+              7559,
+              8203
+            ],
+            [
+              8658,
+              8558,
+              6204,
+              0,
+              7661,
+              7604,
+              8454,
+              5882
+            ],
+            [
+              9954,
+              6830,
+              8018,
+              9008,
+              0,
+              5245,
+              6692,
+              6865
+            ],
+            [
+              9314,
+              9150,
+              9299,
+              8887,
+              6109,
+              0,
+              10410,
+              6494
+            ],
+            [
+              8185,
+              8945,
+              8688,
+              5724,
+              6546,
+              7462,
+              0,
+              7807
+            ],
+            [
+              8687,
+              8202,
+              10060,
+              6854,
+              7932,
+              8526,
+              9852,
+              0
+            ]
+          ],
+          "remote_token_destinations": 447977,
+          "max_endpoint_remote_tokens": 60477,
+          "home_to_replica_matrix": [
+            [
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1
+            ],
+            [
+              0,
+              3,
+              0,
+              1,
+              2,
+              0,
+              4,
+              0
+            ],
+            [
+              2,
+              2,
+              0,
+              0,
+              2,
+              2,
+              0,
+              2
+            ],
+            [
+              2,
+              1,
+              4,
+              3,
+              0,
+              4,
+              3,
+              3
+            ],
+            [
+              2,
+              1,
+              0,
+              2,
+              3,
+              0,
+              0,
+              1
+            ],
+            [
+              1,
+              0,
+              2,
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "expert_copies": 63,
+          "expert_copies_by_rank": [
+            8,
+            8,
+            7,
+            8,
+            8,
+            8,
+            8,
+            8
+          ],
+          "active_remote_experts_with_assigned_tasks": 63,
+          "runtime_address_and_dedup_audit_flags_all_passed": true
+        }
+      },
+      "additional_planner_ms": 1.204262402653694,
+      "saved_remote_token_destinations": 187608,
+      "additional_expert_copies": 56
+    },
+    {
+      "layer": 3,
+      "timing": {
+        "moon": {
+          "max_rank_median_cuda_ms": 0.06656959950923919,
+          "max_rank_median_host_ms": 0.07193116471171379,
+          "median_sample_max_rank_cuda_ms": 0.06656959950923919,
+          "median_sample_max_rank_host_ms": 0.07193116471171379,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "cuda_ms": 0.06518400013446808,
+              "host_ms": 0.0710424967110157
+            },
+            {
+              "rank": 1,
+              "cuda_ms": 0.06656959950923919,
+              "host_ms": 0.07193116471171379
+            },
+            {
+              "rank": 2,
+              "cuda_ms": 0.06559360027313232,
+              "host_ms": 0.07133376784622669
+            },
+            {
+              "rank": 3,
+              "cuda_ms": 0.06557759940624236,
+              "host_ms": 0.07143691182136536
+            },
+            {
+              "rank": 4,
+              "cuda_ms": 0.0659168004989624,
+              "host_ms": 0.07150438614189625
+            },
+            {
+              "rank": 5,
+              "cuda_ms": 0.06577920019626618,
+              "host_ms": 0.07134811021387577
+            },
+            {
+              "rank": 6,
+              "cuda_ms": 0.06590719819068908,
+              "host_ms": 0.0712340697646141
+            },
+            {
+              "rank": 7,
+              "cuda_ms": 0.0657151997089386,
+              "host_ms": 0.07118992507457733
+            }
+          ]
+        },
+        "sampled_group": {
+          "max_rank_median_cuda_ms": 1.249503993988037,
+          "max_rank_median_host_ms": 1.2554025277495384,
+          "median_sample_max_rank_cuda_ms": 1.249503993988037,
+          "median_sample_max_rank_host_ms": 1.2556223664432764,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "cuda_ms": 1.2486783981323242,
+              "host_ms": 1.2547513004392385
+            },
+            {
+              "rank": 1,
+              "cuda_ms": 1.249503993988037,
+              "host_ms": 1.2554025277495384
+            },
+            {
+              "rank": 2,
+              "cuda_ms": 1.2486848354339601,
+              "host_ms": 1.2550012208521366
+            },
+            {
+              "rank": 3,
+              "cuda_ms": 1.248960018157959,
+              "host_ms": 1.2553167063742876
+            },
+            {
+              "rank": 4,
+              "cuda_ms": 1.2486783981323242,
+              "host_ms": 1.2551527936011553
+            },
+            {
+              "rank": 5,
+              "cuda_ms": 1.2491744041442872,
+              "host_ms": 1.2552141211926937
+            },
+            {
+              "rank": 6,
+              "cuda_ms": 1.2491104125976562,
+              "host_ms": 1.2551003135740757
+            },
+            {
+              "rank": 7,
+              "cuda_ms": 1.248572826385498,
+              "host_ms": 1.2546984013170004
+            }
+          ]
+        }
+      },
+      "routing": {
+        "native": {
+          "owner_sha256": "0e40a8553241924cf21e0be3b608430686f59016316c4fbf054c0dcf0131cdd6",
+          "loads": [
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144
+          ],
+          "dispatch_matrix": [
+            [
+              0,
+              10612,
+              11852,
+              11025,
+              9205,
+              8167,
+              10899,
+              12866
+            ],
+            [
+              13785,
+              0,
+              14950,
+              11658,
+              10491,
+              8242,
+              11276,
+              8053
+            ],
+            [
+              12242,
+              10700,
+              0,
+              12272,
+              12387,
+              10342,
+              8364,
+              9025
+            ],
+            [
+              9687,
+              11677,
+              7127,
+              0,
+              13864,
+              13216,
+              8220,
+              14930
+            ],
+            [
+              12073,
+              12533,
+              10223,
+              12430,
+              0,
+              11424,
+              10515,
+              11096
+            ],
+            [
+              8835,
+              13020,
+              7094,
+              12085,
+              12505,
+              0,
+              12261,
+              12337
+            ],
+            [
+              10040,
+              10233,
+              7419,
+              13969,
+              13248,
+              12358,
+              0,
+              11741
+            ],
+            [
+              11687,
+              11091,
+              9058,
+              12475,
+              11712,
+              10341,
+              12564,
+              0
+            ]
+          ],
+          "remote_token_destinations": 623501,
+          "max_endpoint_remote_tokens": 85914,
+          "home_to_replica_matrix": [
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              2
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "expert_copies": 10,
+          "expert_copies_by_rank": [
+            2,
+            0,
+            1,
+            2,
+            1,
+            1,
+            1,
+            2
+          ],
+          "active_remote_experts_with_assigned_tasks": 10,
+          "runtime_address_and_dedup_audit_flags_all_passed": true
+        },
+        "sampled_group": {
+          "owner_sha256": "2fd2dd24e59e4cd1c81f9736f61b064c4c0e7ffed5bbdbee32281b787b236054",
+          "loads": [
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144
+          ],
+          "dispatch_matrix": [
+            [
+              0,
+              4792,
+              8444,
+              9207,
+              3259,
+              5347,
+              9914,
+              12829
+            ],
+            [
+              10140,
+              0,
+              7943,
+              8781,
+              10163,
+              4559,
+              8087,
+              6549
+            ],
+            [
+              7681,
+              8009,
+              0,
+              6202,
+              10732,
+              6230,
+              4729,
+              6968
+            ],
+            [
+              6219,
+              6558,
+              5018,
+              0,
+              7546,
+              11415,
+              5726,
+              10380
+            ],
+            [
+              8119,
+              10280,
+              9745,
+              9225,
+              0,
+              10037,
+              7911,
+              8141
+            ],
+            [
+              5746,
+              9486,
+              5675,
+              10721,
+              9939,
+              0,
+              10169,
+              10956
+            ],
+            [
+              6585,
+              9062,
+              5138,
+              10731,
+              8602,
+              8770,
+              0,
+              10723
+            ],
+            [
+              11020,
+              10711,
+              6761,
+              8976,
+              8441,
+              6768,
+              11267,
+              0
+            ]
+          ],
+          "remote_token_destinations": 463132,
+          "max_endpoint_remote_tokens": 66546,
+          "home_to_replica_matrix": [
+            [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              2,
+              0,
+              1,
+              1,
+              2,
+              3,
+              2,
+              2
+            ],
+            [
+              2,
+              2,
+              0,
+              4,
+              2,
+              4,
+              4,
+              3
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              3,
+              4,
+              3,
+              2,
+              2,
+              0,
+              2,
+              3
+            ],
+            [
+              0,
+              1,
+              3,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0
+            ]
+          ],
+          "expert_copies": 63,
+          "expert_copies_by_rank": [
+            8,
+            8,
+            7,
+            8,
+            8,
+            8,
+            8,
+            8
+          ],
+          "active_remote_experts_with_assigned_tasks": 63,
+          "runtime_address_and_dedup_audit_flags_all_passed": true
+        }
+      },
+      "additional_planner_ms": 1.1829343944787978,
+      "saved_remote_token_destinations": 160369,
+      "additional_expert_copies": 53
+    },
+    {
+      "layer": 4,
+      "timing": {
+        "moon": {
+          "max_rank_median_cuda_ms": 0.06528000235557556,
+          "max_rank_median_host_ms": 0.07081911899149418,
+          "median_sample_max_rank_cuda_ms": 0.06528000235557556,
+          "median_sample_max_rank_host_ms": 0.07096785120666027,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "cuda_ms": 0.06423999965190888,
+              "host_ms": 0.07003447972238064
+            },
+            {
+              "rank": 1,
+              "cuda_ms": 0.06528000235557556,
+              "host_ms": 0.07078009657561779
+            },
+            {
+              "rank": 2,
+              "cuda_ms": 0.06476480066776275,
+              "host_ms": 0.07041599601507187
+            },
+            {
+              "rank": 3,
+              "cuda_ms": 0.06512640118598938,
+              "host_ms": 0.07081911899149418
+            },
+            {
+              "rank": 4,
+              "cuda_ms": 0.06448000073432922,
+              "host_ms": 0.0703602097928524
+            },
+            {
+              "rank": 5,
+              "cuda_ms": 0.06471039950847626,
+              "host_ms": 0.07023815996944904
+            },
+            {
+              "rank": 6,
+              "cuda_ms": 0.06484160125255584,
+              "host_ms": 0.07028770633041859
+            },
+            {
+              "rank": 7,
+              "cuda_ms": 0.06459519863128663,
+              "host_ms": 0.07004672661423683
+            }
+          ]
+        },
+        "sampled_group": {
+          "max_rank_median_cuda_ms": 1.2897984027862548,
+          "max_rank_median_host_ms": 1.2954236939549446,
+          "median_sample_max_rank_cuda_ms": 1.2898144245147707,
+          "median_sample_max_rank_host_ms": 1.295471889898181,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "cuda_ms": 1.2886080265045166,
+              "host_ms": 1.2946872971951962
+            },
+            {
+              "rank": 1,
+              "cuda_ms": 1.2897984027862548,
+              "host_ms": 1.2954236939549446
+            },
+            {
+              "rank": 2,
+              "cuda_ms": 1.2892159938812258,
+              "host_ms": 1.2950543779879808
+            },
+            {
+              "rank": 3,
+              "cuda_ms": 1.2890719890594484,
+              "host_ms": 1.295245112851262
+            },
+            {
+              "rank": 4,
+              "cuda_ms": 1.2886303901672362,
+              "host_ms": 1.2948357034474611
+            },
+            {
+              "rank": 5,
+              "cuda_ms": 1.2893216133117675,
+              "host_ms": 1.2949875090271235
+            },
+            {
+              "rank": 6,
+              "cuda_ms": 1.2888672351837158,
+              "host_ms": 1.2948699295520782
+            },
+            {
+              "rank": 7,
+              "cuda_ms": 1.2889984130859373,
+              "host_ms": 1.2946931179612875
+            }
+          ]
+        }
+      },
+      "routing": {
+        "native": {
+          "owner_sha256": "ccaa193e84fbf5b0f313765a6742bdacb24d0ed00d00e859e209001b6dd1abb1",
+          "loads": [
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144
+          ],
+          "dispatch_matrix": [
+            [
+              0,
+              14478,
+              13214,
+              7339,
+              6176,
+              9393,
+              11297,
+              12399
+            ],
+            [
+              15747,
+              0,
+              12752,
+              9784,
+              11439,
+              11520,
+              7202,
+              10305
+            ],
+            [
+              8958,
+              10983,
+              0,
+              12437,
+              10989,
+              10722,
+              13593,
+              12164
+            ],
+            [
+              9464,
+              14970,
+              12066,
+              0,
+              12769,
+              13124,
+              10593,
+              8513
+            ],
+            [
+              11460,
+              10497,
+              12628,
+              10427,
+              0,
+              11795,
+              12603,
+              12624
+            ],
+            [
+              8572,
+              11670,
+              12380,
+              8884,
+              12979,
+              0,
+              13497,
+              10920
+            ],
+            [
+              8215,
+              12063,
+              12245,
+              12295,
+              14657,
+              8940,
+              0,
+              13737
+            ],
+            [
+              9711,
+              5650,
+              12222,
+              13658,
+              11872,
+              10131,
+              13946,
+              0
+            ]
+          ],
+          "remote_token_destinations": 634668,
+          "max_endpoint_remote_tokens": 87507,
+          "home_to_replica_matrix": [
+            [
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "expert_copies": 8,
+          "expert_copies_by_rank": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            0,
+            1,
+            1
+          ],
+          "active_remote_experts_with_assigned_tasks": 8,
+          "runtime_address_and_dedup_audit_flags_all_passed": true
+        },
+        "sampled_group": {
+          "owner_sha256": "2bebe821535015e4617e71bc9df10890eeddb688fd0678bd57145df45414331d",
+          "loads": [
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144
+          ],
+          "dispatch_matrix": [
+            [
+              0,
+              10471,
+              10929,
+              6315,
+              5333,
+              8370,
+              11297,
+              7769
+            ],
+            [
+              10072,
+              0,
+              5849,
+              7360,
+              7733,
+              10583,
+              6823,
+              6519
+            ],
+            [
+              7360,
+              7903,
+              0,
+              9209,
+              8422,
+              7704,
+              10449,
+              7857
+            ],
+            [
+              4709,
+              10541,
+              8359,
+              0,
+              7837,
+              7429,
+              4431,
+              6484
+            ],
+            [
+              8369,
+              6273,
+              6689,
+              8634,
+              0,
+              8740,
+              9173,
+              9694
+            ],
+            [
+              7468,
+              8796,
+              8383,
+              7313,
+              9331,
+              0,
+              9709,
+              7696
+            ],
+            [
+              5256,
+              10125,
+              9805,
+              10021,
+              11785,
+              7129,
+              0,
+              9345
+            ],
+            [
+              8773,
+              4528,
+              10000,
+              12721,
+              10073,
+              7755,
+              11964,
+              0
+            ]
+          ],
+          "remote_token_destinations": 469665,
+          "max_endpoint_remote_tokens": 65814,
+          "home_to_replica_matrix": [
+            [
+              0,
+              1,
+              2,
+              2,
+              2,
+              3,
+              3,
+              3
+            ],
+            [
+              0,
+              0,
+              1,
+              2,
+              1,
+              1,
+              1,
+              2
+            ],
+            [
+              1,
+              1,
+              0,
+              0,
+              1,
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              2,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              2,
+              0,
+              0,
+              1,
+              1,
+              1
+            ],
+            [
+              3,
+              1,
+              1,
+              3,
+              3,
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              2,
+              2,
+              2,
+              0,
+              1,
+              1,
+              1,
+              0
+            ]
+          ],
+          "expert_copies": 63,
+          "expert_copies_by_rank": [
+            8,
+            8,
+            8,
+            7,
+            8,
+            8,
+            8,
+            8
+          ],
+          "active_remote_experts_with_assigned_tasks": 63,
+          "runtime_address_and_dedup_audit_flags_all_passed": true
+        }
+      },
+      "additional_planner_ms": 1.2245184004306793,
+      "saved_remote_token_destinations": 165003,
+      "additional_expert_copies": 55
+    },
+    {
+      "layer": 5,
+      "timing": {
+        "moon": {
+          "max_rank_median_cuda_ms": 0.06554879844188691,
+          "max_rank_median_host_ms": 0.07132738828659058,
+          "median_sample_max_rank_cuda_ms": 0.06554879844188691,
+          "median_sample_max_rank_host_ms": 0.07132738828659058,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "cuda_ms": 0.06429120004177094,
+              "host_ms": 0.07035997696220875
+            },
+            {
+              "rank": 1,
+              "cuda_ms": 0.06554879844188691,
+              "host_ms": 0.07132738828659058
+            },
+            {
+              "rank": 2,
+              "cuda_ms": 0.06484159827232361,
+              "host_ms": 0.07062340155243874
+            },
+            {
+              "rank": 3,
+              "cuda_ms": 0.06519360244274139,
+              "host_ms": 0.07085050456225872
+            },
+            {
+              "rank": 4,
+              "cuda_ms": 0.06532159745693207,
+              "host_ms": 0.07102452218532562
+            },
+            {
+              "rank": 5,
+              "cuda_ms": 0.06462079882621766,
+              "host_ms": 0.07034214213490486
+            },
+            {
+              "rank": 6,
+              "cuda_ms": 0.06501440107822418,
+              "host_ms": 0.07085446268320084
+            },
+            {
+              "rank": 7,
+              "cuda_ms": 0.06523839831352235,
+              "host_ms": 0.0708273146301508
+            }
+          ]
+        },
+        "sampled_group": {
+          "max_rank_median_cuda_ms": 1.3448928356170655,
+          "max_rank_median_host_ms": 1.3507319148629904,
+          "median_sample_max_rank_cuda_ms": 1.344979238510132,
+          "median_sample_max_rank_host_ms": 1.3509862590581179,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "cuda_ms": 1.3434784412384033,
+              "host_ms": 1.349921664223075
+            },
+            {
+              "rank": 1,
+              "cuda_ms": 1.3448928356170655,
+              "host_ms": 1.3507319148629904
+            },
+            {
+              "rank": 2,
+              "cuda_ms": 1.3444191932678222,
+              "host_ms": 1.3502769637852907
+            },
+            {
+              "rank": 3,
+              "cuda_ms": 1.3442560195922852,
+              "host_ms": 1.3501957058906555
+            },
+            {
+              "rank": 4,
+              "cuda_ms": 1.344275188446045,
+              "host_ms": 1.3503316789865494
+            },
+            {
+              "rank": 5,
+              "cuda_ms": 1.3445184230804443,
+              "host_ms": 1.350191654637456
+            },
+            {
+              "rank": 6,
+              "cuda_ms": 1.344380807876587,
+              "host_ms": 1.3505436945706606
+            },
+            {
+              "rank": 7,
+              "cuda_ms": 1.343772792816162,
+              "host_ms": 1.3498674146831036
+            }
+          ]
+        }
+      },
+      "routing": {
+        "native": {
+          "owner_sha256": "e76b67c80546c95f1bd654eafbaed661cd1e14ed7e7269b1e9ec8006a2ba3c06",
+          "loads": [
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144
+          ],
+          "dispatch_matrix": [
+            [
+              0,
+              10081,
+              13559,
+              10627,
+              7497,
+              9385,
+              11144,
+              13956
+            ],
+            [
+              13542,
+              0,
+              12116,
+              10237,
+              10742,
+              12233,
+              8342,
+              9896
+            ],
+            [
+              11571,
+              9226,
+              0,
+              11478,
+              10445,
+              12512,
+              4616,
+              12643
+            ],
+            [
+              12551,
+              10320,
+              14565,
+              0,
+              13781,
+              13481,
+              3590,
+              12855
+            ],
+            [
+              10688,
+              12686,
+              9995,
+              11574,
+              0,
+              11043,
+              13160,
+              12482
+            ],
+            [
+              11235,
+              11742,
+              10000,
+              9880,
+              8399,
+              0,
+              14397,
+              10299
+            ],
+            [
+              12770,
+              12471,
+              6919,
+              13159,
+              9034,
+              11526,
+              0,
+              11814
+            ],
+            [
+              12567,
+              11720,
+              10907,
+              12793,
+              10998,
+              8192,
+              15819,
+              0
+            ]
+          ],
+          "remote_token_destinations": 625260,
+          "max_endpoint_remote_tokens": 84924,
+          "home_to_replica_matrix": [
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              3,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0
+            ]
+          ],
+          "expert_copies": 9,
+          "expert_copies_by_rank": [
+            3,
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          "active_remote_experts_with_assigned_tasks": 9,
+          "runtime_address_and_dedup_audit_flags_all_passed": true
+        },
+        "sampled_group": {
+          "owner_sha256": "e7504b234ed6dc9db21b20ba8f54497631b7153e348c95339a7bd8a7f180de41",
+          "loads": [
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144
+          ],
+          "dispatch_matrix": [
+            [
+              0,
+              7854,
+              11266,
+              5602,
+              6729,
+              5671,
+              11129,
+              12818
+            ],
+            [
+              10452,
+              0,
+              6989,
+              5238,
+              8321,
+              8088,
+              7935,
+              6881
+            ],
+            [
+              10200,
+              7513,
+              0,
+              8313,
+              8724,
+              8097,
+              4462,
+              8467
+            ],
+            [
+              9457,
+              7172,
+              6626,
+              0,
+              9158,
+              9147,
+              3586,
+              6404
+            ],
+            [
+              9411,
+              11764,
+              7124,
+              8550,
+              0,
+              7066,
+              8248,
+              9877
+            ],
+            [
+              10140,
+              10218,
+              8747,
+              7704,
+              6973,
+              0,
+              9565,
+              7000
+            ],
+            [
+              9942,
+              9969,
+              6649,
+              10768,
+              6281,
+              7824,
+              0,
+              8125
+            ],
+            [
+              11066,
+              10662,
+              10296,
+              9746,
+              9478,
+              6702,
+              11832,
+              0
+            ]
+          ],
+          "remote_token_destinations": 474026,
+          "max_endpoint_remote_tokens": 70668,
+          "home_to_replica_matrix": [
+            [
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              4,
+              0,
+              1,
+              2,
+              2,
+              1,
+              2,
+              1
+            ],
+            [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              2,
+              1
+            ],
+            [
+              0,
+              2,
+              2,
+              0,
+              4,
+              2,
+              1,
+              2
+            ],
+            [
+              0,
+              2,
+              0,
+              3,
+              0,
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              0,
+              2,
+              1,
+              1,
+              0,
+              1,
+              2
+            ],
+            [
+              1,
+              2,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              0,
+              2,
+              1,
+              1,
+              2,
+              2,
+              0
+            ]
+          ],
+          "expert_copies": 63,
+          "expert_copies_by_rank": [
+            8,
+            7,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8
+          ],
+          "active_remote_experts_with_assigned_tasks": 63,
+          "runtime_address_and_dedup_audit_flags_all_passed": true
+        }
+      },
+      "additional_planner_ms": 1.2793440371751785,
+      "saved_remote_token_destinations": 151234,
+      "additional_expert_copies": 54
+    },
+    {
+      "layer": 6,
+      "timing": {
+        "moon": {
+          "max_rank_median_cuda_ms": 0.06483519971370696,
+          "max_rank_median_host_ms": 0.0703772995620966,
+          "median_sample_max_rank_cuda_ms": 0.06496639847755432,
+          "median_sample_max_rank_host_ms": 0.0703772995620966,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "cuda_ms": 0.06348160207271576,
+              "host_ms": 0.06929077208042145
+            },
+            {
+              "rank": 1,
+              "cuda_ms": 0.06483519971370696,
+              "host_ms": 0.0703772995620966
+            },
+            {
+              "rank": 2,
+              "cuda_ms": 0.06447040140628815,
+              "host_ms": 0.06998293101787567
+            },
+            {
+              "rank": 3,
+              "cuda_ms": 0.06436159908771515,
+              "host_ms": 0.0699843280017376
+            },
+            {
+              "rank": 4,
+              "cuda_ms": 0.06393280029296874,
+              "host_ms": 0.06975959986448288
+            },
+            {
+              "rank": 5,
+              "cuda_ms": 0.06452160179615021,
+              "host_ms": 0.06992882117629051
+            },
+            {
+              "rank": 6,
+              "cuda_ms": 0.06416319906711579,
+              "host_ms": 0.06983866915106773
+            },
+            {
+              "rank": 7,
+              "cuda_ms": 0.06401599943637848,
+              "host_ms": 0.0694942194968462
+            }
+          ]
+        },
+        "sampled_group": {
+          "max_rank_median_cuda_ms": 1.2758656024932862,
+          "max_rank_median_host_ms": 1.2817091308534145,
+          "median_sample_max_rank_cuda_ms": 1.2758912086486816,
+          "median_sample_max_rank_host_ms": 1.2830252293497324,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "cuda_ms": 1.2752095699310302,
+              "host_ms": 1.2811441905796528
+            },
+            {
+              "rank": 1,
+              "cuda_ms": 1.2758656024932862,
+              "host_ms": 1.2815536931157112
+            },
+            {
+              "rank": 2,
+              "cuda_ms": 1.275551986694336,
+              "host_ms": 1.2810924090445042
+            },
+            {
+              "rank": 3,
+              "cuda_ms": 1.2750624179840089,
+              "host_ms": 1.2817091308534145
+            },
+            {
+              "rank": 4,
+              "cuda_ms": 1.2747200012207032,
+              "host_ms": 1.281127566471696
+            },
+            {
+              "rank": 5,
+              "cuda_ms": 1.2753823757171632,
+              "host_ms": 1.281374553218484
+            },
+            {
+              "rank": 6,
+              "cuda_ms": 1.274947166442871,
+              "host_ms": 1.281077554449439
+            },
+            {
+              "rank": 7,
+              "cuda_ms": 1.2748000144958496,
+              "host_ms": 1.2807386927306652
+            }
+          ]
+        }
+      },
+      "routing": {
+        "native": {
+          "owner_sha256": "84efe9489a77f90d31bfb252cbb04036e395171e5300264cb03352b64d81ed7b",
+          "loads": [
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144
+          ],
+          "dispatch_matrix": [
+            [
+              0,
+              9529,
+              14067,
+              7578,
+              11532,
+              10226,
+              13357,
+              11258
+            ],
+            [
+              13863,
+              0,
+              6972,
+              13901,
+              8256,
+              10626,
+              13905,
+              9431
+            ],
+            [
+              11788,
+              11610,
+              0,
+              12924,
+              12830,
+              12355,
+              13291,
+              7054
+            ],
+            [
+              7772,
+              13869,
+              10346,
+              0,
+              14698,
+              12715,
+              11678,
+              13723
+            ],
+            [
+              11073,
+              12107,
+              12781,
+              11507,
+              0,
+              11914,
+              10763,
+              11386
+            ],
+            [
+              10593,
+              13839,
+              12484,
+              10453,
+              11005,
+              0,
+              9033,
+              10030
+            ],
+            [
+              9042,
+              10602,
+              9941,
+              13032,
+              12052,
+              11142,
+              0,
+              12935
+            ],
+            [
+              8359,
+              10155,
+              13389,
+              13491,
+              11276,
+              11037,
+              8861,
+              0
+            ]
+          ],
+          "remote_token_destinations": 635436,
+          "max_endpoint_remote_tokens": 84801,
+          "home_to_replica_matrix": [
+            [
+              0,
+              2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0,
+              0,
+              0,
+              2,
+              1,
+              0
+            ]
+          ],
+          "expert_copies": 9,
+          "expert_copies_by_rank": [
+            1,
+            2,
+            1,
+            1,
+            1,
+            2,
+            1,
+            0
+          ],
+          "active_remote_experts_with_assigned_tasks": 9,
+          "runtime_address_and_dedup_audit_flags_all_passed": true
+        },
+        "sampled_group": {
+          "owner_sha256": "280ca463998749cc695c9c67c19baf3e446c82cd285c56eb02508489468daa28",
+          "loads": [
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144
+          ],
+          "dispatch_matrix": [
+            [
+              0,
+              8795,
+              10409,
+              5645,
+              10512,
+              9090,
+              11363,
+              6846
+            ],
+            [
+              8113,
+              0,
+              5556,
+              11430,
+              5805,
+              7472,
+              7288,
+              8289
+            ],
+            [
+              8194,
+              6950,
+              0,
+              9289,
+              9756,
+              8928,
+              6653,
+              6061
+            ],
+            [
+              4628,
+              10181,
+              7261,
+              0,
+              11800,
+              7443,
+              6510,
+              11637
+            ],
+            [
+              9251,
+              9452,
+              10556,
+              6774,
+              0,
+              9272,
+              8951,
+              9303
+            ],
+            [
+              9400,
+              10438,
+              10153,
+              7473,
+              7230,
+              0,
+              7537,
+              9044
+            ],
+            [
+              7270,
+              7337,
+              7622,
+              9085,
+              9017,
+              9079,
+              0,
+              10773
+            ],
+            [
+              5060,
+              6670,
+              12476,
+              11178,
+              7217,
+              8853,
+              7624,
+              0
+            ]
+          ],
+          "remote_token_destinations": 475999,
+          "max_endpoint_remote_tokens": 64033,
+          "home_to_replica_matrix": [
+            [
+              0,
+              4,
+              2,
+              3,
+              1,
+              1,
+              3,
+              2
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              3,
+              1,
+              0,
+              2,
+              2,
+              2,
+              1,
+              3
+            ],
+            [
+              1,
+              1,
+              2,
+              0,
+              1,
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              2,
+              2,
+              1,
+              0,
+              0,
+              2
+            ],
+            [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              3,
+              1,
+              2,
+              1,
+              3,
+              3,
+              2,
+              0
+            ]
+          ],
+          "expert_copies": 63,
+          "expert_copies_by_rank": [
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            7
+          ],
+          "active_remote_experts_with_assigned_tasks": 63,
+          "runtime_address_and_dedup_audit_flags_all_passed": true
+        }
+      },
+      "additional_planner_ms": 1.2110304027795793,
+      "saved_remote_token_destinations": 159437,
+      "additional_expert_copies": 54
+    },
+    {
+      "layer": 7,
+      "timing": {
+        "moon": {
+          "max_rank_median_cuda_ms": 0.0654911994934082,
+          "max_rank_median_host_ms": 0.07110722362995148,
+          "median_sample_max_rank_cuda_ms": 0.06552959978580475,
+          "median_sample_max_rank_host_ms": 0.07110722362995148,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "cuda_ms": 0.06448000073432922,
+              "host_ms": 0.07004267536103725
+            },
+            {
+              "rank": 1,
+              "cuda_ms": 0.0654911994934082,
+              "host_ms": 0.07110722362995148
+            },
+            {
+              "rank": 2,
+              "cuda_ms": 0.06495679914951324,
+              "host_ms": 0.07052058354020119
+            },
+            {
+              "rank": 3,
+              "cuda_ms": 0.06465599834918975,
+              "host_ms": 0.0706017017364502
+            },
+            {
+              "rank": 4,
+              "cuda_ms": 0.06470399796962738,
+              "host_ms": 0.07053455337882042
+            },
+            {
+              "rank": 5,
+              "cuda_ms": 0.065216001868248,
+              "host_ms": 0.07060887292027473
+            },
+            {
+              "rank": 6,
+              "cuda_ms": 0.06484160125255585,
+              "host_ms": 0.07045669481158257
+            },
+            {
+              "rank": 7,
+              "cuda_ms": 0.0636703997850418,
+              "host_ms": 0.06968621164560318
+            }
+          ]
+        },
+        "sampled_group": {
+          "max_rank_median_cuda_ms": 1.2692063808441163,
+          "max_rank_median_host_ms": 1.2757142074406147,
+          "median_sample_max_rank_cuda_ms": 1.2700448036193848,
+          "median_sample_max_rank_host_ms": 1.281548198312521,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "cuda_ms": 1.2690144062042237,
+              "host_ms": 1.2750342022627592
+            },
+            {
+              "rank": 1,
+              "cuda_ms": 1.2691584110260008,
+              "host_ms": 1.275553833693266
+            },
+            {
+              "rank": 2,
+              "cuda_ms": 1.2690944194793703,
+              "host_ms": 1.2753841932862997
+            },
+            {
+              "rank": 3,
+              "cuda_ms": 1.2687263965606688,
+              "host_ms": 1.2757142074406147
+            },
+            {
+              "rank": 4,
+              "cuda_ms": 1.2680447578430176,
+              "host_ms": 1.2743959669023752
+            },
+            {
+              "rank": 5,
+              "cuda_ms": 1.268956756591797,
+              "host_ms": 1.2746802996844053
+            },
+            {
+              "rank": 6,
+              "cuda_ms": 1.2690335750579833,
+              "host_ms": 1.274713920429349
+            },
+            {
+              "rank": 7,
+              "cuda_ms": 1.2692063808441163,
+              "host_ms": 1.2748382985591888
+            }
+          ]
+        }
+      },
+      "routing": {
+        "native": {
+          "owner_sha256": "606e28b4b633baf3ef4da7c9a2bde523efa98c43bac3acda81afa4922fdf43d2",
+          "loads": [
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144
+          ],
+          "dispatch_matrix": [
+            [
+              0,
+              10385,
+              11616,
+              11155,
+              13061,
+              12675,
+              12263,
+              12611
+            ],
+            [
+              12703,
+              0,
+              13401,
+              12153,
+              12767,
+              8120,
+              7247,
+              9429
+            ],
+            [
+              12015,
+              13599,
+              0,
+              12219,
+              9543,
+              9856,
+              8988,
+              9857
+            ],
+            [
+              10854,
+              12977,
+              13636,
+              0,
+              11599,
+              13351,
+              12123,
+              10462
+            ],
+            [
+              11431,
+              11296,
+              8895,
+              11914,
+              0,
+              14037,
+              11614,
+              11268
+            ],
+            [
+              9142,
+              8027,
+              11151,
+              12961,
+              13753,
+              0,
+              14028,
+              11424
+            ],
+            [
+              5162,
+              12817,
+              10118,
+              10090,
+              10447,
+              14723,
+              0,
+              12923
+            ],
+            [
+              10629,
+              11023,
+              12858,
+              9032,
+              10983,
+              12351,
+              10431,
+              0
+            ]
+          ],
+          "remote_token_destinations": 635193,
+          "max_endpoint_remote_tokens": 85113,
+          "home_to_replica_matrix": [
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              2,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0
+            ]
+          ],
+          "expert_copies": 10,
+          "expert_copies_by_rank": [
+            1,
+            2,
+            1,
+            0,
+            2,
+            2,
+            1,
+            1
+          ],
+          "active_remote_experts_with_assigned_tasks": 10,
+          "runtime_address_and_dedup_audit_flags_all_passed": true
+        },
+        "sampled_group": {
+          "owner_sha256": "6e2ab2e57d398c60ca673bf9d7097efb53ff2ba86d71cef25cc43d490c02b3b3",
+          "loads": [
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144,
+            134144
+          ],
+          "dispatch_matrix": [
+            [
+              0,
+              7607,
+              6420,
+              7670,
+              6254,
+              8268,
+              12142,
+              11296
+            ],
+            [
+              11414,
+              0,
+              8169,
+              9876,
+              8783,
+              4612,
+              5502,
+              7646
+            ],
+            [
+              8738,
+              8636,
+              0,
+              7637,
+              7940,
+              6951,
+              7112,
+              8078
+            ],
+            [
+              5176,
+              7689,
+              11177,
+              0,
+              11212,
+              5526,
+              7587,
+              8617
+            ],
+            [
+              8903,
+              6461,
+              7815,
+              7864,
+              0,
+              11325,
+              8300,
+              8278
+            ],
+            [
+              8967,
+              3773,
+              10143,
+              9319,
+              12258,
+              0,
+              9127,
+              8529
+            ],
+            [
+              4618,
+              8474,
+              6368,
+              5668,
+              9007,
+              11708,
+              0,
+              8382
+            ],
+            [
+              10629,
+              6429,
+              9876,
+              7889,
+              8733,
+              12287,
+              8337,
+              0
+            ]
+          ],
+          "remote_token_destinations": 467202,
+          "max_endpoint_remote_tokens": 64187,
+          "home_to_replica_matrix": [
+            [
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            [
+              3,
+              2,
+              0,
+              1,
+              2,
+              1,
+              3,
+              3
+            ],
+            [
+              2,
+              3,
+              0,
+              0,
+              3,
+              4,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              2,
+              0,
+              1,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              2,
+              3,
+              3,
+              3,
+              0,
+              1,
+              0,
+              3
+            ],
+            [
+              1,
+              0,
+              3,
+              2,
+              3,
+              0,
+              3,
+              0
+            ]
+          ],
+          "expert_copies": 64,
+          "expert_copies_by_rank": [
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8
+          ],
+          "active_remote_experts_with_assigned_tasks": 64,
+          "runtime_address_and_dedup_audit_flags_all_passed": true
+        }
+      },
+      "additional_planner_ms": 1.203715181350708,
+      "saved_remote_token_destinations": 167991,
+      "additional_expert_copies": 54
+    }
+  ],
+  "fixture_sha256": {
+    "layer_00.npz": "b705b5e45be5dfa57d9b29fcb6b26e938de49cdf2d9fd153787cc2bd43e9d6f9",
+    "layer_01.npz": "dbc6cfdfe10ac87984da3f429f4a5b4d5d6dd32e5d1e64e983e3e39ac807867b",
+    "layer_02.npz": "3b4c7c54c395e278a9880ac5e8a5bf737dd72ed53db0f376060b2b059b02134b",
+    "layer_03.npz": "0cf78029316533bd3a76053d065263994a78e644c869738043c5feb4d2aff3e2",
+    "layer_04.npz": "53c72a6823090add179e5a03fc6c8b795bf632a08330e142dfbef8af1018b6ea",
+    "layer_05.npz": "5b6106eaeca3a03c060aa7733b50ce1c409435cb3cd47a510b669047a8143a7b",
+    "layer_06.npz": "d4dc1c7b911e3024de4b2cab206ba68ce2df5f520c1701aae6685256de7e389a",
+    "layer_07.npz": "1e0f64493ee09ec3711746459c930135c155134c6b1e60fd7b6966f8689bf613"
+  },
+  "sources": {
+    "benchmark_manifest_entry_count": 23,
+    "exact_matches_to_benchmark": 22,
+    "benchmark_comparison": {
+      "tests/benchmark_sampled_group.py": {
+        "benchmark_sha256": "4b9f9495ed046d132b9468bb34215585a8185778381f136bf6d1ab307b775fdc",
+        "current_sha256": "4b9f9495ed046d132b9468bb34215585a8185778381f136bf6d1ab307b775fdc",
+        "matches": true
+      },
+      "moonep/sampled_group.py": {
+        "benchmark_sha256": "aa9793598eb4d1220b7b2cebc666a98504cbe7a863eb0ea4b2fca77a266d27c9",
+        "current_sha256": "aa9793598eb4d1220b7b2cebc666a98504cbe7a863eb0ea4b2fca77a266d27c9",
+        "matches": true
+      },
+      "moonep/buffer.py": {
+        "benchmark_sha256": "005d1d20b802cf390716f8a1198801f9a61c61d9e4d0e0906ac257239ddff28d",
+        "current_sha256": "005d1d20b802cf390716f8a1198801f9a61c61d9e4d0e0906ac257239ddff28d",
+        "matches": true
+      },
+      "moonep/inter_rank_sync.py": {
+        "benchmark_sha256": "218cea7d1c4b3769e5faccfb58b6b797ee13428afe708fdf9ac4038f1f2627bf",
+        "current_sha256": "218cea7d1c4b3769e5faccfb58b6b797ee13428afe708fdf9ac4038f1f2627bf",
+        "matches": true
+      },
+      "moonep/planning.py": {
+        "benchmark_sha256": "13f39774c25df5fd6fb25cb5633e0746e99125452cb38c722315b34ad2561f31",
+        "current_sha256": "13f39774c25df5fd6fb25cb5633e0746e99125452cb38c722315b34ad2561f31",
+        "matches": true
+      },
+      "moonep/sampled_materialize.py": {
+        "benchmark_sha256": "7e8da2fb42599e2249b7d2a21bb727acd409a4074651583220ef17d76d0cad3b",
+        "current_sha256": "7e8da2fb42599e2249b7d2a21bb727acd409a4074651583220ef17d76d0cad3b",
+        "matches": true
+      },
+      "moonep/sampled_residency.py": {
+        "benchmark_sha256": "ef7fe7e2c3b80dd9846c3b159b3b1cc063187790a74ad159a3f5628ba9eff713",
+        "current_sha256": "ef7fe7e2c3b80dd9846c3b159b3b1cc063187790a74ad159a3f5628ba9eff713",
+        "matches": true
+      },
+      "moonep/combine.py": {
+        "benchmark_sha256": "f59ca01da1950b1147019cca4b64560d3eeef06e34d5b2e9295810b577ec780c",
+        "current_sha256": "f59ca01da1950b1147019cca4b64560d3eeef06e34d5b2e9295810b577ec780c",
+        "matches": true
+      },
+      "moonep/grad_reduce.py": {
+        "benchmark_sha256": "8f2e5f8e7ef7a490a315c29b6e36fdefbaa4f63ce5e8e27240e6f063691a7d32",
+        "current_sha256": "d9933f992567ebca13e746a7a6d5c13bc491e13ce897be1c49a60f18d848edca",
+        "matches": false
+      },
+      "moonep/__init__.py": {
+        "benchmark_sha256": "6fd583b5279322d1c7f95a076d633381e44dffe4d515523b3191dac5a1b43d87",
+        "current_sha256": "6fd583b5279322d1c7f95a076d633381e44dffe4d515523b3191dac5a1b43d87",
+        "matches": true
+      },
+      "moonep/sampled_exchange.py": {
+        "benchmark_sha256": "96d6c49a0b8c3645dfd7f40b12beb8c64525c97d2b896f6d715d866358df1522",
+        "current_sha256": "96d6c49a0b8c3645dfd7f40b12beb8c64525c97d2b896f6d715d866358df1522",
+        "matches": true
+      },
+      "moonep/dispatch_epilogue.py": {
+        "benchmark_sha256": "a0f36c989bafe13b2f61cafc29cd4f0e0e763b1e673e4641cc8962cab91570c1",
+        "current_sha256": "a0f36c989bafe13b2f61cafc29cd4f0e0e763b1e673e4641cc8962cab91570c1",
+        "matches": true
+      },
+      "moonep/constants.py": {
+        "benchmark_sha256": "b781e3c5d20bfa6d07a2f5edf3c9fd8841e98749c7088b65a4a9603a5a353cbf",
+        "current_sha256": "b781e3c5d20bfa6d07a2f5edf3c9fd8841e98749c7088b65a4a9603a5a353cbf",
+        "matches": true
+      },
+      "moonep/combine_prologue.py": {
+        "benchmark_sha256": "bc5b4486ac3fdd6d3ae8a2e1b1ccb4a38917862f25e33efdbe3b16655b28af12",
+        "current_sha256": "bc5b4486ac3fdd6d3ae8a2e1b1ccb4a38917862f25e33efdbe3b16655b28af12",
+        "matches": true
+      },
+      "moonep/api.py": {
+        "benchmark_sha256": "5149ed57b5fedede9a980ee377d024ed00226d10b10d730a7e0eedaa59d59f3a",
+        "current_sha256": "5149ed57b5fedede9a980ee377d024ed00226d10b10d730a7e0eedaa59d59f3a",
+        "matches": true
+      },
+      "moonep/affinity_gpu.py": {
+        "benchmark_sha256": "9d3c90de014403d38771bd9ff1e95ae620053ea78fb7aba308e9e57e74152e40",
+        "current_sha256": "9d3c90de014403d38771bd9ff1e95ae620053ea78fb7aba308e9e57e74152e40",
+        "matches": true
+      },
+      "moonep/dispatch.py": {
+        "benchmark_sha256": "5415544783b54ac9def877c72a388c288c062c952a826981391ed2731628e56b",
+        "current_sha256": "5415544783b54ac9def877c72a388c288c062c952a826981391ed2731628e56b",
+        "matches": true
+      },
+      "moonep/_common.py": {
+        "benchmark_sha256": "2547572811a4ab4ac01cbca3faad19c4be62aad7de40c54c0c33c481aae086a5",
+        "current_sha256": "2547572811a4ab4ac01cbca3faad19c4be62aad7de40c54c0c33c481aae086a5",
+        "matches": true
+      },
+      "moonep/prefetch.py": {
+        "benchmark_sha256": "98f81a9a49e284ed5135617b8512fe78e141422b99dbdccba295d5c97ae0b0a3",
+        "current_sha256": "98f81a9a49e284ed5135617b8512fe78e141422b99dbdccba295d5c97ae0b0a3",
+        "matches": true
+      },
+      "moonep/csrc/sampled_exchange.cu": {
+        "benchmark_sha256": "2dc7d0a29e5126db922068cf34f5556ecc4e1d10904a37bc75890e40528ddc68",
+        "current_sha256": "2dc7d0a29e5126db922068cf34f5556ecc4e1d10904a37bc75890e40528ddc68",
+        "matches": true
+      },
+      "moonep/csrc/affinity_planner.cu": {
+        "benchmark_sha256": "2e4420e624cece9a3b419a6933967d9b5516b22f7f1c0c22ebdd8d98e96c62bd",
+        "current_sha256": "2e4420e624cece9a3b419a6933967d9b5516b22f7f1c0c22ebdd8d98e96c62bd",
+        "matches": true
+      },
+      "moonep/csrc/sampled_residency.cu": {
+        "benchmark_sha256": "83463072f0193fe1b6b02b33432bec01eb8fcf581baa2b5f953f04fe562db9ea",
+        "current_sha256": "83463072f0193fe1b6b02b33432bec01eb8fcf581baa2b5f953f04fe562db9ea",
+        "matches": true
+      },
+      "moonep/csrc/sampled_materialize.cu": {
+        "benchmark_sha256": "900cb6cfd3cb0303adb2842cdcff8da90f9f644766f69765c85a7b76a55856d2",
+        "current_sha256": "900cb6cfd3cb0303adb2842cdcff8da90f9f644766f69765c85a7b76a55856d2",
+        "matches": true
+      }
+    },
+    "final_manifest_entry_count": 25,
+    "final_manifest_all_exact": true,
+    "final_comparison": {
+      "moonep/__init__.py": {
+        "recorded_sha256": "6fd583b5279322d1c7f95a076d633381e44dffe4d515523b3191dac5a1b43d87",
+        "current_sha256": "6fd583b5279322d1c7f95a076d633381e44dffe4d515523b3191dac5a1b43d87",
+        "matches": true
+      },
+      "moonep/_common.py": {
+        "recorded_sha256": "2547572811a4ab4ac01cbca3faad19c4be62aad7de40c54c0c33c481aae086a5",
+        "current_sha256": "2547572811a4ab4ac01cbca3faad19c4be62aad7de40c54c0c33c481aae086a5",
+        "matches": true
+      },
+      "moonep/affinity_gpu.py": {
+        "recorded_sha256": "9d3c90de014403d38771bd9ff1e95ae620053ea78fb7aba308e9e57e74152e40",
+        "current_sha256": "9d3c90de014403d38771bd9ff1e95ae620053ea78fb7aba308e9e57e74152e40",
+        "matches": true
+      },
+      "moonep/api.py": {
+        "recorded_sha256": "5149ed57b5fedede9a980ee377d024ed00226d10b10d730a7e0eedaa59d59f3a",
+        "current_sha256": "5149ed57b5fedede9a980ee377d024ed00226d10b10d730a7e0eedaa59d59f3a",
+        "matches": true
+      },
+      "moonep/buffer.py": {
+        "recorded_sha256": "005d1d20b802cf390716f8a1198801f9a61c61d9e4d0e0906ac257239ddff28d",
+        "current_sha256": "005d1d20b802cf390716f8a1198801f9a61c61d9e4d0e0906ac257239ddff28d",
+        "matches": true
+      },
+      "moonep/combine.py": {
+        "recorded_sha256": "f59ca01da1950b1147019cca4b64560d3eeef06e34d5b2e9295810b577ec780c",
+        "current_sha256": "f59ca01da1950b1147019cca4b64560d3eeef06e34d5b2e9295810b577ec780c",
+        "matches": true
+      },
+      "moonep/combine_prologue.py": {
+        "recorded_sha256": "bc5b4486ac3fdd6d3ae8a2e1b1ccb4a38917862f25e33efdbe3b16655b28af12",
+        "current_sha256": "bc5b4486ac3fdd6d3ae8a2e1b1ccb4a38917862f25e33efdbe3b16655b28af12",
+        "matches": true
+      },
+      "moonep/constants.py": {
+        "recorded_sha256": "b781e3c5d20bfa6d07a2f5edf3c9fd8841e98749c7088b65a4a9603a5a353cbf",
+        "current_sha256": "b781e3c5d20bfa6d07a2f5edf3c9fd8841e98749c7088b65a4a9603a5a353cbf",
+        "matches": true
+      },
+      "moonep/csrc/affinity_planner.cu": {
+        "recorded_sha256": "2e4420e624cece9a3b419a6933967d9b5516b22f7f1c0c22ebdd8d98e96c62bd",
+        "current_sha256": "2e4420e624cece9a3b419a6933967d9b5516b22f7f1c0c22ebdd8d98e96c62bd",
+        "matches": true
+      },
+      "moonep/csrc/sampled_exchange.cu": {
+        "recorded_sha256": "2dc7d0a29e5126db922068cf34f5556ecc4e1d10904a37bc75890e40528ddc68",
+        "current_sha256": "2dc7d0a29e5126db922068cf34f5556ecc4e1d10904a37bc75890e40528ddc68",
+        "matches": true
+      },
+      "moonep/csrc/sampled_materialize.cu": {
+        "recorded_sha256": "900cb6cfd3cb0303adb2842cdcff8da90f9f644766f69765c85a7b76a55856d2",
+        "current_sha256": "900cb6cfd3cb0303adb2842cdcff8da90f9f644766f69765c85a7b76a55856d2",
+        "matches": true
+      },
+      "moonep/csrc/sampled_residency.cu": {
+        "recorded_sha256": "83463072f0193fe1b6b02b33432bec01eb8fcf581baa2b5f953f04fe562db9ea",
+        "current_sha256": "83463072f0193fe1b6b02b33432bec01eb8fcf581baa2b5f953f04fe562db9ea",
+        "matches": true
+      },
+      "moonep/dispatch.py": {
+        "recorded_sha256": "5415544783b54ac9def877c72a388c288c062c952a826981391ed2731628e56b",
+        "current_sha256": "5415544783b54ac9def877c72a388c288c062c952a826981391ed2731628e56b",
+        "matches": true
+      },
+      "moonep/dispatch_epilogue.py": {
+        "recorded_sha256": "a0f36c989bafe13b2f61cafc29cd4f0e0e763b1e673e4641cc8962cab91570c1",
+        "current_sha256": "a0f36c989bafe13b2f61cafc29cd4f0e0e763b1e673e4641cc8962cab91570c1",
+        "matches": true
+      },
+      "moonep/grad_reduce.py": {
+        "recorded_sha256": "d9933f992567ebca13e746a7a6d5c13bc491e13ce897be1c49a60f18d848edca",
+        "current_sha256": "d9933f992567ebca13e746a7a6d5c13bc491e13ce897be1c49a60f18d848edca",
+        "matches": true
+      },
+      "moonep/inter_rank_sync.py": {
+        "recorded_sha256": "218cea7d1c4b3769e5faccfb58b6b797ee13428afe708fdf9ac4038f1f2627bf",
+        "current_sha256": "218cea7d1c4b3769e5faccfb58b6b797ee13428afe708fdf9ac4038f1f2627bf",
+        "matches": true
+      },
+      "moonep/planning.py": {
+        "recorded_sha256": "13f39774c25df5fd6fb25cb5633e0746e99125452cb38c722315b34ad2561f31",
+        "current_sha256": "13f39774c25df5fd6fb25cb5633e0746e99125452cb38c722315b34ad2561f31",
+        "matches": true
+      },
+      "moonep/prefetch.py": {
+        "recorded_sha256": "98f81a9a49e284ed5135617b8512fe78e141422b99dbdccba295d5c97ae0b0a3",
+        "current_sha256": "98f81a9a49e284ed5135617b8512fe78e141422b99dbdccba295d5c97ae0b0a3",
+        "matches": true
+      },
+      "moonep/sampled_exchange.py": {
+        "recorded_sha256": "96d6c49a0b8c3645dfd7f40b12beb8c64525c97d2b896f6d715d866358df1522",
+        "current_sha256": "96d6c49a0b8c3645dfd7f40b12beb8c64525c97d2b896f6d715d866358df1522",
+        "matches": true
+      },
+      "moonep/sampled_group.py": {
+        "recorded_sha256": "aa9793598eb4d1220b7b2cebc666a98504cbe7a863eb0ea4b2fca77a266d27c9",
+        "current_sha256": "aa9793598eb4d1220b7b2cebc666a98504cbe7a863eb0ea4b2fca77a266d27c9",
+        "matches": true
+      },
+      "moonep/sampled_materialize.py": {
+        "recorded_sha256": "7e8da2fb42599e2249b7d2a21bb727acd409a4074651583220ef17d76d0cad3b",
+        "current_sha256": "7e8da2fb42599e2249b7d2a21bb727acd409a4074651583220ef17d76d0cad3b",
+        "matches": true
+      },
+      "moonep/sampled_residency.py": {
+        "recorded_sha256": "ef7fe7e2c3b80dd9846c3b159b3b1cc063187790a74ad159a3f5628ba9eff713",
+        "current_sha256": "ef7fe7e2c3b80dd9846c3b159b3b1cc063187790a74ad159a3f5628ba9eff713",
+        "matches": true
+      },
+      "tests/benchmark_sampled_group.py": {
+        "recorded_sha256": "4b9f9495ed046d132b9468bb34215585a8185778381f136bf6d1ab307b775fdc",
+        "current_sha256": "4b9f9495ed046d132b9468bb34215585a8185778381f136bf6d1ab307b775fdc",
+        "matches": true
+      },
+      "tests/test_sampled_group.py": {
+        "recorded_sha256": "ddd40ff2f9f894e56cfc47e9aae444cff9019bf1b240bcf22298f8fdfbe4bbde",
+        "current_sha256": "ddd40ff2f9f894e56cfc47e9aae444cff9019bf1b240bcf22298f8fdfbe4bbde",
+        "matches": true
+      },
+      "tests/test_sampled_weights.py": {
+        "recorded_sha256": "73c28d5ebf5eff6c94598e2241dc7b1ff9ce842011ef94aa818fb0c9186fcfda",
+        "current_sha256": "73c28d5ebf5eff6c94598e2241dc7b1ff9ce842011ef94aa818fb0c9186fcfda",
+        "matches": true
+      }
+    },
+    "new_backend_sources": {
+      "moonep/sampled_group.py": "aa9793598eb4d1220b7b2cebc666a98504cbe7a863eb0ea4b2fca77a266d27c9",
+      "moonep/sampled_residency.py": "ef7fe7e2c3b80dd9846c3b159b3b1cc063187790a74ad159a3f5628ba9eff713",
+      "moonep/sampled_exchange.py": "96d6c49a0b8c3645dfd7f40b12beb8c64525c97d2b896f6d715d866358df1522",
+      "moonep/sampled_materialize.py": "7e8da2fb42599e2249b7d2a21bb727acd409a4074651583220ef17d76d0cad3b",
+      "moonep/csrc/sampled_residency.cu": "83463072f0193fe1b6b02b33432bec01eb8fcf581baa2b5f953f04fe562db9ea",
+      "moonep/csrc/sampled_exchange.cu": "2dc7d0a29e5126db922068cf34f5556ecc4e1d10904a37bc75890e40528ddc68",
+      "moonep/csrc/sampled_materialize.cu": "900cb6cfd3cb0303adb2842cdcff8da90f9f644766f69765c85a7b76a55856d2"
+    },
+    "component_sources": {
+      "tests/sampled_components.py": {
+        "recorded_sha256": "7e56d60982fae7c0c69202cf6fc97e9c1cdd37d095e6a11a529c633c8a758384",
+        "current_sha256": "7e56d60982fae7c0c69202cf6fc97e9c1cdd37d095e6a11a529c633c8a758384",
+        "matches": true
+      },
+      "moonep/sampled_residency.py": {
+        "recorded_sha256": "ef7fe7e2c3b80dd9846c3b159b3b1cc063187790a74ad159a3f5628ba9eff713",
+        "current_sha256": "ef7fe7e2c3b80dd9846c3b159b3b1cc063187790a74ad159a3f5628ba9eff713",
+        "matches": true
+      },
+      "moonep/sampled_exchange.py": {
+        "recorded_sha256": "96d6c49a0b8c3645dfd7f40b12beb8c64525c97d2b896f6d715d866358df1522",
+        "current_sha256": "96d6c49a0b8c3645dfd7f40b12beb8c64525c97d2b896f6d715d866358df1522",
+        "matches": true
+      },
+      "moonep/csrc/sampled_residency.cu": {
+        "recorded_sha256": "83463072f0193fe1b6b02b33432bec01eb8fcf581baa2b5f953f04fe562db9ea",
+        "current_sha256": "83463072f0193fe1b6b02b33432bec01eb8fcf581baa2b5f953f04fe562db9ea",
+        "matches": true
+      },
+      "moonep/csrc/sampled_exchange.cu": {
+        "recorded_sha256": "2dc7d0a29e5126db922068cf34f5556ecc4e1d10904a37bc75890e40528ddc68",
+        "current_sha256": "2dc7d0a29e5126db922068cf34f5556ecc4e1d10904a37bc75890e40528ddc68",
+        "matches": true
+      }
+    },
+    "allowed_post_benchmark_difference": {
+      "file": "moonep/grad_reduce.py",
+      "recorded_sha256": "8f2e5f8e7ef7a490a315c29b6e36fdefbaa4f63ce5e8e27240e6f063691a7d32",
+      "final_sha256": "d9933f992567ebca13e746a7a6d5c13bc491e13ce897be1c49a60f18d848edca",
+      "change": "Replace unavailable cute.make_fragment((H_PER,), Float32) with cute.make_rmem_tensor((H_PER,), Float32), plus explanatory comment. Reversing only that edit reproduces the exact old SHA.",
+      "reason": "Planner benchmark does not execute grad_reduce. Final gradient kernel is separately exercised by the successful eight-rank weights_attempt03; failed attempt02 remains preserved.",
+      "reconstructed_old_sha256": "8f2e5f8e7ef7a490a315c29b6e36fdefbaa4f63ce5e8e27240e6f063691a7d32"
+    }
+  },
+  "components": {
+    "scope": "Two physical GPUs with eight original logical source shards; correctness only, not eight-GPU runtime/performance evidence.",
+    "replays": [
+      {
+        "layer": 0,
+        "repeat": 0,
+        "statuses": [
+          0,
+          0
+        ],
+        "remote_before": 621511,
+        "remote_after": 530732,
+        "saved": 90779,
+        "global_stats_counted_once": true
+      },
+      {
+        "layer": 0,
+        "repeat": 1,
+        "statuses": [
+          0,
+          0
+        ],
+        "remote_before": 621511,
+        "remote_after": 530732,
+        "saved": 90779,
+        "global_stats_counted_once": true
+      },
+      {
+        "layer": 1,
+        "repeat": 0,
+        "statuses": [
+          0,
+          0
+        ],
+        "remote_before": 643011,
+        "remote_after": 462932,
+        "saved": 180079,
+        "global_stats_counted_once": true
+      },
+      {
+        "layer": 1,
+        "repeat": 1,
+        "statuses": [
+          0,
+          0
+        ],
+        "remote_before": 643011,
+        "remote_after": 462932,
+        "saved": 180079,
+        "global_stats_counted_once": true
+      },
+      {
+        "layer": 2,
+        "repeat": 0,
+        "statuses": [
+          0,
+          0
+        ],
+        "remote_before": 635585,
+        "remote_after": 447977,
+        "saved": 187608,
+        "global_stats_counted_once": true
+      },
+      {
+        "layer": 2,
+        "repeat": 1,
+        "statuses": [
+          0,
+          0
+        ],
+        "remote_before": 635585,
+        "remote_after": 447977,
+        "saved": 187608,
+        "global_stats_counted_once": true
+      },
+      {
+        "layer": 3,
+        "repeat": 0,
+        "statuses": [
+          0,
+          0
+        ],
+        "remote_before": 623501,
+        "remote_after": 463132,
+        "saved": 160369,
+        "global_stats_counted_once": true
+      },
+      {
+        "layer": 3,
+        "repeat": 1,
+        "statuses": [
+          0,
+          0
+        ],
+        "remote_before": 623501,
+        "remote_after": 463132,
+        "saved": 160369,
+        "global_stats_counted_once": true
+      },
+      {
+        "layer": 4,
+        "repeat": 0,
+        "statuses": [
+          0,
+          0
+        ],
+        "remote_before": 634668,
+        "remote_after": 469665,
+        "saved": 165003,
+        "global_stats_counted_once": true
+      },
+      {
+        "layer": 4,
+        "repeat": 1,
+        "statuses": [
+          0,
+          0
+        ],
+        "remote_before": 634668,
+        "remote_after": 469665,
+        "saved": 165003,
+        "global_stats_counted_once": true
+      },
+      {
+        "layer": 5,
+        "repeat": 0,
+        "statuses": [
+          0,
+          0
+        ],
+        "remote_before": 625260,
+        "remote_after": 474026,
+        "saved": 151234,
+        "global_stats_counted_once": true
+      },
+      {
+        "layer": 5,
+        "repeat": 1,
+        "statuses": [
+          0,
+          0
+        ],
+        "remote_before": 625260,
+        "remote_after": 474026,
+        "saved": 151234,
+        "global_stats_counted_once": true
+      },
+      {
+        "layer": 6,
+        "repeat": 0,
+        "statuses": [
+          0,
+          0
+        ],
+        "remote_before": 635436,
+        "remote_after": 475999,
+        "saved": 159437,
+        "global_stats_counted_once": true
+      },
+      {
+        "layer": 6,
+        "repeat": 1,
+        "statuses": [
+          0,
+          0
+        ],
+        "remote_before": 635436,
+        "remote_after": 475999,
+        "saved": 159437,
+        "global_stats_counted_once": true
+      },
+      {
+        "layer": 7,
+        "repeat": 0,
+        "statuses": [
+          0,
+          0
+        ],
+        "remote_before": 635193,
+        "remote_after": 467202,
+        "saved": 167991,
+        "global_stats_counted_once": true
+      },
+      {
+        "layer": 7,
+        "repeat": 1,
+        "statuses": [
+          0,
+          0
+        ],
+        "remote_before": 635193,
+        "remote_after": 467202,
+        "saved": 167991,
+        "global_stats_counted_once": true
+      }
+    ],
+    "global_stats_not_summed_twice_across_ranks": true
+  },
+  "tests": {
+    "native8_attempt01": {
+      "log_path": "outputs/native_sampled_integration/native8/evidence/native8_attempt01.log",
+      "log_sha256": "de6f2c9c49864ae22b6f8d8d030587fbba74a838dceba7acbc82e370bfe292eb",
+      "exitcode": 0,
+      "pass_count_per_rank_summary": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "failed_count_per_rank_summary": [],
+      "preserved_failure": false
+    },
+    "weights_attempt03": {
+      "log_path": "outputs/native_sampled_integration/native8/evidence/weights_attempt03.log",
+      "log_sha256": "eddc8039336c9d91e527f4a25fee514dff9229aee0a0582e5e0fddb92951f8a1",
+      "exitcode": 0,
+      "pass_count_per_rank_summary": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "failed_count_per_rank_summary": [],
+      "preserved_failure": false
+    },
+    "native8_weights_attempt02": {
+      "log_path": "outputs/native_sampled_integration/native8/evidence/native8_weights_attempt02.log",
+      "log_sha256": "ee9a09c3db52ce1b58e21693c5818c60850b7791dbb3098665c5f8dc427fd8fd",
+      "exitcode": 1,
+      "pass_count_per_rank_summary": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "failed_count_per_rank_summary": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "preserved_failure": true
+    },
+    "planner_native8_attempt01": {
+      "log_path": "outputs/native_sampled_integration/native8/evidence/planner_native8_attempt01.log",
+      "log_sha256": "707bdebe816ae573967b682b1221c93b88864ca6511f9c7e55e62b55e89cac79",
+      "exitcode": 0,
+      "pass_count_per_rank_summary": [],
+      "failed_count_per_rank_summary": [],
+      "preserved_failure": false
+    }
+  },
+  "limitations": [
+    "Actual physical address arrays, cumulative segments and sign-encoded dedup markers are not persisted in the JSON. Their uniqueness/segment/no-padding/sign checks are verified as runtime audit flags; this CPU readback does not claim to rerun them. Fixture owner SHA matching enables independent owner/load/traffic/support recomputation.",
+    "Runtime source sharding and unchanged-input checks are attested by benchmark code plus recorded audits. The independent CPU audit may load full fixtures; the measured planner retains source-local routes.",
+    "Five main tests per rank cover configuration, B8/B44 dynamic public forward/backward token paths, nondefault process group/global fallback, and graph replay. They are not complete model training.",
+    "Separate weight test covers actual BF16 peer weight refresh and FP32 replica parameter-gradient reduction over three projections and two disjoint mappings/versions, using S=257,H=256,B=44. Gradients are constructed test payloads, not GEMM-generated gradients; no optimizer or full model training is measured.",
+    "Planner-only timing excludes token/expert/gradient payloads and cannot establish positive training or end-to-end benefit. Eight-layer timing sums are per-layer measurements, not an end-to-end eight-layer latency recording.",
+    "Totals are sums of per-layer transfer counts for one replay per layer; do not multiply them by samples, repeats, ranks, or four training passes without stating that separate model."
+  ],
+  "checks": {
+    "benchmark_complete_no_failures": true,
+    "eight_distinct_original_layers": true,
+    "benchmark_eight_physical_and_original_ranks": true,
+    "fixed_benchmark_protocol": true,
+    "L0.moon.ten_samples": true,
+    "L0.moon.sample_ids": true,
+    "L0.moon.sample0.five_replays": true,
+    "L0.moon.sample0.all_eight_ranks": true,
+    "L0.moon.sample0.finite_positive": true,
+    "L0.moon.sample0.maxima": true,
+    "L0.moon.sample1.five_replays": true,
+    "L0.moon.sample1.all_eight_ranks": true,
+    "L0.moon.sample1.finite_positive": true,
+    "L0.moon.sample1.maxima": true,
+    "L0.moon.sample2.five_replays": true,
+    "L0.moon.sample2.all_eight_ranks": true,
+    "L0.moon.sample2.finite_positive": true,
+    "L0.moon.sample2.maxima": true,
+    "L0.moon.sample3.five_replays": true,
+    "L0.moon.sample3.all_eight_ranks": true,
+    "L0.moon.sample3.finite_positive": true,
+    "L0.moon.sample3.maxima": true,
+    "L0.moon.sample4.five_replays": true,
+    "L0.moon.sample4.all_eight_ranks": true,
+    "L0.moon.sample4.finite_positive": true,
+    "L0.moon.sample4.maxima": true,
+    "L0.moon.sample5.five_replays": true,
+    "L0.moon.sample5.all_eight_ranks": true,
+    "L0.moon.sample5.finite_positive": true,
+    "L0.moon.sample5.maxima": true,
+    "L0.moon.sample6.five_replays": true,
+    "L0.moon.sample6.all_eight_ranks": true,
+    "L0.moon.sample6.finite_positive": true,
+    "L0.moon.sample6.maxima": true,
+    "L0.moon.sample7.five_replays": true,
+    "L0.moon.sample7.all_eight_ranks": true,
+    "L0.moon.sample7.finite_positive": true,
+    "L0.moon.sample7.maxima": true,
+    "L0.moon.sample8.five_replays": true,
+    "L0.moon.sample8.all_eight_ranks": true,
+    "L0.moon.sample8.finite_positive": true,
+    "L0.moon.sample8.maxima": true,
+    "L0.moon.sample9.five_replays": true,
+    "L0.moon.sample9.all_eight_ranks": true,
+    "L0.moon.sample9.finite_positive": true,
+    "L0.moon.sample9.maxima": true,
+    "L0.moon.rank0.median": true,
+    "L0.moon.rank1.median": true,
+    "L0.moon.rank2.median": true,
+    "L0.moon.rank3.median": true,
+    "L0.moon.rank4.median": true,
+    "L0.moon.rank5.median": true,
+    "L0.moon.rank6.median": true,
+    "L0.moon.rank7.median": true,
+    "L0.moon.summary": true,
+    "L0.sampled_group.ten_samples": true,
+    "L0.sampled_group.sample_ids": true,
+    "L0.sampled_group.sample0.five_replays": true,
+    "L0.sampled_group.sample0.all_eight_ranks": true,
+    "L0.sampled_group.sample0.finite_positive": true,
+    "L0.sampled_group.sample0.maxima": true,
+    "L0.sampled_group.sample1.five_replays": true,
+    "L0.sampled_group.sample1.all_eight_ranks": true,
+    "L0.sampled_group.sample1.finite_positive": true,
+    "L0.sampled_group.sample1.maxima": true,
+    "L0.sampled_group.sample2.five_replays": true,
+    "L0.sampled_group.sample2.all_eight_ranks": true,
+    "L0.sampled_group.sample2.finite_positive": true,
+    "L0.sampled_group.sample2.maxima": true,
+    "L0.sampled_group.sample3.five_replays": true,
+    "L0.sampled_group.sample3.all_eight_ranks": true,
+    "L0.sampled_group.sample3.finite_positive": true,
+    "L0.sampled_group.sample3.maxima": true,
+    "L0.sampled_group.sample4.five_replays": true,
+    "L0.sampled_group.sample4.all_eight_ranks": true,
+    "L0.sampled_group.sample4.finite_positive": true,
+    "L0.sampled_group.sample4.maxima": true,
+    "L0.sampled_group.sample5.five_replays": true,
+    "L0.sampled_group.sample5.all_eight_ranks": true,
+    "L0.sampled_group.sample5.finite_positive": true,
+    "L0.sampled_group.sample5.maxima": true,
+    "L0.sampled_group.sample6.five_replays": true,
+    "L0.sampled_group.sample6.all_eight_ranks": true,
+    "L0.sampled_group.sample6.finite_positive": true,
+    "L0.sampled_group.sample6.maxima": true,
+    "L0.sampled_group.sample7.five_replays": true,
+    "L0.sampled_group.sample7.all_eight_ranks": true,
+    "L0.sampled_group.sample7.finite_positive": true,
+    "L0.sampled_group.sample7.maxima": true,
+    "L0.sampled_group.sample8.five_replays": true,
+    "L0.sampled_group.sample8.all_eight_ranks": true,
+    "L0.sampled_group.sample8.finite_positive": true,
+    "L0.sampled_group.sample8.maxima": true,
+    "L0.sampled_group.sample9.five_replays": true,
+    "L0.sampled_group.sample9.all_eight_ranks": true,
+    "L0.sampled_group.sample9.finite_positive": true,
+    "L0.sampled_group.sample9.maxima": true,
+    "L0.sampled_group.rank0.median": true,
+    "L0.sampled_group.rank1.median": true,
+    "L0.sampled_group.rank2.median": true,
+    "L0.sampled_group.rank3.median": true,
+    "L0.sampled_group.rank4.median": true,
+    "L0.sampled_group.rank5.median": true,
+    "L0.sampled_group.rank6.median": true,
+    "L0.sampled_group.rank7.median": true,
+    "L0.sampled_group.summary": true,
+    "L0.planner_delta": true,
+    "L0.fixture_sha256": true,
+    "L0.original_trace_shape": true,
+    "L0.unique_valid_experts_per_token": true,
+    "L0.native_replica_valid_rank0": true,
+    "L0.native_replica_valid_rank1": true,
+    "L0.native_replica_valid_rank2": true,
+    "L0.native_replica_valid_rank3": true,
+    "L0.native_replica_valid_rank4": true,
+    "L0.native_replica_valid_rank5": true,
+    "L0.native_replica_valid_rank6": true,
+    "L0.native_replica_valid_rank7": true,
+    "L0.native.runtime_owner_equals_fixture_by_sha256": true,
+    "L0.native.owner_range": true,
+    "L0.native.exact_loads": true,
+    "L0.native.expert_task_conservation": true,
+    "L0.native.support_legal": true,
+    "L0.native.replica_budget_and_homes": true,
+    "L0.native.deduplicated_traffic": true,
+    "L0.native.copy_matrix": true,
+    "L0.native.endpoint_traffic": true,
+    "L0.native.runtime_audit_flags": true,
+    "L0.sampled_group.runtime_owner_equals_fixture_by_sha256": true,
+    "L0.sampled_group.owner_range": true,
+    "L0.sampled_group.exact_loads": true,
+    "L0.sampled_group.expert_task_conservation": true,
+    "L0.sampled_group.support_legal": true,
+    "L0.sampled_group.replica_budget_and_homes": true,
+    "L0.sampled_group.deduplicated_traffic": true,
+    "L0.sampled_group.copy_matrix": true,
+    "L0.sampled_group.endpoint_traffic": true,
+    "L0.sampled_group.runtime_audit_flags": true,
+    "L0.traffic_and_copy_deltas": true,
+    "L0.input_seed_post_timing_audits": true,
+    "L0.all_status_zero_no_fallback": true,
+    "L1.moon.ten_samples": true,
+    "L1.moon.sample_ids": true,
+    "L1.moon.sample0.five_replays": true,
+    "L1.moon.sample0.all_eight_ranks": true,
+    "L1.moon.sample0.finite_positive": true,
+    "L1.moon.sample0.maxima": true,
+    "L1.moon.sample1.five_replays": true,
+    "L1.moon.sample1.all_eight_ranks": true,
+    "L1.moon.sample1.finite_positive": true,
+    "L1.moon.sample1.maxima": true,
+    "L1.moon.sample2.five_replays": true,
+    "L1.moon.sample2.all_eight_ranks": true,
+    "L1.moon.sample2.finite_positive": true,
+    "L1.moon.sample2.maxima": true,
+    "L1.moon.sample3.five_replays": true,
+    "L1.moon.sample3.all_eight_ranks": true,
+    "L1.moon.sample3.finite_positive": true,
+    "L1.moon.sample3.maxima": true,
+    "L1.moon.sample4.five_replays": true,
+    "L1.moon.sample4.all_eight_ranks": true,
+    "L1.moon.sample4.finite_positive": true,
+    "L1.moon.sample4.maxima": true,
+    "L1.moon.sample5.five_replays": true,
+    "L1.moon.sample5.all_eight_ranks": true,
+    "L1.moon.sample5.finite_positive": true,
+    "L1.moon.sample5.maxima": true,
+    "L1.moon.sample6.five_replays": true,
+    "L1.moon.sample6.all_eight_ranks": true,
+    "L1.moon.sample6.finite_positive": true,
+    "L1.moon.sample6.maxima": true,
+    "L1.moon.sample7.five_replays": true,
+    "L1.moon.sample7.all_eight_ranks": true,
+    "L1.moon.sample7.finite_positive": true,
+    "L1.moon.sample7.maxima": true,
+    "L1.moon.sample8.five_replays": true,
+    "L1.moon.sample8.all_eight_ranks": true,
+    "L1.moon.sample8.finite_positive": true,
+    "L1.moon.sample8.maxima": true,
+    "L1.moon.sample9.five_replays": true,
+    "L1.moon.sample9.all_eight_ranks": true,
+    "L1.moon.sample9.finite_positive": true,
+    "L1.moon.sample9.maxima": true,
+    "L1.moon.rank0.median": true,
+    "L1.moon.rank1.median": true,
+    "L1.moon.rank2.median": true,
+    "L1.moon.rank3.median": true,
+    "L1.moon.rank4.median": true,
+    "L1.moon.rank5.median": true,
+    "L1.moon.rank6.median": true,
+    "L1.moon.rank7.median": true,
+    "L1.moon.summary": true,
+    "L1.sampled_group.ten_samples": true,
+    "L1.sampled_group.sample_ids": true,
+    "L1.sampled_group.sample0.five_replays": true,
+    "L1.sampled_group.sample0.all_eight_ranks": true,
+    "L1.sampled_group.sample0.finite_positive": true,
+    "L1.sampled_group.sample0.maxima": true,
+    "L1.sampled_group.sample1.five_replays": true,
+    "L1.sampled_group.sample1.all_eight_ranks": true,
+    "L1.sampled_group.sample1.finite_positive": true,
+    "L1.sampled_group.sample1.maxima": true,
+    "L1.sampled_group.sample2.five_replays": true,
+    "L1.sampled_group.sample2.all_eight_ranks": true,
+    "L1.sampled_group.sample2.finite_positive": true,
+    "L1.sampled_group.sample2.maxima": true,
+    "L1.sampled_group.sample3.five_replays": true,
+    "L1.sampled_group.sample3.all_eight_ranks": true,
+    "L1.sampled_group.sample3.finite_positive": true,
+    "L1.sampled_group.sample3.maxima": true,
+    "L1.sampled_group.sample4.five_replays": true,
+    "L1.sampled_group.sample4.all_eight_ranks": true,
+    "L1.sampled_group.sample4.finite_positive": true,
+    "L1.sampled_group.sample4.maxima": true,
+    "L1.sampled_group.sample5.five_replays": true,
+    "L1.sampled_group.sample5.all_eight_ranks": true,
+    "L1.sampled_group.sample5.finite_positive": true,
+    "L1.sampled_group.sample5.maxima": true,
+    "L1.sampled_group.sample6.five_replays": true,
+    "L1.sampled_group.sample6.all_eight_ranks": true,
+    "L1.sampled_group.sample6.finite_positive": true,
+    "L1.sampled_group.sample6.maxima": true,
+    "L1.sampled_group.sample7.five_replays": true,
+    "L1.sampled_group.sample7.all_eight_ranks": true,
+    "L1.sampled_group.sample7.finite_positive": true,
+    "L1.sampled_group.sample7.maxima": true,
+    "L1.sampled_group.sample8.five_replays": true,
+    "L1.sampled_group.sample8.all_eight_ranks": true,
+    "L1.sampled_group.sample8.finite_positive": true,
+    "L1.sampled_group.sample8.maxima": true,
+    "L1.sampled_group.sample9.five_replays": true,
+    "L1.sampled_group.sample9.all_eight_ranks": true,
+    "L1.sampled_group.sample9.finite_positive": true,
+    "L1.sampled_group.sample9.maxima": true,
+    "L1.sampled_group.rank0.median": true,
+    "L1.sampled_group.rank1.median": true,
+    "L1.sampled_group.rank2.median": true,
+    "L1.sampled_group.rank3.median": true,
+    "L1.sampled_group.rank4.median": true,
+    "L1.sampled_group.rank5.median": true,
+    "L1.sampled_group.rank6.median": true,
+    "L1.sampled_group.rank7.median": true,
+    "L1.sampled_group.summary": true,
+    "L1.planner_delta": true,
+    "L1.fixture_sha256": true,
+    "L1.original_trace_shape": true,
+    "L1.unique_valid_experts_per_token": true,
+    "L1.native_replica_valid_rank0": true,
+    "L1.native_replica_valid_rank1": true,
+    "L1.native_replica_valid_rank2": true,
+    "L1.native_replica_valid_rank3": true,
+    "L1.native_replica_valid_rank4": true,
+    "L1.native_replica_valid_rank5": true,
+    "L1.native_replica_valid_rank6": true,
+    "L1.native_replica_valid_rank7": true,
+    "L1.native.runtime_owner_equals_fixture_by_sha256": true,
+    "L1.native.owner_range": true,
+    "L1.native.exact_loads": true,
+    "L1.native.expert_task_conservation": true,
+    "L1.native.support_legal": true,
+    "L1.native.replica_budget_and_homes": true,
+    "L1.native.deduplicated_traffic": true,
+    "L1.native.copy_matrix": true,
+    "L1.native.endpoint_traffic": true,
+    "L1.native.runtime_audit_flags": true,
+    "L1.sampled_group.runtime_owner_equals_fixture_by_sha256": true,
+    "L1.sampled_group.owner_range": true,
+    "L1.sampled_group.exact_loads": true,
+    "L1.sampled_group.expert_task_conservation": true,
+    "L1.sampled_group.support_legal": true,
+    "L1.sampled_group.replica_budget_and_homes": true,
+    "L1.sampled_group.deduplicated_traffic": true,
+    "L1.sampled_group.copy_matrix": true,
+    "L1.sampled_group.endpoint_traffic": true,
+    "L1.sampled_group.runtime_audit_flags": true,
+    "L1.traffic_and_copy_deltas": true,
+    "L1.input_seed_post_timing_audits": true,
+    "L1.all_status_zero_no_fallback": true,
+    "L2.moon.ten_samples": true,
+    "L2.moon.sample_ids": true,
+    "L2.moon.sample0.five_replays": true,
+    "L2.moon.sample0.all_eight_ranks": true,
+    "L2.moon.sample0.finite_positive": true,
+    "L2.moon.sample0.maxima": true,
+    "L2.moon.sample1.five_replays": true,
+    "L2.moon.sample1.all_eight_ranks": true,
+    "L2.moon.sample1.finite_positive": true,
+    "L2.moon.sample1.maxima": true,
+    "L2.moon.sample2.five_replays": true,
+    "L2.moon.sample2.all_eight_ranks": true,
+    "L2.moon.sample2.finite_positive": true,
+    "L2.moon.sample2.maxima": true,
+    "L2.moon.sample3.five_replays": true,
+    "L2.moon.sample3.all_eight_ranks": true,
+    "L2.moon.sample3.finite_positive": true,
+    "L2.moon.sample3.maxima": true,
+    "L2.moon.sample4.five_replays": true,
+    "L2.moon.sample4.all_eight_ranks": true,
+    "L2.moon.sample4.finite_positive": true,
+    "L2.moon.sample4.maxima": true,
+    "L2.moon.sample5.five_replays": true,
+    "L2.moon.sample5.all_eight_ranks": true,
+    "L2.moon.sample5.finite_positive": true,
+    "L2.moon.sample5.maxima": true,
+    "L2.moon.sample6.five_replays": true,
+    "L2.moon.sample6.all_eight_ranks": true,
+    "L2.moon.sample6.finite_positive": true,
+    "L2.moon.sample6.maxima": true,
+    "L2.moon.sample7.five_replays": true,
+    "L2.moon.sample7.all_eight_ranks": true,
+    "L2.moon.sample7.finite_positive": true,
+    "L2.moon.sample7.maxima": true,
+    "L2.moon.sample8.five_replays": true,
+    "L2.moon.sample8.all_eight_ranks": true,
+    "L2.moon.sample8.finite_positive": true,
+    "L2.moon.sample8.maxima": true,
+    "L2.moon.sample9.five_replays": true,
+    "L2.moon.sample9.all_eight_ranks": true,
+    "L2.moon.sample9.finite_positive": true,
+    "L2.moon.sample9.maxima": true,
+    "L2.moon.rank0.median": true,
+    "L2.moon.rank1.median": true,
+    "L2.moon.rank2.median": true,
+    "L2.moon.rank3.median": true,
+    "L2.moon.rank4.median": true,
+    "L2.moon.rank5.median": true,
+    "L2.moon.rank6.median": true,
+    "L2.moon.rank7.median": true,
+    "L2.moon.summary": true,
+    "L2.sampled_group.ten_samples": true,
+    "L2.sampled_group.sample_ids": true,
+    "L2.sampled_group.sample0.five_replays": true,
+    "L2.sampled_group.sample0.all_eight_ranks": true,
+    "L2.sampled_group.sample0.finite_positive": true,
+    "L2.sampled_group.sample0.maxima": true,
+    "L2.sampled_group.sample1.five_replays": true,
+    "L2.sampled_group.sample1.all_eight_ranks": true,
+    "L2.sampled_group.sample1.finite_positive": true,
+    "L2.sampled_group.sample1.maxima": true,
+    "L2.sampled_group.sample2.five_replays": true,
+    "L2.sampled_group.sample2.all_eight_ranks": true,
+    "L2.sampled_group.sample2.finite_positive": true,
+    "L2.sampled_group.sample2.maxima": true,
+    "L2.sampled_group.sample3.five_replays": true,
+    "L2.sampled_group.sample3.all_eight_ranks": true,
+    "L2.sampled_group.sample3.finite_positive": true,
+    "L2.sampled_group.sample3.maxima": true,
+    "L2.sampled_group.sample4.five_replays": true,
+    "L2.sampled_group.sample4.all_eight_ranks": true,
+    "L2.sampled_group.sample4.finite_positive": true,
+    "L2.sampled_group.sample4.maxima": true,
+    "L2.sampled_group.sample5.five_replays": true,
+    "L2.sampled_group.sample5.all_eight_ranks": true,
+    "L2.sampled_group.sample5.finite_positive": true,
+    "L2.sampled_group.sample5.maxima": true,
+    "L2.sampled_group.sample6.five_replays": true,
+    "L2.sampled_group.sample6.all_eight_ranks": true,
+    "L2.sampled_group.sample6.finite_positive": true,
+    "L2.sampled_group.sample6.maxima": true,
+    "L2.sampled_group.sample7.five_replays": true,
+    "L2.sampled_group.sample7.all_eight_ranks": true,
+    "L2.sampled_group.sample7.finite_positive": true,
+    "L2.sampled_group.sample7.maxima": true,
+    "L2.sampled_group.sample8.five_replays": true,
+    "L2.sampled_group.sample8.all_eight_ranks": true,
+    "L2.sampled_group.sample8.finite_positive": true,
+    "L2.sampled_group.sample8.maxima": true,
+    "L2.sampled_group.sample9.five_replays": true,
+    "L2.sampled_group.sample9.all_eight_ranks": true,
+    "L2.sampled_group.sample9.finite_positive": true,
+    "L2.sampled_group.sample9.maxima": true,
+    "L2.sampled_group.rank0.median": true,
+    "L2.sampled_group.rank1.median": true,
+    "L2.sampled_group.rank2.median": true,
+    "L2.sampled_group.rank3.median": true,
+    "L2.sampled_group.rank4.median": true,
+    "L2.sampled_group.rank5.median": true,
+    "L2.sampled_group.rank6.median": true,
+    "L2.sampled_group.rank7.median": true,
+    "L2.sampled_group.summary": true,
+    "L2.planner_delta": true,
+    "L2.fixture_sha256": true,
+    "L2.original_trace_shape": true,
+    "L2.unique_valid_experts_per_token": true,
+    "L2.native_replica_valid_rank0": true,
+    "L2.native_replica_valid_rank1": true,
+    "L2.native_replica_valid_rank2": true,
+    "L2.native_replica_valid_rank3": true,
+    "L2.native_replica_valid_rank4": true,
+    "L2.native_replica_valid_rank5": true,
+    "L2.native_replica_valid_rank6": true,
+    "L2.native_replica_valid_rank7": true,
+    "L2.native.runtime_owner_equals_fixture_by_sha256": true,
+    "L2.native.owner_range": true,
+    "L2.native.exact_loads": true,
+    "L2.native.expert_task_conservation": true,
+    "L2.native.support_legal": true,
+    "L2.native.replica_budget_and_homes": true,
+    "L2.native.deduplicated_traffic": true,
+    "L2.native.copy_matrix": true,
+    "L2.native.endpoint_traffic": true,
+    "L2.native.runtime_audit_flags": true,
+    "L2.sampled_group.runtime_owner_equals_fixture_by_sha256": true,
+    "L2.sampled_group.owner_range": true,
+    "L2.sampled_group.exact_loads": true,
+    "L2.sampled_group.expert_task_conservation": true,
+    "L2.sampled_group.support_legal": true,
+    "L2.sampled_group.replica_budget_and_homes": true,
+    "L2.sampled_group.deduplicated_traffic": true,
+    "L2.sampled_group.copy_matrix": true,
+    "L2.sampled_group.endpoint_traffic": true,
+    "L2.sampled_group.runtime_audit_flags": true,
+    "L2.traffic_and_copy_deltas": true,
+    "L2.input_seed_post_timing_audits": true,
+    "L2.all_status_zero_no_fallback": true,
+    "L3.moon.ten_samples": true,
+    "L3.moon.sample_ids": true,
+    "L3.moon.sample0.five_replays": true,
+    "L3.moon.sample0.all_eight_ranks": true,
+    "L3.moon.sample0.finite_positive": true,
+    "L3.moon.sample0.maxima": true,
+    "L3.moon.sample1.five_replays": true,
+    "L3.moon.sample1.all_eight_ranks": true,
+    "L3.moon.sample1.finite_positive": true,
+    "L3.moon.sample1.maxima": true,
+    "L3.moon.sample2.five_replays": true,
+    "L3.moon.sample2.all_eight_ranks": true,
+    "L3.moon.sample2.finite_positive": true,
+    "L3.moon.sample2.maxima": true,
+    "L3.moon.sample3.five_replays": true,
+    "L3.moon.sample3.all_eight_ranks": true,
+    "L3.moon.sample3.finite_positive": true,
+    "L3.moon.sample3.maxima": true,
+    "L3.moon.sample4.five_replays": true,
+    "L3.moon.sample4.all_eight_ranks": true,
+    "L3.moon.sample4.finite_positive": true,
+    "L3.moon.sample4.maxima": true,
+    "L3.moon.sample5.five_replays": true,
+    "L3.moon.sample5.all_eight_ranks": true,
+    "L3.moon.sample5.finite_positive": true,
+    "L3.moon.sample5.maxima": true,
+    "L3.moon.sample6.five_replays": true,
+    "L3.moon.sample6.all_eight_ranks": true,
+    "L3.moon.sample6.finite_positive": true,
+    "L3.moon.sample6.maxima": true,
+    "L3.moon.sample7.five_replays": true,
+    "L3.moon.sample7.all_eight_ranks": true,
+    "L3.moon.sample7.finite_positive": true,
+    "L3.moon.sample7.maxima": true,
+    "L3.moon.sample8.five_replays": true,
+    "L3.moon.sample8.all_eight_ranks": true,
+    "L3.moon.sample8.finite_positive": true,
+    "L3.moon.sample8.maxima": true,
+    "L3.moon.sample9.five_replays": true,
+    "L3.moon.sample9.all_eight_ranks": true,
+    "L3.moon.sample9.finite_positive": true,
+    "L3.moon.sample9.maxima": true,
+    "L3.moon.rank0.median": true,
+    "L3.moon.rank1.median": true,
+    "L3.moon.rank2.median": true,
+    "L3.moon.rank3.median": true,
+    "L3.moon.rank4.median": true,
+    "L3.moon.rank5.median": true,
+    "L3.moon.rank6.median": true,
+    "L3.moon.rank7.median": true,
+    "L3.moon.summary": true,
+    "L3.sampled_group.ten_samples": true,
+    "L3.sampled_group.sample_ids": true,
+    "L3.sampled_group.sample0.five_replays": true,
+    "L3.sampled_group.sample0.all_eight_ranks": true,
+    "L3.sampled_group.sample0.finite_positive": true,
+    "L3.sampled_group.sample0.maxima": true,
+    "L3.sampled_group.sample1.five_replays": true,
+    "L3.sampled_group.sample1.all_eight_ranks": true,
+    "L3.sampled_group.sample1.finite_positive": true,
+    "L3.sampled_group.sample1.maxima": true,
+    "L3.sampled_group.sample2.five_replays": true,
+    "L3.sampled_group.sample2.all_eight_ranks": true,
+    "L3.sampled_group.sample2.finite_positive": true,
+    "L3.sampled_group.sample2.maxima": true,
+    "L3.sampled_group.sample3.five_replays": true,
+    "L3.sampled_group.sample3.all_eight_ranks": true,
+    "L3.sampled_group.sample3.finite_positive": true,
+    "L3.sampled_group.sample3.maxima": true,
+    "L3.sampled_group.sample4.five_replays": true,
+    "L3.sampled_group.sample4.all_eight_ranks": true,
+    "L3.sampled_group.sample4.finite_positive": true,
+    "L3.sampled_group.sample4.maxima": true,
+    "L3.sampled_group.sample5.five_replays": true,
+    "L3.sampled_group.sample5.all_eight_ranks": true,
+    "L3.sampled_group.sample5.finite_positive": true,
+    "L3.sampled_group.sample5.maxima": true,
+    "L3.sampled_group.sample6.five_replays": true,
+    "L3.sampled_group.sample6.all_eight_ranks": true,
+    "L3.sampled_group.sample6.finite_positive": true,
+    "L3.sampled_group.sample6.maxima": true,
+    "L3.sampled_group.sample7.five_replays": true,
+    "L3.sampled_group.sample7.all_eight_ranks": true,
+    "L3.sampled_group.sample7.finite_positive": true,
+    "L3.sampled_group.sample7.maxima": true,
+    "L3.sampled_group.sample8.five_replays": true,
+    "L3.sampled_group.sample8.all_eight_ranks": true,
+    "L3.sampled_group.sample8.finite_positive": true,
+    "L3.sampled_group.sample8.maxima": true,
+    "L3.sampled_group.sample9.five_replays": true,
+    "L3.sampled_group.sample9.all_eight_ranks": true,
+    "L3.sampled_group.sample9.finite_positive": true,
+    "L3.sampled_group.sample9.maxima": true,
+    "L3.sampled_group.rank0.median": true,
+    "L3.sampled_group.rank1.median": true,
+    "L3.sampled_group.rank2.median": true,
+    "L3.sampled_group.rank3.median": true,
+    "L3.sampled_group.rank4.median": true,
+    "L3.sampled_group.rank5.median": true,
+    "L3.sampled_group.rank6.median": true,
+    "L3.sampled_group.rank7.median": true,
+    "L3.sampled_group.summary": true,
+    "L3.planner_delta": true,
+    "L3.fixture_sha256": true,
+    "L3.original_trace_shape": true,
+    "L3.unique_valid_experts_per_token": true,
+    "L3.native_replica_valid_rank0": true,
+    "L3.native_replica_valid_rank1": true,
+    "L3.native_replica_valid_rank2": true,
+    "L3.native_replica_valid_rank3": true,
+    "L3.native_replica_valid_rank4": true,
+    "L3.native_replica_valid_rank5": true,
+    "L3.native_replica_valid_rank6": true,
+    "L3.native_replica_valid_rank7": true,
+    "L3.native.runtime_owner_equals_fixture_by_sha256": true,
+    "L3.native.owner_range": true,
+    "L3.native.exact_loads": true,
+    "L3.native.expert_task_conservation": true,
+    "L3.native.support_legal": true,
+    "L3.native.replica_budget_and_homes": true,
+    "L3.native.deduplicated_traffic": true,
+    "L3.native.copy_matrix": true,
+    "L3.native.endpoint_traffic": true,
+    "L3.native.runtime_audit_flags": true,
+    "L3.sampled_group.runtime_owner_equals_fixture_by_sha256": true,
+    "L3.sampled_group.owner_range": true,
+    "L3.sampled_group.exact_loads": true,
+    "L3.sampled_group.expert_task_conservation": true,
+    "L3.sampled_group.support_legal": true,
+    "L3.sampled_group.replica_budget_and_homes": true,
+    "L3.sampled_group.deduplicated_traffic": true,
+    "L3.sampled_group.copy_matrix": true,
+    "L3.sampled_group.endpoint_traffic": true,
+    "L3.sampled_group.runtime_audit_flags": true,
+    "L3.traffic_and_copy_deltas": true,
+    "L3.input_seed_post_timing_audits": true,
+    "L3.all_status_zero_no_fallback": true,
+    "L4.moon.ten_samples": true,
+    "L4.moon.sample_ids": true,
+    "L4.moon.sample0.five_replays": true,
+    "L4.moon.sample0.all_eight_ranks": true,
+    "L4.moon.sample0.finite_positive": true,
+    "L4.moon.sample0.maxima": true,
+    "L4.moon.sample1.five_replays": true,
+    "L4.moon.sample1.all_eight_ranks": true,
+    "L4.moon.sample1.finite_positive": true,
+    "L4.moon.sample1.maxima": true,
+    "L4.moon.sample2.five_replays": true,
+    "L4.moon.sample2.all_eight_ranks": true,
+    "L4.moon.sample2.finite_positive": true,
+    "L4.moon.sample2.maxima": true,
+    "L4.moon.sample3.five_replays": true,
+    "L4.moon.sample3.all_eight_ranks": true,
+    "L4.moon.sample3.finite_positive": true,
+    "L4.moon.sample3.maxima": true,
+    "L4.moon.sample4.five_replays": true,
+    "L4.moon.sample4.all_eight_ranks": true,
+    "L4.moon.sample4.finite_positive": true,
+    "L4.moon.sample4.maxima": true,
+    "L4.moon.sample5.five_replays": true,
+    "L4.moon.sample5.all_eight_ranks": true,
+    "L4.moon.sample5.finite_positive": true,
+    "L4.moon.sample5.maxima": true,
+    "L4.moon.sample6.five_replays": true,
+    "L4.moon.sample6.all_eight_ranks": true,
+    "L4.moon.sample6.finite_positive": true,
+    "L4.moon.sample6.maxima": true,
+    "L4.moon.sample7.five_replays": true,
+    "L4.moon.sample7.all_eight_ranks": true,
+    "L4.moon.sample7.finite_positive": true,
+    "L4.moon.sample7.maxima": true,
+    "L4.moon.sample8.five_replays": true,
+    "L4.moon.sample8.all_eight_ranks": true,
+    "L4.moon.sample8.finite_positive": true,
+    "L4.moon.sample8.maxima": true,
+    "L4.moon.sample9.five_replays": true,
+    "L4.moon.sample9.all_eight_ranks": true,
+    "L4.moon.sample9.finite_positive": true,
+    "L4.moon.sample9.maxima": true,
+    "L4.moon.rank0.median": true,
+    "L4.moon.rank1.median": true,
+    "L4.moon.rank2.median": true,
+    "L4.moon.rank3.median": true,
+    "L4.moon.rank4.median": true,
+    "L4.moon.rank5.median": true,
+    "L4.moon.rank6.median": true,
+    "L4.moon.rank7.median": true,
+    "L4.moon.summary": true,
+    "L4.sampled_group.ten_samples": true,
+    "L4.sampled_group.sample_ids": true,
+    "L4.sampled_group.sample0.five_replays": true,
+    "L4.sampled_group.sample0.all_eight_ranks": true,
+    "L4.sampled_group.sample0.finite_positive": true,
+    "L4.sampled_group.sample0.maxima": true,
+    "L4.sampled_group.sample1.five_replays": true,
+    "L4.sampled_group.sample1.all_eight_ranks": true,
+    "L4.sampled_group.sample1.finite_positive": true,
+    "L4.sampled_group.sample1.maxima": true,
+    "L4.sampled_group.sample2.five_replays": true,
+    "L4.sampled_group.sample2.all_eight_ranks": true,
+    "L4.sampled_group.sample2.finite_positive": true,
+    "L4.sampled_group.sample2.maxima": true,
+    "L4.sampled_group.sample3.five_replays": true,
+    "L4.sampled_group.sample3.all_eight_ranks": true,
+    "L4.sampled_group.sample3.finite_positive": true,
+    "L4.sampled_group.sample3.maxima": true,
+    "L4.sampled_group.sample4.five_replays": true,
+    "L4.sampled_group.sample4.all_eight_ranks": true,
+    "L4.sampled_group.sample4.finite_positive": true,
+    "L4.sampled_group.sample4.maxima": true,
+    "L4.sampled_group.sample5.five_replays": true,
+    "L4.sampled_group.sample5.all_eight_ranks": true,
+    "L4.sampled_group.sample5.finite_positive": true,
+    "L4.sampled_group.sample5.maxima": true,
+    "L4.sampled_group.sample6.five_replays": true,
+    "L4.sampled_group.sample6.all_eight_ranks": true,
+    "L4.sampled_group.sample6.finite_positive": true,
+    "L4.sampled_group.sample6.maxima": true,
+    "L4.sampled_group.sample7.five_replays": true,
+    "L4.sampled_group.sample7.all_eight_ranks": true,
+    "L4.sampled_group.sample7.finite_positive": true,
+    "L4.sampled_group.sample7.maxima": true,
+    "L4.sampled_group.sample8.five_replays": true,
+    "L4.sampled_group.sample8.all_eight_ranks": true,
+    "L4.sampled_group.sample8.finite_positive": true,
+    "L4.sampled_group.sample8.maxima": true,
+    "L4.sampled_group.sample9.five_replays": true,
+    "L4.sampled_group.sample9.all_eight_ranks": true,
+    "L4.sampled_group.sample9.finite_positive": true,
+    "L4.sampled_group.sample9.maxima": true,
+    "L4.sampled_group.rank0.median": true,
+    "L4.sampled_group.rank1.median": true,
+    "L4.sampled_group.rank2.median": true,
+    "L4.sampled_group.rank3.median": true,
+    "L4.sampled_group.rank4.median": true,
+    "L4.sampled_group.rank5.median": true,
+    "L4.sampled_group.rank6.median": true,
+    "L4.sampled_group.rank7.median": true,
+    "L4.sampled_group.summary": true,
+    "L4.planner_delta": true,
+    "L4.fixture_sha256": true,
+    "L4.original_trace_shape": true,
+    "L4.unique_valid_experts_per_token": true,
+    "L4.native_replica_valid_rank0": true,
+    "L4.native_replica_valid_rank1": true,
+    "L4.native_replica_valid_rank2": true,
+    "L4.native_replica_valid_rank3": true,
+    "L4.native_replica_valid_rank4": true,
+    "L4.native_replica_valid_rank5": true,
+    "L4.native_replica_valid_rank6": true,
+    "L4.native_replica_valid_rank7": true,
+    "L4.native.runtime_owner_equals_fixture_by_sha256": true,
+    "L4.native.owner_range": true,
+    "L4.native.exact_loads": true,
+    "L4.native.expert_task_conservation": true,
+    "L4.native.support_legal": true,
+    "L4.native.replica_budget_and_homes": true,
+    "L4.native.deduplicated_traffic": true,
+    "L4.native.copy_matrix": true,
+    "L4.native.endpoint_traffic": true,
+    "L4.native.runtime_audit_flags": true,
+    "L4.sampled_group.runtime_owner_equals_fixture_by_sha256": true,
+    "L4.sampled_group.owner_range": true,
+    "L4.sampled_group.exact_loads": true,
+    "L4.sampled_group.expert_task_conservation": true,
+    "L4.sampled_group.support_legal": true,
+    "L4.sampled_group.replica_budget_and_homes": true,
+    "L4.sampled_group.deduplicated_traffic": true,
+    "L4.sampled_group.copy_matrix": true,
+    "L4.sampled_group.endpoint_traffic": true,
+    "L4.sampled_group.runtime_audit_flags": true,
+    "L4.traffic_and_copy_deltas": true,
+    "L4.input_seed_post_timing_audits": true,
+    "L4.all_status_zero_no_fallback": true,
+    "L5.moon.ten_samples": true,
+    "L5.moon.sample_ids": true,
+    "L5.moon.sample0.five_replays": true,
+    "L5.moon.sample0.all_eight_ranks": true,
+    "L5.moon.sample0.finite_positive": true,
+    "L5.moon.sample0.maxima": true,
+    "L5.moon.sample1.five_replays": true,
+    "L5.moon.sample1.all_eight_ranks": true,
+    "L5.moon.sample1.finite_positive": true,
+    "L5.moon.sample1.maxima": true,
+    "L5.moon.sample2.five_replays": true,
+    "L5.moon.sample2.all_eight_ranks": true,
+    "L5.moon.sample2.finite_positive": true,
+    "L5.moon.sample2.maxima": true,
+    "L5.moon.sample3.five_replays": true,
+    "L5.moon.sample3.all_eight_ranks": true,
+    "L5.moon.sample3.finite_positive": true,
+    "L5.moon.sample3.maxima": true,
+    "L5.moon.sample4.five_replays": true,
+    "L5.moon.sample4.all_eight_ranks": true,
+    "L5.moon.sample4.finite_positive": true,
+    "L5.moon.sample4.maxima": true,
+    "L5.moon.sample5.five_replays": true,
+    "L5.moon.sample5.all_eight_ranks": true,
+    "L5.moon.sample5.finite_positive": true,
+    "L5.moon.sample5.maxima": true,
+    "L5.moon.sample6.five_replays": true,
+    "L5.moon.sample6.all_eight_ranks": true,
+    "L5.moon.sample6.finite_positive": true,
+    "L5.moon.sample6.maxima": true,
+    "L5.moon.sample7.five_replays": true,
+    "L5.moon.sample7.all_eight_ranks": true,
+    "L5.moon.sample7.finite_positive": true,
+    "L5.moon.sample7.maxima": true,
+    "L5.moon.sample8.five_replays": true,
+    "L5.moon.sample8.all_eight_ranks": true,
+    "L5.moon.sample8.finite_positive": true,
+    "L5.moon.sample8.maxima": true,
+    "L5.moon.sample9.five_replays": true,
+    "L5.moon.sample9.all_eight_ranks": true,
+    "L5.moon.sample9.finite_positive": true,
+    "L5.moon.sample9.maxima": true,
+    "L5.moon.rank0.median": true,
+    "L5.moon.rank1.median": true,
+    "L5.moon.rank2.median": true,
+    "L5.moon.rank3.median": true,
+    "L5.moon.rank4.median": true,
+    "L5.moon.rank5.median": true,
+    "L5.moon.rank6.median": true,
+    "L5.moon.rank7.median": true,
+    "L5.moon.summary": true,
+    "L5.sampled_group.ten_samples": true,
+    "L5.sampled_group.sample_ids": true,
+    "L5.sampled_group.sample0.five_replays": true,
+    "L5.sampled_group.sample0.all_eight_ranks": true,
+    "L5.sampled_group.sample0.finite_positive": true,
+    "L5.sampled_group.sample0.maxima": true,
+    "L5.sampled_group.sample1.five_replays": true,
+    "L5.sampled_group.sample1.all_eight_ranks": true,
+    "L5.sampled_group.sample1.finite_positive": true,
+    "L5.sampled_group.sample1.maxima": true,
+    "L5.sampled_group.sample2.five_replays": true,
+    "L5.sampled_group.sample2.all_eight_ranks": true,
+    "L5.sampled_group.sample2.finite_positive": true,
+    "L5.sampled_group.sample2.maxima": true,
+    "L5.sampled_group.sample3.five_replays": true,
+    "L5.sampled_group.sample3.all_eight_ranks": true,
+    "L5.sampled_group.sample3.finite_positive": true,
+    "L5.sampled_group.sample3.maxima": true,
+    "L5.sampled_group.sample4.five_replays": true,
+    "L5.sampled_group.sample4.all_eight_ranks": true,
+    "L5.sampled_group.sample4.finite_positive": true,
+    "L5.sampled_group.sample4.maxima": true,
+    "L5.sampled_group.sample5.five_replays": true,
+    "L5.sampled_group.sample5.all_eight_ranks": true,
+    "L5.sampled_group.sample5.finite_positive": true,
+    "L5.sampled_group.sample5.maxima": true,
+    "L5.sampled_group.sample6.five_replays": true,
+    "L5.sampled_group.sample6.all_eight_ranks": true,
+    "L5.sampled_group.sample6.finite_positive": true,
+    "L5.sampled_group.sample6.maxima": true,
+    "L5.sampled_group.sample7.five_replays": true,
+    "L5.sampled_group.sample7.all_eight_ranks": true,
+    "L5.sampled_group.sample7.finite_positive": true,
+    "L5.sampled_group.sample7.maxima": true,
+    "L5.sampled_group.sample8.five_replays": true,
+    "L5.sampled_group.sample8.all_eight_ranks": true,
+    "L5.sampled_group.sample8.finite_positive": true,
+    "L5.sampled_group.sample8.maxima": true,
+    "L5.sampled_group.sample9.five_replays": true,
+    "L5.sampled_group.sample9.all_eight_ranks": true,
+    "L5.sampled_group.sample9.finite_positive": true,
+    "L5.sampled_group.sample9.maxima": true,
+    "L5.sampled_group.rank0.median": true,
+    "L5.sampled_group.rank1.median": true,
+    "L5.sampled_group.rank2.median": true,
+    "L5.sampled_group.rank3.median": true,
+    "L5.sampled_group.rank4.median": true,
+    "L5.sampled_group.rank5.median": true,
+    "L5.sampled_group.rank6.median": true,
+    "L5.sampled_group.rank7.median": true,
+    "L5.sampled_group.summary": true,
+    "L5.planner_delta": true,
+    "L5.fixture_sha256": true,
+    "L5.original_trace_shape": true,
+    "L5.unique_valid_experts_per_token": true,
+    "L5.native_replica_valid_rank0": true,
+    "L5.native_replica_valid_rank1": true,
+    "L5.native_replica_valid_rank2": true,
+    "L5.native_replica_valid_rank3": true,
+    "L5.native_replica_valid_rank4": true,
+    "L5.native_replica_valid_rank5": true,
+    "L5.native_replica_valid_rank6": true,
+    "L5.native_replica_valid_rank7": true,
+    "L5.native.runtime_owner_equals_fixture_by_sha256": true,
+    "L5.native.owner_range": true,
+    "L5.native.exact_loads": true,
+    "L5.native.expert_task_conservation": true,
+    "L5.native.support_legal": true,
+    "L5.native.replica_budget_and_homes": true,
+    "L5.native.deduplicated_traffic": true,
+    "L5.native.copy_matrix": true,
+    "L5.native.endpoint_traffic": true,
+    "L5.native.runtime_audit_flags": true,
+    "L5.sampled_group.runtime_owner_equals_fixture_by_sha256": true,
+    "L5.sampled_group.owner_range": true,
+    "L5.sampled_group.exact_loads": true,
+    "L5.sampled_group.expert_task_conservation": true,
+    "L5.sampled_group.support_legal": true,
+    "L5.sampled_group.replica_budget_and_homes": true,
+    "L5.sampled_group.deduplicated_traffic": true,
+    "L5.sampled_group.copy_matrix": true,
+    "L5.sampled_group.endpoint_traffic": true,
+    "L5.sampled_group.runtime_audit_flags": true,
+    "L5.traffic_and_copy_deltas": true,
+    "L5.input_seed_post_timing_audits": true,
+    "L5.all_status_zero_no_fallback": true,
+    "L6.moon.ten_samples": true,
+    "L6.moon.sample_ids": true,
+    "L6.moon.sample0.five_replays": true,
+    "L6.moon.sample0.all_eight_ranks": true,
+    "L6.moon.sample0.finite_positive": true,
+    "L6.moon.sample0.maxima": true,
+    "L6.moon.sample1.five_replays": true,
+    "L6.moon.sample1.all_eight_ranks": true,
+    "L6.moon.sample1.finite_positive": true,
+    "L6.moon.sample1.maxima": true,
+    "L6.moon.sample2.five_replays": true,
+    "L6.moon.sample2.all_eight_ranks": true,
+    "L6.moon.sample2.finite_positive": true,
+    "L6.moon.sample2.maxima": true,
+    "L6.moon.sample3.five_replays": true,
+    "L6.moon.sample3.all_eight_ranks": true,
+    "L6.moon.sample3.finite_positive": true,
+    "L6.moon.sample3.maxima": true,
+    "L6.moon.sample4.five_replays": true,
+    "L6.moon.sample4.all_eight_ranks": true,
+    "L6.moon.sample4.finite_positive": true,
+    "L6.moon.sample4.maxima": true,
+    "L6.moon.sample5.five_replays": true,
+    "L6.moon.sample5.all_eight_ranks": true,
+    "L6.moon.sample5.finite_positive": true,
+    "L6.moon.sample5.maxima": true,
+    "L6.moon.sample6.five_replays": true,
+    "L6.moon.sample6.all_eight_ranks": true,
+    "L6.moon.sample6.finite_positive": true,
+    "L6.moon.sample6.maxima": true,
+    "L6.moon.sample7.five_replays": true,
+    "L6.moon.sample7.all_eight_ranks": true,
+    "L6.moon.sample7.finite_positive": true,
+    "L6.moon.sample7.maxima": true,
+    "L6.moon.sample8.five_replays": true,
+    "L6.moon.sample8.all_eight_ranks": true,
+    "L6.moon.sample8.finite_positive": true,
+    "L6.moon.sample8.maxima": true,
+    "L6.moon.sample9.five_replays": true,
+    "L6.moon.sample9.all_eight_ranks": true,
+    "L6.moon.sample9.finite_positive": true,
+    "L6.moon.sample9.maxima": true,
+    "L6.moon.rank0.median": true,
+    "L6.moon.rank1.median": true,
+    "L6.moon.rank2.median": true,
+    "L6.moon.rank3.median": true,
+    "L6.moon.rank4.median": true,
+    "L6.moon.rank5.median": true,
+    "L6.moon.rank6.median": true,
+    "L6.moon.rank7.median": true,
+    "L6.moon.summary": true,
+    "L6.sampled_group.ten_samples": true,
+    "L6.sampled_group.sample_ids": true,
+    "L6.sampled_group.sample0.five_replays": true,
+    "L6.sampled_group.sample0.all_eight_ranks": true,
+    "L6.sampled_group.sample0.finite_positive": true,
+    "L6.sampled_group.sample0.maxima": true,
+    "L6.sampled_group.sample1.five_replays": true,
+    "L6.sampled_group.sample1.all_eight_ranks": true,
+    "L6.sampled_group.sample1.finite_positive": true,
+    "L6.sampled_group.sample1.maxima": true,
+    "L6.sampled_group.sample2.five_replays": true,
+    "L6.sampled_group.sample2.all_eight_ranks": true,
+    "L6.sampled_group.sample2.finite_positive": true,
+    "L6.sampled_group.sample2.maxima": true,
+    "L6.sampled_group.sample3.five_replays": true,
+    "L6.sampled_group.sample3.all_eight_ranks": true,
+    "L6.sampled_group.sample3.finite_positive": true,
+    "L6.sampled_group.sample3.maxima": true,
+    "L6.sampled_group.sample4.five_replays": true,
+    "L6.sampled_group.sample4.all_eight_ranks": true,
+    "L6.sampled_group.sample4.finite_positive": true,
+    "L6.sampled_group.sample4.maxima": true,
+    "L6.sampled_group.sample5.five_replays": true,
+    "L6.sampled_group.sample5.all_eight_ranks": true,
+    "L6.sampled_group.sample5.finite_positive": true,
+    "L6.sampled_group.sample5.maxima": true,
+    "L6.sampled_group.sample6.five_replays": true,
+    "L6.sampled_group.sample6.all_eight_ranks": true,
+    "L6.sampled_group.sample6.finite_positive": true,
+    "L6.sampled_group.sample6.maxima": true,
+    "L6.sampled_group.sample7.five_replays": true,
+    "L6.sampled_group.sample7.all_eight_ranks": true,
+    "L6.sampled_group.sample7.finite_positive": true,
+    "L6.sampled_group.sample7.maxima": true,
+    "L6.sampled_group.sample8.five_replays": true,
+    "L6.sampled_group.sample8.all_eight_ranks": true,
+    "L6.sampled_group.sample8.finite_positive": true,
+    "L6.sampled_group.sample8.maxima": true,
+    "L6.sampled_group.sample9.five_replays": true,
+    "L6.sampled_group.sample9.all_eight_ranks": true,
+    "L6.sampled_group.sample9.finite_positive": true,
+    "L6.sampled_group.sample9.maxima": true,
+    "L6.sampled_group.rank0.median": true,
+    "L6.sampled_group.rank1.median": true,
+    "L6.sampled_group.rank2.median": true,
+    "L6.sampled_group.rank3.median": true,
+    "L6.sampled_group.rank4.median": true,
+    "L6.sampled_group.rank5.median": true,
+    "L6.sampled_group.rank6.median": true,
+    "L6.sampled_group.rank7.median": true,
+    "L6.sampled_group.summary": true,
+    "L6.planner_delta": true,
+    "L6.fixture_sha256": true,
+    "L6.original_trace_shape": true,
+    "L6.unique_valid_experts_per_token": true,
+    "L6.native_replica_valid_rank0": true,
+    "L6.native_replica_valid_rank1": true,
+    "L6.native_replica_valid_rank2": true,
+    "L6.native_replica_valid_rank3": true,
+    "L6.native_replica_valid_rank4": true,
+    "L6.native_replica_valid_rank5": true,
+    "L6.native_replica_valid_rank6": true,
+    "L6.native_replica_valid_rank7": true,
+    "L6.native.runtime_owner_equals_fixture_by_sha256": true,
+    "L6.native.owner_range": true,
+    "L6.native.exact_loads": true,
+    "L6.native.expert_task_conservation": true,
+    "L6.native.support_legal": true,
+    "L6.native.replica_budget_and_homes": true,
+    "L6.native.deduplicated_traffic": true,
+    "L6.native.copy_matrix": true,
+    "L6.native.endpoint_traffic": true,
+    "L6.native.runtime_audit_flags": true,
+    "L6.sampled_group.runtime_owner_equals_fixture_by_sha256": true,
+    "L6.sampled_group.owner_range": true,
+    "L6.sampled_group.exact_loads": true,
+    "L6.sampled_group.expert_task_conservation": true,
+    "L6.sampled_group.support_legal": true,
+    "L6.sampled_group.replica_budget_and_homes": true,
+    "L6.sampled_group.deduplicated_traffic": true,
+    "L6.sampled_group.copy_matrix": true,
+    "L6.sampled_group.endpoint_traffic": true,
+    "L6.sampled_group.runtime_audit_flags": true,
+    "L6.traffic_and_copy_deltas": true,
+    "L6.input_seed_post_timing_audits": true,
+    "L6.all_status_zero_no_fallback": true,
+    "L7.moon.ten_samples": true,
+    "L7.moon.sample_ids": true,
+    "L7.moon.sample0.five_replays": true,
+    "L7.moon.sample0.all_eight_ranks": true,
+    "L7.moon.sample0.finite_positive": true,
+    "L7.moon.sample0.maxima": true,
+    "L7.moon.sample1.five_replays": true,
+    "L7.moon.sample1.all_eight_ranks": true,
+    "L7.moon.sample1.finite_positive": true,
+    "L7.moon.sample1.maxima": true,
+    "L7.moon.sample2.five_replays": true,
+    "L7.moon.sample2.all_eight_ranks": true,
+    "L7.moon.sample2.finite_positive": true,
+    "L7.moon.sample2.maxima": true,
+    "L7.moon.sample3.five_replays": true,
+    "L7.moon.sample3.all_eight_ranks": true,
+    "L7.moon.sample3.finite_positive": true,
+    "L7.moon.sample3.maxima": true,
+    "L7.moon.sample4.five_replays": true,
+    "L7.moon.sample4.all_eight_ranks": true,
+    "L7.moon.sample4.finite_positive": true,
+    "L7.moon.sample4.maxima": true,
+    "L7.moon.sample5.five_replays": true,
+    "L7.moon.sample5.all_eight_ranks": true,
+    "L7.moon.sample5.finite_positive": true,
+    "L7.moon.sample5.maxima": true,
+    "L7.moon.sample6.five_replays": true,
+    "L7.moon.sample6.all_eight_ranks": true,
+    "L7.moon.sample6.finite_positive": true,
+    "L7.moon.sample6.maxima": true,
+    "L7.moon.sample7.five_replays": true,
+    "L7.moon.sample7.all_eight_ranks": true,
+    "L7.moon.sample7.finite_positive": true,
+    "L7.moon.sample7.maxima": true,
+    "L7.moon.sample8.five_replays": true,
+    "L7.moon.sample8.all_eight_ranks": true,
+    "L7.moon.sample8.finite_positive": true,
+    "L7.moon.sample8.maxima": true,
+    "L7.moon.sample9.five_replays": true,
+    "L7.moon.sample9.all_eight_ranks": true,
+    "L7.moon.sample9.finite_positive": true,
+    "L7.moon.sample9.maxima": true,
+    "L7.moon.rank0.median": true,
+    "L7.moon.rank1.median": true,
+    "L7.moon.rank2.median": true,
+    "L7.moon.rank3.median": true,
+    "L7.moon.rank4.median": true,
+    "L7.moon.rank5.median": true,
+    "L7.moon.rank6.median": true,
+    "L7.moon.rank7.median": true,
+    "L7.moon.summary": true,
+    "L7.sampled_group.ten_samples": true,
+    "L7.sampled_group.sample_ids": true,
+    "L7.sampled_group.sample0.five_replays": true,
+    "L7.sampled_group.sample0.all_eight_ranks": true,
+    "L7.sampled_group.sample0.finite_positive": true,
+    "L7.sampled_group.sample0.maxima": true,
+    "L7.sampled_group.sample1.five_replays": true,
+    "L7.sampled_group.sample1.all_eight_ranks": true,
+    "L7.sampled_group.sample1.finite_positive": true,
+    "L7.sampled_group.sample1.maxima": true,
+    "L7.sampled_group.sample2.five_replays": true,
+    "L7.sampled_group.sample2.all_eight_ranks": true,
+    "L7.sampled_group.sample2.finite_positive": true,
+    "L7.sampled_group.sample2.maxima": true,
+    "L7.sampled_group.sample3.five_replays": true,
+    "L7.sampled_group.sample3.all_eight_ranks": true,
+    "L7.sampled_group.sample3.finite_positive": true,
+    "L7.sampled_group.sample3.maxima": true,
+    "L7.sampled_group.sample4.five_replays": true,
+    "L7.sampled_group.sample4.all_eight_ranks": true,
+    "L7.sampled_group.sample4.finite_positive": true,
+    "L7.sampled_group.sample4.maxima": true,
+    "L7.sampled_group.sample5.five_replays": true,
+    "L7.sampled_group.sample5.all_eight_ranks": true,
+    "L7.sampled_group.sample5.finite_positive": true,
+    "L7.sampled_group.sample5.maxima": true,
+    "L7.sampled_group.sample6.five_replays": true,
+    "L7.sampled_group.sample6.all_eight_ranks": true,
+    "L7.sampled_group.sample6.finite_positive": true,
+    "L7.sampled_group.sample6.maxima": true,
+    "L7.sampled_group.sample7.five_replays": true,
+    "L7.sampled_group.sample7.all_eight_ranks": true,
+    "L7.sampled_group.sample7.finite_positive": true,
+    "L7.sampled_group.sample7.maxima": true,
+    "L7.sampled_group.sample8.five_replays": true,
+    "L7.sampled_group.sample8.all_eight_ranks": true,
+    "L7.sampled_group.sample8.finite_positive": true,
+    "L7.sampled_group.sample8.maxima": true,
+    "L7.sampled_group.sample9.five_replays": true,
+    "L7.sampled_group.sample9.all_eight_ranks": true,
+    "L7.sampled_group.sample9.finite_positive": true,
+    "L7.sampled_group.sample9.maxima": true,
+    "L7.sampled_group.rank0.median": true,
+    "L7.sampled_group.rank1.median": true,
+    "L7.sampled_group.rank2.median": true,
+    "L7.sampled_group.rank3.median": true,
+    "L7.sampled_group.rank4.median": true,
+    "L7.sampled_group.rank5.median": true,
+    "L7.sampled_group.rank6.median": true,
+    "L7.sampled_group.rank7.median": true,
+    "L7.sampled_group.summary": true,
+    "L7.planner_delta": true,
+    "L7.fixture_sha256": true,
+    "L7.original_trace_shape": true,
+    "L7.unique_valid_experts_per_token": true,
+    "L7.native_replica_valid_rank0": true,
+    "L7.native_replica_valid_rank1": true,
+    "L7.native_replica_valid_rank2": true,
+    "L7.native_replica_valid_rank3": true,
+    "L7.native_replica_valid_rank4": true,
+    "L7.native_replica_valid_rank5": true,
+    "L7.native_replica_valid_rank6": true,
+    "L7.native_replica_valid_rank7": true,
+    "L7.native.runtime_owner_equals_fixture_by_sha256": true,
+    "L7.native.owner_range": true,
+    "L7.native.exact_loads": true,
+    "L7.native.expert_task_conservation": true,
+    "L7.native.support_legal": true,
+    "L7.native.replica_budget_and_homes": true,
+    "L7.native.deduplicated_traffic": true,
+    "L7.native.copy_matrix": true,
+    "L7.native.endpoint_traffic": true,
+    "L7.native.runtime_audit_flags": true,
+    "L7.sampled_group.runtime_owner_equals_fixture_by_sha256": true,
+    "L7.sampled_group.owner_range": true,
+    "L7.sampled_group.exact_loads": true,
+    "L7.sampled_group.expert_task_conservation": true,
+    "L7.sampled_group.support_legal": true,
+    "L7.sampled_group.replica_budget_and_homes": true,
+    "L7.sampled_group.deduplicated_traffic": true,
+    "L7.sampled_group.copy_matrix": true,
+    "L7.sampled_group.endpoint_traffic": true,
+    "L7.sampled_group.runtime_audit_flags": true,
+    "L7.traffic_and_copy_deltas": true,
+    "L7.input_seed_post_timing_audits": true,
+    "L7.all_status_zero_no_fallback": true,
+    "sum_of_layer_planner_times": true,
+    "benchmark_summary_correctness": true,
+    "only_benchmark_source_difference_is_grad_reduce": true,
+    "compatibility_change_occurs_once": true,
+    "reversing_only_documented_compatibility_edit_restores_exact_benchmark_sha256": true,
+    "all_final_source_manifest_entries_match": true,
+    "publication_updated_source_hashes_match_staging": true,
+    "component_scope_and_completion": true,
+    "component_fixture_manifest_hash": true,
+    "all_component_source_hashes_match": true,
+    "components_all_eight_layers": true,
+    "components.L0.fixture_sha": true,
+    "components.L0.two_repeats": true,
+    "components.L0.repeat0.checks": true,
+    "components.L0.repeat0.source_sharding": true,
+    "components.L0.repeat0.rank_status_history": true,
+    "components.L0.repeat0.traffic": true,
+    "components.L0.repeat0.exact_round_stats": true,
+    "components.L0.repeat0.stats_saved_counted_once": true,
+    "components.L0.repeat0.runtime_count_hash_rank_agreement": true,
+    "components.L0.repeat1.checks": true,
+    "components.L0.repeat1.source_sharding": true,
+    "components.L0.repeat1.rank_status_history": true,
+    "components.L0.repeat1.traffic": true,
+    "components.L0.repeat1.exact_round_stats": true,
+    "components.L0.repeat1.stats_saved_counted_once": true,
+    "components.L0.repeat1.runtime_count_hash_rank_agreement": true,
+    "components.L1.fixture_sha": true,
+    "components.L1.two_repeats": true,
+    "components.L1.repeat0.checks": true,
+    "components.L1.repeat0.source_sharding": true,
+    "components.L1.repeat0.rank_status_history": false,
+    "components.L1.repeat0.traffic": true,
+    "components.L1.repeat0.exact_round_stats": true,
+    "components.L1.repeat0.stats_saved_counted_once": true,
+    "components.L1.repeat0.runtime_count_hash_rank_agreement": true,
+    "components.L1.repeat1.checks": true,
+    "components.L1.repeat1.source_sharding": true,
+    "components.L1.repeat1.rank_status_history": false,
+    "components.L1.repeat1.traffic": true,
+    "components.L1.repeat1.exact_round_stats": true,
+    "components.L1.repeat1.stats_saved_counted_once": true,
+    "components.L1.repeat1.runtime_count_hash_rank_agreement": true,
+    "components.L2.fixture_sha": true,
+    "components.L2.two_repeats": true,
+    "components.L2.repeat0.checks": true,
+    "components.L2.repeat0.source_sharding": true,
+    "components.L2.repeat0.rank_status_history": false,
+    "components.L2.repeat0.traffic": true,
+    "components.L2.repeat0.exact_round_stats": true,
+    "components.L2.repeat0.stats_saved_counted_once": true,
+    "components.L2.repeat0.runtime_count_hash_rank_agreement": true,
+    "components.L2.repeat1.checks": true,
+    "components.L2.repeat1.source_sharding": true,
+    "components.L2.repeat1.rank_status_history": false,
+    "components.L2.repeat1.traffic": true,
+    "components.L2.repeat1.exact_round_stats": true,
+    "components.L2.repeat1.stats_saved_counted_once": true,
+    "components.L2.repeat1.runtime_count_hash_rank_agreement": true,
+    "components.L3.fixture_sha": true,
+    "components.L3.two_repeats": true,
+    "components.L3.repeat0.checks": true,
+    "components.L3.repeat0.source_sharding": true,
+    "components.L3.repeat0.rank_status_history": false,
+    "components.L3.repeat0.traffic": true,
+    "components.L3.repeat0.exact_round_stats": true,
+    "components.L3.repeat0.stats_saved_counted_once": true,
+    "components.L3.repeat0.runtime_count_hash_rank_agreement": true,
+    "components.L3.repeat1.checks": true,
+    "components.L3.repeat1.source_sharding": true,
+    "components.L3.repeat1.rank_status_history": false,
+    "components.L3.repeat1.traffic": true,
+    "components.L3.repeat1.exact_round_stats": true,
+    "components.L3.repeat1.stats_saved_counted_once": true,
+    "components.L3.repeat1.runtime_count_hash_rank_agreement": true,
+    "components.L4.fixture_sha": true,
+    "components.L4.two_repeats": true,
+    "components.L4.repeat0.checks": true,
+    "components.L4.repeat0.source_sharding": true,
+    "components.L4.repeat0.rank_status_history": false,
+    "components.L4.repeat0.traffic": true,
+    "components.L4.repeat0.exact_round_stats": true,
+    "components.L4.repeat0.stats_saved_counted_once": true,
+    "components.L4.repeat0.runtime_count_hash_rank_agreement": true,
+    "components.L4.repeat1.checks": true,
+    "components.L4.repeat1.source_sharding": true,
+    "components.L4.repeat1.rank_status_history": false,
+    "components.L4.repeat1.traffic": true,
+    "components.L4.repeat1.exact_round_stats": true,
+    "components.L4.repeat1.stats_saved_counted_once": true,
+    "components.L4.repeat1.runtime_count_hash_rank_agreement": true,
+    "components.L5.fixture_sha": true,
+    "components.L5.two_repeats": true,
+    "components.L5.repeat0.checks": true,
+    "components.L5.repeat0.source_sharding": true,
+    "components.L5.repeat0.rank_status_history": false,
+    "components.L5.repeat0.traffic": true,
+    "components.L5.repeat0.exact_round_stats": true,
+    "components.L5.repeat0.stats_saved_counted_once": true,
+    "components.L5.repeat0.runtime_count_hash_rank_agreement": true,
+    "components.L5.repeat1.checks": true,
+    "components.L5.repeat1.source_sharding": true,
+    "components.L5.repeat1.rank_status_history": false,
+    "components.L5.repeat1.traffic": true,
+    "components.L5.repeat1.exact_round_stats": true,
+    "components.L5.repeat1.stats_saved_counted_once": true,
+    "components.L5.repeat1.runtime_count_hash_rank_agreement": true,
+    "components.L6.fixture_sha": true,
+    "components.L6.two_repeats": true,
+    "components.L6.repeat0.checks": true,
+    "components.L6.repeat0.source_sharding": true,
+    "components.L6.repeat0.rank_status_history": false,
+    "components.L6.repeat0.traffic": true,
+    "components.L6.repeat0.exact_round_stats": true,
+    "components.L6.repeat0.stats_saved_counted_once": true,
+    "components.L6.repeat0.runtime_count_hash_rank_agreement": true,
+    "components.L6.repeat1.checks": true,
+    "components.L6.repeat1.source_sharding": true,
+    "components.L6.repeat1.rank_status_history": false,
+    "components.L6.repeat1.traffic": true,
+    "components.L6.repeat1.exact_round_stats": true,
+    "components.L6.repeat1.stats_saved_counted_once": true,
+    "components.L6.repeat1.runtime_count_hash_rank_agreement": true,
+    "components.L7.fixture_sha": true,
+    "components.L7.two_repeats": true,
+    "components.L7.repeat0.checks": true,
+    "components.L7.repeat0.source_sharding": true,
+    "components.L7.repeat0.rank_status_history": false,
+    "components.L7.repeat0.traffic": true,
+    "components.L7.repeat0.exact_round_stats": true,
+    "components.L7.repeat0.stats_saved_counted_once": true,
+    "components.L7.repeat0.runtime_count_hash_rank_agreement": true,
+    "components.L7.repeat1.checks": true,
+    "components.L7.repeat1.source_sharding": true,
+    "components.L7.repeat1.rank_status_history": false,
+    "components.L7.repeat1.traffic": true,
+    "components.L7.repeat1.exact_round_stats": true,
+    "components.L7.repeat1.stats_saved_counted_once": true,
+    "components.L7.repeat1.runtime_count_hash_rank_agreement": true,
+    "components.all_eight_layers_checked": true,
+    "components.all_original_source_round_owners_exact": true,
+    "components.original_support_and_copies_exact": true,
+    "components.graph_dynamic_layers_checked": true,
+    "component_live_collectives_dynamic_graph": true,
+    "logs.native8_attempt01.exit_and_rank_summaries": true,
+    "logs.weights_attempt03.exit_and_rank_summaries": true,
+    "logs.native8_weights_attempt02.exit_and_rank_summaries": true,
+    "logs.preserved_failure_is_removed_cute_api": true,
+    "logs.planner_native8_attempt01.exit_and_rank_summaries": true,
+    "benchmark_downloaded_duplicate_exact": true,
+    "component_downloaded_duplicate_exact": true,
+    "component_process_exit_zero": true
+  },
+  "reviewer_script_issue": "The first readback incorrectly assumed accepted package history length equals 32 for every layer. Actual selector histories vary by layer; corrected readback compares each length with the hashed fixture manifest. No GPU evidence or source was modified."
+}

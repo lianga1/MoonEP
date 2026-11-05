@@ -1,0 +1,104 @@
+{
+  "status": "complete",
+  "scope": "CPU/reference and source-static audit only; no CUDA compile, runtime, NCCL or CUDA Graph validation",
+  "sources": {
+    "experiments/native_sampled_integration/source/moonep/sampled_residency.py": "ef7fe7e2c3b80dd9846c3b159b3b1cc063187790a74ad159a3f5628ba9eff713",
+    "experiments/native_sampled_integration/source/moonep/csrc/sampled_residency.cu": "83463072f0193fe1b6b02b33432bec01eb8fcf581baa2b5f953f04fe562db9ea"
+  },
+  "runtime_host_readback": {
+    "gather_local": false,
+    "select": false,
+    "run": false,
+    "build_from_reduced_samples": false
+  },
+  "cases": [
+    {
+      "layer": 0,
+      "B": 8,
+      "native_mandatory_copies": 11,
+      "selected_extra": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "accepted_history_length": 32,
+      "mandatory_preserved": true,
+      "sample_packet_exact": true,
+      "two_physical_four_sources_packet_exact": true,
+      "missing_and_duplicate_source_detectable": true
+    },
+    {
+      "layer": 0,
+      "B": 44,
+      "native_mandatory_copies": 11,
+      "selected_extra": [
+        40,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "accepted_history_length": 165,
+      "mandatory_preserved": true,
+      "sample_packet_exact": true,
+      "two_physical_four_sources_packet_exact": true,
+      "missing_and_duplicate_source_detectable": true
+    },
+    {
+      "layer": 7,
+      "B": 8,
+      "native_mandatory_copies": 10,
+      "selected_extra": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "accepted_history_length": 35,
+      "mandatory_preserved": true,
+      "sample_packet_exact": true,
+      "two_physical_four_sources_packet_exact": true,
+      "missing_and_duplicate_source_detectable": true
+    },
+    {
+      "layer": 7,
+      "B": 44,
+      "native_mandatory_copies": 10,
+      "selected_extra": [
+        44,
+        43,
+        44,
+        44,
+        43,
+        44,
+        43,
+        43
+      ],
+      "accepted_history_length": 187,
+      "mandatory_preserved": true,
+      "sample_packet_exact": true,
+      "two_physical_four_sources_packet_exact": true,
+      "missing_and_duplicate_source_detectable": true
+    }
+  ],
+  "failures": [],
+  "sample_ids_match_original": true,
+  "limitations": [
+    "GPU compilation and execution pending",
+    "real eight-rank NCCL and Graph pending",
+    "two-physical component collection is not eight-physical runtime validation",
+    "unsampled invalid/overflow seed pairs require full materializer audit and collective fallback"
+  ]
+}

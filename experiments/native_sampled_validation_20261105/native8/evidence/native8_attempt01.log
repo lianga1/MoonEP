@@ -1,0 +1,104 @@
+........................................
+=============================== warnings summary ===============================
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[44-True]
+tests/test_sampled_group.py::test_nondefault_group_and_collective_fallback
+tests/test_sampled_group.py::test_graph_replay_reads_new_routes
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+    return func(*args, **kwargs)
+
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[44-True]
+tests/test_sampled_group.py::test_nondefault_group_and_collective_fallback
+tests/test_sampled_group.py::test_graph_replay_reads_new_routes
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+5 passed, 10 warnings in 180.72s (0:03:00)
+
+=============================== warnings summary ===============================
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[44-True]
+tests/test_sampled_group.py::test_nondefault_group_and_collective_fallback
+tests/test_sampled_group.py::test_graph_replay_reads_new_routes
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+5 passed, 5 warnings in 180.78s (0:03:00)
+
+=============================== warnings summary ===============================
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[44-True]
+tests/test_sampled_group.py::test_nondefault_group_and_collective_fallback
+tests/test_sampled_group.py::test_graph_replay_reads_new_routes
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+5 passed, 5 warnings in 180.78s (0:03:00)
+
+=============================== warnings summary ===============================
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[44-True]
+tests/test_sampled_group.py::test_nondefault_group_and_collective_fallback
+tests/test_sampled_group.py::test_graph_replay_reads_new_routes
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+5 passed, 5 warnings in 180.79s (0:03:00)
+
+=============================== warnings summary ===============================
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[44-True]
+tests/test_sampled_group.py::test_nondefault_group_and_collective_fallback
+tests/test_sampled_group.py::test_graph_replay_reads_new_routes
+
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=============================== warnings summary ===============================
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[44-True]
+tests/test_sampled_group.py::test_nondefault_group_and_collective_fallback
+tests/test_sampled_group.py::test_graph_replay_reads_new_routes
+=============================== warnings summary ===============================  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+5 passed, 5 warnings in 180.80s (0:03:00)
+
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[44-True]
+tests/test_sampled_group.py::test_nondefault_group_and_collective_fallback
+tests/test_sampled_group.py::test_graph_replay_reads_new_routes-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=============================== warnings summary ===============================
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[44-True]
+tests/test_sampled_group.py::test_nondefault_group_and_collective_fallback
+tests/test_sampled_group.py::test_graph_replay_reads_new_routes
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)5 passed, 5 warnings in 180.81s (0:03:00)
+
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+5 passed, 5 warnings in 180.80s (0:03:00)
+5 passed, 5 warnings in 180.80s (0:03:00)

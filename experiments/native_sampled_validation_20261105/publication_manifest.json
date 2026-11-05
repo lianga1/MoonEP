@@ -1,0 +1,27 @@
+{
+  "base_commit": "6fb5f9df437fbe2d92d7279171254adb252a5b7a",
+  "updated_source": {
+    "README.md": "7ca62b8ee126166288a51fd728e9765199860ea507cb37194d89054c8a1104fa",
+    "setup.py": "c79ea64592ec2dc8c13fe74177f0c95d081a4f34c7a0835916d00c2e159fca25",
+    "moonep/api.py": "5149ed57b5fedede9a980ee377d024ed00226d10b10d730a7e0eedaa59d59f3a",
+    "moonep/planning.py": "13f39774c25df5fd6fb25cb5633e0746e99125452cb38c722315b34ad2561f31",
+    "moonep/grad_reduce.py": "d9933f992567ebca13e746a7a6d5c13bc491e13ce897be1c49a60f18d848edca",
+    "moonep/sampled_group.py": "aa9793598eb4d1220b7b2cebc666a98504cbe7a863eb0ea4b2fca77a266d27c9",
+    "moonep/sampled_exchange.py": "96d6c49a0b8c3645dfd7f40b12beb8c64525c97d2b896f6d715d866358df1522",
+    "moonep/sampled_residency.py": "ef7fe7e2c3b80dd9846c3b159b3b1cc063187790a74ad159a3f5628ba9eff713",
+    "moonep/sampled_materialize.py": "7e8da2fb42599e2249b7d2a21bb727acd409a4074651583220ef17d76d0cad3b",
+    "moonep/csrc/sampled_exchange.cu": "2dc7d0a29e5126db922068cf34f5556ecc4e1d10904a37bc75890e40528ddc68",
+    "moonep/csrc/sampled_residency.cu": "83463072f0193fe1b6b02b33432bec01eb8fcf581baa2b5f953f04fe562db9ea",
+    "moonep/csrc/sampled_materialize.cu": "900cb6cfd3cb0303adb2842cdcff8da90f9f644766f69765c85a7b76a55856d2",
+    "docs/sampled_group.md": "9126834d44f58156f29c5f9b1704eed033b8f402ea004d3de4133f0e611f9aeb",
+    "docs/sampled_group_validation.md": "db75e1b498878cbc5360287afc9529ae69fd8aa54d0d27ac7d13b9f8552b5cc5",
+    "tests/test_sampled_group.py": "ddd40ff2f9f894e56cfc47e9aae444cff9019bf1b240bcf22298f8fdfbe4bbde",
+    "tests/test_sampled_weights.py": "73c28d5ebf5eff6c94598e2241dc7b1ff9ce842011ef94aa818fb0c9186fcfda",
+    "tests/sampled_components.py": "7e56d60982fae7c0c69202cf6fc97e9c1cdd37d095e6a11a529c633c8a758384",
+    "tests/benchmark_sampled_group.py": "4b9f9495ed046d132b9468bb34215585a8185778381f136bf6d1ab307b775fdc"
+  },
+  "preserved_unrelated_worktree_files": {
+    ".gitignore": "354538c9fa32ab53821b83b90668d302df1269627f4b7dafddfa96143939165d",
+    "moonep/csrc/affinity_planner.cu": "4c4722063b4a6828d622f26ff19c5482bf74288208824bbf365f216cb9738435"
+  }
+}

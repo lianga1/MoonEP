@@ -221,3 +221,7 @@ This library is inspired by the following works:
 ## Router planner experiments (2026-11-05)
 
 See [eight-rank sampled residency, prefix exchange, and H200 evidence](experiments/router_planner_20261105/README.md) for the experimental CUDA kernels, reproducible router fixtures, raw measurements and failures, and training communication cost estimates. Two physical GPUs calibrate original eight-rank components and bandwidth; the eight-GPU communication totals are modeled, not end-to-end training measurements.
+
+### Optional eight-rank sampled group planner
+
+Use `Buffer(..., planning_backend="sampled_group", planning_rounds=4, planning_sample_seed=20261026)` for live source-sharded sampling and balanced bundle exchange. The current specialization is R=8, E=352, K=8. See [configuration, runtime flow and validation boundaries](docs/sampled_group.md). The original `moon` planner remains the default.
