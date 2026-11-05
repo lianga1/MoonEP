@@ -1,0 +1,269 @@
+[sampled configurable] preflight: reject independently valid, cross-rank different sample sizes
+[sampled configurable] preflight: PASS before allocation
+................................[sampled configurable] E64_K1_D37_G1_L1_S17_B8: construct Buffer and compile sampled CUDA extensions
+[sampled configurable] E64_K1_D37_G1_L1_S17_B8: compile native planner
+[sampled configurable] E64_K1_D37_G1_L1_S17_B8: compile native sync
+[sampled configurable] E64_K1_D37_G1_L1_S17_B8: compile unweighted dispatch fresh=True
+[sampled configurable] E64_K1_D37_G1_L1_S17_B8: compile unweighted dispatch fresh=False
+[sampled configurable] E64_K1_D37_G1_L1_S17_B8: compile unweighted combine and prologue/epilogue
+[sampled configurable] E64_K1_D37_G1_L1_S17_B8: wait for every rank's JIT completion
+[sampled configurable] E64_K1_D37_G1_L1_S17_B8: all ranks compiled; start actual GPU execution
+[sampled configurable] E64_K1_D37_G1_L1_S17_B8: fresh local/hot runtime route phase=0
+[sampled configurable] E64_K1_D37_G1_L1_S17_B8: fresh local/hot runtime route phase=1
+[sampled configurable] E64_K1_D37_G1_L1_S17_B8: reuse first saved plan after second fresh plan
+[sampled configurable] E64_K1_D37_G1_L1_S17_B8: fresh local/hot runtime route phase=2
+[sampled configurable] E64_K1_D37_G1_L1_S17_B8: PASS full layouts, payloads, dynamic routes, saved-plan lifetime
+........[sampled configurable] E128_K3_D64_G2_L2_S33_B16: construct Buffer and compile sampled CUDA extensions
+[sampled configurable] E128_K3_D64_G2_L2_S33_B16: compile native planner
+[sampled configurable] E128_K3_D64_G2_L2_S33_B16: compile native sync
+[sampled configurable] E128_K3_D64_G2_L2_S33_B16: compile unweighted dispatch fresh=True
+[sampled configurable] E128_K3_D64_G2_L2_S33_B16: compile unweighted dispatch fresh=False
+[sampled configurable] E128_K3_D64_G2_L2_S33_B16: compile unweighted combine and prologue/epilogue
+[sampled configurable] E128_K3_D64_G2_L2_S33_B16: wait for every rank's JIT completion
+[sampled configurable] E128_K3_D64_G2_L2_S33_B16: all ranks compiled; start actual GPU execution
+[sampled configurable] E128_K3_D64_G2_L2_S33_B16: fresh local/hot runtime route phase=0
+[sampled configurable] E128_K3_D64_G2_L2_S33_B16: fresh local/hot runtime route phase=1
+[sampled configurable] E128_K3_D64_G2_L2_S33_B16: reuse first saved plan after second fresh plan
+[sampled configurable] E128_K3_D64_G2_L2_S33_B16: fresh local/hot runtime route phase=2
+[sampled configurable] E128_K3_D64_G2_L2_S33_B16: PASS full layouts, payloads, dynamic routes, saved-plan lifetime
+........[sampled configurable] E256_K4_D128_G3_L2_S65_B32: construct Buffer and compile sampled CUDA extensions
+[sampled configurable] E256_K4_D128_G3_L2_S65_B32: compile native planner
+[sampled configurable] E256_K4_D128_G3_L2_S65_B32: compile native sync
+[sampled configurable] E256_K4_D128_G3_L2_S65_B32: compile unweighted dispatch fresh=True
+[sampled configurable] E256_K4_D128_G3_L2_S65_B32: compile unweighted dispatch fresh=False
+[sampled configurable] E256_K4_D128_G3_L2_S65_B32: compile unweighted combine and prologue/epilogue
+[sampled configurable] E256_K4_D128_G3_L2_S65_B32: wait for every rank's JIT completion
+[sampled configurable] E256_K4_D128_G3_L2_S65_B32: all ranks compiled; start actual GPU execution
+[sampled configurable] E256_K4_D128_G3_L2_S65_B32: fresh local/hot runtime route phase=0
+[sampled configurable] E256_K4_D128_G3_L2_S65_B32: fresh local/hot runtime route phase=1
+[sampled configurable] E256_K4_D128_G3_L2_S65_B32: reuse first saved plan after second fresh plan
+[sampled configurable] E256_K4_D128_G3_L2_S65_B32: fresh local/hot runtime route phase=2
+[sampled configurable] E256_K4_D128_G3_L2_S65_B32: PASS full layouts, payloads, dynamic routes, saved-plan lifetime
+........[sampled configurable] E352_K8_D256_G2_L4_S257_B8: construct Buffer and compile sampled CUDA extensions
+[sampled configurable] E352_K8_D256_G2_L4_S257_B8: compile native planner
+[sampled configurable] E352_K8_D256_G2_L4_S257_B8: compile native sync
+[sampled configurable] E352_K8_D256_G2_L4_S257_B8: compile unweighted dispatch fresh=True
+[sampled configurable] E352_K8_D256_G2_L4_S257_B8: compile unweighted dispatch fresh=False
+[sampled configurable] E352_K8_D256_G2_L4_S257_B8: compile unweighted combine and prologue/epilogue
+[sampled configurable] E352_K8_D256_G2_L4_S257_B8: wait for every rank's JIT completion
+[sampled configurable] E352_K8_D256_G2_L4_S257_B8: all ranks compiled; start actual GPU execution
+[sampled configurable] E352_K8_D256_G2_L4_S257_B8: fresh local/hot runtime route phase=0
+[sampled configurable] E352_K8_D256_G2_L4_S257_B8: fresh local/hot runtime route phase=1
+[sampled configurable] E352_K8_D256_G2_L4_S257_B8: reuse first saved plan after second fresh plan
+[sampled configurable] E352_K8_D256_G2_L4_S257_B8: fresh local/hot runtime route phase=2
+[sampled configurable] E352_K8_D256_G2_L4_S257_B8: PASS full layouts, payloads, dynamic routes, saved-plan lifetime
+........[sampled configurable] E520_K7_D37_G1_L2_S65_B65: construct Buffer and compile sampled CUDA extensions
+[sampled configurable] E520_K7_D37_G1_L2_S65_B65: compile native planner
+[sampled configurable] E520_K7_D37_G1_L2_S65_B65: compile native sync
+[sampled configurable] E520_K7_D37_G1_L2_S65_B65: compile unweighted dispatch fresh=True
+[sampled configurable] E520_K7_D37_G1_L2_S65_B65: compile unweighted dispatch fresh=False
+[sampled configurable] E520_K7_D37_G1_L2_S65_B65: compile unweighted combine and prologue/epilogue
+[sampled configurable] E520_K7_D37_G1_L2_S65_B65: wait for every rank's JIT completion
+[sampled configurable] E520_K7_D37_G1_L2_S65_B65: all ranks compiled; start actual GPU execution
+[sampled configurable] E520_K7_D37_G1_L2_S65_B65: fresh local/hot runtime route phase=0
+[sampled configurable] E520_K7_D37_G1_L2_S65_B65: fresh local/hot runtime route phase=1
+[sampled configurable] E520_K7_D37_G1_L2_S65_B65: reuse first saved plan after second fresh plan
+[sampled configurable] E520_K7_D37_G1_L2_S65_B65: fresh local/hot runtime route phase=2
+[sampled configurable] E520_K7_D37_G1_L2_S65_B65: PASS full layouts, payloads, dynamic routes, saved-plan lifetime
+........[sampled configurable] E512_K16_D512_G2_L4_S65_B64: construct Buffer and compile sampled CUDA extensions
+[sampled configurable] E512_K16_D512_G2_L4_S65_B64: compile native planner
+[sampled configurable] E512_K16_D512_G2_L4_S65_B64: compile native sync
+[sampled configurable] E512_K16_D512_G2_L4_S65_B64: compile unweighted dispatch fresh=True
+[sampled configurable] E512_K16_D512_G2_L4_S65_B64: compile unweighted dispatch fresh=False
+[sampled configurable] E512_K16_D512_G2_L4_S65_B64: compile unweighted combine and prologue/epilogue
+[sampled configurable] E512_K16_D512_G2_L4_S65_B64: wait for every rank's JIT completion
+[sampled configurable] E512_K16_D512_G2_L4_S65_B64: all ranks compiled; start actual GPU execution
+[sampled configurable] E512_K16_D512_G2_L4_S65_B64: fresh local/hot runtime route phase=0
+[sampled configurable] E512_K16_D512_G2_L4_S65_B64: fresh local/hot runtime route phase=1
+[sampled configurable] E512_K16_D512_G2_L4_S65_B64: reuse first saved plan after second fresh plan
+[sampled configurable] E512_K16_D512_G2_L4_S65_B64: fresh local/hot runtime route phase=2
+[sampled configurable] E512_K16_D512_G2_L4_S65_B64: warm graph path
+[sampled configurable] E512_K16_D512_G2_L4_S65_B64: capture graph
+[sampled configurable] E512_K16_D512_G2_L4_S65_B64: graph replay changed input phase=0
+[sampled configurable] E512_K16_D512_G2_L4_S65_B64: graph replay changed input phase=1
+[sampled configurable] E512_K16_D512_G2_L4_S65_B64: graph replay changed input phase=2
+[sampled configurable] E512_K16_D512_G2_L4_S65_B64: PASS full layouts, payloads, dynamic routes, saved-plan lifetime
+........[sampled configurable] E1024_K32_D128_G2_L2_S33_B128: construct Buffer and compile sampled CUDA extensions
+[sampled configurable] E1024_K32_D128_G2_L2_S33_B128: compile native planner
+[sampled configurable] E1024_K32_D128_G2_L2_S33_B128: compile native sync
+[sampled configurable] E1024_K32_D128_G2_L2_S33_B128: compile unweighted dispatch fresh=True
+[sampled configurable] E1024_K32_D128_G2_L2_S33_B128: compile unweighted dispatch fresh=False
+[sampled configurable] E1024_K32_D128_G2_L2_S33_B128: compile unweighted combine and prologue/epilogue
+[sampled configurable] E1024_K32_D128_G2_L2_S33_B128: wait for every rank's JIT completion
+[sampled configurable] E1024_K32_D128_G2_L2_S33_B128: all ranks compiled; start actual GPU execution
+[sampled configurable] E1024_K32_D128_G2_L2_S33_B128: fresh local/hot runtime route phase=0
+[sampled configurable] E1024_K32_D128_G2_L2_S33_B128: fresh local/hot runtime route phase=1
+[sampled configurable] E1024_K32_D128_G2_L2_S33_B128: reuse first saved plan after second fresh plan
+[sampled configurable] E1024_K32_D128_G2_L2_S33_B128: fresh local/hot runtime route phase=2
+[sampled configurable] E1024_K32_D128_G2_L2_S33_B128: PASS full layouts, payloads, dynamic routes, saved-plan lifetime
+........[sampled configurable] E4096_K1_D256_G1_L1_S1_B512: construct Buffer and compile sampled CUDA extensions
+[sampled configurable] E4096_K1_D256_G1_L1_S1_B512: compile native planner
+[sampled configurable] E4096_K1_D256_G1_L1_S1_B512: compile native sync
+[sampled configurable] E4096_K1_D256_G1_L1_S1_B512: compile unweighted dispatch fresh=True
+[sampled configurable] E4096_K1_D256_G1_L1_S1_B512: compile unweighted dispatch fresh=False
+[sampled configurable] E4096_K1_D256_G1_L1_S1_B512: compile unweighted combine and prologue/epilogue
+[sampled configurable] E4096_K1_D256_G1_L1_S1_B512: wait for every rank's JIT completion
+[sampled configurable] E4096_K1_D256_G1_L1_S1_B512: all ranks compiled; start actual GPU execution
+[sampled configurable] E4096_K1_D256_G1_L1_S1_B512: fresh local/hot runtime route phase=0
+[sampled configurable] E4096_K1_D256_G1_L1_S1_B512: fresh local/hot runtime route phase=1
+[sampled configurable] E4096_K1_D256_G1_L1_S1_B512: reuse first saved plan after second fresh plan
+[sampled configurable] E4096_K1_D256_G1_L1_S1_B512: fresh local/hot runtime route phase=2
+[sampled configurable] E4096_K1_D256_G1_L1_S1_B512: PASS full layouts, payloads, dynamic routes, saved-plan lifetime
+........[sampled configurable] E64_K1_D4096_G8_L1_S513_B8: construct Buffer and compile sampled CUDA extensions
+[sampled configurable] E64_K1_D4096_G8_L1_S513_B8: compile native planner
+[sampled configurable] E64_K1_D4096_G8_L1_S513_B8: compile native sync
+[sampled configurable] E64_K1_D4096_G8_L1_S513_B8: compile unweighted dispatch fresh=True
+[sampled configurable] E64_K1_D4096_G8_L1_S513_B8: compile unweighted dispatch fresh=False
+[sampled configurable] E64_K1_D4096_G8_L1_S513_B8: compile unweighted combine and prologue/epilogue
+[sampled configurable] E64_K1_D4096_G8_L1_S513_B8: wait for every rank's JIT completion
+[sampled configurable] E64_K1_D4096_G8_L1_S513_B8: all ranks compiled; start actual GPU execution
+[sampled configurable] E64_K1_D4096_G8_L1_S513_B8: fresh local/hot runtime route phase=0
+[sampled configurable] E64_K1_D4096_G8_L1_S513_B8: fresh local/hot runtime route phase=1
+[sampled configurable] E64_K1_D4096_G8_L1_S513_B8: reuse first saved plan after second fresh plan
+[sampled configurable] E64_K1_D4096_G8_L1_S513_B8: fresh local/hot runtime route phase=2
+[sampled configurable] E64_K1_D4096_G8_L1_S513_B8: PASS full layouts, payloads, dynamic routes, saved-plan lifetime
+........[sampled configurable] E8_K8_D37_G2_L2_S17_B1: construct Buffer and compile sampled CUDA extensions
+[sampled configurable] E8_K8_D37_G2_L2_S17_B1: compile native planner
+[sampled configurable] E8_K8_D37_G2_L2_S17_B1: compile native sync
+[sampled configurable] E8_K8_D37_G2_L2_S17_B1: compile unweighted dispatch fresh=True
+[sampled configurable] E8_K8_D37_G2_L2_S17_B1: compile unweighted dispatch fresh=False
+[sampled configurable] E8_K8_D37_G2_L2_S17_B1: compile unweighted combine and prologue/epilogue
+[sampled configurable] E8_K8_D37_G2_L2_S17_B1: wait for every rank's JIT completion
+[sampled configurable] E8_K8_D37_G2_L2_S17_B1: all ranks compiled; start actual GPU execution
+[sampled configurable] E8_K8_D37_G2_L2_S17_B1: fresh local/hot runtime route phase=0
+[sampled configurable] E8_K8_D37_G2_L2_S17_B1: fresh local/hot runtime route phase=1
+[sampled configurable] E8_K8_D37_G2_L2_S17_B1: reuse first saved plan after second fresh plan
+[sampled configurable] E8_K8_D37_G2_L2_S17_B1: fresh local/hot runtime route phase=2
+[sampled configurable] E8_K8_D37_G2_L2_S17_B1: PASS full layouts, payloads, dynamic routes, saved-plan lifetime
+........
+=============================== warnings summary ===============================
+tests/test_sampled_configurable.py: 10 warnings
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+tests/test_sampled_configurable.py::test_variable_model_and_planner_configuration[E4096_K1_D256_G1_L1_S1_B512]
+  /inspire/hdd/project/embodied-multimodality/liangzuning-253108090053/moonep_configurable_20261105/moonep/planning.py:222: DSLOptimizationWarning: This static loop has 128 iterations, which may be very slow to compile, consider using `cutlass.range(..., unroll_full=True)` instead.
+    for j in cutlass.range_constexpr(CHUNK):
+
+tests/test_sampled_configurable.py::test_variable_model_and_planner_configuration[E4096_K1_D256_G1_L1_S1_B512]
+  /inspire/hdd/project/embodied-multimodality/liangzuning-253108090053/moonep_configurable_20261105/moonep/planning.py:230: DSLOptimizationWarning: This static loop has 128 iterations, which may be very slow to compile, consider using `cutlass.range(..., unroll_full=True)` instead.
+    for j in cutlass.range_constexpr(CHUNK):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+14 passed, 12 warnings in 97.09s (0:01:37)
+
+=============================== warnings summary ===============================
+tests/test_sampled_configurable.py: 10 warnings
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+tests/test_sampled_configurable.py::test_variable_model_and_planner_configuration[E4096_K1_D256_G1_L1_S1_B512]
+  /inspire/hdd/project/embodied-multimodality/liangzuning-253108090053/moonep_configurable_20261105/moonep/planning.py:222: DSLOptimizationWarning: This static loop has 128 iterations, which may be very slow to compile, consider using `cutlass.range(..., unroll_full=True)` instead.
+    for j in cutlass.range_constexpr(CHUNK):
+
+tests/test_sampled_configurable.py::test_variable_model_and_planner_configuration[E4096_K1_D256_G1_L1_S1_B512]
+  /inspire/hdd/project/embodied-multimodality/liangzuning-253108090053/moonep_configurable_20261105/moonep/planning.py:230: DSLOptimizationWarning: This static loop has 128 iterations, which may be very slow to compile, consider using `cutlass.range(..., unroll_full=True)` instead.
+    for j in cutlass.range_constexpr(CHUNK):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+14 passed, 12 warnings in 97.12s (0:01:37)
+
+=============================== warnings summary ===============================
+tests/test_sampled_configurable.py: 10 warnings
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+tests/test_sampled_configurable.py::test_variable_model_and_planner_configuration[E4096_K1_D256_G1_L1_S1_B512]
+  /inspire/hdd/project/embodied-multimodality/liangzuning-253108090053/moonep_configurable_20261105/moonep/planning.py:222: DSLOptimizationWarning: This static loop has 128 iterations, which may be very slow to compile, consider using `cutlass.range(..., unroll_full=True)` instead.
+    for j in cutlass.range_constexpr(CHUNK):
+
+tests/test_sampled_configurable.py::test_variable_model_and_planner_configuration[E4096_K1_D256_G1_L1_S1_B512]
+  /inspire/hdd/project/embodied-multimodality/liangzuning-253108090053/moonep_configurable_20261105/moonep/planning.py:230: DSLOptimizationWarning: This static loop has 128 iterations, which may be very slow to compile, consider using `cutlass.range(..., unroll_full=True)` instead.
+    for j in cutlass.range_constexpr(CHUNK):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+14 passed, 12 warnings in 97.14s (0:01:37)
+
+=============================== warnings summary ===============================
+tests/test_sampled_configurable.py: 10 warnings
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+tests/test_sampled_configurable.py::test_variable_model_and_planner_configuration[E4096_K1_D256_G1_L1_S1_B512]
+  /inspire/hdd/project/embodied-multimodality/liangzuning-253108090053/moonep_configurable_20261105/moonep/planning.py:222: DSLOptimizationWarning: This static loop has 128 iterations, which may be very slow to compile, consider using `cutlass.range(..., unroll_full=True)` instead.
+    for j in cutlass.range_constexpr(CHUNK):
+
+
+tests/test_sampled_configurable.py::test_variable_model_and_planner_configuration[E4096_K1_D256_G1_L1_S1_B512]
+  /inspire/hdd/project/embodied-multimodality/liangzuning-253108090053/moonep_configurable_20261105/moonep/planning.py:230: DSLOptimizationWarning: This static loop has 128 iterations, which may be very slow to compile, consider using `cutlass.range(..., unroll_full=True)` instead.
+    for j in cutlass.range_constexpr(CHUNK):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=============================== warnings summary ===============================
+14 passed, 12 warnings in 97.16s (0:01:37)
+tests/test_sampled_configurable.py: 10 warnings
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+tests/test_sampled_configurable.py::test_variable_model_and_planner_configuration[E4096_K1_D256_G1_L1_S1_B512]
+  /inspire/hdd/project/embodied-multimodality/liangzuning-253108090053/moonep_configurable_20261105/moonep/planning.py:222: DSLOptimizationWarning: This static loop has 128 iterations, which may be very slow to compile, consider using `cutlass.range(..., unroll_full=True)` instead.
+    for j in cutlass.range_constexpr(CHUNK):
+
+tests/test_sampled_configurable.py::test_variable_model_and_planner_configuration[E4096_K1_D256_G1_L1_S1_B512]
+  /inspire/hdd/project/embodied-multimodality/liangzuning-253108090053/moonep_configurable_20261105/moonep/planning.py:230: DSLOptimizationWarning: This static loop has 128 iterations, which may be very slow to compile, consider using `cutlass.range(..., unroll_full=True)` instead.
+    for j in cutlass.range_constexpr(CHUNK):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+
+=============================== warnings summary ===============================
+14 passed, 12 warnings in 97.16s (0:01:37)
+tests/test_sampled_configurable.py: 10 warnings
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+tests/test_sampled_configurable.py::test_variable_model_and_planner_configuration[E4096_K1_D256_G1_L1_S1_B512]
+  /inspire/hdd/project/embodied-multimodality/liangzuning-253108090053/moonep_configurable_20261105/moonep/planning.py:222: DSLOptimizationWarning: This static loop has 128 iterations, which may be very slow to compile, consider using `cutlass.range(..., unroll_full=True)` instead.
+    for j in cutlass.range_constexpr(CHUNK):
+
+tests/test_sampled_configurable.py::test_variable_model_and_planner_configuration[E4096_K1_D256_G1_L1_S1_B512]
+  /inspire/hdd/project/embodied-multimodality/liangzuning-253108090053/moonep_configurable_20261105/moonep/planning.py:230: DSLOptimizationWarning: This static loop has 128 iterations, which may be very slow to compile, consider using `cutlass.range(..., unroll_full=True)` instead.
+    for j in cutlass.range_constexpr(CHUNK):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+14 passed, 12 warnings in 97.16s (0:01:37)
+
+=============================== warnings summary ===============================
+tests/test_sampled_configurable.py: 15 warnings
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+    return func(*args, **kwargs)
+
+tests/test_sampled_configurable.py: 10 warnings
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+tests/test_sampled_configurable.py::test_variable_model_and_planner_configuration[E4096_K1_D256_G1_L1_S1_B512]
+  /inspire/hdd/project/embodied-multimodality/liangzuning-253108090053/moonep_configurable_20261105/moonep/planning.py:222: DSLOptimizationWarning: This static loop has 128 iterations, which may be very slow to compile, consider using `cutlass.range(..., unroll_full=True)` instead.
+    for j in cutlass.range_constexpr(CHUNK):
+
+tests/test_sampled_configurable.py::test_variable_model_and_planner_configuration[E4096_K1_D256_G1_L1_S1_B512]
+  /inspire/hdd/project/embodied-multimodality/liangzuning-253108090053/moonep_configurable_20261105/moonep/planning.py:230: DSLOptimizationWarning: This static loop has 128 iterations, which may be very slow to compile, consider using `cutlass.range(..., unroll_full=True)` instead.
+    for j in cutlass.range_constexpr(CHUNK):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+14 passed, 27 warnings in 97.16s (0:01:37)
+
+=============================== warnings summary ===============================
+tests/test_sampled_configurable.py: 10 warnings
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+tests/test_sampled_configurable.py::test_variable_model_and_planner_configuration[E4096_K1_D256_G1_L1_S1_B512]
+  /inspire/hdd/project/embodied-multimodality/liangzuning-253108090053/moonep_configurable_20261105/moonep/planning.py:222: DSLOptimizationWarning: This static loop has 128 iterations, which may be very slow to compile, consider using `cutlass.range(..., unroll_full=True)` instead.
+    for j in cutlass.range_constexpr(CHUNK):
+
+tests/test_sampled_configurable.py::test_variable_model_and_planner_configuration[E4096_K1_D256_G1_L1_S1_B512]
+  /inspire/hdd/project/embodied-multimodality/liangzuning-253108090053/moonep_configurable_20261105/moonep/planning.py:230: DSLOptimizationWarning: This static loop has 128 iterations, which may be very slow to compile, consider using `cutlass.range(..., unroll_full=True)` instead.
+    for j in cutlass.range_constexpr(CHUNK):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+14 passed, 12 warnings in 97.17s (0:01:37)

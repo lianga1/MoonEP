@@ -50,9 +50,12 @@ Usage:
 import logging
 import os
 import warnings
+from numbers import Integral
 
 import torch
 import torch.distributed as dist
+
+from .planner_config import MoEModelConfig, SampledPlannerConfig, resolve_planner_config
 
 from .buffer import (
     create_nvl_dist_tensor,
@@ -61,12 +64,12 @@ from .buffer import (
     get_vmm_granularity,
     get_multicast_granularity,
 )
-from .constants import DEDUP_BUILDER_WARPS
+from .constants import DEDUP_BUILDER_WARPS, KIDX_BITS
 from .planning import MoonEPCommPlan, allocate_planning_outputs, launch_planning
 from .inter_rank_sync import launch_inter_rank_sync
 from .dispatch import launch_dispatch
 from .dispatch_epilogue import launch_dispatch_epilogue
-from .combine import launch_combine
+from .combine import CombineKernel, launch_combine
 from .combine_prologue import launch_combine_prologue
 from .prefetch import _ELEM_TYPES, launch_prefetch, retile_for_prefetch
 from .grad_reduce import launch_grad_reduce
@@ -77,6 +80,55 @@ logger = logging.getLogger(__name__)
 def _align_up(x: int, alignment: int) -> int:
     """Round x up to a multiple of alignment."""
     return ((x + alignment - 1) // alignment) * alignment
+
+
+def _sampled_integer(name, value, minimum=1, maximum=2**31-1):
+    """Normalize initialization scalars without silently accepting floats/bools."""
+    if isinstance(value, bool) or not isinstance(value, Integral):
+        raise ValueError(f"{name} must be an integer")
+    value = int(value)
+    if value < minimum or value > maximum:
+        raise ValueError(f"{name} must be in [{minimum}, {maximum}]")
+    return value
+
+
+def _sampled_context_bounds(S, H, K, E, R, B, token_padding, num_sms):
+    """Mirror native address bounds before any shared allocation/collective.
+
+    Uninitialized host tests use only scalar arithmetic. Device-specific VMM
+    alignment is checked once a real CUDA distributed context is available.
+    """
+    limit = 2**31-1
+    N = S*K
+    if N >= limit or R*S > limit:
+        raise ValueError("sampled_group requires S*K<int32_max and R*S<=int32_max")
+    if H % CombineKernel.ACC_THREADS:
+        raise ValueError(f"H must be a multiple of {CombineKernel.ACC_THREADS} for native combine")
+    epn = E//R
+    NvS = N + (token_padding-1)*max(2*epn, epn+B)
+    if R*NvS > limit or NvS > (1 << (31-KIDX_BITS))-1:
+        raise ValueError("sampled_group NvS exceeds native int32/dedup address bounds")
+    tpe = _align_up(NvS, 4)
+    plan = _align_up(tpe+R*E, 4)
+    output_elems = 3*E*R + 3*R*(E+B) + B*R + 2*R
+    topk0 = _align_up(plan+output_elems, 4)
+    meta_logical = topk0 + 3*_align_up(N, 4) + 3 + NvS
+    if R*meta_logical-1 > limit:
+        raise ValueError("sampled_group native metadata offsets exceed int32")
+    if not dist.is_initialized() or not torch.cuda.is_available():
+        return None
+    device = torch.cuda.current_device()
+    max_sms = torch.cuda.get_device_properties(device).multi_processor_count
+    if num_sms > max_sms:
+        raise ValueError(f"num_sms={num_sms} exceeds this device's {max_sms} SMs")
+    _num_sms_dedup_from_env(max_sms)
+    NvS_padded = pad_dim0_for_alignment([NvS, H], torch.bfloat16)
+    alignment = max(get_vmm_granularity(), get_multicast_granularity(R))
+    meta_padded = _align_up(meta_logical*4, alignment)//4
+    if ((R-1)*NvS_padded + NvS-1 > limit or
+            (R-1)*meta_padded + meta_logical-1 > limit):
+        raise ValueError("sampled_group VMM-aligned native addresses exceed int32")
+    return (NvS_padded, meta_padded)
 
 
 def _num_sms_dedup_from_env(max_sms: int) -> int:
@@ -462,8 +514,9 @@ class Buffer:
         explicitly_destroy: bool = False,
         planning_backend: str = "moon",
         planning_sweeps: int = 2,
-        planning_rounds: int = 4,
-        planning_sample_seed: int = 20261026,
+        planning_rounds: int | None = None,
+        planning_sample_seed: int | None = None,
+        planner_config: SampledPlannerConfig | dict | None = None,
     ):
         """Allocate and hold all communication buffers.
 
@@ -488,8 +541,9 @@ class Buffer:
             explicitly_destroy: if True, warn (instead of auto-destroying)
                 when the Buffer is garbage-collected without ``destroy()``.
             planning_backend: "moon" (default), "affinity_gpu", or "sampled_group".
-                sampled_group uses 256 live samples and source-local balanced
-                bundle exchange; requires R=8, E=352, K=8, 1<=B<=44.
+                sampled_group uses configurable live samples and source-local
+                balanced bundle exchange. E/K come from this Buffer; requires
+                R=8, E%8=0, 8<=E<=4096, 1<=K<=min(32,E).
                 See docs/sampled_group.md. affinity_gpu
                 refines the original planner with GPU expert residency and
                 equal-count swaps. All EP ranks must use the same setting.
@@ -497,21 +551,26 @@ class Buffer:
             planning_sweeps: non-negative number of rank-pair exchange sweeps
                 for affinity_gpu (default 2). Initialize and warm up the Buffer
                 before CUDA Graph capture. See docs/affinity_gpu.md.
-            planning_rounds: positive number of sampled_group exchange rounds
-                (default 4), with one live count all-gather per round.
-            planning_sample_seed: integer controlling the fixed global sample
-                indices; sampled route and execution data are refreshed each call.
+            planner_config: SampledPlannerConfig or a dictionary of planner-only
+                controls. Defaults: sample_size=256, groups_per_class=2, rounds=4,
+                sample_seed=20261026. Effective sample size is min(sample_size,R*S).
+                Construct and warm up before CUDA Graph capture.
+            planning_rounds: legacy rounds override; omitted uses planner_config.
+            planning_sample_seed: legacy seed override; omitted uses planner_config.
+                Explicit overrides cannot conflict with planner_config.
         """
-        assert isinstance(comm_stream_priority, int), (
-            f"comm_stream_priority must be an int, got "
-            f"{type(comm_stream_priority).__name__}"
-        )
-        assert isinstance(enable_pdl, bool), (
-            f"enable_pdl must be a bool, got {type(enable_pdl).__name__}"
-        )
+        if planning_backend != "sampled_group":
+            assert isinstance(comm_stream_priority, int), (
+                f"comm_stream_priority must be an int, got "
+                f"{type(comm_stream_priority).__name__}"
+            )
+            assert isinstance(enable_pdl, bool), (
+                f"enable_pdl must be a bool, got {type(enable_pdl).__name__}"
+            )
         if planning_backend not in ("moon", "affinity_gpu", "sampled_group"):
             raise ValueError(f"unknown planning_backend: {planning_backend}")
-        if not isinstance(planning_sweeps, int) or planning_sweeps < 0:
+        if planning_backend != "sampled_group" and (
+                not isinstance(planning_sweeps, int) or planning_sweeps < 0):
             raise ValueError("planning_sweeps must be a non-negative integer")
         if planning_backend == "affinity_gpu":
             if S * K > (2**31 - 1024) // 1024:
@@ -522,14 +581,55 @@ class Buffer:
                     1 <= K <= min(32, E) and 0 < slots <= E - E // num_ep_ranks):
                 raise ValueError("affinity_gpu requires 2<=R<=16, K<=32, E<=1024, "
                                  "E%R=0, 0<B<=E-E/R")
+        resolved_planner_config = None
         if planning_backend == "sampled_group":
-            slots = E // num_ep_ranks if B is None else B
-            if (num_ep_ranks, E, K) != (8, 352, 8) or S < 32 or not 1 <= slots <= 44:
-                raise ValueError("sampled_group requires R=8, E=352, K=8, S>=32, 1<=B<=44")
-            if not isinstance(planning_rounds, int) or isinstance(planning_rounds, bool) or planning_rounds < 1:
-                raise ValueError("planning_rounds must be a positive integer")
-            if not isinstance(planning_sample_seed, int) or isinstance(planning_sample_seed, bool) or planning_sample_seed < 0:
-                raise ValueError("planning_sample_seed must be a non-negative integer")
+            # Validate collectively before any variable-shaped collective or NVL
+            # allocation. A malformed setting on one rank must reject all ranks,
+            # rather than leave its peers waiting in context construction.
+            local_error = None
+            signature = None
+            try:
+                S, H, K, E, num_ep_ranks = (
+                    _sampled_integer(name, value) for name, value in
+                    (("S", S), ("H", H), ("K", K), ("E", E), ("num_ep_ranks", num_ep_ranks))
+                )
+                token_padding = _sampled_integer("token_padding", token_padding)
+                num_sms = 32 if num_sms is None else _sampled_integer("num_sms", num_sms)
+                comm_stream_priority = _sampled_integer("comm_stream_priority", comm_stream_priority, -(2**31))
+                planning_sweeps = _sampled_integer("planning_sweeps", planning_sweeps, 0)
+                if not isinstance(enable_pdl, bool):
+                    raise ValueError("enable_pdl must be a bool")
+                resolved_planner_config = resolve_planner_config(
+                    planner_config, rounds=planning_rounds, sample_seed=planning_sample_seed,
+                )
+                if num_ep_ranks != 8:
+                    raise ValueError("sampled_group requires an eight-rank EP group")
+                slots = E // 8 if B is None else _sampled_integer("B", B)
+                B = slots
+                resolved_planner_config.validate_shape(R=num_ep_ranks, E=E, K=K, S=S, B=slots)
+                if dist.is_initialized() and dist.get_world_size(group) != num_ep_ranks:
+                    raise ValueError("num_ep_ranks must equal the process-group size")
+                layout_signature = _sampled_context_bounds(S, H, K, E, num_ep_ranks, slots, token_padding, num_sms)
+                handle_mode = os.environ.get("MOONEP_MEM_HANDLE_TYPE", "auto").lower()
+                if handle_mode not in ("auto", "fabric", "fd"):
+                    raise ValueError("MOONEP_MEM_HANDLE_TYPE must be auto/fabric/fd")
+                signature = (S, H, K, E, num_ep_ranks, slots, token_padding, num_sms,
+                             handle_mode, layout_signature, resolved_planner_config.to_dict())
+            except (ValueError, TypeError, OverflowError, RuntimeError, AssertionError) as exc:
+                local_error = f"{type(exc).__name__}: {exc}"
+                if not dist.is_initialized():
+                    raise
+            if dist.is_initialized():
+                configurations = [None] * dist.get_world_size(group)
+                dist.all_gather_object(configurations, (local_error, signature), group=group)
+                errors = [(rank, error) for rank, (error, _) in enumerate(configurations) if error]
+                if errors:
+                    raise ValueError(f"invalid sampled_group configuration on EP ranks: {errors}")
+                if any(item != signature for _, item in configurations):
+                    raise ValueError("sampled_group model and planner configuration must match on every EP rank")
+        elif planner_config is not None:
+            raise ValueError("planner_config is only used with planning_backend='sampled_group'")
+        self.planner_config = resolved_planner_config
         self.explicitly_destroy = explicitly_destroy
         self.comm_stream_priority = comm_stream_priority
         self.enable_pdl = enable_pdl
@@ -551,12 +651,52 @@ class Buffer:
         if planning_backend == "sampled_group":
             from .sampled_group import SampledGroupPlanner
             self._ctx['sampled_group_planner'] = SampledGroupPlanner(
-                self._ctx, rounds=planning_rounds, sample_seed=planning_sample_seed,
+                self._ctx, config=resolved_planner_config,
             )
         self._comm_stream = torch.cuda.Stream(
             device=int(self._ctx['device']),
             priority=self.comm_stream_priority,
         )
+
+    @classmethod
+    def from_model_config(
+        cls, model_config, *, S: int, num_ep_ranks: int,
+        expert_field: str | None = None, topk_field: str | None = None,
+        hidden_field: str | None = None, **kwargs,
+    ):
+        """Reuse model H/E/K directly; planner_config contains no duplicated dimensions.
+
+        Accepts MoEModelConfig, a config object, or a dictionary. Ambiguous
+        aliases fail explicitly; custom field paths can be supplied above.
+        Global routed expert count is required, not a per-rank shard count.
+        With sampled_group, every EP rank must use this same entry point;
+        model parsing errors are coordinated before Buffer allocation.
+        """
+        # This entry point has a model-parse preflight before Buffer's shape
+        # preflight. All ranks must use the same constructor entry point.
+        sampled = kwargs.get("planning_backend", "moon") == "sampled_group"
+        local_error = None
+        model = None
+        try:
+            forbidden = set(kwargs) & {"H", "E", "K"}
+            if forbidden:
+                raise ValueError(f"model dimensions cannot be overridden separately: {sorted(forbidden)}")
+            model = MoEModelConfig.from_model_config(
+                model_config, expert_field=expert_field, topk_field=topk_field, hidden_field=hidden_field,
+            )
+        except (ValueError, TypeError, OverflowError, RuntimeError, AttributeError) as exc:
+            if not sampled or not dist.is_initialized():
+                raise
+            local_error = f"{type(exc).__name__}: {exc}"
+        if sampled and dist.is_initialized():
+            group = kwargs.get("group")
+            errors = [None] * dist.get_world_size(group)
+            dist.all_gather_object(errors, local_error, group=group)
+            invalid = [(rank, error) for rank, error in enumerate(errors) if error]
+            if invalid:
+                raise ValueError(f"invalid sampled_group model configuration on EP ranks: {invalid}")
+        return cls(S=S, H=model.hidden_size, K=model.top_k, E=model.num_experts,
+                   num_ep_ranks=num_ep_ranks, **kwargs)
 
     @property
     def destroyed(self) -> bool:

@@ -1,0 +1,9 @@
+compile (1024, 7, 128, 8)
+compile (520, 16, 512, 3)
+compile (1024, 32, 128, 8)
+ready (1024, 7, 128, 8)
+compile (512, 16, 128, 2)
+ready (520, 16, 512, 3)
+ready (1024, 32, 128, 8)
+ready (512, 16, 128, 2)
+Remaining extensions ready

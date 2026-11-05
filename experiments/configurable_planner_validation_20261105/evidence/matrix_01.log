@@ -1,0 +1,138 @@
+[sampled configurable] preflight: reject independently valid, cross-rank different sample sizes
+[sampled configurable] preflight: PASS before allocation
+................................[sampled configurable] E64_K1_D37_G1_L1_S17_B8: construct Buffer and compile sampled CUDA extensions
+[sampled configurable] E64_K1_D37_G1_L1_S17_B8: compile native planner
+[sampled configurable] E64_K1_D37_G1_L1_S17_B8: compile native sync
+[sampled configurable] E64_K1_D37_G1_L1_S17_B8: compile unweighted dispatch fresh=True
+[sampled configurable] E64_K1_D37_G1_L1_S17_B8: compile unweighted dispatch fresh=False
+[sampled configurable] E64_K1_D37_G1_L1_S17_B8: compile unweighted combine and prologue/epilogue
+[sampled configurable] E64_K1_D37_G1_L1_S17_B8: wait for every rank's JIT completion
+[sampled configurable] E64_K1_D37_G1_L1_S17_B8: all ranks compiled; start actual GPU execution
+[sampled configurable] E64_K1_D37_G1_L1_S17_B8: fresh local/hot runtime route phase=0
+[sampled configurable] E64_K1_D37_G1_L1_S17_B8: fresh local/hot runtime route phase=1
+[sampled configurable] E64_K1_D37_G1_L1_S17_B8: reuse first saved plan after second fresh plan
+[sampled configurable] E64_K1_D37_G1_L1_S17_B8: fresh local/hot runtime route phase=2
+[sampled configurable] E64_K1_D37_G1_L1_S17_B8: PASS full layouts, payloads, dynamic routes, saved-plan lifetime
+........[sampled configurable] E128_K3_D64_G2_L2_S33_B16: construct Buffer and compile sampled CUDA extensions
+[sampled configurable] E128_K3_D64_G2_L2_S33_B16: compile native planner
+[sampled configurable] E128_K3_D64_G2_L2_S33_B16: compile native sync
+[sampled configurable] E128_K3_D64_G2_L2_S33_B16: compile unweighted dispatch fresh=True
+[sampled configurable] E128_K3_D64_G2_L2_S33_B16: compile unweighted dispatch fresh=False
+[sampled configurable] E128_K3_D64_G2_L2_S33_B16: compile unweighted combine and prologue/epilogue
+[sampled configurable] E128_K3_D64_G2_L2_S33_B16: wait for every rank's JIT completion
+[sampled configurable] E128_K3_D64_G2_L2_S33_B16: all ranks compiled; start actual GPU execution
+[sampled configurable] E128_K3_D64_G2_L2_S33_B16: fresh local/hot runtime route phase=0
+[sampled configurable] E128_K3_D64_G2_L2_S33_B16: fresh local/hot runtime route phase=1
+[sampled configurable] E128_K3_D64_G2_L2_S33_B16: reuse first saved plan after second fresh plan
+[sampled configurable] E128_K3_D64_G2_L2_S33_B16: fresh local/hot runtime route phase=2
+[sampled configurable] E128_K3_D64_G2_L2_S33_B16: PASS full layouts, payloads, dynamic routes, saved-plan lifetime
+........[sampled configurable] E256_K4_D128_G3_L2_S65_B32: construct Buffer and compile sampled CUDA extensions
+[sampled configurable] E256_K4_D128_G3_L2_S65_B32: compile native planner
+[sampled configurable] E256_K4_D128_G3_L2_S65_B32: compile native sync
+[sampled configurable] E256_K4_D128_G3_L2_S65_B32: compile unweighted dispatch fresh=True
+[sampled configurable] E256_K4_D128_G3_L2_S65_B32: compile unweighted dispatch fresh=False
+[sampled configurable] E256_K4_D128_G3_L2_S65_B32: compile unweighted combine and prologue/epilogue
+[sampled configurable] E256_K4_D128_G3_L2_S65_B32: wait for every rank's JIT completion
+[sampled configurable] E256_K4_D128_G3_L2_S65_B32: all ranks compiled; start actual GPU execution
+[sampled configurable] E256_K4_D128_G3_L2_S65_B32: fresh local/hot runtime route phase=0
+[sampled configurable] E256_K4_D128_G3_L2_S65_B32: fresh local/hot runtime route phase=1
+[sampled configurable] E256_K4_D128_G3_L2_S65_B32: reuse first saved plan after second fresh plan
+[sampled configurable] E256_K4_D128_G3_L2_S65_B32: fresh local/hot runtime route phase=2
+[sampled configurable] E256_K4_D128_G3_L2_S65_B32: PASS full layouts, payloads, dynamic routes, saved-plan lifetime
+........[sampled configurable] E352_K8_D256_G2_L4_S257_B8: construct Buffer and compile sampled CUDA extensions
+[sampled configurable] E352_K8_D256_G2_L4_S257_B8: compile native planner
+[sampled configurable] E352_K8_D256_G2_L4_S257_B8: compile native sync
+[sampled configurable] E352_K8_D256_G2_L4_S257_B8: compile unweighted dispatch fresh=True
+[sampled configurable] E352_K8_D256_G2_L4_S257_B8: compile unweighted dispatch fresh=False
+[sampled configurable] E352_K8_D256_G2_L4_S257_B8: compile unweighted combine and prologue/epilogue
+[sampled configurable] E352_K8_D256_G2_L4_S257_B8: wait for every rank's JIT completion
+[sampled configurable] E352_K8_D256_G2_L4_S257_B8: all ranks compiled; start actual GPU execution
+[sampled configurable] E352_K8_D256_G2_L4_S257_B8: fresh local/hot runtime route phase=0
+[sampled configurable] E352_K8_D256_G2_L4_S257_B8: fresh local/hot runtime route phase=1
+[sampled configurable] E352_K8_D256_G2_L4_S257_B8: reuse first saved plan after second fresh plan
+[sampled configurable] E352_K8_D256_G2_L4_S257_B8: fresh local/hot runtime route phase=2
+[sampled configurable] E352_K8_D256_G2_L4_S257_B8: PASS full layouts, payloads, dynamic routes, saved-plan lifetime
+........[sampled configurable] E520_K7_D37_G1_L2_S65_B65: construct Buffer and compile sampled CUDA extensions
+[sampled configurable] E520_K7_D37_G1_L2_S65_B65: compile native planner
+[sampled configurable] E520_K7_D37_G1_L2_S65_B65: compile native sync
+[sampled configurable] E520_K7_D37_G1_L2_S65_B65: compile unweighted dispatch fresh=True
+[sampled configurable] E520_K7_D37_G1_L2_S65_B65: compile unweighted dispatch fresh=False
+[sampled configurable] E520_K7_D37_G1_L2_S65_B65: compile unweighted combine and prologue/epilogue
+[sampled configurable] E520_K7_D37_G1_L2_S65_B65: wait for every rank's JIT completion
+[sampled configurable] E520_K7_D37_G1_L2_S65_B65: all ranks compiled; start actual GPU execution
+[sampled configurable] E520_K7_D37_G1_L2_S65_B65: fresh local/hot runtime route phase=0
+[sampled configurable] E520_K7_D37_G1_L2_S65_B65: fresh local/hot runtime route phase=1
+[sampled configurable] E520_K7_D37_G1_L2_S65_B65: reuse first saved plan after second fresh plan
+[sampled configurable] E520_K7_D37_G1_L2_S65_B65: fresh local/hot runtime route phase=2
+[sampled configurable] E520_K7_D37_G1_L2_S65_B65: PASS full layouts, payloads, dynamic routes, saved-plan lifetime
+........[sampled configurable] E512_K16_D512_G2_L4_S65_B64: construct Buffer and compile sampled CUDA extensions
+[sampled configurable] E512_K16_D512_G2_L4_S65_B64: compile native planner
+[sampled configurable] E512_K16_D512_G2_L4_S65_B64: compile native sync
+[sampled configurable] E512_K16_D512_G2_L4_S65_B64: compile unweighted dispatch fresh=True
+[sampled configurable] E512_K16_D512_G2_L4_S65_B64: compile unweighted dispatch fresh=False
+[sampled configurable] E512_K16_D512_G2_L4_S65_B64: compile unweighted combine and prologue/epilogue
+[sampled configurable] E512_K16_D512_G2_L4_S65_B64: wait for every rank's JIT completion
+[sampled configurable] E512_K16_D512_G2_L4_S65_B64: all ranks compiled; start actual GPU execution
+[sampled configurable] E512_K16_D512_G2_L4_S65_B64: fresh local/hot runtime route phase=0
+[sampled configurable] E512_K16_D512_G2_L4_S65_B64: fresh local/hot runtime route phase=1
+[sampled configurable] E512_K16_D512_G2_L4_S65_B64: reuse first saved plan after second fresh plan
+[sampled configurable] E512_K16_D512_G2_L4_S65_B64: fresh local/hot runtime route phase=2
+[sampled configurable] E512_K16_D512_G2_L4_S65_B64: warm graph path
+[sampled configurable] E512_K16_D512_G2_L4_S65_B64: capture graph
+[sampled configurable] E512_K16_D512_G2_L4_S65_B64: graph replay changed input phase=0
+[sampled configurable] E512_K16_D512_G2_L4_S65_B64: graph replay changed input phase=1
+[sampled configurable] E512_K16_D512_G2_L4_S65_B64: graph replay changed input phase=2
+[sampled configurable] E512_K16_D512_G2_L4_S65_B64: PASS full layouts, payloads, dynamic routes, saved-plan lifetime
+........[sampled configurable] E1024_K32_D128_G2_L2_S33_B128: construct Buffer and compile sampled CUDA extensions
+[sampled configurable] E1024_K32_D128_G2_L2_S33_B128: compile native planner
+[sampled configurable] E1024_K32_D128_G2_L2_S33_B128: compile native sync
+[sampled configurable] E1024_K32_D128_G2_L2_S33_B128: compile unweighted dispatch fresh=True
+[sampled configurable] E1024_K32_D128_G2_L2_S33_B128: compile unweighted dispatch fresh=False
+[sampled configurable] E1024_K32_D128_G2_L2_S33_B128: compile unweighted combine and prologue/epilogue
+[sampled configurable] E1024_K32_D128_G2_L2_S33_B128: wait for every rank's JIT completion
+[sampled configurable] E1024_K32_D128_G2_L2_S33_B128: all ranks compiled; start actual GPU execution
+[sampled configurable] E1024_K32_D128_G2_L2_S33_B128: fresh local/hot runtime route phase=0
+[sampled configurable] E1024_K32_D128_G2_L2_S33_B128: fresh local/hot runtime route phase=1
+[sampled configurable] E1024_K32_D128_G2_L2_S33_B128: reuse first saved plan after second fresh plan
+[sampled configurable] E1024_K32_D128_G2_L2_S33_B128: fresh local/hot runtime route phase=2
+[sampled configurable] E1024_K32_D128_G2_L2_S33_B128: PASS full layouts, payloads, dynamic routes, saved-plan lifetime
+........[sampled configurable] E4096_K1_D256_G1_L1_S1_B512: construct Buffer and compile sampled CUDA extensions
+[sampled configurable] E4096_K1_D256_G1_L1_S1_B512: compile native planner
+W1105 10:26:34.136000 477228 torch/distributed/elastic/agent/server/api.py:753] Received 15 death signal, shutting down workers
+W1105 10:26:34.137000 477228 torch/distributed/elastic/multiprocessing/api.py:1028] Sending process 477234 closing signal SIGTERM
+W1105 10:26:34.138000 477228 torch/distributed/elastic/multiprocessing/api.py:1028] Sending process 477235 closing signal SIGTERM
+W1105 10:26:34.138000 477228 torch/distributed/elastic/multiprocessing/api.py:1028] Sending process 477236 closing signal SIGTERM
+W1105 10:26:34.139000 477228 torch/distributed/elastic/multiprocessing/api.py:1028] Sending process 477237 closing signal SIGTERM
+W1105 10:26:34.139000 477228 torch/distributed/elastic/multiprocessing/api.py:1028] Sending process 477238 closing signal SIGTERM
+W1105 10:26:34.139000 477228 torch/distributed/elastic/multiprocessing/api.py:1028] Sending process 477239 closing signal SIGTERM
+W1105 10:26:34.139000 477228 torch/distributed/elastic/multiprocessing/api.py:1028] Sending process 477240 closing signal SIGTERM
+W1105 10:26:34.140000 477228 torch/distributed/elastic/multiprocessing/api.py:1028] Sending process 477241 closing signal SIGTERM
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/run.py", line 1032, in <module>
+    main()
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 367, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/run.py", line 1028, in main
+    run(args)
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/run.py", line 1019, in run
+    elastic_launch(
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/launcher/api.py", line 194, in __call__
+    return launch_agent(
+           ^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/launcher/api.py", line 374, in launch_agent
+    result = agent.run()
+             ^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/elastic/metrics/api.py", line 134, in wrapper
+    result = f(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/elastic/agent/server/api.py", line 745, in run
+    result = self._invoke_run(role)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/elastic/agent/server/api.py", line 923, in _invoke_run
+    time.sleep(monitor_interval)
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/elastic/multiprocessing/api.py", line 86, in _terminate_process_handler
+    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
+torch.distributed.elastic.multiprocessing.api.SignalException: Process 477228 got signal: 15

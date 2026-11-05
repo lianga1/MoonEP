@@ -52,7 +52,7 @@ def test_configuration_registration_and_shape_guards(monkeypatch):
     for slots in (8, 44):
         with pytest.raises(AllocationReached):
             Buffer(**(defaults | {'B': slots}))
-    for change in ({'num_ep_ranks': 4}, {'E': 256}, {'K': 4}, {'B': 0},
+    for change in ({'num_ep_ranks': 4}, {'E': 353}, {'K': 33}, {'B': 0},
                    {'planning_rounds': -1}, {'planning_backend': 'unknown_backend'}):
         with pytest.raises(ValueError):
             Buffer(**(defaults | change))

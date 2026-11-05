@@ -1,0 +1,1975 @@
+{
+  "status": "complete",
+  "scope": "two physical GPUs; eight original logical sources; component correctness only",
+  "not_eight_physical_rank_runtime": true,
+  "not_end_to_end_or_performance_measurement": true,
+  "protocol": {
+    "N": 134144,
+    "R": 8,
+    "E": 352,
+    "K": 8,
+    "B": 8,
+    "d": 256,
+    "g": 2,
+    "L": 4,
+    "seed": 20261026,
+    "layers": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "repeats": 2,
+    "warmup": 3,
+    "sample_collective": "real world2 SUM of four original-source packets per physical rank",
+    "exchange_collective": "real world2 all-gather of four live original-source count rows per rank, every round",
+    "preloaded_counts_used": false,
+    "graph_reused_across_changed_layer_inputs": true
+  },
+  "cases": [
+    {
+      "layer": 0,
+      "fixture": {
+        "path": "fixtures/layer_00.npz",
+        "sha256": "b705b5e45be5dfa57d9b29fcb6b26e938de49cdf2d9fd153787cc2bd43e9d6f9"
+      },
+      "passes": [
+        {
+          "repeat": 0,
+          "passed": true,
+          "ranks": [
+            {
+              "physical_rank": 0,
+              "logical_sources": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "errors": [],
+              "status": 0,
+              "remote_before_local": 310608,
+              "remote_after_local": 260762,
+              "runtime_count_sha256": "81ff30d7a0083b3b615bd8a618199bbf089ab6dff0afca11860d878ddab41c58",
+              "global_stats_once": [
+                [
+                  36919,
+                  75292,
+                  73838,
+                  63111
+                ],
+                [
+                  13601,
+                  28422,
+                  27202,
+                  19388
+                ],
+                [
+                  5032,
+                  10732,
+                  10064,
+                  6116
+                ],
+                [
+                  1924,
+                  4320,
+                  3848,
+                  2164
+                ]
+              ],
+              "global_stats_sum_over_rounds_once": [
+                57476,
+                118766,
+                114952,
+                90779
+              ],
+              "accepted_history_length": 32,
+              "history_checked": false
+            },
+            {
+              "physical_rank": 1,
+              "logical_sources": [
+                4,
+                5,
+                6,
+                7
+              ],
+              "errors": [],
+              "status": 0,
+              "remote_before_local": 310903,
+              "remote_after_local": 269970,
+              "runtime_count_sha256": "81ff30d7a0083b3b615bd8a618199bbf089ab6dff0afca11860d878ddab41c58",
+              "global_stats_once": [
+                [
+                  36919,
+                  75292,
+                  73838,
+                  63111
+                ],
+                [
+                  13601,
+                  28422,
+                  27202,
+                  19388
+                ],
+                [
+                  5032,
+                  10732,
+                  10064,
+                  6116
+                ],
+                [
+                  1924,
+                  4320,
+                  3848,
+                  2164
+                ]
+              ],
+              "global_stats_sum_over_rounds_once": [
+                57476,
+                118766,
+                114952,
+                90779
+              ],
+              "accepted_history_length": 32,
+              "history_checked": false
+            }
+          ],
+          "remote_before": 621511,
+          "remote_after": 530732,
+          "actual_saved": 90779,
+          "stats_saved_sum_once": 90779,
+          "oracle_counts_never_used_at_runtime": true,
+          "graph_recomputed_after_poison": true,
+          "errors": []
+        },
+        {
+          "repeat": 1,
+          "passed": true,
+          "ranks": [
+            {
+              "physical_rank": 0,
+              "logical_sources": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "errors": [],
+              "status": 0,
+              "remote_before_local": 310608,
+              "remote_after_local": 260762,
+              "runtime_count_sha256": "81ff30d7a0083b3b615bd8a618199bbf089ab6dff0afca11860d878ddab41c58",
+              "global_stats_once": [
+                [
+                  36919,
+                  75292,
+                  73838,
+                  63111
+                ],
+                [
+                  13601,
+                  28422,
+                  27202,
+                  19388
+                ],
+                [
+                  5032,
+                  10732,
+                  10064,
+                  6116
+                ],
+                [
+                  1924,
+                  4320,
+                  3848,
+                  2164
+                ]
+              ],
+              "global_stats_sum_over_rounds_once": [
+                57476,
+                118766,
+                114952,
+                90779
+              ],
+              "accepted_history_length": 32,
+              "history_checked": false
+            },
+            {
+              "physical_rank": 1,
+              "logical_sources": [
+                4,
+                5,
+                6,
+                7
+              ],
+              "errors": [],
+              "status": 0,
+              "remote_before_local": 310903,
+              "remote_after_local": 269970,
+              "runtime_count_sha256": "81ff30d7a0083b3b615bd8a618199bbf089ab6dff0afca11860d878ddab41c58",
+              "global_stats_once": [
+                [
+                  36919,
+                  75292,
+                  73838,
+                  63111
+                ],
+                [
+                  13601,
+                  28422,
+                  27202,
+                  19388
+                ],
+                [
+                  5032,
+                  10732,
+                  10064,
+                  6116
+                ],
+                [
+                  1924,
+                  4320,
+                  3848,
+                  2164
+                ]
+              ],
+              "global_stats_sum_over_rounds_once": [
+                57476,
+                118766,
+                114952,
+                90779
+              ],
+              "accepted_history_length": 32,
+              "history_checked": false
+            }
+          ],
+          "remote_before": 621511,
+          "remote_after": 530732,
+          "actual_saved": 90779,
+          "stats_saved_sum_once": 90779,
+          "oracle_counts_never_used_at_runtime": true,
+          "graph_recomputed_after_poison": true,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "layer": 1,
+      "fixture": {
+        "path": "fixtures/layer_01.npz",
+        "sha256": "dbc6cfdfe10ac87984da3f429f4a5b4d5d6dd32e5d1e64e983e3e39ac807867b"
+      },
+      "passes": [
+        {
+          "repeat": 0,
+          "passed": true,
+          "ranks": [
+            {
+              "physical_rank": 0,
+              "logical_sources": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "errors": [],
+              "status": 0,
+              "remote_before_local": 317739,
+              "remote_after_local": 224015,
+              "runtime_count_sha256": "5e39166401b106c706f254d2a0587fd0a688f64562a4da2c9cd110c691a00c0a",
+              "global_stats_once": [
+                [
+                  45908,
+                  95552,
+                  91816,
+                  85211
+                ],
+                [
+                  34425,
+                  74574,
+                  68850,
+                  55681
+                ],
+                [
+                  18326,
+                  41494,
+                  36652,
+                  27068
+                ],
+                [
+                  8835,
+                  21466,
+                  17670,
+                  12119
+                ]
+              ],
+              "global_stats_sum_over_rounds_once": [
+                107494,
+                233086,
+                214988,
+                180079
+              ],
+              "accepted_history_length": 35,
+              "history_checked": false
+            },
+            {
+              "physical_rank": 1,
+              "logical_sources": [
+                4,
+                5,
+                6,
+                7
+              ],
+              "errors": [],
+              "status": 0,
+              "remote_before_local": 325272,
+              "remote_after_local": 238917,
+              "runtime_count_sha256": "5e39166401b106c706f254d2a0587fd0a688f64562a4da2c9cd110c691a00c0a",
+              "global_stats_once": [
+                [
+                  45908,
+                  95552,
+                  91816,
+                  85211
+                ],
+                [
+                  34425,
+                  74574,
+                  68850,
+                  55681
+                ],
+                [
+                  18326,
+                  41494,
+                  36652,
+                  27068
+                ],
+                [
+                  8835,
+                  21466,
+                  17670,
+                  12119
+                ]
+              ],
+              "global_stats_sum_over_rounds_once": [
+                107494,
+                233086,
+                214988,
+                180079
+              ],
+              "accepted_history_length": 35,
+              "history_checked": false
+            }
+          ],
+          "remote_before": 643011,
+          "remote_after": 462932,
+          "actual_saved": 180079,
+          "stats_saved_sum_once": 180079,
+          "oracle_counts_never_used_at_runtime": true,
+          "graph_recomputed_after_poison": true,
+          "errors": []
+        },
+        {
+          "repeat": 1,
+          "passed": true,
+          "ranks": [
+            {
+              "physical_rank": 0,
+              "logical_sources": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "errors": [],
+              "status": 0,
+              "remote_before_local": 317739,
+              "remote_after_local": 224015,
+              "runtime_count_sha256": "5e39166401b106c706f254d2a0587fd0a688f64562a4da2c9cd110c691a00c0a",
+              "global_stats_once": [
+                [
+                  45908,
+                  95552,
+                  91816,
+                  85211
+                ],
+                [
+                  34425,
+                  74574,
+                  68850,
+                  55681
+                ],
+                [
+                  18326,
+                  41494,
+                  36652,
+                  27068
+                ],
+                [
+                  8835,
+                  21466,
+                  17670,
+                  12119
+                ]
+              ],
+              "global_stats_sum_over_rounds_once": [
+                107494,
+                233086,
+                214988,
+                180079
+              ],
+              "accepted_history_length": 35,
+              "history_checked": false
+            },
+            {
+              "physical_rank": 1,
+              "logical_sources": [
+                4,
+                5,
+                6,
+                7
+              ],
+              "errors": [],
+              "status": 0,
+              "remote_before_local": 325272,
+              "remote_after_local": 238917,
+              "runtime_count_sha256": "5e39166401b106c706f254d2a0587fd0a688f64562a4da2c9cd110c691a00c0a",
+              "global_stats_once": [
+                [
+                  45908,
+                  95552,
+                  91816,
+                  85211
+                ],
+                [
+                  34425,
+                  74574,
+                  68850,
+                  55681
+                ],
+                [
+                  18326,
+                  41494,
+                  36652,
+                  27068
+                ],
+                [
+                  8835,
+                  21466,
+                  17670,
+                  12119
+                ]
+              ],
+              "global_stats_sum_over_rounds_once": [
+                107494,
+                233086,
+                214988,
+                180079
+              ],
+              "accepted_history_length": 35,
+              "history_checked": false
+            }
+          ],
+          "remote_before": 643011,
+          "remote_after": 462932,
+          "actual_saved": 180079,
+          "stats_saved_sum_once": 180079,
+          "oracle_counts_never_used_at_runtime": true,
+          "graph_recomputed_after_poison": true,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "layer": 2,
+      "fixture": {
+        "path": "fixtures/layer_02.npz",
+        "sha256": "3b4c7c54c395e278a9880ac5e8a5bf737dd72ed53db0f376060b2b059b02134b"
+      },
+      "passes": [
+        {
+          "repeat": 0,
+          "passed": true,
+          "ranks": [
+            {
+              "physical_rank": 0,
+              "logical_sources": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "errors": [],
+              "status": 0,
+              "remote_before_local": 313822,
+              "remote_after_local": 222232,
+              "runtime_count_sha256": "650e597377fbd1a9a4268863d7b2c607d5fd0276b85ff88b3f0e05e7d2ca9b44",
+              "global_stats_once": [
+                [
+                  50002,
+                  107436,
+                  100004,
+                  91420
+                ],
+                [
+                  36252,
+                  81844,
+                  72504,
+                  56945
+                ],
+                [
+                  20048,
+                  45782,
+                  40096,
+                  27947
+                ],
+                [
+                  8966,
+                  20390,
+                  17932,
+                  11296
+                ]
+              ],
+              "global_stats_sum_over_rounds_once": [
+                115268,
+                255452,
+                230536,
+                187608
+              ],
+              "accepted_history_length": 36,
+              "history_checked": false
+            },
+            {
+              "physical_rank": 1,
+              "logical_sources": [
+                4,
+                5,
+                6,
+                7
+              ],
+              "errors": [],
+              "status": 0,
+              "remote_before_local": 321763,
+              "remote_after_local": 225745,
+              "runtime_count_sha256": "650e597377fbd1a9a4268863d7b2c607d5fd0276b85ff88b3f0e05e7d2ca9b44",
+              "global_stats_once": [
+                [
+                  50002,
+                  107436,
+                  100004,
+                  91420
+                ],
+                [
+                  36252,
+                  81844,
+                  72504,
+                  56945
+                ],
+                [
+                  20048,
+                  45782,
+                  40096,
+                  27947
+                ],
+                [
+                  8966,
+                  20390,
+                  17932,
+                  11296
+                ]
+              ],
+              "global_stats_sum_over_rounds_once": [
+                115268,
+                255452,
+                230536,
+                187608
+              ],
+              "accepted_history_length": 36,
+              "history_checked": false
+            }
+          ],
+          "remote_before": 635585,
+          "remote_after": 447977,
+          "actual_saved": 187608,
+          "stats_saved_sum_once": 187608,
+          "oracle_counts_never_used_at_runtime": true,
+          "graph_recomputed_after_poison": true,
+          "errors": []
+        },
+        {
+          "repeat": 1,
+          "passed": true,
+          "ranks": [
+            {
+              "physical_rank": 0,
+              "logical_sources": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "errors": [],
+              "status": 0,
+              "remote_before_local": 313822,
+              "remote_after_local": 222232,
+              "runtime_count_sha256": "650e597377fbd1a9a4268863d7b2c607d5fd0276b85ff88b3f0e05e7d2ca9b44",
+              "global_stats_once": [
+                [
+                  50002,
+                  107436,
+                  100004,
+                  91420
+                ],
+                [
+                  36252,
+                  81844,
+                  72504,
+                  56945
+                ],
+                [
+                  20048,
+                  45782,
+                  40096,
+                  27947
+                ],
+                [
+                  8966,
+                  20390,
+                  17932,
+                  11296
+                ]
+              ],
+              "global_stats_sum_over_rounds_once": [
+                115268,
+                255452,
+                230536,
+                187608
+              ],
+              "accepted_history_length": 36,
+              "history_checked": false
+            },
+            {
+              "physical_rank": 1,
+              "logical_sources": [
+                4,
+                5,
+                6,
+                7
+              ],
+              "errors": [],
+              "status": 0,
+              "remote_before_local": 321763,
+              "remote_after_local": 225745,
+              "runtime_count_sha256": "650e597377fbd1a9a4268863d7b2c607d5fd0276b85ff88b3f0e05e7d2ca9b44",
+              "global_stats_once": [
+                [
+                  50002,
+                  107436,
+                  100004,
+                  91420
+                ],
+                [
+                  36252,
+                  81844,
+                  72504,
+                  56945
+                ],
+                [
+                  20048,
+                  45782,
+                  40096,
+                  27947
+                ],
+                [
+                  8966,
+                  20390,
+                  17932,
+                  11296
+                ]
+              ],
+              "global_stats_sum_over_rounds_once": [
+                115268,
+                255452,
+                230536,
+                187608
+              ],
+              "accepted_history_length": 36,
+              "history_checked": false
+            }
+          ],
+          "remote_before": 635585,
+          "remote_after": 447977,
+          "actual_saved": 187608,
+          "stats_saved_sum_once": 187608,
+          "oracle_counts_never_used_at_runtime": true,
+          "graph_recomputed_after_poison": true,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "layer": 3,
+      "fixture": {
+        "path": "fixtures/layer_03.npz",
+        "sha256": "0cf78029316533bd3a76053d065263994a78e644c869738043c5feb4d2aff3e2"
+      },
+      "passes": [
+        {
+          "repeat": 0,
+          "passed": true,
+          "ranks": [
+            {
+              "physical_rank": 0,
+              "logical_sources": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "errors": [],
+              "status": 0,
+              "remote_before_local": 307134,
+              "remote_after_local": 213427,
+              "runtime_count_sha256": "428f9e32d5f7b8498202d99a90785cb8e493a4c9f9e8d0b427eaf565db8d5fb0",
+              "global_stats_once": [
+                [
+                  40590,
+                  85308,
+                  81180,
+                  72665
+                ],
+                [
+                  30127,
+                  65300,
+                  60254,
+                  49624
+                ],
+                [
+                  18946,
+                  42344,
+                  37892,
+                  26302
+                ],
+                [
+                  9018,
+                  21098,
+                  18036,
+                  11778
+                ]
+              ],
+              "global_stats_sum_over_rounds_once": [
+                98681,
+                214050,
+                197362,
+                160369
+              ],
+              "accepted_history_length": 33,
+              "history_checked": false
+            },
+            {
+              "physical_rank": 1,
+              "logical_sources": [
+                4,
+                5,
+                6,
+                7
+              ],
+              "errors": [],
+              "status": 0,
+              "remote_before_local": 316367,
+              "remote_after_local": 249705,
+              "runtime_count_sha256": "428f9e32d5f7b8498202d99a90785cb8e493a4c9f9e8d0b427eaf565db8d5fb0",
+              "global_stats_once": [
+                [
+                  40590,
+                  85308,
+                  81180,
+                  72665
+                ],
+                [
+                  30127,
+                  65300,
+                  60254,
+                  49624
+                ],
+                [
+                  18946,
+                  42344,
+                  37892,
+                  26302
+                ],
+                [
+                  9018,
+                  21098,
+                  18036,
+                  11778
+                ]
+              ],
+              "global_stats_sum_over_rounds_once": [
+                98681,
+                214050,
+                197362,
+                160369
+              ],
+              "accepted_history_length": 33,
+              "history_checked": false
+            }
+          ],
+          "remote_before": 623501,
+          "remote_after": 463132,
+          "actual_saved": 160369,
+          "stats_saved_sum_once": 160369,
+          "oracle_counts_never_used_at_runtime": true,
+          "graph_recomputed_after_poison": true,
+          "errors": []
+        },
+        {
+          "repeat": 1,
+          "passed": true,
+          "ranks": [
+            {
+              "physical_rank": 0,
+              "logical_sources": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "errors": [],
+              "status": 0,
+              "remote_before_local": 307134,
+              "remote_after_local": 213427,
+              "runtime_count_sha256": "428f9e32d5f7b8498202d99a90785cb8e493a4c9f9e8d0b427eaf565db8d5fb0",
+              "global_stats_once": [
+                [
+                  40590,
+                  85308,
+                  81180,
+                  72665
+                ],
+                [
+                  30127,
+                  65300,
+                  60254,
+                  49624
+                ],
+                [
+                  18946,
+                  42344,
+                  37892,
+                  26302
+                ],
+                [
+                  9018,
+                  21098,
+                  18036,
+                  11778
+                ]
+              ],
+              "global_stats_sum_over_rounds_once": [
+                98681,
+                214050,
+                197362,
+                160369
+              ],
+              "accepted_history_length": 33,
+              "history_checked": false
+            },
+            {
+              "physical_rank": 1,
+              "logical_sources": [
+                4,
+                5,
+                6,
+                7
+              ],
+              "errors": [],
+              "status": 0,
+              "remote_before_local": 316367,
+              "remote_after_local": 249705,
+              "runtime_count_sha256": "428f9e32d5f7b8498202d99a90785cb8e493a4c9f9e8d0b427eaf565db8d5fb0",
+              "global_stats_once": [
+                [
+                  40590,
+                  85308,
+                  81180,
+                  72665
+                ],
+                [
+                  30127,
+                  65300,
+                  60254,
+                  49624
+                ],
+                [
+                  18946,
+                  42344,
+                  37892,
+                  26302
+                ],
+                [
+                  9018,
+                  21098,
+                  18036,
+                  11778
+                ]
+              ],
+              "global_stats_sum_over_rounds_once": [
+                98681,
+                214050,
+                197362,
+                160369
+              ],
+              "accepted_history_length": 33,
+              "history_checked": false
+            }
+          ],
+          "remote_before": 623501,
+          "remote_after": 463132,
+          "actual_saved": 160369,
+          "stats_saved_sum_once": 160369,
+          "oracle_counts_never_used_at_runtime": true,
+          "graph_recomputed_after_poison": true,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "layer": 4,
+      "fixture": {
+        "path": "fixtures/layer_04.npz",
+        "sha256": "53c72a6823090add179e5a03fc6c8b795bf632a08330e142dfbef8af1018b6ea"
+      },
+      "passes": [
+        {
+          "repeat": 0,
+          "passed": true,
+          "ranks": [
+            {
+              "physical_rank": 0,
+              "logical_sources": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "errors": [],
+              "status": 0,
+              "remote_before_local": 314390,
+              "remote_after_local": 224117,
+              "runtime_count_sha256": "9d0efd173c57660a682323efbc57032c2abcd627cacc849f13f254483147e7f0",
+              "global_stats_once": [
+                [
+                  44388,
+                  92484,
+                  88776,
+                  79408
+                ],
+                [
+                  29860,
+                  65952,
+                  59720,
+                  47146
+                ],
+                [
+                  18897,
+                  43548,
+                  37794,
+                  25584
+                ],
+                [
+                  10149,
+                  24258,
+                  20298,
+                  12865
+                ]
+              ],
+              "global_stats_sum_over_rounds_once": [
+                103294,
+                226242,
+                206588,
+                165003
+              ],
+              "accepted_history_length": 36,
+              "history_checked": false
+            },
+            {
+              "physical_rank": 1,
+              "logical_sources": [
+                4,
+                5,
+                6,
+                7
+              ],
+              "errors": [],
+              "status": 0,
+              "remote_before_local": 320278,
+              "remote_after_local": 245548,
+              "runtime_count_sha256": "9d0efd173c57660a682323efbc57032c2abcd627cacc849f13f254483147e7f0",
+              "global_stats_once": [
+                [
+                  44388,
+                  92484,
+                  88776,
+                  79408
+                ],
+                [
+                  29860,
+                  65952,
+                  59720,
+                  47146
+                ],
+                [
+                  18897,
+                  43548,
+                  37794,
+                  25584
+                ],
+                [
+                  10149,
+                  24258,
+                  20298,
+                  12865
+                ]
+              ],
+              "global_stats_sum_over_rounds_once": [
+                103294,
+                226242,
+                206588,
+                165003
+              ],
+              "accepted_history_length": 36,
+              "history_checked": false
+            }
+          ],
+          "remote_before": 634668,
+          "remote_after": 469665,
+          "actual_saved": 165003,
+          "stats_saved_sum_once": 165003,
+          "oracle_counts_never_used_at_runtime": true,
+          "graph_recomputed_after_poison": true,
+          "errors": []
+        },
+        {
+          "repeat": 1,
+          "passed": true,
+          "ranks": [
+            {
+              "physical_rank": 0,
+              "logical_sources": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "errors": [],
+              "status": 0,
+              "remote_before_local": 314390,
+              "remote_after_local": 224117,
+              "runtime_count_sha256": "9d0efd173c57660a682323efbc57032c2abcd627cacc849f13f254483147e7f0",
+              "global_stats_once": [
+                [
+                  44388,
+                  92484,
+                  88776,
+                  79408
+                ],
+                [
+                  29860,
+                  65952,
+                  59720,
+                  47146
+                ],
+                [
+                  18897,
+                  43548,
+                  37794,
+                  25584
+                ],
+                [
+                  10149,
+                  24258,
+                  20298,
+                  12865
+                ]
+              ],
+              "global_stats_sum_over_rounds_once": [
+                103294,
+                226242,
+                206588,
+                165003
+              ],
+              "accepted_history_length": 36,
+              "history_checked": false
+            },
+            {
+              "physical_rank": 1,
+              "logical_sources": [
+                4,
+                5,
+                6,
+                7
+              ],
+              "errors": [],
+              "status": 0,
+              "remote_before_local": 320278,
+              "remote_after_local": 245548,
+              "runtime_count_sha256": "9d0efd173c57660a682323efbc57032c2abcd627cacc849f13f254483147e7f0",
+              "global_stats_once": [
+                [
+                  44388,
+                  92484,
+                  88776,
+                  79408
+                ],
+                [
+                  29860,
+                  65952,
+                  59720,
+                  47146
+                ],
+                [
+                  18897,
+                  43548,
+                  37794,
+                  25584
+                ],
+                [
+                  10149,
+                  24258,
+                  20298,
+                  12865
+                ]
+              ],
+              "global_stats_sum_over_rounds_once": [
+                103294,
+                226242,
+                206588,
+                165003
+              ],
+              "accepted_history_length": 36,
+              "history_checked": false
+            }
+          ],
+          "remote_before": 634668,
+          "remote_after": 469665,
+          "actual_saved": 165003,
+          "stats_saved_sum_once": 165003,
+          "oracle_counts_never_used_at_runtime": true,
+          "graph_recomputed_after_poison": true,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "layer": 5,
+      "fixture": {
+        "path": "fixtures/layer_05.npz",
+        "sha256": "5b6106eaeca3a03c060aa7733b50ce1c409435cb3cd47a510b669047a8143a7b"
+      },
+      "passes": [
+        {
+          "repeat": 0,
+          "passed": true,
+          "ranks": [
+            {
+              "physical_rank": 0,
+              "logical_sources": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "errors": [],
+              "status": 0,
+              "remote_before_local": 306991,
+              "remote_after_local": 222299,
+              "runtime_count_sha256": "958d8f6e97bf4033ddf62dce98437db3e245662e218f99b1e859713d5b20e120",
+              "global_stats_once": [
+                [
+                  37784,
+                  81402,
+                  75568,
+                  70041
+                ],
+                [
+                  27118,
+                  62808,
+                  54236,
+                  44275
+                ],
+                [
+                  15910,
+                  37174,
+                  31820,
+                  22908
+                ],
+                [
+                  10769,
+                  26290,
+                  21538,
+                  14010
+                ]
+              ],
+              "global_stats_sum_over_rounds_once": [
+                91581,
+                207674,
+                183162,
+                151234
+              ],
+              "accepted_history_length": 39,
+              "history_checked": false
+            },
+            {
+              "physical_rank": 1,
+              "logical_sources": [
+                4,
+                5,
+                6,
+                7
+              ],
+              "errors": [],
+              "status": 0,
+              "remote_before_local": 318269,
+              "remote_after_local": 251727,
+              "runtime_count_sha256": "958d8f6e97bf4033ddf62dce98437db3e245662e218f99b1e859713d5b20e120",
+              "global_stats_once": [
+                [
+                  37784,
+                  81402,
+                  75568,
+                  70041
+                ],
+                [
+                  27118,
+                  62808,
+                  54236,
+                  44275
+                ],
+                [
+                  15910,
+                  37174,
+                  31820,
+                  22908
+                ],
+                [
+                  10769,
+                  26290,
+                  21538,
+                  14010
+                ]
+              ],
+              "global_stats_sum_over_rounds_once": [
+                91581,
+                207674,
+                183162,
+                151234
+              ],
+              "accepted_history_length": 39,
+              "history_checked": false
+            }
+          ],
+          "remote_before": 625260,
+          "remote_after": 474026,
+          "actual_saved": 151234,
+          "stats_saved_sum_once": 151234,
+          "oracle_counts_never_used_at_runtime": true,
+          "graph_recomputed_after_poison": true,
+          "errors": []
+        },
+        {
+          "repeat": 1,
+          "passed": true,
+          "ranks": [
+            {
+              "physical_rank": 0,
+              "logical_sources": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "errors": [],
+              "status": 0,
+              "remote_before_local": 306991,
+              "remote_after_local": 222299,
+              "runtime_count_sha256": "958d8f6e97bf4033ddf62dce98437db3e245662e218f99b1e859713d5b20e120",
+              "global_stats_once": [
+                [
+                  37784,
+                  81402,
+                  75568,
+                  70041
+                ],
+                [
+                  27118,
+                  62808,
+                  54236,
+                  44275
+                ],
+                [
+                  15910,
+                  37174,
+                  31820,
+                  22908
+                ],
+                [
+                  10769,
+                  26290,
+                  21538,
+                  14010
+                ]
+              ],
+              "global_stats_sum_over_rounds_once": [
+                91581,
+                207674,
+                183162,
+                151234
+              ],
+              "accepted_history_length": 39,
+              "history_checked": false
+            },
+            {
+              "physical_rank": 1,
+              "logical_sources": [
+                4,
+                5,
+                6,
+                7
+              ],
+              "errors": [],
+              "status": 0,
+              "remote_before_local": 318269,
+              "remote_after_local": 251727,
+              "runtime_count_sha256": "958d8f6e97bf4033ddf62dce98437db3e245662e218f99b1e859713d5b20e120",
+              "global_stats_once": [
+                [
+                  37784,
+                  81402,
+                  75568,
+                  70041
+                ],
+                [
+                  27118,
+                  62808,
+                  54236,
+                  44275
+                ],
+                [
+                  15910,
+                  37174,
+                  31820,
+                  22908
+                ],
+                [
+                  10769,
+                  26290,
+                  21538,
+                  14010
+                ]
+              ],
+              "global_stats_sum_over_rounds_once": [
+                91581,
+                207674,
+                183162,
+                151234
+              ],
+              "accepted_history_length": 39,
+              "history_checked": false
+            }
+          ],
+          "remote_before": 625260,
+          "remote_after": 474026,
+          "actual_saved": 151234,
+          "stats_saved_sum_once": 151234,
+          "oracle_counts_never_used_at_runtime": true,
+          "graph_recomputed_after_poison": true,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "layer": 6,
+      "fixture": {
+        "path": "fixtures/layer_06.npz",
+        "sha256": "d4dc1c7b911e3024de4b2cab206ba68ce2df5f520c1701aae6685256de7e389a"
+      },
+      "passes": [
+        {
+          "repeat": 0,
+          "passed": true,
+          "ranks": [
+            {
+              "physical_rank": 0,
+              "logical_sources": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "errors": [],
+              "status": 0,
+              "remote_before_local": 321154,
+              "remote_after_local": 231904,
+              "runtime_count_sha256": "4014e62a8fc4d72e33d32b404c7b6f002cdf8347dbef81d41c41e7802394497d",
+              "global_stats_once": [
+                [
+                  40030,
+                  84228,
+                  80060,
+                  74223
+                ],
+                [
+                  28711,
+                  62786,
+                  57422,
+                  46508
+                ],
+                [
+                  17991,
+                  40512,
+                  35982,
+                  26069
+                ],
+                [
+                  9755,
+                  22260,
+                  19510,
+                  12637
+                ]
+              ],
+              "global_stats_sum_over_rounds_once": [
+                96487,
+                209786,
+                192974,
+                159437
+              ],
+              "accepted_history_length": 35,
+              "history_checked": false
+            },
+            {
+              "physical_rank": 1,
+              "logical_sources": [
+                4,
+                5,
+                6,
+                7
+              ],
+              "errors": [],
+              "status": 0,
+              "remote_before_local": 314282,
+              "remote_after_local": 244095,
+              "runtime_count_sha256": "4014e62a8fc4d72e33d32b404c7b6f002cdf8347dbef81d41c41e7802394497d",
+              "global_stats_once": [
+                [
+                  40030,
+                  84228,
+                  80060,
+                  74223
+                ],
+                [
+                  28711,
+                  62786,
+                  57422,
+                  46508
+                ],
+                [
+                  17991,
+                  40512,
+                  35982,
+                  26069
+                ],
+                [
+                  9755,
+                  22260,
+                  19510,
+                  12637
+                ]
+              ],
+              "global_stats_sum_over_rounds_once": [
+                96487,
+                209786,
+                192974,
+                159437
+              ],
+              "accepted_history_length": 35,
+              "history_checked": false
+            }
+          ],
+          "remote_before": 635436,
+          "remote_after": 475999,
+          "actual_saved": 159437,
+          "stats_saved_sum_once": 159437,
+          "oracle_counts_never_used_at_runtime": true,
+          "graph_recomputed_after_poison": true,
+          "errors": []
+        },
+        {
+          "repeat": 1,
+          "passed": true,
+          "ranks": [
+            {
+              "physical_rank": 0,
+              "logical_sources": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "errors": [],
+              "status": 0,
+              "remote_before_local": 321154,
+              "remote_after_local": 231904,
+              "runtime_count_sha256": "4014e62a8fc4d72e33d32b404c7b6f002cdf8347dbef81d41c41e7802394497d",
+              "global_stats_once": [
+                [
+                  40030,
+                  84228,
+                  80060,
+                  74223
+                ],
+                [
+                  28711,
+                  62786,
+                  57422,
+                  46508
+                ],
+                [
+                  17991,
+                  40512,
+                  35982,
+                  26069
+                ],
+                [
+                  9755,
+                  22260,
+                  19510,
+                  12637
+                ]
+              ],
+              "global_stats_sum_over_rounds_once": [
+                96487,
+                209786,
+                192974,
+                159437
+              ],
+              "accepted_history_length": 35,
+              "history_checked": false
+            },
+            {
+              "physical_rank": 1,
+              "logical_sources": [
+                4,
+                5,
+                6,
+                7
+              ],
+              "errors": [],
+              "status": 0,
+              "remote_before_local": 314282,
+              "remote_after_local": 244095,
+              "runtime_count_sha256": "4014e62a8fc4d72e33d32b404c7b6f002cdf8347dbef81d41c41e7802394497d",
+              "global_stats_once": [
+                [
+                  40030,
+                  84228,
+                  80060,
+                  74223
+                ],
+                [
+                  28711,
+                  62786,
+                  57422,
+                  46508
+                ],
+                [
+                  17991,
+                  40512,
+                  35982,
+                  26069
+                ],
+                [
+                  9755,
+                  22260,
+                  19510,
+                  12637
+                ]
+              ],
+              "global_stats_sum_over_rounds_once": [
+                96487,
+                209786,
+                192974,
+                159437
+              ],
+              "accepted_history_length": 35,
+              "history_checked": false
+            }
+          ],
+          "remote_before": 635436,
+          "remote_after": 475999,
+          "actual_saved": 159437,
+          "stats_saved_sum_once": 159437,
+          "oracle_counts_never_used_at_runtime": true,
+          "graph_recomputed_after_poison": true,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "layer": 7,
+      "fixture": {
+        "path": "fixtures/layer_07.npz",
+        "sha256": "1e0f64493ee09ec3711746459c930135c155134c6b1e60fd7b6966f8689bf613"
+      },
+      "passes": [
+        {
+          "repeat": 0,
+          "passed": true,
+          "ranks": [
+            {
+              "physical_rank": 0,
+              "logical_sources": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "errors": [],
+              "status": 0,
+              "remote_before_local": 320665,
+              "remote_after_local": 227735,
+              "runtime_count_sha256": "f5e7ac8a5d6a72be0efb13401223d27555f8dc5513ba316441bf96e9dc6cd23e",
+              "global_stats_once": [
+                [
+                  39680,
+                  83640,
+                  79360,
+                  74452
+                ],
+                [
+                  28155,
+                  63416,
+                  56310,
+                  47079
+                ],
+                [
+                  19174,
+                  46350,
+                  38348,
+                  28455
+                ],
+                [
+                  13057,
+                  32322,
+                  26114,
+                  18005
+                ]
+              ],
+              "global_stats_sum_over_rounds_once": [
+                100066,
+                225728,
+                200132,
+                167991
+              ],
+              "accepted_history_length": 35,
+              "history_checked": false
+            },
+            {
+              "physical_rank": 1,
+              "logical_sources": [
+                4,
+                5,
+                6,
+                7
+              ],
+              "errors": [],
+              "status": 0,
+              "remote_before_local": 314528,
+              "remote_after_local": 239467,
+              "runtime_count_sha256": "f5e7ac8a5d6a72be0efb13401223d27555f8dc5513ba316441bf96e9dc6cd23e",
+              "global_stats_once": [
+                [
+                  39680,
+                  83640,
+                  79360,
+                  74452
+                ],
+                [
+                  28155,
+                  63416,
+                  56310,
+                  47079
+                ],
+                [
+                  19174,
+                  46350,
+                  38348,
+                  28455
+                ],
+                [
+                  13057,
+                  32322,
+                  26114,
+                  18005
+                ]
+              ],
+              "global_stats_sum_over_rounds_once": [
+                100066,
+                225728,
+                200132,
+                167991
+              ],
+              "accepted_history_length": 35,
+              "history_checked": false
+            }
+          ],
+          "remote_before": 635193,
+          "remote_after": 467202,
+          "actual_saved": 167991,
+          "stats_saved_sum_once": 167991,
+          "oracle_counts_never_used_at_runtime": true,
+          "graph_recomputed_after_poison": true,
+          "errors": []
+        },
+        {
+          "repeat": 1,
+          "passed": true,
+          "ranks": [
+            {
+              "physical_rank": 0,
+              "logical_sources": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "errors": [],
+              "status": 0,
+              "remote_before_local": 320665,
+              "remote_after_local": 227735,
+              "runtime_count_sha256": "f5e7ac8a5d6a72be0efb13401223d27555f8dc5513ba316441bf96e9dc6cd23e",
+              "global_stats_once": [
+                [
+                  39680,
+                  83640,
+                  79360,
+                  74452
+                ],
+                [
+                  28155,
+                  63416,
+                  56310,
+                  47079
+                ],
+                [
+                  19174,
+                  46350,
+                  38348,
+                  28455
+                ],
+                [
+                  13057,
+                  32322,
+                  26114,
+                  18005
+                ]
+              ],
+              "global_stats_sum_over_rounds_once": [
+                100066,
+                225728,
+                200132,
+                167991
+              ],
+              "accepted_history_length": 35,
+              "history_checked": false
+            },
+            {
+              "physical_rank": 1,
+              "logical_sources": [
+                4,
+                5,
+                6,
+                7
+              ],
+              "errors": [],
+              "status": 0,
+              "remote_before_local": 314528,
+              "remote_after_local": 239467,
+              "runtime_count_sha256": "f5e7ac8a5d6a72be0efb13401223d27555f8dc5513ba316441bf96e9dc6cd23e",
+              "global_stats_once": [
+                [
+                  39680,
+                  83640,
+                  79360,
+                  74452
+                ],
+                [
+                  28155,
+                  63416,
+                  56310,
+                  47079
+                ],
+                [
+                  19174,
+                  46350,
+                  38348,
+                  28455
+                ],
+                [
+                  13057,
+                  32322,
+                  26114,
+                  18005
+                ]
+              ],
+              "global_stats_sum_over_rounds_once": [
+                100066,
+                225728,
+                200132,
+                167991
+              ],
+              "accepted_history_length": 35,
+              "history_checked": false
+            }
+          ],
+          "remote_before": 635193,
+          "remote_after": 467202,
+          "actual_saved": 167991,
+          "stats_saved_sum_once": 167991,
+          "oracle_counts_never_used_at_runtime": true,
+          "graph_recomputed_after_poison": true,
+          "errors": []
+        }
+      ]
+    }
+  ],
+  "failures": [],
+  "environment": {
+    "torch": "2.13.0+cu130",
+    "numpy": "2.2.6",
+    "cuda": "13.0",
+    "nccl": [
+      2,
+      29,
+      7
+    ],
+    "devices": [
+      "NVIDIA H200",
+      "NVIDIA H200"
+    ]
+  },
+  "source_sha256": {
+    "/inspire/hdd/project/embodied-multimodality/liangzuning-253108090053/moonep_configurable_20261105/tests/sampled_components.py": "7e56d60982fae7c0c69202cf6fc97e9c1cdd37d095e6a11a529c633c8a758384",
+    "/inspire/hdd/project/embodied-multimodality/liangzuning-253108090053/moonep_configurable_20261105/moonep/sampled_residency.py": "9c31d5ba2c5ab027ec9768e28457515006efe6c92b16f4b462c28ec8a6642b11",
+    "/inspire/hdd/project/embodied-multimodality/liangzuning-253108090053/moonep_configurable_20261105/moonep/sampled_exchange.py": "3c6ecc829042f57a8740ff704b9c80601449dd6677062f39b5fdfc9973a51a28",
+    "/inspire/hdd/project/embodied-multimodality/liangzuning-253108090053/moonep_configurable_20261105/moonep/csrc/sampled_residency.cu": "5d9e34aa57e17e3a594d8608e1301dea872408913da12e2548f4a3bccdae3a81",
+    "/inspire/hdd/project/embodied-multimodality/liangzuning-253108090053/moonep_configurable_20261105/moonep/csrc/sampled_exchange.cu": "144c8c9bea2d24718c0e826467c26f463d6db87ac0eb887af7955b0c22e8d8ce"
+  },
+  "eager_warmup": [
+    {
+      "physical_rank": 0,
+      "logical_sources": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "errors": [],
+      "status": 0,
+      "remote_before_local": 310608,
+      "remote_after_local": 260762,
+      "runtime_count_sha256": "81ff30d7a0083b3b615bd8a618199bbf089ab6dff0afca11860d878ddab41c58",
+      "global_stats_once": [
+        [
+          36919,
+          75292,
+          73838,
+          63111
+        ],
+        [
+          13601,
+          28422,
+          27202,
+          19388
+        ],
+        [
+          5032,
+          10732,
+          10064,
+          6116
+        ],
+        [
+          1924,
+          4320,
+          3848,
+          2164
+        ]
+      ],
+      "global_stats_sum_over_rounds_once": [
+        57476,
+        118766,
+        114952,
+        90779
+      ],
+      "accepted_history_length": 32,
+      "history_checked": false
+    },
+    {
+      "physical_rank": 1,
+      "logical_sources": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "errors": [],
+      "status": 0,
+      "remote_before_local": 310903,
+      "remote_after_local": 269970,
+      "runtime_count_sha256": "81ff30d7a0083b3b615bd8a618199bbf089ab6dff0afca11860d878ddab41c58",
+      "global_stats_once": [
+        [
+          36919,
+          75292,
+          73838,
+          63111
+        ],
+        [
+          13601,
+          28422,
+          27202,
+          19388
+        ],
+        [
+          5032,
+          10732,
+          10064,
+          6116
+        ],
+        [
+          1924,
+          4320,
+          3848,
+          2164
+        ]
+      ],
+      "global_stats_sum_over_rounds_once": [
+        57476,
+        118766,
+        114952,
+        90779
+      ],
+      "accepted_history_length": 32,
+      "history_checked": false
+    }
+  ],
+  "all_eight_layers_checked": true,
+  "all_original_source_round_owners_exact": true,
+  "original_support_and_copies_exact": true,
+  "graph_dynamic_layers_checked": true
+}

@@ -1,0 +1,12 @@
+Torch 2.13.0+cu130 CUDA 13.0
+Shared optin 232448
+compile 64 1 37 1
+compile 128 3 64 2
+compile 256 4 128 3
+compile 352 8 256 2
+compile 520 7 37 1
+compile 512 16 512 2
+compile 1024 32 128 2
+compile 4096 1 8 1
+compile 64 1 4096 8
+CUDA extensions ready

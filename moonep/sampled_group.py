@@ -8,35 +8,39 @@ whereas all final results are copied into the caller's MoonEPCommPlan.
 import torch
 import torch.distributed as dist
 
-from .sampled_exchange import BUCKETS, SampledExchange
+from .sampled_exchange import SampledExchange
+from .planner_config import SampledPlannerConfig
 from .sampled_materialize import SampledMaterializer
 from .sampled_residency import Residency
 
 
 class SampledGroupPlanner:
-    def __init__(self, ctx, *, rounds=4, sample_seed=20261026):
+    def __init__(self, ctx, *, config=None):
         from .planning import allocate_planning_outputs
 
         self.ctx = ctx
         self.rank = int(ctx["rank"])
         self.group = ctx.get("group")
-        self.rounds = rounds
-        self.sample_seed = sample_seed
+        self.config = SampledPlannerConfig() if config is None else config
+        self.rounds = self.config.rounds
+        self.sample_seed = self.config.sample_seed
+        self.groups_per_class = self.config.groups_per_class
         R, S, K, E, B = (int(ctx[k]) for k in ("R", "S", "K", "E", "B"))
-        if (R, E, K) != (8, 352, 8) or S < 32 or not 1 <= B <= 44:
-            raise ValueError("sampled_group requires R=8, E=352, K=8, S>=32, 1<=B<=44")
+        self.config.validate_shape(R=R, E=E, K=K, S=S, B=B)
+        self.sample_size = self.config.effective_sample_size(R*S)
         device = ctx["meta_buf"].device
         self.routes = torch.empty((S, K), device=device, dtype=torch.int32)
         self.seed_owner = torch.empty_like(self.routes)
         self.seed, self.seed_cu = allocate_planning_outputs(ctx)
-        self.residency = Residency(ctx, sample_seed=sample_seed)
+        self.residency = Residency(ctx, sample_seed=self.sample_seed,
+            sample_size=self.config.sample_size, groups_per_class=self.groups_per_class)
         self.support = self.residency.support
         self.exchange = SampledExchange(
-            self.routes, self.support, source=self.rank, rounds=rounds,
+            self.routes, self.support, source=self.rank, rounds=self.rounds,
         )
         self.owner = self.exchange.owner
         self.materializer = SampledMaterializer(ctx)
-        self.gathered_counts = torch.empty((R, BUCKETS), device=device, dtype=torch.int32)
+        self.gathered_counts = torch.empty((R, self.exchange.buckets), device=device, dtype=torch.int32)
         self.status = torch.zeros(1, device=device, dtype=torch.int32)
         self.valid = torch.empty(1, device=device, dtype=torch.bool)
         # Explicit device-side rejection hook for fallback correctness tests.

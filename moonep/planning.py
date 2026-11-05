@@ -94,6 +94,8 @@ class MoonEPCommPlan:
 BLOCK_SIZE_P2 = 2048
 BLOCK_DIM_P2 = 512
 ITEMS_PER_THREAD_P2 = BLOCK_SIZE_P2 // BLOCK_DIM_P2  # 4
+PLANNING_BLOCK_DIMS = (512, 256, 128, 64)
+PLANNING_SMEM_HEADROOM = 1024
 
 
 def ceil_div(x, y):
@@ -114,6 +116,48 @@ def ceil_pow2(x):
 def log2_r(R):
     """Return max(ceil(log2(R + 1)), 1), for fixed-trip-count rank binary search."""
     return max(R.bit_length(), 1)
+
+
+def _planning_smem_bytes(R, E, B, num_sms, block_dim):
+    """Mirror kernel sa() allocations, including alignment and its i64 mbar.
+
+    This is the explicit shared allocation, not a register/occupancy estimate.
+    The selector separately reserves headroom for compiler/runtime additions.
+    """
+    if R <= 0 or E <= 0 or E % R or B <= 0 or num_sms <= 0:
+        raise ValueError('planning requires R/E/B/num_sms > 0 and E divisible by R')
+    if block_dim not in PLANNING_BLOCK_DIMS or block_dim < R:
+        raise ValueError('planning block dimension must be a supported size >= R')
+    s1_cols = min(align_up(ceil_div(E, num_sms), 32), block_dim)
+    pd_groups = align_up(ceil_div(E + B, num_sms), 32)
+    pd_etc = align_up(ceil_div(R * B, num_sms), 32)
+    pd_scratch = (align_up(pd_groups + 4, 4)
+                  + align_up(2 * pd_groups + 4, 4)
+                  + align_up(pd_etc + 4, 4))
+    scratch = max(R * s1_cols, E + E // R + R,
+                  (E + 1) * (block_dim // 32 + 1), pd_scratch)
+    # sa() pads lengths to 16 int32s. The 8-byte mbar after scratch is
+    # followed by 8 alignment bytes before s_hist, hence the final +16.
+    return 4 * (align_up(scratch, 16) + 4 * align_up(E, 16)
+                + align_up(B, 16) + 64) + 16
+
+
+def _select_planning_block_dim(R, E, B, num_sms, max_smem_bytes):
+    """Keep the original 512 threads whenever it fits; bounded static fallback."""
+    budget = int(max_smem_bytes) - PLANNING_SMEM_HEADROOM
+    estimates = {}
+    for block_dim in PLANNING_BLOCK_DIMS:
+        if block_dim < R:
+            continue
+        needed = _planning_smem_bytes(R, E, B, num_sms, block_dim)
+        estimates[block_dim] = needed
+        if needed <= budget:
+            return block_dim
+    raise ValueError(
+        f'native planner shared memory does not fit: R={R}, E={E}, B={B}, '
+        f'num_sms={num_sms}, optin_limit={max_smem_bytes}, '
+        f'headroom={PLANNING_SMEM_HEADROOM}, bytes_by_block_dim={estimates}'
+    )
 
 
 # ============================================================
@@ -353,7 +397,7 @@ def _pd_issue_g2s(meta, smem_stage, src_begin, logical_count, mbar):
 class PlanningKernel:
     def __init__(self, R, E, B, S, K, NvS_capacity, NvS, num_vblocks, meta_stride,
                  TPE_OFF, PLAN_OFF, BARRIER_OFF, TOPK0_OFF, ORDER_OFF, ORDER0_OFF,
-                 token_padding, num_sms):
+                 token_padding, num_sms, block_dim=BLOCK_DIM_P2):
         self.R, self.E, self.B, self.S, self.K = R, E, B, S, K
         self.N = self.S * self.K
         self.NvS_capacity, self.NvS, self.num_vblocks = NvS_capacity, NvS, num_vblocks
@@ -361,6 +405,10 @@ class PlanningKernel:
         self.TPE_OFF, self.PLAN_OFF, self.BARRIER_OFF = TPE_OFF, PLAN_OFF, BARRIER_OFF
         self.TOPK0_OFF, self.ORDER_OFF, self.ORDER0_OFF = TOPK0_OFF, ORDER_OFF, ORDER0_OFF
         self.token_padding, self.num_sms = token_padding, num_sms
+        if block_dim not in PLANNING_BLOCK_DIMS or block_dim < R:
+            raise ValueError('unsupported planning block dimension')
+        self.block_dim = block_dim
+        self.items_per_thread = BLOCK_SIZE_P2 // block_dim
 
     @cute.jit
     def __call__(self, tpe, topk, meta, mc, dst, cu_seqlens,
@@ -389,7 +437,7 @@ class PlanningKernel:
         self.kernel(tpe_t, topk_t, meta_t, mc_t, dst_t, cu_t, etc_t,
                     zfr_t, stats_t, alloc_t, gt_t, z_t, lh_t, bar_t,
                     rank).launch(
-            grid=(num_sms, 1, 1), block=(BLOCK_DIM_P2, 1, 1),
+            grid=(num_sms, 1, 1), block=(self.block_dim, 1, 1),
             stream=stream, cooperative=True)
 
     # =========================================================
@@ -400,12 +448,12 @@ class PlanningKernel:
                bar_ptr, num_sms, pid, tid):
         R = cutlass.const_expr(self.R)
         E = cutlass.const_expr(self.E)
-        NUM_WARPS = cutlass.const_expr(BLOCK_DIM_P2 // 32)
+        NUM_WARPS = cutlass.const_expr(self.block_dim // 32)
         WST = cutlass.const_expr(NUM_WARPS + 1)
-        IPT = cutlass.const_expr(ITEMS_PER_THREAD_P2)
+        IPT = cutlass.const_expr(self.items_per_thread)
         N = cutlass.const_expr(self.N)
         num_vblocks = cutlass.const_expr(self.num_vblocks)
-        num_threads = BLOCK_DIM_P2
+        num_threads = cutlass.const_expr(self.block_dim)
         warp = tid >> 5
         lane = tid & 31
 
@@ -528,7 +576,8 @@ class PlanningKernel:
         epn = cutlass.const_expr(E // R)
         LOG2_R = cutlass.const_expr(log2_r(R))
         EB_PAD = cutlass.const_expr(ceil_pow2(E + B))
-        IPT_EB = cutlass.const_expr(ceil_div(EB_PAD, BLOCK_DIM_P2))
+        IPT_EB = cutlass.const_expr(ceil_div(EB_PAD, self.block_dim))
+        IPT = cutlass.const_expr(self.items_per_thread)
         ms = cutlass.const_expr(self.meta_stride)
         N = cutlass.const_expr(self.N)
         NvS = cutlass.const_expr(self.NvS)
@@ -551,12 +600,12 @@ class PlanningKernel:
         ETC_SUB = ZFR_SUB + 2 * R * (E + B)
         STATS_SUB = ETC_SUB + R * B
         PB = PLAN_OFF
-        num_threads = BLOCK_DIM_P2
-        NUM_WARPS = cutlass.const_expr(BLOCK_DIM_P2 // 32)
+        num_threads = cutlass.const_expr(self.block_dim)
+        NUM_WARPS = cutlass.const_expr(self.block_dim // 32)
         S1_TILE = 32
         S1_COLS = cutlass.const_expr(min(
             align_up((E + num_sms - 1) // num_sms, S1_TILE),
-            BLOCK_DIM_P2,
+            self.block_dim,
         ))
         pid = cute.arch.block_idx()[0]
         tid = cute.arch.thread_idx()[0]
@@ -586,7 +635,7 @@ class PlanningKernel:
         scratch_ints = cutlass.const_expr(max(
             R * S1_COLS,
             E + E // R + R,
-            (E + 1) * (BLOCK_DIM_P2 // 32 + 1),
+            (E + 1) * (self.block_dim // 32 + 1),
             PD_SCRATCH_INTS,
         ))
         scratch = sa(scratch_ints)
@@ -863,7 +912,10 @@ class PlanningKernel:
                     )
                     if tid == 0:
                         all_remote_stats[dest_rank, 0] = remote_expert_count
-                    for slot in cutlass.range_constexpr(B):
+                    # Keep small B fully unrolled, but emit one IR loop for
+                    # large B instead of duplicating the E_CHUNK-wide body
+                    # hundreds of times during Python/MLIR construction.
+                    for slot in cutlass.range(B, unroll_full=cutlass.const_expr(B <= 64)):
                         best_cnt, best_idx = reg_scan_argmax_max_idx(remote_expert_counts, E, lane)
                         for j in cutlass.range(E_CHUNK, unroll_full=True):
                             expert_idx = lane + j * 32
@@ -1047,9 +1099,9 @@ class PlanningKernel:
         cute.arch.barrier()
         seg = cute.ceil_div(N, num_sms)
         sbeg = pid * seg; send = cutlass.min(sbeg + seg, N)
-        for base in cutlass.range(sbeg + tid, send, num_threads * ITEMS_PER_THREAD_P2):
-            for i in cutlass.range_constexpr(ITEMS_PER_THREAD_P2):
-                idx = base + i * BLOCK_DIM_P2
+        for base in cutlass.range(sbeg + tid, send, num_threads * IPT):
+            for i in cutlass.range_constexpr(IPT):
+                idx = base + i * num_threads
                 if idx < send:
                     offv = order_in[idx]
                     expert_idx = topk_by_off[offv]
@@ -1136,15 +1188,40 @@ class PlanningKernel:
 # Host side: compile cache + launch
 # ============================================================
 @functools.lru_cache(maxsize=None)
-def _get_compiled(R, E, B, S, K, NvS_capacity, NvS, num_vblocks, meta_stride,
-                  TPE_OFF, PLAN_OFF, BARRIER_OFF, TOPK0_OFF, ORDER_OFF, ORDER0_OFF,
-                  token_padding, num_sms):
+def _planning_smem_limit(device_index):
+    props = torch.cuda.get_device_properties(device_index)
+    limit = getattr(props, 'shared_memory_per_block_optin', None)
+    if limit is None or int(limit) <= 0:
+        raise RuntimeError(
+            'native planner requires the CUDA device opt-in shared-memory limit; '
+            'torch device properties do not expose shared_memory_per_block_optin'
+        )
+    return int(limit)
+
+
+@functools.lru_cache(maxsize=None)
+def _get_compiled_for_device(R, E, B, S, K, NvS_capacity, NvS, num_vblocks, meta_stride,
+                             TPE_OFF, PLAN_OFF, BARRIER_OFF, TOPK0_OFF, ORDER_OFF, ORDER0_OFF,
+                             token_padding, num_sms, device_index):
+    block_dim = _select_planning_block_dim(
+        R, E, B, num_sms, _planning_smem_limit(device_index))
     k = PlanningKernel(R, E, B, S, K, NvS_capacity, NvS, num_vblocks, meta_stride,
                        TPE_OFF, PLAN_OFF, BARRIER_OFF, TOPK0_OFF, ORDER_OFF, ORDER0_OFF,
-                       token_padding, num_sms)
+                       token_padding, num_sms, block_dim=block_dim)
     i32 = make_ptr(Int32, 0, cute.AddressSpace.gmem, assumed_align=16)
     return cute.compile(k, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32,
                         i32, i32, i32, i32, Int32(0), cuda.CUstream(0))
+
+
+def _get_compiled(R, E, B, S, K, NvS_capacity, NvS, num_vblocks, meta_stride,
+                  TPE_OFF, PLAN_OFF, BARRIER_OFF, TOPK0_OFF, ORDER_OFF, ORDER0_OFF,
+                  token_padding, num_sms):
+    # Keep the existing precompile API; include the execution device in the
+    # actual cache key so another device cannot inherit an oversized launch.
+    return _get_compiled_for_device(
+        R, E, B, S, K, NvS_capacity, NvS, num_vblocks, meta_stride,
+        TPE_OFF, PLAN_OFF, BARRIER_OFF, TOPK0_OFF, ORDER_OFF, ORDER0_OFF,
+        token_padding, num_sms, torch.cuda.current_device())
 
 
 def _launch_planning_kernel(ctx, topk, tpe, dst, cu_seqlens,

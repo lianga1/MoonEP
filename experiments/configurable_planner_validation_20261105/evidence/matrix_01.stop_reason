@@ -1,0 +1,1 @@
+Stopped during E4096/B512 native JIT: fully unrolled B slot loop expands 512 copies of E/32 expert scan. Keep this partial attempt; rerun with bounded loop.

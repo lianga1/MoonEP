@@ -1,23 +1,23 @@
-# 八卡 sampled_group planner
+# 八卡可配置 sampled_group planner
 
-`sampled_group` 把「256 个样本选择专家副本、每类保留两个专家组、全量 token 做四轮等量成组交换」接到 MoonEP 的正常 `Buffer.dispatch()` 路径。无需加载 router dump，也无需外部传入统计表。原生 `moon` 仍是默认值；较早的 `affinity_gpu` 是另一个算法。
+`sampled_group` 将采样选择专家副本、全量 token 等量成组交换接入 `Buffer.dispatch()`。E（全局路由专家数）、K（每个 token 选择的专家数）、H（隐藏维度）直接复用模型配置；planner 自己的近似搜索参数另有默认值。原生 `moon` 仍是默认后端。
+
+## 复用模型配置
 
 ```python
-from moonep import Buffer
+from moonep import Buffer, SampledPlannerConfig
 
-# 先按 MoonEP 原有方式初始化 NCCL，并给每个进程设置对应 CUDA 设备。
-buffer = Buffer(
+# 先初始化 NCCL，并为每个进程设置对应 CUDA 设备。
+buffer = Buffer.from_model_config(
+    model.config,                  # 也可以传配置字典
     S=local_tokens,
-    H=hidden_size,
-    K=8,
-    E=352,
     num_ep_ranks=8,
-    B=8,                       # 每张卡的额外专家槽数；默认 B=None 为 44
     planning_backend="sampled_group",
-    planning_rounds=4,
-    planning_sample_seed=20261026,
+    planner_config=SampledPlannerConfig(
+        sample_size=512,           # 全部八张卡合计请求的采样数
+        # groups_per_class=2, rounds=4, sample_seed=20261026
+    ),
 )
-# hidden、topk、tokens_per_expert 都来自当前批次。
 received, weights, cu_seqlens, plan, *rest = buffer.dispatch(
     hidden,
     route_weights_sk=router_weights,
@@ -26,55 +26,62 @@ received, weights, cu_seqlens, plan, *rest = buffer.dispatch(
 )
 ```
 
-启动脚本可把自己的命令行 `--planning-backend sampled_group` 传给上述构造参数。所有 EP 进程必须使用相同的后端、轮数、种子、S/E/K/B；一个 EP 组内不能混用。此版本限定同机 NVLink 八卡、E=352、K=8、每卡 S≥32、1≤B≤44，保留 MoonEP 对 hidden size、padding 等原有约束。一次性 CUDA 编译需要 CUDA toolkit 和 ninja；源码发行包与 wheel 都包含所需 CUDA 文件。部署前构造并预热，CUDA Graph 捕获期间不编译。
+也支持 `planner_config={"sample_size": 512}`，便于将 YAML/JSON 或启动参数直接传入。省略 `planner_config` 使用下表默认值。旧式 `Buffer(S,H,K,E,8,...)` 保留，E/K/H 仍只从 Buffer 参数取一次；旧 `planning_rounds`、`planning_sample_seed` 参数保留，显式传入时不能与配置对象冲突。
 
-## 实际运行顺序
+| 参数 | 默认值 | 含义和范围 |
+|---|---:|---|
+| `sample_size` | 256 | 全组采样数，1–4096；小批次实际取 `min(sample_size,8*S)`，无放回采样 |
+| `groups_per_class` | 2 | 每个方向、计算任务数、收益类别保留的专家组数量，1–8；不是每组的专家数 |
+| `rounds` | 4 | 全量等量交换轮数，正整数 |
+| `sample_seed` | 20261026 | 初始化采样位置的非负整数种子 |
 
-1. 执行本仓库的原生 MoonEP planner，得到平衡起点和必需副本。这个起点仍由实时路由产生。
-2. 每卡只取自己的来源 token 中命中的样本。全组总共 256 个样本，卡间一次 SUM 汇总专家、执行卡和有效性信息，共 4,609 个 int32（18,436 字节）。索引在初始化时按种子确定；每次调用重读这些位置上的新路由和新执行计划。
-3. 每卡根据同一批样本执行相同的全局副本选择。对每个方向、组大小和收益类别保留两个专家组，在全体卡对之间共享每卡 B 个额外槽的预算。原属专家与起点必需副本始终保留。B44 的选择历史和最多追加次数也扩展到 8B，不受原实验 64 次上限限制。
-4. 每卡全量处理原本来自自己的 S 个 token。每个 token 每轮只提出一个交换建议。每轮真实汇总 1,152 个 int32 计数（每来源 4,608 字节），以全局来源顺序分配双向等量名额，再更新执行卡。四轮使用四次**当前**计数汇总，没有预录计数。
-5. 复用刚才原生 C1 阶段按专家排好的计算任务顺序，只稳定排序 3 位目标卡编号，生成新的执行地址。汇总每来源 `[8,352]` 专家计数，分配不重叠的行和真实副本槽，生成 `dst/cu_seqlens/experts_to_copy/zero_fill_ranges/remote_stats`。
-6. 所有卡汇总错误状态。副本缺失、容量不足等任一检查失败时，全组选择原生起点；否则使用新结果。随后清理并重新发布来源信息。正常 fresh dispatch 使用这些最终结果构建属于该 plan 的去重信息。
+模型字段自动读取如下；支持对象或字典，也支持其 `text_config`。同一维度有多个值且冲突时会报错，避免猜错模型结构。
 
-全量路由和全量 `dst` 不做 all-gather。副本选择是采样近似，交换与地址生成覆盖全部实际计算任务。kernel 复用驻留位图、每 token 的执行掩码、前缀计数和原生专家顺序；GPU 临时空间在 Buffer 构造时分配。
+| 维度 | 自动识别字段 |
+|---|---|
+| H | `hidden_size`, `d_model`, `n_embd` |
+| E | `num_experts`, `n_routed_experts`, `moe_num_experts` |
+| K | `num_experts_per_tok`, `num_experts_per_token`, `moe_top_k` |
 
-## 回退、训练和生命周期
+特殊模型可指定 `expert_field="text_config.num_local_experts"`、`topk_field="router.k"`、`hidden_field="model.width"`。`num_local_experts` 可能表示分片数，普通 `top_k` 可能是文本生成参数，因此不自动推断这两个字段。也可显式提供 `MoEModelConfig(hidden_size=..., num_experts=..., top_k=...)`。不同层 E/K 不同时，为每层提供具体配置和 Buffer；不把列表直接作为一个 E/K 使用。
 
-可以在**非计时、非图捕获**的检查阶段读取：
+## 支持范围与初始化
 
-```python
-adapter = buffer._require_ctx()["sampled_group_planner"]
-status = int(adapter.status.item())  # 0：使用新计划；非 0：全组退回原生计划
-```
+当前仍是同机 NVLink 八卡：R=8、8≤E≤4096、E 能被 8 整除、1≤K≤min(32,E)、S≥1。副本槽数 B 默认 E/8，范围 1≤B≤E−E/8；H 需能被 128 整除，padding 等继续遵守 MoonEP 原有约束。B 较小时必须保证原生起点本身可执行，不能靠回退修复一个原生也无法容纳的计划。
 
-这属于诊断接口，不能把 `.item()` 放进训练热路径。局部详细原因分别在 `adapter.residency.status` 和 `adapter.materializer.status`。最终状态经 MAX 汇总，只表达“是否退回”，不保证保留全部原因位。
+所有 EP 进程必须使用相同后端及模型/算法配置。构造时对 sampled_group 做一次配置一致性检查，避免有效但不相同的配置进入尺寸不同的通信。各进程必须共同调用相同构造入口（全部使用 `Buffer()` 或全部使用 `from_model_config()`）；模型解析入口另有一次错误汇总。不要让一部分进程选择另一后端。
 
-B=8 是受限物理副本预算。原生起点如果需要 B 个槽以外的专家，候选会被拒绝；回退只保留原生行为，不能使原生自身不支持的训练配置变得合法。一般训练仍应遵循原生的槽位容量要求，并检查自己的真实路由。
+配置在 Buffer 生命周期内固定。改变 E/K/S、样本数或保留组数等时构造新 Buffer 并预热。CUDA kernel 按需要的形状和源文件摘要编译、缓存，既不会在训练迭代中重新编译，也不支持直接修改一个已捕获 CUDA Graph 的配置。需要 CUDA toolkit 和 ninja；源码包和 wheel 包含 CUDA 源码。
 
-`plan.experts_to_copy` 直接沿用原生权重预取和副本梯度归并接口。当前版本在全局检查通过后才确定最终方案，没有新增“样本选完就提前发权重”的事件。若后续增加该功能，必须处理地址检查失败后的方案变更。
+## 算法顺序与可变布局
 
-同一个 Buffer 的临时区只支持一次在途调用。前向后保存最终 `plan.clone()`、`cu_seqlens.clone()` 及不借用通信缓冲区的激活和路由权重，反向复用该计划。专家副本槽在反向前不能被别的层覆盖；若复用槽位，需恢复该前向对应的专家权重，并在覆盖副本梯度前完成归并。这些训练生命周期要求不会由新 planner 自动消除。
+1. 原生 MoonEP planner 根据实时路由得到负载平衡的起点和必需副本。
+2. 每卡读取其来源 token 中命中的采样位置，全组 SUM 汇总当前路由和执行卡。实际采样数为 D 时，采样数据包包含 `D*(2*K+2)+1` 个 int32；D=256/K=8 时仍是 4,609 个。种子固定的是位置，每次调用读取的是新批次的数据。
+3. 从这些样本识别专家组。组是某个 token 在某执行卡上的专家集合，大小可为 1…K。每个方向、大小、收益类别保留 G=`groups_per_class` 组。双向等量组形成候选，在每卡 B 个副本槽预算下贪心选择。保留原属专家和起点必需副本。专家集合使用完整排序列表校验，哈希仅作快速过滤，不以哈希相等代替集合相等。
+4. 每卡全量处理原本来自自己的 S 个 token，每轮每 token 最多一个交换建议。移动规模为小于 K 的 1、2、4…以及当前完整组；K=8 保留原 1/2/4/全组规则。汇总每来源 `2*8*8*(K+1)` 个 int32 计数，并按来源顺序分配双向等量名额。执行 `rounds` 轮，每轮使用真实当前计数。
+5. 复用原生 C1 的专家排序，只稳定排序 3 位目标卡号。汇总每来源 `[8,E]` 专家计数，生成唯一执行行及真实副本槽，输出原生 `dst/cu_seqlens/experts_to_copy/zero_fill_ranges/remote_stats`。
+6. 全组汇总错误状态，检查通过才发布候选；任一 rank 拒绝则全组选择原生起点，再发布来源信息。正常 dispatch 根据最终地址建立该 plan 自己的去重信息。
 
-通信目的地数量下降并不等于训练加速。额外权重传输、每次更新后的刷新、副本梯度归并和完整 planner 时间都必须计入；此前八卡流量估算在部分训练设定下仍为负收益，因此此后端为显式启用。
+全量路由和 `dst` 不做 all-gather。采样只近似选择副本；全量交换与地址生成覆盖所有计算任务。K≤8 保留并行共享计数路径，K>8 用有界计数表，避免共享内存随着 warp 数和 K 同时膨胀。驻留集合长度随 E 变化，采样频数按固定大小分块，物理专家布局按块扫描。原生起始规划也按设备共享内存上限选择 512/256/128/64 线程，保留每块 2048 个计算任务的顺序；默认 E352 仍用 512 线程。B≤64 保留副本槽循环展开，大 B 使用循环控制编译体积。K≤32 的 token 掩码用无符号 32 位处理，包括第 32 个专家位。
 
-## 验证与复现
+这些可变布局避免为每个模型手工改源码，但不代表所有配置的性能相同。采样频数比较仍近似随 D² 增长，双向候选数量随 G² 增长；调大采样和保留组数需要衡量质量与延迟。配置支持范围与本次实测矩阵见验证记录，不把边界检查等同于全部组合已测试。
 
-配置检查不分配通信缓冲：
+## 训练与生命周期
+
+诊断阶段可读取 `buffer._require_ctx()["sampled_group_planner"].status.item()`：0 使用新计划，非 0 全组回退。不要在计时或 CUDA Graph 捕获中调用 `.item()`。局部原因见 `residency.status`、`materializer.status`。
+
+`plan.experts_to_copy` 沿用权重预取和副本梯度归并接口；当前仍在全局检查通过后才确定最终计划。此次配置改造没有提前发权重的新事件。
+
+Buffer 的临时区只支持一次在途调用。前向后保存最终 `plan.clone()`、`cu_seqlens.clone()` 及不借用通信缓冲的激活和路由权重，反向复用该计划。专家副本槽在反向前不能被别的层覆盖；若复用槽，需恢复对应前向的权重，并在覆盖梯度前完成归并。
+
+通信目的地数量下降不等于训练加速。额外权重刷新、副本梯度归并、完整 planner 时间都必须计入。此后端保持显式启用；完整模型 GEMM、optimizer、多层流水线与长期稳定性仍需单独验证。
+
+## 验证
 
 ```bash
-python -m pytest -q tests/test_sampled_group.py -k configuration
-```
-
-真实八卡公开接口验证：
-
-```bash
+python -m pytest -q tests/test_planner_config.py
 MOONEP_MEM_HANDLE_TYPE=fd TORCH_CUDA_ARCH_LIST=9.0 MAX_JOBS=4 \
-  torchrun --standalone --nproc_per_node=8 -m pytest -q -s tests/test_sampled_group.py
+  torchrun --standalone --nproc_per_node=8 -m pytest -q -s tests/test_sampled_configurable.py
 ```
 
-测试要求八个不同的物理 GPU，包含动态输入、B8/B44、同步及异步 dispatch/combine、旧 plan 在新计划之后的前后向复用、dX/路由权重梯度、非默认进程组、单卡拒绝后的全局回退和更新输入后的 CUDA Graph 重放。测试先在所有 rank 完成原生 kernel 编译，再同步进入通信，避免首次编译导致设备内等待超时。
-
-完整训练模型的 GEMM、optimizer、多层流水线及长期稳定性需要另行验证。实际执行结果、失败尝试和软件版本随本次提交的验证记录保存，不能把组件回放替代为八卡训练吞吐测试。
-
-本次已执行的八卡测试、完整planner实测、保留失败及兼容性修复见 [验证记录](sampled_group_validation.md)。
+测试在所有 rank 预编译原生内核后才进入通信。旧版八卡默认配置测试和真实 router 回放继续保留。历史结果见 [上一版验证记录](sampled_group_validation.md)，本次变更与执行结果见 [可配置版本验证记录](sampled_configurable_validation.md)。

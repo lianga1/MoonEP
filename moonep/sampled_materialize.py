@@ -66,8 +66,11 @@ class SampledMaterializer:
         self.R, self.E, self.K, self.B, self.S, self.rank, self.NvS = (
             int(ctx[k]) for k in ("R", "E", "K", "B", "S", "rank", "NvS")
         )
-        if not (self.R == 8 and self.E == 352 and self.K == 8 and 1 <= self.B <= 44):
-            raise ValueError("sampled materializer currently supports R=8,E=352,K=8,1<=B<=44")
+        if not (self.R == 8 and 8 <= self.E <= 4096 and self.E % self.R == 0
+                and 1 <= self.K <= min(32, self.E)
+                and 1 <= self.B <= self.E - self.E // self.R):
+            raise ValueError("sampled materializer requires R=8, 8<=E<=4096, E%8=0, "
+                             "1<=K<=min(32,E), 1<=B<=E-E/8")
         self.N, self.padding = self.S * self.K, int(ctx["token_padding"])
         if self.S <= 0 or self.padding < 1 or self.NvS < self.N:
             raise ValueError("invalid local token count, padding or NvS")
@@ -88,6 +91,9 @@ class SampledMaterializer:
         self.gathered_counts = ints(self.R, self.R, self.E)
         self.offsets, self.prefix, self.totals = (ints(self.R, self.E) for _ in range(3))
         self.keys_in, self.keys_out, self.ids_in, self.ids_out = (ints(self.N) for _ in range(4))
+        # One byte per pair, generated once in original token order using
+        # subwarp match/ballot operations; avoids per-pair previous-K rescans.
+        self.duplicates = torch.empty((self.S, self.K), dtype=torch.uint8, device=self.device)
         self.starts = ints(self.R, self.E)
         begin = self.rank * int(ctx["meta_chunk_padded"]) + int(ctx["ORDER_OFF"])
         self.native_order = ctx["meta_buf"][begin : begin + self.N]
@@ -115,7 +121,7 @@ class SampledMaterializer:
         """
         if (support.device != self.device or support.dtype not in (torch.bool, torch.int32)
                 or tuple(support.shape) != (self.R, self.E) or not support.is_contiguous()):
-            raise ValueError("support must be contiguous CUDA bool/int32 [8,352]")
+            raise ValueError(f"support must be contiguous CUDA bool/int32 [{self.R},{self.E}]")
         self.ext.support(support, self.lut, self.copies, self.status, self.R, self.E, self.B)
         return self.copies
 
@@ -132,13 +138,13 @@ class SampledMaterializer:
         self.ext.prepare(
             routes, owner, seed_owner, self.native_order, self.lut,
             self.keys_in, self.keys_out, self.ids_in, self.ids_out,
-            self.starts, self.counts, self.workspace, self.status,
+            self.starts, self.counts, self.workspace, self.duplicates, self.status,
             self.R, self.E, self.K, self.reuse_native_order, self.sort_bits,
         )
         dist.all_gather_into_tensor(self.gathered_counts.view(-1), self.counts.view(-1), group=self.group)
         self.ext.layout_encode(
             routes, owner, self.ids_out, self.starts, self.gathered_counts,
-            self.lut, self.copies, self.offsets, self.prefix, self.totals,
+            self.lut, self.copies, self.offsets, self.prefix, self.totals, self.duplicates,
             self.plan.dst, self.cu, self.plan.zero_fill_ranges, self.plan.remote_stats,
             self.status, self.R, self.E, self.B, self.K, self.rank, self.padding, self.NvS,
         )

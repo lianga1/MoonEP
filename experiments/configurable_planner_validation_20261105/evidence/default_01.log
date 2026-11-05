@@ -1,0 +1,147 @@
+........................................[PASS] sampled_group weights/FP32 grads version=1, copies=56, H=256, I=1024, async=False
+[PASS] sampled_group weights/FP32 grads version=2, copies=56, H=256, I=1024, async=True
+........
+=============================== warnings summary ===============================
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[44-True]
+tests/test_sampled_group.py::test_nondefault_group_and_collective_fallback
+tests/test_sampled_group.py::test_graph_replay_reads_new_routes
+tests/test_sampled_weights.py::test_sampled_plan_weight_and_parameter_gradient_lifecycle
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+tests/test_sampled_weights.py::test_sampled_plan_weight_and_parameter_gradient_lifecycle
+  /inspire/hdd/project/embodied-multimodality/liangzuning-253108090053/moonep_configurable_20261105/moonep/grad_reduce.py:354: DSLOptimizationWarning: This static loop has 128 iterations, which may be very slow to compile, consider using `cutlass.range(..., unroll_full=True)` instead.
+    for j in cutlass.range_constexpr(H_PER):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+6 passed, 7 warnings in 19.64s
+
+=============================== warnings summary ===============================
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[44-True]
+tests/test_sampled_group.py::test_nondefault_group_and_collective_fallback
+tests/test_sampled_group.py::test_graph_replay_reads_new_routes
+tests/test_sampled_weights.py::test_sampled_plan_weight_and_parameter_gradient_lifecycle
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+tests/test_sampled_weights.py::test_sampled_plan_weight_and_parameter_gradient_lifecycle
+  /inspire/hdd/project/embodied-multimodality/liangzuning-253108090053/moonep_configurable_20261105/moonep/grad_reduce.py:354: DSLOptimizationWarning: This static loop has 128 iterations, which may be very slow to compile, consider using `cutlass.range(..., unroll_full=True)` instead.
+    for j in cutlass.range_constexpr(H_PER):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+6 passed, 7 warnings in 19.63s
+
+=============================== warnings summary ===============================
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[44-True]
+tests/test_sampled_group.py::test_nondefault_group_and_collective_fallback
+tests/test_sampled_group.py::test_graph_replay_reads_new_routes
+tests/test_sampled_weights.py::test_sampled_plan_weight_and_parameter_gradient_lifecycle
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+tests/test_sampled_weights.py::test_sampled_plan_weight_and_parameter_gradient_lifecycle
+  /inspire/hdd/project/embodied-multimodality/liangzuning-253108090053/moonep_configurable_20261105/moonep/grad_reduce.py:354: DSLOptimizationWarning: This static loop has 128 iterations, which may be very slow to compile, consider using `cutlass.range(..., unroll_full=True)` instead.
+    for j in cutlass.range_constexpr(H_PER):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+6 passed, 7 warnings in 19.75s
+
+=============================== warnings summary ===============================
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[44-True]
+tests/test_sampled_group.py::test_nondefault_group_and_collective_fallback
+tests/test_sampled_group.py::test_graph_replay_reads_new_routes
+tests/test_sampled_weights.py::test_sampled_plan_weight_and_parameter_gradient_lifecycle
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+    return func(*args, **kwargs)
+
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[44-True]
+tests/test_sampled_group.py::test_nondefault_group_and_collective_fallback
+tests/test_sampled_group.py::test_graph_replay_reads_new_routes
+tests/test_sampled_weights.py::test_sampled_plan_weight_and_parameter_gradient_lifecycle
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+tests/test_sampled_weights.py::test_sampled_plan_weight_and_parameter_gradient_lifecycle
+  /inspire/hdd/project/embodied-multimodality/liangzuning-253108090053/moonep_configurable_20261105/moonep/grad_reduce.py:354: DSLOptimizationWarning: This static loop has 128 iterations, which may be very slow to compile, consider using `cutlass.range(..., unroll_full=True)` instead.
+    for j in cutlass.range_constexpr(H_PER):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+6 passed, 13 warnings in 19.74s
+
+
+=============================== warnings summary ===============================
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[44-True]
+tests/test_sampled_group.py::test_nondefault_group_and_collective_fallback
+tests/test_sampled_group.py::test_graph_replay_reads_new_routes
+tests/test_sampled_weights.py::test_sampled_plan_weight_and_parameter_gradient_lifecycle
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+tests/test_sampled_weights.py::test_sampled_plan_weight_and_parameter_gradient_lifecycle
+  /inspire/hdd/project/embodied-multimodality/liangzuning-253108090053/moonep_configurable_20261105/moonep/grad_reduce.py:354: DSLOptimizationWarning: This static loop has 128 iterations, which may be very slow to compile, consider using `cutlass.range(..., unroll_full=True)` instead.
+    for j in cutlass.range_constexpr(H_PER):=============================== warnings summary ===============================
+
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[44-True]
+tests/test_sampled_group.py::test_nondefault_group_and_collective_fallback
+tests/test_sampled_group.py::test_graph_replay_reads_new_routes
+tests/test_sampled_weights.py::test_sampled_plan_weight_and_parameter_gradient_lifecycle
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+tests/test_sampled_weights.py::test_sampled_plan_weight_and_parameter_gradient_lifecycle
+  /inspire/hdd/project/embodied-multimodality/liangzuning-253108090053/moonep_configurable_20261105/moonep/grad_reduce.py:354: DSLOptimizationWarning: This static loop has 128 iterations, which may be very slow to compile, consider using `cutlass.range(..., unroll_full=True)` instead.
+    for j in cutlass.range_constexpr(H_PER):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+6 passed, 7 warnings in 19.68s
+6 passed, 7 warnings in 19.68s
+
+
+=============================== warnings summary ===============================
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[44-True]
+tests/test_sampled_group.py::test_nondefault_group_and_collective_fallback
+tests/test_sampled_group.py::test_graph_replay_reads_new_routes
+tests/test_sampled_weights.py::test_sampled_plan_weight_and_parameter_gradient_lifecycle
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)=============================== warnings summary ===============================
+
+
+tests/test_sampled_weights.py::test_sampled_plan_weight_and_parameter_gradient_lifecycle
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[8-False]
+tests/test_sampled_group.py::test_dynamic_public_forward_backward[44-True]
+tests/test_sampled_group.py::test_nondefault_group_and_collective_fallback
+tests/test_sampled_group.py::test_graph_replay_reads_new_routes
+tests/test_sampled_weights.py::test_sampled_plan_weight_and_parameter_gradient_lifecycle
+  /inspire/hdd/project/embodied-multimodality/liangzuning-253108090053/moonep_configurable_20261105/moonep/grad_reduce.py:354: DSLOptimizationWarning: This static loop has 128 iterations, which may be very slow to compile, consider using `cutlass.range(..., unroll_full=True)` instead.
+    for j in cutlass.range_constexpr(H_PER):
+
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+
+
+tests/test_sampled_weights.py::test_sampled_plan_weight_and_parameter_gradient_lifecycle
+  /inspire/hdd/project/embodied-multimodality/liangzuning-253108090053/moonep_configurable_20261105/moonep/grad_reduce.py:354: DSLOptimizationWarning: This static loop has 128 iterations, which may be very slow to compile, consider using `cutlass.range(..., unroll_full=True)` instead.
+    for j in cutlass.range_constexpr(H_PER):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+6 passed, 7 warnings in 19.71s
+6 passed, 7 warnings in 19.72s

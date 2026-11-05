@@ -224,4 +224,4 @@ See [eight-rank sampled residency, prefix exchange, and H200 evidence](experimen
 
 ### Optional eight-rank sampled group planner
 
-Use `Buffer(..., planning_backend="sampled_group", planning_rounds=4, planning_sample_seed=20261026)` for live source-sharded sampling and balanced bundle exchange. The current specialization is R=8, E=352, K=8. See [configuration, runtime flow and validation boundaries](docs/sampled_group.md). The original `moon` planner remains the default.
+Use `Buffer.from_model_config(model.config, S=local_tokens, num_ep_ranks=8, planning_backend="sampled_group", planner_config=SampledPlannerConfig(sample_size=512))` for live source-sharded sampling and balanced bundle exchange (`from moonep import Buffer, SampledPlannerConfig`). E/K/H come directly from the model; planner-only defaults are 256 global samples, two groups per class, four rounds and seed 20261026. Kernels adapt to R=8, E divisible by 8 in 8–4096, and K in 1–min(32,E). See [configuration, runtime flow and measured validation boundaries](docs/sampled_group.md). The original `moon` planner remains the default.

@@ -1,0 +1,14 @@
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+{"layer": 0, "passed": true, "repeats": 2, "remote_before": 621511, "remote_after": 530732}
+{"layer": 1, "passed": true, "repeats": 2, "remote_before": 643011, "remote_after": 462932}
+{"layer": 2, "passed": true, "repeats": 2, "remote_before": 635585, "remote_after": 447977}
+{"layer": 3, "passed": true, "repeats": 2, "remote_before": 623501, "remote_after": 463132}
+{"layer": 4, "passed": true, "repeats": 2, "remote_before": 634668, "remote_after": 469665}
+{"layer": 5, "passed": true, "repeats": 2, "remote_before": 625260, "remote_after": 474026}
+{"layer": 6, "passed": true, "repeats": 2, "remote_before": 635436, "remote_after": 475999}
+{"layer": 7, "passed": true, "repeats": 2, "remote_before": 635193, "remote_after": 467202}

@@ -1,0 +1,174 @@
+{
+  "status": "complete",
+  "scope": "CPU structural oracle and source checks only; GPU pending",
+  "default_layers": [
+    {
+      "layer": 0,
+      "support_exact": true,
+      "history_exact": true,
+      "packages": 1026,
+      "accepted": 32
+    },
+    {
+      "layer": 1,
+      "support_exact": true,
+      "history_exact": true,
+      "packages": 958,
+      "accepted": 35
+    },
+    {
+      "layer": 2,
+      "support_exact": true,
+      "history_exact": true,
+      "packages": 963,
+      "accepted": 36
+    },
+    {
+      "layer": 3,
+      "support_exact": true,
+      "history_exact": true,
+      "packages": 922,
+      "accepted": 33
+    },
+    {
+      "layer": 4,
+      "support_exact": true,
+      "history_exact": true,
+      "packages": 941,
+      "accepted": 36
+    },
+    {
+      "layer": 5,
+      "support_exact": true,
+      "history_exact": true,
+      "packages": 960,
+      "accepted": 39
+    },
+    {
+      "layer": 6,
+      "support_exact": true,
+      "history_exact": true,
+      "packages": 996,
+      "accepted": 35
+    },
+    {
+      "layer": 7,
+      "support_exact": true,
+      "history_exact": true,
+      "packages": 960,
+      "accepted": 35
+    }
+  ],
+  "generic_cases": [
+    {
+      "E": 8,
+      "K": 1,
+      "S": 8,
+      "requested_D": 1,
+      "actual_D": 1,
+      "G": 1,
+      "B": 1,
+      "support_exact": true,
+      "history_exact": true,
+      "packages": 0,
+      "accepted": 0
+    },
+    {
+      "E": 24,
+      "K": 3,
+      "S": 16,
+      "requested_D": 37,
+      "actual_D": 37,
+      "G": 3,
+      "B": 3,
+      "support_exact": true,
+      "history_exact": true,
+      "packages": 370,
+      "accepted": 12
+    },
+    {
+      "E": 64,
+      "K": 8,
+      "S": 16,
+      "requested_D": 128,
+      "actual_D": 128,
+      "G": 1,
+      "B": 8,
+      "support_exact": true,
+      "history_exact": true,
+      "packages": 216,
+      "accepted": 34
+    },
+    {
+      "E": 128,
+      "K": 16,
+      "S": 64,
+      "requested_D": 512,
+      "actual_D": 512,
+      "G": 4,
+      "B": 12,
+      "support_exact": true,
+      "history_exact": true,
+      "packages": 6093,
+      "accepted": 50
+    },
+    {
+      "E": 4096,
+      "K": 32,
+      "S": 8,
+      "requested_D": 37,
+      "actual_D": 37,
+      "G": 8,
+      "B": 16,
+      "support_exact": true,
+      "history_exact": true,
+      "packages": 1541,
+      "accepted": 41
+    },
+    {
+      "E": 512,
+      "K": 32,
+      "S": 64,
+      "requested_D": 512,
+      "actual_D": 512,
+      "G": 8,
+      "B": 3,
+      "support_exact": true,
+      "history_exact": true,
+      "packages": 12600,
+      "accepted": 11
+    },
+    {
+      "E": 8,
+      "K": 1,
+      "S": 512,
+      "requested_D": 4096,
+      "actual_D": 4096,
+      "G": 1,
+      "B": 1,
+      "support_exact": true,
+      "history_exact": true,
+      "packages": 84,
+      "accepted": 4
+    },
+    {
+      "E": 8,
+      "K": 1,
+      "S": 1,
+      "requested_D": 4096,
+      "actual_D": 8,
+      "G": 2,
+      "B": 1,
+      "support_exact": true,
+      "history_exact": true,
+      "packages": 5,
+      "accepted": 2
+    }
+  ],
+  "failures": [],
+  "source_sha256": {
+    "experiments/configurable_planner/source/tests/sampled_residency_reference.py": "b42d6e49dc0ce55dae95eea6830496817d909ce4dee909e8fc539372366df0da",
+    "experiments/configurable_planner/source/moonep/sampled_residency.py": "9c31d5ba2c5ab027ec9768e28457515006efe6c92b16f4b462c28ec8a6642b11",
+    "experiments/configurable_planner/source/moonep/csrc/sampled_residency.cu": "5d9e34aa57e17e3a594d8608e1301dea872408913da12e2548f4a3bccdae3a81"
+  }
+}

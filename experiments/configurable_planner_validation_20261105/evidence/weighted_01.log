@@ -1,0 +1,103 @@
+[sampled configurable] weighted_E512_K16_S33: construct with default B=E/R; async=False
+[sampled configurable] weighted_E512_K16_S33: compile native planner and synchronization
+[sampled configurable] weighted_E512_K16_S33: compile dispatch weights=True, fresh=True
+[sampled configurable] weighted_E512_K16_S33: compile dispatch weights=False, fresh=False
+[sampled configurable] weighted_E512_K16_S33: compile combine router-gradient output=False
+[sampled configurable] weighted_E512_K16_S33: compile combine router-gradient output=True
+[sampled configurable] weighted_E512_K16_S33: compile epilogue/prologue; wait for every rank
+[sampled configurable] weighted_E512_K16_S33: all ranks compiled; begin weighted execution
+[sampled configurable] weighted_E512_K16_S33: weighted forward phase=0 (local)
+[sampled configurable] weighted_E512_K16_S33: weighted forward phase=1 (hot)
+[sampled configurable] weighted_E512_K16_S33: backward saved phase=0 after both forward plans
+[sampled configurable] weighted_E512_K16_S33: backward saved phase=1 after both forward plans
+[sampled configurable] weighted_E512_K16_S33: PASS weighted forward, dX, routing gradients and saved-plan lifetime
+........[sampled configurable] weighted_E1024_K32_S17: construct with default B=E/R; async=True
+[sampled configurable] weighted_E1024_K32_S17: compile native planner and synchronization
+[sampled configurable] weighted_E1024_K32_S17: compile dispatch weights=True, fresh=True
+[sampled configurable] weighted_E1024_K32_S17: compile dispatch weights=False, fresh=False
+[sampled configurable] weighted_E1024_K32_S17: compile combine router-gradient output=False
+[sampled configurable] weighted_E1024_K32_S17: compile combine router-gradient output=True
+[sampled configurable] weighted_E1024_K32_S17: compile epilogue/prologue; wait for every rank
+[sampled configurable] weighted_E1024_K32_S17: all ranks compiled; begin weighted execution
+[sampled configurable] weighted_E1024_K32_S17: weighted forward phase=0 (local)
+[sampled configurable] weighted_E1024_K32_S17: weighted forward phase=1 (hot)
+[sampled configurable] weighted_E1024_K32_S17: backward saved phase=0 after both forward plans
+[sampled configurable] weighted_E1024_K32_S17: backward saved phase=1 after both forward plans
+[sampled configurable] weighted_E1024_K32_S17: PASS weighted forward, dX, routing gradients and saved-plan lifetime
+........
+=============================== warnings summary ===============================
+tests/test_sampled_configurable_weighted.py::test_weighted_forward_and_saved_plan_backward[E512_K16_S33]
+tests/test_sampled_configurable_weighted.py::test_weighted_forward_and_saved_plan_backward[E1024_K32_S17]
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+2 passed, 2 warnings in 15.94s
+
+=============================== warnings summary ===============================
+tests/test_sampled_configurable_weighted.py::test_weighted_forward_and_saved_plan_backward[E512_K16_S33]
+tests/test_sampled_configurable_weighted.py::test_weighted_forward_and_saved_plan_backward[E1024_K32_S17]
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+2 passed, 2 warnings in 15.93s
+
+=============================== warnings summary ===============================
+tests/test_sampled_configurable_weighted.py::test_weighted_forward_and_saved_plan_backward[E512_K16_S33]
+tests/test_sampled_configurable_weighted.py::test_weighted_forward_and_saved_plan_backward[E1024_K32_S17]
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+2 passed, 2 warnings in 15.92s
+
+=============================== warnings summary ===============================
+tests/test_sampled_configurable_weighted.py::test_weighted_forward_and_saved_plan_backward[E512_K16_S33]
+tests/test_sampled_configurable_weighted.py::test_weighted_forward_and_saved_plan_backward[E1024_K32_S17]
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+2 passed, 2 warnings in 15.95s
+
+=============================== warnings summary ===============================
+tests/test_sampled_configurable_weighted.py::test_weighted_forward_and_saved_plan_backward[E512_K16_S33]
+tests/test_sampled_configurable_weighted.py::test_weighted_forward_and_saved_plan_backward[E1024_K32_S17]
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+2 passed, 2 warnings in 15.96s
+
+=============================== warnings summary ===============================
+tests/test_sampled_configurable_weighted.py::test_weighted_forward_and_saved_plan_backward[E512_K16_S33]
+tests/test_sampled_configurable_weighted.py::test_weighted_forward_and_saved_plan_backward[E1024_K32_S17]
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+2 passed, 2 warnings in 15.94s
+
+=============================== warnings summary ===============================
+tests/test_sampled_configurable_weighted.py::test_weighted_forward_and_saved_plan_backward[E512_K16_S33]
+tests/test_sampled_configurable_weighted.py::test_weighted_forward_and_saved_plan_backward[E1024_K32_S17]
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+    return func(*args, **kwargs)
+
+tests/test_sampled_configurable_weighted.py::test_weighted_forward_and_saved_plan_backward[E512_K16_S33]
+tests/test_sampled_configurable_weighted.py::test_weighted_forward_and_saved_plan_backward[E1024_K32_S17]
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+2 passed, 4 warnings in 15.98s
+
+=============================== warnings summary ===============================
+tests/test_sampled_configurable_weighted.py::test_weighted_forward_and_saved_plan_backward[E512_K16_S33]
+tests/test_sampled_configurable_weighted.py::test_weighted_forward_and_saved_plan_backward[E1024_K32_S17]
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+2 passed, 2 warnings in 15.92s
