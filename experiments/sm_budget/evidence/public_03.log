@@ -1,0 +1,82 @@
+................................................................[sampled configurable] SM32_E352_K8_fuseFalse: compile native planner
+[sampled configurable] SM32_E352_K8_fuseFalse: compile native sync
+[sampled configurable] SM32_E352_K8_fuseFalse: compile unweighted dispatch fresh=True
+[sampled configurable] SM32_E352_K8_fuseFalse: compile unweighted dispatch fresh=False
+[sampled configurable] SM32_E352_K8_fuseFalse: compile unweighted combine and prologue/epilogue
+[sampled configurable] SM32_E352_K8_fuseFalse: wait for every rank's JIT completion
+[sampled configurable] SM32_E352_K8_fuseFalse: all ranks compiled; start actual GPU execution
+[sampled configurable] SM32_E352_K8_fuseFalse: warm graph path
+[sampled configurable] SM32_E352_K8_fuseFalse: capture graph
+[sampled configurable] SM32_E352_K8_fuseFalse: graph replay changed input phase=0
+[sampled configurable] SM32_E352_K8_fuseFalse: graph replay changed input phase=1
+[sampled configurable] SM32_E352_K8_fuseFalse: graph replay changed input phase=2
+........[sampled configurable] SM32_E352_K8_fuseTrue: compile native planner
+[sampled configurable] SM32_E352_K8_fuseTrue: compile native sync
+[sampled configurable] SM32_E352_K8_fuseTrue: compile unweighted dispatch fresh=True
+[sampled configurable] SM32_E352_K8_fuseTrue: compile unweighted dispatch fresh=False
+[sampled configurable] SM32_E352_K8_fuseTrue: compile unweighted combine and prologue/epilogue
+[sampled configurable] SM32_E352_K8_fuseTrue: wait for every rank's JIT completion
+[sampled configurable] SM32_E352_K8_fuseTrue: all ranks compiled; start actual GPU execution
+[sampled configurable] SM32_E352_K8_fuseTrue: warm graph path
+[sampled configurable] SM32_E352_K8_fuseTrue: capture graph
+[sampled configurable] SM32_E352_K8_fuseTrue: graph replay changed input phase=0
+[sampled configurable] SM32_E352_K8_fuseTrue: graph replay changed input phase=1
+[sampled configurable] SM32_E352_K8_fuseTrue: graph replay changed input phase=2
+........[sampled configurable] SM32_E64_K1_fuseTrue: compile native planner
+[sampled configurable] SM32_E64_K1_fuseTrue: compile native sync
+[sampled configurable] SM32_E64_K1_fuseTrue: compile unweighted dispatch fresh=True
+[sampled configurable] SM32_E64_K1_fuseTrue: compile unweighted dispatch fresh=False
+[sampled configurable] SM32_E64_K1_fuseTrue: compile unweighted combine and prologue/epilogue
+[sampled configurable] SM32_E64_K1_fuseTrue: wait for every rank's JIT completion
+[sampled configurable] SM32_E64_K1_fuseTrue: all ranks compiled; start actual GPU execution
+[sampled configurable] SM32_E64_K1_fuseTrue: warm graph path
+[sampled configurable] SM32_E64_K1_fuseTrue: capture graph
+[sampled configurable] SM32_E64_K1_fuseTrue: graph replay changed input phase=0
+[sampled configurable] SM32_E64_K1_fuseTrue: graph replay changed input phase=1
+[sampled configurable] SM32_E64_K1_fuseTrue: graph replay changed input phase=2
+........[sampled configurable] SM32_E128_K16_fuseTrue: compile native planner
+[sampled configurable] SM32_E128_K16_fuseTrue: compile native sync
+[sampled configurable] SM32_E128_K16_fuseTrue: compile unweighted dispatch fresh=True
+[sampled configurable] SM32_E128_K16_fuseTrue: compile unweighted dispatch fresh=False
+[sampled configurable] SM32_E128_K16_fuseTrue: compile unweighted combine and prologue/epilogue
+[sampled configurable] SM32_E128_K16_fuseTrue: wait for every rank's JIT completion
+[sampled configurable] SM32_E128_K16_fuseTrue: all ranks compiled; start actual GPU execution
+[sampled configurable] SM32_E128_K16_fuseTrue: warm graph path
+[sampled configurable] SM32_E128_K16_fuseTrue: capture graph
+[sampled configurable] SM32_E128_K16_fuseTrue: graph replay changed input phase=0
+[sampled configurable] SM32_E128_K16_fuseTrue: graph replay changed input phase=1
+[sampled configurable] SM32_E128_K16_fuseTrue: graph replay changed input phase=2
+........[sampled configurable] SM32_E64_K3_fuseTrue: compile native planner
+[sampled configurable] SM32_E64_K3_fuseTrue: compile native sync
+[sampled configurable] SM32_E64_K3_fuseTrue: compile unweighted dispatch fresh=True
+[sampled configurable] SM32_E64_K3_fuseTrue: compile unweighted dispatch fresh=False
+[sampled configurable] SM32_E64_K3_fuseTrue: compile unweighted combine and prologue/epilogue
+[sampled configurable] SM32_E64_K3_fuseTrue: wait for every rank's JIT completion
+[sampled configurable] SM32_E64_K3_fuseTrue: all ranks compiled; start actual GPU execution
+[sampled configurable] SM32_E64_K3_fuseTrue: warm graph path
+[sampled configurable] SM32_E64_K3_fuseTrue: capture graph
+[sampled configurable] SM32_E64_K3_fuseTrue: graph replay changed input phase=0
+[sampled configurable] SM32_E64_K3_fuseTrue: graph replay changed input phase=1
+[sampled configurable] SM32_E64_K3_fuseTrue: graph replay changed input phase=2
+........................
+=============================== warnings summary ===============================
+tests/test_sampled_sm_budget.py: 18 warnings
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+    return func(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+15 passed, 9 deselected, 18 warnings in 137.68s (0:02:17)
+
+15 passed, 9 deselected in 137.69s (0:02:17)
+
+15 passed, 9 deselected in 137.70s (0:02:17)
+
+15 passed, 9 deselected in 137.75s (0:02:17)
+
+15 passed, 9 deselected in 137.75s (0:02:17)
+
+15 passed, 9 deselected in 137.72s (0:02:17)
+
+15 passed, 9 deselected in 137.75s (0:02:17)
+
+15 passed, 9 deselected in 137.76s (0:02:17)

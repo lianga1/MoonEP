@@ -9,6 +9,7 @@
 #include <cub/block/block_reduce.cuh>
 #include <cub/device/device_merge_sort.cuh>
 #include <cstdint>
+#include <algorithm>
 
 #ifndef MOONEP_E
 #error "MOONEP_E/K/D/G must be supplied by sampled_residency.py"
@@ -628,6 +629,293 @@ __global__ void build_active_tables(const int* packages,const int* selected_ids,
   }
 }
 
+// Bounded execution uses the original logical records/tiles. Physical CTA order
+// never determines candidate IDs, group frequency ties, or stable ordering.
+__global__ void sample_records_bounded(const int* sampled,const int64_t* ids,const bool* support,const int* extra,
+ int* classes,int* groups,Word* sig0,Word* sig1,Word* masks,const int* status,int S,int B){
+  for(int linear=blockIdx.x*THREADS+threadIdx.x;linear<PAIRS*D;linear+=gridDim.x*THREADS){
+    int p=linear/D,t=linear%D;
+    int a,b;pair_ids(p,a,b);int idx=p*D+t,src=int(ids[t]/S);
+    for(int w=0;w<WORDS;++w)masks[idx*WORDS+w]=0;
+    for(int k=0;k<K;++k)groups[idx*K+k]=-1;
+    classes[idx]=-1;sig0[idx]=sig1[idx]=0;
+    if(*status)continue;
+    int ga[K],gb[K],na=0,nb=0;
+    for(int k=0;k<K;++k){int e=sampled[t*2*K+k],o=sampled[t*2*K+K+k];if(o==a)ga[na++]=e;if(o==b)gb[nb++]=e;}
+    int va=-2,vb=-2;
+    if(na){int v=int(a!=src)-int(b!=src&&nb==0),missing=0;
+      for(int k=0;k<na;++k)missing+=!support[b*E+ga[k]];
+      if(v>=0&&missing<=B-extra[b])va=v;}
+    if(nb){int v=int(b!=src)-int(a!=src&&na==0),missing=0;
+      for(int k=0;k<nb;++k)missing+=!support[a*E+gb[k]];
+      if(v>=0&&missing<=B-extra[a])vb=v;}
+    int dir=-1;
+    if(va>vb)dir=0;else if(vb>va)dir=1;else if(va>=0){
+      unsigned tie=unsigned(ids[t])+unsigned(a)*0x9e3779b9u+unsigned(b)*0x85ebca6bu;
+      tie^=tie>>16;tie*=0x7feb352du;tie^=tie>>15;dir=tie&1u;}
+    if(dir<0||(dir?vb:va)<0)continue;
+    int n=dir?nb:na,g[K];for(int k=0;k<n;++k)g[k]=dir?gb[k]:ga[k];
+    for(int k=1;k<n;++k){int v=g[k],j=k-1;while(j>=0&&g[j]>v){g[j+1]=g[j];--j;}g[j+1]=v;}
+    Word h=0xcbf29ce484222325ULL,other=0x9e3779b97f4a7c15ULL;
+    for(int k=0;k<n;++k){int e=g[k];groups[idx*K+k]=e;
+      h=(h^Word(e+1))*0x100000001b3ULL;other=mix64(other^Word(e+1));
+      masks[idx*WORDS+e/64]|=Word(1)<<(e%64);}
+    sig0[idx]=h;sig1[idx]=other;classes[idx]=cls(dir,n,dir?vb:va);
+  }
+}
+__global__ void record_frequencies_bounded(const int* classes,const int* groups,const Word* sig0,const Word* sig1,int* freq){
+  __shared__ int c[THREADS];__shared__ Word h[THREADS],l[THREADS];
+  for(int tile=blockIdx.x;tile<PAIRS*((D+THREADS-1)/THREADS);tile+=gridDim.x){
+    int lane=threadIdx.x,t=(tile%((D+THREADS-1)/THREADS))*THREADS+lane,base=(tile/((D+THREADS-1)/THREADS))*D;
+    int own_class=t<D?classes[base+t]:-1,n=0,first=D;
+    Word own_h=t<D?sig0[base+t]:0,own_l=t<D?sig1[base+t]:0;
+    int size=own_class<0?0:(own_class/2)%STRIDE;
+    for(int start=0;start<D;start+=THREADS){int j=start+lane;
+      c[lane]=j<D?classes[base+j]:-1;h[lane]=j<D?sig0[base+j]:0;l[lane]=j<D?sig1[base+j]:0;
+      __syncthreads();
+      if(own_class>=0)for(int k=0;k<min(THREADS,D-start);++k){
+        if(own_class==c[k]&&own_h==h[k]&&own_l==l[k]&&equal_group(base+t,base+start+k,size,groups)){
+          ++n;first=min(first,start+k);}}
+      __syncthreads();
+    }
+    if(t<D)freq[base+t]=first==t?n:0;
+    __syncthreads();
+  }
+}
+// Each warp owns one class and scans all D records in 32-record segments.
+// Warps select independently, so no CTA-wide barrier is needed when an empty
+// class terminates early. The comparator is exactly the original total order:
+// frequency descending, full expert-list lexicographic order, then record ID.
+__global__ void class_topg_warp_bounded(const int* classes,const int* freq,const int* groups,int* tops,int* first){
+  constexpr int WARPS=THREADS/32;
+  const int lane=threadIdx.x&31,warp=threadIdx.x/32;
+  BestGroup better{freq,groups};
+  for(int cc=blockIdx.x*WARPS+warp;cc<PAIRS*CLASSES;cc+=gridDim.x*WARPS){
+    const int c=cc%CLASSES,base=(cc/CLASSES)*D;
+    int selected[G];
+    #pragma unroll
+    for(int j=0;j<G;++j)selected[j]=-1;
+    // One writer initializes and later overwrites this row. An early break
+    // must leave every unused top-G slot at -1, including poisoned replays.
+    if(lane==0)for(int j=0;j<G;++j)tops[cc*G+j]=-1;
+    for(int g=0;g<G;++g){
+      GroupChoice local{-1,D};
+      for(int t=lane;t<D;t+=32){
+        const int rec=base+t;
+        if(classes[rec]!=c)continue;
+        // first is the first class occurrence, NOT the first positive or
+        // unselected frequency. This also covers classes with only freq=0.
+        local.first=min(local.first,t);
+        if(freq[rec]<=0)continue;
+        bool used=false;
+        #pragma unroll
+        for(int j=0;j<G;++j)if(j<g)used|=selected[j]==rec;
+        if(!used&&better.better(rec,local.id))local.id=rec;
+      }
+      #pragma unroll
+      for(int delta=16;delta>0;delta/=2){
+        const GroupChoice other{__shfl_down_sync(0xffffffffu,local.id,delta),
+                                __shfl_down_sync(0xffffffffu,local.first,delta)};
+        if(lane+delta<32)local=better(local,other);
+      }
+      const int chosen=__shfl_sync(0xffffffffu,local.id,0);
+      // Constant-index writes keep the small selected list register-friendly.
+      #pragma unroll
+      for(int j=0;j<G;++j)if(j==g)selected[j]=chosen;
+      if(lane==0){tops[cc*G+g]=chosen;if(g==0)first[cc]=local.first;}
+      // chosen is broadcast to every lane, hence this exit is warp-uniform.
+      if(chosen<0)break;
+    }
+  }
+}
+__global__ void assemble_groups_bounded(const int* tops,const int* first,const int* classes,int* records,
+ int* sizes,int* offsets){
+  for(int task=blockIdx.x*THREADS+threadIdx.x;task<PAIR_SIZES;task+=gridDim.x*THREADS){
+    int p=task/K,size=task%K+1,a,b;pair_ids(p,a,b);
+    for(int dir=0;dir<2;++dir){int key=bucket(dir?b:a,dir?a:b,size),base=p*CLASSES,n=0;
+      for(int j=0;j<RETAINED;++j)records[key*RETAINED+j]=-1;
+      int c0=base+cls(dir,size,0),c1=base+cls(dir,size,1),initial=first[c0]<=first[c1]?0:1;
+      for(int pass=0;pass<2;++pass){int c=base+cls(dir,size,pass?1-initial:initial);
+        for(int j=0;j<G;++j){int rec=tops[c*G+j];if(rec>=0)records[key*RETAINED+n++]=rec;}}
+      sizes[key]=n;
+    }
+    int ka=bucket(a,b,size),kb=bucket(b,a,size),n=0;
+    for(int ia=0;ia<sizes[ka];++ia)for(int ib=0;ib<sizes[kb];++ib){
+      int ra=records[ka*RETAINED+ia],rb=records[kb*RETAINED+ib];
+      n+=int((classes[ra]&1)+(classes[rb]&1)>0);}
+    offsets[task]=n;
+  }
+}
+__global__ void fill_packages_bounded(const int* classes,const int* records,const int* sizes,const int* offsets,int* packages){
+  for(int task=blockIdx.x*THREADS+threadIdx.x;task<PAIR_SIZES;task+=gridDim.x*THREADS){
+    int p=task/K,size=task%K+1,a,b;pair_ids(p,a,b);int out=offsets[task];
+    int ka=bucket(a,b,size),kb=bucket(b,a,size);
+    for(int ia=0;ia<sizes[ka];++ia)for(int ib=0;ib<sizes[kb];++ib){
+      int ra=records[ka*RETAINED+ia],rb=records[kb*RETAINED+ib];
+      if((classes[ra]&1)+(classes[rb]&1)==0)continue;
+      if(out<MAXP){int* q=packages+out*5;q[0]=a;q[1]=b;q[2]=size;q[3]=ra;q[4]=rb;}++out;}
+  }
+}
+__global__ void initial_package_scores_bounded(const Word* masks,const int* freq,const int* classes,
+ const int* records,const int* sizes,const int* packages,const int* package_count,
+ const bool* support,const int* extra,const int* status,Score* scores,int* diagnostics,int B){
+  __shared__ Word resident[R][WORDS];
+  int t=threadIdx.x;
+  for(int i=t;i<R*WORDS;i+=THREADS){int r=i/WORDS,w=i%WORDS;Word m=0;
+    for(int bit=0;bit<64;++bit){int e=w*64+bit;if(e<E&&support[r*E+e])m|=Word(1)<<bit;}
+    resident[r][w]=m;
+  }
+  __syncthreads();
+  for(int p=blockIdx.x*THREADS+t;p<MAXP;p+=gridDim.x*THREADS){
+    Score score{0,0,p};
+    if(p<*package_count&&*status==0){
+      const int* q=packages+p*5;int a=q[0],b=q[1],size=q[2],ra=q[3],rb=q[4];
+      int ca=0,cb=0;
+      for(int w=0;w<WORDS;++w){ca+=__popcll(masks[rb*WORDS+w]&~resident[a][w]);
+        cb+=__popcll(masks[ra*WORDS+w]&~resident[b][w]);}
+      int cost=ca+cb;
+      if(cost>0&&extra[a]+ca<=B&&extra[b]+cb<=B){
+        int ka=bucket(a,b,size),kb=bucket(b,a,size);
+        int x0=0,x1=0,y0=0,y1=0,bx0=0,bx1=0,by0=0,by1=0;
+        for(int j=0;j<sizes[ka];++j){int rec=records[ka*RETAINED+j];bool before=true,after=true;
+          for(int w=0;w<WORDS;++w){before&=!(masks[rec*WORDS+w]&~resident[b][w]);
+            after&=!(masks[rec*WORDS+w]&~(resident[b][w]|masks[ra*WORDS+w]));}
+          int f=freq[rec];bool gain=classes[rec]&1;
+          if(before){if(gain)bx1+=f;else bx0+=f;}if(after){if(gain)x1+=f;else x0+=f;}
+        }
+        for(int j=0;j<sizes[kb];++j){int rec=records[kb*RETAINED+j];bool before=true,after=true;
+          for(int w=0;w<WORDS;++w){before&=!(masks[rec*WORDS+w]&~resident[a][w]);
+            after&=!(masks[rec*WORDS+w]&~(resident[a][w]|masks[rb*WORDS+w]));}
+          int f=freq[rec];bool gain=classes[rec]&1;
+          if(before){if(gain)by1+=f;else by0+=f;}if(after){if(gain)y1+=f;else y0+=f;}
+        }
+        int gain=match_gain(x0,x1,y0,y1)-match_gain(bx0,bx1,by0,by1);
+        if(gain>0){score={gain,cost,p};atomicAdd(diagnostics,1);}
+      }
+    }
+    scores[p]=score;
+  }
+}
+__global__ void retain_package_ids_bounded(const Score* sorted,const int* package_count,
+ int* selected_ids,int* retained_count,int* diagnostics,int cap){
+  const int count=min(*package_count,cap);
+  for(int p=blockIdx.x*THREADS+threadIdx.x;p<MAXP;p+=gridDim.x*THREADS){
+    if(p<count)selected_ids[p]=sorted[p].idx;
+    if(p==0){*retained_count=count;diagnostics[1]=*package_count;diagnostics[2]=count;}
+  }
+}
+__global__ void build_active_tables_bounded(const int* packages,const int* selected_ids,
+ const int* retained_count,const int* records,const int* sizes,const int* status,
+ int* active_keys,int* active_rows,int* active_flags,int* active_counts){
+  if(*status)return;
+  for(int p=blockIdx.x*THREADS+threadIdx.x;p<*retained_count;p+=gridDim.x*THREADS){
+    const int* q=packages+selected_ids[p]*5;
+    int ka=bucket(q[0],q[1],q[2]),kb=bucket(q[1],q[0],q[2]);
+    const int keys[2]={ka,kb},recs[2]={q[3],q[4]};
+    for(int direction=0;direction<2;++direction){
+      int key=keys[direction];
+      if(atomicCAS(active_flags+key,0,1)==0){
+        int pos=atomicAdd(active_counts,1);active_keys[pos]=key;
+      }
+      for(int j=0;j<sizes[key];++j){
+        int row=key*RETAINED+j;
+        if(records[row]!=recs[direction])continue;
+        if(atomicCAS(active_flags+BUCKETS+row,0,1)==0){
+          int pos=atomicAdd(active_counts+1,1);active_rows[pos]=row;
+        }
+        break;
+      }
+    }
+  }
+}
+
+
+// Exact total-order sorting. Each bounded CTA processes fixed 256-entry runs;
+// logarithmic merge passes use original package IDs as the final tie-breaker.
+// No CUB device kernel is launched on the SM-budget path.
+__device__ void sort_score_tile(Score* values){
+  const int t=threadIdx.x;InitialBefore before;
+  __syncthreads();
+  for(int width=2;width<=THREADS;width*=2){
+    for(int distance=width/2;distance>0;distance/=2){
+      const Score a=values[t],b=values[t^distance];
+      const bool want_first=((t&distance)==0)==((t&width)==0);
+      const Score result=want_first?(before(b,a)?b:a):(before(a,b)?b:a);
+      __syncthreads();values[t]=result;__syncthreads();
+    }
+  }
+}
+__global__ void score_blocks_bounded(const Score* input,Score* output){
+  __shared__ Score values[THREADS];const int t=threadIdx.x;
+  for(int tile=blockIdx.x;tile<(MAXP+THREADS-1)/THREADS;tile+=gridDim.x){
+    const int p=tile*THREADS+t;values[t]=p<MAXP?input[p]:Score{0,0,p};
+    sort_score_tile(values);if(p<MAXP)output[p]=values[t];__syncthreads();
+  }
+}
+__global__ void merge_scores_bounded(const Score* input,Score* output,int width){
+  InitialBefore before;
+  for(int p=blockIdx.x*THREADS+threadIdx.x;p<MAXP;p+=gridDim.x*THREADS){
+    const int begin=(p/(2*width))*(2*width),mid=min(begin+width,MAXP),end=min(begin+2*width,MAXP);
+    const bool left=p<mid;const int own_begin=left?begin:mid,other_begin=left?mid:begin,other_end=left?end:mid;
+    const Score value=input[p];int lo=other_begin,hi=other_end;
+    while(lo<hi){const int m=lo+(hi-lo)/2;if(before(input[m],value))lo=m+1;else hi=m;}
+    output[begin+(p-own_begin)+(lo-other_begin)]=value;
+  }
+}
+__global__ void reset_pruning_bounded(int* diagnostics,int* flags,int* counts){
+  for(int i=blockIdx.x*THREADS+threadIdx.x;i<BUCKETS+GREEDY_ROWS;i+=gridDim.x*THREADS)flags[i]=0;
+  if(blockIdx.x==0){if(threadIdx.x<3)diagnostics[threadIdx.x]=0;if(threadIdx.x<2)counts[threadIdx.x]=0;}
+}
+__global__ void copy_packet_bounded(const int* input,int* output){
+  for(int i=blockIdx.x*THREADS+threadIdx.x;i<PACKET_SIZE;i+=gridDim.x*THREADS)output[i]=input[i];
+}
+__global__ void initial_score_blocks_bounded(const Word* masks,const int* freq,const int* classes,
+ const int* records,const int* sizes,const int* packages,const int* package_count,
+ const bool* support,const int* extra,const int* status,Score* scores,int* diagnostics,int B){
+  __shared__ Word resident[R][WORDS];
+  __shared__ Score tile_scores[THREADS];
+  int t=threadIdx.x;
+  for(int i=t;i<R*WORDS;i+=THREADS){int r=i/WORDS,w=i%WORDS;Word m=0;
+    for(int bit=0;bit<64;++bit){int e=w*64+bit;if(e<E&&support[r*E+e])m|=Word(1)<<bit;}
+    resident[r][w]=m;
+  }
+  __syncthreads();
+  for(int tile=blockIdx.x;tile<(MAXP+THREADS-1)/THREADS;tile+=gridDim.x){
+  const int p=tile*THREADS+t;
+  Score score{0,0,p};
+  if(p<*package_count&&*status==0){
+    const int* q=packages+p*5;int a=q[0],b=q[1],size=q[2],ra=q[3],rb=q[4];
+    int ca=0,cb=0;
+    for(int w=0;w<WORDS;++w){ca+=__popcll(masks[rb*WORDS+w]&~resident[a][w]);
+      cb+=__popcll(masks[ra*WORDS+w]&~resident[b][w]);}
+    int cost=ca+cb;
+    if(cost>0&&extra[a]+ca<=B&&extra[b]+cb<=B){
+      int ka=bucket(a,b,size),kb=bucket(b,a,size);
+      int x0=0,x1=0,y0=0,y1=0,bx0=0,bx1=0,by0=0,by1=0;
+      for(int j=0;j<sizes[ka];++j){int rec=records[ka*RETAINED+j];bool before=true,after=true;
+        for(int w=0;w<WORDS;++w){before&=!(masks[rec*WORDS+w]&~resident[b][w]);
+          after&=!(masks[rec*WORDS+w]&~(resident[b][w]|masks[ra*WORDS+w]));}
+        int f=freq[rec];bool gain=classes[rec]&1;
+        if(before){if(gain)bx1+=f;else bx0+=f;}if(after){if(gain)x1+=f;else x0+=f;}
+      }
+      for(int j=0;j<sizes[kb];++j){int rec=records[kb*RETAINED+j];bool before=true,after=true;
+        for(int w=0;w<WORDS;++w){before&=!(masks[rec*WORDS+w]&~resident[a][w]);
+          after&=!(masks[rec*WORDS+w]&~(resident[a][w]|masks[rb*WORDS+w]));}
+        int f=freq[rec];bool gain=classes[rec]&1;
+        if(before){if(gain)by1+=f;else by0+=f;}if(after){if(gain)y1+=f;else y0+=f;}
+      }
+      int gain=match_gain(x0,x1,y0,y1)-match_gain(bx0,bx1,by0,by1);
+      if(gain>0){score={gain,cost,p};atomicAdd(diagnostics,1);}
+    }
+  }
+  tile_scores[t]=score;
+  sort_score_tile(tile_scores);
+  if(p<MAXP)scores[p]=tile_scores[t];
+  __syncthreads();
+
+  }
+}
+
 void check(const at::Tensor& tensor,const at::Tensor& reference,at::ScalarType dtype,int64_t count,const char* name){
   TORCH_CHECK(tensor.is_cuda()&&tensor.device()==reference.device()&&tensor.scalar_type()==dtype&&tensor.is_contiguous()&&tensor.numel()==count,"invalid ",name);
 }
@@ -649,8 +937,9 @@ void select_residency(const at::Tensor& packet,const at::Tensor& ids,const at::T
  at::Tensor& samples,at::Tensor& support,at::Tensor& extra,at::Tensor& seen,at::Tensor& classes,at::Tensor& groups,
  at::Tensor& sig0,at::Tensor& sig1,at::Tensor& masks,at::Tensor& freq,at::Tensor& tops,at::Tensor& first,
  at::Tensor& records,at::Tensor& sizes,at::Tensor& offsets,at::Tensor& packages,at::Tensor& package_count,
- at::Tensor& output_etc,at::Tensor& history,at::Tensor& history_count,at::Tensor& status,int64_t S,int64_t B){
+ at::Tensor& output_etc,at::Tensor& history,at::Tensor& history_count,at::Tensor& status,int64_t S,int64_t B,int64_t sm_limit,bool fuse){
   TORCH_CHECK(packet.is_cuda()&&B>=1&&B<=E-HOME&&S>=1&&int64_t(R)*S>=D,"invalid packet/B/S");
+  TORCH_CHECK(sm_limit>=0&&sm_limit<=1024,"invalid SM budget");
   check(packet,packet,at::kInt,PACKET_SIZE,"packet");check(ids,packet,at::kLong,D,"sample IDs");check(etc,packet,at::kInt,R*B,"native copies");
   check(samples,packet,at::kInt,D*2*K,"samples");check(support,packet,at::kBool,R*E,"support");
   check(extra,packet,at::kInt,R,"extra");check(seen,packet,at::kInt,R*E,"copy seen");
@@ -665,6 +954,18 @@ void select_residency(const at::Tensor& packet,const at::Tensor& ids,const at::T
   c10::cuda::CUDAGuard guard(packet.device());auto stream=c10::cuda::getCurrentCUDAStream();
   auto w=[](at::Tensor& x){return reinterpret_cast<Word*>(x.data_ptr<int64_t>());};
   mandatory_validate<<<1,THREADS,0,stream>>>(packet.data_ptr<int>(),etc.data_ptr<int>(),samples.data_ptr<int>(),support.data_ptr<bool>(),extra.data_ptr<int>(),seen.data_ptr<int>(),status.data_ptr<int>(),B);
+  if(sm_limit>0){
+    const int samples_grid=std::min<int64_t>((PAIRS*D+THREADS-1)/THREADS,sm_limit);
+    const int frequency_grid=std::min<int64_t>(PAIRS*((D+THREADS-1)/THREADS),sm_limit);
+    const int class_grid=std::min<int64_t>((PAIRS*CLASSES+THREADS/32-1)/(THREADS/32),sm_limit);
+    const int package_grid=std::min<int64_t>((PAIR_SIZES+THREADS-1)/THREADS,sm_limit);
+    sample_records_bounded<<<samples_grid,THREADS,0,stream>>>(samples.data_ptr<int>(),ids.data_ptr<int64_t>(),support.data_ptr<bool>(),extra.data_ptr<int>(),classes.data_ptr<int>(),groups.data_ptr<int>(),w(sig0),w(sig1),w(masks),status.data_ptr<int>(),S,B);
+    record_frequencies_bounded<<<frequency_grid,THREADS,0,stream>>>(classes.data_ptr<int>(),groups.data_ptr<int>(),w(sig0),w(sig1),freq.data_ptr<int>());
+    class_topg_warp_bounded<<<class_grid,THREADS,0,stream>>>(classes.data_ptr<int>(),freq.data_ptr<int>(),groups.data_ptr<int>(),tops.data_ptr<int>(),first.data_ptr<int>());
+    assemble_groups_bounded<<<package_grid,THREADS,0,stream>>>(tops.data_ptr<int>(),first.data_ptr<int>(),classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),offsets.data_ptr<int>());
+    prefix_packages<<<1,THREADS,0,stream>>>(records.data_ptr<int>(),sizes.data_ptr<int>(),offsets.data_ptr<int>(),package_count.data_ptr<int>(),status.data_ptr<int>());
+    fill_packages_bounded<<<package_grid,THREADS,0,stream>>>(classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),offsets.data_ptr<int>(),packages.data_ptr<int>());
+  }else{
   dim3 grid((D+THREADS-1)/THREADS,PAIRS);
   sample_records<<<grid,THREADS,0,stream>>>(samples.data_ptr<int>(),ids.data_ptr<int64_t>(),support.data_ptr<bool>(),extra.data_ptr<int>(),classes.data_ptr<int>(),groups.data_ptr<int>(),w(sig0),w(sig1),w(masks),status.data_ptr<int>(),S,B);
   record_frequencies<<<grid,THREADS,0,stream>>>(classes.data_ptr<int>(),groups.data_ptr<int>(),w(sig0),w(sig1),freq.data_ptr<int>());
@@ -672,6 +973,7 @@ void select_residency(const at::Tensor& packet,const at::Tensor& ids,const at::T
   assemble_groups<<<(PAIR_SIZES+THREADS-1)/THREADS,THREADS,0,stream>>>(tops.data_ptr<int>(),first.data_ptr<int>(),classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),offsets.data_ptr<int>());
   prefix_packages<<<1,THREADS,0,stream>>>(records.data_ptr<int>(),sizes.data_ptr<int>(),offsets.data_ptr<int>(),package_count.data_ptr<int>(),status.data_ptr<int>());
   fill_packages<<<(PAIR_SIZES+THREADS-1)/THREADS,THREADS,0,stream>>>(classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),offsets.data_ptr<int>(),packages.data_ptr<int>());
+  }
   if constexpr(USE_GREEDY_TABLE){
     global_greedy_table<><<<1,THREADS,0,stream>>>(w(masks),freq.data_ptr<int>(),classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),packages.data_ptr<int>(),package_count.data_ptr<int>(),support.data_ptr<bool>(),extra.data_ptr<int>(),output_etc.data_ptr<int>(),history.data_ptr<int64_t>(),history_count.data_ptr<int>(),status.data_ptr<int>(),B);
   }else{
@@ -696,8 +998,9 @@ void select_capped_active(const at::Tensor& packet,const at::Tensor& ids,const a
  at::Tensor& samples,at::Tensor& support,at::Tensor& extra,at::Tensor& seen,at::Tensor& classes,at::Tensor& groups,
  at::Tensor& sig0,at::Tensor& sig1,at::Tensor& masks,at::Tensor& freq,at::Tensor& tops,at::Tensor& first,
  at::Tensor& records,at::Tensor& sizes,at::Tensor& offsets,at::Tensor& packages,at::Tensor& package_count,
- at::Tensor& output_etc,at::Tensor& history,at::Tensor& history_count,at::Tensor& status,int64_t S,int64_t B,at::Tensor& scores_in,at::Tensor& scores_out,at::Tensor& sort_scratch,at::Tensor& selected_ids,at::Tensor& retained_count,at::Tensor& diagnostics,int64_t cap,at::Tensor& active_keys,at::Tensor& active_rows,at::Tensor& active_flags,at::Tensor& active_counts){
+ at::Tensor& output_etc,at::Tensor& history,at::Tensor& history_count,at::Tensor& status,int64_t S,int64_t B,at::Tensor& scores_in,at::Tensor& scores_out,at::Tensor& sort_scratch,at::Tensor& selected_ids,at::Tensor& retained_count,at::Tensor& diagnostics,int64_t cap,at::Tensor& active_keys,at::Tensor& active_rows,at::Tensor& active_flags,at::Tensor& active_counts,int64_t sm_limit,bool fuse){
   TORCH_CHECK(packet.is_cuda()&&B>=1&&B<=E-HOME&&S>=1&&int64_t(R)*S>=D,"invalid packet/B/S");
+  TORCH_CHECK(sm_limit>=0&&sm_limit<=1024,"invalid SM budget");
   check(packet,packet,at::kInt,PACKET_SIZE,"packet");check(ids,packet,at::kLong,D,"sample IDs");check(etc,packet,at::kInt,R*B,"native copies");
   check(samples,packet,at::kInt,D*2*K,"samples");check(support,packet,at::kBool,R*E,"support");
   check(extra,packet,at::kInt,R,"extra");check(seen,packet,at::kInt,R*E,"copy seen");
@@ -721,6 +1024,18 @@ void select_capped_active(const at::Tensor& packet,const at::Tensor& ids,const a
   c10::cuda::CUDAGuard guard(packet.device());auto stream=c10::cuda::getCurrentCUDAStream();
   auto w=[](at::Tensor& x){return reinterpret_cast<Word*>(x.data_ptr<int64_t>());};
   mandatory_validate<<<1,THREADS,0,stream>>>(packet.data_ptr<int>(),etc.data_ptr<int>(),samples.data_ptr<int>(),support.data_ptr<bool>(),extra.data_ptr<int>(),seen.data_ptr<int>(),status.data_ptr<int>(),B);
+  if(sm_limit>0){
+    const int samples_grid=std::min<int64_t>((PAIRS*D+THREADS-1)/THREADS,sm_limit);
+    const int frequency_grid=std::min<int64_t>(PAIRS*((D+THREADS-1)/THREADS),sm_limit);
+    const int class_grid=std::min<int64_t>((PAIRS*CLASSES+THREADS/32-1)/(THREADS/32),sm_limit);
+    const int package_grid=std::min<int64_t>((PAIR_SIZES+THREADS-1)/THREADS,sm_limit);
+    sample_records_bounded<<<samples_grid,THREADS,0,stream>>>(samples.data_ptr<int>(),ids.data_ptr<int64_t>(),support.data_ptr<bool>(),extra.data_ptr<int>(),classes.data_ptr<int>(),groups.data_ptr<int>(),w(sig0),w(sig1),w(masks),status.data_ptr<int>(),S,B);
+    record_frequencies_bounded<<<frequency_grid,THREADS,0,stream>>>(classes.data_ptr<int>(),groups.data_ptr<int>(),w(sig0),w(sig1),freq.data_ptr<int>());
+    class_topg_warp_bounded<<<class_grid,THREADS,0,stream>>>(classes.data_ptr<int>(),freq.data_ptr<int>(),groups.data_ptr<int>(),tops.data_ptr<int>(),first.data_ptr<int>());
+    assemble_groups_bounded<<<package_grid,THREADS,0,stream>>>(tops.data_ptr<int>(),first.data_ptr<int>(),classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),offsets.data_ptr<int>());
+    prefix_packages<<<1,THREADS,0,stream>>>(records.data_ptr<int>(),sizes.data_ptr<int>(),offsets.data_ptr<int>(),package_count.data_ptr<int>(),status.data_ptr<int>());
+    fill_packages_bounded<<<package_grid,THREADS,0,stream>>>(classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),offsets.data_ptr<int>(),packages.data_ptr<int>());
+  }else{
   dim3 grid((D+THREADS-1)/THREADS,PAIRS);
   sample_records<<<grid,THREADS,0,stream>>>(samples.data_ptr<int>(),ids.data_ptr<int64_t>(),support.data_ptr<bool>(),extra.data_ptr<int>(),classes.data_ptr<int>(),groups.data_ptr<int>(),w(sig0),w(sig1),w(masks),status.data_ptr<int>(),S,B);
   record_frequencies<<<grid,THREADS,0,stream>>>(classes.data_ptr<int>(),groups.data_ptr<int>(),w(sig0),w(sig1),freq.data_ptr<int>());
@@ -728,17 +1043,41 @@ void select_capped_active(const at::Tensor& packet,const at::Tensor& ids,const a
   assemble_groups<<<(PAIR_SIZES+THREADS-1)/THREADS,THREADS,0,stream>>>(tops.data_ptr<int>(),first.data_ptr<int>(),classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),offsets.data_ptr<int>());
   prefix_packages<<<1,THREADS,0,stream>>>(records.data_ptr<int>(),sizes.data_ptr<int>(),offsets.data_ptr<int>(),package_count.data_ptr<int>(),status.data_ptr<int>());
   fill_packages<<<(PAIR_SIZES+THREADS-1)/THREADS,THREADS,0,stream>>>(classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),offsets.data_ptr<int>(),packages.data_ptr<int>());
+  }
   auto* in=reinterpret_cast<Score*>(scores_in.data_ptr<int>());
   auto* out=reinterpret_cast<Score*>(scores_out.data_ptr<int>());
+  const Score* sorted=out;
+  const int score_grid=sm_limit>0?std::min<int64_t>((MAXP+THREADS-1)/THREADS,sm_limit):(MAXP+THREADS-1)/THREADS;
+  if(sm_limit>0){
+    reset_pruning_bounded<<<std::min<int64_t>((BUCKETS+GREEDY_ROWS+THREADS-1)/THREADS,sm_limit),THREADS,0,stream>>>(diagnostics.data_ptr<int>(),active_flags.data_ptr<int>(),active_counts.data_ptr<int>());
+    if(fuse){
+      initial_score_blocks_bounded<<<score_grid,THREADS,0,stream>>>(w(masks),freq.data_ptr<int>(),classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),packages.data_ptr<int>(),package_count.data_ptr<int>(),support.data_ptr<bool>(),extra.data_ptr<int>(),status.data_ptr<int>(),out,diagnostics.data_ptr<int>(),B);
+    }else{
+      initial_package_scores_bounded<<<score_grid,THREADS,0,stream>>>(w(masks),freq.data_ptr<int>(),classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),packages.data_ptr<int>(),package_count.data_ptr<int>(),support.data_ptr<bool>(),extra.data_ptr<int>(),status.data_ptr<int>(),in,diagnostics.data_ptr<int>(),B);
+      score_blocks_bounded<<<score_grid,THREADS,0,stream>>>(in,out);
+    }
+    Score* current=out;Score* next=in;
+    for(int width=THREADS;width<MAXP;width*=2){
+      merge_scores_bounded<<<score_grid,THREADS,0,stream>>>(current,next,width);
+      std::swap(current,next);
+    }
+    sorted=current;
+    retain_package_ids_bounded<<<score_grid,THREADS,0,stream>>>(sorted,package_count.data_ptr<int>(),selected_ids.data_ptr<int>(),retained_count.data_ptr<int>(),diagnostics.data_ptr<int>(),cap);
+  }else{
   C10_CUDA_CHECK(cudaMemsetAsync(diagnostics.data_ptr<int>(),0,3*sizeof(int),stream));
   initial_package_scores<<<(MAXP+THREADS-1)/THREADS,THREADS,0,stream>>>(w(masks),freq.data_ptr<int>(),classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),packages.data_ptr<int>(),package_count.data_ptr<int>(),support.data_ptr<bool>(),extra.data_ptr<int>(),status.data_ptr<int>(),in,diagnostics.data_ptr<int>(),B);
   size_t scratch_bytes=sort_scratch.numel();
   C10_CUDA_CHECK(cub::DeviceMergeSort::SortKeysCopy(sort_scratch.data_ptr(),scratch_bytes,in,out,MAXP,InitialBefore{},stream));
   retain_package_ids<<<(MAXP+THREADS-1)/THREADS,THREADS,0,stream>>>(out,package_count.data_ptr<int>(),selected_ids.data_ptr<int>(),retained_count.data_ptr<int>(),diagnostics.data_ptr<int>(),cap);
+  }
   if constexpr(USE_GREEDY_TABLE){
+    if(sm_limit>0){
+      build_active_tables_bounded<<<score_grid,THREADS,0,stream>>>(packages.data_ptr<int>(),selected_ids.data_ptr<int>(),retained_count.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),status.data_ptr<int>(),active_keys.data_ptr<int>(),active_rows.data_ptr<int>(),active_flags.data_ptr<int>(),active_counts.data_ptr<int>());
+    }else{
     C10_CUDA_CHECK(cudaMemsetAsync(active_flags.data_ptr<int>(),0,(BUCKETS+GREEDY_ROWS)*sizeof(int),stream));
     C10_CUDA_CHECK(cudaMemsetAsync(active_counts.data_ptr<int>(),0,2*sizeof(int),stream));
     build_active_tables<<<(MAXP+THREADS-1)/THREADS,THREADS,0,stream>>>(packages.data_ptr<int>(),selected_ids.data_ptr<int>(),retained_count.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),status.data_ptr<int>(),active_keys.data_ptr<int>(),active_rows.data_ptr<int>(),active_flags.data_ptr<int>(),active_counts.data_ptr<int>());
+    }
     global_greedy_table_active<><<<1,THREADS,0,stream>>>(w(masks),freq.data_ptr<int>(),classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),packages.data_ptr<int>(),retained_count.data_ptr<int>(),selected_ids.data_ptr<int>(),support.data_ptr<bool>(),extra.data_ptr<int>(),output_etc.data_ptr<int>(),history.data_ptr<int64_t>(),history_count.data_ptr<int>(),status.data_ptr<int>(),B,active_keys.data_ptr<int>(),active_rows.data_ptr<int>(),active_counts.data_ptr<int>());
   }else{
     global_greedy_capped<<<1,THREADS,0,stream>>>(w(masks),freq.data_ptr<int>(),classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),packages.data_ptr<int>(),retained_count.data_ptr<int>(),selected_ids.data_ptr<int>(),support.data_ptr<bool>(),extra.data_ptr<int>(),output_etc.data_ptr<int>(),history.data_ptr<int64_t>(),history_count.data_ptr<int>(),status.data_ptr<int>(),B);
@@ -755,11 +1094,20 @@ int64_t pruning_workspace_bytes(const at::Tensor& scores_in,const at::Tensor& sc
   return int64_t(bytes);
 }
 
+void copy_packet(const at::Tensor& input,at::Tensor& output,int64_t sm_limit){
+  TORCH_CHECK(sm_limit>0&&sm_limit<=1024,"invalid SM budget");
+  check(input,input,at::kInt,PACKET_SIZE,"input packet");check(output,input,at::kInt,PACKET_SIZE,"output packet");
+  c10::cuda::CUDAGuard guard(input.device());
+  copy_packet_bounded<<<std::min<int64_t>((PACKET_SIZE+THREADS-1)/THREADS,sm_limit),THREADS,0,c10::cuda::getCurrentCUDAStream()>>>(input.data_ptr<int>(),output.data_ptr<int>());
+  C10_CUDA_KERNEL_LAUNCH_CHECK();
+}
+
 PYBIND11_MODULE(TORCH_EXTENSION_NAME,m){
   m.def("select_capped_active",&select_capped_active);
   m.def("pruning_workspace_bytes",&pruning_workspace_bytes);
   m.def("uses_active_table",[](){return USE_GREEDY_TABLE;});
   m.def("gather",&gather);
+  m.def("copy_packet",&copy_packet);
   m.def("select",&select_residency);
   m.def("count_frequencies",&count_frequencies);
 }

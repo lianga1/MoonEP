@@ -1,0 +1,28 @@
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+USDT:2026-11-06 09:13:27 655237:655237 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-06 09:13:27 655251:655251 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-06 09:13:27 655245:655245 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-06 09:13:27 655242:655242 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-06 09:13:27 655249:655249 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-06 09:13:27 655248:655248 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-06 09:13:27 655240:655240 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-06 09:13:27 655244:655244 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-06 09:13:27 655248:655248 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-06 09:13:27 655242:655242 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-06 09:13:27 655251:655251 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-06 09:13:27 655244:655244 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-06 09:13:27 655240:655240 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-06 09:13:27 655249:655249 SyncActivityProfilerHandler.cpp:59] profiler_stop
+
+USDT:2026-11-06 09:13:27 655245:655245 SyncActivityProfilerHandler.cpp:59] profiler_stop
+
+
+
+
+USDT:2026-11-06 09:13:27 655237:655237 SyncActivityProfilerHandler.cpp:59] profiler_stop
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+{"layer": 0, "candidate_limit": 128, "passed": true, "planner_us": 811.4783763885498}
+{"layer": 1, "candidate_limit": 128, "passed": true, "planner_us": 825.4176139831543}
+{"layer": 2, "candidate_limit": 128, "passed": true, "planner_us": 802.2527694702148}
+{"layer": 3, "candidate_limit": 128, "passed": true, "planner_us": 788.9055967330933}
+{"layer": 4, "candidate_limit": 128, "passed": true, "planner_us": 836.5695953369141}
+{"layer": 5, "candidate_limit": 128, "passed": true, "planner_us": 809.935998916626}
+{"layer": 6, "candidate_limit": 128, "passed": true, "planner_us": 802.4032115936279}
+{"layer": 7, "candidate_limit": 128, "passed": true, "planner_us": 794.9984073638916}

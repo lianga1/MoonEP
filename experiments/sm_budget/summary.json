@@ -1,0 +1,5459 @@
+{
+  "format_version": 1,
+  "validation": "passed",
+  "formal_inputs": {
+    "baseline_before_03": {
+      "path": "baseline_before_03.json.gz",
+      "sha256": "bd79988c235deac0e78a7a7d6efed75ed867e70710c8ec8fb128225bd53a11cb"
+    },
+    "bounded32_03": {
+      "path": "bounded32_03.json.gz",
+      "sha256": "e9236dae8ac77c2cb5321f9b3da4b43dd4eee96f4df09860d0ece5d3ca264430"
+    },
+    "fused32_03": {
+      "path": "fused32_03.json.gz",
+      "sha256": "98b84f3cc2971632240931a65bda2b256814ef99c341b0f631074049733de490"
+    },
+    "fused48_03": {
+      "path": "fused48_03.json.gz",
+      "sha256": "08284a5dfde469ffc2c9dc6d0537c26596d4ee1bd5651c8c8d263010d3218d3c"
+    },
+    "fused64_03": {
+      "path": "fused64_03.json.gz",
+      "sha256": "43c3d49921b70eb4e71eaed73b85e98149733e971ed2b730d1c1eef1965d7b9e"
+    },
+    "fused96_03": {
+      "path": "fused96_03.json.gz",
+      "sha256": "c0b7c657b6e622e1a6ce0afe1ef801429917f9cb1901a9f1de107f51aab54386"
+    },
+    "fused128_03": {
+      "path": "fused128_03.json.gz",
+      "sha256": "19290a451342233214e546fc8388996121a42d44b06e63b99a1b837072ba9743"
+    },
+    "baseline_after_03": {
+      "path": "baseline_after_03.json.gz",
+      "sha256": "0c605ef54d61a78ceef90e10189ab3b0147ca63575b9a151b97ad5ea3aeffa0e"
+    }
+  },
+  "hardware": {
+    "gpu": "NVIDIA H200",
+    "device_sms": 132,
+    "identities": [
+      {
+        "rank": 0,
+        "host": "omni-dev--e2549984aa65-fkao76l7ui",
+        "local_device": 0,
+        "uuid": "e9c0c5f0-3a06-9b45-f956-325220a9b05f"
+      },
+      {
+        "rank": 1,
+        "host": "omni-dev--e2549984aa65-fkao76l7ui",
+        "local_device": 1,
+        "uuid": "2ab0e6a4-7ade-80b7-17e5-2f490eb50715"
+      },
+      {
+        "rank": 2,
+        "host": "omni-dev--e2549984aa65-fkao76l7ui",
+        "local_device": 2,
+        "uuid": "cb67e011-30a0-7a82-7d3d-7f1dc5a280a1"
+      },
+      {
+        "rank": 3,
+        "host": "omni-dev--e2549984aa65-fkao76l7ui",
+        "local_device": 3,
+        "uuid": "c48dd361-dbcb-9113-ba1d-12a061986e68"
+      },
+      {
+        "rank": 4,
+        "host": "omni-dev--e2549984aa65-fkao76l7ui",
+        "local_device": 4,
+        "uuid": "35d81ab9-b2da-e810-0414-99576427d8ac"
+      },
+      {
+        "rank": 5,
+        "host": "omni-dev--e2549984aa65-fkao76l7ui",
+        "local_device": 5,
+        "uuid": "656ccf44-5788-1414-23ae-a366b1f1dd3b"
+      },
+      {
+        "rank": 6,
+        "host": "omni-dev--e2549984aa65-fkao76l7ui",
+        "local_device": 6,
+        "uuid": "7b968ddb-cf76-7260-76cd-91d12d14b67b"
+      },
+      {
+        "rank": 7,
+        "host": "omni-dev--e2549984aa65-fkao76l7ui",
+        "local_device": 7,
+        "uuid": "7d096b7b-d90b-c88e-e1e7-d1ac53bf94fd"
+      }
+    ],
+    "torch": "2.13.0+cu130",
+    "cuda": "13.0",
+    "nccl": [
+      2,
+      29,
+      7
+    ]
+  },
+  "workload": {
+    "R": 8,
+    "N": 134144,
+    "S": 16768,
+    "E": 352,
+    "K": 8,
+    "B": 8
+  },
+  "planner_config": {
+    "sample_size": 256,
+    "groups_per_class": 2,
+    "rounds": 4,
+    "sample_seed": 20261026,
+    "candidate_limit": 128
+  },
+  "tests": {
+    "config": {
+      "passed_per_process": 24,
+      "process_summaries": 1,
+      "exit_code": 0
+    },
+    "components": {
+      "passed_per_process": 9,
+      "process_summaries": 1,
+      "exit_code": 0
+    },
+    "public": {
+      "passed_per_process": 15,
+      "process_summaries": 8,
+      "exit_code": 0
+    },
+    "compatibility": {
+      "passed_per_process": 5,
+      "process_summaries": 8,
+      "exit_code": 0
+    }
+  },
+  "fixture_sha256": {
+    "layer_00.npz": "b705b5e45be5dfa57d9b29fcb6b26e938de49cdf2d9fd153787cc2bd43e9d6f9",
+    "layer_01.npz": "dbc6cfdfe10ac87984da3f429f4a5b4d5d6dd32e5d1e64e983e3e39ac807867b",
+    "layer_02.npz": "3b4c7c54c395e278a9880ac5e8a5bf737dd72ed53db0f376060b2b059b02134b",
+    "layer_03.npz": "0cf78029316533bd3a76053d065263994a78e644c869738043c5feb4d2aff3e2",
+    "layer_04.npz": "53c72a6823090add179e5a03fc6c8b795bf632a08330e142dfbef8af1018b6ea",
+    "layer_05.npz": "5b6106eaeca3a03c060aa7733b50ce1c409435cb3cd47a510b669047a8143a7b",
+    "layer_06.npz": "d4dc1c7b911e3024de4b2cab206ba68ce2df5f520c1701aae6685256de7e389a",
+    "layer_07.npz": "1e0f64493ee09ec3711746459c930135c155134c6b1e60fd7b6966f8689bf613"
+  },
+  "oracle_sha256": "4cf37ff7e3a18ffba37ccebddceac074916efb5e7261bbe6d1a07102cacc47bb",
+  "all_outputs_exact": true,
+  "all_audits_passed": true,
+  "fallback_count": 0,
+  "current_sources_checked": true,
+  "timing_method": "For each layer: median of 10 CUDA-event samples per rank; max across 8 ranks; each sample averages 5 Graph replays. Then arithmetic mean over 8 layers.",
+  "baseline_reference": {
+    "mean_cuda_us": 685.9224006533623,
+    "layer_cuda_us": [
+      704.6656012535095,
+      687.6783967018127,
+      683.8383913040161,
+      664.0784025192261,
+      696.4959979057312,
+      689.9712204933167,
+      687.4735951423645,
+      673.1775999069214
+    ],
+    "definition": "Arithmetic mean of before and after baseline timings; not a randomized or drift-corrected estimate.",
+    "before_to_after_change_percent": -0.08557045281288866,
+    "layer_before_to_after_change_percent": [
+      0.2564505795249916,
+      -0.15576562495888124,
+      -0.08933936024361211,
+      -0.2228546874256998,
+      -0.20103237908127847,
+      -0.1297763496389881,
+      -0.42129251512340593,
+      0.27703872647730776
+    ]
+  },
+  "communication": {
+    "native_remote_token_destinations": 5054165,
+    "remote_token_destinations": 3887660,
+    "remote_reduction_percent": 23.08007356309103,
+    "native_expert_copies": 71,
+    "expert_copies": 434,
+    "additional_copies_vs_native": 363,
+    "additional_copies_vs_previous_sampled": 0,
+    "all_variants_exact": true,
+    "interpretation": "Counts sum 8 independent layers. A remote token-destination counts once per destination GPU; it is not a compute pair or a measured payload transfer time."
+  },
+  "variants": {
+    "baseline_before_03": {
+      "sm_limit": 0,
+      "fuse": false,
+      "layers": [
+        {
+          "layer": 0,
+          "timings": {
+            "native": {
+              "cuda_us": 79.07200157642365,
+              "rank_medians_cuda_us": [
+                77.87519991397858,
+                79.07200157642365,
+                78.89919877052307,
+                78.65599989891052,
+                78.65279912948608,
+                78.4991979598999,
+                78.54399979114532,
+                78.51199805736542
+              ],
+              "host_us": 84.6601091325283,
+              "rank_medians_host_us": [
+                83.91477167606354,
+                84.6601091325283,
+                84.62662808597088,
+                84.370793774724,
+                84.30639281868935,
+                84.22369137406349,
+                84.44241248071194,
+                84.32851172983646
+              ]
+            },
+            "sampled": {
+              "cuda_us": 703.7631988525391,
+              "rank_medians_cuda_us": [
+                702.9888153076172,
+                703.7631988525391,
+                703.6479949951172,
+                703.4976005554199,
+                703.6863803863524,
+                702.8127908706665,
+                703.3312082290649,
+                703.2864093780518
+              ],
+              "host_us": 709.3935739248991,
+              "rank_medians_host_us": [
+                709.0407889336348,
+                709.3935739248991,
+                709.3813735991716,
+                709.3827705830336,
+                709.1874722391367,
+                708.859134465456,
+                709.1441191732883,
+                709.0501021593809
+              ]
+            }
+          },
+          "traces": [
+            {
+              "rank": 0,
+              "path": "baseline_before_traces_03/rank0_graph.json.gz",
+              "kernel_count": 267,
+              "max_launch_blocks": 1584,
+              "max_simultaneous_launched_blocks": 1584,
+              "streams": [
+                7,
+                170
+              ],
+              "nccl_kernel_count": 21,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 1,
+              "path": "baseline_before_traces_03/rank1_graph.json.gz",
+              "kernel_count": 267,
+              "max_launch_blocks": 1584,
+              "max_simultaneous_launched_blocks": 1584,
+              "streams": [
+                7,
+                170
+              ],
+              "nccl_kernel_count": 21,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 2,
+              "path": "baseline_before_traces_03/rank2_graph.json.gz",
+              "kernel_count": 267,
+              "max_launch_blocks": 1584,
+              "max_simultaneous_launched_blocks": 1584,
+              "streams": [
+                7,
+                170
+              ],
+              "nccl_kernel_count": 21,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 3,
+              "path": "baseline_before_traces_03/rank3_graph.json.gz",
+              "kernel_count": 267,
+              "max_launch_blocks": 1584,
+              "max_simultaneous_launched_blocks": 1584,
+              "streams": [
+                7,
+                170
+              ],
+              "nccl_kernel_count": 21,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 4,
+              "path": "baseline_before_traces_03/rank4_graph.json.gz",
+              "kernel_count": 267,
+              "max_launch_blocks": 1584,
+              "max_simultaneous_launched_blocks": 1584,
+              "streams": [
+                7,
+                170
+              ],
+              "nccl_kernel_count": 21,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 5,
+              "path": "baseline_before_traces_03/rank5_graph.json.gz",
+              "kernel_count": 267,
+              "max_launch_blocks": 1584,
+              "max_simultaneous_launched_blocks": 1584,
+              "streams": [
+                7,
+                170
+              ],
+              "nccl_kernel_count": 21,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 6,
+              "path": "baseline_before_traces_03/rank6_graph.json.gz",
+              "kernel_count": 267,
+              "max_launch_blocks": 1584,
+              "max_simultaneous_launched_blocks": 1584,
+              "streams": [
+                7,
+                170
+              ],
+              "nccl_kernel_count": 21,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 7,
+              "path": "baseline_before_traces_03/rank7_graph.json.gz",
+              "kernel_count": 267,
+              "max_launch_blocks": 1584,
+              "max_simultaneous_launched_blocks": 1584,
+              "streams": [
+                7,
+                170
+              ],
+              "nccl_kernel_count": 21,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            }
+          ],
+          "native_remote_token_destinations": 621511,
+          "remote_token_destinations": 533736,
+          "remote_reduction_percent": 14.122839338322246,
+          "native_expert_copies": 11,
+          "expert_copies": 61,
+          "history_iterations": 30,
+          "full_candidates": 1026,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": -0.1280610830676543
+        },
+        {
+          "layer": 1,
+          "timings": {
+            "native": {
+              "cuda_us": 72.74560034275055,
+              "rank_medians_cuda_us": [
+                69.75679993629456,
+                72.61119782924652,
+                72.74560034275055,
+                72.4511981010437,
+                72.53760099411011,
+                72.07680046558379,
+                72.53759801387787,
+                71.91679775714874
+              ],
+              "host_us": 79.54011671245098,
+              "rank_medians_host_us": [
+                77.10237987339497,
+                79.54011671245098,
+                79.52973246574402,
+                79.42058145999908,
+                79.23264056444168,
+                79.12362925708294,
+                79.14486341178417,
+                78.84842343628407
+              ]
+            },
+            "sampled": {
+              "cuda_us": 688.21439743042,
+              "rank_medians_cuda_us": [
+                685.1232051849365,
+                687.6799821853639,
+                688.21439743042,
+                687.2671842575073,
+                687.6320123672485,
+                687.4336004257202,
+                687.6991987228394,
+                687.4752044677734
+              ],
+              "host_us": 695.0973533093929,
+              "rank_medians_host_us": [
+                692.4140267074108,
+                694.7633344680071,
+                695.0973533093929,
+                694.4467313587666,
+                694.6307141333818,
+                694.412924349308,
+                694.5567205548286,
+                694.2866835743189
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 643011,
+          "remote_token_destinations": 485678,
+          "remote_reduction_percent": 24.468166174451135,
+          "native_expert_copies": 7,
+          "expert_copies": 55,
+          "history_iterations": 29,
+          "full_candidates": 958,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 0.07794351708270142
+        },
+        {
+          "layer": 2,
+          "timings": {
+            "native": {
+              "cuda_us": 69.13280189037324,
+              "rank_medians_cuda_us": [
+                66.42879843711853,
+                68.92479956150055,
+                69.03359889984131,
+                69.08159852027893,
+                69.13280189037324,
+                68.17280054092407,
+                68.97920072078706,
+                68.47360134124756
+              ],
+              "host_us": 75.76048374176025,
+              "rank_medians_host_us": [
+                73.45820777118206,
+                75.65096020698547,
+                75.76048374176025,
+                75.70479065179825,
+                75.66716521978378,
+                75.54711773991585,
+                75.48336870968342,
+                75.16024634242058
+              ]
+            },
+            "sampled": {
+              "cuda_us": 684.1439962387085,
+              "rank_medians_cuda_us": [
+                681.168007850647,
+                684.0287923812866,
+                684.1439962387085,
+                683.6159944534302,
+                683.6416006088257,
+                682.9216003417969,
+                683.9616060256958,
+                683.2639932632447
+              ],
+              "host_us": 698.2522085309029,
+              "rank_medians_host_us": [
+                688.6179093271494,
+                690.8344570547342,
+                690.8774375915527,
+                690.6273774802685,
+                690.3298199176788,
+                698.2522085309029,
+                690.5332207679749,
+                690.3755944222212
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 635585,
+          "remote_token_destinations": 465156,
+          "remote_reduction_percent": 26.81450946765578,
+          "native_expert_copies": 7,
+          "expert_copies": 52,
+          "history_iterations": 29,
+          "full_candidates": 963,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 0.044689642842321575
+        },
+        {
+          "layer": 3,
+          "timings": {
+            "native": {
+              "cuda_us": 70.52160203456879,
+              "rank_medians_cuda_us": [
+                68.1887984275818,
+                70.48960030078888,
+                70.42560279369354,
+                70.02879977226256,
+                70.52160203456879,
+                69.77280080318451,
+                66.84480011463165,
+                69.83360052108765
+              ],
+              "host_us": 77.1394930779934,
+              "rank_medians_host_us": [
+                75.02851076424122,
+                76.98340341448784,
+                77.1394930779934,
+                76.79648697376251,
+                76.83709263801575,
+                76.65008306503296,
+                74.48652759194374,
+                76.40817202627659
+              ]
+            },
+            "sampled": {
+              "cuda_us": 664.8191928863525,
+              "rank_medians_cuda_us": [
+                662.3424053192139,
+                664.7104024887085,
+                664.8191928863525,
+                664.6111965179443,
+                664.3008232116699,
+                663.5295867919922,
+                662.3135805130005,
+                664.3424034118652
+              ],
+              "host_us": 679.2593747377396,
+              "rank_medians_host_us": [
+                669.6022115647793,
+                671.6953124850988,
+                671.5868134051561,
+                671.6265343129635,
+                671.2898146361113,
+                679.2593747377396,
+                671.343132853508,
+                671.2121888995171
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 623501,
+          "remote_token_destinations": 476656,
+          "remote_reduction_percent": 23.551686364576796,
+          "native_expert_copies": 10,
+          "expert_copies": 50,
+          "history_iterations": 26,
+          "full_candidates": 922,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 0.11155164274523344
+        },
+        {
+          "layer": 4,
+          "timings": {
+            "native": {
+              "cuda_us": 68.62399876117706,
+              "rank_medians_cuda_us": [
+                65.64159989356995,
+                68.39680075645447,
+                68.62399876117706,
+                67.9967999458313,
+                68.43200027942657,
+                67.14560091495514,
+                68.28159987926483,
+                68.2208001613617
+              ],
+              "host_us": 75.2028077840805,
+              "rank_medians_host_us": [
+                72.60162383317947,
+                74.95321333408356,
+                75.2028077840805,
+                74.8269259929657,
+                74.79977793991566,
+                74.11250844597816,
+                74.69984702765942,
+                74.60573688149452
+              ]
+            },
+            "sampled": {
+              "cuda_us": 697.1967935562134,
+              "rank_medians_cuda_us": [
+                694.3903923034668,
+                697.1967935562134,
+                697.1776008605957,
+                696.7136144638062,
+                696.8191862106323,
+                696.1887836456299,
+                696.8575954437255,
+                696.121597290039
+              ],
+              "host_us": 712.3428862541914,
+              "rank_medians_host_us": [
+                701.7691154032946,
+                704.0294818580151,
+                703.901331871748,
+                703.6305498331785,
+                703.4874055534601,
+                712.3428862541914,
+                703.6370690912008,
+                703.5046815872192
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 634668,
+          "remote_token_destinations": 483420,
+          "remote_reduction_percent": 23.831042371759725,
+          "native_expert_copies": 8,
+          "expert_copies": 56,
+          "history_iterations": 32,
+          "full_candidates": 941,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 0.10061732624297992
+        },
+        {
+          "layer": 5,
+          "timings": {
+            "native": {
+              "cuda_us": 67.99359917640685,
+              "rank_medians_cuda_us": [
+                65.41120111942291,
+                67.95199811458588,
+                67.99359917640685,
+                67.59679913520813,
+                67.72799789905548,
+                67.2864019870758,
+                67.89439916610718,
+                67.58399903774261
+              ],
+              "host_us": 74.80047643184662,
+              "rank_medians_host_us": [
+                72.34020158648491,
+                74.68401454389095,
+                74.80047643184662,
+                74.29230026900768,
+                74.19339381158352,
+                73.98747839033604,
+                74.40280169248581,
+                74.09108802676201
+              ]
+            },
+            "sampled": {
+              "cuda_us": 690.4192209243774,
+              "rank_medians_cuda_us": [
+                687.2639894485474,
+                690.2528047561646,
+                690.0255918502808,
+                690.2112007141112,
+                690.4192209243774,
+                688.7392044067382,
+                689.8880004882812,
+                689.574408531189
+              ],
+              "host_us": 704.0477357804775,
+              "rank_medians_host_us": [
+                694.5742759853601,
+                697.1103604882956,
+                697.2887553274632,
+                697.1767637878656,
+                697.1476133912802,
+                704.0477357804775,
+                696.9081703573465,
+                696.6921500861645
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 625260,
+          "remote_token_destinations": 487250,
+          "remote_reduction_percent": 22.07241787416435,
+          "native_expert_copies": 9,
+          "expert_copies": 50,
+          "history_iterations": 32,
+          "full_candidates": 960,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 0.06493030691054891
+        },
+        {
+          "layer": 6,
+          "timings": {
+            "native": {
+              "cuda_us": 67.94559955596924,
+              "rank_medians_cuda_us": [
+                65.0816023349762,
+                67.93279945850372,
+                67.94559955596924,
+                67.5552010536194,
+                67.5328016281128,
+                67.1552002429962,
+                67.4784004688263,
+                67.43359863758087
+              ],
+              "host_us": 74.6128149330616,
+              "rank_medians_host_us": [
+                72.10401818156242,
+                74.59432817995548,
+                74.6128149330616,
+                74.2920208722353,
+                74.24047216773033,
+                73.88638332486153,
+                74.15763102471828,
+                73.98473098874092
+              ]
+            },
+            "sampled": {
+              "cuda_us": 688.9247894287109,
+              "rank_medians_cuda_us": [
+                686.1279964447021,
+                688.9247894287109,
+                688.8672113418579,
+                688.1600141525269,
+                688.6911869049072,
+                687.6575946807861,
+                686.569595336914,
+                688.6559963226317
+              ],
+              "host_us": 702.1050900220871,
+              "rank_medians_host_us": [
+                693.4706587344408,
+                696.0651371628046,
+                695.6721190363169,
+                695.1598450541496,
+                695.5007556825876,
+                702.1050900220871,
+                694.623589515686,
+                695.6026889383793
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 635436,
+          "remote_token_destinations": 479503,
+          "remote_reduction_percent": 24.53952876450185,
+          "native_expert_copies": 9,
+          "expert_copies": 57,
+          "history_iterations": 31,
+          "full_candidates": 996,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 0.21109091266928726
+        },
+        {
+          "layer": 7,
+          "timings": {
+            "native": {
+              "cuda_us": 67.86879897117615,
+              "rank_medians_cuda_us": [
+                65.01120030879974,
+                67.78560280799866,
+                67.86879897117615,
+                67.26079881191254,
+                67.84000098705292,
+                67.22880005836487,
+                67.34720170497893,
+                67.3695981502533
+              ],
+              "host_us": 74.61570203304291,
+              "rank_medians_host_us": [
+                72.10490293800831,
+                74.61570203304291,
+                74.42268542945385,
+                74.1440337151289,
+                74.37602616846561,
+                73.97625595331192,
+                74.0337185561657,
+                73.83101619780064
+              ]
+            },
+            "sampled": {
+              "cuda_us": 672.2464084625244,
+              "rank_medians_cuda_us": [
+                669.4591999053956,
+                672.2464084625244,
+                672.2111940383911,
+                671.727991104126,
+                670.739197731018,
+                671.0815906524658,
+                671.9071865081787,
+                671.5519905090332
+              ],
+              "host_us": 687.557365745306,
+              "rank_medians_host_us": [
+                676.7474114894867,
+                678.8981147110462,
+                678.8210943341255,
+                678.4928031265736,
+                685.8428008854389,
+                687.557365745306,
+                679.0702231228352,
+                678.2217882573605
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 635193,
+          "remote_token_destinations": 476261,
+          "remote_reduction_percent": 25.021056592248335,
+          "native_expert_copies": 10,
+          "expert_copies": 53,
+          "history_iterations": 28,
+          "full_candidates": 960,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": -0.13832775251667595
+        }
+      ],
+      "mean_cuda_us": 686.2159997224808,
+      "mean_host_us": 698.5069485381246,
+      "native_mean_cuda_us": 70.48800028860569,
+      "latency_change_vs_bracketing_baseline_percent": 0.042803539997948725,
+      "latency_change_vs_before_percent": 0.0,
+      "latency_change_vs_after_percent": 0.0856437385477582
+    },
+    "bounded32_03": {
+      "sm_limit": 32,
+      "fuse": false,
+      "layers": [
+        {
+          "layer": 0,
+          "timings": {
+            "native": {
+              "cuda_us": 79.03040051460266,
+              "rank_medians_cuda_us": [
+                78.24000120162964,
+                79.03040051460266,
+                78.90879809856415,
+                78.66560220718384,
+                78.68480086326599,
+                78.62400114536285,
+                78.74239981174469,
+                78.42559814453125
+              ],
+              "host_us": 84.74052883684635,
+              "rank_medians_host_us": [
+                83.99849757552147,
+                84.74052883684635,
+                84.5078844577074,
+                84.51822213828564,
+                84.1920729726553,
+                84.37051437795162,
+                84.41228419542313,
+                84.19016376137733
+              ]
+            },
+            "sampled": {
+              "cuda_us": 879.4271945953369,
+              "rank_medians_cuda_us": [
+                878.547191619873,
+                879.2447566986084,
+                879.0688037872314,
+                878.9952278137207,
+                879.4271945953369,
+                878.9312362670898,
+                878.6303997039795,
+                878.8928031921387
+              ],
+              "host_us": 885.0125595927238,
+              "rank_medians_host_us": [
+                884.5217525959015,
+                885.0125595927238,
+                884.8238736391068,
+                884.7913239151239,
+                884.7052231431007,
+                884.5426142215729,
+                884.2293173074722,
+                884.5356293022633
+              ]
+            }
+          },
+          "traces": [
+            {
+              "rank": 0,
+              "path": "bounded32_traces_03/rank0_graph.json.gz",
+              "kernel_count": 312,
+              "max_launch_blocks": 32,
+              "max_simultaneous_launched_blocks": 32,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 1,
+              "path": "bounded32_traces_03/rank1_graph.json.gz",
+              "kernel_count": 312,
+              "max_launch_blocks": 32,
+              "max_simultaneous_launched_blocks": 32,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 2,
+              "path": "bounded32_traces_03/rank2_graph.json.gz",
+              "kernel_count": 312,
+              "max_launch_blocks": 32,
+              "max_simultaneous_launched_blocks": 32,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 3,
+              "path": "bounded32_traces_03/rank3_graph.json.gz",
+              "kernel_count": 312,
+              "max_launch_blocks": 32,
+              "max_simultaneous_launched_blocks": 32,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 4,
+              "path": "bounded32_traces_03/rank4_graph.json.gz",
+              "kernel_count": 312,
+              "max_launch_blocks": 32,
+              "max_simultaneous_launched_blocks": 32,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 5,
+              "path": "bounded32_traces_03/rank5_graph.json.gz",
+              "kernel_count": 312,
+              "max_launch_blocks": 32,
+              "max_simultaneous_launched_blocks": 32,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 6,
+              "path": "bounded32_traces_03/rank6_graph.json.gz",
+              "kernel_count": 312,
+              "max_launch_blocks": 32,
+              "max_simultaneous_launched_blocks": 32,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 7,
+              "path": "bounded32_traces_03/rank7_graph.json.gz",
+              "kernel_count": 312,
+              "max_launch_blocks": 32,
+              "max_simultaneous_launched_blocks": 32,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            }
+          ],
+          "native_remote_token_destinations": 621511,
+          "remote_token_destinations": 533736,
+          "remote_reduction_percent": 14.122839338322246,
+          "native_expert_copies": 11,
+          "expert_copies": 61,
+          "history_iterations": 30,
+          "full_candidates": 1026,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 24.800642039422517
+        },
+        {
+          "layer": 1,
+          "timings": {
+            "native": {
+              "cuda_us": 72.06400036811827,
+              "rank_medians_cuda_us": [
+                69.57759857177734,
+                71.69600129127501,
+                71.92640006542206,
+                71.77279889583588,
+                71.17120027542114,
+                71.78879976272583,
+                71.561598777771,
+                72.06400036811827
+              ],
+              "host_us": 79.19333875179291,
+              "rank_medians_host_us": [
+                76.87089964747429,
+                79.19333875179291,
+                79.03054356575012,
+                79.09592241048813,
+                78.19416932761669,
+                79.0716614574194,
+                78.83417420089245,
+                79.03543300926685
+              ]
+            },
+            "sampled": {
+              "cuda_us": 887.4367713928223,
+              "rank_medians_cuda_us": [
+                883.7984085083008,
+                883.8111877441406,
+                887.2640132904053,
+                887.4367713928223,
+                885.1039886474609,
+                887.3727798461914,
+                887.2159957885742,
+                887.3471736907959
+              ],
+              "host_us": 894.1332809627056,
+              "rank_medians_host_us": [
+                891.1308366805315,
+                893.3885022997856,
+                894.1286709159613,
+                894.1332809627056,
+                893.561216071248,
+                893.954373896122,
+                893.8607759773731,
+                893.875677138567
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 643011,
+          "remote_token_destinations": 485678,
+          "remote_reduction_percent": 24.468166174451135,
+          "native_expert_copies": 7,
+          "expert_copies": 55,
+          "history_iterations": 29,
+          "full_candidates": 958,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 29.048225980207377
+        },
+        {
+          "layer": 2,
+          "timings": {
+            "native": {
+              "cuda_us": 68.72639954090118,
+              "rank_medians_cuda_us": [
+                66.52160286903381,
+                68.72639954090118,
+                68.61119866371155,
+                68.54079961776732,
+                68.50879788398743,
+                68.34560036659241,
+                68.28159987926483,
+                68.38079988956451
+              ],
+              "host_us": 75.30939765274525,
+              "rank_medians_host_us": [
+                73.33168759942055,
+                75.30939765274525,
+                75.23884996771812,
+                75.14157332479954,
+                75.09798742830753,
+                74.75493475794792,
+                74.64033551514149,
+                74.97980259358883
+              ]
+            },
+            "sampled": {
+              "cuda_us": 858.7071895599365,
+              "rank_medians_cuda_us": [
+                857.151985168457,
+                858.4416389465332,
+                858.7071895599365,
+                858.4383964538573,
+                858.5343837738037,
+                858.7071895599365,
+                858.2399845123292,
+                858.5760116577148
+              ],
+              "host_us": 865.5996061861515,
+              "rank_medians_host_us": [
+                864.1697000712156,
+                865.474296733737,
+                865.5996061861515,
+                865.584472194314,
+                865.4824923723936,
+                865.5394427478313,
+                865.0926873087883,
+                865.43969810009
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 635585,
+          "remote_token_destinations": 465156,
+          "remote_reduction_percent": 26.81450946765578,
+          "native_expert_copies": 7,
+          "expert_copies": 52,
+          "history_iterations": 29,
+          "full_candidates": 963,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 25.571655595770505
+        },
+        {
+          "layer": 3,
+          "timings": {
+            "native": {
+              "cuda_us": 68.54400038719177,
+              "rank_medians_cuda_us": [
+                66.32960140705107,
+                68.54400038719177,
+                68.50880086421967,
+                68.23360025882721,
+                68.35519969463348,
+                68.121600151062,
+                67.9967999458313,
+                68.17280054092406
+              ],
+              "host_us": 75.40727965533733,
+              "rank_medians_host_us": [
+                73.25597107410431,
+                75.40727965533733,
+                74.87102411687374,
+                74.96061734855175,
+                74.8694408684969,
+                74.51451383531094,
+                74.742641299963,
+                74.76485334336758
+              ]
+            },
+            "sampled": {
+              "cuda_us": 840.4351711273193,
+              "rank_medians_cuda_us": [
+                838.4160041809082,
+                840.1343822479248,
+                840.3584003448486,
+                840.4160022735596,
+                839.840030670166,
+                839.7823810577393,
+                840.2175903320312,
+                840.4351711273193
+              ],
+              "host_us": 847.1999783068895,
+              "rank_medians_host_us": [
+                845.4215247184038,
+                847.0334112644196,
+                847.0953907817602,
+                847.1999783068895,
+                846.3853038847446,
+                846.5551305562258,
+                846.9052612781525,
+                847.0169268548489
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 623501,
+          "remote_token_destinations": 476656,
+          "remote_reduction_percent": 23.551686364576796,
+          "native_expert_copies": 10,
+          "expert_copies": 50,
+          "history_iterations": 26,
+          "full_candidates": 922,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 26.556618606940386
+        },
+        {
+          "layer": 4,
+          "timings": {
+            "native": {
+              "cuda_us": 67.4656003713608,
+              "rank_medians_cuda_us": [
+                65.3408020734787,
+                67.36960113048553,
+                67.07839965820312,
+                67.06880033016205,
+                67.20640063285826,
+                66.95039868354797,
+                67.21920073032379,
+                67.4656003713608
+              ],
+              "host_us": 74.06738586723804,
+              "rank_medians_host_us": [
+                72.2183845937252,
+                74.06738586723804,
+                73.74519482254982,
+                73.92419502139091,
+                73.83506745100021,
+                73.56894202530384,
+                73.7976748496294,
+                74.0125309675932
+              ]
+            },
+            "sampled": {
+              "cuda_us": 878.3200263977051,
+              "rank_medians_cuda_us": [
+                876.0543823242188,
+                878.0928134918213,
+                878.3200263977051,
+                878.0447959899902,
+                877.8496265411377,
+                877.40159034729,
+                877.945566177368,
+                877.9039859771729
+              ],
+              "host_us": 884.9672041833401,
+              "rank_medians_host_us": [
+                883.1888437271118,
+                884.8588448017836,
+                884.9672041833401,
+                884.8499041050673,
+                884.6771903336048,
+                884.3610063195229,
+                884.5596108585596,
+                884.5925331115723
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 634668,
+          "remote_token_destinations": 483420,
+          "remote_reduction_percent": 23.831042371759725,
+          "native_expert_copies": 8,
+          "expert_copies": 56,
+          "history_iterations": 32,
+          "full_candidates": 941,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 26.105538156528386
+        },
+        {
+          "layer": 5,
+          "timings": {
+            "native": {
+              "cuda_us": 67.9040014743805,
+              "rank_medians_cuda_us": [
+                65.54560065269472,
+                67.9040014743805,
+                67.69599914550781,
+                67.40480065345764,
+                67.55520105361938,
+                67.46240258216858,
+                67.33439862728119,
+                66.80639982223511
+              ],
+              "host_us": 74.33420978486538,
+              "rank_medians_host_us": [
+                72.40250706672668,
+                74.33420978486538,
+                74.14435967803001,
+                74.00056347250938,
+                73.92014376819134,
+                73.90081882476807,
+                73.72107356786728,
+                73.68996739387512
+              ]
+            },
+            "sampled": {
+              "cuda_us": 877.2416114807129,
+              "rank_medians_cuda_us": [
+                875.4240036010742,
+                877.2416114807129,
+                877.2063732147217,
+                877.0527839660645,
+                876.4736175537109,
+                877.1136283874512,
+                876.3743877410889,
+                875.8848190307617
+              ],
+              "host_us": 883.9388843625784,
+              "rank_medians_host_us": [
+                882.2488598525524,
+                883.9388843625784,
+                883.8198147714138,
+                883.6903609335423,
+                883.6471941322088,
+                883.5726883262396,
+                883.1452112644911,
+                883.6426306515932
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 625260,
+          "remote_token_destinations": 487250,
+          "remote_reduction_percent": 22.07241787416435,
+          "native_expert_copies": 9,
+          "expert_copies": 50,
+          "history_iterations": 32,
+          "full_candidates": 960,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 27.14176844267524
+        },
+        {
+          "layer": 6,
+          "timings": {
+            "native": {
+              "cuda_us": 67.85919964313507,
+              "rank_medians_cuda_us": [
+                65.25120139122009,
+                67.85919964313507,
+                67.24799871444702,
+                67.61280000209808,
+                67.77600049972534,
+                67.79839992523193,
+                67.0527994632721,
+                66.39359891414642
+              ],
+              "host_us": 74.28638637065887,
+              "rank_medians_host_us": [
+                72.11859337985516,
+                74.28638637065887,
+                73.85876961052418,
+                74.11162368953228,
+                74.11250844597816,
+                74.06994700431824,
+                73.53131659328938,
+                73.288194835186
+              ]
+            },
+            "sampled": {
+              "cuda_us": 869.1135883331298,
+              "rank_medians_cuda_us": [
+                866.425609588623,
+                868.5760021209717,
+                869.1135883331298,
+                868.8032150268555,
+                868.179178237915,
+                867.9967880249025,
+                868.3167934417723,
+                867.3408031463623
+              ],
+              "host_us": 875.7479023188353,
+              "rank_medians_host_us": [
+                873.525021597743,
+                875.4658047109842,
+                875.7479023188353,
+                875.7308125495911,
+                875.1197252422571,
+                875.1362096518278,
+                875.1701097935438,
+                875.186501070857
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 635436,
+          "remote_token_destinations": 479503,
+          "remote_reduction_percent": 24.53952876450185,
+          "native_expert_copies": 9,
+          "expert_copies": 57,
+          "history_iterations": 31,
+          "full_candidates": 996,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 26.42137741350643
+        },
+        {
+          "layer": 7,
+          "timings": {
+            "native": {
+              "cuda_us": 67.56480038166046,
+              "rank_medians_cuda_us": [
+                65.01120030879974,
+                67.56480038166046,
+                67.0559972524643,
+                66.975998878479,
+                67.15200245380402,
+                67.27359890937805,
+                67.27359890937807,
+                66.12479984760284
+              ],
+              "host_us": 74.20633919537067,
+              "rank_medians_host_us": [
+                72.06844165921211,
+                74.20633919537067,
+                73.76340217888355,
+                74.01821203529835,
+                73.59227165579796,
+                73.80242459475994,
+                73.56773130595684,
+                73.20852018892765
+              ]
+            },
+            "sampled": {
+              "cuda_us": 855.7024002075195,
+              "rank_medians_cuda_us": [
+                854.150390625,
+                855.452823638916,
+                855.628776550293,
+                855.2735805511475,
+                855.5808067321777,
+                855.7024002075195,
+                855.4975986480713,
+                854.7103881835938
+              ],
+              "host_us": 862.5361137092113,
+              "rank_medians_host_us": [
+                861.3318204879761,
+                862.4292444437742,
+                862.2810244560242,
+                862.4070324003696,
+                862.4518290162086,
+                862.2646331787109,
+                862.4086622148752,
+                862.5361137092113
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 635193,
+          "remote_token_destinations": 476261,
+          "remote_reduction_percent": 25.021056592248335,
+          "native_expert_copies": 10,
+          "expert_copies": 53,
+          "history_iterations": 28,
+          "full_candidates": 960,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 27.113914712229793
+        }
+      ],
+      "mean_cuda_us": 868.2979941368103,
+      "mean_host_us": 874.8919412028044,
+      "native_mean_cuda_us": 69.89480033516884,
+      "latency_change_vs_bracketing_baseline_percent": 26.588371120367206,
+      "latency_change_vs_before_percent": 26.534209999179126,
+      "latency_change_vs_after_percent": 26.642578627164305
+    },
+    "fused32_03": {
+      "sm_limit": 32,
+      "fuse": true,
+      "layers": [
+        {
+          "layer": 0,
+          "timings": {
+            "native": {
+              "cuda_us": 79.39519882202148,
+              "rank_medians_cuda_us": [
+                77.98080146312714,
+                79.39519882202148,
+                79.0912002325058,
+                79.00480031967163,
+                78.53119969367981,
+                78.5696029663086,
+                78.53440046310425,
+                78.53440046310425
+              ],
+              "host_us": 84.67850275337696,
+              "rank_medians_host_us": [
+                83.80971848964691,
+                84.67850275337696,
+                84.55067873001099,
+                84.49233137071133,
+                84.3629240989685,
+                84.15039628744125,
+                84.17493663728237,
+                84.10480804741383
+              ]
+            },
+            "sampled": {
+              "cuda_us": 921.5487957000732,
+              "rank_medians_cuda_us": [
+                919.9967861175537,
+                920.8576202392578,
+                921.5487957000732,
+                921.3535785675049,
+                920.2623844146729,
+                920.7647800445557,
+                920.4288005828857,
+                920.2303886413574
+              ],
+              "host_us": 926.9298519939184,
+              "rank_medians_host_us": [
+                925.9448386728764,
+                926.5819564461708,
+                926.9298519939184,
+                926.8506895750761,
+                926.5710134059191,
+                926.3570886105299,
+                926.4376014471054,
+                926.2138977646828
+              ]
+            }
+          },
+          "traces": [
+            {
+              "rank": 0,
+              "path": "fused32_traces_03/rank0_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 32,
+              "max_simultaneous_launched_blocks": 32,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 1,
+              "path": "fused32_traces_03/rank1_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 32,
+              "max_simultaneous_launched_blocks": 32,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 2,
+              "path": "fused32_traces_03/rank2_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 32,
+              "max_simultaneous_launched_blocks": 32,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 3,
+              "path": "fused32_traces_03/rank3_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 32,
+              "max_simultaneous_launched_blocks": 32,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 4,
+              "path": "fused32_traces_03/rank4_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 32,
+              "max_simultaneous_launched_blocks": 32,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 5,
+              "path": "fused32_traces_03/rank5_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 32,
+              "max_simultaneous_launched_blocks": 32,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 6,
+              "path": "fused32_traces_03/rank6_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 32,
+              "max_simultaneous_launched_blocks": 32,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 7,
+              "path": "fused32_traces_03/rank7_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 32,
+              "max_simultaneous_launched_blocks": 32,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            }
+          ],
+          "native_remote_token_destinations": 621511,
+          "remote_token_destinations": 533736,
+          "remote_reduction_percent": 14.122839338322246,
+          "native_expert_copies": 11,
+          "expert_copies": 61,
+          "history_iterations": 30,
+          "full_candidates": 1026,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 30.778172520519863
+        },
+        {
+          "layer": 1,
+          "timings": {
+            "native": {
+              "cuda_us": 72.42240011692047,
+              "rank_medians_cuda_us": [
+                69.77600157260895,
+                72.42240011692047,
+                72.26559817790985,
+                72.31360077857971,
+                71.40159904956818,
+                71.49119973182678,
+                71.42079770565033,
+                71.4816004037857
+              ],
+              "host_us": 79.0757592767477,
+              "rank_medians_host_us": [
+                76.64444856345654,
+                79.0757592767477,
+                78.84800434112549,
+                78.94928567111492,
+                78.36571894586086,
+                78.31952534615993,
+                78.34229618310928,
+                78.40157486498356
+              ]
+            },
+            "sampled": {
+              "cuda_us": 914.2303943634033,
+              "rank_medians_cuda_us": [
+                911.9807720184326,
+                914.1312122344971,
+                914.137601852417,
+                914.2303943634033,
+                913.6192321777344,
+                913.4079933166504,
+                913.1231784820557,
+                913.5039806365968
+              ],
+              "host_us": 921.0541844367981,
+              "rank_medians_host_us": [
+                918.838381767273,
+                920.9750220179558,
+                920.8942763507366,
+                921.0541844367981,
+                920.703774318099,
+                920.7384660840034,
+                920.3682653605938,
+                920.3723631799221
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 643011,
+          "remote_token_destinations": 485678,
+          "remote_reduction_percent": 24.468166174451135,
+          "native_expert_copies": 7,
+          "expert_copies": 55,
+          "history_iterations": 29,
+          "full_candidates": 958,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 32.94446920946781
+        },
+        {
+          "layer": 2,
+          "timings": {
+            "native": {
+              "cuda_us": 69.30879950523376,
+              "rank_medians_cuda_us": [
+                66.47680103778839,
+                68.8832014799118,
+                68.87679994106294,
+                69.30879950523376,
+                68.45120191574097,
+                68.12160015106201,
+                68.4799998998642,
+                68.26239824295044
+              ],
+              "host_us": 75.68597793579102,
+              "rank_medians_host_us": [
+                73.32987152040005,
+                75.57650096714497,
+                75.3507949411869,
+                75.68597793579102,
+                75.14208555221558,
+                74.85253736376762,
+                75.13598538935184,
+                75.00550709664822
+              ]
+            },
+            "sampled": {
+              "cuda_us": 882.3616027832031,
+              "rank_medians_cuda_us": [
+                879.5296192169188,
+                882.1919918060303,
+                882.3616027832031,
+                882.2527885437012,
+                881.7920207977295,
+                881.6704273223877,
+                881.7535877227782,
+                881.5040111541748
+              ],
+              "host_us": 889.3163874745369,
+              "rank_medians_host_us": [
+                886.8202101439238,
+                889.158807694912,
+                889.3163874745369,
+                889.1446050256491,
+                888.9706805348396,
+                889.0143595635891,
+                888.9535907655954,
+                888.6773139238358
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 635585,
+          "remote_token_destinations": 465156,
+          "remote_reduction_percent": 26.81450946765578,
+          "native_expert_copies": 7,
+          "expert_copies": 52,
+          "history_iterations": 29,
+          "full_candidates": 963,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 29.030720416357703
+        },
+        {
+          "layer": 3,
+          "timings": {
+            "native": {
+              "cuda_us": 68.2528018951416,
+              "rank_medians_cuda_us": [
+                66.04480147361755,
+                68.2528018951416,
+                68.19840073585509,
+                67.98399984836578,
+                67.95839965343475,
+                67.53599941730499,
+                67.30879843235016,
+                67.47519969940186
+              ],
+              "host_us": 74.76788014173508,
+              "rank_medians_host_us": [
+                72.78230041265488,
+                74.76788014173508,
+                74.55199956893921,
+                74.63176734745502,
+                74.52624849975109,
+                74.31614212691784,
+                74.31250996887684,
+                74.26338270306587
+              ]
+            },
+            "sampled": {
+              "cuda_us": 872.2719669342041,
+              "rank_medians_cuda_us": [
+                870.3455924987793,
+                871.9200134277343,
+                872.1632003784179,
+                872.2719669342041,
+                871.9456195831299,
+                871.4687824249268,
+                871.8208312988281,
+                871.4463710784912
+              ],
+              "host_us": 879.0633641183376,
+              "rank_medians_host_us": [
+                877.4318732321262,
+                879.0453895926476,
+                878.9266925305128,
+                879.0633641183376,
+                878.6753751337528,
+                878.7152823060751,
+                878.8702078163624,
+                878.599239513278
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 623501,
+          "remote_token_destinations": 476656,
+          "remote_reduction_percent": 23.551686364576796,
+          "native_expert_copies": 10,
+          "expert_copies": 50,
+          "history_iterations": 26,
+          "full_candidates": 922,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 31.350750698288298
+        },
+        {
+          "layer": 4,
+          "timings": {
+            "native": {
+              "cuda_us": 68.70720088481902,
+              "rank_medians_cuda_us": [
+                65.8048003911972,
+                68.52479875087738,
+                68.18560063838959,
+                68.70720088481902,
+                67.92960166931152,
+                67.98399984836578,
+                67.6831990480423,
+                68.16959977149963
+              ],
+              "host_us": 75.3314234316349,
+              "rank_medians_host_us": [
+                73.04488681256771,
+                75.32690651714802,
+                74.62417706847191,
+                75.3314234316349,
+                74.69486445188522,
+                74.88592527806759,
+                74.55958984792233,
+                74.9506987631321
+              ]
+            },
+            "sampled": {
+              "cuda_us": 911.8112087249756,
+              "rank_medians_cuda_us": [
+                909.827184677124,
+                911.4367961883545,
+                911.7184162139893,
+                911.8112087249756,
+                910.5663776397705,
+                910.9792232513428,
+                911.1776351928711,
+                911.1583709716797
+              ],
+              "host_us": 918.2978887110949,
+              "rank_medians_host_us": [
+                916.7916607111692,
+                918.224873021245,
+                918.2746522128582,
+                918.2978887110949,
+                917.5064042210579,
+                917.8515989333391,
+                917.9302025586367,
+                917.9653599858284
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 634668,
+          "remote_token_destinations": 483420,
+          "remote_reduction_percent": 23.831042371759725,
+          "native_expert_copies": 8,
+          "expert_copies": 56,
+          "history_iterations": 32,
+          "full_candidates": 941,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 30.9140628900479
+        },
+        {
+          "layer": 5,
+          "timings": {
+            "native": {
+              "cuda_us": 67.83680021762848,
+              "rank_medians_cuda_us": [
+                65.25119841098785,
+                67.83680021762848,
+                67.44640171527863,
+                67.83359944820405,
+                67.51999855041504,
+                67.14879870414734,
+                67.00800061225891,
+                67.14560091495514
+              ],
+              "host_us": 74.24857467412949,
+              "rank_medians_host_us": [
+                72.17959500849247,
+                74.18133318424225,
+                74.07409138977528,
+                74.24857467412949,
+                73.95693100988865,
+                73.8454982638359,
+                73.84349592030048,
+                73.88428784906864
+              ]
+            },
+            "sampled": {
+              "cuda_us": 893.4463977813721,
+              "rank_medians_cuda_us": [
+                891.875171661377,
+                893.4463977813721,
+                893.3440208435059,
+                893.395185470581,
+                892.848014831543,
+                892.8575992584229,
+                892.9311752319336,
+                892.9983615875244
+              ],
+              "host_us": 900.3525599837303,
+              "rank_medians_host_us": [
+                898.8526649773121,
+                900.0204503536224,
+                899.9272715300322,
+                899.9199606478214,
+                899.6307384222746,
+                900.3525599837303,
+                899.7452445328236,
+                899.7197728604078
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 625260,
+          "remote_token_destinations": 487250,
+          "remote_reduction_percent": 22.07241787416435,
+          "native_expert_copies": 9,
+          "expert_copies": 50,
+          "history_iterations": 32,
+          "full_candidates": 960,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 29.490386155900005
+        },
+        {
+          "layer": 6,
+          "timings": {
+            "native": {
+              "cuda_us": 67.64799952507019,
+              "rank_medians_cuda_us": [
+                65.0079995393753,
+                67.64799952507019,
+                67.5711989402771,
+                67.45280027389528,
+                66.85439944267273,
+                66.86719954013824,
+                66.5472000837326,
+                66.51199758052826
+              ],
+              "host_us": 74.1665717214346,
+              "rank_medians_host_us": [
+                71.81558758020401,
+                74.03409108519554,
+                74.1665717214346,
+                74.13309067487717,
+                73.5193956643343,
+                73.6101996153593,
+                73.67981597781181,
+                73.4883826225996
+              ]
+            },
+            "sampled": {
+              "cuda_us": 881.8975925445556,
+              "rank_medians_cuda_us": [
+                879.4751644134521,
+                881.8975925445556,
+                881.606388092041,
+                881.7663669586182,
+                881.446361541748,
+                881.1071872711182,
+                881.174373626709,
+                880.9855937957764
+              ],
+              "host_us": 888.5526098310947,
+              "rank_medians_host_us": [
+                886.4247240126133,
+                888.5526098310947,
+                888.3175905793905,
+                888.4922601282597,
+                888.3378934115171,
+                888.0281355232,
+                888.2354013621807,
+                888.0244567990303
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 635436,
+          "remote_token_destinations": 479503,
+          "remote_reduction_percent": 24.53952876450185,
+          "native_expert_copies": 9,
+          "expert_copies": 57,
+          "history_iterations": 31,
+          "full_candidates": 996,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 28.280940355524354
+        },
+        {
+          "layer": 7,
+          "timings": {
+            "native": {
+              "cuda_us": 67.32160151004791,
+              "rank_medians_cuda_us": [
+                64.7487998008728,
+                67.29280054569244,
+                67.32160151004791,
+                67.20960140228271,
+                66.76480174064636,
+                66.5823996067047,
+                66.59840047359467,
+                66.57599806785583
+              ],
+              "host_us": 73.8206785172224,
+              "rank_medians_host_us": [
+                71.63411937654018,
+                73.8206785172224,
+                73.70314560830593,
+                73.7935770303011,
+                73.48861545324326,
+                73.41066375374794,
+                73.54384288191795,
+                73.29629734158516
+              ]
+            },
+            "sampled": {
+              "cuda_us": 886.5664005279541,
+              "rank_medians_cuda_us": [
+                883.8335990905762,
+                885.9776020050049,
+                886.0383987426758,
+                886.5664005279541,
+                885.8047962188721,
+                885.1776123046875,
+                885.6159687042236,
+                885.8111858367921
+              ],
+              "host_us": 893.1315038353205,
+              "rank_medians_host_us": [
+                890.9848518669605,
+                893.1315038353205,
+                892.9208852350712,
+                893.0932264775038,
+                892.8179740905762,
+                892.2036737203598,
+                892.6678914576769,
+                892.5278205424547
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 635193,
+          "remote_token_destinations": 476261,
+          "remote_reduction_percent": 25.021056592248335,
+          "native_expert_copies": 10,
+          "expert_copies": 53,
+          "history_iterations": 28,
+          "full_candidates": 960,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 31.698737547199652
+        }
+      ],
+      "mean_cuda_us": 895.5167949199677,
+      "mean_host_us": 902.0872937981039,
+      "native_mean_cuda_us": 70.11160030961037,
+      "latency_change_vs_bracketing_baseline_percent": 30.556575214187532,
+      "latency_change_vs_before_percent": 30.50071628789364,
+      "latency_change_vs_after_percent": 30.612481980154204
+    },
+    "fused48_03": {
+      "sm_limit": 48,
+      "fuse": true,
+      "layers": [
+        {
+          "layer": 0,
+          "timings": {
+            "native": {
+              "cuda_us": 79.4975996017456,
+              "rank_medians_cuda_us": [
+                78.3071994781494,
+                79.4975996017456,
+                78.81599962711334,
+                79.0719985961914,
+                79.33759987354279,
+                78.90560030937193,
+                78.9471983909607,
+                78.59520018100739
+              ],
+              "host_us": 84.9646981805563,
+              "rank_medians_host_us": [
+                84.02201347053051,
+                84.9646981805563,
+                84.57601070404053,
+                84.65559221804142,
+                84.72837507724762,
+                84.57540534436703,
+                84.41358804702759,
+                84.09707807004452
+              ]
+            },
+            "sampled": {
+              "cuda_us": 811.4783763885498,
+              "rank_medians_cuda_us": [
+                810.7200145721436,
+                811.4783763885498,
+                811.3728046417236,
+                811.2319946289061,
+                811.3151550292969,
+                811.2800121307373,
+                811.0783576965332,
+                810.755205154419
+              ],
+              "host_us": 816.9692475348711,
+              "rank_medians_host_us": [
+                816.5046107023954,
+                816.8495260179043,
+                816.8885018676519,
+                816.8276865035295,
+                816.6784886270761,
+                816.6456129401922,
+                816.9692475348711,
+                816.2947837263346
+              ]
+            }
+          },
+          "traces": [
+            {
+              "rank": 0,
+              "path": "fused48_traces_03/rank0_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 48,
+              "max_simultaneous_launched_blocks": 48,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 1,
+              "path": "fused48_traces_03/rank1_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 48,
+              "max_simultaneous_launched_blocks": 48,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 2,
+              "path": "fused48_traces_03/rank2_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 48,
+              "max_simultaneous_launched_blocks": 48,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 3,
+              "path": "fused48_traces_03/rank3_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 48,
+              "max_simultaneous_launched_blocks": 48,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 4,
+              "path": "fused48_traces_03/rank4_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 48,
+              "max_simultaneous_launched_blocks": 48,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 5,
+              "path": "fused48_traces_03/rank5_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 48,
+              "max_simultaneous_launched_blocks": 48,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 6,
+              "path": "fused48_traces_03/rank6_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 48,
+              "max_simultaneous_launched_blocks": 48,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 7,
+              "path": "fused48_traces_03/rank7_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 48,
+              "max_simultaneous_launched_blocks": 48,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            }
+          ],
+          "native_remote_token_destinations": 621511,
+          "remote_token_destinations": 533736,
+          "remote_reduction_percent": 14.122839338322246,
+          "native_expert_copies": 11,
+          "expert_copies": 61,
+          "history_iterations": 30,
+          "full_candidates": 1026,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 15.157938026921425
+        },
+        {
+          "layer": 1,
+          "timings": {
+            "native": {
+              "cuda_us": 77.24480032920837,
+              "rank_medians_cuda_us": [
+                70.5024003982544,
+                77.24480032920837,
+                76.14720165729523,
+                76.25920176506042,
+                77.18400061130524,
+                76.56639814376831,
+                76.27840042114258,
+                76.12159848213196
+              ],
+              "host_us": 83.94839242100716,
+              "rank_medians_host_us": [
+                79.0182501077652,
+                83.94839242100716,
+                83.11462588608265,
+                83.32831785082817,
+                83.85307155549526,
+                83.3150465041399,
+                83.49590934813023,
+                82.82135240733624
+              ]
+            },
+            "sampled": {
+              "cuda_us": 825.4176139831543,
+              "rank_medians_cuda_us": [
+                821.2287902832031,
+                825.4176139831543,
+                824.8991966247559,
+                824.8160362243652,
+                825.3504276275635,
+                824.8512268066406,
+                824.6816158294678,
+                824.6943950653076
+              ],
+              "host_us": 832.2850801050663,
+              "rank_medians_host_us": [
+                829.0233090519905,
+                832.2850801050663,
+                831.8142965435982,
+                831.7578118294477,
+                832.0401888340712,
+                831.8419102579355,
+                831.7667990922928,
+                831.5689861774445
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 643011,
+          "remote_token_destinations": 485678,
+          "remote_reduction_percent": 24.468166174451135,
+          "native_expert_copies": 7,
+          "expert_copies": 55,
+          "history_iterations": 29,
+          "full_candidates": 958,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 20.029597838459836
+        },
+        {
+          "layer": 2,
+          "timings": {
+            "native": {
+              "cuda_us": 69.11679804325104,
+              "rank_medians_cuda_us": [
+                66.6047990322113,
+                69.11679804325104,
+                68.75199973583221,
+                68.81279945373535,
+                68.84480118751526,
+                68.63680183887482,
+                68.58240067958832,
+                68.54720115661621
+              ],
+              "host_us": 75.75857453048229,
+              "rank_medians_host_us": [
+                73.63143377006054,
+                75.75857453048229,
+                75.46050474047661,
+                75.39652287960052,
+                75.32383315265179,
+                75.11121220886707,
+                75.19731298089027,
+                75.06776601076126
+              ]
+            },
+            "sampled": {
+              "cuda_us": 802.2527694702148,
+              "rank_medians_cuda_us": [
+                799.2223978042603,
+                802.2527694702148,
+                801.5968322753906,
+                801.2287616729736,
+                801.584005355835,
+                800.5472183227539,
+                801.2768268585205,
+                800.4640102386475
+              ],
+              "host_us": 809.0392220765352,
+              "rank_medians_host_us": [
+                806.6593203693628,
+                809.0392220765352,
+                808.7096270173788,
+                808.4310684353113,
+                808.444619178772,
+                807.6833561062813,
+                808.398611843586,
+                807.6236583292484
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 635585,
+          "remote_token_destinations": 465156,
+          "remote_reduction_percent": 26.81450946765578,
+          "native_expert_copies": 7,
+          "expert_copies": 52,
+          "history_iterations": 29,
+          "full_candidates": 963,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 17.31613487514112
+        },
+        {
+          "layer": 3,
+          "timings": {
+            "native": {
+              "cuda_us": 68.75199973583221,
+              "rank_medians_cuda_us": [
+                66.40639901161194,
+                68.40640008449554,
+                68.55359971523285,
+                68.05439889431,
+                68.75199973583221,
+                68.2752013206482,
+                68.23039948940277,
+                68.29439997673035
+              ],
+              "host_us": 75.08490234613419,
+              "rank_medians_host_us": [
+                73.21625016629696,
+                75.01477375626564,
+                75.06688125431538,
+                75.08490234613419,
+                75.07340051233768,
+                75.00550709664822,
+                74.97980259358883,
+                74.70324635505676
+              ]
+            },
+            "sampled": {
+              "cuda_us": 788.9055967330933,
+              "rank_medians_cuda_us": [
+                786.5152120590211,
+                788.9055967330933,
+                788.3647918701172,
+                788.2528066635132,
+                788.0511999130249,
+                787.7088069915771,
+                787.4655961990356,
+                787.8687858581543
+              ],
+              "host_us": 795.7377471029758,
+              "rank_medians_host_us": [
+                793.768186122179,
+                795.7377471029758,
+                795.514415949583,
+                795.3972555696964,
+                795.060396194458,
+                795.0965780764818,
+                795.232504606247,
+                794.7828155010939
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 623501,
+          "remote_token_destinations": 476656,
+          "remote_reduction_percent": 23.551686364576796,
+          "native_expert_copies": 10,
+          "expert_copies": 50,
+          "history_iterations": 26,
+          "full_candidates": 922,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 18.797056754191498
+        },
+        {
+          "layer": 4,
+          "timings": {
+            "native": {
+              "cuda_us": 71.2224006652832,
+              "rank_medians_cuda_us": [
+                65.92960059642792,
+                71.10400199890137,
+                70.48960030078888,
+                68.84799897670746,
+                71.2224006652832,
+                68.71040165424347,
+                70.23360133171082,
+                68.87359917163849
+              ],
+              "host_us": 78.72255519032478,
+              "rank_medians_host_us": [
+                74.88210685551167,
+                77.88660004734993,
+                77.25758478045464,
+                76.90605707466602,
+                77.81791500747204,
+                77.36291736364365,
+                78.72255519032478,
+                75.59382356703281
+              ]
+            },
+            "sampled": {
+              "cuda_us": 836.5695953369141,
+              "rank_medians_cuda_us": [
+                834.8383903503418,
+                836.5567684173584,
+                835.9871864318848,
+                836.089563369751,
+                836.5695953369141,
+                835.9488010406494,
+                835.916805267334,
+                835.7343673706055
+              ],
+              "host_us": 843.6733391135931,
+              "rank_medians_host_us": [
+                841.9072721153498,
+                843.6733391135931,
+                843.2111237198114,
+                843.2427886873484,
+                843.3634880930185,
+                843.2357106357813,
+                843.1089110672474,
+                842.7347522228956
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 634668,
+          "remote_token_destinations": 483420,
+          "remote_reduction_percent": 23.831042371759725,
+          "native_expert_copies": 8,
+          "expert_copies": 56,
+          "history_iterations": 32,
+          "full_candidates": 941,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 20.11118482408587
+        },
+        {
+          "layer": 5,
+          "timings": {
+            "native": {
+              "cuda_us": 67.86879897117615,
+              "rank_medians_cuda_us": [
+                65.28320014476776,
+                67.86879897117615,
+                67.4560010433197,
+                67.38240122795105,
+                67.41439998149873,
+                67.52000153064728,
+                67.07839965820312,
+                66.86079800128935
+              ],
+              "host_us": 74.43861104547977,
+              "rank_medians_host_us": [
+                72.13340140879154,
+                74.43861104547977,
+                74.19902831315994,
+                74.19642060995102,
+                74.04210045933723,
+                74.10449907183647,
+                73.89881648123264,
+                73.55059497058392
+              ]
+            },
+            "sampled": {
+              "cuda_us": 809.935998916626,
+              "rank_medians_cuda_us": [
+                807.587194442749,
+                809.9232196807861,
+                809.2576026916505,
+                809.6928119659424,
+                809.935998916626,
+                809.3535900115967,
+                809.3408107757568,
+                809.3215942382812
+              ],
+              "host_us": 816.743727773428,
+              "rank_medians_host_us": [
+                814.7646207362413,
+                816.7360443621874,
+                816.3057267665863,
+                816.743727773428,
+                816.6287560015917,
+                816.3067977875471,
+                816.502096131444,
+                816.0238619893789
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 625260,
+          "remote_token_destinations": 487250,
+          "remote_reduction_percent": 22.07241787416435,
+          "native_expert_copies": 9,
+          "expert_copies": 50,
+          "history_iterations": 32,
+          "full_candidates": 960,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 17.38692497022365
+        },
+        {
+          "layer": 6,
+          "timings": {
+            "native": {
+              "cuda_us": 67.98720061779022,
+              "rank_medians_cuda_us": [
+                65.18400013446806,
+                67.98720061779022,
+                67.77600049972534,
+                67.53279864788055,
+                67.55199730396271,
+                67.66720116138458,
+                67.02080070972444,
+                66.7360007762909
+              ],
+              "host_us": 74.65207017958164,
+              "rank_medians_host_us": [
+                72.14490324258804,
+                74.65207017958164,
+                74.30887781083584,
+                74.14929568767548,
+                73.95544089376926,
+                74.0936491638422,
+                73.71455430984497,
+                73.50342348217964
+              ]
+            },
+            "sampled": {
+              "cuda_us": 802.4032115936279,
+              "rank_medians_cuda_us": [
+                799.6512174606323,
+                802.4032115936279,
+                801.907205581665,
+                802.0415782928467,
+                802.0415782928467,
+                801.801586151123,
+                801.5168190002441,
+                801.5264034271241
+              ],
+              "host_us": 809.087511152029,
+              "rank_medians_host_us": [
+                806.8564813584089,
+                809.087511152029,
+                808.7313733994961,
+                808.9141920208931,
+                808.6840156465769,
+                808.5104636847973,
+                808.3952125161886,
+                808.2072716206312
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 635436,
+          "remote_token_destinations": 479503,
+          "remote_reduction_percent": 24.53952876450185,
+          "native_expert_copies": 9,
+          "expert_copies": 57,
+          "history_iterations": 31,
+          "full_candidates": 996,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 16.717677197109417
+        },
+        {
+          "layer": 7,
+          "timings": {
+            "native": {
+              "cuda_us": 67.84639954566956,
+              "rank_medians_cuda_us": [
+                64.94080126285553,
+                67.84639954566956,
+                67.43679940700531,
+                66.94080233573914,
+                67.38559901714325,
+                67.43679940700531,
+                67.10079908370972,
+                66.83840155601501
+              ],
+              "host_us": 74.27181117236614,
+              "rank_medians_host_us": [
+                71.89717143774033,
+                74.27181117236614,
+                74.08200763165951,
+                73.89029487967491,
+                73.8267321139574,
+                73.9256851375103,
+                73.8936010748148,
+                73.51157255470753
+              ]
+            },
+            "sampled": {
+              "cuda_us": 794.9984073638916,
+              "rank_medians_cuda_us": [
+                792.6399946212769,
+                794.9984073638916,
+                794.7808027267456,
+                794.5760011672974,
+                794.7648048400879,
+                794.598388671875,
+                793.9167976379395,
+                794.2816019058228
+              ],
+              "host_us": 801.8394932150841,
+              "rank_medians_host_us": [
+                799.8099084943533,
+                801.8394932150841,
+                801.5523198992014,
+                801.6964420676231,
+                801.5766274183989,
+                801.25592648983,
+                800.8961100131273,
+                801.058067008853
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 635193,
+          "remote_token_destinations": 476261,
+          "remote_reduction_percent": 25.021056592248335,
+          "native_expert_copies": 10,
+          "expert_copies": 53,
+          "history_iterations": 28,
+          "full_candidates": 960,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 18.096384590606405
+        }
+      ],
+      "mean_cuda_us": 808.995196223259,
+      "mean_host_us": 815.6719210091978,
+      "native_mean_cuda_us": 71.19199968874454,
+      "latency_change_vs_bracketing_baseline_percent": 17.942670403046467,
+      "latency_change_vs_before_percent": 17.89220836448473,
+      "latency_change_vs_after_percent": 17.99317565918459
+    },
+    "fused64_03": {
+      "sm_limit": 64,
+      "fuse": true,
+      "layers": [
+        {
+          "layer": 0,
+          "timings": {
+            "native": {
+              "cuda_us": 79.48479950428009,
+              "rank_medians_cuda_us": [
+                78.49920094013213,
+                79.48479950428009,
+                79.32800054550171,
+                79.22559976577759,
+                78.93120050430298,
+                78.889599442482,
+                79.1487991809845,
+                78.96320223808289
+              ],
+              "host_us": 85.20931005477905,
+              "rank_medians_host_us": [
+                84.41638201475143,
+                85.20931005477905,
+                84.8046038299799,
+                85.05177684128284,
+                84.57181975245476,
+                84.42639373242855,
+                84.61326360702515,
+                84.34955962002277
+              ]
+            },
+            "sampled": {
+              "cuda_us": 791.3056135177612,
+              "rank_medians_cuda_us": [
+                790.5152082443237,
+                791.0240173339844,
+                791.0400152206421,
+                791.3056135177612,
+                790.831995010376,
+                790.8416032791138,
+                790.7231807708741,
+                790.7903909683228
+              ],
+              "host_us": 796.9112135469913,
+              "rank_medians_host_us": [
+                796.5678349137306,
+                796.76010645926,
+                796.6462057083845,
+                796.9112135469913,
+                796.4387070387602,
+                796.4214310050011,
+                796.3883224874735,
+                796.3832933455706
+              ]
+            }
+          },
+          "traces": [
+            {
+              "rank": 0,
+              "path": "fused64_traces_03/rank0_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 64,
+              "max_simultaneous_launched_blocks": 64,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 1,
+              "path": "fused64_traces_03/rank1_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 64,
+              "max_simultaneous_launched_blocks": 64,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 2,
+              "path": "fused64_traces_03/rank2_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 64,
+              "max_simultaneous_launched_blocks": 64,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 3,
+              "path": "fused64_traces_03/rank3_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 64,
+              "max_simultaneous_launched_blocks": 64,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 4,
+              "path": "fused64_traces_03/rank4_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 64,
+              "max_simultaneous_launched_blocks": 64,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 5,
+              "path": "fused64_traces_03/rank5_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 64,
+              "max_simultaneous_launched_blocks": 64,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 6,
+              "path": "fused64_traces_03/rank6_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 64,
+              "max_simultaneous_launched_blocks": 64,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 7,
+              "path": "fused64_traces_03/rank7_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 64,
+              "max_simultaneous_launched_blocks": 64,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            }
+          ],
+          "native_remote_token_destinations": 621511,
+          "remote_token_destinations": 533736,
+          "remote_reduction_percent": 14.122839338322246,
+          "native_expert_copies": 11,
+          "expert_copies": 61,
+          "history_iterations": 30,
+          "full_candidates": 1026,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 12.29519535367276
+        },
+        {
+          "layer": 1,
+          "timings": {
+            "native": {
+              "cuda_us": 72.45759963989258,
+              "rank_medians_cuda_us": [
+                69.8144018650055,
+                72.1312016248703,
+                72.45759963989258,
+                72.33600020408632,
+                71.95840179920197,
+                71.50079905986786,
+                72.2815990447998,
+                71.8207985162735
+              ],
+              "host_us": 79.08809930086136,
+              "rank_medians_host_us": [
+                76.96561515331268,
+                79.02202196419239,
+                79.08809930086136,
+                79.01317439973354,
+                78.73233407735825,
+                78.4565694630146,
+                78.82118225097656,
+                78.34159769117832
+              ]
+            },
+            "sampled": {
+              "cuda_us": 792.0767784118652,
+              "rank_medians_cuda_us": [
+                789.8079872131348,
+                791.3632154464723,
+                792.0608043670654,
+                792.0767784118652,
+                791.3952112197876,
+                791.430401802063,
+                791.4911985397339,
+                791.7440176010131
+              ],
+              "host_us": 798.9840116351843,
+              "rank_medians_host_us": [
+                796.9543803483248,
+                798.5025644302368,
+                798.9840116351843,
+                798.8756988197565,
+                798.1622125953436,
+                798.3983960002661,
+                798.3486168086529,
+                798.2488721609116
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 643011,
+          "remote_token_destinations": 485678,
+          "remote_reduction_percent": 24.468166174451135,
+          "native_expert_copies": 7,
+          "expert_copies": 55,
+          "history_iterations": 29,
+          "full_candidates": 958,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 15.181279826552574
+        },
+        {
+          "layer": 2,
+          "timings": {
+            "native": {
+              "cuda_us": 69.1135972738266,
+              "rank_medians_cuda_us": [
+                66.71359837055208,
+                68.6495989561081,
+                69.1135972738266,
+                69.00799870491028,
+                68.34560036659241,
+                67.98720061779022,
+                68.4031993150711,
+                68.53120028972626
+              ],
+              "host_us": 75.62595419585705,
+              "rank_medians_host_us": [
+                73.56037385761738,
+                75.58371871709824,
+                75.62595419585705,
+                75.59298537671566,
+                74.90911521017551,
+                74.77854378521442,
+                75.06762631237507,
+                75.04615932703018
+              ]
+            },
+            "sampled": {
+              "cuda_us": 768.1983947753905,
+              "rank_medians_cuda_us": [
+                765.9999847412109,
+                767.7567958831788,
+                768.1535959243774,
+                767.8047895431519,
+                767.6223993301392,
+                767.4592018127441,
+                768.0511951446533,
+                768.1983947753905
+              ],
+              "host_us": 775.0082295387983,
+              "rank_medians_host_us": [
+                773.1501944363117,
+                774.7889030724764,
+                775.0082295387983,
+                774.8940028250217,
+                774.3529975414276,
+                774.4525093585253,
+                774.5783310383558,
+                774.7170049697161
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 635585,
+          "remote_token_destinations": 465156,
+          "remote_reduction_percent": 26.81450946765578,
+          "native_expert_copies": 7,
+          "expert_copies": 52,
+          "history_iterations": 29,
+          "full_candidates": 963,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 12.336248526571868
+        },
+        {
+          "layer": 3,
+          "timings": {
+            "native": {
+              "cuda_us": 68.76479983329773,
+              "rank_medians_cuda_us": [
+                66.09920263290405,
+                68.60800087451935,
+                68.70400011539459,
+                68.76479983329773,
+                68.07360053062439,
+                68.10559928417206,
+                68.43520104885101,
+                68.12480092048645
+              ],
+              "host_us": 75.36760531365871,
+              "rank_medians_host_us": [
+                73.05080071091652,
+                75.36760531365871,
+                75.33128373324871,
+                75.33221505582333,
+                74.76028986275196,
+                74.70338605344296,
+                74.99037310481071,
+                74.72792640328407
+              ]
+            },
+            "sampled": {
+              "cuda_us": 764.4063949584961,
+              "rank_medians_cuda_us": [
+                761.9616031646727,
+                763.484787940979,
+                764.1728162765503,
+                764.4063949584961,
+                763.8720035552979,
+                762.9440069198608,
+                763.8175964355469,
+                763.2384061813354
+              ],
+              "host_us": 770.9601428359747,
+              "rank_medians_host_us": [
+                768.8252720981836,
+                770.4721763730049,
+                770.8624936640263,
+                770.9601428359747,
+                770.3636772930622,
+                770.0073532760143,
+                770.436879247427,
+                770.3003939241171
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 623501,
+          "remote_token_destinations": 476656,
+          "remote_reduction_percent": 23.551686364576796,
+          "native_expert_copies": 10,
+          "expert_copies": 50,
+          "history_iterations": 26,
+          "full_candidates": 922,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 15.107853539381644
+        },
+        {
+          "layer": 4,
+          "timings": {
+            "native": {
+              "cuda_us": 68.15359890460968,
+              "rank_medians_cuda_us": [
+                65.5711978673935,
+                68.01599860191345,
+                67.80479848384857,
+                68.15359890460968,
+                67.6607996225357,
+                67.6576018333435,
+                67.81120002269745,
+                67.55839884281158
+              ],
+              "host_us": 74.65891540050507,
+              "rank_medians_host_us": [
+                72.49345071613789,
+                74.6424775570631,
+                74.39847104251385,
+                74.65891540050507,
+                74.06980730593204,
+                74.27460514008999,
+                74.22966882586479,
+                74.03912022709846
+              ]
+            },
+            "sampled": {
+              "cuda_us": 791.5072202682496,
+              "rank_medians_cuda_us": [
+                789.0432119369507,
+                790.457582473755,
+                791.5072202682496,
+                790.8479928970337,
+                790.7135963439941,
+                790.5535936355591,
+                790.5823945999146,
+                790.390396118164
+              ],
+              "host_us": 798.2991170138121,
+              "rank_medians_host_us": [
+                796.017050743103,
+                797.5167129188776,
+                798.2991170138121,
+                797.932967543602,
+                797.7048400789499,
+                797.6255845278502,
+                797.5555025041103,
+                797.1499115228653
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 634668,
+          "remote_token_destinations": 483420,
+          "remote_reduction_percent": 23.831042371759725,
+          "native_expert_copies": 8,
+          "expert_copies": 56,
+          "history_iterations": 32,
+          "full_candidates": 941,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 13.641316338960197
+        },
+        {
+          "layer": 5,
+          "timings": {
+            "native": {
+              "cuda_us": 67.6800012588501,
+              "rank_medians_cuda_us": [
+                65.30560255050659,
+                67.48799979686737,
+                67.6800012588501,
+                67.32480227947235,
+                67.33440160751343,
+                67.53279864788055,
+                67.58080124855043,
+                67.1072006225586
+              ],
+              "host_us": 74.53612051904202,
+              "rank_medians_host_us": [
+                72.40190170705318,
+                74.26701486110687,
+                74.53612051904202,
+                73.92391562461853,
+                73.99804890155792,
+                74.28377866744995,
+                74.16470907628536,
+                73.94528947770596
+              ]
+            },
+            "sampled": {
+              "cuda_us": 776.4032125473022,
+              "rank_medians_cuda_us": [
+                773.961615562439,
+                776.1312007904053,
+                776.2271881103516,
+                776.4032125473022,
+                775.8751869201661,
+                775.9232044219971,
+                775.9007930755615,
+                775.9456157684326
+              ],
+              "host_us": 783.3222392946482,
+              "rank_medians_host_us": [
+                781.0255978256464,
+                783.3222392946482,
+                783.1057067960501,
+                783.2262199372053,
+                782.77881257236,
+                782.8861940652132,
+                782.8934118151665,
+                782.878277823329
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 625260,
+          "remote_token_destinations": 487250,
+          "remote_reduction_percent": 22.07241787416435,
+          "native_expert_copies": 9,
+          "expert_copies": 50,
+          "history_iterations": 32,
+          "full_candidates": 960,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 12.526898149779097
+        },
+        {
+          "layer": 6,
+          "timings": {
+            "native": {
+              "cuda_us": 67.62560009956358,
+              "rank_medians_cuda_us": [
+                65.21919965744019,
+                67.27040112018584,
+                67.62560009956358,
+                67.14879870414734,
+                67.08800196647644,
+                66.90560281276703,
+                67.18080043792723,
+                67.23839938640594
+              ],
+              "host_us": 74.31497797369957,
+              "rank_medians_host_us": [
+                72.12464697659016,
+                74.16382431983948,
+                74.31497797369957,
+                73.86640645563602,
+                73.69662635028362,
+                73.63813929259777,
+                73.74980486929417,
+                73.61005991697311
+              ]
+            },
+            "sampled": {
+              "cuda_us": 772.7807998657225,
+              "rank_medians_cuda_us": [
+                770.8223819732666,
+                772.7519989013672,
+                772.6112127304077,
+                772.7807998657225,
+                772.1535921096803,
+                772.1951961517334,
+                772.4063873291016,
+                772.5087881088257
+              ],
+              "host_us": 779.5467972755432,
+              "rank_medians_host_us": [
+                777.7979131788015,
+                779.5467972755432,
+                779.4404868036509,
+                779.4938515871763,
+                778.9310999214649,
+                779.0946401655674,
+                779.2796473950148,
+                779.0528703480959
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 635436,
+          "remote_token_destinations": 479503,
+          "remote_reduction_percent": 24.53952876450185,
+          "native_expert_copies": 9,
+          "expert_copies": 57,
+          "history_iterations": 31,
+          "full_candidates": 996,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 12.408797272525396
+        },
+        {
+          "layer": 7,
+          "timings": {
+            "native": {
+              "cuda_us": 66.77760183811188,
+              "rank_medians_cuda_us": [
+                64.74559903144836,
+                66.7743980884552,
+                66.52800142765045,
+                66.65280163288116,
+                66.74239933490753,
+                66.33279919624329,
+                66.499200463295,
+                66.77760183811188
+              ],
+              "host_us": 73.47902283072472,
+              "rank_medians_host_us": [
+                71.4457593858242,
+                73.47902283072472,
+                73.11347872018814,
+                73.29434156417847,
+                73.14938120543957,
+                73.10747168958187,
+                73.01503792405128,
+                73.13019596040249
+              ]
+            },
+            "sampled": {
+              "cuda_us": 767.1872138977052,
+              "rank_medians_cuda_us": [
+                764.5024061203003,
+                767.1872138977052,
+                766.6399955749512,
+                766.9407844543457,
+                766.259217262268,
+                766.2751913070679,
+                766.7295932769775,
+                766.377592086792
+              ],
+              "host_us": 774.0026339888573,
+              "rank_medians_host_us": [
+                771.8030828982592,
+                774.0026339888573,
+                773.5526654869318,
+                773.6835163086653,
+                773.2169236987829,
+                773.3901031315327,
+                773.5381834208965,
+                773.0608806014061
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 635193,
+          "remote_token_destinations": 476261,
+          "remote_reduction_percent": 25.021056592248335,
+          "native_expert_copies": 10,
+          "expert_copies": 53,
+          "history_iterations": 28,
+          "full_candidates": 960,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 13.96505379914339
+        }
+      ],
+      "mean_cuda_us": 777.9832035303116,
+      "mean_host_us": 784.6292981412262,
+      "native_mean_cuda_us": 70.00719979405403,
+      "latency_change_vs_bracketing_baseline_percent": 13.421460326891,
+      "latency_change_vs_before_percent": 13.372932698296648,
+      "latency_change_vs_after_percent": 13.470029516360714
+    },
+    "fused96_03": {
+      "sm_limit": 96,
+      "fuse": true,
+      "layers": [
+        {
+          "layer": 0,
+          "timings": {
+            "native": {
+              "cuda_us": 79.06239926815033,
+              "rank_medians_cuda_us": [
+                78.0128002166748,
+                79.06239926815033,
+                78.13759744167328,
+                79.0336012840271,
+                79.04320061206818,
+                78.65920066833496,
+                78.69759798049927,
+                78.62719893455505
+              ],
+              "host_us": 84.57680232822895,
+              "rank_medians_host_us": [
+                83.86075496673584,
+                84.57680232822895,
+                84.1077882796526,
+                84.56269279122353,
+                84.40590463578701,
+                84.19039659202099,
+                84.14727635681629,
+                83.890650421381
+              ]
+            },
+            "sampled": {
+              "cuda_us": 710.8511924743652,
+              "rank_medians_cuda_us": [
+                710.0287914276123,
+                710.8511924743652,
+                710.2463960647583,
+                710.6240034103392,
+                710.7424020767212,
+                710.5759859085083,
+                710.4575872421265,
+                710.7327938079834
+              ],
+              "host_us": 716.8996147811413,
+              "rank_medians_host_us": [
+                716.2732072174549,
+                716.8996147811413,
+                716.2825204432011,
+                716.440798714757,
+                716.2657100707293,
+                716.2176072597504,
+                716.1235902458429,
+                716.158514842391
+              ]
+            }
+          },
+          "traces": [
+            {
+              "rank": 0,
+              "path": "fused96_traces_03/rank0_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 96,
+              "max_simultaneous_launched_blocks": 96,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 1,
+              "path": "fused96_traces_03/rank1_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 96,
+              "max_simultaneous_launched_blocks": 96,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 2,
+              "path": "fused96_traces_03/rank2_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 96,
+              "max_simultaneous_launched_blocks": 96,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 3,
+              "path": "fused96_traces_03/rank3_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 96,
+              "max_simultaneous_launched_blocks": 96,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 4,
+              "path": "fused96_traces_03/rank4_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 96,
+              "max_simultaneous_launched_blocks": 96,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 5,
+              "path": "fused96_traces_03/rank5_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 96,
+              "max_simultaneous_launched_blocks": 96,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 6,
+              "path": "fused96_traces_03/rank6_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 96,
+              "max_simultaneous_launched_blocks": 96,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 7,
+              "path": "fused96_traces_03/rank7_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 96,
+              "max_simultaneous_launched_blocks": 96,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            }
+          ],
+          "native_remote_token_destinations": 621511,
+          "remote_token_destinations": 533736,
+          "remote_reduction_percent": 14.122839338322246,
+          "native_expert_copies": 11,
+          "expert_copies": 61,
+          "history_iterations": 30,
+          "full_candidates": 1026,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 0.8778051901288109
+        },
+        {
+          "layer": 1,
+          "timings": {
+            "native": {
+              "cuda_us": 71.49119973182677,
+              "rank_medians_cuda_us": [
+                69.40480172634125,
+                71.49119973182677,
+                70.66240012645721,
+                71.1648017168045,
+                71.22879922389984,
+                71.1327999830246,
+                71.04319930076599,
+                71.06559872627258
+              ],
+              "host_us": 78.27752269804478,
+              "rank_medians_host_us": [
+                76.4098484069109,
+                78.27752269804478,
+                77.89842784404755,
+                77.9411755502224,
+                77.7232926338911,
+                77.69209332764149,
+                77.69525982439518,
+                77.65479385852814
+              ]
+            },
+            "sampled": {
+              "cuda_us": 715.1135921478271,
+              "rank_medians_cuda_us": [
+                712.3903989791871,
+                715.1135921478271,
+                713.8303995132446,
+                713.756799697876,
+                714.3168210983278,
+                713.7151956558228,
+                714.4927978515625,
+                713.8943910598755
+              ],
+              "host_us": 722.0705039799213,
+              "rank_medians_host_us": [
+                719.75770406425,
+                722.0705039799213,
+                721.5714082121849,
+                720.9781091660261,
+                721.4020937681198,
+                720.8885625004768,
+                721.23808786273,
+                720.9401112049818
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 643011,
+          "remote_token_destinations": 485678,
+          "remote_reduction_percent": 24.468166174451135,
+          "native_expert_copies": 7,
+          "expert_copies": 55,
+          "history_iterations": 29,
+          "full_candidates": 958,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 3.989538653183944
+        },
+        {
+          "layer": 2,
+          "timings": {
+            "native": {
+              "cuda_us": 69.15840208530426,
+              "rank_medians_cuda_us": [
+                66.52800142765045,
+                69.15840208530426,
+                68.32000017166138,
+                68.54400038719177,
+                68.71359944343567,
+                69.03679966926573,
+                68.12799870967865,
+                68.61440241336823
+              ],
+              "host_us": 75.71252062916756,
+              "rank_medians_host_us": [
+                73.54174740612507,
+                75.71252062916756,
+                75.15829056501389,
+                75.37319324910641,
+                75.39917714893818,
+                75.56634955108166,
+                74.99037310481071,
+                75.11083967983723
+              ]
+            },
+            "sampled": {
+              "cuda_us": 701.4175891876221,
+              "rank_medians_cuda_us": [
+                698.8224029541014,
+                701.4175891876221,
+                701.2447834014893,
+                700.876784324646,
+                701.4048099517822,
+                700.707221031189,
+                701.1647939682007,
+                701.1008024215698
+              ],
+              "host_us": 708.3209697157145,
+              "rank_medians_host_us": [
+                706.2241435050964,
+                708.3209697157145,
+                708.2595489919186,
+                708.1185933202505,
+                708.218477666378,
+                707.7047135680914,
+                708.0506067723036,
+                707.9573813825846
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 635585,
+          "remote_token_destinations": 465156,
+          "remote_reduction_percent": 26.81450946765578,
+          "native_expert_copies": 7,
+          "expert_copies": 52,
+          "history_iterations": 29,
+          "full_candidates": 963,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 2.5706655413253454
+        },
+        {
+          "layer": 3,
+          "timings": {
+            "native": {
+              "cuda_us": 68.62080097198486,
+              "rank_medians_cuda_us": [
+                66.0991996526718,
+                68.62080097198486,
+                68.16959977149963,
+                68.39680075645447,
+                68.37440133094788,
+                68.28799843788147,
+                68.26560199260712,
+                68.23360025882721
+              ],
+              "host_us": 75.20546205341816,
+              "rank_medians_host_us": [
+                72.96428084373474,
+                75.20546205341816,
+                74.73570294678211,
+                75.0306062400341,
+                74.827391654253,
+                74.80992935597897,
+                74.70441050827503,
+                74.6757723391056
+              ]
+            },
+            "sampled": {
+              "cuda_us": 686.5375995635986,
+              "rank_medians_cuda_us": [
+                684.2144012451172,
+                686.4735841751099,
+                686.4031791687011,
+                686.5375995635986,
+                686.4959955215454,
+                686.3360166549684,
+                686.4959955215455,
+                686.0639810562134
+              ],
+              "host_us": 693.3292839676142,
+              "rank_medians_host_us": [
+                691.163819283247,
+                693.3292839676142,
+                693.095987662673,
+                693.0883973836899,
+                693.0616684257984,
+                692.7732843905687,
+                692.963320761919,
+                692.7093956619501
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 623501,
+          "remote_token_destinations": 476656,
+          "remote_reduction_percent": 23.551686364576796,
+          "native_expert_copies": 10,
+          "expert_copies": 50,
+          "history_iterations": 26,
+          "full_candidates": 922,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 3.3820098589522063
+        },
+        {
+          "layer": 4,
+          "timings": {
+            "native": {
+              "cuda_us": 68.07680130004884,
+              "rank_medians_cuda_us": [
+                65.67039787769319,
+                68.06719899177551,
+                67.68960058689117,
+                68.07680130004884,
+                67.89120137691498,
+                67.79199838638306,
+                67.4784004688263,
+                67.32800006866455
+              ],
+              "host_us": 74.73509758710861,
+              "rank_medians_host_us": [
+                72.71673530340195,
+                74.66734386980534,
+                74.46003146469593,
+                74.73509758710861,
+                74.68406111001968,
+                74.55344311892986,
+                74.2082018405199,
+                73.8814938813448
+              ]
+            },
+            "sampled": {
+              "cuda_us": 726.4832019805908,
+              "rank_medians_cuda_us": [
+                724.2239952087401,
+                726.4288187026978,
+                726.2367963790894,
+                726.2527942657471,
+                726.4832019805908,
+                726.4672040939331,
+                726.3263940811157,
+                725.9744167327882
+              ],
+              "host_us": 733.5052825510502,
+              "rank_medians_host_us": [
+                731.3271518796682,
+                733.2297973334789,
+                733.1665139645338,
+                733.5052825510502,
+                733.1287488341331,
+                732.965487986803,
+                732.894241809845,
+                732.7308878302574
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 634668,
+          "remote_token_destinations": 483420,
+          "remote_reduction_percent": 23.831042371759725,
+          "native_expert_copies": 8,
+          "expert_copies": 56,
+          "history_iterations": 32,
+          "full_candidates": 941,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 4.3054381023045485
+        },
+        {
+          "layer": 5,
+          "timings": {
+            "native": {
+              "cuda_us": 67.78559982776642,
+              "rank_medians_cuda_us": [
+                65.25439918041229,
+                67.6224023103714,
+                67.78559982776642,
+                67.77600049972534,
+                67.3664003610611,
+                67.49759912490845,
+                67.47200191020966,
+                67.34080016613007
+              ],
+              "host_us": 74.373884126544,
+              "rank_medians_host_us": [
+                72.28190079331398,
+                74.22221824526787,
+                74.28270764648914,
+                74.373884126544,
+                74.22799244523048,
+                74.17774759232998,
+                73.96964356303215,
+                73.81616160273552
+              ]
+            },
+            "sampled": {
+              "cuda_us": 707.2191953659058,
+              "rank_medians_cuda_us": [
+                705.510401725769,
+                707.2191953659058,
+                707.1200132369995,
+                706.9279909133912,
+                707.1104049682617,
+                706.9504022598267,
+                707.0559978485107,
+                706.822395324707
+              ],
+              "host_us": 714.1562178730965,
+              "rank_medians_host_us": [
+                712.2648879885674,
+                713.9529101550579,
+                713.8010580092669,
+                713.665084913373,
+                714.1562178730965,
+                713.5775871574879,
+                713.4933024644852,
+                713.3638020604849
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 625260,
+          "remote_token_destinations": 487250,
+          "remote_reduction_percent": 22.07241787416435,
+          "native_expert_copies": 9,
+          "expert_copies": 50,
+          "history_iterations": 32,
+          "full_candidates": 960,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 2.499810768956001
+        },
+        {
+          "layer": 6,
+          "timings": {
+            "native": {
+              "cuda_us": 67.94880032539369,
+              "rank_medians_cuda_us": [
+                65.2319997549057,
+                67.94880032539369,
+                67.4815982580185,
+                67.50720143318176,
+                67.44640171527863,
+                67.60640144348145,
+                67.56480038166046,
+                67.35360026359558
+              ],
+              "host_us": 74.4447112083435,
+              "rank_medians_host_us": [
+                72.27938622236252,
+                74.4447112083435,
+                74.04331117868423,
+                74.1519033908844,
+                73.82663898169994,
+                74.06054064631462,
+                74.17146116495132,
+                73.81215691566467
+              ]
+            },
+            "sampled": {
+              "cuda_us": 702.2271871566772,
+              "rank_medians_cuda_us": [
+                700.0159978866578,
+                702.0480155944824,
+                702.1696090698242,
+                701.7663955688475,
+                702.2271871566772,
+                702.0576000213623,
+                702.0992040634155,
+                701.8112182617186
+              ],
+              "host_us": 708.8760379701853,
+              "rank_medians_host_us": [
+                707.1542087942362,
+                708.7865844368935,
+                708.8760379701853,
+                708.5433695465326,
+                708.7417412549257,
+                708.6462806910276,
+                708.5492834448814,
+                708.3964068442583
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 635436,
+          "remote_token_destinations": 479503,
+          "remote_reduction_percent": 24.53952876450185,
+          "native_expert_copies": 9,
+          "expert_copies": 57,
+          "history_iterations": 31,
+          "full_candidates": 996,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 2.146059444109638
+        },
+        {
+          "layer": 7,
+          "timings": {
+            "native": {
+              "cuda_us": 66.8863981962204,
+              "rank_medians_cuda_us": [
+                64.71039950847626,
+                66.52479767799377,
+                66.6720002889633,
+                66.76479876041414,
+                66.8863981962204,
+                66.56320095062256,
+                66.59840047359467,
+                66.70719981193542
+              ],
+              "host_us": 73.48642684519291,
+              "rank_medians_host_us": [
+                71.57516665756702,
+                73.47152568399906,
+                73.24637845158577,
+                73.48642684519291,
+                73.35077971220016,
+                72.94542156159878,
+                73.01531732082367,
+                73.13168607652187
+              ]
+            },
+            "sampled": {
+              "cuda_us": 694.1248178482056,
+              "rank_medians_cuda_us": [
+                690.8704042434692,
+                693.5392141342163,
+                694.1248178482056,
+                693.942403793335,
+                694.0512180328369,
+                693.2000160217285,
+                693.6480045318602,
+                692.7328109741211
+              ],
+              "host_us": 701.1478301137686,
+              "rank_medians_host_us": [
+                699.0410853177309,
+                700.605008751154,
+                701.1478301137686,
+                700.8005864918232,
+                700.9028922766447,
+                700.3314793109894,
+                700.4385348409414,
+                699.8411845415831
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 635193,
+          "remote_token_destinations": 476261,
+          "remote_reduction_percent": 25.021056592248335,
+          "native_expert_copies": 10,
+          "expert_copies": 53,
+          "history_iterations": 28,
+          "full_candidates": 960,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 3.111692656466958
+        }
+      ],
+      "mean_cuda_us": 705.4967969655991,
+      "mean_host_us": 712.2882176190615,
+      "native_mean_cuda_us": 69.87880021333694,
+      "latency_change_vs_bracketing_baseline_percent": 2.8537333514099483,
+      "latency_change_vs_before_percent": 2.8097271487280695,
+      "latency_change_vs_after_percent": 2.897777242648991
+    },
+    "fused128_03": {
+      "sm_limit": 128,
+      "fuse": true,
+      "layers": [
+        {
+          "layer": 0,
+          "timings": {
+            "native": {
+              "cuda_us": 79.42399978637695,
+              "rank_medians_cuda_us": [
+                78.00640165805817,
+                79.42399978637695,
+                78.956800699234,
+                78.85760068893433,
+                78.56000065803528,
+                78.78400087356569,
+                78.9823979139328,
+                78.97599935531616
+              ],
+              "host_us": 84.80888791382313,
+              "rank_medians_host_us": [
+                83.90801958739758,
+                84.80888791382313,
+                84.41442623734474,
+                84.38429795205593,
+                84.1701403260231,
+                84.40962992608547,
+                84.30476300418377,
+                84.30634625256062
+              ]
+            },
+            "sampled": {
+              "cuda_us": 702.7168035507202,
+              "rank_medians_cuda_us": [
+                701.1584043502808,
+                702.7168035507202,
+                701.7184019088745,
+                701.7920017242432,
+                701.4399766921997,
+                702.1663904190063,
+                702.07998752594,
+                702.1088123321533
+              ],
+              "host_us": 708.1938907504082,
+              "rank_medians_host_us": [
+                707.174139097333,
+                708.1938907504082,
+                707.6432928442955,
+                707.797659561038,
+                707.348482683301,
+                707.7616639435291,
+                707.6799869537354,
+                707.5407076627016
+              ]
+            }
+          },
+          "traces": [
+            {
+              "rank": 0,
+              "path": "fused128_traces_03/rank0_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 128,
+              "max_simultaneous_launched_blocks": 128,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 1,
+              "path": "fused128_traces_03/rank1_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 128,
+              "max_simultaneous_launched_blocks": 128,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 2,
+              "path": "fused128_traces_03/rank2_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 128,
+              "max_simultaneous_launched_blocks": 128,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 3,
+              "path": "fused128_traces_03/rank3_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 128,
+              "max_simultaneous_launched_blocks": 128,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 4,
+              "path": "fused128_traces_03/rank4_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 128,
+              "max_simultaneous_launched_blocks": 128,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 5,
+              "path": "fused128_traces_03/rank5_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 128,
+              "max_simultaneous_launched_blocks": 128,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 6,
+              "path": "fused128_traces_03/rank6_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 128,
+              "max_simultaneous_launched_blocks": 128,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            },
+            {
+              "rank": 7,
+              "path": "fused128_traces_03/rank7_graph.json.gz",
+              "kernel_count": 192,
+              "max_launch_blocks": 128,
+              "max_simultaneous_launched_blocks": 128,
+              "streams": [
+                7
+              ],
+              "nccl_kernel_count": 0,
+              "anchors": {
+                "sample_gather": 3,
+                "expert_greedy": 3,
+                "exchange_proposal": 12,
+                "exchange_prefix": 12,
+                "layout_encode": 3,
+                "publication": 3
+              }
+            }
+          ],
+          "native_remote_token_destinations": 621511,
+          "remote_token_destinations": 533736,
+          "remote_reduction_percent": 14.122839338322246,
+          "native_expert_copies": 11,
+          "expert_copies": 61,
+          "history_iterations": 30,
+          "full_candidates": 1026,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": -0.27655638352753753
+        },
+        {
+          "layer": 1,
+          "timings": {
+            "native": {
+              "cuda_us": 72.53760099411011,
+              "rank_medians_cuda_us": [
+                69.49439942836761,
+                72.53760099411011,
+                72.01600074768066,
+                71.99680209159851,
+                72.19519913196564,
+                71.73119783401489,
+                71.97760045528412,
+                71.77920043468475
+              ],
+              "host_us": 79.09238338470459,
+              "rank_medians_host_us": [
+                76.74288935959339,
+                79.09238338470459,
+                78.65061052143574,
+                78.66253145039082,
+                78.61913181841373,
+                78.50434631109238,
+                78.53270508348942,
+                78.30960676074028
+              ]
+            },
+            "sampled": {
+              "cuda_us": 708.9663982391357,
+              "rank_medians_cuda_us": [
+                706.4671993255615,
+                708.9663982391357,
+                708.3807945251466,
+                708.6656093597412,
+                708.851194381714,
+                708.9087963104248,
+                708.5920095443726,
+                708.3904027938843
+              ],
+              "host_us": 715.6213279813528,
+              "rank_medians_host_us": [
+                713.5053165256977,
+                715.6213279813528,
+                715.2197882533073,
+                715.3751794248819,
+                715.3358310461044,
+                715.3866346925497,
+                715.0552701205015,
+                714.9988785386086
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 643011,
+          "remote_token_destinations": 485678,
+          "remote_reduction_percent": 24.468166174451135,
+          "native_expert_copies": 7,
+          "expert_copies": 55,
+          "history_iterations": 29,
+          "full_candidates": 958,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 3.095633313395152
+        },
+        {
+          "layer": 2,
+          "timings": {
+            "native": {
+              "cuda_us": 69.56480145454407,
+              "rank_medians_cuda_us": [
+                67.01759994029999,
+                69.56480145454407,
+                69.22879815101624,
+                68.86720061302185,
+                68.73279809951782,
+                69.30239796638487,
+                69.00799870491028,
+                68.72000098228453
+              ],
+              "host_us": 76.52039639651775,
+              "rank_medians_host_us": [
+                74.37504827976227,
+                76.52039639651775,
+                76.16798393428326,
+                75.72346366941929,
+                75.122294947505,
+                76.06451399624348,
+                75.91699250042439,
+                75.95405913889408
+              ]
+            },
+            "sampled": {
+              "cuda_us": 694.6367979049684,
+              "rank_medians_cuda_us": [
+                691.9903993606567,
+                694.3936109542847,
+                693.9520120620728,
+                694.5248126983643,
+                693.7503814697266,
+                694.6367979049684,
+                693.9520120620728,
+                693.8591957092285
+              ],
+              "host_us": 701.527064666152,
+              "rank_medians_host_us": [
+                699.2011331021786,
+                701.527064666152,
+                700.9518332779408,
+                701.343035325408,
+                700.7790729403496,
+                701.2770976871252,
+                700.6705272942781,
+                700.7724139839411
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 635585,
+          "remote_token_destinations": 465156,
+          "remote_reduction_percent": 26.81450946765578,
+          "native_expert_copies": 7,
+          "expert_copies": 52,
+          "history_iterations": 29,
+          "full_candidates": 963,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 1.5790875063859344
+        },
+        {
+          "layer": 3,
+          "timings": {
+            "native": {
+              "cuda_us": 69.16159987449646,
+              "rank_medians_cuda_us": [
+                66.13759994506836,
+                69.16159987449646,
+                68.55680048465729,
+                68.63040030002594,
+                68.6495989561081,
+                68.17920207977295,
+                68.09919774532318,
+                68.03200244903564
+              ],
+              "host_us": 75.69058798253536,
+              "rank_medians_host_us": [
+                73.26090708374977,
+                75.69058798253536,
+                74.99479688704014,
+                75.31009614467621,
+                75.12308657169342,
+                74.76345635950565,
+                74.67949762940407,
+                74.45802912116051
+              ]
+            },
+            "sampled": {
+              "cuda_us": 676.8543958663939,
+              "rank_medians_cuda_us": [
+                674.2847919464111,
+                676.8543958663939,
+                676.1791944503783,
+                674.7040033340454,
+                676.5151977539064,
+                676.7744064331054,
+                676.41921043396,
+                676.7071962356567
+              ],
+              "host_us": 683.8936358690262,
+              "rank_medians_host_us": [
+                681.6525477916002,
+                683.8936358690262,
+                683.3260878920555,
+                682.7240344136953,
+                683.2465063780546,
+                683.5291627794504,
+                683.0066908150911,
+                683.3415944129229
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 623501,
+          "remote_token_destinations": 476656,
+          "remote_reduction_percent": 23.551686364576796,
+          "native_expert_copies": 10,
+          "expert_copies": 50,
+          "history_iterations": 26,
+          "full_candidates": 922,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 1.9238682207855629
+        },
+        {
+          "layer": 4,
+          "timings": {
+            "native": {
+              "cuda_us": 68.62720251083374,
+              "rank_medians_cuda_us": [
+                65.75680077075958,
+                68.62720251083374,
+                67.60640144348146,
+                68.16959977149963,
+                67.94240176677704,
+                67.99359917640686,
+                67.80800223350525,
+                67.71200001239777
+              ],
+              "host_us": 75.62967948615551,
+              "rank_medians_host_us": [
+                72.92116060853004,
+                75.62967948615551,
+                74.83265362679958,
+                74.9319326132536,
+                74.84611123800278,
+                74.78571496903896,
+                74.96760226786137,
+                74.67372342944145
+              ]
+            },
+            "sampled": {
+              "cuda_us": 715.6063795089722,
+              "rank_medians_cuda_us": [
+                713.318395614624,
+                715.6063795089722,
+                715.2159929275513,
+                715.0720119476318,
+                714.9440050125122,
+                715.1520013809204,
+                715.2063846588135,
+                715.1263952255249
+              ],
+              "host_us": 722.607783973217,
+              "rank_medians_host_us": [
+                720.770750194788,
+                722.607783973217,
+                721.8941114842892,
+                722.0833096653223,
+                721.7249367386103,
+                722.0039144158363,
+                721.7604201287031,
+                722.4241737276316
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 634668,
+          "remote_token_destinations": 483420,
+          "remote_reduction_percent": 23.831042371759725,
+          "native_expert_copies": 8,
+          "expert_copies": 56,
+          "history_iterations": 32,
+          "full_candidates": 941,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 2.743789147490183
+        },
+        {
+          "layer": 5,
+          "timings": {
+            "native": {
+              "cuda_us": 68.09280216693878,
+              "rank_medians_cuda_us": [
+                65.4336005449295,
+                68.02879869937897,
+                68.09280216693878,
+                67.50719845294952,
+                67.39839911460876,
+                67.96160042285919,
+                67.56159961223602,
+                67.44960248470306
+              ],
+              "host_us": 74.7868325561285,
+              "rank_medians_host_us": [
+                72.532519698143,
+                74.7868325561285,
+                74.52527061104774,
+                74.19963367283344,
+                74.24741052091122,
+                74.37323220074177,
+                74.09178651869297,
+                74.10217076539993
+              ]
+            },
+            "sampled": {
+              "cuda_us": 702.2495985031128,
+              "rank_medians_cuda_us": [
+                699.6383905410765,
+                702.2495985031128,
+                701.6032218933105,
+                701.9840002059937,
+                701.8431901931763,
+                701.9200086593628,
+                701.3472080230713,
+                700.6272077560425
+              ],
+              "host_us": 708.9483086019754,
+              "rank_medians_host_us": [
+                706.8349979817867,
+                708.9483086019754,
+                708.368793129921,
+                708.6428813636303,
+                708.4786891937256,
+                708.4553129971027,
+                708.1056013703346,
+                708.0648094415665
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 625260,
+          "remote_token_destinations": 487250,
+          "remote_reduction_percent": 22.07241787416435,
+          "native_expert_copies": 9,
+          "expert_copies": 50,
+          "history_iterations": 32,
+          "full_candidates": 960,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 1.7795492978703198
+        },
+        {
+          "layer": 6,
+          "timings": {
+            "native": {
+              "cuda_us": 67.96800196170807,
+              "rank_medians_cuda_us": [
+                65.0816023349762,
+                67.96800196170807,
+                67.52640008926392,
+                67.55200028419495,
+                66.8832004070282,
+                67.3887997865677,
+                67.75680184364319,
+                67.3471987247467
+              ],
+              "host_us": 74.6420118957758,
+              "rank_medians_host_us": [
+                72.08120077848434,
+                74.6420118957758,
+                74.08494129776955,
+                74.2829404771328,
+                73.73555563390255,
+                73.96964356303215,
+                73.98067973554134,
+                73.98235611617565
+              ]
+            },
+            "sampled": {
+              "cuda_us": 701.0303974151611,
+              "rank_medians_cuda_us": [
+                698.8032102584838,
+                701.0303974151611,
+                700.2016067504884,
+                700.163197517395,
+                698.5919952392578,
+                699.9936103820801,
+                700.7168054580688,
+                700.550389289856
+              ],
+              "host_us": 707.4896711856127,
+              "rank_medians_host_us": [
+                705.8081217110157,
+                707.4896711856127,
+                707.1157451719046,
+                706.9373037666082,
+                705.9034891426563,
+                706.6989783197641,
+                707.1416359394789,
+                707.0608902722597
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 635436,
+          "remote_token_destinations": 479503,
+          "remote_reduction_percent": 24.53952876450185,
+          "native_expert_copies": 9,
+          "expert_copies": 57,
+          "history_iterations": 31,
+          "full_candidates": 996,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 1.971974250151276
+        },
+        {
+          "layer": 7,
+          "timings": {
+            "native": {
+              "cuda_us": 67.65120029449463,
+              "rank_medians_cuda_us": [
+                64.73920047283171,
+                67.65120029449463,
+                67.3471987247467,
+                67.15520024299622,
+                65.89759886264801,
+                67.46560037136078,
+                67.30879843235016,
+                67.07520186901093
+              ],
+              "host_us": 74.33732971549034,
+              "rank_medians_host_us": [
+                71.82848639786243,
+                74.33732971549034,
+                73.90426471829414,
+                73.8176517188549,
+                73.23827594518661,
+                73.98049347102642,
+                73.69769737124443,
+                73.65760393440723
+              ]
+            },
+            "sampled": {
+              "cuda_us": 690.2208089828492,
+              "rank_medians_cuda_us": [
+                688.2207870483398,
+                690.2208089828492,
+                689.9584054946899,
+                690.1472091674805,
+                689.4975900650024,
+                690.1184082031251,
+                689.8944139480592,
+                689.8015975952147
+              ],
+              "host_us": 697.4393036216497,
+              "rank_medians_host_us": [
+                695.6504657864571,
+                697.4393036216497,
+                697.0506627112627,
+                697.1986498683691,
+                696.7619527131319,
+                696.9679147005081,
+                696.8885194510221,
+                696.7456080019474
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 635193,
+          "remote_token_destinations": 476261,
+          "remote_reduction_percent": 25.021056592248335,
+          "native_expert_copies": 10,
+          "expert_copies": 53,
+          "history_iterations": 28,
+          "full_candidates": 960,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 2.531755227488919
+        }
+      ],
+      "mean_cuda_us": 699.0351974964142,
+      "mean_host_us": 705.7151233311743,
+      "native_mean_cuda_us": 70.37840113043785,
+      "latency_change_vs_bracketing_baseline_percent": 1.911702669363402,
+      "latency_change_vs_before_percent": 1.8680995166416636,
+      "latency_change_vs_after_percent": 1.95534316545527
+    },
+    "baseline_after_03": {
+      "sm_limit": 0,
+      "fuse": false,
+      "layers": [
+        {
+          "layer": 0,
+          "timings": {
+            "native": {
+              "cuda_us": 78.99840176105499,
+              "rank_medians_cuda_us": [
+                78.35200130939484,
+                78.40000092983246,
+                78.98559868335724,
+                78.99840176105499,
+                78.8320004940033,
+                78.57919931411745,
+                78.62720191478729,
+                78.78400087356569
+              ],
+              "host_us": 84.69843305647373,
+              "rank_medians_host_us": [
+                84.2834822833538,
+                84.01819504797459,
+                84.69843305647373,
+                84.65233258903027,
+                84.43300612270832,
+                84.26164276897907,
+                84.28031578660011,
+                84.28990840911865
+              ]
+            },
+            "sampled": {
+              "cuda_us": 705.56800365448,
+              "rank_medians_cuda_us": [
+                704.6784162521362,
+                704.5631885528564,
+                704.9919843673706,
+                705.56800365448,
+                704.8991918563843,
+                704.697585105896,
+                704.9312114715576,
+                705.1551818847656
+              ],
+              "host_us": 720.4018998891115,
+              "rank_medians_host_us": [
+                710.5387281626463,
+                710.5010561645031,
+                711.1920975148678,
+                710.9860423952341,
+                710.7320707291365,
+                720.4018998891115,
+                710.8008023351431,
+                710.5696480721235
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 621511,
+          "remote_token_destinations": 533736,
+          "remote_reduction_percent": 14.122839338322246,
+          "native_expert_copies": 11,
+          "expert_copies": 61,
+          "history_iterations": 30,
+          "full_candidates": 1026,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 0.1280610830676654
+        },
+        {
+          "layer": 1,
+          "timings": {
+            "native": {
+              "cuda_us": 69.43039894104002,
+              "rank_medians_cuda_us": [
+                68.6944007873535,
+                68.82239878177643,
+                69.43039894104002,
+                69.10719871520996,
+                69.1424012184143,
+                68.86399984359741,
+                68.88960003852846,
+                69.08159852027893
+              ],
+              "host_us": 75.09393617510796,
+              "rank_medians_host_us": [
+                74.52773861587048,
+                74.65025410056114,
+                75.09393617510796,
+                74.90771822631359,
+                74.71037097275257,
+                74.41430352628231,
+                74.5619647204876,
+                74.69239644706249
+              ]
+            },
+            "sampled": {
+              "cuda_us": 687.1423959732056,
+              "rank_medians_cuda_us": [
+                686.5535974502563,
+                686.3680124282836,
+                686.3584041595459,
+                687.1423959732056,
+                686.7488145828247,
+                685.9456062316895,
+                686.3392114639282,
+                686.4000082015991
+              ],
+              "host_us": 700.899213552475,
+              "rank_medians_host_us": [
+                692.4577057361603,
+                692.1838968992233,
+                692.7497684955597,
+                692.7314680069685,
+                692.3337001353502,
+                700.899213552475,
+                692.1796593815088,
+                692.03139282763
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 643011,
+          "remote_token_destinations": 485678,
+          "remote_reduction_percent": 24.468166174451135,
+          "native_expert_copies": 7,
+          "expert_copies": 55,
+          "history_iterations": 29,
+          "full_candidates": 958,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": -0.07794351708267921
+        },
+        {
+          "layer": 2,
+          "timings": {
+            "native": {
+              "cuda_us": 66.75840020179749,
+              "rank_medians_cuda_us": [
+                65.9743994474411,
+                66.22399985790253,
+                66.6815996170044,
+                66.75840020179749,
+                66.6016012430191,
+                66.10559821128845,
+                66.00640118122101,
+                66.31680130958557
+              ],
+              "host_us": 72.23556749522686,
+              "rank_medians_host_us": [
+                71.6398935765028,
+                71.79491221904755,
+                72.07999005913734,
+                72.23556749522686,
+                71.9213392585516,
+                71.6556329280138,
+                71.53032347559929,
+                71.69065065681934
+              ]
+            },
+            "sampled": {
+              "cuda_us": 683.5327863693237,
+              "rank_medians_cuda_us": [
+                682.8480005264282,
+                682.3008060455322,
+                683.1167936325073,
+                683.5327863693237,
+                682.9344034194946,
+                682.2495937347412,
+                682.8735828399658,
+                683.0432176589966
+              ],
+              "host_us": 696.7650726437569,
+              "rank_medians_host_us": [
+                688.8572126626968,
+                688.6742077767849,
+                689.0282966196537,
+                689.0794727951288,
+                688.6497139930725,
+                696.7650726437569,
+                688.8578645884991,
+                688.6323913931847
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 635585,
+          "remote_token_destinations": 465156,
+          "remote_reduction_percent": 26.81450946765578,
+          "native_expert_copies": 7,
+          "expert_copies": 52,
+          "history_iterations": 29,
+          "full_candidates": 963,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": -0.04468964284231047
+        },
+        {
+          "layer": 3,
+          "timings": {
+            "native": {
+              "cuda_us": 66.48640036582947,
+              "rank_medians_cuda_us": [
+                65.43680131435394,
+                65.84320068359375,
+                66.39360189437865,
+                66.4223998785019,
+                66.48640036582947,
+                66.24639928340912,
+                66.20160043239592,
+                66.18239879608154
+              ],
+              "host_us": 71.96096703410149,
+              "rank_medians_host_us": [
+                71.3828019797802,
+                71.65763527154922,
+                71.96096703410149,
+                71.91398181021214,
+                71.84837013483047,
+                71.59379310905933,
+                71.8461349606514,
+                71.56692445278168
+              ]
+            },
+            "sampled": {
+              "cuda_us": 663.3376121520996,
+              "rank_medians_cuda_us": [
+                662.4511957168579,
+                662.5472068786622,
+                662.6432180404663,
+                663.3376121520996,
+                662.9024028778076,
+                662.1024131774902,
+                662.8127813339233,
+                662.9727840423585
+              ],
+              "host_us": 676.2459874153137,
+              "rank_medians_host_us": [
+                668.3746818453074,
+                668.3791987597942,
+                668.6059758067131,
+                668.7755230814219,
+                668.4996653348207,
+                676.2459874153137,
+                668.6327047646046,
+                668.4634834527969
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 623501,
+          "remote_token_destinations": 476656,
+          "remote_reduction_percent": 23.551686364576796,
+          "native_expert_copies": 10,
+          "expert_copies": 50,
+          "history_iterations": 26,
+          "full_candidates": 922,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": -0.11155164274523344
+        },
+        {
+          "layer": 4,
+          "timings": {
+            "native": {
+              "cuda_us": 65.41759967803955,
+              "rank_medians_cuda_us": [
+                64.68160152435303,
+                65.03359973430634,
+                65.41439890861511,
+                65.41759967803955,
+                64.9504005908966,
+                65.14559984207152,
+                65.03680050373079,
+                65.37919938564302
+              ],
+              "host_us": 71.04333490133286,
+              "rank_medians_host_us": [
+                70.38810290396214,
+                70.5481506884098,
+                71.04333490133286,
+                70.88631391525269,
+                70.5632846802473,
+                70.76570764183998,
+                70.68300619721413,
+                70.71890868246555
+              ]
+            },
+            "sampled": {
+              "cuda_us": 695.7952022552489,
+              "rank_medians_cuda_us": [
+                694.758415222168,
+                695.1807975769043,
+                695.2863931655884,
+                695.4336166381836,
+                695.7952022552489,
+                694.7648048400879,
+                694.8512077331543,
+                695.0623989105225
+              ],
+              "host_us": 709.2720828950405,
+              "rank_medians_host_us": [
+                700.7078733295202,
+                700.9300403296947,
+                701.1161651462317,
+                700.991926714778,
+                701.2003567069769,
+                709.2720828950405,
+                700.7477805018425,
+                700.5848921835423
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 634668,
+          "remote_token_destinations": 483420,
+          "remote_reduction_percent": 23.831042371759725,
+          "native_expert_copies": 8,
+          "expert_copies": 56,
+          "history_iterations": 32,
+          "full_candidates": 941,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": -0.10061732624300213
+        },
+        {
+          "layer": 5,
+          "timings": {
+            "native": {
+              "cuda_us": 65.57760238647461,
+              "rank_medians_cuda_us": [
+                64.7680014371872,
+                64.9728000164032,
+                65.49440026283264,
+                65.46239852905272,
+                65.57760238647461,
+                65.01759886741637,
+                64.99840021133424,
+                65.41759967803956
+              ],
+              "host_us": 71.21930830180645,
+              "rank_medians_host_us": [
+                70.67103870213032,
+                70.74857130646706,
+                71.21930830180645,
+                70.94708271324635,
+                70.84901444613934,
+                70.59881463646889,
+                70.75360044836998,
+                70.67001424729824
+              ]
+            },
+            "sampled": {
+              "cuda_us": 689.5232200622559,
+              "rank_medians_cuda_us": [
+                688.5152101516724,
+                688.5663986206055,
+                689.0400171279907,
+                689.5232200622559,
+                688.0896091461182,
+                688.3615970611572,
+                688.6336088180542,
+                688.9376163482666
+              ],
+              "host_us": 702.7313113212585,
+              "rank_medians_host_us": [
+                694.679981097579,
+                694.5731118321419,
+                695.0876209884882,
+                695.048226043582,
+                694.1911298781633,
+                702.7313113212585,
+                694.5511791855097,
+                694.5937406271696
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 625260,
+          "remote_token_destinations": 487250,
+          "remote_reduction_percent": 22.07241787416435,
+          "native_expert_copies": 9,
+          "expert_copies": 50,
+          "history_iterations": 32,
+          "full_candidates": 960,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": -0.06493030691054891
+        },
+        {
+          "layer": 6,
+          "timings": {
+            "native": {
+              "cuda_us": 65.19039869308472,
+              "rank_medians_cuda_us": [
+                64.39040005207062,
+                64.97600078582764,
+                65.174400806427,
+                64.9759978055954,
+                65.0079995393753,
+                64.63679969310759,
+                64.89919722080231,
+                65.19039869308472
+              ],
+              "host_us": 70.73679007589817,
+              "rank_medians_host_us": [
+                70.19084878265858,
+                70.49567066133022,
+                70.73679007589817,
+                70.63220255076885,
+                70.28831169009209,
+                70.31564600765705,
+                70.43913938105106,
+                70.508336648345
+              ]
+            },
+            "sampled": {
+              "cuda_us": 686.0224008560181,
+              "rank_medians_cuda_us": [
+                685.4975938796997,
+                685.8304023742676,
+                685.5808019638062,
+                685.9168052673339,
+                685.590386390686,
+                685.3055953979492,
+                685.3695869445802,
+                686.0224008560181
+              ],
+              "host_us": 699.8078897595406,
+              "rank_medians_host_us": [
+                691.5196776390076,
+                691.620446741581,
+                691.9603794813156,
+                691.6848476976156,
+                691.4414465427399,
+                699.8078897595406,
+                691.4305966347456,
+                691.493321210146
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 635436,
+          "remote_token_destinations": 479503,
+          "remote_reduction_percent": 24.53952876450185,
+          "native_expert_copies": 9,
+          "expert_copies": 57,
+          "history_iterations": 31,
+          "full_candidates": 996,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": -0.21109091266929836
+        },
+        {
+          "layer": 7,
+          "timings": {
+            "native": {
+              "cuda_us": 65.29600024223328,
+              "rank_medians_cuda_us": [
+                64.46399986743927,
+                64.66239988803864,
+                64.6591991186142,
+                65.29600024223328,
+                64.99519944190979,
+                64.61119949817656,
+                64.68160152435303,
+                65.15839993953705
+              ],
+              "host_us": 70.69949060678482,
+              "rank_medians_host_us": [
+                70.16481831669807,
+                70.60053758323193,
+                70.55741734802723,
+                70.69949060678482,
+                70.52980363368988,
+                70.21543569862843,
+                70.3031662851572,
+                70.40565833449364
+              ]
+            },
+            "sampled": {
+              "cuda_us": 674.1087913513184,
+              "rank_medians_cuda_us": [
+                673.1071949005127,
+                668.9664125442505,
+                673.6799955368042,
+                674.1087913513184,
+                673.0976104736328,
+                672.8255987167358,
+                673.6704111099243,
+                673.2479810714722
+              ],
+              "host_us": 687.0611105114222,
+              "rank_medians_host_us": [
+                679.104495793581,
+                676.9096944481134,
+                679.4237531721592,
+                679.6865724027157,
+                679.2319938540459,
+                687.0611105114222,
+                679.5765832066536,
+                679.1133433580399
+              ]
+            }
+          },
+          "traces": [],
+          "native_remote_token_destinations": 635193,
+          "remote_token_destinations": 476261,
+          "remote_reduction_percent": 25.021056592248335,
+          "native_expert_copies": 10,
+          "expert_copies": 53,
+          "history_iterations": 28,
+          "full_candidates": 960,
+          "retained_candidates": 128,
+          "latency_change_vs_bracketing_baseline_percent": 0.13832775251667595
+        }
+      ],
+      "mean_cuda_us": 685.6288015842438,
+      "mean_host_us": 699.1480709984899,
+      "native_mean_cuda_us": 67.89440028369427,
+      "latency_change_vs_bracketing_baseline_percent": -0.04280353999793762,
+      "latency_change_vs_before_percent": -0.08557045281288866,
+      "latency_change_vs_after_percent": 0.0
+    }
+  },
+  "exploratory_files": [
+    "compatibility_01.exit",
+    "compatibility_01.log",
+    "components_01.exit",
+    "components_01.log",
+    "config_01.exit",
+    "config_01.log",
+    "correctness_complete_01",
+    "launcher_01.log",
+    "launcher_correctness_01.log",
+    "launcher_full_03.log",
+    "launcher_probe_02.log",
+    "probe32_01.exit",
+    "probe32_01.json.gz",
+    "probe32_01.log",
+    "probe_fused32_01.exit",
+    "probe_fused32_01.json.gz",
+    "probe_fused32_01.log",
+    "probe_fused32_02.exit",
+    "probe_fused32_02.json.gz",
+    "probe_fused32_02.log",
+    "probe_fused32_03.exit",
+    "probe_fused32_03.json.gz",
+    "probe_fused32_03.log",
+    "probe_fused32_traces_01/rank0_graph.json.gz",
+    "probe_fused32_traces_01/rank1_graph.json.gz",
+    "probe_fused32_traces_01/rank2_graph.json.gz",
+    "probe_fused32_traces_01/rank3_graph.json.gz",
+    "probe_fused32_traces_01/rank4_graph.json.gz",
+    "probe_fused32_traces_01/rank5_graph.json.gz",
+    "probe_fused32_traces_01/rank6_graph.json.gz",
+    "probe_fused32_traces_01/rank7_graph.json.gz",
+    "probe_fused32_traces_02/rank0_graph.json.gz",
+    "probe_fused32_traces_02/rank1_graph.json.gz",
+    "probe_fused32_traces_02/rank2_graph.json.gz",
+    "probe_fused32_traces_02/rank3_graph.json.gz",
+    "probe_fused32_traces_02/rank4_graph.json.gz",
+    "probe_fused32_traces_02/rank5_graph.json.gz",
+    "probe_fused32_traces_02/rank6_graph.json.gz",
+    "probe_fused32_traces_02/rank7_graph.json.gz",
+    "probe_fused32_traces_03/rank0_graph.json.gz",
+    "probe_fused32_traces_03/rank1_graph.json.gz",
+    "probe_fused32_traces_03/rank2_graph.json.gz",
+    "probe_fused32_traces_03/rank3_graph.json.gz",
+    "probe_fused32_traces_03/rank4_graph.json.gz",
+    "probe_fused32_traces_03/rank5_graph.json.gz",
+    "probe_fused32_traces_03/rank6_graph.json.gz",
+    "probe_fused32_traces_03/rank7_graph.json.gz",
+    "public_01.exit",
+    "public_01.log"
+  ],
+  "limitations": [
+    "Planner-only latency; excludes expert weights, token activations, gradients, GEMM, optimizer, histogram building, allocation, JIT and audits.",
+    "Communication reduction is exact route-plan accounting. This cohort does not measure end-to-end training speed or weight/gradient payload costs.",
+    "SM upper bound uses conservative concurrent launched CTA counts from raw GPU trace intervals. It does not pin SM IDs or measure achieved occupancy.",
+    "Budget traces cover layer 0 on all 8 ranks and 3 Graph replays; full-output and CPU-oracle checks cover all 8 layers.",
+    "Runs are sequential with bracketing baselines, not randomized repeated cohorts or confidence intervals.",
+    "Exploratory probes are retained verbatim and excluded from every formal timing table.",
+    "Private router NPZ files are omitted; their original SHA-256 and independent CPU array hashes are retained."
+  ],
+  "evidence_manifest_sha256": "aa85ceb48e5b5cf6f6dfd1cc7c6e2291bc6c5d5e2a287ab151b9272641f8b025",
+  "evidence_file_count": 139
+}

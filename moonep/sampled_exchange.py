@@ -38,8 +38,13 @@ class SampledExchange:
     Mask tensors are [S,8] int32 storage interpreted as unsigned 32-bit sets;
     their high bit is valid for expert-choice index 31. Owners remain [S,K].
     Routes must contain expert IDs in [0,E); seeds must contain ranks in [0,8).
+    sm_limit=0 retains the original grid dimensions. A positive limit bounds
+    every launch to that many CTAs while preserving virtual tile IDs/order.
+    fuse=True joins proposal/ordinal generation and small-table fold/quota;
+    it requires a positive limit. This class launches on the current stream;
+    its limit does not constrain external collectives supplied by the caller.
     """
-    def __init__(self,routes,support,*,source,rounds=4):
+    def __init__(self,routes,support,*,source,rounds=4,sm_limit=0,fuse=False):
         if (routes.ndim != 2 or routes.shape[0] <= 0 or not 1 <= routes.shape[1] <= 32
                 or routes.dtype != torch.int32 or not routes.is_cuda or not routes.is_contiguous()):
             raise ValueError('routes require contiguous CUDA int32 [S,K], S>0 and 1<=K<=32')
@@ -52,6 +57,14 @@ class SampledExchange:
             raise ValueError('source 0..7 and positive rounds required')
         if routes.shape[0] > (2**31 - 1) // RANKS:
             raise ValueError('8*S must fit the int32 global count and token index contract')
+        if isinstance(sm_limit, bool):
+            raise ValueError('sm_limit must be a nonnegative integer, not bool')
+        sm_limit = operator.index(sm_limit)
+        if not 0 <= sm_limit <= torch.cuda.get_device_properties(routes.device).multi_processor_count:
+            raise ValueError('sm_limit must be zero or no greater than this device SM count')
+        if not isinstance(fuse, bool) or (fuse and sm_limit == 0):
+            raise ValueError('fuse must be bool and requires a positive sm_limit')
+        self.sm_limit,self.fuse=sm_limit,fuse
         self.routes,self.support,self.source,self.rounds=routes,support,source,rounds
         self.S,self.K=routes.shape;self.E=support.shape[1]
         self.buckets=RANKS*RANKS*2*(self.K+1)
@@ -67,26 +80,26 @@ class SampledExchange:
         if (tuple(support.shape) != (RANKS,self.E) or support.dtype != torch.bool
                 or support.device != self.routes.device or not support.is_contiguous()):
             raise ValueError('replacement support must match the original shape, dtype and device')
-        self.ext.prepare(self.routes,support,self.resident,self.exec_masks)
+        self.ext.prepare(self.routes,support,self.resident,self.exec_masks,self.sm_limit)
     def reset(self,seed):
         if (seed.shape != self.owner.shape or seed.dtype != torch.int32
                 or seed.device != self.owner.device or not seed.is_contiguous()):
             raise ValueError('seed must match the contiguous int32 [S,K] owner shape and device')
-        self.ext.reset(seed,self.owner,self.old_masks)
+        self.ext.reset(seed,self.owner,self.old_masks,self.sm_limit)
     def _step(self,step):
         step = operator.index(step)
         if not 0 <= step < self.rounds:
             raise ValueError('step must be in [0,rounds)')
         return step
     def propose(self,step):
-        self.ext.propose(self.old_masks,self.exec_masks,self.keys,self.moves,self.ordinals,self.block_counts,self.block_prefix,self.counts,self.S,self.source*self.S,self._step(step))
+        self.ext.propose(self.old_masks,self.exec_masks,self.keys,self.moves,self.ordinals,self.block_counts,self.block_prefix,self.counts,self.S,self.source*self.S,self._step(step),self.sm_limit,self.fuse)
         return self.counts
     def quota(self,step,gathered):
         if (gathered.numel() != RANKS*self.buckets or gathered.dtype != torch.int32
                 or gathered.device != self.routes.device or not gathered.is_contiguous()):
             raise ValueError('gathered must contain 8*buckets contiguous CUDA int32 counts')
-        self.ext.quota(gathered,self.total,self.source_prefix,self.accept,self.stats,self.source,self._step(step))
+        self.ext.quota(gathered,self.total,self.source_prefix,self.accept,self.stats,self.source,self._step(step),self.sm_limit,self.fuse)
     def apply(self):
-        self.ext.apply(self.keys,self.moves,self.ordinals,self.block_prefix,self.source_prefix,self.accept,self.old_masks,self.owner)
+        self.ext.apply(self.keys,self.moves,self.ordinals,self.block_prefix,self.source_prefix,self.accept,self.old_masks,self.owner,self.sm_limit)
         return self.owner
     def commit(self,step,gathered):self.quota(step,gathered);return self.apply()

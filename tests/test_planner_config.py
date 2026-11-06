@@ -8,7 +8,7 @@ import moonep.api as api
 
 def test_defaults_and_small_batch_cap():
     cfg = SampledPlannerConfig()
-    assert cfg.to_dict() == dict(sample_size=256, groups_per_class=2, rounds=4, sample_seed=20261026, candidate_limit=0)
+    assert cfg.to_dict() == dict(sample_size=256, groups_per_class=2, rounds=4, sample_seed=20261026, candidate_limit=0, sm_limit=0, fuse=False)
     assert cfg.effective_sample_size(8) == 8
     assert cfg.effective_sample_size(4096) == 256
     assert resolve_planner_config({'sample_size': 37}).sample_size == 37
@@ -20,7 +20,8 @@ def test_defaults_and_small_batch_cap():
     dict(sample_size=True), dict(groups_per_class=0), dict(groups_per_class=9),
     dict(rounds=0), dict(sample_seed=-1), dict(rounds=1.5),
     dict(candidate_limit=-1), dict(candidate_limit=True), dict(candidate_limit=1.5),
-    dict(candidate_limit=2**31)])
+    dict(candidate_limit=2**31),dict(sm_limit=-1),dict(sm_limit=True),dict(sm_limit=1.5),
+    dict(sm_limit=1025),dict(fuse=1),dict(fuse=True)])
 def test_invalid_settings(values):
     with pytest.raises(ValueError):
         SampledPlannerConfig(**values)

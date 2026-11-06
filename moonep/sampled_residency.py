@@ -81,6 +81,12 @@ class Residency:
     model-specific package capacity are clamped to that capacity. All settings
     and storage are fixed at construction, before CUDA Graph capture.
 
+    sm_limit>0 bounds every runtime launch to at most that many CTAs. Virtual
+    record tiles preserve all original group and package IDs. Bounded sorting
+    uses fixed 256-entry runs and parallel merge passes instead of CUB device
+    kernels; fuse=True combines initial scoring with the first sorting pass.
+    A bounded source-local collective must be supplied for distributed run().
+
     Call run(local_routes, local_owner, native_copies) on the intended CUDA
     stream. There is one all_reduce of D*(2*K+2)+1 int32 values: sampled
     experts, sampled owners, row ownership/validity, and copy-list validity.
@@ -88,7 +94,8 @@ class Residency:
     """
 
     def __init__(self, ctx, sample_seed=20261026, *, sample_size=256,
-                 groups_per_class=2, candidate_limit=0, component_only=False):
+                 groups_per_class=2, candidate_limit=0, component_only=False,
+                 sm_limit=0, fuse=False, collective=None):
         self.ranks, self.experts, self.topk = (_integer(ctx[key], key) for key in ("R", "E", "K"))
         self.per_source, self.slots, self.rank = (_integer(ctx[key], key) for key in ("S", "B", "rank"))
         self.group = ctx.get("group")
@@ -130,6 +137,16 @@ class Residency:
             raise ValueError("sampled residency requires a CUDA device")
         if self.device.index is None:
             self.device = torch.device("cuda", torch.cuda.current_device())
+        self.sm_limit = _integer(sm_limit, "sm_limit")
+        if not 0 <= self.sm_limit <= torch.cuda.get_device_properties(self.device).multi_processor_count:
+            raise ValueError("sm_limit must be zero or within this device's SM count")
+        if not isinstance(fuse, bool):
+            raise ValueError("fuse must be bool")
+        self.fuse, self.collective = fuse, collective
+        if self.fuse and not self.sm_limit:
+            raise ValueError("fuse requires a positive sm_limit")
+        if self.sm_limit and not self.component_only and collective is None:
+            raise ValueError("bounded residency requires a bounded collective")
         self.sample_seed = _integer(sample_seed, "sample_seed")
         # Initialization only. No token contents are observed by this RNG.
         sample_ids = np.sort(np.random.default_rng(self.sample_seed).choice(
@@ -160,12 +177,13 @@ class Residency:
         self.packages, self.package_count = ints(self.max_packages, 5), ints(1)
         self.experts_to_copy = ints(8, self.slots)
         self.history, self.history_count = words(8 * self.slots, self.history_width), ints(1)
-        # Unlimited selection retains its old execution path and allocates no
-        # pruning storage. The CUB temporary buffer is queried once here, never
-        # during run()/select() or a CUDA Graph replay.
+        # Unlimited candidate selection allocates no pruning storage. The
+        # unbounded-SM path queries CUB scratch only at construction. Bounded
+        # sorting alternates the two score arrays and needs no CUB workspace.
         if self.effective_candidate_limit:
             self.scores_in, self.scores_out = ints(self.max_packages, 3), ints(self.max_packages, 3)
-            needed = self.ext.pruning_workspace_bytes(self.scores_in, self.scores_out)
+            needed = (0 if self.sm_limit else
+                      self.ext.pruning_workspace_bytes(self.scores_in, self.scores_out))
             self.sort_scratch = torch.empty(max(1, needed), dtype=torch.uint8, device=self.device)
             self.selected_ids, self.retained_count = ints(self.max_packages), ints(1)
             self.pruning_diagnostics = ints(3)
@@ -208,20 +226,25 @@ class Residency:
                 self.history_count, self.status, self.per_source, self.slots,
                 self.scores_in, self.scores_out, self.sort_scratch, self.selected_ids,
                 self.retained_count, self.pruning_diagnostics, self.effective_candidate_limit,
-                self.active_keys, self.active_rows, self.active_flags, self.active_counts)
+                self.active_keys, self.active_rows, self.active_flags, self.active_counts,
+                self.sm_limit, self.fuse)
             return self.support
         self.ext.select(self.packet, self.ids, native_copies, self.samples,
             self.support, self.extra, self.copy_seen, self.classes, self.groups, self.sig0, self.sig1, self.masks,
             self.frequencies, self.tops, self.first, self.records, self.sizes,
             self.package_offsets, self.packages, self.package_count, self.experts_to_copy, self.history,
-            self.history_count, self.status, self.per_source, self.slots)
+            self.history_count, self.status, self.per_source, self.slots,
+            self.sm_limit, self.fuse)
         return self.support
 
     def run(self, local_routes, local_owner, native_copies):
         if self.component_only:
             raise RuntimeError("component_only objects cannot run the native eight-rank collective path")
         self.gather_local(local_routes, local_owner, native_copies)
-        dist.all_reduce(self.packet, op=dist.ReduceOp.SUM, group=self.group, async_op=False)
+        if self.collective is not None:
+            self.collective.all_reduce(self.packet, "sum")
+        else:
+            dist.all_reduce(self.packet, op=dist.ReduceOp.SUM, group=self.group, async_op=False)
         return self.select(native_copies)
 
     def candidate_diagnostics(self):
@@ -258,10 +281,16 @@ class Residency:
         """
         if reduced_packet is not None:
             self._input(reduced_packet, (self.packet_size,), "reduced_packet")
-            self.packet.copy_(reduced_packet)
+            if self.sm_limit:
+                self.ext.copy_packet(reduced_packet, self.packet, self.sm_limit)
+            else:
+                self.packet.copy_(reduced_packet)
         # A component harness may skip gather_local on this object; reset the
         # previous run's status before validating the complete current packet.
-        self.status.zero_()
+        # mandatory_validate resets status at the beginning of select. Avoid a
+        # framework fill kernel on the bounded path, including component tests.
+        if not self.sm_limit:
+            self.status.zero_()
         return self.select(native_copies)
 
     def accepted_packages(self):

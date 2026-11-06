@@ -24,19 +24,30 @@ class SampledPlannerConfig:
     candidate_limit=0 retains unlimited package selection. A positive value
     keeps the best initial packages and updates only their dependent caches;
     the effective limit is clipped to the current K/G package capacity.
+    sm_limit=0 retains the original execution path. A positive limit bounds
+    all runtime planner launches on one stream, including peer collectives,
+    sorting and publication. fuse enables bounded segment fusion; it requires
+    a positive limit. This is a per-invocation CTA/SM upper bound, not a fixed
+    physical SM partition, and applies only to same-host NVLink EP8.
     """
     sample_size: int = 256
     groups_per_class: int = 2
     rounds: int = 4
     sample_seed: int = 20261026
     candidate_limit: int = 0
+    sm_limit: int = 0
+    fuse: bool = False
 
     def __post_init__(self):
         bounds = {"sample_size": (1, 4096), "groups_per_class": (1, 8),
                   "rounds": (1, None), "sample_seed": (0, None),
-                  "candidate_limit": (0, 2**31-1)}
+                  "candidate_limit": (0, 2**31-1), "sm_limit": (0, 1024)}
         for name, (lo, hi) in bounds.items():
             object.__setattr__(self, name, _integer(name, getattr(self, name), lo, hi))
+        if not isinstance(self.fuse, bool):
+            raise ValueError("fuse must be a bool")
+        if self.fuse and not self.sm_limit:
+            raise ValueError("fuse requires a positive sm_limit")
 
     def to_dict(self):
         return asdict(self)

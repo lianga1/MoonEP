@@ -46,6 +46,12 @@ class SampledMaterializer:
     new execution rank. This keeps (rank, expert, original source offset)
     order without re-sorting expert bits. Set reuse_native_order=False for a
     general stable composite-key baseline. Both assign identical rows.
+
+    sm_limit>0 replaces the device-wide sort with stable eight-bucket grouping
+    and bounds every local launch, including initialization/publication, to
+    that many CTAs. It requires native order reuse and an all_gather(src,dst)
+    collective obeying the same budget. fuse combines metadata, validation and
+    tile histogram generation; it does not change grouping or tie order.
     """
 
     STATUS = {
@@ -59,7 +65,8 @@ class SampledMaterializer:
         128: "native C1 order is invalid or not expert-sorted",
     }
 
-    def __init__(self, ctx, *, reuse_native_order=True):
+    def __init__(self, ctx, *, reuse_native_order=True, sm_limit=0, fuse=False,
+                 collective=None):
         from moonep.planning import allocate_planning_outputs
 
         self.ctx, self.group = ctx, ctx.get("group")
@@ -79,6 +86,13 @@ class SampledMaterializer:
         self.device = ctx["meta_buf"].device
         self.ext = extension()
         self.reuse_native_order = bool(reuse_native_order)
+        if isinstance(sm_limit, bool) or not isinstance(sm_limit, int) or sm_limit < 0:
+            raise ValueError("sm_limit must be a nonnegative integer")
+        self.sm_limit, self.fuse, self.collective = sm_limit, bool(fuse), collective
+        if self.sm_limit and not self.reuse_native_order:
+            raise ValueError("bounded materialization requires reuse_native_order=True")
+        if self.sm_limit and collective is None:
+            raise ValueError("bounded materialization requires a bounded collective")
         self.plan, self.cu = allocate_planning_outputs(ctx)
         self.copies = self.plan.experts_to_copy
 
@@ -98,8 +112,15 @@ class SampledMaterializer:
         begin = self.rank * int(ctx["meta_chunk_padded"]) + int(ctx["ORDER_OFF"])
         self.native_order = ctx["meta_buf"][begin : begin + self.N]
         self.sort_bits = (self.R - 1).bit_length() if self.reuse_native_order else (self.R * self.E - 1).bit_length()
-        workspace = self.ext.workspace(self.keys_in, self.keys_out, self.ids_in, self.ids_out, self.sort_bits)
-        self.workspace = torch.empty(max(1, workspace), dtype=torch.uint8, device=self.device)
+        if self.sm_limit:
+            # Stable eight-bucket grouping over virtual 256-pair tiles. The
+            # physical CTA budget never changes the order of these tiles.
+            tiles = (self.N + 255) // 256
+            self.sort_counts, self.sort_prefix = ints(self.R, tiles), ints(self.R, tiles)
+            self.workspace = None
+        else:
+            workspace = self.ext.workspace(self.keys_in, self.keys_out, self.ids_in, self.ids_out, self.sort_bits)
+            self.workspace = torch.empty(max(1, workspace), dtype=torch.uint8, device=self.device)
 
     def _int(self, tensor, shape, name):
         if (tensor.device != self.device or tensor.dtype != torch.int32
@@ -110,7 +131,10 @@ class SampledMaterializer:
         """Decode this parent's canonical duplicate marker: raw = -dst - 1."""
         self._int(raw_dst, (self.N,), "raw_dst")
         self._int(out_owner, (self.S, self.K), "out_owner")
-        self.ext.decode(raw_dst, out_owner, self.NvS)
+        if self.sm_limit:
+            self.ext.decode_bounded(raw_dst, out_owner, self.NvS, self.sm_limit)
+        else:
+            self.ext.decode(raw_dst, out_owner, self.NvS)
         return out_owner
 
     def prepare_support(self, support):
@@ -122,7 +146,11 @@ class SampledMaterializer:
         if (support.device != self.device or support.dtype not in (torch.bool, torch.int32)
                 or tuple(support.shape) != (self.R, self.E) or not support.is_contiguous()):
             raise ValueError(f"support must be contiguous CUDA bool/int32 [{self.R},{self.E}]")
-        self.ext.support(support, self.lut, self.copies, self.status, self.R, self.E, self.B)
+        if self.sm_limit:
+            self.ext.support_bounded(support, self.lut, self.copies, self.status,
+                                     self.R, self.E, self.B, self.sm_limit)
+        else:
+            self.ext.support(support, self.lut, self.copies, self.status, self.R, self.E, self.B)
         return self.copies
 
     def materialize(self, routes, owner, seed_owner):
@@ -135,19 +163,36 @@ class SampledMaterializer:
         """
         for name, tensor in (("routes", routes), ("owner", owner), ("seed_owner", seed_owner)):
             self._int(tensor, (self.S, self.K), name)
-        self.ext.prepare(
-            routes, owner, seed_owner, self.native_order, self.lut,
-            self.keys_in, self.keys_out, self.ids_in, self.ids_out,
-            self.starts, self.counts, self.workspace, self.duplicates, self.status,
-            self.R, self.E, self.K, self.reuse_native_order, self.sort_bits,
-        )
-        dist.all_gather_into_tensor(self.gathered_counts.view(-1), self.counts.view(-1), group=self.group)
-        self.ext.layout_encode(
-            routes, owner, self.ids_out, self.starts, self.gathered_counts,
-            self.lut, self.copies, self.offsets, self.prefix, self.totals, self.duplicates,
-            self.plan.dst, self.cu, self.plan.zero_fill_ranges, self.plan.remote_stats,
-            self.status, self.R, self.E, self.B, self.K, self.rank, self.padding, self.NvS,
-        )
+        if self.sm_limit:
+            self.ext.prepare_bounded(
+                routes, owner, seed_owner, self.native_order, self.lut,
+                self.keys_in, self.keys_out, self.ids_in, self.ids_out,
+                self.starts, self.counts, self.sort_counts, self.sort_prefix,
+                self.duplicates, self.status, self.R, self.E, self.K,
+                self.sm_limit, self.fuse,
+            )
+            self.collective.all_gather(self.counts.view(-1), self.gathered_counts.view(-1))
+            self.ext.layout_encode_bounded(
+                routes, owner, self.ids_out, self.starts, self.gathered_counts,
+                self.lut, self.copies, self.offsets, self.prefix, self.totals, self.duplicates,
+                self.plan.dst, self.cu, self.plan.zero_fill_ranges, self.plan.remote_stats,
+                self.status, self.R, self.E, self.B, self.K, self.rank, self.padding,
+                self.NvS, self.sm_limit,
+            )
+        else:
+            self.ext.prepare(
+                routes, owner, seed_owner, self.native_order, self.lut,
+                self.keys_in, self.keys_out, self.ids_in, self.ids_out,
+                self.starts, self.counts, self.workspace, self.duplicates, self.status,
+                self.R, self.E, self.K, self.reuse_native_order, self.sort_bits,
+            )
+            dist.all_gather_into_tensor(self.gathered_counts.view(-1), self.counts.view(-1), group=self.group)
+            self.ext.layout_encode(
+                routes, owner, self.ids_out, self.starts, self.gathered_counts,
+                self.lut, self.copies, self.offsets, self.prefix, self.totals, self.duplicates,
+                self.plan.dst, self.cu, self.plan.zero_fill_ranges, self.plan.remote_stats,
+                self.status, self.R, self.E, self.B, self.K, self.rank, self.padding, self.NvS,
+            )
         return self.plan, self.cu
 
     def publish(self, final_dst):
@@ -164,9 +209,16 @@ class SampledMaterializer:
         self._int(final_dst, (self.N,), "final_dst")
         stride, offset = int(self.ctx["meta_chunk_padded"]), int(self.ctx["SRC_INFO_OFF"])
         begin = self.rank * stride + offset
-        self.ctx["meta_buf"][begin : begin + self.NvS].fill_(-1)
+        if self.sm_limit:
+            self.ext.fill_bounded(self.ctx["meta_buf"], begin, self.NvS, -1, self.sm_limit)
+        else:
+            self.ctx["meta_buf"][begin : begin + self.NvS].fill_(-1)
         launch_inter_rank_sync(self.ctx)
-        self.ext.publish(final_dst, self.ctx["meta_buf"], self.rank, self.NvS, stride, offset)
+        if self.sm_limit:
+            self.ext.publish_bounded(final_dst, self.ctx["meta_buf"], self.rank,
+                                     self.NvS, stride, offset, self.sm_limit)
+        else:
+            self.ext.publish(final_dst, self.ctx["meta_buf"], self.rank, self.NvS, stride, offset)
         launch_inter_rank_sync(self.ctx)
 
     def check_status(self):

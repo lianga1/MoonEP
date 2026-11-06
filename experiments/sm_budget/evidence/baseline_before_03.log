@@ -1,0 +1,62 @@
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+USDT:2026-11-06 09:12:19 626439:626439 SyncActivityProfilerHandler.cpp:52] profiler_startUSDT:2026-11-06 09:12:19 626443:626443 SyncActivityProfilerHandler.cpp:52] profiler_start
+
+USDT:2026-11-06 09:12:19 626442:626442 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-06 09:12:19 626441:626441 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-06 09:12:19 626446:626446 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-06 09:12:19 626445:626445 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-06 09:12:19 626440:626440 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-06 09:12:19 626444:626444 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-06 09:12:19 626444:626444 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-06 09:12:19 626443:626443 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-06 09:12:19 626440:626440 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-06 09:12:19 626439:626439 SyncActivityProfilerHandler.cpp:59] profiler_stop
+USDT:2026-11-06 09:12:19 626446:626446 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-06 09:12:19 626442:626442 SyncActivityProfilerHandler.cpp:59] profiler_stop
+
+USDT:2026-11-06 09:12:19 626441:626441 SyncActivityProfilerHandler.cpp:59] profiler_stop
+
+
+
+USDT:2026-11-06 09:12:19 626445:626445 SyncActivityProfilerHandler.cpp:59] profiler_stop
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+{"layer": 0, "candidate_limit": 128, "passed": true, "planner_us": 703.7631988525391}
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+{"layer": 1, "candidate_limit": 128, "passed": true, "planner_us": 688.21439743042}
+{"layer": 2, "candidate_limit": 128, "passed": true, "planner_us": 684.1439962387085}
+{"layer": 3, "candidate_limit": 128, "passed": true, "planner_us": 664.8191928863525}
+{"layer": 4, "candidate_limit": 128, "passed": true, "planner_us": 697.1967935562134}
+{"layer": 5, "candidate_limit": 128, "passed": true, "planner_us": 690.4192209243774}
+{"layer": 6, "candidate_limit": 128, "passed": true, "planner_us": 688.9247894287109}
+{"layer": 7, "candidate_limit": 128, "passed": true, "planner_us": 672.2464084625244}

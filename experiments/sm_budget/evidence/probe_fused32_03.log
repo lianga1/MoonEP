@@ -1,0 +1,23 @@
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+USDT:2026-11-06 09:04:23 403254:403254 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-06 09:04:23 403261:403261 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-06 09:04:23 403260:403260 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-06 09:04:23 403267:403267 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-06 09:04:23 403256:403256 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-06 09:04:23 403263:403263 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-06 09:04:23 403258:403258 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-06 09:04:23 403264:403264 SyncActivityProfilerHandler.cpp:52] profiler_start
+USDT:2026-11-06 09:04:23 403258:403258 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-06 09:04:23 403256:403256 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-06 09:04:23 403263:403263 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-06 09:04:23 403267:403267 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-06 09:04:23 403261:403261 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-06 09:04:23 403264:403264 SyncActivityProfilerHandler.cpp:59] profiler_stopUSDT:2026-11-06 09:04:23 403260:403260 SyncActivityProfilerHandler.cpp:59] profiler_stop
+
+USDT:2026-11-06 09:04:23 403254:403254 SyncActivityProfilerHandler.cpp:59] profiler_stop
+
+
+
+
+
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+{"layer": 0, "candidate_limit": 128, "passed": true, "planner_us": 924.8319864273071}

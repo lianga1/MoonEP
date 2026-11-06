@@ -49,6 +49,7 @@ Usage:
 
 import logging
 import os
+import socket
 import warnings
 from numbers import Integral
 
@@ -610,6 +611,10 @@ class Buffer:
                 slots = E // 8 if B is None else _sampled_integer("B", B)
                 B = slots
                 resolved_planner_config.validate_shape(R=num_ep_ranks, E=E, K=K, S=S, B=slots)
+                if (resolved_planner_config.sm_limit and dist.is_initialized()
+                        and torch.cuda.is_available()
+                        and resolved_planner_config.sm_limit > torch.cuda.get_device_properties(torch.cuda.current_device()).multi_processor_count):
+                    raise ValueError("planner sm_limit exceeds this device's SM count")
                 if dist.is_initialized() and dist.get_world_size(group) != num_ep_ranks:
                     raise ValueError("num_ep_ranks must equal the process-group size")
                 layout_signature = _sampled_context_bounds(S, H, K, E, num_ep_ranks, slots, token_padding, num_sms)
@@ -617,7 +622,8 @@ class Buffer:
                 if handle_mode not in ("auto", "fabric", "fd"):
                     raise ValueError("MOONEP_MEM_HANDLE_TYPE must be auto/fabric/fd")
                 signature = (S, H, K, E, num_ep_ranks, slots, token_padding, num_sms,
-                             handle_mode, layout_signature, resolved_planner_config.to_dict())
+                             handle_mode, layout_signature, resolved_planner_config.to_dict(),
+                             socket.gethostname() if resolved_planner_config.sm_limit else None)
             except (ValueError, TypeError, OverflowError, RuntimeError, AssertionError) as exc:
                 local_error = f"{type(exc).__name__}: {exc}"
                 if not dist.is_initialized():
