@@ -112,21 +112,41 @@ void collective(at::Tensor src,at::Tensor dst,at::Tensor shared,int stride,int r
   TORCH_CHECK(limit>0&&limit<=1024,"invalid planner CTA limit");
   c10::cuda::CUDAGuard guard(src.device());auto s=c10::cuda::getCurrentCUDAStream();
   int n=int(src.numel());int* sh=shared.data_ptr<int>();
-  if(fuse&&n>T){
-    const int grid=blocks(dst.numel(),limit);
-    const int* input=src.data_ptr<int>();int* output=dst.data_ptr<int>();
-    void* args[]={&input,&output,&sh,&stride,&rank,&n,&mode};
-    C10_CUDA_CHECK(cudaLaunchCooperativeKernel(
-        reinterpret_cast<const void*>(fused_collective_parallel),
-        dim3(grid),dim3(T),args,0,s));
-  }
-  else if(fuse)fused_collective<<<1,T,0,s>>>(src.data_ptr<int>(),dst.data_ptr<int>(),sh,stride,rank,n,mode);
+  // Measured selective fusion: scalar/small payloads benefit from one CTA;
+  // larger tables retain the four-launch path, avoiding cooperative-grid
+  // barrier overhead. The cap applies unchanged to every constituent launch.
+  if(fuse&&n<=T)fused_collective<<<1,T,0,s>>>(src.data_ptr<int>(),dst.data_ptr<int>(),sh,stride,rank,n,mode);
   else{
     copy_kernel<<<blocks(n,limit),T,0,s>>>(src.data_ptr<int>(),sh+rank*stride+HEADER,n,true);
     barrier_kernel<<<1,T,0,s>>>(sh,stride,rank);
     read_kernel<<<blocks(dst.numel(),limit),T,0,s>>>(sh,dst.data_ptr<int>(),stride,n,mode);
     barrier_kernel<<<1,T,0,s>>>(sh,stride,rank);
   }
+  C10_CUDA_KERNEL_LAUNCH_CHECK();
+}
+// Diagnostic only: grid=-1 preserves the LEGACY all-fused automatic choice,
+// including cooperative grids for larger tables; grid=0 replays the four-launch
+// path; positive grid forces the COMPLETE cooperative peer protocol, including
+// publish/read completion barriers. Even grid=1 uses the cooperative variant
+// so its grid-barrier overhead can be separated from fused_collective.
+void diagnostic_collective(at::Tensor src,at::Tensor dst,at::Tensor shared,
+    int stride,int rank,int mode,int limit,int grid){
+  TORCH_CHECK(limit>0&&limit<=1024&&grid>=-1&&grid<=limit,"diagnostic grid must be -1, 0, or 1..sm_limit");
+  if(grid==0||(grid==-1&&src.numel()<=T)){
+    collective(src,dst,shared,stride,rank,mode,limit,grid==-1);return;
+  }
+  check(src,src);check(dst,src);check(shared,src);
+  TORCH_CHECK(src.numel()>0&&src.numel()<=INT_MAX&&stride>=HEADER+src.numel()&&
+      shared.numel()==int64_t(R)*stride&&rank>=0&&rank<R&&mode>=0&&mode<=2);
+  TORCH_CHECK(dst.numel()==src.numel()*(mode==0?R:1));
+  if(grid==-1)grid=blocks(dst.numel(),limit);
+  c10::cuda::CUDAGuard guard(src.device());auto stream=c10::cuda::getCurrentCUDAStream();
+  int n=int(src.numel());int* sh=shared.data_ptr<int>();
+  const int* input=src.data_ptr<int>();int* output=dst.data_ptr<int>();
+  void* args[]={&input,&output,&sh,&stride,&rank,&n,&mode};
+  C10_CUDA_CHECK(cudaLaunchCooperativeKernel(
+      reinterpret_cast<const void*>(fused_collective_parallel),
+      dim3(grid),dim3(T),args,0,stream));
   C10_CUDA_KERNEL_LAUNCH_CHECK();
 }
 void status(at::Tensor a,at::Tensor b,at::Tensor reject,at::Tensor out){
@@ -150,4 +170,4 @@ void select_all(at::Tensor status,at::Tensor valid,std::vector<at::Tensor> candi
   }
   C10_CUDA_KERNEL_LAUNCH_CHECK();
 }
-PYBIND11_MODULE(TORCH_EXTENSION_NAME,m){m.def("copy",&copy);m.def("collective",&collective);m.def("status",&status);m.def("select_all",&select_all);}
+PYBIND11_MODULE(TORCH_EXTENSION_NAME,m){m.def("copy",&copy);m.def("collective",&collective);m.def("status",&status);m.def("select_all",&select_all);m.def("diagnostic_collective",&diagnostic_collective);}

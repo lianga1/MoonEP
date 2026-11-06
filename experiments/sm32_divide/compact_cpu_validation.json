@@ -1,0 +1,300 @@
+{
+  "status": "passed",
+  "scope": "CPU oracle comparison of exact compact-bit arithmetic, not a CUDA compile/runtime/performance result",
+  "cases": 28,
+  "checks": [
+    {
+      "accepted": 30,
+      "active_keys": 52,
+      "active_rows": 120,
+      "history_sha256": "652906f670aec46a47acf2f4224c9b7cb42c22ed04902952dd7dcaee2dd5dfd0",
+      "kind": "real_fixture",
+      "layer": 0,
+      "fixture_sha256": "b705b5e45be5dfa57d9b29fcb6b26e938de49cdf2d9fd153787cc2bd43e9d6f9"
+    },
+    {
+      "accepted": 29,
+      "active_keys": 52,
+      "active_rows": 127,
+      "history_sha256": "9c4e8139cee3009ececf56e106d1b608a2b2e248ca26ddd9f07a363337ffab10",
+      "kind": "real_fixture",
+      "layer": 1,
+      "fixture_sha256": "dbc6cfdfe10ac87984da3f429f4a5b4d5d6dd32e5d1e64e983e3e39ac807867b"
+    },
+    {
+      "accepted": 29,
+      "active_keys": 50,
+      "active_rows": 121,
+      "history_sha256": "3c87294fc86a6c9dc5ffc949f9c486154797991278572f73a6c1103e0bc6e0f1",
+      "kind": "real_fixture",
+      "layer": 2,
+      "fixture_sha256": "3b4c7c54c395e278a9880ac5e8a5bf737dd72ed53db0f376060b2b059b02134b"
+    },
+    {
+      "accepted": 26,
+      "active_keys": 44,
+      "active_rows": 118,
+      "history_sha256": "1eb73ee09b5df8eb8b6b4390d6c82ec1b911d121efae81fa44709d6ff25c9ceb",
+      "kind": "real_fixture",
+      "layer": 3,
+      "fixture_sha256": "0cf78029316533bd3a76053d065263994a78e644c869738043c5feb4d2aff3e2"
+    },
+    {
+      "accepted": 32,
+      "active_keys": 44,
+      "active_rows": 118,
+      "history_sha256": "796e60f2e72c3c82fa0f2873b1f9149400dcd8bf4d339cc619cd471d6a805175",
+      "kind": "real_fixture",
+      "layer": 4,
+      "fixture_sha256": "53c72a6823090add179e5a03fc6c8b795bf632a08330e142dfbef8af1018b6ea"
+    },
+    {
+      "accepted": 32,
+      "active_keys": 42,
+      "active_rows": 114,
+      "history_sha256": "f0f59e633ae440fdea8756694688a30e5b875e131be8d5e74fb4354206c4f775",
+      "kind": "real_fixture",
+      "layer": 5,
+      "fixture_sha256": "5b6106eaeca3a03c060aa7733b50ce1c409435cb3cd47a510b669047a8143a7b"
+    },
+    {
+      "accepted": 31,
+      "active_keys": 48,
+      "active_rows": 124,
+      "history_sha256": "54272e3943ee67fa0bb7f6d0f5e228f6889b1d8c8932ce7901bb538bc25df45b",
+      "kind": "real_fixture",
+      "layer": 6,
+      "fixture_sha256": "d4dc1c7b911e3024de4b2cab206ba68ce2df5f520c1701aae6685256de7e389a"
+    },
+    {
+      "accepted": 28,
+      "active_keys": 50,
+      "active_rows": 127,
+      "history_sha256": "a37e9d53c28f13b5dd521d854f10ee72e8aafc000b2c02c51c5ba066f43ef6e2",
+      "kind": "real_fixture",
+      "layer": 7,
+      "fixture_sha256": "1e0f64493ee09ec3711746459c930135c155134c6b1e60fd7b6966f8689bf613"
+    },
+    {
+      "accepted": 33,
+      "active_keys": 48,
+      "active_rows": 125,
+      "history_sha256": "c812b062d41a79f3734adf36d7cfbd28c03fbea79982f6d0d3106d3a6a4dcd25",
+      "kind": "random_repeated_routes",
+      "E": 64,
+      "K": 1,
+      "G": 2,
+      "seed": 7
+    },
+    {
+      "accepted": 31,
+      "active_keys": 46,
+      "active_rows": 123,
+      "history_sha256": "771009c15c2e8921a2eb10f050111dd53bc045579cc171be2d7252789aea8d7f",
+      "kind": "random_repeated_routes",
+      "E": 64,
+      "K": 1,
+      "G": 2,
+      "seed": 31
+    },
+    {
+      "accepted": 33,
+      "active_keys": 38,
+      "active_rows": 114,
+      "history_sha256": "5caa0d2abd276ffde9901c6683a5ce0db01b8af93bd0795f9a667da1090db1e5",
+      "kind": "random_repeated_routes",
+      "E": 64,
+      "K": 1,
+      "G": 2,
+      "seed": 20261026
+    },
+    {
+      "accepted": 33,
+      "active_keys": 46,
+      "active_rows": 124,
+      "history_sha256": "d0d55e97272364de19c042b7d866deaa4bf99861c11e631fff7eb5ae50f6361d",
+      "kind": "random_repeated_routes",
+      "E": 64,
+      "K": 1,
+      "G": 2,
+      "seed": 932071
+    },
+    {
+      "accepted": 31,
+      "active_keys": 42,
+      "active_rows": 122,
+      "history_sha256": "f8c07316899c6d8a3c9512b73147e80ac64d0d0c377c43f82da54a3f088e0915",
+      "kind": "random_repeated_routes",
+      "E": 64,
+      "K": 3,
+      "G": 3,
+      "seed": 7
+    },
+    {
+      "accepted": 32,
+      "active_keys": 36,
+      "active_rows": 112,
+      "history_sha256": "678565b5e9b6bb6434bc39b0217dd8f9b25a9b1f8bcb82f654c3cb28b415f5ed",
+      "kind": "random_repeated_routes",
+      "E": 64,
+      "K": 3,
+      "G": 3,
+      "seed": 31
+    },
+    {
+      "accepted": 33,
+      "active_keys": 38,
+      "active_rows": 110,
+      "history_sha256": "dabeeaadf5d4cd70c2f7b0042a57db2995fe467ef43d980dd414690c7a0fa31e",
+      "kind": "random_repeated_routes",
+      "E": 64,
+      "K": 3,
+      "G": 3,
+      "seed": 20261026
+    },
+    {
+      "accepted": 36,
+      "active_keys": 40,
+      "active_rows": 118,
+      "history_sha256": "0a5bbc0a4096fc0d33e3e1e730cfee92167648fe342194d98b565421728c6338",
+      "kind": "random_repeated_routes",
+      "E": 64,
+      "K": 3,
+      "G": 3,
+      "seed": 932071
+    },
+    {
+      "accepted": 33,
+      "active_keys": 56,
+      "active_rows": 124,
+      "history_sha256": "c29d10516699ab8353776b4a6c183dd61d2e18622f096e110ad29b79497e3e05",
+      "kind": "random_repeated_routes",
+      "E": 352,
+      "K": 8,
+      "G": 2,
+      "seed": 7
+    },
+    {
+      "accepted": 34,
+      "active_keys": 68,
+      "active_rows": 135,
+      "history_sha256": "b2600c8343b6fb763bf225f568d2d77ed713621dc6034062b42a53ffa1385729",
+      "kind": "random_repeated_routes",
+      "E": 352,
+      "K": 8,
+      "G": 2,
+      "seed": 31
+    },
+    {
+      "accepted": 33,
+      "active_keys": 62,
+      "active_rows": 126,
+      "history_sha256": "c52f918396464bc532a84048ca40580189860d64c246de931412a67b51222e59",
+      "kind": "random_repeated_routes",
+      "E": 352,
+      "K": 8,
+      "G": 2,
+      "seed": 20261026
+    },
+    {
+      "accepted": 31,
+      "active_keys": 60,
+      "active_rows": 128,
+      "history_sha256": "97143e3078f0f20b440b6bb2eff08172f67a57ddadf5f270f2adf939130e1527",
+      "kind": "random_repeated_routes",
+      "E": 352,
+      "K": 8,
+      "G": 2,
+      "seed": 932071
+    },
+    {
+      "accepted": 33,
+      "active_keys": 50,
+      "active_rows": 130,
+      "history_sha256": "7916f3f9ec378b2b0a83de74fa4838d411454e1ecb18c647ffce85d3901de8ce",
+      "kind": "random_repeated_routes",
+      "E": 520,
+      "K": 3,
+      "G": 3,
+      "seed": 7
+    },
+    {
+      "accepted": 29,
+      "active_keys": 36,
+      "active_rows": 105,
+      "history_sha256": "cb4d39110cb38a3e57d4c511a5e7ce46f9f0e6638ad3dc05b4eb1fd777b6b84c",
+      "kind": "random_repeated_routes",
+      "E": 520,
+      "K": 3,
+      "G": 3,
+      "seed": 31
+    },
+    {
+      "accepted": 29,
+      "active_keys": 42,
+      "active_rows": 114,
+      "history_sha256": "3c6844f7663630c5bc22951dcbb170ca23dc885a872a506e9c78b8a24f143888",
+      "kind": "random_repeated_routes",
+      "E": 520,
+      "K": 3,
+      "G": 3,
+      "seed": 20261026
+    },
+    {
+      "accepted": 32,
+      "active_keys": 40,
+      "active_rows": 119,
+      "history_sha256": "0b03ce2ea9e504140b4becd0697c6ce1f7d26f965e0250945b992f27afa6dad2",
+      "kind": "random_repeated_routes",
+      "E": 520,
+      "K": 3,
+      "G": 3,
+      "seed": 932071
+    },
+    {
+      "accepted": 32,
+      "active_keys": 184,
+      "active_rows": 220,
+      "history_sha256": "21581b530dc8d80c3fff11b697447d7da497a3ae7b0cb0231e6c1c83e3fac250",
+      "kind": "random_repeated_routes",
+      "E": 128,
+      "K": 16,
+      "G": 1,
+      "seed": 7
+    },
+    {
+      "accepted": 33,
+      "active_keys": 190,
+      "active_rows": 223,
+      "history_sha256": "004a6f2c735fbacb6fb86506e9a4f8acb93a7489b9cd7988f21e96170fd14f88",
+      "kind": "random_repeated_routes",
+      "E": 128,
+      "K": 16,
+      "G": 1,
+      "seed": 31
+    },
+    {
+      "accepted": 32,
+      "active_keys": 182,
+      "active_rows": 219,
+      "history_sha256": "a7807a409f720deb174d051c5d1655e8b2b7f8f6a3b82c81a46d068557755a05",
+      "kind": "random_repeated_routes",
+      "E": 128,
+      "K": 16,
+      "G": 1,
+      "seed": 20261026
+    },
+    {
+      "accepted": 31,
+      "active_keys": 182,
+      "active_rows": 219,
+      "history_sha256": "9f393a322aa18454e985d5e03b4c87429e476976338f7f9f951c404a3634d54b",
+      "kind": "random_repeated_routes",
+      "E": 128,
+      "K": 16,
+      "G": 1,
+      "seed": 932071
+    }
+  ],
+  "elapsed_seconds": 2.232122792
+}

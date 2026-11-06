@@ -86,6 +86,10 @@ class Residency:
     uses fixed 256-entry runs and parallel merge passes instead of CUB device
     kernels; fuse=True combines initial scoring with the first sorting pass.
     A bounded source-local collective must be supplied for distributed run().
+    At E352/K8/D256/G2 and sm_limit=32, positive candidate limits additionally
+    split exact frequencies across eight physical ranks: 896 int32 values per
+    rank are all-gathered into 7168 values before unchanged candidate ranking.
+    Other shapes, unlimited limits and component-only objects stay local.
 
     Call run(local_routes, local_owner, native_copies) on the intended CUDA
     stream. There is one all_reduce of D*(2*K+2)+1 int32 values: sampled
@@ -192,6 +196,22 @@ class Residency:
             self.active_flags = ints(self.buckets + self.active_rows.numel())
             self.active_counts = torch.zeros(2, dtype=torch.int32, device=self.device)
 
+        # Enable the extra peer collective only for the physically distributed
+        # configuration measured end-to-end. Other model/sample parameters,
+        # component-only objects and unlimited candidates keep the local path.
+        # This decision depends only on constructor configuration, never GPU
+        # status or token contents, so all ranks keep one collective sequence.
+        self.frequency_sharding_enabled = bool(
+            not self.component_only and self.effective_candidate_limit
+            and self.experts == 352 and self.topk == 8 and self.sample_size == 256
+            and self.groups_per_class == 2 and self.sm_limit == 32
+            and callable(getattr(self.collective, "all_gather", None)))
+        self.frequency_packed = self.frequency_gathered = None
+        if self.frequency_sharding_enabled:
+            shard_words = (28 * self.sample_size + 7) // 8
+            self.frequency_packed = ints(shard_words)
+            self.frequency_gathered = ints(8, shard_words)
+
     def _input(self, value, shape, name):
         if not (value.device == self.device and value.dtype == torch.int32
                 and value.is_contiguous() and tuple(value.shape) == shape):
@@ -215,19 +235,77 @@ class Residency:
             self.packet, self.status, self.copy_seen, self.per_source, source, self.slots)
         return self.packet
 
+    def _select_capped_phase(self, native_copies, phase):
+        args = (
+            self.packet, self.ids, native_copies, self.samples,
+            self.support, self.extra, self.copy_seen, self.classes, self.groups, self.sig0, self.sig1, self.masks,
+            self.frequencies, self.tops, self.first, self.records, self.sizes,
+            self.package_offsets, self.packages, self.package_count, self.experts_to_copy, self.history,
+            self.history_count, self.status, self.per_source, self.slots,
+            self.scores_in, self.scores_out, self.sort_scratch, self.selected_ids,
+            self.retained_count, self.pruning_diagnostics, self.effective_candidate_limit,
+            self.active_keys, self.active_rows, self.active_flags, self.active_counts,
+            self.sm_limit, self.fuse)
+        if phase == 0:
+            self.ext.select_capped_active(*args)
+        else:
+            self.ext.select_capped_active_phase(phase, *args)
+        return self.support
+
+    def select_prepare(self, native_copies):
+        """Sharded phase 1: reset mandatory state and build all sample records.
+
+        No frequency kernel or peer collective is run. This initializes even
+        invalid records/status; the caller must still run the fixed collective
+        sequence before select_finalize on every rank.
+        """
+        if not self.frequency_sharding_enabled:
+            raise RuntimeError("split selector requires the enabled distributed frequency path")
+        self._input(native_copies, (8, self.slots), "native_copies")
+        return self._select_capped_phase(native_copies, 1)
+
+    def select_frequency_shard(self):
+        """Count this rank's records into its preallocated 896-int shard."""
+        if not self.frequency_sharding_enabled:
+            raise RuntimeError("distributed frequency sharding is not enabled")
+        self.ext.frequency_shard(self.classes, self.groups, self.sig0, self.sig1,
+            self.frequency_packed, self.rank, self.sm_limit)
+        return self.frequency_packed
+
+    def select_frequency_unpack(self):
+        """Restore original record order after the explicit all_gather."""
+        if not self.frequency_sharding_enabled:
+            raise RuntimeError("distributed frequency sharding is not enabled")
+        self.ext.frequency_unshard(self.frequency_gathered, self.frequencies, self.sm_limit)
+        return self.frequencies
+
+    def select_finalize(self, native_copies):
+        """Sharded phase 2: consume exact frequencies, from top-G through greedy.
+
+        Mandatory support/status is inherited from select_prepare. This phase
+        neither rebuilds records nor overwrites the gathered frequency table.
+        """
+        if not self.frequency_sharding_enabled:
+            raise RuntimeError("split selector requires the enabled distributed frequency path")
+        self._input(native_copies, (8, self.slots), "native_copies")
+        return self._select_capped_phase(native_copies, 2)
+
     def select(self, native_copies):
-        """Consume the globally summed packet; run() is the normal entry point."""
+        """Consume global samples; use the same path for run and stage profiling.
+
+        When frequency_sharding_enabled, this method includes one all_gather
+        and must be invoked in the same order on all eight ranks.
+        """
         self._input(native_copies, (8, self.slots), "native_copies")
         if self.effective_candidate_limit:
-            self.ext.select_capped_active(self.packet, self.ids, native_copies, self.samples,
-                self.support, self.extra, self.copy_seen, self.classes, self.groups, self.sig0, self.sig1, self.masks,
-                self.frequencies, self.tops, self.first, self.records, self.sizes,
-                self.package_offsets, self.packages, self.package_count, self.experts_to_copy, self.history,
-                self.history_count, self.status, self.per_source, self.slots,
-                self.scores_in, self.scores_out, self.sort_scratch, self.selected_ids,
-                self.retained_count, self.pruning_diagnostics, self.effective_candidate_limit,
-                self.active_keys, self.active_rows, self.active_flags, self.active_counts,
-                self.sm_limit, self.fuse)
+            if self.frequency_sharding_enabled:
+                self.select_prepare(native_copies)
+                self.select_frequency_shard()
+                self.collective.all_gather(self.frequency_packed, self.frequency_gathered)
+                self.select_frequency_unpack()
+                self.select_finalize(native_copies)
+            else:
+                self._select_capped_phase(native_copies, 0)
             return self.support
         self.ext.select(self.packet, self.ids, native_copies, self.samples,
             self.support, self.extra, self.copy_seen, self.classes, self.groups, self.sig0, self.sig1, self.masks,
@@ -246,6 +324,77 @@ class Residency:
         else:
             dist.all_reduce(self.packet, op=dist.ReduceOp.SUM, group=self.group, async_op=False)
         return self.select(native_copies)
+
+    def diagnostic_frequency_local(self, *, warp=False):
+        """Experimental local frequency comparison; call select/run first.
+
+        warp=False replays the current bounded frequency kernel; warp=True
+        replays the exact one-warp-per-record variant. Neither changes the
+        production selector. Both write this object's frequencies array.
+        """
+        if not self.sm_limit or not isinstance(warp, bool):
+            raise ValueError("frequency diagnostics require positive sm_limit and bool warp")
+        self.ext.diagnostic_frequency_local(self.classes, self.groups,
+            self.sig0, self.sig1, self.frequencies, self.sm_limit, warp)
+        return self.frequencies
+
+    def diagnostic_frequency_shard(self, packed, *, shard_rank=None):
+        """Write this rank's flat-record-ID modulo eight frequency shard.
+
+        packed is preallocated int32[ceil(28*D/8)]. All eight ranks must share
+        the exact same candidate records/signatures. No collective is hidden
+        here: explicitly all_gather these outputs, then call unshard below.
+        """
+        if not self.sm_limit:
+            raise ValueError("frequency diagnostics require positive sm_limit")
+        rank = self.rank if shard_rank is None else _integer(shard_rank, "shard_rank")
+        if not 0 <= rank < 8:
+            raise ValueError("shard_rank must be in 0..7")
+        words = (self.frequencies.numel() + 7) // 8
+        self._input(packed, (words,), "packed frequencies")
+        self.ext.diagnostic_frequency_shard(self.classes, self.groups,
+            self.sig0, self.sig1, packed, rank, self.sm_limit)
+        return packed
+
+    def diagnostic_frequency_unshard(self, gathered):
+        """Restore exact [28,D] frequencies after the experimental all_gather."""
+        if not self.sm_limit:
+            raise ValueError("frequency diagnostics require positive sm_limit")
+        words = (self.frequencies.numel() + 7) // 8
+        self._input(gathered, (8, words), "gathered frequencies")
+        self.ext.diagnostic_frequency_unshard(gathered, self.frequencies, self.sm_limit)
+        return self.frequencies
+
+    def diagnostic_greedy_replay(self, native_copies, *, compact, single_package=False):
+        """Diagnostic-only old/compact greedy comparison; not a planner setting.
+
+        First call select/run to build candidates. Reuse that exact sample
+        packet and native_copies. Both choices reset mandatory support with
+        the same kernel before replaying the unchanged selected candidates.
+        This overwrites support, copies and accepted history; it does not
+        rebuild/prune candidates or launch any collective. CUDA Graph capture
+        is allowed. Timings include the common mandatory initialization.
+        single_package=False preserves the original bitmap loop for a causal
+        comparison. True uses one package per thread and requires compact
+        with this object's effective candidate limit at most 256. This switch
+        is diagnostic-only; production retains the original bitmap loop.
+        """
+        if not isinstance(compact, bool) or not isinstance(single_package, bool):
+            raise ValueError("compact and single_package must be bool")
+        if single_package and (not compact or self.effective_candidate_limit > 256):
+            raise ValueError("single_package requires compact and effective candidate_limit<=256")
+        if not self.effective_candidate_limit or not self.uses_active_table:
+            raise ValueError("diagnostic replay requires capped active-table residency")
+        self._input(native_copies, (8, self.slots), "native_copies")
+        self.ext.diagnostic_greedy_replay(self.packet, native_copies,
+            self.samples, self.support, self.extra, self.copy_seen,
+            self.masks, self.frequencies, self.classes, self.groups,
+            self.records, self.sizes, self.packages, self.retained_count,
+            self.selected_ids, self.experts_to_copy, self.history,
+            self.history_count, self.status, self.active_keys, self.active_rows,
+            self.active_counts, self.slots, self.effective_candidate_limit,
+            compact, single_package)
+        return self.support
 
     def candidate_diagnostics(self):
         """Synchronizing debug readback; never called by the planning path.
@@ -278,6 +427,8 @@ class Residency:
         If reduced_packet is supplied, copy it into borrowed packet storage on
         the current CUDA stream. No host reads or input-dependent allocations.
         All source contributions must use this object's same sample indices.
+        Eligible distributed objects also execute the frequency all_gather;
+        component_only objects retain a local selector with no collective.
         """
         if reduced_packet is not None:
             self._input(reduced_packet, (self.packet_size,), "reduced_packet")

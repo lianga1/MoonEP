@@ -1,0 +1,127 @@
+{
+  "status": "complete",
+  "scope": "CPU arithmetic/index oracle; not CUDA execution",
+  "cases": [
+    {
+      "D": 1,
+      "K": 1,
+      "forced_hash_collision": false,
+      "flat_records": 28,
+      "shard_words": 4,
+      "first_occurrence_exact": true,
+      "padded_tail_zero": true,
+      "expected_sha256": "73292e2940b5d4ad229dee230064778f3030e6c3ab71f540bfe552c548dfb567"
+    },
+    {
+      "D": 1,
+      "K": 1,
+      "forced_hash_collision": true,
+      "flat_records": 28,
+      "shard_words": 4,
+      "first_occurrence_exact": true,
+      "padded_tail_zero": true,
+      "expected_sha256": "73292e2940b5d4ad229dee230064778f3030e6c3ab71f540bfe552c548dfb567"
+    },
+    {
+      "D": 7,
+      "K": 3,
+      "forced_hash_collision": false,
+      "flat_records": 196,
+      "shard_words": 25,
+      "first_occurrence_exact": true,
+      "padded_tail_zero": true,
+      "expected_sha256": "0d4b6906df4628f47e5bb91d1a67630b52f825e4d94a311810dea91a2caeaf81"
+    },
+    {
+      "D": 7,
+      "K": 3,
+      "forced_hash_collision": true,
+      "flat_records": 196,
+      "shard_words": 25,
+      "first_occurrence_exact": true,
+      "padded_tail_zero": true,
+      "expected_sha256": "8186983ddc2b14a8f1bbee380d7687b52f8868758e63dc25fc5161e926e40f4e"
+    },
+    {
+      "D": 37,
+      "K": 3,
+      "forced_hash_collision": false,
+      "flat_records": 1036,
+      "shard_words": 130,
+      "first_occurrence_exact": true,
+      "padded_tail_zero": true,
+      "expected_sha256": "dc0bd60942179dae20f71dd54199898c6f7ecb28af69f7ed5eef1464ea4bd197"
+    },
+    {
+      "D": 37,
+      "K": 3,
+      "forced_hash_collision": true,
+      "flat_records": 1036,
+      "shard_words": 130,
+      "first_occurrence_exact": true,
+      "padded_tail_zero": true,
+      "expected_sha256": "8dd90ebf9b4bf80c62eacd2c3764aecfaac7f767de0fb8fe49616c4a836ed915"
+    },
+    {
+      "D": 256,
+      "K": 8,
+      "forced_hash_collision": false,
+      "flat_records": 7168,
+      "shard_words": 896,
+      "first_occurrence_exact": true,
+      "padded_tail_zero": true,
+      "expected_sha256": "6374a72e7c06b36859c186f97c50e3d0a11dd232d97a6593c2827867110f6845"
+    },
+    {
+      "D": 256,
+      "K": 8,
+      "forced_hash_collision": true,
+      "flat_records": 7168,
+      "shard_words": 896,
+      "first_occurrence_exact": true,
+      "padded_tail_zero": true,
+      "expected_sha256": "7b5577f6413265daf579f014a7424f1e08d8f985ce3f68c16219da4bfa5ce630"
+    },
+    {
+      "D": 257,
+      "K": 8,
+      "forced_hash_collision": false,
+      "flat_records": 7196,
+      "shard_words": 900,
+      "first_occurrence_exact": true,
+      "padded_tail_zero": true,
+      "expected_sha256": "36cd81ab6aa5ae366bc6b8d668e11f0644580c514e84d3cbf0b0745f08732570"
+    },
+    {
+      "D": 257,
+      "K": 8,
+      "forced_hash_collision": true,
+      "flat_records": 7196,
+      "shard_words": 900,
+      "first_occurrence_exact": true,
+      "padded_tail_zero": true,
+      "expected_sha256": "f4213729a9a3104770695b5b8a7b21730fdd827886133db63cae11a794a9b46b"
+    },
+    {
+      "D": 512,
+      "K": 8,
+      "forced_hash_collision": false,
+      "flat_records": 14336,
+      "shard_words": 1792,
+      "first_occurrence_exact": true,
+      "padded_tail_zero": true,
+      "expected_sha256": "8833e320ab2524793b812b5d1ea1aa647377b323736a263434bf18b4c8364944"
+    },
+    {
+      "D": 512,
+      "K": 8,
+      "forced_hash_collision": true,
+      "flat_records": 14336,
+      "shard_words": 1792,
+      "first_occurrence_exact": true,
+      "padded_tail_zero": true,
+      "expected_sha256": "55930c8a5391f34efdbed767a9930cb822abce28fa8acf7f12fddfeea49d7d17"
+    }
+  ],
+  "test_source_sha256": "3d10a4828ebdb677192aee3fe4b5c9cbd5eb74209006a3c67dfa118590ec862a"
+}

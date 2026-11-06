@@ -1,0 +1,507 @@
+{
+  "seed": 20261106,
+  "scope": "Independent count-prefix vs actual stable expert then rank ordering and full starts scan",
+  "passed": true,
+  "cases": [
+    {
+      "E": 8,
+      "N": 1,
+      "matched": true
+    },
+    {
+      "E": 8,
+      "N": 2048,
+      "matched": true
+    },
+    {
+      "E": 4096,
+      "N": 257,
+      "matched": true
+    },
+    {
+      "E": 128,
+      "N": 257,
+      "matched": true
+    },
+    {
+      "E": 4096,
+      "N": 1,
+      "matched": true
+    },
+    {
+      "E": 8,
+      "N": 2048,
+      "matched": true
+    },
+    {
+      "E": 8,
+      "N": 3,
+      "matched": true
+    },
+    {
+      "E": 8,
+      "N": 3,
+      "matched": true
+    },
+    {
+      "E": 8,
+      "N": 31,
+      "matched": true
+    },
+    {
+      "E": 128,
+      "N": 3,
+      "matched": true
+    },
+    {
+      "E": 8,
+      "N": 1,
+      "matched": true
+    },
+    {
+      "E": 4096,
+      "N": 31,
+      "matched": true
+    },
+    {
+      "E": 128,
+      "N": 257,
+      "matched": true
+    },
+    {
+      "E": 352,
+      "N": 1,
+      "matched": true
+    },
+    {
+      "E": 128,
+      "N": 1,
+      "matched": true
+    },
+    {
+      "E": 352,
+      "N": 3,
+      "matched": true
+    },
+    {
+      "E": 64,
+      "N": 3,
+      "matched": true
+    },
+    {
+      "E": 4096,
+      "N": 2048,
+      "matched": true
+    },
+    {
+      "E": 8,
+      "N": 3,
+      "matched": true
+    },
+    {
+      "E": 352,
+      "N": 257,
+      "matched": true
+    },
+    {
+      "E": 128,
+      "N": 3,
+      "matched": true
+    },
+    {
+      "E": 4096,
+      "N": 2048,
+      "matched": true
+    },
+    {
+      "E": 8,
+      "N": 3,
+      "matched": true
+    },
+    {
+      "E": 64,
+      "N": 3,
+      "matched": true
+    },
+    {
+      "E": 128,
+      "N": 31,
+      "matched": true
+    },
+    {
+      "E": 8,
+      "N": 1,
+      "matched": true
+    },
+    {
+      "E": 64,
+      "N": 31,
+      "matched": true
+    },
+    {
+      "E": 8,
+      "N": 257,
+      "matched": true
+    },
+    {
+      "E": 352,
+      "N": 3,
+      "matched": true
+    },
+    {
+      "E": 352,
+      "N": 257,
+      "matched": true
+    },
+    {
+      "E": 8,
+      "N": 1,
+      "matched": true
+    },
+    {
+      "E": 128,
+      "N": 257,
+      "matched": true
+    },
+    {
+      "E": 8,
+      "N": 31,
+      "matched": true
+    },
+    {
+      "E": 352,
+      "N": 3,
+      "matched": true
+    },
+    {
+      "E": 8,
+      "N": 31,
+      "matched": true
+    },
+    {
+      "E": 64,
+      "N": 2048,
+      "matched": true
+    },
+    {
+      "E": 352,
+      "N": 2048,
+      "matched": true
+    },
+    {
+      "E": 8,
+      "N": 2048,
+      "matched": true
+    },
+    {
+      "E": 128,
+      "N": 1,
+      "matched": true
+    },
+    {
+      "E": 8,
+      "N": 257,
+      "matched": true
+    },
+    {
+      "E": 352,
+      "N": 1,
+      "matched": true
+    },
+    {
+      "E": 64,
+      "N": 2048,
+      "matched": true
+    },
+    {
+      "E": 352,
+      "N": 3,
+      "matched": true
+    },
+    {
+      "E": 8,
+      "N": 257,
+      "matched": true
+    },
+    {
+      "E": 128,
+      "N": 1,
+      "matched": true
+    },
+    {
+      "E": 64,
+      "N": 2048,
+      "matched": true
+    },
+    {
+      "E": 128,
+      "N": 257,
+      "matched": true
+    },
+    {
+      "E": 64,
+      "N": 31,
+      "matched": true
+    },
+    {
+      "E": 64,
+      "N": 257,
+      "matched": true
+    },
+    {
+      "E": 352,
+      "N": 1,
+      "matched": true
+    },
+    {
+      "E": 8,
+      "N": 31,
+      "matched": true
+    },
+    {
+      "E": 4096,
+      "N": 257,
+      "matched": true
+    },
+    {
+      "E": 8,
+      "N": 1,
+      "matched": true
+    },
+    {
+      "E": 8,
+      "N": 257,
+      "matched": true
+    },
+    {
+      "E": 64,
+      "N": 257,
+      "matched": true
+    },
+    {
+      "E": 128,
+      "N": 31,
+      "matched": true
+    },
+    {
+      "E": 128,
+      "N": 2048,
+      "matched": true
+    },
+    {
+      "E": 352,
+      "N": 257,
+      "matched": true
+    },
+    {
+      "E": 4096,
+      "N": 2048,
+      "matched": true
+    },
+    {
+      "E": 64,
+      "N": 257,
+      "matched": true
+    },
+    {
+      "E": 128,
+      "N": 3,
+      "matched": true
+    },
+    {
+      "E": 64,
+      "N": 1,
+      "matched": true
+    },
+    {
+      "E": 8,
+      "N": 257,
+      "matched": true
+    },
+    {
+      "E": 4096,
+      "N": 1,
+      "matched": true
+    },
+    {
+      "E": 8,
+      "N": 1,
+      "matched": true
+    },
+    {
+      "E": 64,
+      "N": 2048,
+      "matched": true
+    },
+    {
+      "E": 128,
+      "N": 31,
+      "matched": true
+    },
+    {
+      "E": 128,
+      "N": 2048,
+      "matched": true
+    },
+    {
+      "E": 8,
+      "N": 257,
+      "matched": true
+    },
+    {
+      "E": 352,
+      "N": 257,
+      "matched": true
+    },
+    {
+      "E": 128,
+      "N": 2048,
+      "matched": true
+    },
+    {
+      "E": 8,
+      "N": 1,
+      "matched": true
+    },
+    {
+      "E": 4096,
+      "N": 1,
+      "matched": true
+    },
+    {
+      "E": 4096,
+      "N": 2048,
+      "matched": true
+    },
+    {
+      "E": 128,
+      "N": 2048,
+      "matched": true
+    },
+    {
+      "E": 8,
+      "N": 1,
+      "matched": true
+    },
+    {
+      "E": 128,
+      "N": 3,
+      "matched": true
+    },
+    {
+      "E": 8,
+      "N": 1,
+      "matched": true
+    },
+    {
+      "E": 64,
+      "N": 31,
+      "matched": true
+    },
+    {
+      "E": 64,
+      "N": 2048,
+      "matched": true
+    },
+    {
+      "E": 4096,
+      "N": 1,
+      "matched": true
+    },
+    {
+      "E": 4096,
+      "N": 2048,
+      "matched": true
+    },
+    {
+      "E": 4096,
+      "N": 1,
+      "matched": true
+    },
+    {
+      "E": 4096,
+      "N": 31,
+      "matched": true
+    },
+    {
+      "E": 352,
+      "N": 2048,
+      "matched": true
+    },
+    {
+      "E": 8,
+      "N": 1,
+      "matched": true
+    },
+    {
+      "E": 8,
+      "N": 31,
+      "matched": true
+    },
+    {
+      "E": 8,
+      "N": 31,
+      "matched": true
+    },
+    {
+      "E": 128,
+      "N": 31,
+      "matched": true
+    },
+    {
+      "E": 128,
+      "N": 3,
+      "matched": true
+    },
+    {
+      "E": 8,
+      "N": 2048,
+      "matched": true
+    },
+    {
+      "E": 4096,
+      "N": 31,
+      "matched": true
+    },
+    {
+      "E": 8,
+      "N": 3,
+      "matched": true
+    },
+    {
+      "E": 4096,
+      "N": 2048,
+      "matched": true
+    },
+    {
+      "E": 128,
+      "N": 1,
+      "matched": true
+    },
+    {
+      "E": 64,
+      "N": 1,
+      "matched": true
+    },
+    {
+      "E": 4096,
+      "N": 2048,
+      "matched": true
+    },
+    {
+      "E": 128,
+      "N": 1,
+      "matched": true
+    },
+    {
+      "E": 64,
+      "N": 31,
+      "matched": true
+    },
+    {
+      "E": 4096,
+      "N": 257,
+      "matched": true
+    }
+  ]
+}

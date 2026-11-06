@@ -1,0 +1,41 @@
+--- a/moonep/csrc/sampled_residency.cu
++++ b/moonep/csrc/sampled_residency.cu
+@@ -570,10 +570,10 @@
+   if(t<R)s.current_extra[t]=extra[t];
+   if(t==0){s.accepted=0;s.changed_targets=(1u<<R)-1;}
+ 
+-  // The host dispatches PackagesPerThread=1 when cap<=THREADS: retained_count
+-  // is min(package_count,cap), so thread t owns at most package t. Larger caps
+-  // keep the original MAXP-derived loop/storage. Candidate IDs and contents
+-  // are unchanged; only statically impossible per-thread slots are removed.
++  // The diagnostic-only PackagesPerThread=1 variant requires cap<=THREADS:
++  // retained_count is min(package_count,cap), so thread t owns at most package t.
++  // Production retains the original MAXP-derived loop/storage after GPU tests
++  // showed the smaller specialization was slower. Candidate IDs are unchanged.
+   int forward_slot[PackagesPerThread],backward_slot[PackagesPerThread];
+   #pragma unroll
+   for(int i=0;i<PackagesPerThread;++i){
+@@ -1255,11 +1255,7 @@
+     }
+     if constexpr(USE_COMPACT_GREEDY_TABLE){
+       if(sm_limit>0){
+-        if(cap<=THREADS){
+-          global_greedy_compact_active<1><<<1,THREADS,0,stream>>>(w(masks),freq.data_ptr<int>(),classes.data_ptr<int>(),groups.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),packages.data_ptr<int>(),retained_count.data_ptr<int>(),selected_ids.data_ptr<int>(),support.data_ptr<bool>(),extra.data_ptr<int>(),output_etc.data_ptr<int>(),history.data_ptr<int64_t>(),history_count.data_ptr<int>(),status.data_ptr<int>(),B,active_keys.data_ptr<int>(),active_rows.data_ptr<int>(),active_counts.data_ptr<int>());
+-        }else{
+-          global_greedy_compact_active<><<<1,THREADS,0,stream>>>(w(masks),freq.data_ptr<int>(),classes.data_ptr<int>(),groups.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),packages.data_ptr<int>(),retained_count.data_ptr<int>(),selected_ids.data_ptr<int>(),support.data_ptr<bool>(),extra.data_ptr<int>(),output_etc.data_ptr<int>(),history.data_ptr<int64_t>(),history_count.data_ptr<int>(),status.data_ptr<int>(),B,active_keys.data_ptr<int>(),active_rows.data_ptr<int>(),active_counts.data_ptr<int>());
+-        }
++        global_greedy_compact_active<><<<1,THREADS,0,stream>>>(w(masks),freq.data_ptr<int>(),classes.data_ptr<int>(),groups.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),packages.data_ptr<int>(),retained_count.data_ptr<int>(),selected_ids.data_ptr<int>(),support.data_ptr<bool>(),extra.data_ptr<int>(),output_etc.data_ptr<int>(),history.data_ptr<int64_t>(),history_count.data_ptr<int>(),status.data_ptr<int>(),B,active_keys.data_ptr<int>(),active_rows.data_ptr<int>(),active_counts.data_ptr<int>());
+       }else{
+     global_greedy_table_active<><<<1,THREADS,0,stream>>>(w(masks),freq.data_ptr<int>(),classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),packages.data_ptr<int>(),retained_count.data_ptr<int>(),selected_ids.data_ptr<int>(),support.data_ptr<bool>(),extra.data_ptr<int>(),output_etc.data_ptr<int>(),history.data_ptr<int64_t>(),history_count.data_ptr<int>(),status.data_ptr<int>(),B,active_keys.data_ptr<int>(),active_rows.data_ptr<int>(),active_counts.data_ptr<int>());
+       }
+--- a/moonep/sampled_residency.py
++++ b/moonep/sampled_residency.py
+@@ -299,7 +299,7 @@
+         single_package=False preserves the original bitmap loop for a causal
+         comparison. True uses one package per thread and requires compact
+         with this object's effective candidate limit at most 256. This switch
+-        is diagnostic-only; the production bounded path dispatches by cap.
++        is diagnostic-only; production retains the original bitmap loop.
+         """
+         if not isinstance(compact, bool) or not isinstance(single_package, bool):
+             raise ValueError("compact and single_package must be bool")

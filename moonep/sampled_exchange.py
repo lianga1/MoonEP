@@ -40,11 +40,15 @@ class SampledExchange:
     Routes must contain expert IDs in [0,E); seeds must contain ranks in [0,8).
     sm_limit=0 retains the original grid dimensions. A positive limit bounds
     every launch to that many CTAs while preserving virtual tile IDs/order.
-    fuse=True joins proposal/ordinal generation and small-table fold/quota;
-    it requires a positive limit. This class launches on the current stream;
+    fuse=True enables the measured selective policy: small-table fold/quota
+    remains fused, while proposal and stable ordinals stay separate with the
+    default 256-token histogram. It requires a positive limit. The private
+    _fuse_proposals override and stage 4 retain the old fused proposal for
+    diagnostics; they do not change candidate or stable-order semantics.
+    This class launches on the current stream;
     its limit does not constrain external collectives supplied by the caller.
     """
-    def __init__(self,routes,support,*,source,rounds=4,sm_limit=0,fuse=False):
+    def __init__(self,routes,support,*,source,rounds=4,sm_limit=0,fuse=False,_tile_tokens=256,_fuse_proposals=False):
         if (routes.ndim != 2 or routes.shape[0] <= 0 or not 1 <= routes.shape[1] <= 32
                 or routes.dtype != torch.int32 or not routes.is_cuda or not routes.is_contiguous()):
             raise ValueError('routes require contiguous CUDA int32 [S,K], S>0 and 1<=K<=32')
@@ -64,11 +68,20 @@ class SampledExchange:
             raise ValueError('sm_limit must be zero or no greater than this device SM count')
         if not isinstance(fuse, bool) or (fuse and sm_limit == 0):
             raise ValueError('fuse must be bool and requires a positive sm_limit')
+        if not isinstance(_fuse_proposals, bool) or (_fuse_proposals and sm_limit == 0):
+            raise ValueError('private proposal fusion must be bool and requires a positive sm_limit')
+        self._fuse_proposals=_fuse_proposals
+        if isinstance(_tile_tokens, bool):
+            raise ValueError('private histogram tile must be 64, 128 or 256')
+        _tile_tokens = operator.index(_tile_tokens)
+        if _tile_tokens not in (64,128,256) or (_tile_tokens != 256 and sm_limit == 0):
+            raise ValueError('private histogram tiles 64/128 require a positive sm_limit')
+        self._tile_tokens=_tile_tokens
         self.sm_limit,self.fuse=sm_limit,fuse
         self.routes,self.support,self.source,self.rounds=routes,support,source,rounds
         self.S,self.K=routes.shape;self.E=support.shape[1]
         self.buckets=RANKS*RANKS*2*(self.K+1)
-        self.blocks=(self.S+255)//256;self.ext=extension(self.K)
+        self.blocks=(self.S+_tile_tokens-1)//_tile_tokens;self.ext=extension(self.K)
         def ints(*shape):return torch.empty(shape,device=routes.device,dtype=torch.int32)
         self.owner=torch.empty_like(routes);self.old_masks=ints(self.S,RANKS);self.exec_masks=ints(self.S,RANKS)
         self.resident=ints(self.E);self.keys=ints(self.S);self.moves=ints(self.S);self.ordinals=ints(self.S)
@@ -91,8 +104,21 @@ class SampledExchange:
         if not 0 <= step < self.rounds:
             raise ValueError('step must be in [0,rounds)')
         return step
-    def propose(self,step):
-        self.ext.propose(self.old_masks,self.exec_masks,self.keys,self.moves,self.ordinals,self.block_counts,self.block_prefix,self.counts,self.S,self.source*self.S,self._step(step),self.sm_limit,self.fuse)
+    def propose(self,step,*,_stage=0):
+        """Generate proposals; private stage splits are for microbenchmarks only.
+
+        0 runs the normal pipeline; 1 proposal, 2 ordinal, 3 prefix, 4 fused
+        proposal+ordinal (explicitly overrides selective fusion). Stage 4
+        requires a positive SM limit. Run stage 0 first to initialize inputs. Only
+        stages 0/3 produce current counts. None of these stages changes owners.
+        """
+        if isinstance(_stage, bool):
+            raise ValueError('private proposal stage must be in 0..4')
+        _stage=operator.index(_stage)
+        if _stage not in range(5) or (_stage==4 and self.sm_limit==0):
+            raise ValueError('private proposal stage must be in 0..4; stage 4 requires a positive sm_limit')
+        proposal_fuse=self._fuse_proposals or _stage==4
+        self.ext.propose(self.old_masks,self.exec_masks,self.keys,self.moves,self.ordinals,self.block_counts,self.block_prefix,self.counts,self.S,self.source*self.S,self._step(step),self.sm_limit,proposal_fuse,self._tile_tokens,_stage)
         return self.counts
     def quota(self,step,gathered):
         if (gathered.numel() != RANKS*self.buckets or gathered.dtype != torch.int32
@@ -100,6 +126,6 @@ class SampledExchange:
             raise ValueError('gathered must contain 8*buckets contiguous CUDA int32 counts')
         self.ext.quota(gathered,self.total,self.source_prefix,self.accept,self.stats,self.source,self._step(step),self.sm_limit,self.fuse)
     def apply(self):
-        self.ext.apply(self.keys,self.moves,self.ordinals,self.block_prefix,self.source_prefix,self.accept,self.old_masks,self.owner,self.sm_limit)
+        self.ext.apply(self.keys,self.moves,self.ordinals,self.block_prefix,self.source_prefix,self.accept,self.old_masks,self.owner,self.sm_limit,self._tile_tokens)
         return self.owner
     def commit(self,step,gathered):self.quota(step,gathered);return self.apply()

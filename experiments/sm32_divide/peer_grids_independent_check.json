@@ -1,0 +1,2700 @@
+{
+  "status": "passed",
+  "checker": "Independent standard-library arithmetic and little-endian int32 SHA-256 reconstruction; does not import benchmark code, torch, or numpy.",
+  "checker_sha256": "a02e71450c6c9d603aa2be842bb9c1f2852d6295d33f91664ad5e72c133ebc72",
+  "source_file": "components_diagnostics_02/evidence/peer_grids02.json",
+  "source_sha256": "d70f44b66c05b00a971d746a6aef8fdb505e96940e0ffd93da883cef88e9c409",
+  "checks": {
+    "formal_samples_per_variant": 20,
+    "workloads": 4,
+    "variants": 8,
+    "graph_replays_per_rank": 640,
+    "rank_records": 5120,
+    "individual_timed_collectives": 8960,
+    "alternating_schedule_exact": true,
+    "unique_phase_on_every_replay": true,
+    "every_rank_input_hash_reconstructed": true,
+    "every_output_and_expected_hash_reconstructed": true,
+    "all_pass_flags_true": true,
+    "signed_int32_sum_range_checked": true,
+    "all_raw_totals_recomputed": true,
+    "all_rank_medians_and_summary_recomputed": true,
+    "two_untimed_alignment_calls_per_replay_recorded": true,
+    "alignment_calls_per_rank": 1280
+  },
+  "hardware": [
+    {
+      "rank": 0,
+      "local_device": 0,
+      "host": "omni-dev--e2549984aa65-fkao76l7ui",
+      "uuid": "e9c0c5f0-3a06-9b45-f956-325220a9b05f",
+      "gpu": "NVIDIA H200",
+      "sms": 132
+    },
+    {
+      "rank": 1,
+      "local_device": 1,
+      "host": "omni-dev--e2549984aa65-fkao76l7ui",
+      "uuid": "2ab0e6a4-7ade-80b7-17e5-2f490eb50715",
+      "gpu": "NVIDIA H200",
+      "sms": 132
+    },
+    {
+      "rank": 2,
+      "local_device": 2,
+      "host": "omni-dev--e2549984aa65-fkao76l7ui",
+      "uuid": "cb67e011-30a0-7a82-7d3d-7f1dc5a280a1",
+      "gpu": "NVIDIA H200",
+      "sms": 132
+    },
+    {
+      "rank": 3,
+      "local_device": 3,
+      "host": "omni-dev--e2549984aa65-fkao76l7ui",
+      "uuid": "c48dd361-dbcb-9113-ba1d-12a061986e68",
+      "gpu": "NVIDIA H200",
+      "sms": 132
+    },
+    {
+      "rank": 4,
+      "local_device": 4,
+      "host": "omni-dev--e2549984aa65-fkao76l7ui",
+      "uuid": "35d81ab9-b2da-e810-0414-99576427d8ac",
+      "gpu": "NVIDIA H200",
+      "sms": 132
+    },
+    {
+      "rank": 5,
+      "local_device": 5,
+      "host": "omni-dev--e2549984aa65-fkao76l7ui",
+      "uuid": "656ccf44-5788-1414-23ae-a366b1f1dd3b",
+      "gpu": "NVIDIA H200",
+      "sms": 132
+    },
+    {
+      "rank": 6,
+      "local_device": 6,
+      "host": "omni-dev--e2549984aa65-fkao76l7ui",
+      "uuid": "7b968ddb-cf76-7260-76cd-91d12d14b67b",
+      "gpu": "NVIDIA H200",
+      "sms": 132
+    },
+    {
+      "rank": 7,
+      "local_device": 7,
+      "host": "omni-dev--e2549984aa65-fkao76l7ui",
+      "uuid": "7d096b7b-d90b-c88e-e1e7-d1ac53bf94fd",
+      "gpu": "NVIDIA H200",
+      "sms": 132
+    }
+  ],
+  "measured_source_files": {
+    "tests/benchmark_peer_grids.py": "3b2a01a02bd0196195b59e669acb5774e48db5cf681b1f0ea2393c74cc371222",
+    "moonep/sampled_runtime.py": "9d980cf51f7c1ad5162261e63f552a4aa74f5211be7fb8c98a58f380bdd9f631",
+    "moonep/csrc/sampled_runtime.cu": "706383efa774f007d4615bfb63c218307404f751a786ad4450eb97e7ef0a8a89"
+  },
+  "recomputed_summary": {
+    "exchange_counts": {
+      "words": 1152,
+      "op": "gather",
+      "calls": 4,
+      "variants": {
+        "unfused": {
+          "grid": 0,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "median_total_collective_us": 70.03200054168701,
+              "median_group_with_input_reset_us": 91.85599908232689,
+              "median_by_call_us": [
+                17.695999704301357,
+                17.35999993979931,
+                17.56799966096878,
+                17.456000670790672
+              ]
+            },
+            {
+              "rank": 1,
+              "median_total_collective_us": 70.33600099384785,
+              "median_group_with_input_reset_us": 91.85599908232689,
+              "median_by_call_us": [
+                17.695999704301357,
+                17.456000670790672,
+                17.583999782800674,
+                17.616000026464462
+              ]
+            },
+            {
+              "rank": 2,
+              "median_total_collective_us": 70.27200050652027,
+              "median_group_with_input_reset_us": 91.87199920415878,
+              "median_by_call_us": [
+                17.59999990463257,
+                17.376000061631203,
+                17.632000148296356,
+                17.472000792622566
+              ]
+            },
+            {
+              "rank": 3,
+              "median_total_collective_us": 69.82399988919497,
+              "median_group_with_input_reset_us": 91.93599969148636,
+              "median_by_call_us": [
+                17.59999990463257,
+                17.343999817967415,
+                17.503999173641205,
+                17.503999173641205
+              ]
+            },
+            {
+              "rank": 4,
+              "median_total_collective_us": 69.18400060385466,
+              "median_group_with_input_reset_us": 91.93599969148636,
+              "median_by_call_us": [
+                17.311999574303627,
+                17.16800034046173,
+                17.376000061631203,
+                17.280000261962414
+              ]
+            },
+            {
+              "rank": 5,
+              "median_total_collective_us": 69.63200028985739,
+              "median_group_with_input_reset_us": 92.0960009098053,
+              "median_by_call_us": [
+                17.487999983131886,
+                17.295999452471733,
+                17.487999983131886,
+                17.35999993979931
+              ]
+            },
+            {
+              "rank": 6,
+              "median_total_collective_us": 69.37599834054708,
+              "median_group_with_input_reset_us": 92.04800054430962,
+              "median_by_call_us": [
+                17.391999252140522,
+                17.11999997496605,
+                17.24799908697605,
+                17.27999933063984
+              ]
+            },
+            {
+              "rank": 7,
+              "median_total_collective_us": 69.16800048202276,
+              "median_group_with_input_reset_us": 91.96799993515015,
+              "median_by_call_us": [
+                17.40800030529499,
+                17.184000462293625,
+                17.535999417304993,
+                17.152000218629837
+              ]
+            }
+          ],
+          "max_rank_median_total_collective_us": 70.33600099384785,
+          "max_rank_median_total_divided_by_calls_us": 17.58400024846196,
+          "max_rank_median_group_with_input_reset_us": 92.0960009098053,
+          "latency_change_vs_unfused_percent": 0.0
+        },
+        "fused_auto": {
+          "grid": -1,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "median_total_collective_us": 73.95199965685606,
+              "median_group_with_input_reset_us": 96.19200229644775,
+              "median_by_call_us": [
+                18.52799952030182,
+                18.48000008612871,
+                18.52799952030182,
+                18.49599927663803
+              ]
+            },
+            {
+              "rank": 1,
+              "median_total_collective_us": 74.52800031751394,
+              "median_group_with_input_reset_us": 96.22400254011154,
+              "median_by_call_us": [
+                18.60800012946129,
+                18.751999363303185,
+                18.751999363303185,
+                18.496000207960606
+              ]
+            },
+            {
+              "rank": 2,
+              "median_total_collective_us": 74.49599914252758,
+              "median_group_with_input_reset_us": 96.3520035147667,
+              "median_by_call_us": [
+                18.672000616788864,
+                18.52799952030182,
+                18.65600049495697,
+                18.688000738620758
+              ]
+            },
+            {
+              "rank": 3,
+              "median_total_collective_us": 74.40000213682652,
+              "median_group_with_input_reset_us": 96.30400314927101,
+              "median_by_call_us": [
+                18.5759998857975,
+                18.49599927663803,
+                18.672000616788864,
+                18.592000007629395
+              ]
+            },
+            {
+              "rank": 4,
+              "median_total_collective_us": 73.40800017118454,
+              "median_group_with_input_reset_us": 96.38400003314018,
+              "median_by_call_us": [
+                18.271999433636665,
+                18.28799955546856,
+                18.432000651955605,
+                18.400000408291817
+              ]
+            },
+            {
+              "rank": 5,
+              "median_total_collective_us": 73.88800010085106,
+              "median_group_with_input_reset_us": 96.44799679517746,
+              "median_by_call_us": [
+                18.624000251293182,
+                18.352000042796135,
+                18.52799952030182,
+                18.49599927663803
+              ]
+            },
+            {
+              "rank": 6,
+              "median_total_collective_us": 73.42400029301643,
+              "median_group_with_input_reset_us": 96.39999642968178,
+              "median_by_call_us": [
+                18.36800016462803,
+                18.17600056529045,
+                18.463999964296818,
+                18.352000042796135
+              ]
+            },
+            {
+              "rank": 7,
+              "median_total_collective_us": 73.58400151133537,
+              "median_group_with_input_reset_us": 96.39999642968178,
+              "median_by_call_us": [
+                18.5759998857975,
+                18.400000408291817,
+                18.400000408291817,
+                18.384000286459923
+              ]
+            }
+          ],
+          "max_rank_median_total_collective_us": 74.52800031751394,
+          "max_rank_median_total_divided_by_calls_us": 18.632000079378486,
+          "max_rank_median_group_with_input_reset_us": 96.44799679517746,
+          "latency_change_vs_unfused_percent": 5.9599625574856985
+        },
+        "cooperative_1": {
+          "grid": 1,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "median_total_collective_us": 193.23199801146984,
+              "median_group_with_input_reset_us": 215.2320072054863,
+              "median_by_call_us": [
+                48.25599864125252,
+                48.43199998140335,
+                48.22399839758873,
+                48.367999494075775
+              ]
+            },
+            {
+              "rank": 1,
+              "median_total_collective_us": 193.55199858546257,
+              "median_group_with_input_reset_us": 215.32800048589706,
+              "median_by_call_us": [
+                48.38399961590767,
+                48.39999973773956,
+                48.41599985957146,
+                48.38399961590767
+              ]
+            },
+            {
+              "rank": 2,
+              "median_total_collective_us": 193.59999895095825,
+              "median_group_with_input_reset_us": 215.39199352264404,
+              "median_by_call_us": [
+                48.38399961590767,
+                48.39999973773956,
+                48.41599985957146,
+                48.49600046873093
+              ]
+            },
+            {
+              "rank": 3,
+              "median_total_collective_us": 193.28000023961067,
+              "median_group_with_input_reset_us": 215.4719978570938,
+              "median_by_call_us": [
+                48.3039990067482,
+                48.287998884916306,
+                48.33599925041199,
+                48.287998884916306
+              ]
+            },
+            {
+              "rank": 4,
+              "median_total_collective_us": 192.71999970078468,
+              "median_group_with_input_reset_us": 215.43999761343002,
+              "median_by_call_us": [
+                48.09600114822388,
+                48.09600114822388,
+                48.09600114822388,
+                48.239998519420624
+              ]
+            },
+            {
+              "rank": 5,
+              "median_total_collective_us": 193.03999841213226,
+              "median_group_with_input_reset_us": 215.42400121688843,
+              "median_by_call_us": [
+                48.22399839758873,
+                48.38399961590767,
+                48.239998519420624,
+                48.287998884916306
+              ]
+            },
+            {
+              "rank": 6,
+              "median_total_collective_us": 192.51200184226036,
+              "median_group_with_input_reset_us": 215.37599712610245,
+              "median_by_call_us": [
+                48.11200127005577,
+                48.06400090456009,
+                48.19200001657009,
+                48.06400090456009
+              ]
+            },
+            {
+              "rank": 7,
+              "median_total_collective_us": 192.6880031824112,
+              "median_group_with_input_reset_us": 215.42400121688843,
+              "median_by_call_us": [
+                48.128001391887665,
+                48.16000163555145,
+                48.11200127005577,
+                48.22400026023388
+              ]
+            }
+          ],
+          "max_rank_median_total_collective_us": 193.59999895095825,
+          "max_rank_median_total_divided_by_calls_us": 48.39999973773956,
+          "max_rank_median_group_with_input_reset_us": 215.4719978570938,
+          "latency_change_vs_unfused_percent": 175.25022209876852
+        },
+        "cooperative_2": {
+          "grid": 2,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "median_total_collective_us": 129.71200421452522,
+              "median_group_with_input_reset_us": 151.75999701023102,
+              "median_by_call_us": [
+                32.287999987602234,
+                32.48000144958496,
+                32.255999743938446,
+                32.52799995243549
+              ]
+            },
+            {
+              "rank": 1,
+              "median_total_collective_us": 130.1600020378828,
+              "median_group_with_input_reset_us": 151.8239974975586,
+              "median_by_call_us": [
+                32.62399882078171,
+                32.496001571416855,
+                32.46400132775307,
+                32.6399989426136
+              ]
+            },
+            {
+              "rank": 2,
+              "median_total_collective_us": 130.0799958407879,
+              "median_group_with_input_reset_us": 151.66399627923965,
+              "median_by_call_us": [
+                32.607998698949814,
+                32.6399989426136,
+                32.3680005967617,
+                32.5119998306036
+              ]
+            },
+            {
+              "rank": 3,
+              "median_total_collective_us": 129.91999834775925,
+              "median_group_with_input_reset_us": 151.90400183200836,
+              "median_by_call_us": [
+                32.47999958693981,
+                32.3840007185936,
+                32.3840007185936,
+                32.62399882078171
+              ]
+            },
+            {
+              "rank": 4,
+              "median_total_collective_us": 129.07199934124947,
+              "median_group_with_input_reset_us": 151.72799676656723,
+              "median_by_call_us": [
+                32.35200047492981,
+                32.287999987602234,
+                32.127998769283295,
+                32.27199986577034
+              ]
+            },
+            {
+              "rank": 5,
+              "median_total_collective_us": 129.42400015890598,
+              "median_group_with_input_reset_us": 151.8399938941002,
+              "median_by_call_us": [
+                32.287999987602234,
+                32.35200047492981,
+                32.19199925661087,
+                32.51200169324875
+              ]
+            },
+            {
+              "rank": 6,
+              "median_total_collective_us": 129.13599982857704,
+              "median_group_with_input_reset_us": 151.8239974975586,
+              "median_by_call_us": [
+                32.23999962210655,
+                32.22399950027466,
+                32.19199925661087,
+                32.3680005967617
+              ]
+            },
+            {
+              "rank": 7,
+              "median_total_collective_us": 129.1519980877638,
+              "median_group_with_input_reset_us": 151.7919972538948,
+              "median_by_call_us": [
+                32.35200047492981,
+                32.336000353097916,
+                32.14399889111519,
+                32.127998769283295
+              ]
+            }
+          ],
+          "max_rank_median_total_collective_us": 130.1600020378828,
+          "max_rank_median_total_divided_by_calls_us": 32.5400005094707,
+          "max_rank_median_group_with_input_reset_us": 151.90400183200836,
+          "latency_change_vs_unfused_percent": 85.05459536897419
+        },
+        "cooperative_4": {
+          "grid": 4,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "median_total_collective_us": 97.24799916148186,
+              "median_group_with_input_reset_us": 119.18399855494499,
+              "median_by_call_us": [
+                24.4159996509552,
+                24.4159996509552,
+                24.383999407291412,
+                24.191999807953835
+              ]
+            },
+            {
+              "rank": 1,
+              "median_total_collective_us": 97.50400017946959,
+              "median_group_with_input_reset_us": 119.18399855494499,
+              "median_by_call_us": [
+                24.4159996509552,
+                24.399999529123306,
+                24.399999529123306,
+                24.272000417113304
+              ]
+            },
+            {
+              "rank": 2,
+              "median_total_collective_us": 97.69599884748459,
+              "median_group_with_input_reset_us": 119.32799965143204,
+              "median_by_call_us": [
+                24.560000747442245,
+                24.304000660777092,
+                24.4159996509552,
+                24.447999894618988
+              ]
+            },
+            {
+              "rank": 3,
+              "median_total_collective_us": 97.29599859565496,
+              "median_group_with_input_reset_us": 119.23199892044067,
+              "median_by_call_us": [
+                24.383999407291412,
+                24.3520000949502,
+                24.383999407291412,
+                24.303999729454517
+              ]
+            },
+            {
+              "rank": 4,
+              "median_total_collective_us": 96.44799679517746,
+              "median_group_with_input_reset_us": 119.31199952960014,
+              "median_by_call_us": [
+                24.191999807953835,
+                24.12799932062626,
+                24.09599907696247,
+                24.09599907696247
+              ]
+            },
+            {
+              "rank": 5,
+              "median_total_collective_us": 96.7840002849698,
+              "median_group_with_input_reset_us": 119.23199892044067,
+              "median_by_call_us": [
+                24.240000173449516,
+                24.224000051617622,
+                24.224000051617622,
+                24.096000008285046
+              ]
+            },
+            {
+              "rank": 6,
+              "median_total_collective_us": 96.59199882298708,
+              "median_group_with_input_reset_us": 119.24799904227257,
+              "median_by_call_us": [
+                24.159999564290047,
+                24.191999807953835,
+                24.159999564290047,
+                24.07999988645315
+              ]
+            },
+            {
+              "rank": 7,
+              "median_total_collective_us": 96.92800138145685,
+              "median_group_with_input_reset_us": 119.29599940776825,
+              "median_by_call_us": [
+                24.320000782608986,
+                24.304000660777092,
+                24.25600029528141,
+                24.09599907696247
+              ]
+            }
+          ],
+          "max_rank_median_total_collective_us": 97.69599884748459,
+          "max_rank_median_total_divided_by_calls_us": 24.423999711871147,
+          "max_rank_median_group_with_input_reset_us": 119.32799965143204,
+          "latency_change_vs_unfused_percent": 38.89899548885338
+        },
+        "cooperative_8": {
+          "grid": 8,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "median_total_collective_us": 83.71199853718281,
+              "median_group_with_input_reset_us": 105.96800222992897,
+              "median_by_call_us": [
+                20.94399929046631,
+                20.896000787615776,
+                20.767999812960625,
+                20.848000422120094
+              ]
+            },
+            {
+              "rank": 1,
+              "median_total_collective_us": 84.03200097382069,
+              "median_group_with_input_reset_us": 105.98400235176086,
+              "median_by_call_us": [
+                21.07200026512146,
+                20.94399929046631,
+                21.12000063061714,
+                21.12000063061714
+              ]
+            },
+            {
+              "rank": 2,
+              "median_total_collective_us": 84.33600142598152,
+              "median_group_with_input_reset_us": 105.96800222992897,
+              "median_by_call_us": [
+                21.023999899625778,
+                21.119999699294567,
+                21.07200026512146,
+                20.896000787615776
+              ]
+            },
+            {
+              "rank": 3,
+              "median_total_collective_us": 83.71200039982796,
+              "median_group_with_input_reset_us": 105.92000186443329,
+              "median_by_call_us": [
+                21.15200087428093,
+                20.94399929046631,
+                20.8959998562932,
+                20.8959998562932
+              ]
+            },
+            {
+              "rank": 4,
+              "median_total_collective_us": 83.21599941700697,
+              "median_group_with_input_reset_us": 106.06400296092033,
+              "median_by_call_us": [
+                20.959999412298203,
+                20.735999569296837,
+                20.767999812960625,
+                20.767999812960625
+              ]
+            },
+            {
+              "rank": 5,
+              "median_total_collective_us": 83.6159996688366,
+              "median_group_with_input_reset_us": 106.1599999666214,
+              "median_by_call_us": [
+                20.911999978125095,
+                20.864000543951988,
+                20.880000665783882,
+                20.896000787615776
+              ]
+            },
+            {
+              "rank": 6,
+              "median_total_collective_us": 83.39200168848038,
+              "median_group_with_input_reset_us": 106.22399672865868,
+              "median_by_call_us": [
+                20.848000422120094,
+                20.848000422120094,
+                20.75199969112873,
+                20.8320003002882
+              ]
+            },
+            {
+              "rank": 7,
+              "median_total_collective_us": 83.18400103598833,
+              "median_group_with_input_reset_us": 106.01600259542465,
+              "median_by_call_us": [
+                20.864000543951988,
+                20.8320003002882,
+                20.848000422120094,
+                20.816000178456306
+              ]
+            }
+          ],
+          "max_rank_median_total_collective_us": 84.33600142598152,
+          "max_rank_median_total_divided_by_calls_us": 21.08400035649538,
+          "max_rank_median_group_with_input_reset_us": 106.22399672865868,
+          "latency_change_vs_unfused_percent": 19.904458931860837
+        },
+        "cooperative_16": {
+          "grid": 16,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "median_total_collective_us": 77.24800147116184,
+              "median_group_with_input_reset_us": 99.13600236177444,
+              "median_by_call_us": [
+                19.392000511288643,
+                18.96000001579523,
+                19.392000511288643,
+                19.42400075495243
+              ]
+            },
+            {
+              "rank": 1,
+              "median_total_collective_us": 77.59999856352806,
+              "median_group_with_input_reset_us": 99.20000284910202,
+              "median_by_call_us": [
+                19.328000023961067,
+                19.328000023961067,
+                19.34400014579296,
+                19.487999379634857
+              ]
+            },
+            {
+              "rank": 2,
+              "median_total_collective_us": 77.53600087016821,
+              "median_group_with_input_reset_us": 99.08800199627876,
+              "median_by_call_us": [
+                19.360000267624855,
+                19.248000346124172,
+                19.487999379634857,
+                19.519999623298645
+              ]
+            },
+            {
+              "rank": 3,
+              "median_total_collective_us": 77.40799896419048,
+              "median_group_with_input_reset_us": 99.27999973297119,
+              "median_by_call_us": [
+                19.311999902129173,
+                19.26399953663349,
+                19.29599978029728,
+                19.43999994546175
+              ]
+            },
+            {
+              "rank": 4,
+              "median_total_collective_us": 76.81599911302328,
+              "median_group_with_input_reset_us": 99.37599673867226,
+              "median_by_call_us": [
+                19.216000102460384,
+                19.039999693632126,
+                19.231999292969704,
+                19.231999292969704
+              ]
+            },
+            {
+              "rank": 5,
+              "median_total_collective_us": 76.99200045317411,
+              "median_group_with_input_reset_us": 99.43999722599983,
+              "median_by_call_us": [
+                19.360000267624855,
+                19.088000059127808,
+                19.29599978029728,
+                19.28000058978796
+              ]
+            },
+            {
+              "rank": 6,
+              "median_total_collective_us": 76.6879990696907,
+              "median_group_with_input_reset_us": 99.35999661684036,
+              "median_by_call_us": [
+                19.1040001809597,
+                18.943999893963337,
+                19.13600042462349,
+                19.279999658465385
+              ]
+            },
+            {
+              "rank": 7,
+              "median_total_collective_us": 76.68799813836813,
+              "median_group_with_input_reset_us": 99.20000284910202,
+              "median_by_call_us": [
+                19.279999658465385,
+                19.023999571800232,
+                19.007999449968338,
+                19.231999292969704
+              ]
+            }
+          ],
+          "max_rank_median_total_collective_us": 77.59999856352806,
+          "max_rank_median_total_divided_by_calls_us": 19.399999640882015,
+          "max_rank_median_group_with_input_reset_us": 99.43999722599983,
+          "latency_change_vs_unfused_percent": 10.327566917424802
+        },
+        "cooperative_32": {
+          "grid": 32,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "median_total_collective_us": 73.9679979160428,
+              "median_group_with_input_reset_us": 96.04800119996071,
+              "median_by_call_us": [
+                18.719999119639397,
+                18.36800016462803,
+                18.511999398469925,
+                18.49599927663803
+              ]
+            },
+            {
+              "rank": 1,
+              "median_total_collective_us": 74.49600007385015,
+              "median_group_with_input_reset_us": 96.16000205278397,
+              "median_by_call_us": [
+                18.640000373125076,
+                18.559999763965607,
+                18.624000251293182,
+                18.592000007629395
+              ]
+            },
+            {
+              "rank": 2,
+              "median_total_collective_us": 74.60799999535084,
+              "median_group_with_input_reset_us": 95.96800059080124,
+              "median_by_call_us": [
+                18.65600049495697,
+                18.592000007629395,
+                18.65600049495697,
+                18.65600049495697
+              ]
+            },
+            {
+              "rank": 3,
+              "median_total_collective_us": 74.36800003051758,
+              "median_group_with_input_reset_us": 96.12800180912018,
+              "median_by_call_us": [
+                18.783999606966972,
+                18.60800012946129,
+                18.60800012946129,
+                18.543999642133713
+              ]
+            },
+            {
+              "rank": 4,
+              "median_total_collective_us": 73.44000041484833,
+              "median_group_with_input_reset_us": 96.0640013217926,
+              "median_by_call_us": [
+                18.447999842464924,
+                18.27200036495924,
+                18.511999398469925,
+                18.36800016462803
+              ]
+            },
+            {
+              "rank": 5,
+              "median_total_collective_us": 73.75999912619591,
+              "median_group_with_input_reset_us": 96.28800302743912,
+              "median_by_call_us": [
+                18.640000373125076,
+                18.27200036495924,
+                18.511999398469925,
+                18.49599927663803
+              ]
+            },
+            {
+              "rank": 6,
+              "median_total_collective_us": 73.42399843037128,
+              "median_group_with_input_reset_us": 96.24000266194344,
+              "median_by_call_us": [
+                18.592000007629395,
+                18.239999189972878,
+                18.28799955546856,
+                18.319999799132347
+              ]
+            },
+            {
+              "rank": 7,
+              "median_total_collective_us": 73.55199940502644,
+              "median_group_with_input_reset_us": 96.28800302743912,
+              "median_by_call_us": [
+                18.511999398469925,
+                18.223999999463558,
+                18.36800016462803,
+                18.384000286459923
+              ]
+            }
+          ],
+          "max_rank_median_total_collective_us": 74.60799999535084,
+          "max_rank_median_total_divided_by_calls_us": 18.65199999883771,
+          "max_rank_median_group_with_input_reset_us": 96.28800302743912,
+          "latency_change_vs_unfused_percent": 6.073701861265413
+        }
+      }
+    },
+    "materialize_counts": {
+      "words": 2816,
+      "op": "gather",
+      "calls": 1,
+      "variants": {
+        "unfused": {
+          "grid": 0,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "median_total_collective_us": 18.783999606966972,
+              "median_group_with_input_reset_us": 26.464000344276428,
+              "median_by_call_us": [
+                18.783999606966972
+              ]
+            },
+            {
+              "rank": 1,
+              "median_total_collective_us": 18.848000094294548,
+              "median_group_with_input_reset_us": 26.38399973511696,
+              "median_by_call_us": [
+                18.848000094294548
+              ]
+            },
+            {
+              "rank": 2,
+              "median_total_collective_us": 18.719999119639397,
+              "median_group_with_input_reset_us": 26.35199949145317,
+              "median_by_call_us": [
+                18.719999119639397
+              ]
+            },
+            {
+              "rank": 3,
+              "median_total_collective_us": 18.688000738620758,
+              "median_group_with_input_reset_us": 26.496000587940216,
+              "median_by_call_us": [
+                18.688000738620758
+              ]
+            },
+            {
+              "rank": 4,
+              "median_total_collective_us": 18.65600049495697,
+              "median_group_with_input_reset_us": 26.496000587940216,
+              "median_by_call_us": [
+                18.65600049495697
+              ]
+            },
+            {
+              "rank": 5,
+              "median_total_collective_us": 18.672000616788864,
+              "median_group_with_input_reset_us": 26.59199945628643,
+              "median_by_call_us": [
+                18.672000616788864
+              ]
+            },
+            {
+              "rank": 6,
+              "median_total_collective_us": 18.60800012946129,
+              "median_group_with_input_reset_us": 26.623999699950218,
+              "median_by_call_us": [
+                18.60800012946129
+              ]
+            },
+            {
+              "rank": 7,
+              "median_total_collective_us": 18.624000251293182,
+              "median_group_with_input_reset_us": 26.528000831604004,
+              "median_by_call_us": [
+                18.624000251293182
+              ]
+            }
+          ],
+          "max_rank_median_total_collective_us": 18.848000094294548,
+          "max_rank_median_total_divided_by_calls_us": 18.848000094294548,
+          "max_rank_median_group_with_input_reset_us": 26.623999699950218,
+          "latency_change_vs_unfused_percent": 0.0
+        },
+        "fused_auto": {
+          "grid": -1,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "median_total_collective_us": 19.58400011062622,
+              "median_group_with_input_reset_us": 27.264000847935677,
+              "median_by_call_us": [
+                19.58400011062622
+              ]
+            },
+            {
+              "rank": 1,
+              "median_total_collective_us": 19.632000476121902,
+              "median_group_with_input_reset_us": 27.264000847935677,
+              "median_by_call_us": [
+                19.632000476121902
+              ]
+            },
+            {
+              "rank": 2,
+              "median_total_collective_us": 19.680000841617584,
+              "median_group_with_input_reset_us": 27.280000038444996,
+              "median_by_call_us": [
+                19.680000841617584
+              ]
+            },
+            {
+              "rank": 3,
+              "median_total_collective_us": 19.74399946630001,
+              "median_group_with_input_reset_us": 27.44000032544136,
+              "median_by_call_us": [
+                19.74399946630001
+              ]
+            },
+            {
+              "rank": 4,
+              "median_total_collective_us": 19.45599913597107,
+              "median_group_with_input_reset_us": 27.424000203609467,
+              "median_by_call_us": [
+                19.45599913597107
+              ]
+            },
+            {
+              "rank": 5,
+              "median_total_collective_us": 19.53599974513054,
+              "median_group_with_input_reset_us": 27.51999907195568,
+              "median_by_call_us": [
+                19.53599974513054
+              ]
+            },
+            {
+              "rank": 6,
+              "median_total_collective_us": 19.37600038945675,
+              "median_group_with_input_reset_us": 27.424000203609467,
+              "median_by_call_us": [
+                19.37600038945675
+              ]
+            },
+            {
+              "rank": 7,
+              "median_total_collective_us": 19.392000511288643,
+              "median_group_with_input_reset_us": 27.375999838113785,
+              "median_by_call_us": [
+                19.392000511288643
+              ]
+            }
+          ],
+          "max_rank_median_total_collective_us": 19.74399946630001,
+          "max_rank_median_total_divided_by_calls_us": 19.74399946630001,
+          "max_rank_median_group_with_input_reset_us": 27.51999907195568,
+          "latency_change_vs_unfused_percent": 4.753816678283496
+        },
+        "cooperative_1": {
+          "grid": 1,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "median_total_collective_us": 96.38400003314018,
+              "median_group_with_input_reset_us": 104.00000214576721,
+              "median_by_call_us": [
+                96.38400003314018
+              ]
+            },
+            {
+              "rank": 1,
+              "median_total_collective_us": 96.51199728250504,
+              "median_group_with_input_reset_us": 104.11200299859047,
+              "median_by_call_us": [
+                96.51199728250504
+              ]
+            },
+            {
+              "rank": 2,
+              "median_total_collective_us": 96.47999703884125,
+              "median_group_with_input_reset_us": 104.032002389431,
+              "median_by_call_us": [
+                96.47999703884125
+              ]
+            },
+            {
+              "rank": 3,
+              "median_total_collective_us": 96.44799679517746,
+              "median_group_with_input_reset_us": 104.16000336408615,
+              "median_by_call_us": [
+                96.44799679517746
+              ]
+            },
+            {
+              "rank": 4,
+              "median_total_collective_us": 96.22400254011154,
+              "median_group_with_input_reset_us": 104.12800312042236,
+              "median_by_call_us": [
+                96.22400254011154
+              ]
+            },
+            {
+              "rank": 5,
+              "median_total_collective_us": 96.3519997894764,
+              "median_group_with_input_reset_us": 104.2879968881607,
+              "median_by_call_us": [
+                96.3519997894764
+              ]
+            },
+            {
+              "rank": 6,
+              "median_total_collective_us": 96.25600278377533,
+              "median_group_with_input_reset_us": 104.22399640083313,
+              "median_by_call_us": [
+                96.25600278377533
+              ]
+            },
+            {
+              "rank": 7,
+              "median_total_collective_us": 96.3200032711029,
+              "median_group_with_input_reset_us": 104.22400012612343,
+              "median_by_call_us": [
+                96.3200032711029
+              ]
+            }
+          ],
+          "max_rank_median_total_collective_us": 96.51199728250504,
+          "max_rank_median_total_divided_by_calls_us": 96.51199728250504,
+          "max_rank_median_group_with_input_reset_us": 104.2879968881607,
+          "latency_change_vs_unfused_percent": 412.0543123921145
+        },
+        "cooperative_2": {
+          "grid": 2,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "median_total_collective_us": 56.88000097870827,
+              "median_group_with_input_reset_us": 64.46399912238121,
+              "median_by_call_us": [
+                56.88000097870827
+              ]
+            },
+            {
+              "rank": 1,
+              "median_total_collective_us": 56.84800073504448,
+              "median_group_with_input_reset_us": 64.41599875688553,
+              "median_by_call_us": [
+                56.84800073504448
+              ]
+            },
+            {
+              "rank": 2,
+              "median_total_collective_us": 57.08799883723259,
+              "median_group_with_input_reset_us": 64.64000046253204,
+              "median_by_call_us": [
+                57.08799883723259
+              ]
+            },
+            {
+              "rank": 3,
+              "median_total_collective_us": 56.73599988222122,
+              "median_group_with_input_reset_us": 64.495999366045,
+              "median_by_call_us": [
+                56.73599988222122
+              ]
+            },
+            {
+              "rank": 4,
+              "median_total_collective_us": 56.71999976038933,
+              "median_group_with_input_reset_us": 64.60800021886826,
+              "median_by_call_us": [
+                56.71999976038933
+              ]
+            },
+            {
+              "rank": 5,
+              "median_total_collective_us": 56.68799951672554,
+              "median_group_with_input_reset_us": 64.70400094985962,
+              "median_by_call_us": [
+                56.68799951672554
+              ]
+            },
+            {
+              "rank": 6,
+              "median_total_collective_us": 56.63999915122986,
+              "median_group_with_input_reset_us": 64.60800021886826,
+              "median_by_call_us": [
+                56.63999915122986
+              ]
+            },
+            {
+              "rank": 7,
+              "median_total_collective_us": 56.63999915122986,
+              "median_group_with_input_reset_us": 64.495999366045,
+              "median_by_call_us": [
+                56.63999915122986
+              ]
+            }
+          ],
+          "max_rank_median_total_collective_us": 57.08799883723259,
+          "max_rank_median_total_divided_by_calls_us": 57.08799883723259,
+          "max_rank_median_group_with_input_reset_us": 64.70400094985962,
+          "latency_change_vs_unfused_percent": 202.88624019326923
+        },
+        "cooperative_4": {
+          "grid": 4,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "median_total_collective_us": 36.639999598264694,
+              "median_group_with_input_reset_us": 44.415999203920364,
+              "median_by_call_us": [
+                36.639999598264694
+              ]
+            },
+            {
+              "rank": 1,
+              "median_total_collective_us": 36.80000081658363,
+              "median_group_with_input_reset_us": 44.38399896025658,
+              "median_by_call_us": [
+                36.80000081658363
+              ]
+            },
+            {
+              "rank": 2,
+              "median_total_collective_us": 36.848001182079315,
+              "median_group_with_input_reset_us": 44.44799944758415,
+              "median_by_call_us": [
+                36.848001182079315
+              ]
+            },
+            {
+              "rank": 3,
+              "median_total_collective_us": 36.80000081658363,
+              "median_group_with_input_reset_us": 44.52800005674362,
+              "median_by_call_us": [
+                36.80000081658363
+              ]
+            },
+            {
+              "rank": 4,
+              "median_total_collective_us": 36.479998379945755,
+              "median_group_with_input_reset_us": 44.415999203920364,
+              "median_by_call_us": [
+                36.479998379945755
+              ]
+            },
+            {
+              "rank": 5,
+              "median_total_collective_us": 36.607999354600906,
+              "median_group_with_input_reset_us": 44.576000422239304,
+              "median_by_call_us": [
+                36.607999354600906
+              ]
+            },
+            {
+              "rank": 6,
+              "median_total_collective_us": 36.559998989105225,
+              "median_group_with_input_reset_us": 44.51199993491173,
+              "median_by_call_us": [
+                36.559998989105225
+              ]
+            },
+            {
+              "rank": 7,
+              "median_total_collective_us": 36.43199987709522,
+              "median_group_with_input_reset_us": 44.335998594760895,
+              "median_by_call_us": [
+                36.43199987709522
+              ]
+            }
+          ],
+          "max_rank_median_total_collective_us": 36.848001182079315,
+          "max_rank_median_total_divided_by_calls_us": 36.848001182079315,
+          "max_rank_median_group_with_input_reset_us": 44.576000422239304,
+          "latency_change_vs_unfused_percent": 95.5008541900078
+        },
+        "cooperative_8": {
+          "grid": 8,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "median_total_collective_us": 26.464000344276428,
+              "median_group_with_input_reset_us": 34.063998609781265,
+              "median_by_call_us": [
+                26.464000344276428
+              ]
+            },
+            {
+              "rank": 1,
+              "median_total_collective_us": 26.704000309109688,
+              "median_group_with_input_reset_us": 34.272000193595886,
+              "median_by_call_us": [
+                26.704000309109688
+              ]
+            },
+            {
+              "rank": 2,
+              "median_total_collective_us": 26.6720000654459,
+              "median_group_with_input_reset_us": 34.20799970626831,
+              "median_by_call_us": [
+                26.6720000654459
+              ]
+            },
+            {
+              "rank": 3,
+              "median_total_collective_us": 26.623999699950218,
+              "median_group_with_input_reset_us": 34.46400165557861,
+              "median_by_call_us": [
+                26.623999699950218
+              ]
+            },
+            {
+              "rank": 4,
+              "median_total_collective_us": 26.43200010061264,
+              "median_group_with_input_reset_us": 34.36800092458725,
+              "median_by_call_us": [
+                26.43200010061264
+              ]
+            },
+            {
+              "rank": 5,
+              "median_total_collective_us": 26.464000344276428,
+              "median_group_with_input_reset_us": 34.384001046419144,
+              "median_by_call_us": [
+                26.464000344276428
+              ]
+            },
+            {
+              "rank": 6,
+              "median_total_collective_us": 26.463999412953854,
+              "median_group_with_input_reset_us": 34.384001046419144,
+              "median_by_call_us": [
+                26.463999412953854
+              ]
+            },
+            {
+              "rank": 7,
+              "median_total_collective_us": 26.38399973511696,
+              "median_group_with_input_reset_us": 34.25600007176399,
+              "median_by_call_us": [
+                26.38399973511696
+              ]
+            }
+          ],
+          "max_rank_median_total_collective_us": 26.704000309109688,
+          "max_rank_median_total_divided_by_calls_us": 26.704000309109688,
+          "max_rank_median_group_with_input_reset_us": 34.46400165557861,
+          "latency_change_vs_unfused_percent": 41.680815871776325
+        },
+        "cooperative_16": {
+          "grid": 16,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "median_total_collective_us": 22.592000663280487,
+              "median_group_with_input_reset_us": 30.256000347435474,
+              "median_by_call_us": [
+                22.592000663280487
+              ]
+            },
+            {
+              "rank": 1,
+              "median_total_collective_us": 22.431999444961548,
+              "median_group_with_input_reset_us": 30.112000182271004,
+              "median_by_call_us": [
+                22.431999444961548
+              ]
+            },
+            {
+              "rank": 2,
+              "median_total_collective_us": 22.52800017595291,
+              "median_group_with_input_reset_us": 30.128000304102898,
+              "median_by_call_us": [
+                22.52800017595291
+              ]
+            },
+            {
+              "rank": 3,
+              "median_total_collective_us": 22.495999932289124,
+              "median_group_with_input_reset_us": 30.30399978160858,
+              "median_by_call_us": [
+                22.495999932289124
+              ]
+            },
+            {
+              "rank": 4,
+              "median_total_collective_us": 22.19199948012829,
+              "median_group_with_input_reset_us": 30.128000304102898,
+              "median_by_call_us": [
+                22.19199948012829
+              ]
+            },
+            {
+              "rank": 5,
+              "median_total_collective_us": 22.352000698447227,
+              "median_group_with_input_reset_us": 30.319999903440475,
+              "median_by_call_us": [
+                22.352000698447227
+              ]
+            },
+            {
+              "rank": 6,
+              "median_total_collective_us": 22.23999984562397,
+              "median_group_with_input_reset_us": 30.2559994161129,
+              "median_by_call_us": [
+                22.23999984562397
+              ]
+            },
+            {
+              "rank": 7,
+              "median_total_collective_us": 22.223999723792076,
+              "median_group_with_input_reset_us": 30.208000913262367,
+              "median_by_call_us": [
+                22.223999723792076
+              ]
+            }
+          ],
+          "max_rank_median_total_collective_us": 22.592000663280487,
+          "max_rank_median_total_divided_by_calls_us": 22.592000663280487,
+          "max_rank_median_group_with_input_reset_us": 30.319999903440475,
+          "latency_change_vs_unfused_percent": 19.864179489893363
+        },
+        "cooperative_32": {
+          "grid": 32,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "median_total_collective_us": 19.600000232458115,
+              "median_group_with_input_reset_us": 27.29600016027689,
+              "median_by_call_us": [
+                19.600000232458115
+              ]
+            },
+            {
+              "rank": 1,
+              "median_total_collective_us": 19.680000841617584,
+              "median_group_with_input_reset_us": 27.216000482439995,
+              "median_by_call_us": [
+                19.680000841617584
+              ]
+            },
+            {
+              "rank": 2,
+              "median_total_collective_us": 19.66400071978569,
+              "median_group_with_input_reset_us": 27.248000726103783,
+              "median_by_call_us": [
+                19.66400071978569
+              ]
+            },
+            {
+              "rank": 3,
+              "median_total_collective_us": 19.392000511288643,
+              "median_group_with_input_reset_us": 27.216000482439995,
+              "median_by_call_us": [
+                19.392000511288643
+              ]
+            },
+            {
+              "rank": 4,
+              "median_total_collective_us": 19.360000267624855,
+              "median_group_with_input_reset_us": 27.295999228954315,
+              "median_by_call_us": [
+                19.360000267624855
+              ]
+            },
+            {
+              "rank": 5,
+              "median_total_collective_us": 19.472000189125538,
+              "median_group_with_input_reset_us": 27.424000203609467,
+              "median_by_call_us": [
+                19.472000189125538
+              ]
+            },
+            {
+              "rank": 6,
+              "median_total_collective_us": 19.392000511288643,
+              "median_group_with_input_reset_us": 27.264000847935677,
+              "median_by_call_us": [
+                19.392000511288643
+              ]
+            },
+            {
+              "rank": 7,
+              "median_total_collective_us": 19.392000511288643,
+              "median_group_with_input_reset_us": 27.327999472618103,
+              "median_by_call_us": [
+                19.392000511288643
+              ]
+            }
+          ],
+          "max_rank_median_total_collective_us": 19.680000841617584,
+          "max_rank_median_total_divided_by_calls_us": 19.680000841617584,
+          "max_rank_median_group_with_input_reset_us": 27.424000203609467,
+          "latency_change_vs_unfused_percent": 4.414265403016904
+        }
+      }
+    },
+    "sample_packet": {
+      "words": 4609,
+      "op": "sum",
+      "calls": 1,
+      "variants": {
+        "unfused": {
+          "grid": 0,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "median_total_collective_us": 16.543999314308167,
+              "median_group_with_input_reset_us": 24.320000782608986,
+              "median_by_call_us": [
+                16.543999314308167
+              ]
+            },
+            {
+              "rank": 1,
+              "median_total_collective_us": 16.767999157309532,
+              "median_group_with_input_reset_us": 24.351999163627625,
+              "median_by_call_us": [
+                16.767999157309532
+              ]
+            },
+            {
+              "rank": 2,
+              "median_total_collective_us": 16.79999940097332,
+              "median_group_with_input_reset_us": 24.383999407291412,
+              "median_by_call_us": [
+                16.79999940097332
+              ]
+            },
+            {
+              "rank": 3,
+              "median_total_collective_us": 16.736000776290894,
+              "median_group_with_input_reset_us": 24.447999894618988,
+              "median_by_call_us": [
+                16.736000776290894
+              ]
+            },
+            {
+              "rank": 4,
+              "median_total_collective_us": 16.48000068962574,
+              "median_group_with_input_reset_us": 24.512000381946564,
+              "median_by_call_us": [
+                16.48000068962574
+              ]
+            },
+            {
+              "rank": 5,
+              "median_total_collective_us": 16.575999557971954,
+              "median_group_with_input_reset_us": 24.49600026011467,
+              "median_by_call_us": [
+                16.575999557971954
+              ]
+            },
+            {
+              "rank": 6,
+              "median_total_collective_us": 16.51199907064438,
+              "median_group_with_input_reset_us": 24.431999772787094,
+              "median_by_call_us": [
+                16.51199907064438
+              ]
+            },
+            {
+              "rank": 7,
+              "median_total_collective_us": 16.543999314308167,
+              "median_group_with_input_reset_us": 24.512000381946564,
+              "median_by_call_us": [
+                16.543999314308167
+              ]
+            }
+          ],
+          "max_rank_median_total_collective_us": 16.79999940097332,
+          "max_rank_median_total_divided_by_calls_us": 16.79999940097332,
+          "max_rank_median_group_with_input_reset_us": 24.512000381946564,
+          "latency_change_vs_unfused_percent": 0.0
+        },
+        "fused_auto": {
+          "grid": -1,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "median_total_collective_us": 17.93600060045719,
+              "median_group_with_input_reset_us": 25.74400044977665,
+              "median_by_call_us": [
+                17.93600060045719
+              ]
+            },
+            {
+              "rank": 1,
+              "median_total_collective_us": 18.112000077962875,
+              "median_group_with_input_reset_us": 25.82399919629097,
+              "median_by_call_us": [
+                18.112000077962875
+              ]
+            },
+            {
+              "rank": 2,
+              "median_total_collective_us": 18.12800019979477,
+              "median_group_with_input_reset_us": 25.791999883949757,
+              "median_by_call_us": [
+                18.12800019979477
+              ]
+            },
+            {
+              "rank": 3,
+              "median_total_collective_us": 17.9840000346303,
+              "median_group_with_input_reset_us": 25.839999318122864,
+              "median_by_call_us": [
+                17.9840000346303
+              ]
+            },
+            {
+              "rank": 4,
+              "median_total_collective_us": 17.823999747633934,
+              "median_group_with_input_reset_us": 25.79200081527233,
+              "median_by_call_us": [
+                17.823999747633934
+              ]
+            },
+            {
+              "rank": 5,
+              "median_total_collective_us": 17.920000478625298,
+              "median_group_with_input_reset_us": 26.000000536441803,
+              "median_by_call_us": [
+                17.920000478625298
+              ]
+            },
+            {
+              "rank": 6,
+              "median_total_collective_us": 17.855999991297722,
+              "median_group_with_input_reset_us": 25.887999683618546,
+              "median_by_call_us": [
+                17.855999991297722
+              ]
+            },
+            {
+              "rank": 7,
+              "median_total_collective_us": 17.855999991297722,
+              "median_group_with_input_reset_us": 25.839999318122864,
+              "median_by_call_us": [
+                17.855999991297722
+              ]
+            }
+          ],
+          "max_rank_median_total_collective_us": 18.12800019979477,
+          "max_rank_median_total_divided_by_calls_us": 18.12800019979477,
+          "max_rank_median_group_with_input_reset_us": 26.000000536441803,
+          "latency_change_vs_unfused_percent": 7.9047669415066135
+        },
+        "cooperative_1": {
+          "grid": 1,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "median_total_collective_us": 36.959998309612274,
+              "median_group_with_input_reset_us": 44.576000422239304,
+              "median_by_call_us": [
+                36.959998309612274
+              ]
+            },
+            {
+              "rank": 1,
+              "median_total_collective_us": 37.039998918771744,
+              "median_group_with_input_reset_us": 44.60800066590309,
+              "median_by_call_us": [
+                37.039998918771744
+              ]
+            },
+            {
+              "rank": 2,
+              "median_total_collective_us": 36.8800014257431,
+              "median_group_with_input_reset_us": 44.47999969124794,
+              "median_by_call_us": [
+                36.8800014257431
+              ]
+            },
+            {
+              "rank": 3,
+              "median_total_collective_us": 36.8800014257431,
+              "median_group_with_input_reset_us": 44.73600164055824,
+              "median_by_call_us": [
+                36.8800014257431
+              ]
+            },
+            {
+              "rank": 4,
+              "median_total_collective_us": 36.70400008559227,
+              "median_group_with_input_reset_us": 44.68800127506256,
+              "median_by_call_us": [
+                36.70400008559227
+              ]
+            },
+            {
+              "rank": 5,
+              "median_total_collective_us": 36.81600093841553,
+              "median_group_with_input_reset_us": 44.75199989974499,
+              "median_by_call_us": [
+                36.81600093841553
+              ]
+            },
+            {
+              "rank": 6,
+              "median_total_collective_us": 36.687999963760376,
+              "median_group_with_input_reset_us": 44.67200115323067,
+              "median_by_call_us": [
+                36.687999963760376
+              ]
+            },
+            {
+              "rank": 7,
+              "median_total_collective_us": 36.687999963760376,
+              "median_group_with_input_reset_us": 44.75199989974499,
+              "median_by_call_us": [
+                36.687999963760376
+              ]
+            }
+          ],
+          "max_rank_median_total_collective_us": 37.039998918771744,
+          "max_rank_median_total_divided_by_calls_us": 37.039998918771744,
+          "max_rank_median_group_with_input_reset_us": 44.75199989974499,
+          "latency_change_vs_unfused_percent": 120.47619190168426
+        },
+        "cooperative_2": {
+          "grid": 2,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "median_total_collective_us": 27.696000412106514,
+              "median_group_with_input_reset_us": 35.392001271247864,
+              "median_by_call_us": [
+                27.696000412106514
+              ]
+            },
+            {
+              "rank": 1,
+              "median_total_collective_us": 27.456000447273254,
+              "median_group_with_input_reset_us": 35.312000662088394,
+              "median_by_call_us": [
+                27.456000447273254
+              ]
+            },
+            {
+              "rank": 2,
+              "median_total_collective_us": 27.615999802947044,
+              "median_group_with_input_reset_us": 35.26400029659271,
+              "median_by_call_us": [
+                27.615999802947044
+              ]
+            },
+            {
+              "rank": 3,
+              "median_total_collective_us": 27.615999802947044,
+              "median_group_with_input_reset_us": 35.51999852061272,
+              "median_by_call_us": [
+                27.615999802947044
+              ]
+            },
+            {
+              "rank": 4,
+              "median_total_collective_us": 27.583999559283257,
+              "median_group_with_input_reset_us": 35.40800139307976,
+              "median_by_call_us": [
+                27.583999559283257
+              ]
+            },
+            {
+              "rank": 5,
+              "median_total_collective_us": 27.44000032544136,
+              "median_group_with_input_reset_us": 35.58399900794029,
+              "median_by_call_us": [
+                27.44000032544136
+              ]
+            },
+            {
+              "rank": 6,
+              "median_total_collective_us": 27.375999838113785,
+              "median_group_with_input_reset_us": 35.51999852061272,
+              "median_by_call_us": [
+                27.375999838113785
+              ]
+            },
+            {
+              "rank": 7,
+              "median_total_collective_us": 27.59999968111515,
+              "median_group_with_input_reset_us": 35.472000017762184,
+              "median_by_call_us": [
+                27.59999968111515
+              ]
+            }
+          ],
+          "max_rank_median_total_collective_us": 27.696000412106514,
+          "max_rank_median_total_divided_by_calls_us": 27.696000412106514,
+          "max_rank_median_group_with_input_reset_us": 35.58399900794029,
+          "latency_change_vs_unfused_percent": 64.85715118836211
+        },
+        "cooperative_4": {
+          "grid": 4,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "median_total_collective_us": 22.016000002622604,
+              "median_group_with_input_reset_us": 29.69600073993206,
+              "median_by_call_us": [
+                22.016000002622604
+              ]
+            },
+            {
+              "rank": 1,
+              "median_total_collective_us": 22.08000048995018,
+              "median_group_with_input_reset_us": 29.69600073993206,
+              "median_by_call_us": [
+                22.08000048995018
+              ]
+            },
+            {
+              "rank": 2,
+              "median_total_collective_us": 22.14400004595518,
+              "median_group_with_input_reset_us": 29.80799973011017,
+              "median_by_call_us": [
+                22.14400004595518
+              ]
+            },
+            {
+              "rank": 3,
+              "median_total_collective_us": 21.856000646948814,
+              "median_group_with_input_reset_us": 29.743999242782593,
+              "median_by_call_us": [
+                21.856000646948814
+              ]
+            },
+            {
+              "rank": 4,
+              "median_total_collective_us": 21.983999758958817,
+              "median_group_with_input_reset_us": 29.77599948644638,
+              "median_by_call_us": [
+                21.983999758958817
+              ]
+            },
+            {
+              "rank": 5,
+              "median_total_collective_us": 21.776000037789345,
+              "median_group_with_input_reset_us": 29.823999851942062,
+              "median_by_call_us": [
+                21.776000037789345
+              ]
+            },
+            {
+              "rank": 6,
+              "median_total_collective_us": 21.695999428629875,
+              "median_group_with_input_reset_us": 29.77599948644638,
+              "median_by_call_us": [
+                21.695999428629875
+              ]
+            },
+            {
+              "rank": 7,
+              "median_total_collective_us": 21.983999758958817,
+              "median_group_with_input_reset_us": 29.80799973011017,
+              "median_by_call_us": [
+                21.983999758958817
+              ]
+            }
+          ],
+          "max_rank_median_total_collective_us": 22.14400004595518,
+          "max_rank_median_total_divided_by_calls_us": 22.14400004595518,
+          "max_rank_median_group_with_input_reset_us": 29.823999851942062,
+          "latency_change_vs_unfused_percent": 31.809528782913254
+        },
+        "cooperative_8": {
+          "grid": 8,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "median_total_collective_us": 20.06400004029274,
+              "median_group_with_input_reset_us": 27.712000533938408,
+              "median_by_call_us": [
+                20.06400004029274
+              ]
+            },
+            {
+              "rank": 1,
+              "median_total_collective_us": 19.840000197291374,
+              "median_group_with_input_reset_us": 27.68000029027462,
+              "median_by_call_us": [
+                19.840000197291374
+              ]
+            },
+            {
+              "rank": 2,
+              "median_total_collective_us": 20.06400004029274,
+              "median_group_with_input_reset_us": 27.77600008994341,
+              "median_by_call_us": [
+                20.06400004029274
+              ]
+            },
+            {
+              "rank": 3,
+              "median_total_collective_us": 19.98399943113327,
+              "median_group_with_input_reset_us": 28.00000086426735,
+              "median_by_call_us": [
+                19.98399943113327
+              ]
+            },
+            {
+              "rank": 4,
+              "median_total_collective_us": 19.90400068461895,
+              "median_group_with_input_reset_us": 27.775999158620834,
+              "median_by_call_us": [
+                19.90400068461895
+              ]
+            },
+            {
+              "rank": 5,
+              "median_total_collective_us": 19.711999222636223,
+              "median_group_with_input_reset_us": 27.936000376939774,
+              "median_by_call_us": [
+                19.711999222636223
+              ]
+            },
+            {
+              "rank": 6,
+              "median_total_collective_us": 19.696000032126904,
+              "median_group_with_input_reset_us": 27.77600008994341,
+              "median_by_call_us": [
+                19.696000032126904
+              ]
+            },
+            {
+              "rank": 7,
+              "median_total_collective_us": 19.872000440955162,
+              "median_group_with_input_reset_us": 27.888000011444092,
+              "median_by_call_us": [
+                19.872000440955162
+              ]
+            }
+          ],
+          "max_rank_median_total_collective_us": 20.06400004029274,
+          "max_rank_median_total_divided_by_calls_us": 20.06400004029274,
+          "max_rank_median_group_with_input_reset_us": 28.00000086426735,
+          "latency_change_vs_unfused_percent": 19.428575926796277
+        },
+        "cooperative_16": {
+          "grid": 16,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "median_total_collective_us": 18.97599920630455,
+              "median_group_with_input_reset_us": 26.75200067460537,
+              "median_by_call_us": [
+                18.97599920630455
+              ]
+            },
+            {
+              "rank": 1,
+              "median_total_collective_us": 18.97599920630455,
+              "median_group_with_input_reset_us": 26.75200067460537,
+              "median_by_call_us": [
+                18.97599920630455
+              ]
+            },
+            {
+              "rank": 2,
+              "median_total_collective_us": 19.039999693632126,
+              "median_group_with_input_reset_us": 26.72000043094158,
+              "median_by_call_us": [
+                19.039999693632126
+              ]
+            },
+            {
+              "rank": 3,
+              "median_total_collective_us": 18.928000703454018,
+              "median_group_with_input_reset_us": 26.863999664783478,
+              "median_by_call_us": [
+                18.928000703454018
+              ]
+            },
+            {
+              "rank": 4,
+              "median_total_collective_us": 18.943999893963337,
+              "median_group_with_input_reset_us": 26.91200003027916,
+              "median_by_call_us": [
+                18.943999893963337
+              ]
+            },
+            {
+              "rank": 5,
+              "median_total_collective_us": 18.783999606966972,
+              "median_group_with_input_reset_us": 26.815999299287796,
+              "median_by_call_us": [
+                18.783999606966972
+              ]
+            },
+            {
+              "rank": 6,
+              "median_total_collective_us": 18.96000001579523,
+              "median_group_with_input_reset_us": 26.928000152111053,
+              "median_by_call_us": [
+                18.96000001579523
+              ]
+            },
+            {
+              "rank": 7,
+              "median_total_collective_us": 19.039999693632126,
+              "median_group_with_input_reset_us": 26.815999299287796,
+              "median_by_call_us": [
+                19.039999693632126
+              ]
+            }
+          ],
+          "max_rank_median_total_collective_us": 19.039999693632126,
+          "max_rank_median_total_divided_by_calls_us": 19.039999693632126,
+          "max_rank_median_group_with_input_reset_us": 26.928000152111053,
+          "latency_change_vs_unfused_percent": 13.333335550768123
+        },
+        "cooperative_32": {
+          "grid": 32,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "median_total_collective_us": 17.855999991297722,
+              "median_group_with_input_reset_us": 25.567999109625816,
+              "median_by_call_us": [
+                17.855999991297722
+              ]
+            },
+            {
+              "rank": 1,
+              "median_total_collective_us": 17.983999103307724,
+              "median_group_with_input_reset_us": 25.615999475121498,
+              "median_by_call_us": [
+                17.983999103307724
+              ]
+            },
+            {
+              "rank": 2,
+              "median_total_collective_us": 18.015999346971512,
+              "median_group_with_input_reset_us": 25.631999596953392,
+              "median_by_call_us": [
+                18.015999346971512
+              ]
+            },
+            {
+              "rank": 3,
+              "median_total_collective_us": 17.760000191628933,
+              "median_group_with_input_reset_us": 25.728000327944756,
+              "median_by_call_us": [
+                17.760000191628933
+              ]
+            },
+            {
+              "rank": 4,
+              "median_total_collective_us": 17.823999747633934,
+              "median_group_with_input_reset_us": 25.615999475121498,
+              "median_by_call_us": [
+                17.823999747633934
+              ]
+            },
+            {
+              "rank": 5,
+              "median_total_collective_us": 17.632000148296356,
+              "median_group_with_input_reset_us": 25.760000571608543,
+              "median_by_call_us": [
+                17.632000148296356
+              ]
+            },
+            {
+              "rank": 6,
+              "median_total_collective_us": 17.74400006979704,
+              "median_group_with_input_reset_us": 25.760000571608543,
+              "median_by_call_us": [
+                17.74400006979704
+              ]
+            },
+            {
+              "rank": 7,
+              "median_total_collective_us": 17.983999103307724,
+              "median_group_with_input_reset_us": 25.855999439954758,
+              "median_by_call_us": [
+                17.983999103307724
+              ]
+            }
+          ],
+          "max_rank_median_total_collective_us": 18.015999346971512,
+          "max_rank_median_total_divided_by_calls_us": 18.015999346971512,
+          "max_rank_median_group_with_input_reset_us": 25.855999439954758,
+          "latency_change_vs_unfused_percent": 7.238095174739967
+        }
+      }
+    },
+    "global_status": {
+      "words": 1,
+      "op": "max",
+      "calls": 1,
+      "variants": {
+        "unfused": {
+          "grid": 0,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "median_total_collective_us": 15.872000716626644,
+              "median_group_with_input_reset_us": 23.584000766277313,
+              "median_by_call_us": [
+                15.872000716626644
+              ]
+            },
+            {
+              "rank": 1,
+              "median_total_collective_us": 15.887999907135963,
+              "median_group_with_input_reset_us": 23.552000522613525,
+              "median_by_call_us": [
+                15.887999907135963
+              ]
+            },
+            {
+              "rank": 2,
+              "median_total_collective_us": 16.01599995046854,
+              "median_group_with_input_reset_us": 23.53600040078163,
+              "median_by_call_us": [
+                16.01599995046854
+              ]
+            },
+            {
+              "rank": 3,
+              "median_total_collective_us": 15.823999419808388,
+              "median_group_with_input_reset_us": 23.760000243782997,
+              "median_by_call_us": [
+                15.823999419808388
+              ]
+            },
+            {
+              "rank": 4,
+              "median_total_collective_us": 15.839999541640282,
+              "median_group_with_input_reset_us": 23.663999512791634,
+              "median_by_call_us": [
+                15.839999541640282
+              ]
+            },
+            {
+              "rank": 5,
+              "median_total_collective_us": 15.664000064134598,
+              "median_group_with_input_reset_us": 23.72800000011921,
+              "median_by_call_us": [
+                15.664000064134598
+              ]
+            },
+            {
+              "rank": 6,
+              "median_total_collective_us": 15.840000472962856,
+              "median_group_with_input_reset_us": 23.679999634623528,
+              "median_by_call_us": [
+                15.840000472962856
+              ]
+            },
+            {
+              "rank": 7,
+              "median_total_collective_us": 16.00000075995922,
+              "median_group_with_input_reset_us": 23.744000121951103,
+              "median_by_call_us": [
+                16.00000075995922
+              ]
+            }
+          ],
+          "max_rank_median_total_collective_us": 16.01599995046854,
+          "max_rank_median_total_divided_by_calls_us": 16.01599995046854,
+          "max_rank_median_group_with_input_reset_us": 23.760000243782997,
+          "latency_change_vs_unfused_percent": 0.0
+        },
+        "fused_auto": {
+          "grid": -1,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "median_total_collective_us": 12.240000069141388,
+              "median_group_with_input_reset_us": 19.90400068461895,
+              "median_by_call_us": [
+                12.240000069141388
+              ]
+            },
+            {
+              "rank": 1,
+              "median_total_collective_us": 12.28800043463707,
+              "median_group_with_input_reset_us": 19.936000928282738,
+              "median_by_call_us": [
+                12.28800043463707
+              ]
+            },
+            {
+              "rank": 2,
+              "median_total_collective_us": 12.415999546647072,
+              "median_group_with_input_reset_us": 20.06400004029274,
+              "median_by_call_us": [
+                12.415999546647072
+              ]
+            },
+            {
+              "rank": 3,
+              "median_total_collective_us": 12.271999847143888,
+              "median_group_with_input_reset_us": 20.160000771284103,
+              "median_by_call_us": [
+                12.271999847143888
+              ]
+            },
+            {
+              "rank": 4,
+              "median_total_collective_us": 12.32000021263957,
+              "median_group_with_input_reset_us": 20.11200040578842,
+              "median_by_call_us": [
+                12.32000021263957
+              ]
+            },
+            {
+              "rank": 5,
+              "median_total_collective_us": 12.128000147640705,
+              "median_group_with_input_reset_us": 20.175999961793423,
+              "median_by_call_us": [
+                12.128000147640705
+              ]
+            },
+            {
+              "rank": 6,
+              "median_total_collective_us": 12.208000291138887,
+              "median_group_with_input_reset_us": 20.255999639630318,
+              "median_by_call_us": [
+                12.208000291138887
+              ]
+            },
+            {
+              "rank": 7,
+              "median_total_collective_us": 12.256000190973282,
+              "median_group_with_input_reset_us": 19.98399943113327,
+              "median_by_call_us": [
+                12.256000190973282
+              ]
+            }
+          ],
+          "max_rank_median_total_collective_us": 12.415999546647072,
+          "max_rank_median_total_divided_by_calls_us": 12.415999546647072,
+          "max_rank_median_group_with_input_reset_us": 20.255999639630318,
+          "latency_change_vs_unfused_percent": -22.477525068399817
+        },
+        "cooperative_1": {
+          "grid": 1,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "median_total_collective_us": 17.44000054895878,
+              "median_group_with_input_reset_us": 25.119999423623085,
+              "median_by_call_us": [
+                17.44000054895878
+              ]
+            },
+            {
+              "rank": 1,
+              "median_total_collective_us": 17.472000792622566,
+              "median_group_with_input_reset_us": 25.167999789118767,
+              "median_by_call_us": [
+                17.472000792622566
+              ]
+            },
+            {
+              "rank": 2,
+              "median_total_collective_us": 17.503999173641205,
+              "median_group_with_input_reset_us": 25.088000111281872,
+              "median_by_call_us": [
+                17.503999173641205
+              ]
+            },
+            {
+              "rank": 3,
+              "median_total_collective_us": 17.40800030529499,
+              "median_group_with_input_reset_us": 25.21600015461445,
+              "median_by_call_us": [
+                17.40800030529499
+              ]
+            },
+            {
+              "rank": 4,
+              "median_total_collective_us": 17.376000061631203,
+              "median_group_with_input_reset_us": 25.119999423623085,
+              "median_by_call_us": [
+                17.376000061631203
+              ]
+            },
+            {
+              "rank": 5,
+              "median_total_collective_us": 17.184000462293625,
+              "median_group_with_input_reset_us": 25.248000398278236,
+              "median_by_call_us": [
+                17.184000462293625
+              ]
+            },
+            {
+              "rank": 6,
+              "median_total_collective_us": 17.216000705957413,
+              "median_group_with_input_reset_us": 25.151999667286873,
+              "median_by_call_us": [
+                17.216000705957413
+              ]
+            },
+            {
+              "rank": 7,
+              "median_total_collective_us": 17.44000054895878,
+              "median_group_with_input_reset_us": 25.18399991095066,
+              "median_by_call_us": [
+                17.44000054895878
+              ]
+            }
+          ],
+          "max_rank_median_total_collective_us": 17.503999173641205,
+          "max_rank_median_total_divided_by_calls_us": 17.503999173641205,
+          "max_rank_median_group_with_input_reset_us": 25.248000398278236,
+          "latency_change_vs_unfused_percent": 9.290704469121414
+        },
+        "cooperative_2": {
+          "grid": 2,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "median_total_collective_us": 17.231999896466732,
+              "median_group_with_input_reset_us": 24.89599958062172,
+              "median_by_call_us": [
+                17.231999896466732
+              ]
+            },
+            {
+              "rank": 1,
+              "median_total_collective_us": 17.24799908697605,
+              "median_group_with_input_reset_us": 24.89599958062172,
+              "median_by_call_us": [
+                17.24799908697605
+              ]
+            },
+            {
+              "rank": 2,
+              "median_total_collective_us": 17.216000705957413,
+              "median_group_with_input_reset_us": 24.831999093294144,
+              "median_by_call_us": [
+                17.216000705957413
+              ]
+            },
+            {
+              "rank": 3,
+              "median_total_collective_us": 17.184000462293625,
+              "median_group_with_input_reset_us": 24.97600018978119,
+              "median_by_call_us": [
+                17.184000462293625
+              ]
+            },
+            {
+              "rank": 4,
+              "median_total_collective_us": 17.216000705957413,
+              "median_group_with_input_reset_us": 25.008000433444977,
+              "median_by_call_us": [
+                17.216000705957413
+              ]
+            },
+            {
+              "rank": 5,
+              "median_total_collective_us": 17.03999936580658,
+              "median_group_with_input_reset_us": 25.040000677108765,
+              "median_by_call_us": [
+                17.03999936580658
+              ]
+            },
+            {
+              "rank": 6,
+              "median_total_collective_us": 17.136000096797943,
+              "median_group_with_input_reset_us": 24.960000067949295,
+              "median_by_call_us": [
+                17.136000096797943
+              ]
+            },
+            {
+              "rank": 7,
+              "median_total_collective_us": 17.11999997496605,
+              "median_group_with_input_reset_us": 24.911999702453613,
+              "median_by_call_us": [
+                17.11999997496605
+              ]
+            }
+          ],
+          "max_rank_median_total_collective_us": 17.24799908697605,
+          "max_rank_median_total_divided_by_calls_us": 17.24799908697605,
+          "max_rank_median_group_with_input_reset_us": 25.040000677108765,
+          "latency_change_vs_unfused_percent": 7.692302324660472
+        },
+        "cooperative_4": {
+          "grid": 4,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "median_total_collective_us": 17.184000462293625,
+              "median_group_with_input_reset_us": 24.78400059044361,
+              "median_by_call_us": [
+                17.184000462293625
+              ]
+            },
+            {
+              "rank": 1,
+              "median_total_collective_us": 17.216000705957413,
+              "median_group_with_input_reset_us": 24.89599958062172,
+              "median_by_call_us": [
+                17.216000705957413
+              ]
+            },
+            {
+              "rank": 2,
+              "median_total_collective_us": 17.40800030529499,
+              "median_group_with_input_reset_us": 24.831999093294144,
+              "median_by_call_us": [
+                17.40800030529499
+              ]
+            },
+            {
+              "rank": 3,
+              "median_total_collective_us": 17.16800034046173,
+              "median_group_with_input_reset_us": 24.960000067949295,
+              "median_by_call_us": [
+                17.16800034046173
+              ]
+            },
+            {
+              "rank": 4,
+              "median_total_collective_us": 17.20000058412552,
+              "median_group_with_input_reset_us": 24.911999702453613,
+              "median_by_call_us": [
+                17.20000058412552
+              ]
+            },
+            {
+              "rank": 5,
+              "median_total_collective_us": 17.055999487638474,
+              "median_group_with_input_reset_us": 25.040000677108765,
+              "median_by_call_us": [
+                17.055999487638474
+              ]
+            },
+            {
+              "rank": 6,
+              "median_total_collective_us": 17.11999997496605,
+              "median_group_with_input_reset_us": 24.927999824285507,
+              "median_by_call_us": [
+                17.11999997496605
+              ]
+            },
+            {
+              "rank": 7,
+              "median_total_collective_us": 17.27999933063984,
+              "median_group_with_input_reset_us": 24.911999702453613,
+              "median_by_call_us": [
+                17.27999933063984
+              ]
+            }
+          ],
+          "max_rank_median_total_collective_us": 17.40800030529499,
+          "max_rank_median_total_divided_by_calls_us": 17.40800030529499,
+          "max_rank_median_group_with_input_reset_us": 25.040000677108765,
+          "latency_change_vs_unfused_percent": 8.691310933637508
+        },
+        "cooperative_8": {
+          "grid": 8,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "median_total_collective_us": 17.216000705957413,
+              "median_group_with_input_reset_us": 24.800000712275505,
+              "median_by_call_us": [
+                17.216000705957413
+              ]
+            },
+            {
+              "rank": 1,
+              "median_total_collective_us": 17.184000462293625,
+              "median_group_with_input_reset_us": 24.800000712275505,
+              "median_by_call_us": [
+                17.184000462293625
+              ]
+            },
+            {
+              "rank": 2,
+              "median_total_collective_us": 17.295999452471733,
+              "median_group_with_input_reset_us": 24.83200002461672,
+              "median_by_call_us": [
+                17.295999452471733
+              ]
+            },
+            {
+              "rank": 3,
+              "median_total_collective_us": 17.08799973130226,
+              "median_group_with_input_reset_us": 24.960000067949295,
+              "median_by_call_us": [
+                17.08799973130226
+              ]
+            },
+            {
+              "rank": 4,
+              "median_total_collective_us": 17.152000218629837,
+              "median_group_with_input_reset_us": 24.960000067949295,
+              "median_by_call_us": [
+                17.152000218629837
+              ]
+            },
+            {
+              "rank": 5,
+              "median_total_collective_us": 16.896000131964684,
+              "median_group_with_input_reset_us": 24.911999702453613,
+              "median_by_call_us": [
+                16.896000131964684
+              ]
+            },
+            {
+              "rank": 6,
+              "median_total_collective_us": 16.896000131964684,
+              "median_group_with_input_reset_us": 24.86399933695793,
+              "median_by_call_us": [
+                16.896000131964684
+              ]
+            },
+            {
+              "rank": 7,
+              "median_total_collective_us": 17.152000218629837,
+              "median_group_with_input_reset_us": 24.927999824285507,
+              "median_by_call_us": [
+                17.152000218629837
+              ]
+            }
+          ],
+          "max_rank_median_total_collective_us": 17.295999452471733,
+          "max_rank_median_total_divided_by_calls_us": 17.295999452471733,
+          "max_rank_median_group_with_input_reset_us": 24.960000067949295,
+          "latency_change_vs_unfused_percent": 7.992004907353589
+        },
+        "cooperative_16": {
+          "grid": 16,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "median_total_collective_us": 17.343999817967415,
+              "median_group_with_input_reset_us": 24.927999824285507,
+              "median_by_call_us": [
+                17.343999817967415
+              ]
+            },
+            {
+              "rank": 1,
+              "median_total_collective_us": 17.376000061631203,
+              "median_group_with_input_reset_us": 24.960000067949295,
+              "median_by_call_us": [
+                17.376000061631203
+              ]
+            },
+            {
+              "rank": 2,
+              "median_total_collective_us": 17.472000792622566,
+              "median_group_with_input_reset_us": 24.86399933695793,
+              "median_by_call_us": [
+                17.472000792622566
+              ]
+            },
+            {
+              "rank": 3,
+              "median_total_collective_us": 17.248000018298626,
+              "median_group_with_input_reset_us": 24.960000067949295,
+              "median_by_call_us": [
+                17.248000018298626
+              ]
+            },
+            {
+              "rank": 4,
+              "median_total_collective_us": 17.16800034046173,
+              "median_group_with_input_reset_us": 24.927999824285507,
+              "median_by_call_us": [
+                17.16800034046173
+              ]
+            },
+            {
+              "rank": 5,
+              "median_total_collective_us": 17.08799973130226,
+              "median_group_with_input_reset_us": 25.05600079894066,
+              "median_by_call_us": [
+                17.08799973130226
+              ]
+            },
+            {
+              "rank": 6,
+              "median_total_collective_us": 17.27999933063984,
+              "median_group_with_input_reset_us": 25.040000677108765,
+              "median_by_call_us": [
+                17.27999933063984
+              ]
+            },
+            {
+              "rank": 7,
+              "median_total_collective_us": 17.343999817967415,
+              "median_group_with_input_reset_us": 25.055999867618084,
+              "median_by_call_us": [
+                17.343999817967415
+              ]
+            }
+          ],
+          "max_rank_median_total_collective_us": 17.472000792622566,
+          "max_rank_median_total_divided_by_calls_us": 17.472000792622566,
+          "max_rank_median_group_with_input_reset_us": 25.05600079894066,
+          "latency_change_vs_unfused_percent": 9.090914377228332
+        },
+        "cooperative_32": {
+          "grid": 32,
+          "per_rank_medians": [
+            {
+              "rank": 0,
+              "median_total_collective_us": 17.456000670790672,
+              "median_group_with_input_reset_us": 25.087999179959297,
+              "median_by_call_us": [
+                17.456000670790672
+              ]
+            },
+            {
+              "rank": 1,
+              "median_total_collective_us": 17.231999896466732,
+              "median_group_with_input_reset_us": 24.89599958062172,
+              "median_by_call_us": [
+                17.231999896466732
+              ]
+            },
+            {
+              "rank": 2,
+              "median_total_collective_us": 17.50400010496378,
+              "median_group_with_input_reset_us": 25.008000433444977,
+              "median_by_call_us": [
+                17.50400010496378
+              ]
+            },
+            {
+              "rank": 3,
+              "median_total_collective_us": 17.32799969613552,
+              "median_group_with_input_reset_us": 25.167999789118767,
+              "median_by_call_us": [
+                17.32799969613552
+              ]
+            },
+            {
+              "rank": 4,
+              "median_total_collective_us": 17.376000061631203,
+              "median_group_with_input_reset_us": 25.119999423623085,
+              "median_by_call_us": [
+                17.376000061631203
+              ]
+            },
+            {
+              "rank": 5,
+              "median_total_collective_us": 17.071999609470367,
+              "median_group_with_input_reset_us": 25.167999789118767,
+              "median_by_call_us": [
+                17.071999609470367
+              ]
+            },
+            {
+              "rank": 6,
+              "median_total_collective_us": 17.32799969613552,
+              "median_group_with_input_reset_us": 25.119999423623085,
+              "median_by_call_us": [
+                17.32799969613552
+              ]
+            },
+            {
+              "rank": 7,
+              "median_total_collective_us": 17.535999417304993,
+              "median_group_with_input_reset_us": 25.200000032782555,
+              "median_by_call_us": [
+                17.535999417304993
+              ]
+            }
+          ],
+          "max_rank_median_total_collective_us": 17.535999417304993,
+          "max_rank_median_total_divided_by_calls_us": 17.535999417304993,
+          "max_rank_median_group_with_input_reset_us": 25.200000032782555,
+          "latency_change_vs_unfused_percent": 9.490506190916825
+        }
+      }
+    }
+  },
+  "measured_policy_choices": {
+    "exchange_counts": {
+      "words": 1152,
+      "op": "gather",
+      "calls_per_replay": 4,
+      "selected": "unfused",
+      "legacy_all_fused_per_call_us": 18.632000079378486,
+      "selected_per_call_us": 17.58400024846196,
+      "unfused_per_call_us": 17.58400024846196
+    },
+    "materialize_counts": {
+      "words": 2816,
+      "op": "gather",
+      "calls_per_replay": 1,
+      "selected": "unfused",
+      "legacy_all_fused_per_call_us": 19.74399946630001,
+      "selected_per_call_us": 18.848000094294548,
+      "unfused_per_call_us": 18.848000094294548
+    },
+    "sample_packet": {
+      "words": 4609,
+      "op": "sum",
+      "calls_per_replay": 1,
+      "selected": "unfused",
+      "legacy_all_fused_per_call_us": 18.12800019979477,
+      "selected_per_call_us": 16.79999940097332,
+      "unfused_per_call_us": 16.79999940097332
+    },
+    "global_status": {
+      "words": 1,
+      "op": "max",
+      "calls_per_replay": 1,
+      "selected": "fused_auto",
+      "legacy_all_fused_per_call_us": 12.415999546647072,
+      "selected_per_call_us": 12.415999546647072,
+      "unfused_per_call_us": 16.01599995046854
+    }
+  },
+  "limitations": [
+    "Output arrays were not archived in this JSON; their recorded hashes were compared to fully reconstructed deterministic expected int32 byte streams.",
+    "This verifies the complete recorded eight-GPU warm-aligned component cohort, not full-planner or training latency.",
+    "The <=256 policy is a production boundary reused from the prior single-CTA path; performance optimality at every unmeasured small size is not established.",
+    "Two alignment calls and the timing boundary are documented in the measured protocol; this timing JSON is not an independent GPU launch trace or occupancy measurement.",
+    "This script recomputes numerical evidence only; it does not repeat the separate source/documentation review.",
+    "Frozen source is not modified and no GPU work is run."
+  ]
+}

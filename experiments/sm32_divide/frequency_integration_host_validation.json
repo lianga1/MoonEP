@@ -1,0 +1,172 @@
+{
+  "status": "passed",
+  "scope": "Host orchestration/eligibility and source control-flow checks, not GPU integration execution",
+  "orchestration": [
+    {
+      "eligible": true,
+      "cap": 128,
+      "events": [
+        [
+          "select_capped_active_phase",
+          1,
+          40
+        ],
+        [
+          "frequency_shard",
+          null,
+          7
+        ],
+        [
+          "all_gather",
+          null,
+          2
+        ],
+        [
+          "frequency_unshard",
+          null,
+          3
+        ],
+        [
+          "select_capped_active_phase",
+          2,
+          40
+        ]
+      ]
+    },
+    {
+      "eligible": false,
+      "cap": 128,
+      "events": [
+        [
+          "select_capped_active",
+          null,
+          39
+        ]
+      ]
+    },
+    {
+      "eligible": false,
+      "cap": 0,
+      "events": [
+        [
+          "select",
+          null,
+          28
+        ]
+      ]
+    },
+    {
+      "run_events": [
+        [
+          "gather_local",
+          null,
+          3
+        ],
+        [
+          "all_reduce",
+          null,
+          2
+        ],
+        [
+          "select_capped_active_phase",
+          1,
+          40
+        ],
+        [
+          "frequency_shard",
+          null,
+          7
+        ],
+        [
+          "all_gather",
+          null,
+          2
+        ],
+        [
+          "frequency_unshard",
+          null,
+          3
+        ],
+        [
+          "select_capped_active_phase",
+          2,
+          40
+        ]
+      ],
+      "host_status_read": false
+    }
+  ],
+  "eligibility": [
+    {
+      "change": {},
+      "enabled": true
+    },
+    {
+      "change": {
+        "component_only": "True"
+      },
+      "enabled": false
+    },
+    {
+      "change": {
+        "effective_candidate_limit": "0"
+      },
+      "enabled": false
+    },
+    {
+      "change": {
+        "experts": "64"
+      },
+      "enabled": false
+    },
+    {
+      "change": {
+        "topk": "3"
+      },
+      "enabled": false
+    },
+    {
+      "change": {
+        "sample_size": "37"
+      },
+      "enabled": false
+    },
+    {
+      "change": {
+        "sample_size": "4096"
+      },
+      "enabled": false
+    },
+    {
+      "change": {
+        "groups_per_class": "3"
+      },
+      "enabled": false
+    },
+    {
+      "change": {
+        "sm_limit": "64"
+      },
+      "enabled": false
+    },
+    {
+      "change": {
+        "collective": "None"
+      },
+      "enabled": false
+    },
+    {
+      "change": {
+        "collective": "namespace(all_reduce=<function <lambda> at 0x1072c19d0>)"
+      },
+      "enabled": false
+    }
+  ],
+  "phase1_returns_before_old_frequency": true,
+  "phase2_skips_mandatory_and_records": true,
+  "production_single_package_enabled": false,
+  "source_sha256": {
+    "moonep/sampled_residency.py": "7f75fd0544250cd1c8682fcb1fb77d6a23dc3944ed3a7dbe6f4ceb719474e087",
+    "moonep/csrc/sampled_residency.cu": "0a0649ea1eea338cc314e43fff3a7d053ebf3118e91e04a1b4f8dfa112a19bd6"
+  }
+}

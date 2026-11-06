@@ -1,0 +1,14 @@
+{
+  "status": "production_single_package_reverted",
+  "diagnostic_single_package_preserved": true,
+  "files": {
+    "moonep/csrc/sampled_residency.cu": {
+      "before_sha256": "4de67dc17ff503db6258f5428567949e10c3f3ae56ea1abe96b15b6c11a2c040",
+      "after_sha256": "6e81c3bb244071a83f1d5c22544844bee109c96931105f9f6b5abfc687027a49"
+    },
+    "moonep/sampled_residency.py": {
+      "before_sha256": "9562dfc5501110e03673965e1328058ac993b02b88506f8346215a60d087c354",
+      "after_sha256": "33c8b22ac2cf3fcea73026f016c8670b3a53259eebe04e104bed4cf5cb6cd88f"
+    }
+  }
+}

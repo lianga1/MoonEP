@@ -27,8 +27,8 @@ def audit_trace(data,limit):
     names=[x['name'] for x in launches]
     anchors={
         'sample_gather':sum('gather_local(' in n for n in names),
-        'expert_greedy':sum('global_greedy_table_active<' in n for n in names),
-        'exchange_proposal':sum('propose_kernel(' in n or 'propose_ordinals_fused(' in n for n in names),
+        'expert_greedy':sum('global_greedy_table_active<' in n or 'global_greedy_compact_active<' in n for n in names),
+        'exchange_proposal':sum('propose_kernel(' in n or 'propose_ordinals_fused(' in n or 'propose_ordinals_fused<' in n for n in names),
         'exchange_prefix':sum('scan_blocks(' in n or 'scan_blocks_warp(' in n for n in names),
         'layout_encode':sum('encode_kernel(' in n or 'bounded_materialize::encode(' in n for n in names),
         'publication':sum('publish_kernel(' in n or 'bounded_materialize::publish(' in n for n in names),

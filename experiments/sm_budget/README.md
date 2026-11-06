@@ -1,5 +1,7 @@
 # 完整 planner 的 SM 上限与分段融合
 
+> 历史记录：本目录对应提交 `802af3f` 的实现和测量，正文中的“当前”均指该提交。后续32SM选择性融合与八卡分治修改见 [新报告](../sm32_divide/README.md)；本目录原始结果保持不变。
+
 本目录交付候选上限 128、四轮交换的完整八卡 planner 实测证据。正式结果见 [summary.md](summary.md)，逐卡中位数、逐层延迟、完整复核状态见 [summary.json](summary.json)。机器是同一台 omni-dev 的八张 H200，每卡 132 个 SM。
 
 ## 使用方式

@@ -266,6 +266,10 @@ def test_sm_budget_public_runtime(eight_physical, experts, topk, samples, groups
         S=tokens, num_ep_ranks=R, B=slots, enable_pdl=False,
         planning_backend='sampled_group', planner_config=cfg, explicitly_destroy=True)
     try:
+        residency = buffer._require_ctx()['sampled_group_planner'].residency
+        expected_sharding = (experts, topk, min(samples, R*tokens), groups) == (352, 8, 256, 2)
+        _assert_all(residency.frequency_sharding_enabled == expected_sharding,
+                    'automatic frequency eligibility differs from the measured-shape guard')
         label = f'SM32_E{experts}_K{topk}_fuse{fuse}'
         _compile_used(buffer, rank, label)
         saved = None
@@ -295,3 +299,93 @@ def test_sm_budget_weighted_forward_backward(eight_physical, monkeypatch, fuse):
         return SampledPlannerConfig(**values, sm_limit=32, fuse=fuse)
     monkeypatch.setattr(candidate_tests, 'SampledPlannerConfig', configuration)
     candidate_tests.test_candidate_limit_weighted_forward_backward(eight_physical, monkeypatch)
+
+
+@pytest.mark.parametrize('fuse', [False, True], ids=['unfused', 'fused'])
+def test_sharded_frequency_invalid_copy_graph_recovery(eight_physical, fuse):
+    """Invalid residency still runs the fixed SUM/shard/gather/unpack sequence.
+
+    Unlike force_reject (which rejects after residency), a bad native copy on
+    one source poisons the live sample packet before record construction.
+    Poisoned frequency workspaces must be overwritten even on this error path.
+    """
+    from moonep.inter_rank_sync import launch_inter_rank_sync
+    from moonep.planning import allocate_planning_outputs, launch_planning
+    from tests.benchmark_sampled_group import precompile_planner
+
+    rank = eight_physical
+    cfg = SampledPlannerConfig(sample_size=256, groups_per_class=2,
+        candidate_limit=128, rounds=4, sample_seed=SEED, sm_limit=32, fuse=fuse)
+    buffer = Buffer(257, H, 8, 352, R, B=8, enable_pdl=False,
+        planning_backend='sampled_group', planner_config=cfg, explicitly_destroy=True)
+    graph = None
+    try:
+        ctx = buffer._require_ctx();adapter = ctx['sampled_group_planner'];res = adapter.residency
+        _assert_all(res.frequency_sharding_enabled, 'delivery shape did not enable frequency sharding')
+        assert tuple(res.frequency_packed.shape) == (896,)
+        assert tuple(res.frequency_gathered.shape) == (8, 896)
+        precompile_planner(adapter.planning_ctx)
+        topk, tpe = _routes(rank, 352, 8, 257, 0)
+        plan, cu = allocate_planning_outputs(ctx)
+
+        def complete_plan():
+            launch_inter_rank_sync(ctx)
+            launch_planning(ctx, topk.flatten(), tpe, cu, plan)
+
+        complete_plan();_ready()
+        _oracle(buffer, topk, cfg, rank)
+        copies = adapter.seed.experts_to_copy.clone()
+
+        def execute():
+            launch_inter_rank_sync(ctx)
+            res.run(adapter.routes, adapter.seed_owner, copies)
+
+        def snapshot():
+            count = int(res.history_count.item())
+            retained = int(res.retained_count.item())
+            assert 0 <= count <= res.history.shape[0]
+            assert 0 <= retained <= res.selected_ids.numel()
+            return dict(support=res.support.clone(), extra=res.extra.clone(),
+                copies=res.experts_to_copy.clone(), history=res.history[:count].clone(),
+                selected_ids=res.selected_ids[:retained].clone(), frequencies=res.frequencies.clone(),
+                packet=res.packet.clone(), status=int(res.status.item()), history_count=count)
+
+        def compare(expected):
+            actual = snapshot()
+            for key, wanted in expected.items():
+                equal = torch.equal(actual[key], wanted) if isinstance(wanted, torch.Tensor) else actual[key] == wanted
+                _assert_all(equal, 'frequency invalid-input recovery differs: '+key)
+
+        execute();_ready()
+        expected = snapshot()
+        _assert_all(expected['status'] == 0, 'initial sharded residency rejected valid copies')
+        graph = torch.cuda.CUDAGraph()
+        with torch.cuda.graph(graph):
+            execute()
+        if rank == 3:
+            copies[0, 0] = 352
+        for _ in range(3):
+            res.frequency_packed.fill_(-777);res.frequency_gathered.fill_(-777)
+            res.frequencies.fill_(-777);res.status.fill_(31);res.history_count.fill_(-1)
+            graph.replay();torch.cuda.synchronize()
+            _assert_all(int(res.status.item()) != 0, 'one bad copy did not invalidate every sample packet')
+            _assert_all(int(res.history_count.item()) == 0, 'invalid records consumed stale greedy candidates')
+            for name in ('frequency_packed', 'frequency_gathered', 'frequencies'):
+                _assert_all(int(torch.count_nonzero(getattr(res, name)).item()) == 0,
+                            'invalid input skipped or left stale frequency work: '+name)
+        copies.copy_(adapter.seed.experts_to_copy)
+        res.frequency_packed.fill_(-991);res.frequency_gathered.fill_(-991)
+        res.frequencies.fill_(-991);res.support.zero_();res.status.fill_(31)
+        graph.replay();torch.cuda.synchronize()
+        compare(expected)
+        # Recovery must also remain usable by the complete planner, including
+        # exchange, materialization, final status reduction and publication.
+        complete_plan();_ready()
+        _assert_all(int(adapter.status.item()) == 0, 'complete planner did not recover after invalid residency')
+        _oracle(buffer, topk, cfg, rank)
+        _ready()
+    finally:
+        torch.cuda.synchronize()
+        if graph is not None:
+            graph.reset()
+        buffer.destroy()

@@ -344,7 +344,14 @@ __device__ __forceinline__ int input_item(int i,const int* routes,const int* own
   bool valid=valid_e&&valid_d;
   int key=valid?d:0;
   keys[i]=key;ids[i]=p;
-  if(valid)atomicAdd(counts+d*E+e,1);
+  // The native order groups experts. Aggregate equal (destination, expert)
+  // updates within the currently participating warp lanes before touching the
+  // shared global counter. A partial final warp uses its active mask; invalid
+  // entries never enter this collective. Counts remain exact integers.
+  if(valid) {
+    const unsigned peers=__match_any_sync(__activemask(),d*E+e);
+    if((threadIdx.x&31)==__ffs(peers)-1)atomicAdd(counts+d*E+e,__popc(peers));
+  }
   return key;
 }
 
@@ -407,6 +414,34 @@ __global__ void prepare_fused(const int* routes,const int* owner,const int* seed
       hist[threadIdx.x*sort_tiles+tile]=total;
     }
     __syncthreads();
+  }
+}
+
+// Eight independent rank buckets are scanned by eight warps. Only their
+// totals need one CTA barrier; the per-column prefixes use warp shuffles.
+// For expert starts, reuse exact local counts instead of re-reading all N
+// scattered ids/routes: stable native expert order + stable rank grouping
+// already implies (rank, expert) order. Invalid inputs still reject upstream.
+template<bool NonemptyOnly>
+__global__ void rank_prefix_warp(const int* values,int* out,int columns,const int* status) {
+  if(status&&*status)return;
+  __shared__ int totals[RANKS];
+  const int rank=threadIdx.x>>5,lane=threadIdx.x&31;
+  int sum=0;
+  for(int i=lane;i<columns;i+=32)sum+=values[rank*columns+i];
+  for(int delta=16;delta;delta>>=1)sum+=__shfl_down_sync(0xffffffffu,sum,delta);
+  if(lane==0)totals[rank]=sum;
+  __syncthreads();
+  int carry=0;for(int r=0;r<rank;++r)carry+=totals[r];
+  for(int base=0;base<columns;base+=32) {
+    const int i=base+lane,value=i<columns?values[rank*columns+i]:0;
+    int inclusive=value;
+    for(int delta=1;delta<32;delta<<=1) {
+      const int prior=__shfl_up_sync(0xffffffffu,inclusive,delta);
+      if(lane>=delta)inclusive+=prior;
+    }
+    if(i<columns)out[rank*columns+i]=(NonemptyOnly&&value==0)?-1:carry+inclusive-value;
+    carry+=__shfl_sync(0xffffffffu,inclusive,31);
   }
 }
 
@@ -554,9 +589,9 @@ void prepare_bounded(Tensor routes,Tensor owner,Tensor seed,Tensor order,Tensor 
     bounded_materialize::input<<<bounded_materialize::grid(N,limit),256,0,stream>>>(PTR(routes),PTR(owner),PTR(seed),PTR(order),PTR(lut),PTR(kin),PTR(vin),PTR(counts),PTR(status),N,E);
     bounded_materialize::histogram<<<bounded_materialize::grid(N,limit),256,0,stream>>>(PTR(kin),PTR(hist),N,tiles);
   }
-  bounded_materialize::histogram_prefix<<<1,256,0,stream>>>(PTR(hist),PTR(prefix),tiles);
+  bounded_materialize::rank_prefix_warp<false><<<1,256,0,stream>>>(PTR(hist),PTR(prefix),tiles,nullptr);
   bounded_materialize::scatter<<<bounded_materialize::grid(N,limit),256,0,stream>>>(PTR(kin),PTR(vin),PTR(prefix),PTR(kout),PTR(vout),N,tiles);
-  bounded_materialize::starts<<<bounded_materialize::grid(N,limit),256,0,stream>>>(PTR(routes),PTR(owner),PTR(vout),PTR(starts),PTR(status),N,E);
+  bounded_materialize::rank_prefix_warp<true><<<1,256,0,stream>>>(PTR(counts),PTR(starts),E,PTR(status));
   C10_CUDA_KERNEL_LAUNCH_CHECK();
 }
 

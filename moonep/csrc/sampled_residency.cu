@@ -294,6 +294,18 @@ struct GreedyTableStorage {
 };
 constexpr bool USE_GREEDY_TABLE=sizeof(GreedyTableStorage)<=48*1024;
 
+// A bucket retains at most 2*G groups, all with the same expert count. For
+// small K/G, assign one bit to each (retained group, expert slot), including
+// duplicate expert IDs across groups. Exact coverage of those slots replaces
+// repeated E-wide mask scans; it is not a probabilistic hash or approximation.
+struct CompactGreedyTableStorage {
+  GreedyTableStorage core;
+  unsigned coverage[GREEDY_ROWS],present[BUCKETS];
+};
+constexpr bool USE_COMPACT_GREEDY_TABLE=RETAINED*K<=32&&
+  sizeof(CompactGreedyTableStorage)<=48*1024;
+
+
 // A template is intentional: configurations exceeding the static shared-memory
 // limit must not instantiate this kernel (or its large local package arrays).
 template<int Specialization=0>
@@ -541,6 +553,132 @@ __global__ void global_greedy_table_active(const Word* masks,const int* freq,con
   if(t==0)*history_count=s.accepted;
 }
 
+// Exact compact-bit variant for the bounded planner. Package scores, global
+// budget checks, BestScore tie-breaking, accepted history and expert-ID output
+// ordering are unchanged. Configurations outside the bit/shared-memory bounds
+// retain global_greedy_table_active (or the existing generic fallback).
+template<int PackagesPerThread=PACKAGES_PER_THREAD>
+__global__ void global_greedy_compact_active(const Word* masks,const int* freq,const int* classes,const int* groups,const int* records,
+ const int* sizes,const int* packages,const int* package_count,const int* selected_ids,bool* support,int* extra,
+ int* output_etc,int64_t* history,int* history_count,const int* status,int B,const int* active_keys,const int* active_rows,const int* active_counts){
+  __shared__ CompactGreedyTableStorage storage;
+  GreedyTableStorage& s=storage.core;
+  const int t=threadIdx.x,n_packages=*package_count;
+  const int n_active_keys=active_counts[0],n_active_rows=active_counts[1];
+  for(int i=t;i<R*WORDS;i+=THREADS){int r=i/WORDS,w=i%WORDS;Word m=0;
+    for(int bit=0;bit<64;++bit){int e=w*64+bit;if(e<E&&support[r*E+e])m|=Word(1)<<bit;}s.resident[r][w]=m;}
+  if(t<R)s.current_extra[t]=extra[t];
+  if(t==0){s.accepted=0;s.changed_targets=(1u<<R)-1;}
+
+  // The diagnostic-only PackagesPerThread=1 variant requires cap<=THREADS:
+  // retained_count is min(package_count,cap), so thread t owns at most package t.
+  // Production retains the original MAXP-derived loop/storage after GPU tests
+  // showed the smaller specialization was slower. Candidate IDs are unchanged.
+  int forward_slot[PackagesPerThread],backward_slot[PackagesPerThread];
+  #pragma unroll
+  for(int i=0;i<PackagesPerThread;++i){
+    forward_slot[i]=backward_slot[i]=-1;
+    int p=t+i*THREADS;
+    // The generic path skips all package reads when status is nonzero. Keep
+    // that property even though metadata is now loaded before the iterations.
+    if(p<n_packages&&*status==0){
+      const int* q=packages+selected_ids[p]*5;
+      int ka=bucket(q[0],q[1],q[2]),kb=bucket(q[1],q[0],q[2]);
+      for(int j=0;j<sizes[ka];++j)if(records[ka*RETAINED+j]==q[3])forward_slot[i]=ka*RETAINED+j;
+      for(int j=0;j<sizes[kb];++j)if(records[kb*RETAINED+j]==q[4])backward_slot[i]=kb*RETAINED+j;
+    }
+  }
+  // Static exact coverage is built once. A duplicated expert in two groups
+  // occupies two bits; adding that expert sets BOTH. The own-group bit range
+  // has no duplicates, so popcount still counts distinct added experts.
+  for(int entry=t;entry<n_active_rows;entry+=THREADS){
+    const int row=active_rows[entry],key=row/RETAINED,size=key%STRIDE;
+    const int rec=records[row];unsigned coverage=0;
+    for(int j=0;j<sizes[key];++j){const int other=records[key*RETAINED+j];
+      for(int k=0;k<size;++k){const int expert=groups[other*K+k];bool included=false;
+        for(int q=0;q<size;++q)included|=groups[rec*K+q]==expert;
+        if(included)coverage|=1u<<(j*K+k);
+      }
+    }
+    storage.coverage[row]=coverage;
+  }
+  __syncthreads();
+
+  for(int iteration=0;iteration<R*B&&*status==0;++iteration){
+    // All cached values for old->new depend only on resident[new]. Every
+    // target is initialized once; after accepting a package, only targets
+    // receiving at least one genuinely new expert need their tables rebuilt.
+    // Keep full package rescoring below: both endpoints' global budgets still
+    // participate in feasibility, and the original deterministic tie remains.
+    const unsigned changed=s.changed_targets;
+    // The baseline counts include every retained group that is already
+    // executable, including groups with zero standalone communication gain.
+    for(int entry=t;entry<n_active_keys;entry+=THREADS){
+      const int key=active_keys[entry],target=(key/STRIDE)%R,size=key%STRIDE;
+      if(!(changed&(1u<<target)))continue;
+      const unsigned group_bits=(1u<<size)-1u;
+      unsigned present=0;int x0=0,x1=0;
+      for(int j=0;j<sizes[key];++j){const int rec=records[key*RETAINED+j];
+        for(int k=0;k<size;++k){const int expert=groups[rec*K+k];
+          if((s.resident[target][expert/64]>>(expert%64))&1ull)present|=1u<<(j*K+k);
+        }
+        const unsigned required=group_bits<<(j*K);
+        if((required&~present)==0){if(classes[rec]&1)x1+=freq[rec];else x0+=freq[rec];}
+      }
+      storage.present[key]=present;s.e0[key]=x0;s.e1[key]=x1;
+    }
+    // Every active row's key is present in active_keys. All readers must see
+    // its freshly updated present mask before scoring rows on other warps.
+    __syncthreads();
+    for(int entry=t;entry<n_active_rows;entry+=THREADS){
+      const int row=active_rows[entry],key=row/RETAINED,j=row%RETAINED;
+      const int target=(key/STRIDE)%R,size=key%STRIDE;
+      if(!(changed&(1u<<target)))continue;
+      const unsigned group_bits=(1u<<size)-1u,present=storage.present[key];
+      s.missing[row]=__popc((group_bits<<(j*K))&~present);
+      const unsigned after=present|storage.coverage[row];int x0=0,x1=0;
+      for(int k=0;k<sizes[key];++k){
+        if(((group_bits<<(k*K))&~after)==0){const int rec=records[key*RETAINED+k];
+          if(classes[rec]&1)x1+=freq[rec];else x0+=freq[rec];}
+      }
+      s.after0[row]=x0;s.after1[row]=x1;
+    }
+    __syncthreads();
+    Score best{0,0,MAXP};
+    #pragma unroll
+    for(int i=0;i<PackagesPerThread;++i){int p=t+i*THREADS;
+      if(p<n_packages){
+        int sa=forward_slot[i],sb=backward_slot[i],ka=sa/RETAINED,kb=sb/RETAINED;
+        int a=ka/(R*STRIDE),b=(ka/STRIDE)%R;
+        // a->b adds the forward group to b, while b->a adds the reverse
+        // group to a. Budgets remain global across all 28 card pairs.
+        int ca=s.missing[sb],cb=s.missing[sa],cost=ca+cb;
+        if(cost==0||s.current_extra[a]+ca>B||s.current_extra[b]+cb>B)continue;
+        int gain=match_gain(s.after0[sa],s.after1[sa],s.after0[sb],s.after1[sb])
+          -match_gain(s.e0[ka],s.e1[ka],s.e0[kb],s.e1[kb]);
+        best=BestScore()(best,Score{gain,cost,selected_ids[p]});
+      }
+    }
+    Score found=GreedyReduce(s.reduction).Reduce(best,BestScore());
+    if(t==0)s.winner=found;__syncthreads();
+    if(s.winner.gain<=0)break;
+    if(t==0){const int* q=packages+s.winner.idx*5;int a=q[0],b=q[1];int64_t* h=history+s.accepted*HISTORY_WIDTH;
+      h[0]=s.winner.idx;h[1]=s.winner.gain;h[2]=a;h[3]=b;h[4]=q[2];h[5]=s.winner.cost;
+      s.changed_targets=0;
+      for(int w=0;w<WORDS;++w){Word aa=masks[q[4]*WORDS+w]&~s.resident[a][w],ab=masks[q[3]*WORDS+w]&~s.resident[b][w];
+        h[6+w]=int64_t(aa);h[6+WORDS+w]=int64_t(ab);s.current_extra[a]+=__popcll(aa);s.current_extra[b]+=__popcll(ab);
+        if(aa)s.changed_targets|=1u<<a;if(ab)s.changed_targets|=1u<<b;
+        s.resident[a][w]|=aa;s.resident[b][w]|=ab;}++s.accepted;
+    }
+    __syncthreads();
+  }
+  for(int i=t;i<R*E;i+=THREADS){int r=i/E,e=i%E;support[i]=(s.resident[r][e/64]>>(e%64))&1;}
+  if(t<R){extra[t]=s.current_extra[t];int n=0;
+    for(int e=0;e<E;++e)if(e/HOME!=t&&((s.resident[t][e/64]>>(e%64))&1)){if(n<B)output_etc[t*B+n]=e;++n;}
+    while(n<B)output_etc[t*B+n++]=-1;}
+  if(t==0)*history_count=s.accepted;
+}
+
 // Candidate pruning ranks complete packages once at mandatory support.
 // All original direction-group records remain in the score tables: a package's
 // gain still measures all groups enabled by its additions, not only itself.
@@ -686,6 +824,44 @@ __global__ void record_frequencies_bounded(const int* classes,const int* groups,
 // Warps select independently, so no CTA-wide barrier is needed when an empty
 // class terminates early. The comparator is exactly the original total order:
 // frequency descending, full expert-list lexicographic order, then record ID.
+// Exact warp frequency implementation, shared by diagnostics and EP8 sharding.
+// One warp owns one output record;
+// lanes partition the D comparisons, then reduce count and first occurrence.
+// Full exact expert lists are checked after BOTH hashes and class match.
+// shards=1 measures the local warp variant. shards=8 emits only flat record
+// IDs shard_rank + 8*i into packed[i]; all-gather + unshard restores freq.
+__global__ void diagnostic_frequency_warp(const int* classes,const int* groups,
+ const Word* sig0,const Word* sig1,int* packed,int shard_rank,int shards){
+  constexpr int WARPS=THREADS/32;
+  const int lane=threadIdx.x&31,warp=threadIdx.x/32;
+  const int count=(PAIRS*D+shards-1)/shards;
+  for(int out=blockIdx.x*WARPS+warp;out<count;out+=gridDim.x*WARPS){
+    const int idx=out*shards+shard_rank;
+    if(idx>=PAIRS*D){if(lane==0)packed[out]=0;continue;}
+    const int base=(idx/D)*D,own=idx%D,own_class=classes[idx];
+    const Word own_h=sig0[idx],own_l=sig1[idx];
+    const int size=own_class<0?0:(own_class/2)%STRIDE;
+    int matches=0,first=D;
+    if(own_class>=0){
+      for(int j=lane;j<D;j+=32){const int other=base+j;
+        if(classes[other]==own_class&&sig0[other]==own_h&&sig1[other]==own_l&&
+           equal_group(idx,other,size,groups)){++matches;first=min(first,j);}
+      }
+    }
+    #pragma unroll
+    for(int delta=16;delta>0;delta/=2){
+      matches+=__shfl_down_sync(0xffffffffu,matches,delta);
+      first=min(first,__shfl_down_sync(0xffffffffu,first,delta));
+    }
+    if(lane==0)packed[out]=first==own?matches:0;
+  }
+}
+__global__ void diagnostic_frequency_unpack(const int* gathered,int* freq){
+  constexpr int SHARD_WORDS=(PAIRS*D+R-1)/R;
+  for(int i=blockIdx.x*THREADS+threadIdx.x;i<PAIRS*D;i+=gridDim.x*THREADS)
+    freq[i]=gathered[(i%R)*SHARD_WORDS+i/R];
+}
+
 __global__ void class_topg_warp_bounded(const int* classes,const int* freq,const int* groups,int* tops,int* first){
   constexpr int WARPS=THREADS/32;
   const int lane=threadIdx.x&31,warp=threadIdx.x/32;
@@ -994,13 +1170,14 @@ void count_frequencies(const at::Tensor& classes,const at::Tensor& groups,
     reinterpret_cast<const Word*>(sig0.data_ptr<int64_t>()),reinterpret_cast<const Word*>(sig1.data_ptr<int64_t>()),freq.data_ptr<int>());
   C10_CUDA_KERNEL_LAUNCH_CHECK();
 }
-void select_capped_active(const at::Tensor& packet,const at::Tensor& ids,const at::Tensor& etc,
+void select_capped_active_phase(int64_t phase,const at::Tensor& packet,const at::Tensor& ids,const at::Tensor& etc,
  at::Tensor& samples,at::Tensor& support,at::Tensor& extra,at::Tensor& seen,at::Tensor& classes,at::Tensor& groups,
  at::Tensor& sig0,at::Tensor& sig1,at::Tensor& masks,at::Tensor& freq,at::Tensor& tops,at::Tensor& first,
  at::Tensor& records,at::Tensor& sizes,at::Tensor& offsets,at::Tensor& packages,at::Tensor& package_count,
  at::Tensor& output_etc,at::Tensor& history,at::Tensor& history_count,at::Tensor& status,int64_t S,int64_t B,at::Tensor& scores_in,at::Tensor& scores_out,at::Tensor& sort_scratch,at::Tensor& selected_ids,at::Tensor& retained_count,at::Tensor& diagnostics,int64_t cap,at::Tensor& active_keys,at::Tensor& active_rows,at::Tensor& active_flags,at::Tensor& active_counts,int64_t sm_limit,bool fuse){
   TORCH_CHECK(packet.is_cuda()&&B>=1&&B<=E-HOME&&S>=1&&int64_t(R)*S>=D,"invalid packet/B/S");
   TORCH_CHECK(sm_limit>=0&&sm_limit<=1024,"invalid SM budget");
+  TORCH_CHECK(phase>=0&&phase<=2&&(phase==0||sm_limit>0),"invalid capped selector phase/budget");
   check(packet,packet,at::kInt,PACKET_SIZE,"packet");check(ids,packet,at::kLong,D,"sample IDs");check(etc,packet,at::kInt,R*B,"native copies");
   check(samples,packet,at::kInt,D*2*K,"samples");check(support,packet,at::kBool,R*E,"support");
   check(extra,packet,at::kInt,R,"extra");check(seen,packet,at::kInt,R*E,"copy seen");
@@ -1023,26 +1200,40 @@ void select_capped_active(const at::Tensor& packet,const at::Tensor& ids,const a
   check(active_counts,packet,at::kInt,2,"active counts");
   c10::cuda::CUDAGuard guard(packet.device());auto stream=c10::cuda::getCurrentCUDAStream();
   auto w=[](at::Tensor& x){return reinterpret_cast<Word*>(x.data_ptr<int64_t>());};
-  mandatory_validate<<<1,THREADS,0,stream>>>(packet.data_ptr<int>(),etc.data_ptr<int>(),samples.data_ptr<int>(),support.data_ptr<bool>(),extra.data_ptr<int>(),seen.data_ptr<int>(),status.data_ptr<int>(),B);
+  // Phase 0 is the original complete local path. Phase 1 only builds
+  // records; phase 2 consumes externally reconstructed exact frequencies.
+  // Phase 1 must still run on invalid input, and callers must execute the
+  // same intervening collective on every rank before phase 2.
+  if(phase!=2){
+    mandatory_validate<<<1,THREADS,0,stream>>>(packet.data_ptr<int>(),etc.data_ptr<int>(),samples.data_ptr<int>(),support.data_ptr<bool>(),extra.data_ptr<int>(),seen.data_ptr<int>(),status.data_ptr<int>(),B);
+    if(sm_limit>0){
+      const int samples_grid=std::min<int64_t>((PAIRS*D+THREADS-1)/THREADS,sm_limit);
+      sample_records_bounded<<<samples_grid,THREADS,0,stream>>>(samples.data_ptr<int>(),ids.data_ptr<int64_t>(),support.data_ptr<bool>(),extra.data_ptr<int>(),classes.data_ptr<int>(),groups.data_ptr<int>(),w(sig0),w(sig1),w(masks),status.data_ptr<int>(),S,B);
+    }else{
+      dim3 grid((D+THREADS-1)/THREADS,PAIRS);
+      sample_records<<<grid,THREADS,0,stream>>>(samples.data_ptr<int>(),ids.data_ptr<int64_t>(),support.data_ptr<bool>(),extra.data_ptr<int>(),classes.data_ptr<int>(),groups.data_ptr<int>(),w(sig0),w(sig1),w(masks),status.data_ptr<int>(),S,B);
+    }
+    if(phase==1){C10_CUDA_KERNEL_LAUNCH_CHECK();return;}
+    if(sm_limit>0){
+      const int frequency_grid=std::min<int64_t>(PAIRS*((D+THREADS-1)/THREADS),sm_limit);
+      record_frequencies_bounded<<<frequency_grid,THREADS,0,stream>>>(classes.data_ptr<int>(),groups.data_ptr<int>(),w(sig0),w(sig1),freq.data_ptr<int>());
+    }else{
+      dim3 grid((D+THREADS-1)/THREADS,PAIRS);
+      record_frequencies<<<grid,THREADS,0,stream>>>(classes.data_ptr<int>(),groups.data_ptr<int>(),w(sig0),w(sig1),freq.data_ptr<int>());
+    }
+  }
   if(sm_limit>0){
-    const int samples_grid=std::min<int64_t>((PAIRS*D+THREADS-1)/THREADS,sm_limit);
-    const int frequency_grid=std::min<int64_t>(PAIRS*((D+THREADS-1)/THREADS),sm_limit);
     const int class_grid=std::min<int64_t>((PAIRS*CLASSES+THREADS/32-1)/(THREADS/32),sm_limit);
     const int package_grid=std::min<int64_t>((PAIR_SIZES+THREADS-1)/THREADS,sm_limit);
-    sample_records_bounded<<<samples_grid,THREADS,0,stream>>>(samples.data_ptr<int>(),ids.data_ptr<int64_t>(),support.data_ptr<bool>(),extra.data_ptr<int>(),classes.data_ptr<int>(),groups.data_ptr<int>(),w(sig0),w(sig1),w(masks),status.data_ptr<int>(),S,B);
-    record_frequencies_bounded<<<frequency_grid,THREADS,0,stream>>>(classes.data_ptr<int>(),groups.data_ptr<int>(),w(sig0),w(sig1),freq.data_ptr<int>());
     class_topg_warp_bounded<<<class_grid,THREADS,0,stream>>>(classes.data_ptr<int>(),freq.data_ptr<int>(),groups.data_ptr<int>(),tops.data_ptr<int>(),first.data_ptr<int>());
     assemble_groups_bounded<<<package_grid,THREADS,0,stream>>>(tops.data_ptr<int>(),first.data_ptr<int>(),classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),offsets.data_ptr<int>());
     prefix_packages<<<1,THREADS,0,stream>>>(records.data_ptr<int>(),sizes.data_ptr<int>(),offsets.data_ptr<int>(),package_count.data_ptr<int>(),status.data_ptr<int>());
     fill_packages_bounded<<<package_grid,THREADS,0,stream>>>(classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),offsets.data_ptr<int>(),packages.data_ptr<int>());
   }else{
-  dim3 grid((D+THREADS-1)/THREADS,PAIRS);
-  sample_records<<<grid,THREADS,0,stream>>>(samples.data_ptr<int>(),ids.data_ptr<int64_t>(),support.data_ptr<bool>(),extra.data_ptr<int>(),classes.data_ptr<int>(),groups.data_ptr<int>(),w(sig0),w(sig1),w(masks),status.data_ptr<int>(),S,B);
-  record_frequencies<<<grid,THREADS,0,stream>>>(classes.data_ptr<int>(),groups.data_ptr<int>(),w(sig0),w(sig1),freq.data_ptr<int>());
-  class_topg<<<PAIRS*CLASSES,THREADS,0,stream>>>(classes.data_ptr<int>(),freq.data_ptr<int>(),groups.data_ptr<int>(),tops.data_ptr<int>(),first.data_ptr<int>());
-  assemble_groups<<<(PAIR_SIZES+THREADS-1)/THREADS,THREADS,0,stream>>>(tops.data_ptr<int>(),first.data_ptr<int>(),classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),offsets.data_ptr<int>());
-  prefix_packages<<<1,THREADS,0,stream>>>(records.data_ptr<int>(),sizes.data_ptr<int>(),offsets.data_ptr<int>(),package_count.data_ptr<int>(),status.data_ptr<int>());
-  fill_packages<<<(PAIR_SIZES+THREADS-1)/THREADS,THREADS,0,stream>>>(classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),offsets.data_ptr<int>(),packages.data_ptr<int>());
+    class_topg<<<PAIRS*CLASSES,THREADS,0,stream>>>(classes.data_ptr<int>(),freq.data_ptr<int>(),groups.data_ptr<int>(),tops.data_ptr<int>(),first.data_ptr<int>());
+    assemble_groups<<<(PAIR_SIZES+THREADS-1)/THREADS,THREADS,0,stream>>>(tops.data_ptr<int>(),first.data_ptr<int>(),classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),offsets.data_ptr<int>());
+    prefix_packages<<<1,THREADS,0,stream>>>(records.data_ptr<int>(),sizes.data_ptr<int>(),offsets.data_ptr<int>(),package_count.data_ptr<int>(),status.data_ptr<int>());
+    fill_packages<<<(PAIR_SIZES+THREADS-1)/THREADS,THREADS,0,stream>>>(classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),offsets.data_ptr<int>(),packages.data_ptr<int>());
   }
   auto* in=reinterpret_cast<Score*>(scores_in.data_ptr<int>());
   auto* out=reinterpret_cast<Score*>(scores_out.data_ptr<int>());
@@ -1078,9 +1269,121 @@ void select_capped_active(const at::Tensor& packet,const at::Tensor& ids,const a
     C10_CUDA_CHECK(cudaMemsetAsync(active_counts.data_ptr<int>(),0,2*sizeof(int),stream));
     build_active_tables<<<(MAXP+THREADS-1)/THREADS,THREADS,0,stream>>>(packages.data_ptr<int>(),selected_ids.data_ptr<int>(),retained_count.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),status.data_ptr<int>(),active_keys.data_ptr<int>(),active_rows.data_ptr<int>(),active_flags.data_ptr<int>(),active_counts.data_ptr<int>());
     }
+    if constexpr(USE_COMPACT_GREEDY_TABLE){
+      if(sm_limit>0){
+        global_greedy_compact_active<><<<1,THREADS,0,stream>>>(w(masks),freq.data_ptr<int>(),classes.data_ptr<int>(),groups.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),packages.data_ptr<int>(),retained_count.data_ptr<int>(),selected_ids.data_ptr<int>(),support.data_ptr<bool>(),extra.data_ptr<int>(),output_etc.data_ptr<int>(),history.data_ptr<int64_t>(),history_count.data_ptr<int>(),status.data_ptr<int>(),B,active_keys.data_ptr<int>(),active_rows.data_ptr<int>(),active_counts.data_ptr<int>());
+      }else{
     global_greedy_table_active<><<<1,THREADS,0,stream>>>(w(masks),freq.data_ptr<int>(),classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),packages.data_ptr<int>(),retained_count.data_ptr<int>(),selected_ids.data_ptr<int>(),support.data_ptr<bool>(),extra.data_ptr<int>(),output_etc.data_ptr<int>(),history.data_ptr<int64_t>(),history_count.data_ptr<int>(),status.data_ptr<int>(),B,active_keys.data_ptr<int>(),active_rows.data_ptr<int>(),active_counts.data_ptr<int>());
+      }
+    }else{
+    global_greedy_table_active<><<<1,THREADS,0,stream>>>(w(masks),freq.data_ptr<int>(),classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),packages.data_ptr<int>(),retained_count.data_ptr<int>(),selected_ids.data_ptr<int>(),support.data_ptr<bool>(),extra.data_ptr<int>(),output_etc.data_ptr<int>(),history.data_ptr<int64_t>(),history_count.data_ptr<int>(),status.data_ptr<int>(),B,active_keys.data_ptr<int>(),active_rows.data_ptr<int>(),active_counts.data_ptr<int>());
+    }
   }else{
     global_greedy_capped<<<1,THREADS,0,stream>>>(w(masks),freq.data_ptr<int>(),classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),packages.data_ptr<int>(),retained_count.data_ptr<int>(),selected_ids.data_ptr<int>(),support.data_ptr<bool>(),extra.data_ptr<int>(),output_etc.data_ptr<int>(),history.data_ptr<int64_t>(),history_count.data_ptr<int>(),status.data_ptr<int>(),B);
+  }
+  C10_CUDA_KERNEL_LAUNCH_CHECK();
+}
+
+// Preserve the existing low-level entry point and its complete local path.
+void select_capped_active(const at::Tensor& packet,const at::Tensor& ids,const at::Tensor& etc,
+ at::Tensor& samples,at::Tensor& support,at::Tensor& extra,at::Tensor& seen,at::Tensor& classes,at::Tensor& groups,
+ at::Tensor& sig0,at::Tensor& sig1,at::Tensor& masks,at::Tensor& freq,at::Tensor& tops,at::Tensor& first,
+ at::Tensor& records,at::Tensor& sizes,at::Tensor& offsets,at::Tensor& packages,at::Tensor& package_count,
+ at::Tensor& output_etc,at::Tensor& history,at::Tensor& history_count,at::Tensor& status,int64_t S,int64_t B,at::Tensor& scores_in,at::Tensor& scores_out,at::Tensor& sort_scratch,at::Tensor& selected_ids,at::Tensor& retained_count,at::Tensor& diagnostics,int64_t cap,at::Tensor& active_keys,at::Tensor& active_rows,at::Tensor& active_flags,at::Tensor& active_counts,int64_t sm_limit,bool fuse){
+  select_capped_active_phase(0,packet,ids,etc,samples,support,extra,seen,classes,groups,sig0,sig1,masks,freq,tops,first,records,sizes,offsets,packages,package_count,output_etc,history,history_count,status,S,B,scores_in,scores_out,sort_scratch,selected_ids,retained_count,diagnostics,cap,active_keys,active_rows,active_flags,active_counts,sm_limit,fuse);
+}
+
+// Frequency entries share exact kernels between diagnostics and the bounded
+// production path. The caller supplies preallocated outputs and explicitly
+// performs one peer all-gather between shard and unshard. The diagnostic local
+// entry retains both baselines; production enables sharding only for the
+// measured EP8/E352/K8/D256/G2/32-SM configuration.
+void diagnostic_frequency_local(const at::Tensor& classes,const at::Tensor& groups,
+ const at::Tensor& sig0,const at::Tensor& sig1,at::Tensor& freq,int64_t sm_limit,bool warp){
+  TORCH_CHECK(classes.is_cuda()&&sm_limit>0&&sm_limit<=1024,"invalid frequency diagnostic device/budget");
+  check(classes,classes,at::kInt,PAIRS*D,"classes");check(groups,classes,at::kInt,PAIRS*D*K,"groups");
+  check(sig0,classes,at::kLong,PAIRS*D,"sig0");check(sig1,classes,at::kLong,PAIRS*D,"sig1");
+  check(freq,classes,at::kInt,PAIRS*D,"frequency output");
+  c10::cuda::CUDAGuard guard(classes.device());auto stream=c10::cuda::getCurrentCUDAStream();
+  auto h0=reinterpret_cast<const Word*>(sig0.data_ptr<int64_t>()),h1=reinterpret_cast<const Word*>(sig1.data_ptr<int64_t>());
+  if(warp){
+    const int grid=std::min<int64_t>((PAIRS*D+THREADS/32-1)/(THREADS/32),sm_limit);
+    diagnostic_frequency_warp<<<grid,THREADS,0,stream>>>(classes.data_ptr<int>(),groups.data_ptr<int>(),h0,h1,freq.data_ptr<int>(),0,1);
+  }else{
+    const int grid=std::min<int64_t>(PAIRS*((D+THREADS-1)/THREADS),sm_limit);
+    record_frequencies_bounded<<<grid,THREADS,0,stream>>>(classes.data_ptr<int>(),groups.data_ptr<int>(),h0,h1,freq.data_ptr<int>());
+  }
+  C10_CUDA_KERNEL_LAUNCH_CHECK();
+}
+void diagnostic_frequency_shard(const at::Tensor& classes,const at::Tensor& groups,
+ const at::Tensor& sig0,const at::Tensor& sig1,at::Tensor& packed,int64_t shard_rank,int64_t sm_limit){
+  TORCH_CHECK(classes.is_cuda()&&sm_limit>0&&sm_limit<=1024&&shard_rank>=0&&shard_rank<R,
+    "invalid frequency shard device/budget/rank");
+  check(classes,classes,at::kInt,PAIRS*D,"classes");check(groups,classes,at::kInt,PAIRS*D*K,"groups");
+  check(sig0,classes,at::kLong,PAIRS*D,"sig0");check(sig1,classes,at::kLong,PAIRS*D,"sig1");
+  constexpr int SHARD_WORDS=(PAIRS*D+R-1)/R;
+  check(packed,classes,at::kInt,SHARD_WORDS,"packed frequency shard");
+  c10::cuda::CUDAGuard guard(classes.device());auto stream=c10::cuda::getCurrentCUDAStream();
+  const int grid=std::min<int64_t>((SHARD_WORDS+THREADS/32-1)/(THREADS/32),sm_limit);
+  diagnostic_frequency_warp<<<grid,THREADS,0,stream>>>(classes.data_ptr<int>(),groups.data_ptr<int>(),
+    reinterpret_cast<const Word*>(sig0.data_ptr<int64_t>()),reinterpret_cast<const Word*>(sig1.data_ptr<int64_t>()),
+    packed.data_ptr<int>(),shard_rank,R);
+  C10_CUDA_KERNEL_LAUNCH_CHECK();
+}
+void diagnostic_frequency_unshard(const at::Tensor& gathered,at::Tensor& freq,int64_t sm_limit){
+  TORCH_CHECK(gathered.is_cuda()&&sm_limit>0&&sm_limit<=1024,"invalid frequency unshard device/budget");
+  check(gathered,gathered,at::kInt,R*((PAIRS*D+R-1)/R),"gathered frequency shards");
+  check(freq,gathered,at::kInt,PAIRS*D,"frequency output");
+  c10::cuda::CUDAGuard guard(gathered.device());auto stream=c10::cuda::getCurrentCUDAStream();
+  const int grid=std::min<int64_t>((PAIRS*D+THREADS-1)/THREADS,sm_limit);
+  diagnostic_frequency_unpack<<<grid,THREADS,0,stream>>>(gathered.data_ptr<int>(),freq.data_ptr<int>());
+  C10_CUDA_KERNEL_LAUNCH_CHECK();
+}
+
+// Diagnostic-only replay of already-built candidates. This is deliberately
+// not a planner configuration option: it compares old/compact greedy kernels
+// with identical mandatory initialization, candidate IDs and active tables.
+// Call select first and retain the same packet/native copies and metadata.
+void diagnostic_greedy_replay(const at::Tensor& packet,const at::Tensor& etc,
+ at::Tensor& samples,at::Tensor& support,at::Tensor& extra,at::Tensor& seen,
+ const at::Tensor& masks,const at::Tensor& freq,const at::Tensor& classes,const at::Tensor& groups,
+ const at::Tensor& records,const at::Tensor& sizes,const at::Tensor& packages,
+ const at::Tensor& retained_count,const at::Tensor& selected_ids,
+ at::Tensor& output_etc,at::Tensor& history,at::Tensor& history_count,at::Tensor& status,
+ const at::Tensor& active_keys,const at::Tensor& active_rows,const at::Tensor& active_counts,
+ int64_t B,int64_t cap,bool compact,bool single_package){
+  TORCH_CHECK(packet.is_cuda()&&B>=1&&B<=E-HOME,"invalid diagnostic packet/B");
+  TORCH_CHECK(cap>0&&cap<=MAXP,"diagnostic cap must match the prepared candidate limit");
+  TORCH_CHECK(!single_package||(compact&&cap<=THREADS),
+    "single-package diagnostic requires compact=true and prepared cap<=256");
+  TORCH_CHECK(USE_GREEDY_TABLE,"diagnostic replay requires the active-table configuration");
+  TORCH_CHECK(!compact||USE_COMPACT_GREEDY_TABLE,"compact greedy is unsupported for this K/G/shared-memory size");
+  check(packet,packet,at::kInt,PACKET_SIZE,"packet");check(etc,packet,at::kInt,R*B,"native copies");
+  check(samples,packet,at::kInt,D*2*K,"samples");check(support,packet,at::kBool,R*E,"support");
+  check(extra,packet,at::kInt,R,"extra");check(seen,packet,at::kInt,R*E,"copy seen");
+  check(masks,packet,at::kLong,PAIRS*D*WORDS,"masks");check(freq,packet,at::kInt,PAIRS*D,"frequencies");
+  check(classes,packet,at::kInt,PAIRS*D,"classes");check(groups,packet,at::kInt,PAIRS*D*K,"groups");
+  check(records,packet,at::kInt,BUCKETS*RETAINED,"records");check(sizes,packet,at::kInt,BUCKETS,"sizes");
+  check(packages,packet,at::kInt,MAXP*5,"packages");check(retained_count,packet,at::kInt,1,"retained count");
+  check(selected_ids,packet,at::kInt,MAXP,"selected IDs");check(output_etc,packet,at::kInt,R*B,"output copies");
+  check(history,packet,at::kLong,R*B*HISTORY_WIDTH,"history");check(history_count,packet,at::kInt,1,"history count");
+  check(status,packet,at::kInt,1,"status");check(active_keys,packet,at::kInt,BUCKETS,"active keys");
+  check(active_rows,packet,at::kInt,GREEDY_ROWS,"active rows");check(active_counts,packet,at::kInt,2,"active counts");
+  c10::cuda::CUDAGuard guard(packet.device());auto stream=c10::cuda::getCurrentCUDAStream();
+  mandatory_validate<<<1,THREADS,0,stream>>>(packet.data_ptr<int>(),etc.data_ptr<int>(),samples.data_ptr<int>(),support.data_ptr<bool>(),extra.data_ptr<int>(),seen.data_ptr<int>(),status.data_ptr<int>(),B);
+  const auto* m=reinterpret_cast<const Word*>(masks.data_ptr<int64_t>());
+  if constexpr(USE_GREEDY_TABLE){
+    if constexpr(USE_COMPACT_GREEDY_TABLE){
+      if(compact){
+        if(single_package){
+          global_greedy_compact_active<1><<<1,THREADS,0,stream>>>(m,freq.data_ptr<int>(),classes.data_ptr<int>(),groups.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),packages.data_ptr<int>(),retained_count.data_ptr<int>(),selected_ids.data_ptr<int>(),support.data_ptr<bool>(),extra.data_ptr<int>(),output_etc.data_ptr<int>(),history.data_ptr<int64_t>(),history_count.data_ptr<int>(),status.data_ptr<int>(),B,active_keys.data_ptr<int>(),active_rows.data_ptr<int>(),active_counts.data_ptr<int>());
+        }else{
+          global_greedy_compact_active<><<<1,THREADS,0,stream>>>(m,freq.data_ptr<int>(),classes.data_ptr<int>(),groups.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),packages.data_ptr<int>(),retained_count.data_ptr<int>(),selected_ids.data_ptr<int>(),support.data_ptr<bool>(),extra.data_ptr<int>(),output_etc.data_ptr<int>(),history.data_ptr<int64_t>(),history_count.data_ptr<int>(),status.data_ptr<int>(),B,active_keys.data_ptr<int>(),active_rows.data_ptr<int>(),active_counts.data_ptr<int>());
+        }
+        C10_CUDA_KERNEL_LAUNCH_CHECK();return;
+      }
+    }
+    global_greedy_table_active<><<<1,THREADS,0,stream>>>(m,freq.data_ptr<int>(),classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),packages.data_ptr<int>(),retained_count.data_ptr<int>(),selected_ids.data_ptr<int>(),support.data_ptr<bool>(),extra.data_ptr<int>(),output_etc.data_ptr<int>(),history.data_ptr<int64_t>(),history_count.data_ptr<int>(),status.data_ptr<int>(),B,active_keys.data_ptr<int>(),active_rows.data_ptr<int>(),active_counts.data_ptr<int>());
   }
   C10_CUDA_KERNEL_LAUNCH_CHECK();
 }
@@ -1104,8 +1407,16 @@ void copy_packet(const at::Tensor& input,at::Tensor& output,int64_t sm_limit){
 
 PYBIND11_MODULE(TORCH_EXTENSION_NAME,m){
   m.def("select_capped_active",&select_capped_active);
+  m.def("select_capped_active_phase",&select_capped_active_phase);
   m.def("pruning_workspace_bytes",&pruning_workspace_bytes);
   m.def("uses_active_table",[](){return USE_GREEDY_TABLE;});
+  m.def("uses_compact_greedy_table",[](){return USE_COMPACT_GREEDY_TABLE;});
+  m.def("diagnostic_greedy_replay",&diagnostic_greedy_replay);
+  m.def("diagnostic_frequency_local",&diagnostic_frequency_local);
+  m.def("diagnostic_frequency_shard",&diagnostic_frequency_shard);
+  m.def("diagnostic_frequency_unshard",&diagnostic_frequency_unshard);
+  m.def("frequency_shard",&diagnostic_frequency_shard);
+  m.def("frequency_unshard",&diagnostic_frequency_unshard);
   m.def("gather",&gather);
   m.def("copy_packet",&copy_packet);
   m.def("select",&select_residency);

@@ -3,9 +3,13 @@
 This is a same-node NVLink EP8 implementation, not a general NCCL replacement.
 Only one planner invocation may be in flight per Buffer. All ranks must execute
 the same collective sequence, including invalid-input/native-fallback paths.
+fuse=True is selective: payloads up to 256 int32 words use the single-CTA
+fused collective; larger tables use the bounded four-launch protocol. Fused
+finish selection remains enabled. Legacy cooperative fusion is diagnostic only.
 """
 from functools import lru_cache
 import hashlib
+import operator
 from pathlib import Path
 
 import torch
@@ -56,6 +60,22 @@ class BoundedPlannerRuntime:
 
     def copy(self,src,dst):
         self.ext.copy(src,dst,self.limit)
+
+    def _diagnostic_collective(self,src,dst,*,op,grid):
+        """Private full-protocol experiment; does not change the default path.
+
+        grid=-1: legacy all-fused auto; 0: production four-launch; positive:
+        force that cooperative CTA count, including for scalar payloads.
+        For in-place SUM/MAX the caller must restore input before EVERY replay.
+        """
+        self._input(src)
+        if isinstance(grid,bool):
+            raise ValueError('diagnostic grid must be an integer')
+        grid=operator.index(grid)
+        if not -1<=grid<=self.limit or op not in ('gather','sum','max'):
+            raise ValueError('diagnostic grid must be -1/0/1..limit, op gather/sum/max')
+        mode={'gather':0,'sum':1,'max':2}[op]
+        self.ext.diagnostic_collective(src,dst,self.shared,self.stride,self.rank,mode,self.limit,grid)
 
     def finish(self,adapter,candidate,candidate_cu,cu,plan):
         self.ext.status(adapter.residency.status,adapter.materializer.status,adapter.force_reject,adapter.status)
