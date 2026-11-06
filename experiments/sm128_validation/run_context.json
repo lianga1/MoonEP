@@ -1,0 +1,17 @@
+{
+  "commit": "55564bcbe1febd82d99b35ae7db0e16c5ccba712",
+  "candidate_limit": 128,
+  "rounds": 4,
+  "sample_size": 256,
+  "groups_per_class": 2,
+  "N": 134144,
+  "R": 8,
+  "E": 352,
+  "K": 8,
+  "source_root": "/inspire/hdd/project/embodied-multimodality/liangzuning-253108090053/moonep_sm32_divide_20261106",
+  "frequency_sharding": {
+    "32": true,
+    "128": false
+  },
+  "native_num_sms": 32
+}

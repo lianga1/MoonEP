@@ -40,7 +40,11 @@ received, weights, cu_seqlens, plan, *rest = buffer.dispatch(
 
 要启用本次交付的八卡、128 候选、四轮配置，使用 `B=8` 和 `SampledPlannerConfig(candidate_limit=128, rounds=4)`。详细启动示例、剪枝规则和证据见 [候选上限版本](sampled_candidate_limit.md)。样本数仍默认 256，每类仍保留两组；128 指最终双向方案的数量，不是采样数，也不是专家数量。
 
-要为完整 planner 加上每卡32个SM的执行上限，使用 `SampledPlannerConfig(candidate_limit=128, rounds=4, sm_limit=32, fuse=True)`。当前选择性融合配合八卡频率分治实测776.764µs，比旧32SM未融合版850.802µs降低8.70%，完整计划与通信收益不变；同一新版关闭融合为797.038µs。该上限包含原生起点、小表跨卡通信、排序、交换、检查和发布；不限制planner外的dispatch、权重/梯度通信或其他并发任务，也不绑定固定SM编号。见 [完整SM上限](sampled_sm_budget.md) 和 [本次优化与证据](../experiments/sm32_divide/README.md)。
+严格限制每卡32个SM时，使用 `SampledPlannerConfig(candidate_limit=128, rounds=4, sm_limit=32, fuse=True)`。此前32SM优化批次中，选择性融合配合八卡频率分治实测776.764µs，比旧32SM未融合版850.802µs降低8.70%；同一新版关闭融合为797.038µs，完整计划与通信收益不变。保留的历史结果见 [32SM优化与证据](../experiments/sm32_divide/README.md)。
+
+允许每卡最多128个SM时，使用 `B=8` 和 `SampledPlannerConfig(candidate_limit=128, rounds=4, sm_limit=128, fuse=True)`。本次对已提交算法 `55564bc` 原样验证，同机八张H200、同一八层路由下，32SM选择性融合前后对照中点为 **763.182µs**，128SM未融合为 **629.366µs**，128SM选择性融合为 **615.976µs**，比本次32SM对照降低 **19.29%**。这与上段历史数字属于不同测量批次。完整九项计划和专家副本一致，远程 `(token, 目的卡)` 次数相对原生MoonEP仍减少 **23.0801%**。见 [128SM配置与复算](../experiments/sm128_validation/README.md) 和 [实测报告](../experiments/sm128_validation/report.md)。
+
+在这份E352/K8、采样256、每类2组的配置中，32SM启用八卡频率分治；128SM恢复每卡完整频率统计，少一次频率表汇总。因此两档差异不能全部归因于SM数量。`Buffer.num_sms` 默认仍为32，原生起点使用 `min(num_sms, sm_limit)`，本次128SM测量中的原生起点仍启动32个线程块。预算包含完整planner的原生起点、统计通信、排序、交换、检查和发布；不限制planner外的dispatch、权重/梯度通信或其他并发任务，也不绑定固定SM编号。计时不含初始化、JIT、实际token/权重/梯度载荷、GEMM或完整训练步。默认仍为 `sm_limit=0, fuse=False`；完整约束见 [SM上限说明](sampled_sm_budget.md)。
 
 模型字段自动读取如下；支持对象或字典，也支持其 `text_config`。同一维度有多个值且冲突时会报错，避免猜错模型结构。
 

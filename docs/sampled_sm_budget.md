@@ -1,6 +1,6 @@
 # 完整 planner 的 SM 上限与分段融合
 
-此路径在 `sampled_group` 内控制完整 planner 的执行规模，保留128候选、四轮交换和原有负载约束。当前严格32SM建议 `fuse=True` 的选择性融合，配合八卡频率分治与计数复用；新结果见 [后续优化报告](../experiments/sm32_divide/README.md)。`sm_limit=0, fuse=False` 默认继续原路径。本文后半的完整预算扫描表保留802版历史结果。
+此路径在 `sampled_group` 内控制完整 planner 的执行规模，保留128候选、四轮交换和原有负载约束。严格32SM时可使用选择性融合与八卡频率分治；允许128SM时，本次实测选择性融合更快，配置与证据见 [128SM验证入口](../experiments/sm128_validation/README.md) 和 [完整报告](../experiments/sm128_validation/report.md)。`sm_limit=0, fuse=False` 默认继续原路径。此前的 [32SM优化报告](../experiments/sm32_divide/README.md) 与本文后半802版预算矩阵均保留为历史批次结果。
 
 ## 启动配置
 
@@ -17,22 +17,38 @@ buffer = Buffer.from_model_config(
     planner_config=SampledPlannerConfig(
         candidate_limit=128,
         rounds=4,
-        sm_limit=32,
+        sm_limit=128,             # 若严格限制32SM，改为32
         fuse=True,
         # sample_size=256, groups_per_class=2, sample_seed=20261026
     ),
 )
 ```
 
-也可以传 `planner_config={"candidate_limit": 128, "rounds": 4, "sm_limit": 32, "fuse": True}`。`fuse=True`启用下文的选择性融合；设为`False`保留同一SM预算及分治优化、拆开可融合阶段。E、K、H仍直接复用模型或 Buffer 参数，采样数和每类保留组数仍有原来的默认值。模型支持范围、字段识别规则和槽位约束见 [配置说明](sampled_group.md)。
+也可以传 `planner_config={"candidate_limit": 128, "rounds": 4, "sm_limit": 128, "fuse": True}`。`fuse=True`启用下文的选择性融合；设为`False`保留同一SM预算及对应统计路径、拆开可融合阶段。E、K、H仍直接复用模型或 Buffer 参数，采样数和每类保留组数仍有原来的默认值。模型支持范围、字段识别规则和槽位约束见 [配置说明](sampled_group.md)。
 
 `sm_limit` 是非负整数，正数不能大于本卡实际SM数量；`fuse` 必须是布尔值，且 `True` 要求正数预算。所有rank的配置必须一致，并在共享缓冲区分配前集体验证。改变预算、融合设置或模型形状时，需要重新构造和预热 Buffer，再重新捕获 CUDA Graph。
 
-## 32SM保证的具体含义
+## 当前128SM验证
+
+本次原样运行提交 `55564bc` 的算法，在同机八张H200上比较候选128、四轮、全局134,144个token、E352/K8、采样256、每类2组、B8。每卡10个样本、每样本5次Graph回放；每层先取各卡中位数的最大值，再平均同一八层。
+
+| 本次配置 | 八层完整planner平均 | 相对本次32SM前后中点 |
+|---|---:|---:|
+| 32SM选择性融合，前后对照中点 | 763.182µs | 基准 |
+| 128SM未融合 | 629.366µs | −17.53% |
+| 128SM选择性融合 | **615.976µs** | **−19.29%** |
+
+前后中点是两次对照的平均，不是置信区间。此前32SM优化批次的776.764µs及本文后半802版数字属于其他测量批次，不用于计算本表收益。完整九项计划与旧版一致，另通过CPU对照且无回退；远程 `(token, 目的卡)` 次数相对原生MoonEP仍减少23.0801%，八层专家副本累计仍为434。
+
+这份形状在32SM时启用八卡频率分治，128SM时各卡执行完整本地频率统计、少一次频率表汇总；两档差异不能全部解释为SM数量变化。128SM trace中，各卡最大单次启动和同时在途线程块的保守上界均为128，原生起点仍为32块，本地频率核为28块，没有NCCL kernel。完整planner计时包含统计表通信和来源信息发布，不包含实际token/专家权重/梯度传输、GEMM或完整训练步。
+
+详细阶段、原始证据和无需GPU的复算入口见 [128SM交付说明](../experiments/sm128_validation/README.md) 与 [验证报告](../experiments/sm128_validation/report.md)。本次没有修改算法或重跑全套60项测试，验证范围是新增预算配置的八层完整计划、Graph一致性与启动预算。
+
+## SM上限保证的具体含义
 
 线程块（CTA）是一组共同执行的GPU线程，一个线程块不会同时跨越多个SM。受限路径每次最多启动 `sm_limit` 个线程块，并将这些 kernel 依次放在同一个 CUDA stream 上执行。因此，对于一个在途的 planner，所有重叠执行的规划线程块合计不超过预算，同时使用的SM数量也不超过预算。
 
-这不是SM固定分区：不同阶段可能被安排在不同的物理SM上；一个SM也可能同时容纳多个线程块。预算不保证恰好使用32个SM，也不直接表示SM利用率。它不为其他工作独占保留剩余SM，也不消除显存带宽竞争。
+这不是SM固定分区：不同阶段可能被安排在不同的物理SM上；一个SM也可能同时容纳多个线程块。预算不保证恰好使用上限数量的SM，也不直接表示SM利用率。它不为其他工作独占保留剩余SM，也不消除显存带宽竞争。
 
 范围包括：
 
