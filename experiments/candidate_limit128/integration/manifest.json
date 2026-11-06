@@ -1,0 +1,33 @@
+{
+  "kind": "Fresh production-interface integration verification; one same-environment comparison batch",
+  "files": {
+    "README.md": "b0fe78aec9dfb2a86eeba683be06a9aeecaaa066eecad5f87b2fb5ff7576711c",
+    "benchmark_cap0_01.exit": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "benchmark_cap0_01.json.gz": "6dc9d285efb59c3a0f1e0893ed56f639072e487d787583605dbf7beb5af9d455",
+    "benchmark_cap0_01.log": "3d2270dbf444840b942afcdad85bf877677ccf198e1b04590cc6c89240b5e599",
+    "benchmark_cap128_01.exit": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "benchmark_cap128_01.json.gz": "32204864f483dac3d1e7e3a4b47c568dfcc253042c0593b399312a649023e260",
+    "benchmark_cap128_01.log": "99557eb116d11c60d313077a579b544483c6933b7a99ea0f275488750d8f764c",
+    "cap128_public_01.exit": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "cap128_public_01.log": "ee36719d17ed1564c7e0a70a6b21cbcb16be97788423533c73186cdfb0649b8c",
+    "compatibility_public_01.exit": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "compatibility_public_01.log": "7cc236d81e3a4aed3181041cea2c1eb47bd3dca383ae633f615080c9bad692cd",
+    "complete_01": "a07534bff35fe7e78c3e56b7261532a88dbf7e45a9c649020152fbc793194b56",
+    "host_config_01.exit": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "host_config_01.log": "f05c57d1ada6bacb60013513040188f81172a9178b11ab9a80f44a6d89bcadde",
+    "launcher_01.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original_validation.sh.gz": "4184b58538e874956372ea913939b5d9975a8b822d3ded7b7f1f963cfd25b628",
+    "provided_summary_cap0_01.json": "0634bef72ca14a386416619daae46e61a8edb9871d57f1944f65624effee56d7",
+    "provided_summary_cap128_01.json": "2c83a51a1398cfecc0963a825cabb5e04ed68e48906f3ff96889ed45154fa216",
+    "run_validation.sh": "604f2bf7f4cc2c81499399ac7de6c4a60d6819550111dc25b6e152a37de4350c",
+    "selector_01.exit": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "selector_01.log": "defd06fa297d91bd26334e0320c427272399b3ad38932d38e7c191ca9befa1cf",
+    "summarize.py": "0842a9c7d440b1e05d7976c5586924e75f38e32c745b11f36e81c674e847f91c",
+    "summary.json": "b6310878ccd216a11ee7771664e9be4911b4ae99467602aad665f168f57a4741"
+  },
+  "uncompressed_sha256": {
+    "benchmark_cap0_01.json.gz": "4f0278ce9daf2fcc17e8755b5ea7a06cc568d1353598a262880acd1b3f3dd715",
+    "benchmark_cap128_01.json.gz": "284223ad50d08cc0a79d8697aeba12217345d84c27884831f7f7343bb3d38130",
+    "original_validation.sh.gz": "ce9332a489646ead39e4dbac899fe36ce52c01d2529a084c2bd7a63df946cb4c"
+  }
+}

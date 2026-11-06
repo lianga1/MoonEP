@@ -7,6 +7,7 @@
 #include <c10/cuda/CUDAException.h>
 #include <cuda_runtime.h>
 #include <cub/block/block_reduce.cuh>
+#include <cub/device/device_merge_sort.cuh>
 #include <cstdint>
 
 #ifndef MOONEP_E
@@ -390,6 +391,243 @@ __global__ void global_greedy_table(const Word* masks,const int* freq,const int*
   if(t==0)*history_count=s.accepted;
 }
 
+__global__ void global_greedy_capped(const Word* masks,const int* freq,const int* classes,const int* records,
+ const int* sizes,const int* packages,const int* package_count,const int* selected_ids,bool* support,int* extra,
+ int* output_etc,int64_t* history,int* history_count,const int* status,int B){
+  using Reduce=cub::BlockReduce<Score,THREADS>;
+  __shared__ typename Reduce::TempStorage tmp;
+  __shared__ Word resident[R][WORDS];__shared__ int current_extra[R],e0[BUCKETS],e1[BUCKETS];
+  __shared__ Score winner;__shared__ int accepted;
+  int t=threadIdx.x;
+  for(int i=t;i<R*WORDS;i+=THREADS){int r=i/WORDS,w=i%WORDS;Word m=0;
+    for(int bit=0;bit<64;++bit){int e=w*64+bit;if(e<E&&support[r*E+e])m|=Word(1)<<bit;}resident[r][w]=m;}
+  if(t<R)current_extra[t]=extra[t];if(t==0)accepted=0;__syncthreads();
+  for(int iteration=0;iteration<R*B&&*status==0;++iteration){
+    for(int key=t;key<BUCKETS;key+=THREADS){int x0=0,x1=0,b=(key/STRIDE)%R;
+      for(int j=0;j<sizes[key];++j){int rec=records[key*RETAINED+j];if(enabled(masks+rec*WORDS,resident[b])){
+        if(classes[rec]&1)x1+=freq[rec];else x0+=freq[rec];}}
+      e0[key]=x0;e1[key]=x1;
+    }
+    __syncthreads();Score best{0,0,MAXP};
+    for(int p=t;p<*package_count;p+=THREADS){int original=selected_ids[p];const int* q=packages+original*5;int a=q[0],b=q[1],size=q[2],ra=q[3],rb=q[4];
+      int ca=0,cb=0;
+      for(int w=0;w<WORDS;++w){ca+=__popcll(masks[rb*WORDS+w]&~resident[a][w]);
+        cb+=__popcll(masks[ra*WORDS+w]&~resident[b][w]);}
+      int cost=ca+cb;if(cost==0||current_extra[a]+ca>B||current_extra[b]+cb>B)continue;
+      int ka=bucket(a,b,size),kb=bucket(b,a,size),x0=0,x1=0,y0=0,y1=0;
+      for(int j=0;j<sizes[ka];++j){int rec=records[ka*RETAINED+j];bool ok=true;
+        for(int w=0;w<WORDS;++w)if(masks[rec*WORDS+w]&~(resident[b][w]|masks[ra*WORDS+w])){ok=false;break;}
+        if(ok){if(classes[rec]&1)x1+=freq[rec];else x0+=freq[rec];}}
+      for(int j=0;j<sizes[kb];++j){int rec=records[kb*RETAINED+j];bool ok=true;
+        for(int w=0;w<WORDS;++w)if(masks[rec*WORDS+w]&~(resident[a][w]|masks[rb*WORDS+w])){ok=false;break;}
+        if(ok){if(classes[rec]&1)y1+=freq[rec];else y0+=freq[rec];}}
+      int gain=match_gain(x0,x1,y0,y1)-match_gain(e0[ka],e1[ka],e0[kb],e1[kb]);
+      best=BestScore()(best,Score{gain,cost,original});
+    }
+    Score found=Reduce(tmp).Reduce(best,BestScore());if(t==0)winner=found;__syncthreads();
+    if(winner.gain<=0)break;
+    if(t==0){const int* q=packages+winner.idx*5;int a=q[0],b=q[1];int64_t* h=history+accepted*HISTORY_WIDTH;
+      h[0]=winner.idx;h[1]=winner.gain;h[2]=a;h[3]=b;h[4]=q[2];h[5]=winner.cost;
+      for(int w=0;w<WORDS;++w){Word aa=masks[q[4]*WORDS+w]&~resident[a][w],ab=masks[q[3]*WORDS+w]&~resident[b][w];
+        h[6+w]=int64_t(aa);h[6+WORDS+w]=int64_t(ab);current_extra[a]+=__popcll(aa);current_extra[b]+=__popcll(ab);
+        resident[a][w]|=aa;resident[b][w]|=ab;}++accepted;
+    }
+    __syncthreads();
+  }
+  for(int i=t;i<R*E;i+=THREADS){int r=i/E,e=i%E;support[i]=(resident[r][e/64]>>(e%64))&1;}
+  if(t<R){extra[t]=current_extra[t];int n=0;
+    for(int e=0;e<E;++e)if(e/HOME!=t&&((resident[t][e/64]>>(e%64))&1)){if(n<B)output_etc[t*B+n]=e;++n;}
+    while(n<B)output_etc[t*B+n++]=-1;}
+  if(t==0)*history_count=accepted;
+}
+
+
+template<int Specialization=0>
+__global__ void global_greedy_table_active(const Word* masks,const int* freq,const int* classes,const int* records,
+ const int* sizes,const int* packages,const int* package_count,const int* selected_ids,bool* support,int* extra,
+ int* output_etc,int64_t* history,int* history_count,const int* status,int B,const int* active_keys,const int* active_rows,const int* active_counts){
+  __shared__ GreedyTableStorage s;
+  const int t=threadIdx.x,n_packages=*package_count;
+  const int n_active_keys=active_counts[0],n_active_rows=active_counts[1];
+  for(int i=t;i<R*WORDS;i+=THREADS){int r=i/WORDS,w=i%WORDS;Word m=0;
+    for(int bit=0;bit<64;++bit){int e=w*64+bit;if(e<E&&support[r*E+e])m|=Word(1)<<bit;}s.resident[r][w]=m;}
+  if(t<R)s.current_extra[t]=extra[t];
+  if(t==0){s.accepted=0;s.changed_targets=(1u<<R)-1;}
+
+  // Only two constant-index arrays are kept per thread. For E352/K8/G2 this
+  // is 2*11 int values; unrolling allows register scalarization, subject to
+  // compiler register pressure. Package order and package contents are intact.
+  int forward_slot[PACKAGES_PER_THREAD],backward_slot[PACKAGES_PER_THREAD];
+  #pragma unroll
+  for(int i=0;i<PACKAGES_PER_THREAD;++i){
+    forward_slot[i]=backward_slot[i]=-1;
+    int p=t+i*THREADS;
+    // The generic path skips all package reads when status is nonzero. Keep
+    // that property even though metadata is now loaded before the iterations.
+    if(p<n_packages&&*status==0){
+      const int* q=packages+selected_ids[p]*5;
+      int ka=bucket(q[0],q[1],q[2]),kb=bucket(q[1],q[0],q[2]);
+      for(int j=0;j<sizes[ka];++j)if(records[ka*RETAINED+j]==q[3])forward_slot[i]=ka*RETAINED+j;
+      for(int j=0;j<sizes[kb];++j)if(records[kb*RETAINED+j]==q[4])backward_slot[i]=kb*RETAINED+j;
+    }
+  }
+  __syncthreads();
+
+  for(int iteration=0;iteration<R*B&&*status==0;++iteration){
+    // All cached values for old->new depend only on resident[new]. Every
+    // target is initialized once; after accepting a package, only targets
+    // receiving at least one genuinely new expert need their tables rebuilt.
+    // Keep full package rescoring below: both endpoints' global budgets still
+    // participate in feasibility, and the original deterministic tie remains.
+    const unsigned changed=s.changed_targets;
+    // The baseline counts include every retained group that is already
+    // executable, including groups with zero standalone communication gain.
+    for(int entry=t;entry<n_active_keys;entry+=THREADS){int key=active_keys[entry];
+      int x0=0,x1=0,b=(key/STRIDE)%R;
+      if(!(changed&(1u<<b)))continue;
+      for(int j=0;j<sizes[key];++j){int rec=records[key*RETAINED+j];if(enabled(masks+rec*WORDS,s.resident[b])){
+        if(classes[rec]&1)x1+=freq[rec];else x0+=freq[rec];}}
+      s.e0[key]=x0;s.e1[key]=x1;
+    }
+    for(int entry=t;entry<n_active_rows;entry+=THREADS){
+      int row=active_rows[entry],key=row/RETAINED,j=row%RETAINED,target=(key/STRIDE)%R;
+      if(!(changed&(1u<<target)))continue;
+      if(j>=sizes[key]){s.missing[row]=s.after0[row]=s.after1[row]=0;continue;}
+      int rec=records[row],missing=0,x0=0,x1=0;
+      for(int w=0;w<WORDS;++w)missing+=__popcll(masks[rec*WORDS+w]&~s.resident[target][w]);
+      // A zero-cost direction still participates: its reverse direction can
+      // produce positive gain. Count the complete bucket after adding this
+      // group's experts, not only the newly enabled records.
+      for(int k=0;k<sizes[key];++k){int other=records[key*RETAINED+k];bool ok=true;
+        for(int w=0;w<WORDS;++w)if(masks[other*WORDS+w]&~(s.resident[target][w]|masks[rec*WORDS+w])){ok=false;break;}
+        if(ok){if(classes[other]&1)x1+=freq[other];else x0+=freq[other];}
+      }
+      s.missing[row]=missing;s.after0[row]=x0;s.after1[row]=x1;
+    }
+    __syncthreads();
+    Score best{0,0,MAXP};
+    #pragma unroll
+    for(int i=0;i<PACKAGES_PER_THREAD;++i){int p=t+i*THREADS;
+      if(p<n_packages){
+        int sa=forward_slot[i],sb=backward_slot[i],ka=sa/RETAINED,kb=sb/RETAINED;
+        int a=ka/(R*STRIDE),b=(ka/STRIDE)%R;
+        // a->b adds the forward group to b, while b->a adds the reverse
+        // group to a. Budgets remain global across all 28 card pairs.
+        int ca=s.missing[sb],cb=s.missing[sa],cost=ca+cb;
+        if(cost==0||s.current_extra[a]+ca>B||s.current_extra[b]+cb>B)continue;
+        int gain=match_gain(s.after0[sa],s.after1[sa],s.after0[sb],s.after1[sb])
+          -match_gain(s.e0[ka],s.e1[ka],s.e0[kb],s.e1[kb]);
+        best=BestScore()(best,Score{gain,cost,selected_ids[p]});
+      }
+    }
+    Score found=GreedyReduce(s.reduction).Reduce(best,BestScore());
+    if(t==0)s.winner=found;__syncthreads();
+    if(s.winner.gain<=0)break;
+    if(t==0){const int* q=packages+s.winner.idx*5;int a=q[0],b=q[1];int64_t* h=history+s.accepted*HISTORY_WIDTH;
+      h[0]=s.winner.idx;h[1]=s.winner.gain;h[2]=a;h[3]=b;h[4]=q[2];h[5]=s.winner.cost;
+      s.changed_targets=0;
+      for(int w=0;w<WORDS;++w){Word aa=masks[q[4]*WORDS+w]&~s.resident[a][w],ab=masks[q[3]*WORDS+w]&~s.resident[b][w];
+        h[6+w]=int64_t(aa);h[6+WORDS+w]=int64_t(ab);s.current_extra[a]+=__popcll(aa);s.current_extra[b]+=__popcll(ab);
+        if(aa)s.changed_targets|=1u<<a;if(ab)s.changed_targets|=1u<<b;
+        s.resident[a][w]|=aa;s.resident[b][w]|=ab;}++s.accepted;
+    }
+    __syncthreads();
+  }
+  for(int i=t;i<R*E;i+=THREADS){int r=i/E,e=i%E;support[i]=(s.resident[r][e/64]>>(e%64))&1;}
+  if(t<R){extra[t]=s.current_extra[t];int n=0;
+    for(int e=0;e<E;++e)if(e/HOME!=t&&((s.resident[t][e/64]>>(e%64))&1)){if(n<B)output_etc[t*B+n]=e;++n;}
+    while(n<B)output_etc[t*B+n++]=-1;}
+  if(t==0)*history_count=s.accepted;
+}
+
+// Candidate pruning ranks complete packages once at mandatory support.
+// All original direction-group records remain in the score tables: a package's
+// gain still measures all groups enabled by its additions, not only itself.
+struct InitialBefore {
+  __host__ __device__ bool operator()(const Score& a,const Score& b)const{
+    const bool av=a.gain>0,bv=b.gain>0;
+    if(av!=bv)return av;
+    if(!av)return a.idx<b.idx;
+    const int64_t lhs=int64_t(a.gain)*b.cost,rhs=int64_t(b.gain)*a.cost;
+    if(lhs!=rhs)return lhs>rhs;
+    if(a.gain!=b.gain)return a.gain>b.gain;
+    if(a.cost!=b.cost)return a.cost<b.cost;
+    return a.idx<b.idx;
+  }
+};
+__global__ void initial_package_scores(const Word* masks,const int* freq,const int* classes,
+ const int* records,const int* sizes,const int* packages,const int* package_count,
+ const bool* support,const int* extra,const int* status,Score* scores,int* diagnostics,int B){
+  __shared__ Word resident[R][WORDS];
+  int t=threadIdx.x;
+  for(int i=t;i<R*WORDS;i+=THREADS){int r=i/WORDS,w=i%WORDS;Word m=0;
+    for(int bit=0;bit<64;++bit){int e=w*64+bit;if(e<E&&support[r*E+e])m|=Word(1)<<bit;}
+    resident[r][w]=m;
+  }
+  __syncthreads();
+  int p=blockIdx.x*THREADS+t;if(p>=MAXP)return;
+  Score score{0,0,p};
+  if(p<*package_count&&*status==0){
+    const int* q=packages+p*5;int a=q[0],b=q[1],size=q[2],ra=q[3],rb=q[4];
+    int ca=0,cb=0;
+    for(int w=0;w<WORDS;++w){ca+=__popcll(masks[rb*WORDS+w]&~resident[a][w]);
+      cb+=__popcll(masks[ra*WORDS+w]&~resident[b][w]);}
+    int cost=ca+cb;
+    if(cost>0&&extra[a]+ca<=B&&extra[b]+cb<=B){
+      int ka=bucket(a,b,size),kb=bucket(b,a,size);
+      int x0=0,x1=0,y0=0,y1=0,bx0=0,bx1=0,by0=0,by1=0;
+      for(int j=0;j<sizes[ka];++j){int rec=records[ka*RETAINED+j];bool before=true,after=true;
+        for(int w=0;w<WORDS;++w){before&=!(masks[rec*WORDS+w]&~resident[b][w]);
+          after&=!(masks[rec*WORDS+w]&~(resident[b][w]|masks[ra*WORDS+w]));}
+        int f=freq[rec];bool gain=classes[rec]&1;
+        if(before){if(gain)bx1+=f;else bx0+=f;}if(after){if(gain)x1+=f;else x0+=f;}
+      }
+      for(int j=0;j<sizes[kb];++j){int rec=records[kb*RETAINED+j];bool before=true,after=true;
+        for(int w=0;w<WORDS;++w){before&=!(masks[rec*WORDS+w]&~resident[a][w]);
+          after&=!(masks[rec*WORDS+w]&~(resident[a][w]|masks[rb*WORDS+w]));}
+        int f=freq[rec];bool gain=classes[rec]&1;
+        if(before){if(gain)by1+=f;else by0+=f;}if(after){if(gain)y1+=f;else y0+=f;}
+      }
+      int gain=match_gain(x0,x1,y0,y1)-match_gain(bx0,bx1,by0,by1);
+      if(gain>0){score={gain,cost,p};atomicAdd(diagnostics,1);}
+    }
+  }
+  scores[p]=score;
+}
+__global__ void retain_package_ids(const Score* sorted,const int* package_count,
+ int* selected_ids,int* retained_count,int* diagnostics,int cap){
+  const int count=min(*package_count,cap),p=blockIdx.x*THREADS+threadIdx.x;
+  if(p<count)selected_ids[p]=sorted[p].idx;
+  if(p==0){*retained_count=count;diagnostics[1]=*package_count;diagnostics[2]=count;}
+}
+
+// Unique active metadata is rebuilt on the GPU after every candidate prune.
+// Atomic append order may vary, but each key/row computes independent integer
+// state and the greedy selection tie remains the original package ID.
+__global__ void build_active_tables(const int* packages,const int* selected_ids,
+ const int* retained_count,const int* records,const int* sizes,const int* status,
+ int* active_keys,int* active_rows,int* active_flags,int* active_counts){
+  int p=blockIdx.x*THREADS+threadIdx.x;
+  if(p>=*retained_count||*status)return;
+  const int* q=packages+selected_ids[p]*5;
+  int ka=bucket(q[0],q[1],q[2]),kb=bucket(q[1],q[0],q[2]);
+  const int keys[2]={ka,kb},recs[2]={q[3],q[4]};
+  for(int direction=0;direction<2;++direction){
+    int key=keys[direction];
+    if(atomicCAS(active_flags+key,0,1)==0){
+      int pos=atomicAdd(active_counts,1);active_keys[pos]=key;
+    }
+    for(int j=0;j<sizes[key];++j){
+      int row=key*RETAINED+j;
+      if(records[row]!=recs[direction])continue;
+      if(atomicCAS(active_flags+BUCKETS+row,0,1)==0){
+        int pos=atomicAdd(active_counts+1,1);active_rows[pos]=row;
+      }
+      break;
+    }
+  }
+}
+
 void check(const at::Tensor& tensor,const at::Tensor& reference,at::ScalarType dtype,int64_t count,const char* name){
   TORCH_CHECK(tensor.is_cuda()&&tensor.device()==reference.device()&&tensor.scalar_type()==dtype&&tensor.is_contiguous()&&tensor.numel()==count,"invalid ",name);
 }
@@ -454,4 +692,74 @@ void count_frequencies(const at::Tensor& classes,const at::Tensor& groups,
     reinterpret_cast<const Word*>(sig0.data_ptr<int64_t>()),reinterpret_cast<const Word*>(sig1.data_ptr<int64_t>()),freq.data_ptr<int>());
   C10_CUDA_KERNEL_LAUNCH_CHECK();
 }
-PYBIND11_MODULE(TORCH_EXTENSION_NAME,m){m.def("gather",&gather);m.def("select",&select_residency);m.def("count_frequencies",&count_frequencies);}
+void select_capped_active(const at::Tensor& packet,const at::Tensor& ids,const at::Tensor& etc,
+ at::Tensor& samples,at::Tensor& support,at::Tensor& extra,at::Tensor& seen,at::Tensor& classes,at::Tensor& groups,
+ at::Tensor& sig0,at::Tensor& sig1,at::Tensor& masks,at::Tensor& freq,at::Tensor& tops,at::Tensor& first,
+ at::Tensor& records,at::Tensor& sizes,at::Tensor& offsets,at::Tensor& packages,at::Tensor& package_count,
+ at::Tensor& output_etc,at::Tensor& history,at::Tensor& history_count,at::Tensor& status,int64_t S,int64_t B,at::Tensor& scores_in,at::Tensor& scores_out,at::Tensor& sort_scratch,at::Tensor& selected_ids,at::Tensor& retained_count,at::Tensor& diagnostics,int64_t cap,at::Tensor& active_keys,at::Tensor& active_rows,at::Tensor& active_flags,at::Tensor& active_counts){
+  TORCH_CHECK(packet.is_cuda()&&B>=1&&B<=E-HOME&&S>=1&&int64_t(R)*S>=D,"invalid packet/B/S");
+  check(packet,packet,at::kInt,PACKET_SIZE,"packet");check(ids,packet,at::kLong,D,"sample IDs");check(etc,packet,at::kInt,R*B,"native copies");
+  check(samples,packet,at::kInt,D*2*K,"samples");check(support,packet,at::kBool,R*E,"support");
+  check(extra,packet,at::kInt,R,"extra");check(seen,packet,at::kInt,R*E,"copy seen");
+  check(classes,packet,at::kInt,PAIRS*D,"classes");check(groups,packet,at::kInt,PAIRS*D*K,"expert groups");
+  check(sig0,packet,at::kLong,PAIRS*D,"signature hash0");check(sig1,packet,at::kLong,PAIRS*D,"signature hash1");
+  check(masks,packet,at::kLong,PAIRS*D*WORDS,"masks");check(freq,packet,at::kInt,PAIRS*D,"frequencies");
+  check(tops,packet,at::kInt,PAIRS*CLASSES*G,"tops");check(first,packet,at::kInt,PAIRS*CLASSES,"first");
+  check(records,packet,at::kInt,BUCKETS*RETAINED,"records");check(sizes,packet,at::kInt,BUCKETS,"sizes");
+  check(offsets,packet,at::kInt,PAIR_SIZES+1,"package offsets");check(packages,packet,at::kInt,MAXP*5,"packages");
+  check(package_count,packet,at::kInt,1,"package count");check(output_etc,packet,at::kInt,R*B,"output copies");
+  check(history,packet,at::kLong,R*B*HISTORY_WIDTH,"history");check(history_count,packet,at::kInt,1,"history count");check(status,packet,at::kInt,1,"status");
+  TORCH_CHECK(cap>0&&cap<=MAXP,"cap must be 1..MAXP; use select for unlimited");
+  check(scores_in,packet,at::kInt,MAXP*3,"scores in");check(scores_out,packet,at::kInt,MAXP*3,"scores out");
+  check(selected_ids,packet,at::kInt,MAXP,"selected IDs");check(retained_count,packet,at::kInt,1,"retained count");
+  check(diagnostics,packet,at::kInt,3,"pruning diagnostics");
+  TORCH_CHECK(sort_scratch.is_cuda()&&sort_scratch.device()==packet.device()&&sort_scratch.scalar_type()==at::kByte&&sort_scratch.is_contiguous(),"invalid sort scratch");
+  check(active_keys,packet,at::kInt,BUCKETS,"active keys");
+  check(active_rows,packet,at::kInt,GREEDY_ROWS,"active rows");
+  check(active_flags,packet,at::kInt,BUCKETS+GREEDY_ROWS,"active flags");
+  check(active_counts,packet,at::kInt,2,"active counts");
+  c10::cuda::CUDAGuard guard(packet.device());auto stream=c10::cuda::getCurrentCUDAStream();
+  auto w=[](at::Tensor& x){return reinterpret_cast<Word*>(x.data_ptr<int64_t>());};
+  mandatory_validate<<<1,THREADS,0,stream>>>(packet.data_ptr<int>(),etc.data_ptr<int>(),samples.data_ptr<int>(),support.data_ptr<bool>(),extra.data_ptr<int>(),seen.data_ptr<int>(),status.data_ptr<int>(),B);
+  dim3 grid((D+THREADS-1)/THREADS,PAIRS);
+  sample_records<<<grid,THREADS,0,stream>>>(samples.data_ptr<int>(),ids.data_ptr<int64_t>(),support.data_ptr<bool>(),extra.data_ptr<int>(),classes.data_ptr<int>(),groups.data_ptr<int>(),w(sig0),w(sig1),w(masks),status.data_ptr<int>(),S,B);
+  record_frequencies<<<grid,THREADS,0,stream>>>(classes.data_ptr<int>(),groups.data_ptr<int>(),w(sig0),w(sig1),freq.data_ptr<int>());
+  class_topg<<<PAIRS*CLASSES,THREADS,0,stream>>>(classes.data_ptr<int>(),freq.data_ptr<int>(),groups.data_ptr<int>(),tops.data_ptr<int>(),first.data_ptr<int>());
+  assemble_groups<<<(PAIR_SIZES+THREADS-1)/THREADS,THREADS,0,stream>>>(tops.data_ptr<int>(),first.data_ptr<int>(),classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),offsets.data_ptr<int>());
+  prefix_packages<<<1,THREADS,0,stream>>>(records.data_ptr<int>(),sizes.data_ptr<int>(),offsets.data_ptr<int>(),package_count.data_ptr<int>(),status.data_ptr<int>());
+  fill_packages<<<(PAIR_SIZES+THREADS-1)/THREADS,THREADS,0,stream>>>(classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),offsets.data_ptr<int>(),packages.data_ptr<int>());
+  auto* in=reinterpret_cast<Score*>(scores_in.data_ptr<int>());
+  auto* out=reinterpret_cast<Score*>(scores_out.data_ptr<int>());
+  C10_CUDA_CHECK(cudaMemsetAsync(diagnostics.data_ptr<int>(),0,3*sizeof(int),stream));
+  initial_package_scores<<<(MAXP+THREADS-1)/THREADS,THREADS,0,stream>>>(w(masks),freq.data_ptr<int>(),classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),packages.data_ptr<int>(),package_count.data_ptr<int>(),support.data_ptr<bool>(),extra.data_ptr<int>(),status.data_ptr<int>(),in,diagnostics.data_ptr<int>(),B);
+  size_t scratch_bytes=sort_scratch.numel();
+  C10_CUDA_CHECK(cub::DeviceMergeSort::SortKeysCopy(sort_scratch.data_ptr(),scratch_bytes,in,out,MAXP,InitialBefore{},stream));
+  retain_package_ids<<<(MAXP+THREADS-1)/THREADS,THREADS,0,stream>>>(out,package_count.data_ptr<int>(),selected_ids.data_ptr<int>(),retained_count.data_ptr<int>(),diagnostics.data_ptr<int>(),cap);
+  if constexpr(USE_GREEDY_TABLE){
+    C10_CUDA_CHECK(cudaMemsetAsync(active_flags.data_ptr<int>(),0,(BUCKETS+GREEDY_ROWS)*sizeof(int),stream));
+    C10_CUDA_CHECK(cudaMemsetAsync(active_counts.data_ptr<int>(),0,2*sizeof(int),stream));
+    build_active_tables<<<(MAXP+THREADS-1)/THREADS,THREADS,0,stream>>>(packages.data_ptr<int>(),selected_ids.data_ptr<int>(),retained_count.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),status.data_ptr<int>(),active_keys.data_ptr<int>(),active_rows.data_ptr<int>(),active_flags.data_ptr<int>(),active_counts.data_ptr<int>());
+    global_greedy_table_active<><<<1,THREADS,0,stream>>>(w(masks),freq.data_ptr<int>(),classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),packages.data_ptr<int>(),retained_count.data_ptr<int>(),selected_ids.data_ptr<int>(),support.data_ptr<bool>(),extra.data_ptr<int>(),output_etc.data_ptr<int>(),history.data_ptr<int64_t>(),history_count.data_ptr<int>(),status.data_ptr<int>(),B,active_keys.data_ptr<int>(),active_rows.data_ptr<int>(),active_counts.data_ptr<int>());
+  }else{
+    global_greedy_capped<<<1,THREADS,0,stream>>>(w(masks),freq.data_ptr<int>(),classes.data_ptr<int>(),records.data_ptr<int>(),sizes.data_ptr<int>(),packages.data_ptr<int>(),retained_count.data_ptr<int>(),selected_ids.data_ptr<int>(),support.data_ptr<bool>(),extra.data_ptr<int>(),output_etc.data_ptr<int>(),history.data_ptr<int64_t>(),history_count.data_ptr<int>(),status.data_ptr<int>(),B);
+  }
+  C10_CUDA_KERNEL_LAUNCH_CHECK();
+}
+
+int64_t pruning_workspace_bytes(const at::Tensor& scores_in,const at::Tensor& scores_out){
+  check(scores_in,scores_in,at::kInt,MAXP*3,"scores in");check(scores_out,scores_in,at::kInt,MAXP*3,"scores out");
+  c10::cuda::CUDAGuard guard(scores_in.device());auto stream=c10::cuda::getCurrentCUDAStream();
+  auto* in=reinterpret_cast<const Score*>(scores_in.data_ptr<int>());
+  auto* out=reinterpret_cast<Score*>(scores_out.data_ptr<int>());
+  size_t bytes=0;C10_CUDA_CHECK(cub::DeviceMergeSort::SortKeysCopy(nullptr,bytes,in,out,MAXP,InitialBefore{},stream));
+  return int64_t(bytes);
+}
+
+PYBIND11_MODULE(TORCH_EXTENSION_NAME,m){
+  m.def("select_capped_active",&select_capped_active);
+  m.def("pruning_workspace_bytes",&pruning_workspace_bytes);
+  m.def("uses_active_table",[](){return USE_GREEDY_TABLE;});
+  m.def("gather",&gather);
+  m.def("select",&select_residency);
+  m.def("count_frequencies",&count_frequencies);
+}

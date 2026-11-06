@@ -553,7 +553,10 @@ class Buffer:
                 before CUDA Graph capture. See docs/affinity_gpu.md.
             planner_config: SampledPlannerConfig or a dictionary of planner-only
                 controls. Defaults: sample_size=256, groups_per_class=2, rounds=4,
-                sample_seed=20261026. Effective sample size is min(sample_size,R*S).
+                sample_seed=20261026, candidate_limit=0 (unlimited). Set
+                candidate_limit=128 and rounds=4 for the capped eight-rank
+                planner. Positive limits are clipped to the K/G package capacity.
+                Effective sample size is min(sample_size,R*S).
                 Construct and warm up before CUDA Graph capture.
             planning_rounds: legacy rounds override; omitted uses planner_config.
             planning_sample_seed: legacy seed override; omitted uses planner_config.

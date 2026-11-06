@@ -1,0 +1,184 @@
+{
+  "status": "complete",
+  "scope": "CPU full trace simulation; no GPU latency",
+  "native_remote": 5054165,
+  "counts": [
+    {
+      "layer": 0,
+      "r8_P": 1026,
+      "r8_I": 32,
+      "r2_P": 28,
+      "r2_I": 5
+    },
+    {
+      "layer": 1,
+      "r8_P": 958,
+      "r8_I": 35,
+      "r2_P": 24,
+      "r2_I": 3
+    },
+    {
+      "layer": 2,
+      "r8_P": 963,
+      "r8_I": 36,
+      "r2_P": 24,
+      "r2_I": 5
+    },
+    {
+      "layer": 3,
+      "r8_P": 922,
+      "r8_I": 33,
+      "r2_P": 26,
+      "r2_I": 5
+    },
+    {
+      "layer": 4,
+      "r8_P": 941,
+      "r8_I": 36,
+      "r2_P": 24,
+      "r2_I": 5
+    },
+    {
+      "layer": 5,
+      "r8_P": 960,
+      "r8_I": 39,
+      "r2_P": 26,
+      "r2_I": 5
+    },
+    {
+      "layer": 6,
+      "r8_P": 996,
+      "r8_I": 35,
+      "r2_P": 26,
+      "r2_I": 3
+    },
+    {
+      "layer": 7,
+      "r8_P": 960,
+      "r8_I": 35,
+      "r2_P": 24,
+      "r2_I": 5
+    }
+  ],
+  "caps": [
+    {
+      "cap": 0,
+      "copies_total": 507,
+      "mean_accepted": 35.125,
+      "rounds": {
+        "2": {
+          "remote": 4076988,
+          "reduction_percent": 19.334093762273294,
+          "extra_remote_vs_unlimited": 0,
+          "retained_savings_percent": 100.0
+        },
+        "4": {
+          "remote": 3791665,
+          "reduction_percent": 24.979398179521247,
+          "extra_remote_vs_unlimited": 0,
+          "retained_savings_percent": 100.0
+        }
+      },
+      "exact_support_layers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "cap": 64,
+      "copies_total": 349,
+      "mean_accepted": 22.75,
+      "rounds": {
+        "2": {
+          "remote": 4212395,
+          "reduction_percent": 16.65497663807968,
+          "extra_remote_vs_unlimited": 135407,
+          "retained_savings_percent": 86.14304266269059
+        },
+        "4": {
+          "remote": 4011570,
+          "reduction_percent": 20.628432194041945,
+          "extra_remote_vs_unlimited": 219905,
+          "retained_savings_percent": 82.58178217821782
+        }
+      },
+      "exact_support_layers": []
+    },
+    {
+      "cap": 128,
+      "copies_total": 434,
+      "mean_accepted": 29.625,
+      "rounds": {
+        "2": {
+          "remote": 4136803,
+          "reduction_percent": 18.150614394266906,
+          "extra_remote_vs_unlimited": 59815,
+          "retained_savings_percent": 93.87879575552843
+        },
+        "4": {
+          "remote": 3887660,
+          "reduction_percent": 23.080073563091034,
+          "extra_remote_vs_unlimited": 95995,
+          "retained_savings_percent": 92.39643564356436
+        }
+      },
+      "exact_support_layers": []
+    },
+    {
+      "cap": 256,
+      "copies_total": 493,
+      "mean_accepted": 34,
+      "rounds": {
+        "2": {
+          "remote": 4100404,
+          "reduction_percent": 18.870792702652167,
+          "extra_remote_vs_unlimited": 23416,
+          "retained_savings_percent": 97.60370946102907
+        },
+        "4": {
+          "remote": 3819654,
+          "reduction_percent": 24.425617287919962,
+          "extra_remote_vs_unlimited": 27989,
+          "retained_savings_percent": 97.7830495049505
+        }
+      },
+      "exact_support_layers": [
+        0
+      ]
+    },
+    {
+      "cap": 512,
+      "copies_total": 506,
+      "mean_accepted": 35,
+      "rounds": {
+        "2": {
+          "remote": 4077665,
+          "reduction_percent": 19.320698869150494,
+          "extra_remote_vs_unlimited": 677,
+          "retained_savings_percent": 99.93071879505965
+        },
+        "4": {
+          "remote": 3793486,
+          "reduction_percent": 24.943368489156963,
+          "extra_remote_vs_unlimited": 1821,
+          "retained_savings_percent": 99.85576237623762
+        }
+      },
+      "exact_support_layers": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  ]
+}

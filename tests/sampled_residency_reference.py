@@ -7,12 +7,16 @@ counting and all decisions remain unchanged, including when hashes collide.
 """
 from collections import Counter
 import itertools
+from fractions import Fraction
+from numbers import Integral
 
 import numpy as np
 
 
 def reference(routes, owner, native_copies, sample_ids, *, experts,
-              groups_per_class=2, force_hash_collision=False):
+              groups_per_class=2, force_hash_collision=False, candidate_limit=0):
+    if isinstance(candidate_limit, bool) or not isinstance(candidate_limit, Integral) or not 0 <= candidate_limit <= 2**31-1:
+        raise ValueError("candidate_limit must be an integer in 0..2**31-1")
     routes, owner, copies = map(np.asarray, (routes, owner, native_copies))
     ids = np.asarray(sample_ids)
     R, S, K = routes.shape
@@ -124,10 +128,27 @@ def reference(routes, owner, native_copies, sample_ids, *, experts,
     def match(x,y):
         n = min(sum(x),sum(y),max(x[1],y[1]))
         return min(n,x[1])+min(n,y[1])
+    selected_ids = list(range(len(packages)))
+    if candidate_limit:
+        initial = [enabled_counts(key,resident[(key//stride)%R]) for key in range(buckets)]
+        def initial_score(index):
+            a,b,size,ra,rb = packages[index]
+            aa,ab = bitmasks[rb]&~resident[a], bitmasks[ra]&~resident[b]
+            ca,cb = bin(aa).count("1"),bin(ab).count("1")
+            cost = ca+cb
+            if cost == 0 or extra[a]+ca > B or extra[b]+cb > B:
+                return Fraction(0),0,0,-index
+            ka,kb = (a*R+b)*stride+size,(b*R+a)*stride+size
+            gain = match(enabled_counts(ka,resident[b]|ab),enabled_counts(kb,resident[a]|aa))-match(initial[ka],initial[kb])
+            return (Fraction(gain,cost),gain,-cost,-index) if gain > 0 else (Fraction(0),0,0,-index)
+        selected_ids.sort(key=initial_score,reverse=True)
+        selected_ids = selected_ids[:candidate_limit]
+    retained_ids = sorted(selected_ids)
     while True:
         enabled = [enabled_counts(key,resident[(key//stride)%R]) for key in range(buckets)]
         best = None
-        for index,(a,b,size,ra,rb) in enumerate(packages):
+        for index in retained_ids:
+            a,b,size,ra,rb = packages[index]
             aa, ab = bitmasks[rb]&~resident[a], bitmasks[ra]&~resident[b]
             ca, cb = bin(aa).count("1"), bin(ab).count("1")
             cost = ca+cb
@@ -137,7 +158,7 @@ def reference(routes, owner, native_copies, sample_ids, *, experts,
             gain = match(enabled_counts(ka,resident[b]|ab),enabled_counts(kb,resident[a]|aa))-match(enabled[ka],enabled[kb])
             if gain <= 0:
                 continue
-            score = gain/cost,gain,-cost,-index
+            score = Fraction(gain,cost),gain,-cost,-index
             if best is None or score > best[0]:
                 best = score,index,a,b,size,gain,aa,ab,ca,cb
         if best is None:
@@ -157,4 +178,5 @@ def reference(routes, owner, native_copies, sample_ids, *, experts,
         frequencies=frequencies, tops=tops, first=first, records=records,
         sizes=sizes, package_offsets=np.asarray(offsets,np.int32),
         packages=np.asarray(packages,np.int32).reshape(-1,5),
-        history=history, history_rows=history_rows)
+        history=history, history_rows=history_rows,
+        selected_ids=np.asarray(selected_ids,np.int32), retained_ids=np.asarray(retained_ids,np.int32))

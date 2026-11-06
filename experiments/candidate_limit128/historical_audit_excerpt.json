@@ -1,0 +1,507 @@
+{
+  "scope": "Scoped excerpt of independent historical experiment audit; no new GPU execution.",
+  "source_audit_sha256": "18188c544aa68137494477eb3f68dd9b91dd4d04599bb5da158432c6c4b26d33",
+  "raw_uncompressed_sha256": "54c4a944bd3a7c7a56efbd0499e7bb1c84752acd8a45f7dc32a2dd637b2a5557",
+  "cohort": {
+    "file": "full_active_rounds4_01.json",
+    "rounds": 4,
+    "selector": "active",
+    "layers": 8,
+    "cap_cases": 40,
+    "completion_and_exit_verified": true,
+    "no_failures_or_fallback": true,
+    "all_physical_layout_checks_passed": true,
+    "all_graph_output_checks_passed": true,
+    "all_CPU_hash_checks_executed": true,
+    "cap0_all_fields_production_exact_cases": 8,
+    "source_hashes": {
+      "production_files_verified_against_b1518bf": 23,
+      "experiment_files_verified_against_local": 7,
+      "all_match": true
+    },
+    "caps": [
+      {
+        "cap": 0,
+        "full_planner_us": 815.7732009887695,
+        "selector_diagnostic_us": 454.46720123291016,
+        "full_planner_reduction_percent": 0.0,
+        "full_planner_saved_us": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "per_layer": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "layers_faster_than_cap0": 0,
+        "active_keys": null,
+        "active_rows": null,
+        "full_candidates": {
+          "mean": 965.75,
+          "min": 922,
+          "max": 1026,
+          "per_layer": [
+            1026,
+            958,
+            963,
+            922,
+            941,
+            960,
+            996,
+            960
+          ]
+        },
+        "retained_candidates": {
+          "mean": 965.75,
+          "min": 922,
+          "max": 1026,
+          "per_layer": [
+            1026,
+            958,
+            963,
+            922,
+            941,
+            960,
+            996,
+            960
+          ]
+        },
+        "accepted_iterations": {
+          "mean": 35.125,
+          "min": 32,
+          "max": 39,
+          "per_layer": [
+            32,
+            35,
+            36,
+            33,
+            36,
+            39,
+            35,
+            35
+          ]
+        },
+        "remote_token_destinations": 3791665,
+        "expert_copies": 507
+      },
+      {
+        "cap": 64,
+        "full_planner_us": 642.9248034954071,
+        "selector_diagnostic_us": 283.1811994314194,
+        "full_planner_reduction_percent": 21.18829072637579,
+        "full_planner_saved_us": {
+          "mean": 172.84839749336246,
+          "min": 139.8880004882813,
+          "max": 202.35199928283697,
+          "per_layer": [
+            139.8880004882813,
+            176.29437446594244,
+            168.35200786590576,
+            172.95360565185547,
+            170.72641849517822,
+            202.35199928283697,
+            169.06554698944086,
+            183.15522670745855
+          ]
+        },
+        "layers_faster_than_cap0": 8,
+        "active_keys": {
+          "mean": 33.5,
+          "min": 26,
+          "max": 46,
+          "per_layer": [
+            46,
+            34,
+            28,
+            32,
+            32,
+            26,
+            34,
+            36
+          ]
+        },
+        "active_rows": {
+          "mean": 72.5,
+          "min": 67,
+          "max": 79,
+          "per_layer": [
+            79,
+            75,
+            68,
+            71,
+            73,
+            67,
+            72,
+            75
+          ]
+        },
+        "full_candidates": {
+          "mean": 965.75,
+          "min": 922,
+          "max": 1026,
+          "per_layer": [
+            1026,
+            958,
+            963,
+            922,
+            941,
+            960,
+            996,
+            960
+          ]
+        },
+        "retained_candidates": {
+          "mean": 64,
+          "min": 64,
+          "max": 64,
+          "per_layer": [
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64
+          ]
+        },
+        "accepted_iterations": {
+          "mean": 22.75,
+          "min": 20,
+          "max": 26,
+          "per_layer": [
+            26,
+            24,
+            24,
+            20,
+            25,
+            21,
+            22,
+            20
+          ]
+        },
+        "remote_token_destinations": 4011570,
+        "expert_copies": 349
+      },
+      {
+        "cap": 128,
+        "full_planner_us": 683.2915961742401,
+        "selector_diagnostic_us": 322.3963975906372,
+        "full_planner_reduction_percent": 16.240004532381448,
+        "full_planner_saved_us": {
+          "mean": 132.48160481452942,
+          "min": 118.4703588485717,
+          "max": 144.24958229064956,
+          "per_layer": [
+            118.60799789428711,
+            144.24958229064956,
+            136.68160438537603,
+            136.0671997070312,
+            124.1824388504028,
+            139.1584157943725,
+            118.4703588485717,
+            142.4352407455445
+          ]
+        },
+        "layers_faster_than_cap0": 8,
+        "active_keys": {
+          "mean": 47.75,
+          "min": 42,
+          "max": 52,
+          "per_layer": [
+            52,
+            52,
+            50,
+            44,
+            44,
+            42,
+            48,
+            50
+          ]
+        },
+        "active_rows": {
+          "mean": 121.125,
+          "min": 114,
+          "max": 127,
+          "per_layer": [
+            120,
+            127,
+            121,
+            118,
+            118,
+            114,
+            124,
+            127
+          ]
+        },
+        "full_candidates": {
+          "mean": 965.75,
+          "min": 922,
+          "max": 1026,
+          "per_layer": [
+            1026,
+            958,
+            963,
+            922,
+            941,
+            960,
+            996,
+            960
+          ]
+        },
+        "retained_candidates": {
+          "mean": 128,
+          "min": 128,
+          "max": 128,
+          "per_layer": [
+            128,
+            128,
+            128,
+            128,
+            128,
+            128,
+            128,
+            128
+          ]
+        },
+        "accepted_iterations": {
+          "mean": 29.625,
+          "min": 26,
+          "max": 32,
+          "per_layer": [
+            30,
+            29,
+            29,
+            26,
+            32,
+            32,
+            31,
+            28
+          ]
+        },
+        "remote_token_destinations": 3887660,
+        "expert_copies": 434
+      },
+      {
+        "cap": 256,
+        "full_planner_us": 716.2460029125214,
+        "selector_diagnostic_us": 355.20959943532944,
+        "full_planner_reduction_percent": 12.200351513829432,
+        "full_planner_saved_us": {
+          "mean": 99.52719807624817,
+          "min": 91.9039964675904,
+          "max": 108.99839401245126,
+          "per_layer": [
+            101.10719203948982,
+            108.99839401245126,
+            99.46241378784171,
+            94.41597461700435,
+            99.24161434173584,
+            91.9039964675904,
+            99.18396472930901,
+            101.90403461456299
+          ]
+        },
+        "layers_faster_than_cap0": 8,
+        "active_keys": {
+          "mean": 61.25,
+          "min": 56,
+          "max": 68,
+          "per_layer": [
+            56,
+            62,
+            62,
+            68,
+            58,
+            62,
+            58,
+            64
+          ]
+        },
+        "active_rows": {
+          "mean": 194.375,
+          "min": 187,
+          "max": 204,
+          "per_layer": [
+            187,
+            192,
+            194,
+            198,
+            194,
+            194,
+            192,
+            204
+          ]
+        },
+        "full_candidates": {
+          "mean": 965.75,
+          "min": 922,
+          "max": 1026,
+          "per_layer": [
+            1026,
+            958,
+            963,
+            922,
+            941,
+            960,
+            996,
+            960
+          ]
+        },
+        "retained_candidates": {
+          "mean": 256,
+          "min": 256,
+          "max": 256,
+          "per_layer": [
+            256,
+            256,
+            256,
+            256,
+            256,
+            256,
+            256,
+            256
+          ]
+        },
+        "accepted_iterations": {
+          "mean": 34,
+          "min": 32,
+          "max": 39,
+          "per_layer": [
+            32,
+            34,
+            34,
+            32,
+            35,
+            39,
+            33,
+            33
+          ]
+        },
+        "remote_token_destinations": 3819654,
+        "expert_copies": 493
+      },
+      {
+        "cap": 512,
+        "full_planner_us": 803.0252009630203,
+        "selector_diagnostic_us": 441.1807954311371,
+        "full_planner_reduction_percent": 1.562689238908288,
+        "full_planner_saved_us": {
+          "mean": 12.748000025749176,
+          "min": 7.740807533264116,
+          "max": 22.272014617919833,
+          "per_layer": [
+            9.542369842529318,
+            17.459201812744183,
+            22.272014617919833,
+            15.545582771301136,
+            12.928056716918878,
+            8.21762084960942,
+            8.278346061706522,
+            7.740807533264116
+          ]
+        },
+        "layers_faster_than_cap0": 8,
+        "active_keys": {
+          "mean": 116.5,
+          "min": 110,
+          "max": 140,
+          "per_layer": [
+            140,
+            116,
+            112,
+            110,
+            110,
+            112,
+            118,
+            114
+          ]
+        },
+        "active_rows": {
+          "mean": 380.5,
+          "min": 376,
+          "max": 397,
+          "per_layer": [
+            397,
+            376,
+            376,
+            379,
+            378,
+            376,
+            377,
+            385
+          ]
+        },
+        "full_candidates": {
+          "mean": 965.75,
+          "min": 922,
+          "max": 1026,
+          "per_layer": [
+            1026,
+            958,
+            963,
+            922,
+            941,
+            960,
+            996,
+            960
+          ]
+        },
+        "retained_candidates": {
+          "mean": 512,
+          "min": 512,
+          "max": 512,
+          "per_layer": [
+            512,
+            512,
+            512,
+            512,
+            512,
+            512,
+            512,
+            512
+          ]
+        },
+        "accepted_iterations": {
+          "mean": 35,
+          "min": 32,
+          "max": 39,
+          "per_layer": [
+            32,
+            35,
+            35,
+            33,
+            36,
+            39,
+            35,
+            35
+          ]
+        },
+        "remote_token_destinations": 3793486,
+        "expert_copies": 506
+      }
+    ]
+  },
+  "cpu_evidence": {
+    "array_manifest_sha256": "4cf37ff7e3a18ffba37ccebddceac074916efb5e7261bbe6d1a07102cacc47bb",
+    "archive_manifest_sha256": "8e245a5ca8496a91a8bb1633b490e188678e12657ae4a0eda611ee23d428c8e6",
+    "archives_verified": 40,
+    "arrays_verified": 200,
+    "all_passed": true,
+    "checked_GPU_values": "Benchmark independently hashes rank0 support, rank0 full history, sorted selected candidate IDs, and stacked all-rank final owners against CPU array manifest. Candidate diagnostics are equal on every rank. Capped histories on every rank are not separately compared with CPU.",
+    "caller_proof": "run_full.sh supplies --cpu-hashes candidate_scaling/cpu_array_hashes.json for all three cohorts; recorded metadata SHA matches that exact file; recorded benchmark.py SHA matches current file and source rejects any mismatch before recording a successful case."
+  },
+  "notes": [
+    "Cap0 executes the untouched production selector and is compared against the production planner on all output fields, source provenance, support, owners and each rank history.",
+    "Active-table pruning changes only which cache keys and group rows are refreshed. Every active cache computation still examines every original group in its bucket. Selected candidate IDs and original-ID tie ordering are identical to clean pruning.",
+    "Cap512 shows a small observed mean reduction of about 1.6 percent in these cohorts, with all eight layers faster. There is one ordered full cohort per configuration and no independently randomized repeated-run comparison; do not present that gain as a robust general speedup.",
+    "These are planner-only latencies. Expert weights, activation/gradient payload, GEMM and optimizer are excluded. Communication reduction is a count of deduplicated remote token-destination visits, not measured end-to-end training speed."
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "scope": "fresh integrated public API; eight physical and logical ranks; four exchange rounds",
+  "timing": "max of eight rank medians of ten samples, five graph replays each; mean of the same eight layers",
+  "test_cases": {
+    "host_configuration": 18,
+    "single_gpu_selector": 3,
+    "cap128_public_cases": 5,
+    "existing_compatibility_cases": 5,
+    "distributed_ranks_per_case": 8,
+    "note": "five distributed cases executed on eight ranks are five cases, not forty independent cases"
+  },
+  "all_six_exit_codes_zero": true,
+  "variants": {
+    "0": {
+      "native_mean_us": 68.58119890093803,
+      "sampled_mean_us": 815.8556193113327,
+      "native_us": [
+        79.66399788856506,
+        70.31680047512054,
+        68.55359971523285,
+        66.7167991399765,
+        66.00639820098877,
+        65.8079981803894,
+        65.96159934997559,
+        65.62239825725555
+      ],
+      "sampled_us": [
+        821.8496322631836,
+        830.4960250854492,
+        818.1087970733643,
+        797.6800203323364,
+        818.1632041931152,
+        829.856014251709,
+        804.0928363800049,
+        806.598424911499
+      ],
+      "native_remote": 5054165,
+      "remote": 3791665,
+      "copies": 507,
+      "reduction_percent": 24.97939817952125
+    },
+    "128": {
+      "native_mean_us": 68.42799969017506,
+      "sampled_mean_us": 684.8463982343674,
+      "native_us": [
+        79.11039888858795,
+        69.67999935150146,
+        67.59999990463257,
+        66.44800007343294,
+        66.56000018119812,
+        66.50879979133606,
+        65.83999991416931,
+        65.67679941654205
+      ],
+      "sampled_us": [
+        705.0015926361084,
+        686.5408182144165,
+        684.1343879699706,
+        663.0847930908203,
+        695.9679841995239,
+        689.1424179077148,
+        685.8464002609253,
+        669.052791595459
+      ],
+      "native_remote": 5054165,
+      "remote": 3887660,
+      "copies": 434,
+      "reduction_percent": 23.08007356309103
+    }
+  },
+  "current_checkout_sources_checked": true,
+  "same_source_manifest_and_devices": true,
+  "historical_fixture_traffic_copies_and_owner_hashes_match_each_layer": true,
+  "planner_time_reduction_percent": 16.05789283985698,
+  "retained_communication_savings_percent": 92.39643564356436,
+  "limitations": [
+    "one same-environment comparison batch, not an order-randomized repeated study",
+    "no expert/token/gradient payload transport, GEMM, optimizer or full training-step latency"
+  ]
+}

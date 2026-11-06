@@ -74,6 +74,12 @@ class Residency:
     E is 8..4096 and divisible by 8; K is 1..min(32,E); B is 1..E-E/8.
     sample_size is 1..4096 and is capped at the actual global token count.
     groups_per_class is 1..8; the default 2 preserves the previous algorithm.
+    candidate_limit=0 preserves unlimited selection. A positive limit retains
+    that many complete reciprocal packages, ranked at mandatory support by
+    gain/cost, gain, lower cost, then original package ID. The later greedy
+    loop recomputes the retained packages' current scores. Limits above the
+    model-specific package capacity are clamped to that capacity. All settings
+    and storage are fixed at construction, before CUDA Graph capture.
 
     Call run(local_routes, local_owner, native_copies) on the intended CUDA
     stream. There is one all_reduce of D*(2*K+2)+1 int32 values: sampled
@@ -82,7 +88,7 @@ class Residency:
     """
 
     def __init__(self, ctx, sample_seed=20261026, *, sample_size=256,
-                 groups_per_class=2, component_only=False):
+                 groups_per_class=2, candidate_limit=0, component_only=False):
         self.ranks, self.experts, self.topk = (_integer(ctx[key], key) for key in ("R", "E", "K"))
         self.per_source, self.slots, self.rank = (_integer(ctx[key], key) for key in ("S", "B", "rank"))
         self.group = ctx.get("group")
@@ -104,6 +110,10 @@ class Residency:
         self.classes_per_pair = 4 * (self.topk + 1)
         self.buckets = 64 * (self.topk + 1)
         self.max_packages = 28 * self.topk * 3 * self.groups_per_class ** 2
+        self.candidate_limit = _integer(candidate_limit, "candidate_limit")
+        if not 0 <= self.candidate_limit <= 2**31-1:
+            raise ValueError("candidate_limit must be in 0..2147483647; 0 is unlimited")
+        self.effective_candidate_limit = min(self.candidate_limit, self.max_packages)
         self.history_width = 6 + 2 * self.words
         if not 0 <= self.rank < 8:
             raise ValueError("ctx rank must be an original logical rank in 0..7")
@@ -126,6 +136,7 @@ class Residency:
             8 * self.per_source, self.sample_size, replace=False)).astype(np.int64)
         self.ids = torch.as_tensor(sample_ids, device=self.device)
         self.ext = extension(self.experts, self.topk, self.sample_size, self.groups_per_class)
+        self.uses_active_table = bool(self.ext.uses_active_table())
         def ints(*shape):
             return torch.empty(shape, dtype=torch.int32, device=self.device)
         def words(*shape):
@@ -149,6 +160,19 @@ class Residency:
         self.packages, self.package_count = ints(self.max_packages, 5), ints(1)
         self.experts_to_copy = ints(8, self.slots)
         self.history, self.history_count = words(8 * self.slots, self.history_width), ints(1)
+        # Unlimited selection retains its old execution path and allocates no
+        # pruning storage. The CUB temporary buffer is queried once here, never
+        # during run()/select() or a CUDA Graph replay.
+        if self.effective_candidate_limit:
+            self.scores_in, self.scores_out = ints(self.max_packages, 3), ints(self.max_packages, 3)
+            needed = self.ext.pruning_workspace_bytes(self.scores_in, self.scores_out)
+            self.sort_scratch = torch.empty(max(1, needed), dtype=torch.uint8, device=self.device)
+            self.selected_ids, self.retained_count = ints(self.max_packages), ints(1)
+            self.pruning_diagnostics = ints(3)
+            self.active_keys = ints(self.buckets)
+            self.active_rows = ints(self.buckets * 2 * self.groups_per_class)
+            self.active_flags = ints(self.buckets + self.active_rows.numel())
+            self.active_counts = torch.zeros(2, dtype=torch.int32, device=self.device)
 
     def _input(self, value, shape, name):
         if not (value.device == self.device and value.dtype == torch.int32
@@ -176,6 +200,16 @@ class Residency:
     def select(self, native_copies):
         """Consume the globally summed packet; run() is the normal entry point."""
         self._input(native_copies, (8, self.slots), "native_copies")
+        if self.effective_candidate_limit:
+            self.ext.select_capped_active(self.packet, self.ids, native_copies, self.samples,
+                self.support, self.extra, self.copy_seen, self.classes, self.groups, self.sig0, self.sig1, self.masks,
+                self.frequencies, self.tops, self.first, self.records, self.sizes,
+                self.package_offsets, self.packages, self.package_count, self.experts_to_copy, self.history,
+                self.history_count, self.status, self.per_source, self.slots,
+                self.scores_in, self.scores_out, self.sort_scratch, self.selected_ids,
+                self.retained_count, self.pruning_diagnostics, self.effective_candidate_limit,
+                self.active_keys, self.active_rows, self.active_flags, self.active_counts)
+            return self.support
         self.ext.select(self.packet, self.ids, native_copies, self.samples,
             self.support, self.extra, self.copy_seen, self.classes, self.groups, self.sig0, self.sig1, self.masks,
             self.frequencies, self.tops, self.first, self.records, self.sizes,
@@ -189,6 +223,31 @@ class Residency:
         self.gather_local(local_routes, local_owner, native_copies)
         dist.all_reduce(self.packet, op=dist.ReduceOp.SUM, group=self.group, async_op=False)
         return self.select(native_copies)
+
+    def candidate_diagnostics(self):
+        """Synchronizing debug readback; never called by the planning path.
+
+        active_keys/rows are cache work-list sizes, not expert counts. They
+        are None for unlimited selection or the large-configuration generic
+        kernel, which avoids the shared-memory cache specialization.
+        """
+        full = int(self.package_count.item())
+        if self.effective_candidate_limit:
+            eligible, before, retained = self.pruning_diagnostics.cpu().tolist()
+            if before != full or retained != min(self.effective_candidate_limit, full):
+                raise RuntimeError("candidate pruning diagnostics are inconsistent")
+            selected = self.selected_ids[:retained].cpu().tolist()
+            if len(set(selected)) != retained or any(i < 0 or i >= full for i in selected):
+                raise RuntimeError("candidate pruning produced invalid package IDs")
+        else:
+            eligible, retained, selected = None, full, list(range(full))
+        active = (self.active_counts.cpu().tolist()
+                  if self.effective_candidate_limit and self.uses_active_table else [None, None])
+        return dict(candidate_limit=self.candidate_limit,
+            effective_candidate_limit=self.effective_candidate_limit,
+            full_P=full, retained_P=retained, initial_eligible_P=eligible,
+            history_I=int(self.history_count.item()), selected_ids=selected,
+            active_keys=active[0], active_rows=active[1], uses_active_table=self.uses_active_table)
 
     def build_from_reduced_samples(self, native_copies, reduced_packet=None):
         """Select after an externally orchestrated SUM of original-source packets.

@@ -1,0 +1,122 @@
+................[sampled configurable] cap128_E352_K8: compile native planner
+[sampled configurable] cap128_E352_K8: compile native sync
+[sampled configurable] cap128_E352_K8: compile unweighted dispatch fresh=True
+[sampled configurable] cap128_E352_K8: compile unweighted dispatch fresh=False
+[sampled configurable] cap128_E352_K8: compile unweighted combine and prologue/epilogue
+[sampled configurable] cap128_E352_K8: wait for every rank's JIT completion
+[sampled configurable] cap128_E352_K8: all ranks compiled; start actual GPU execution
+[sampled configurable] cap128_E352_K8: warm graph path
+[sampled configurable] cap128_E352_K8: capture graph
+[sampled configurable] cap128_E352_K8: graph replay changed input phase=0
+[sampled configurable] cap128_E352_K8: graph replay changed input phase=1
+[sampled configurable] cap128_E352_K8: graph replay changed input phase=2
+........[sampled configurable] cap128_E64_K1: compile native planner
+[sampled configurable] cap128_E64_K1: compile native sync
+[sampled configurable] cap128_E64_K1: compile unweighted dispatch fresh=True
+[sampled configurable] cap128_E64_K1: compile unweighted dispatch fresh=False
+[sampled configurable] cap128_E64_K1: compile unweighted combine and prologue/epilogue
+[sampled configurable] cap128_E64_K1: wait for every rank's JIT completion
+[sampled configurable] cap128_E64_K1: all ranks compiled; start actual GPU execution
+[sampled configurable] cap128_E64_K1: warm graph path
+[sampled configurable] cap128_E64_K1: capture graph
+[sampled configurable] cap128_E64_K1: graph replay changed input phase=0
+[sampled configurable] cap128_E64_K1: graph replay changed input phase=1
+[sampled configurable] cap128_E64_K1: graph replay changed input phase=2
+................
+=============================== warnings summary ===============================
+tests/test_sampled_candidate_limit.py::test_candidate_limit_public_runtime[cap128_rounds4_delivery]
+tests/test_sampled_candidate_limit.py::test_candidate_limit_public_runtime[cap128_small_model_capacity84]
+tests/test_sampled_candidate_limit.py::test_candidate_limit_weighted_forward_backward
+tests/test_sampled_candidate_limit.py::test_candidate_limit_weighted_forward_backward
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+5 passed, 3 deselected, 4 warnings in 176.60s (0:02:56)
+
+=============================== warnings summary ===============================
+tests/test_sampled_candidate_limit.py::test_different_candidate_limits_rejected_collectively
+tests/test_sampled_candidate_limit.py::test_one_invalid_candidate_limit_rejected_collectively
+tests/test_sampled_candidate_limit.py::test_candidate_limit_public_runtime[cap128_rounds4_delivery]
+tests/test_sampled_candidate_limit.py::test_candidate_limit_public_runtime[cap128_small_model_capacity84]
+tests/test_sampled_candidate_limit.py::test_candidate_limit_public_runtime[cap128_small_model_capacity84]
+tests/test_sampled_candidate_limit.py::test_candidate_limit_weighted_forward_backward
+tests/test_sampled_candidate_limit.py::test_candidate_limit_weighted_forward_backward
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+    return func(*args, **kwargs)
+
+tests/test_sampled_candidate_limit.py::test_candidate_limit_public_runtime[cap128_rounds4_delivery]
+tests/test_sampled_candidate_limit.py::test_candidate_limit_public_runtime[cap128_small_model_capacity84]
+tests/test_sampled_candidate_limit.py::test_candidate_limit_weighted_forward_backward
+tests/test_sampled_candidate_limit.py::test_candidate_limit_weighted_forward_backward
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+5 passed, 3 deselected, 11 warnings in 176.65s (0:02:56)
+
+=============================== warnings summary ===============================
+tests/test_sampled_candidate_limit.py::test_candidate_limit_public_runtime[cap128_rounds4_delivery]
+tests/test_sampled_candidate_limit.py::test_candidate_limit_public_runtime[cap128_small_model_capacity84]
+tests/test_sampled_candidate_limit.py::test_candidate_limit_weighted_forward_backward
+tests/test_sampled_candidate_limit.py::test_candidate_limit_weighted_forward_backward
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+5 passed, 3 deselected, 4 warnings in 176.67s (0:02:56)
+
+=============================== warnings summary ===============================
+tests/test_sampled_candidate_limit.py::test_candidate_limit_public_runtime[cap128_rounds4_delivery]
+tests/test_sampled_candidate_limit.py::test_candidate_limit_public_runtime[cap128_small_model_capacity84]
+tests/test_sampled_candidate_limit.py::test_candidate_limit_weighted_forward_backward
+tests/test_sampled_candidate_limit.py::test_candidate_limit_weighted_forward_backward
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+5 passed, 3 deselected, 4 warnings in 176.73s (0:02:56)
+
+=============================== warnings summary ===============================
+tests/test_sampled_candidate_limit.py::test_candidate_limit_public_runtime[cap128_rounds4_delivery]
+tests/test_sampled_candidate_limit.py::test_candidate_limit_public_runtime[cap128_small_model_capacity84]
+tests/test_sampled_candidate_limit.py::test_candidate_limit_weighted_forward_backward
+tests/test_sampled_candidate_limit.py::test_candidate_limit_weighted_forward_backward
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+5 passed, 3 deselected, 4 warnings in 176.70s (0:02:56)
+
+=============================== warnings summary ===============================
+tests/test_sampled_candidate_limit.py::test_candidate_limit_public_runtime[cap128_rounds4_delivery]
+tests/test_sampled_candidate_limit.py::test_candidate_limit_public_runtime[cap128_small_model_capacity84]
+tests/test_sampled_candidate_limit.py::test_candidate_limit_weighted_forward_backward
+tests/test_sampled_candidate_limit.py::test_candidate_limit_weighted_forward_backward
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+5 passed, 3 deselected, 4 warnings in 176.66s (0:02:56)
+
+=============================== warnings summary ===============================
+tests/test_sampled_candidate_limit.py::test_candidate_limit_public_runtime[cap128_rounds4_delivery]
+tests/test_sampled_candidate_limit.py::test_candidate_limit_public_runtime[cap128_small_model_capacity84]
+tests/test_sampled_candidate_limit.py::test_candidate_limit_weighted_forward_backward
+tests/test_sampled_candidate_limit.py::test_candidate_limit_weighted_forward_backward
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+5 passed, 3 deselected, 4 warnings in 176.74s (0:02:56)
+
+=============================== warnings summary ===============================
+tests/test_sampled_candidate_limit.py::test_candidate_limit_public_runtime[cap128_rounds4_delivery]
+tests/test_sampled_candidate_limit.py::test_candidate_limit_public_runtime[cap128_small_model_capacity84]
+tests/test_sampled_candidate_limit.py::test_candidate_limit_weighted_forward_backward
+tests/test_sampled_candidate_limit.py::test_candidate_limit_weighted_forward_backward
+  /usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+    return func(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+5 passed, 3 deselected, 4 warnings in 176.74s (0:02:56)

@@ -8,7 +8,7 @@ import moonep.api as api
 
 def test_defaults_and_small_batch_cap():
     cfg = SampledPlannerConfig()
-    assert cfg.to_dict() == dict(sample_size=256, groups_per_class=2, rounds=4, sample_seed=20261026)
+    assert cfg.to_dict() == dict(sample_size=256, groups_per_class=2, rounds=4, sample_seed=20261026, candidate_limit=0)
     assert cfg.effective_sample_size(8) == 8
     assert cfg.effective_sample_size(4096) == 256
     assert resolve_planner_config({'sample_size': 37}).sample_size == 37
@@ -18,7 +18,9 @@ def test_defaults_and_small_batch_cap():
 
 @pytest.mark.parametrize('values', [dict(sample_size=0), dict(sample_size=4097),
     dict(sample_size=True), dict(groups_per_class=0), dict(groups_per_class=9),
-    dict(rounds=0), dict(sample_seed=-1), dict(rounds=1.5)])
+    dict(rounds=0), dict(sample_seed=-1), dict(rounds=1.5),
+    dict(candidate_limit=-1), dict(candidate_limit=True), dict(candidate_limit=1.5),
+    dict(candidate_limit=2**31)])
 def test_invalid_settings(values):
     with pytest.raises(ValueError):
         SampledPlannerConfig(**values)
@@ -87,3 +89,14 @@ def test_new_shapes_reach_allocation_and_bad_shapes_do_not(monkeypatch):
                        (64, 1, 0, 8), (64, 1, 33, 57)):
         with pytest.raises(ValueError):
             Buffer(S, 256, K, E, 8, B=B, planning_backend='sampled_group')
+
+
+def test_candidate_limit_delivery_config_and_model_reuse():
+    cfg = resolve_planner_config({'candidate_limit': 128, 'rounds': 4})
+    assert cfg.candidate_limit == 128 and cfg.rounds == 4
+    assert resolve_planner_config(cfg) == cfg
+    assert SampledPlannerConfig(candidate_limit=2**31-1).candidate_limit == 2**31-1
+    # The same requested cap can be reused for smaller model configurations;
+    # the selector clips it to its K/G-specific capacity after shape resolution.
+    cfg.validate_shape(R=8, E=64, K=1, S=17, B=8)
+    cfg.validate_shape(R=8, E=352, K=8, S=257, B=8)

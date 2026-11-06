@@ -1,0 +1,13 @@
+{
+  "kind": "Historical pre-integration experiment evidence, preserved without numeric edits",
+  "baseline_commit": "b1518bf9166880a22bb45937dc79458ea2e5102b",
+  "raw_uncompressed_sha256": "54c4a944bd3a7c7a56efbd0499e7bb1c84752acd8a45f7dc32a2dd637b2a5557",
+  "files": {
+    "cpu_array_hashes.json": "4cf37ff7e3a18ffba37ccebddceac074916efb5e7261bbe6d1a07102cacc47bb",
+    "cpu_summary_02.json": "f8984d2dd0b2b025f3ac1e5c7bc93c670b5259d72dfe4c48d315d83998177c31",
+    "full_active_rounds4_01.exit": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "full_active_rounds4_01.json.gz": "b443bf014f2443e70fa17c9577cfde8c8156c0db8d2ec6c2bf1b3d61066850ae",
+    "full_active_rounds4_01.log": "0386fb319187d3acb47eb886ef5ec0d37a499fb752bb32d38409c85fc23fd20a",
+    "historical_audit_excerpt.json": "bf687346164f039f4d0e8fdb4ea42f2c4d7d67f7b13a3feaecca2ea4a46cea22"
+  }
+}

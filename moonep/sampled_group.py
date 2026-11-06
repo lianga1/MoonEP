@@ -33,7 +33,8 @@ class SampledGroupPlanner:
         self.seed_owner = torch.empty_like(self.routes)
         self.seed, self.seed_cu = allocate_planning_outputs(ctx)
         self.residency = Residency(ctx, sample_seed=self.sample_seed,
-            sample_size=self.config.sample_size, groups_per_class=self.groups_per_class)
+            sample_size=self.config.sample_size, groups_per_class=self.groups_per_class,
+            candidate_limit=self.config.candidate_limit)
         self.support = self.residency.support
         self.exchange = SampledExchange(
             self.routes, self.support, source=self.rank, rounds=self.rounds,

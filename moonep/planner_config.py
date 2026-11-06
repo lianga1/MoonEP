@@ -21,15 +21,20 @@ class SampledPlannerConfig:
     sample_size is the requested global sample count, capped at R*S when the
     batch is smaller. Settings are fixed for the lifetime of a Buffer. Create
     and warm a new Buffer when changing them, before CUDA Graph capture.
+    candidate_limit=0 retains unlimited package selection. A positive value
+    keeps the best initial packages and updates only their dependent caches;
+    the effective limit is clipped to the current K/G package capacity.
     """
     sample_size: int = 256
     groups_per_class: int = 2
     rounds: int = 4
     sample_seed: int = 20261026
+    candidate_limit: int = 0
 
     def __post_init__(self):
         bounds = {"sample_size": (1, 4096), "groups_per_class": (1, 8),
-                  "rounds": (1, None), "sample_seed": (0, None)}
+                  "rounds": (1, None), "sample_seed": (0, None),
+                  "candidate_limit": (0, 2**31-1)}
         for name, (lo, hi) in bounds.items():
             object.__setattr__(self, name, _integer(name, getattr(self, name), lo, hi))
 

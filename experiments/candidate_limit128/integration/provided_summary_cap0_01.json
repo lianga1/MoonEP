@@ -1,0 +1,95 @@
+{
+  "candidate_limit": 0,
+  "metadata": {
+    "R": 8,
+    "N": 134144,
+    "S": 16768,
+    "E": 352,
+    "K": 8,
+    "B": 8,
+    "planner_config": {
+      "sample_size": 256,
+      "groups_per_class": 2,
+      "rounds": 4,
+      "sample_seed": 20261026,
+      "candidate_limit": 0
+    },
+    "gpu": "NVIDIA H200",
+    "torch": "2.13.0+cu130",
+    "cuda": "13.0",
+    "nccl": [
+      2,
+      29,
+      7
+    ],
+    "samples": 10,
+    "replays": 5,
+    "oracle_sha256": "4cf37ff7e3a18ffba37ccebddceac074916efb5e7261bbe6d1a07102cacc47bb",
+    "timing": "CUDA Graph; maximum of rank sample medians; average the same eight layers",
+    "included": [
+      "native seed",
+      "live sample collective",
+      "candidate scoring/sort/cache pruning",
+      "expert selection",
+      "full-token exchange and count collectives",
+      "physical layout",
+      "collective validation and native fallback selection",
+      "source metadata publication"
+    ],
+    "excluded": [
+      "histogram construction",
+      "allocation",
+      "JIT",
+      "audits",
+      "expert/token/gradient payload",
+      "GEMM",
+      "optimizer"
+    ]
+  },
+  "native_us": [
+    79.66399788856506,
+    70.31680047512054,
+    68.55359971523285,
+    66.7167991399765,
+    66.00639820098877,
+    65.8079981803894,
+    65.96159934997559,
+    65.62239825725555
+  ],
+  "sampled_us": [
+    821.8496322631836,
+    830.4960250854492,
+    818.1087970733643,
+    797.6800203323364,
+    818.1632041931152,
+    829.856014251709,
+    804.0928363800049,
+    806.598424911499
+  ],
+  "native_remote": 5054165,
+  "remote": 3791665,
+  "copies": 507,
+  "full_P": [
+    1026,
+    958,
+    963,
+    922,
+    941,
+    960,
+    996,
+    960
+  ],
+  "history_I": [
+    32,
+    35,
+    36,
+    33,
+    36,
+    39,
+    35,
+    35
+  ],
+  "native_mean_us": 68.58119890093803,
+  "sampled_mean_us": 815.8556193113327,
+  "reduction_percent": 24.97939817952125
+}
